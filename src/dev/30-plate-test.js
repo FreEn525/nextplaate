@@ -13,11 +13,12 @@
     const res = await fetch(`/${cc}/gallery.php?gal=${cc}`, { credentials: 'same-origin' });
     const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
     const plates = new Set();
-    doc.querySelectorAll('img[src*="/inf/"][alt]').forEach(img => {
-      const t = img.getAttribute('alt').trim();
+    // the plate is the alt of the "inf" image, or the text before the comma in the alt of the main photo (ZG 2072-KA, Renault)
+    doc.querySelectorAll('img[src*="/inf/"][alt], img[src*="/m/"][alt]').forEach(img => {
+      const t = img.getAttribute('alt').split(',')[0].trim();
       if (t) plates.add(t);
     });
-    return [...plates].slice(0, 12);
+    return [...plates].slice(0, 10);
   }
 
   // Types one plate into the visible plate fields, in order; the form's other fields are left alone
@@ -47,7 +48,8 @@
     const rows = [];
     for (const text of plates) {
       const fits = ptType(text);
-      await new Promise(r => setTimeout(r, 500));                  // let the script read the fields
+      if (!fits) { rows.push({ shown: text, fits: false, ok: null }); continue; }   // another plate type (personal, military...): not this form
+      await new Promise(r => setTimeout(r, 350));                  // let the script read the fields
       const read = plateForForm() || '';
       let found = null;
       try { found = await countPlate(read); } catch (e) { found = 'error'; }
@@ -64,9 +66,9 @@
     if (!here.add) { ptMsg('Open an upload page of the country first.'); return; }
     ptMsg('Testing…');
     const rows = await ptCollect();
-    const passed = rows.filter(r => r.ok).length;
+    const passed = rows.filter(r => r.ok).length, tested = rows.filter(r => r.fits).length;
     console.log('[NextPlaate] plate test ' + here.country, rows);
-    ptMsg(`${here.country}: ${passed}/${rows.length} plates pass. Details in the console (F12).` +
+    ptMsg(`${here.country}: ${passed}/${tested} plates pass (${rows.length - tested} of another type, not tested). Details in the console (F12).` +
       (rows.some(r => !r.ok) ? '\nFailed: ' + rows.filter(r => !r.ok).map(r => r.shown).join(', ') : ''));
   }
 
@@ -81,7 +83,7 @@
     await new Promise(r => setTimeout(r, CAPTURE_LOAD_MS + 500));
     if (m && m[1].toLowerCase() === cc) {
       const rows = await ptCollect();
-      await capPut('plates:' + cc, { date: new Date().toISOString(), passed: rows.filter(r => r.ok).length, total: rows.length, rows });
+      await capPut('plates:' + cc, { date: new Date().toISOString(), passed: rows.filter(r => r.ok).length, total: rows.filter(r => r.fits).length, other: rows.filter(r => !r.fits).length, rows });
     } else {
       await capPut('plates-skip:' + cc, location.href);           // no upload page for this country
     }
