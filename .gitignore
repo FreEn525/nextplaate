@@ -3,3 +3,9 @@
 !LICENSE
 !README.md
 !nextplaate.user.js
+!.github/
+!.github/**
+!scripts/
+!scripts/**
+!src/
+!src/**

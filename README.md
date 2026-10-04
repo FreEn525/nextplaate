@@ -22,3 +22,22 @@ Updates are delivered through Greasy Fork. Tampermonkey checks for a new version
 ## License
 
 MIT, see [LICENSE](LICENSE).
+
+## Development
+
+The source is split into modules in `src/`. `nextplaate.user.js` is generated from them and must not be edited by hand.
+
+```
+src/core/      header, wrapper, storage
+src/ui/        shared look, page style, panel, rendering, selection
+src/photos/    photo detection, code generation
+src/edit/      edit flow, back to gallery, like
+src/batch/     upload queue, manager, adding photos, tabs
+src/nav/       gallery pagination
+src/input/     keyboard shortcuts
+src/start.js   startup
+```
+
+Build locally with `node scripts/build.mjs`. A GitHub Action rebuilds the file on every push that touches `src/`, and Greasy Fork picks up the new version from the repository.
+
+Remember to raise `@version` in `src/core/00-meta.txt` before pushing a release. Without a new version number, installed copies do not update.

@@ -1,0 +1,40 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+    paths: ['src/**', 'scripts/**']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build the userscript from src/
+        run: node scripts/build.mjs
+
+      - name: Check syntax
+        run: node --check nextplaate.user.js
+
+      # Commit the rebuilt file only when it changed. This push uses GITHUB_TOKEN,
+      # so it does not start this workflow again.
+      - name: Commit the built script
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add nextplaate.user.js
+          if git diff --cached --quiet; then
+            echo "No change in the built script"
+          else
+            git commit -m "Rebuild nextplaate.user.js from src/"
+            git push
+          fi
