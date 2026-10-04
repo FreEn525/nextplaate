@@ -278,6 +278,7 @@
     .side>*{pointer-events:auto}
     .rail{width:56px;flex:none;display:flex;flex-direction:column;align-items:center;gap:8px;padding:10px 0;background:#fff;border-left:1px solid var(--line2);box-shadow:-6px 0 20px rgba(0,0,0,.08)}
     .rail .logo{margin-bottom:6px}
+    .rsep{width:24px;height:1px;background:var(--line2);margin:auto 0 4px}
     .rbtn{width:40px;height:40px;display:grid;place-items:center;border:0;border-radius:6px;background:none;color:var(--mute);cursor:pointer}
     .rbtn:hover{background:var(--tint);color:var(--ink)}
     .rbtn[aria-pressed="true"]{background:var(--brand);color:var(--brand-t)}
@@ -352,6 +353,8 @@
     DRAWERS.filter(d => byDrawer[d.id]).forEach(d => {
       const btn = h('button', { class: 'rbtn', 'data-drawer': d.id, title: `${d.title} (${d.keys})`, onclick: () => openDrawer(d.id) });
       btn.innerHTML = icon(d.icon);   // our own SVG constants, never user data
+      // settings (the Shortcuts drawer) sit at the bottom, apart from the working tools
+      if (d.id === 'keys') $('rail').append(h('div', { class: 'rsep' }));
       $('rail').append(btn);
       $('dbody').append(h('section', { class: 'dsec', 'data-drawer': d.id, hidden: true },
         byDrawer[d.id].map(g => h('div', { class: 'group' },
