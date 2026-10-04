@@ -6,6 +6,7 @@
    *    keeps each result in the browser, and "Write report" saves the report into a folder you choose.
    * ===================================================================== */
   const PT_QUEUE = 'nextplaate-plates-run';        // the countries left in the run (sessionStorage)
+  const PT_MODE = 'nextplaate-plates-mode';        // 'regular' (standard plates) or 'types' (every plate type)
   const PT_PAUSE_MS = 5000;                        // between two countries (the site limits fast request bursts)
   const ptNorm = s => (s || '').replace(/[\s-]+/g, '').toUpperCase();
 
@@ -168,9 +169,16 @@
     const m = location.pathname.match(/^\/([a-z]{2})\/add\/?$/i);
     await new Promise(r => setTimeout(r, 1000));
     if (m && m[1].toLowerCase() === cc) {
-      let rows;
-      try { rows = await ptCollect(); } catch (e) { ptMsg(`${cc} not saved (${e.message}). Stopped: test it again later.`); sessionStorage.removeItem(PT_QUEUE); return; }
-      await capPut('plates:' + cc, { date: new Date().toISOString(), passed: rows.filter(r => r.ok).length, total: rows.filter(r => r.fits).length, other: rows.filter(r => !r.fits).length, rows });
+      if (sessionStorage.getItem(PT_MODE) === 'types') {
+        let types;
+        try { types = await ptByType(); } catch (e) { ptMsg(`${cc} not saved (${e.message}). Stopped: test it again later.`); sessionStorage.removeItem(PT_QUEUE); return; }
+        await capPut('types:' + cc, { date: new Date().toISOString(), types });
+        console.log('[NextPlaate] all types ' + cc, types);
+      } else {
+        let rows;
+        try { rows = await ptCollect(); } catch (e) { ptMsg(`${cc} not saved (${e.message}). Stopped: test it again later.`); sessionStorage.removeItem(PT_QUEUE); return; }
+        await capPut('plates:' + cc, { date: new Date().toISOString(), passed: rows.filter(r => r.ok).length, total: rows.filter(r => r.fits).length, other: rows.filter(r => !r.fits).length, rows });
+      }
     } else {
       await capPut('plates-skip:' + cc, location.href);           // no upload page for this country
     }
@@ -186,7 +194,18 @@
 
   // Runs the countries that still need a test. "onlyMissing": keep the countries that fully passed.
   // "all": start again from zero (use it after a change that affects every country).
+  // Every plate type of every country: same loop, one country after the other, saved as types:xx
+  async function ptStartTypes() {
+    const kept = await capAll();
+    const left = CAPTURE_COUNTRIES.filter(c => !kept['types:' + c] && !kept['plates-skip:' + c]);
+    if (!left.length) { ptMsg('Every country already has its types. Click "Write report to folder".'); return; }
+    sessionStorage.setItem(PT_MODE, 'types');
+    sessionStorage.setItem(PT_QUEUE, JSON.stringify(left));
+    location.href = '/' + left[0] + '/add';
+  }
+
   async function ptStart(all) {
+    sessionStorage.setItem(PT_MODE, 'regular');
     const kept = await capAll();
     const d = await capDb();
     const drop = Object.keys(kept).filter(k => k.startsWith('plates:') || k.startsWith('plates-skip:'))
@@ -212,14 +231,24 @@
       else if (all['plates-skip:' + c]) report.skipped.push(c);
       else report.untested.push(c);
     }
+    report.types = {};
+    for (const c of CAPTURE_COUNTRIES) if (all['types:' + c]) report.types[c] = all['types:' + c];
+    const typeLines = ['', '## Every plate type', '', '| country | type | passed | tested | other | failed (read / site) |', '|---|---|---|---|---|---|'];
+    for (const [c, d] of Object.entries(report.types)) {
+      for (const [label, r] of Object.entries(d.types)) {
+        if (r.note) { typeLines.push(`| ${c} | ${label} | - | - | - | ${r.note} |`); continue; }
+        const bad = r.rows.filter(x => x.fits && !x.ok).map(x => `${x.shown} / ${x.read} / site ${x.sitefound}`).join('; ');
+        typeLines.push(`| ${c} | ${label} | ${r.passed} | ${r.tested} | ${r.rows.length - r.tested} | ${bad || '-'} |`);
+      }
+    }
     const lines = ['# Plate test report', '', `Date: ${report.date}`, '',
       '| country | passed | total | failed plates |', '|---|---|---|---|'];
     for (const [c, r] of Object.entries(report.countries)) {
       const failed = r.rows.filter(x => !x.ok).map(x => x.shown).join(', ');
       lines.push(`| ${c} | ${r.passed} | ${r.total} | ${failed || '-'} |`);
     }
-    lines.push('', `No upload page: ${report.skipped.join(' ') || '-'}`, `Not tested: ${report.untested.join(' ') || '-'}`);
-    if (!Object.keys(report.countries).length) { ptMsg('Nothing tested yet.'); return; }
+    lines.push('', `No upload page: ${report.skipped.join(' ') || '-'}`, `Not tested: ${report.untested.join(' ') || '-'}`, ...typeLines);
+    if (!Object.keys(report.countries).length && !Object.keys(report.types).length) { ptMsg('Nothing tested yet.'); return; }
     const dir = await window.showDirectoryPicker({ mode: 'readwrite' });
     for (const [name, text] of [['plates-report.json', JSON.stringify(report, null, 2)], ['plates-report.md', lines.join('\n')]]) {
       const file = await dir.getFileHandle(name, { create: true });
@@ -248,6 +277,7 @@
         h('p', { id: 'ptMsg', class: 'presult', text: 'Tests the plates of a country on its upload page, without uploading anything.' }),
         h('button', { id: 'ptRun', class: 'btn ghost', text: 'Test this country' }),
         h('button', { id: 'ptTypes', class: 'btn ghost', text: 'Test every plate type (this country)' }),
+        h('button', { id: 'ptTypesAll', class: 'btn ghost', text: 'Test every type of every country' }),
         h('button', { id: 'ptAll', class: 'btn ghost', text: 'Test the countries not yet passing' }),
         h('button', { id: 'ptAgain', class: 'btn ghost', text: 'Test everything again' }),
         h('button', { id: 'ptWrite', class: 'btn ghost', text: 'Write report to folder' })
@@ -261,6 +291,7 @@
         const r = await ptByType();
         ptMsg(Object.entries(r).map(([k, v]) => (v.note ? k + ': ' + v.note : k + ': ' + v.passed + '/' + v.tested)).join(' | '));
       };
+      $('ptTypesAll').onclick = () => ptStartTypes().catch(e => ptMsg('Could not start: ' + e.message));
       $('ptAll').onclick = () => ptStart(false).catch(e => ptMsg('Could not start: ' + e.message));
       $('ptAgain').onclick = () => ptStart(true).catch(e => ptMsg('Could not start: ' + e.message));
       $('ptWrite').onclick = () => ptWrite().catch(e => ptMsg('Could not write: ' + e.message));
