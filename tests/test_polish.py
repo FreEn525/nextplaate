@@ -8,6 +8,7 @@ import pytest
 from fake_site import PNG, route_site
 
 GALLERY = "https://platesmania.com/fr/gallery.php"
+PHOTO_101 = "https://platesmania.com/fr/nomer101"
 
 
 @pytest.fixture
@@ -214,3 +215,10 @@ def test_ctrl_a_works_on_azerty_where_the_letter_a_has_the_code_keyq(page, tmp_p
     page.evaluate("""() => document.body.dispatchEvent(new KeyboardEvent('keydown',
         { key: 'a', code: 'KeyQ', ctrlKey: true, bubbles: true, cancelable: true }))""")
     assert manager_selected(page) == 2
+
+
+def test_back_to_my_gallery_button_works_without_automation(page):
+    open_at(page, GALLERY)
+    open_at(page, PHOTO_101)                       # remembers the gallery visited before
+    page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('backGallery').click()")
+    page.wait_for_url(GALLERY)

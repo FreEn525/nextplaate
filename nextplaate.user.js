@@ -591,7 +591,10 @@
     groups: [
       {
         drawer: 'pair', title: 'Description',
-        build: () => [h('button', { id: 'fillBtn', class: 'btn ghost', disabled: true, text: 'Fill description (F)' })]
+        build: () => [
+          h('button', { id: 'fillBtn', class: 'btn ghost', disabled: true, text: 'Fill description (F)' }),
+          h('button', { id: 'backGallery', class: 'btn ghost', text: 'Back to my gallery', title: 'Go back to the last gallery you visited' })
+        ]
       },
       {
         drawer: 'pair', title: 'Automation',
@@ -610,6 +613,12 @@
       $('fillBtn').disabled = !here.edit;
       $('fillBtn').title = here.edit ? 'Fill the description of this photo' : 'Only available on the edit page';
       $('fillBtn').onclick = fillDescription;
+      $('backGallery').onclick = () => {
+        const url = store.get('lastGallery', '');
+        if (!url) { setStatus('No gallery visited yet in this browser.'); return; }
+        store.set('restoreScroll', '1');
+        location.href = url;
+      };
       // Options: always visible, remembered
       [['autoEdit', '0'], ['autoFill', '0'], ['autoSave', '0'], ['autoReturn', '1']].forEach(([id, def]) => {
         $(id).checked = store.get(id, def) === '1';
