@@ -38,6 +38,7 @@
   // Any other country: the visible plate fields, read in the order of the page (region, letters, digits...).
   // A field that is not shown (another plate type) is left out. A field with no value is left out.
   const PLATE_FIELD = /nomer|let|digit|region|^b\d|dip|drop|^dig|trl|letter/i;
+  const isPlateField = el => PLATE_FIELD.test(el.id || el.name || '');
   function genericPlate() {
     const parts = [];
     for (const el of document.querySelectorAll('input, select')) {

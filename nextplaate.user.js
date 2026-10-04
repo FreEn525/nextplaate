@@ -230,6 +230,7 @@
   // Any other country: the visible plate fields, read in the order of the page (region, letters, digits...).
   // A field that is not shown (another plate type) is left out. A field with no value is left out.
   const PLATE_FIELD = /nomer|let|digit|region|^b\d|dip|drop|^dig|trl|letter/i;
+  const isPlateField = el => PLATE_FIELD.test(el.id || el.name || '');
   function genericPlate() {
     const parts = [];
     for (const el of document.querySelectorAll('input, select')) {
@@ -938,8 +939,6 @@
    *    When an upload tab checks its plate, the result is saved on its photo in the batch queue,
    *    so the batch window shows a warning on that card before anything is sent.
    * ===================================================================== */
-  const PLATE_FIELDS = ['nomer', 'nomer1', 'nomerpl', 'let', 'digit', 'region', 'b1', 'b2', 'let3', 'let4',
-    'dip1', 'regdip', 'dip2', 'digdip', 'drop_1', 'dip3'];
   const countCache = new Map();   // search address -> number of photos, for this page
   const pending = new Map();      // search address -> the request in progress (same plate = one request)
   let rateLimited = false;        // the site answered "rate limited" (error 1015): a reload clears it
@@ -1019,8 +1018,8 @@
   // Checks when the user leaves a field, presses Enter, or changes the plate type: no polling
   let checkTimer = null;
   const later = ms => { clearTimeout(checkTimer); checkTimer = setTimeout(() => checkPlate(false), ms); };
-  document.addEventListener('input', e => { if (here.add && PLATE_FIELDS.includes(e.target.id)) later(700); }, true);
-  document.addEventListener('blur', e => { if (here.add && PLATE_FIELDS.includes(e.target.id)) later(0); }, true);
+  document.addEventListener('input', e => { if (here.add && isPlateField(e.target)) later(700); }, true);
+  document.addEventListener('blur', e => { if (here.add && isPlateField(e.target)) later(0); }, true);
   document.addEventListener('change', e => { if (here.add && e.target.tagName === 'SELECT') later(0); }, true);
 
   registerFeature({

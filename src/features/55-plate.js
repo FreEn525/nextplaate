@@ -4,8 +4,6 @@
    *    When an upload tab checks its plate, the result is saved on its photo in the batch queue,
    *    so the batch window shows a warning on that card before anything is sent.
    * ===================================================================== */
-  const PLATE_FIELDS = ['nomer', 'nomer1', 'nomerpl', 'let', 'digit', 'region', 'b1', 'b2', 'let3', 'let4',
-    'dip1', 'regdip', 'dip2', 'digdip', 'drop_1', 'dip3'];
   const countCache = new Map();   // search address -> number of photos, for this page
   const pending = new Map();      // search address -> the request in progress (same plate = one request)
   let rateLimited = false;        // the site answered "rate limited" (error 1015): a reload clears it
@@ -85,8 +83,8 @@
   // Checks when the user leaves a field, presses Enter, or changes the plate type: no polling
   let checkTimer = null;
   const later = ms => { clearTimeout(checkTimer); checkTimer = setTimeout(() => checkPlate(false), ms); };
-  document.addEventListener('input', e => { if (here.add && PLATE_FIELDS.includes(e.target.id)) later(700); }, true);
-  document.addEventListener('blur', e => { if (here.add && PLATE_FIELDS.includes(e.target.id)) later(0); }, true);
+  document.addEventListener('input', e => { if (here.add && isPlateField(e.target)) later(700); }, true);
+  document.addEventListener('blur', e => { if (here.add && isPlateField(e.target)) later(0); }, true);
   document.addEventListener('change', e => { if (here.add && e.target.tagName === 'SELECT') later(0); }, true);
 
   registerFeature({
