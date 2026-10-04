@@ -81,6 +81,9 @@
       case 'ru': return joinParts([selText('b1'), fieldVal('digit'), selText('b3') + selText('b4'), selText('region')]);   // Russia: А 001 АА 77
       case 'uz': return joinParts([selText('region'), fieldVal('b1'), fieldVal('dig1'), fieldVal('b2')]);   // Uzbekistan: PP A 123 AA
       case 'gr': return joinParts([selText('b1') + selText('region'), fieldVal('digit')]);   // Greece: I + AZ (the region menu) + 6038 = IAZ 6038
+      case 'by': return joinParts([fieldVal('digit1'), selText('b3') + selText('b4') + (selText('region5') ? '-' + selText('region5') : '')]);   // Belarus: 6383 EC-6
+      case 'cz': return joinParts([selText('region') + selText('b1') + selText('b2'), fieldVal('digit1')]);   // Czechia: 1CA 8407
+      case 'sk': return joinParts([selText('region') + '-' + fieldVal('digit') + fieldVal('let2')]);   // Slovakia: BA-427RF (a space is refused by the site)
       case 'ba':                                                    // Bosnia: A12-E-345, parts joined by dashes
         return [fieldVal('let1'), fieldVal('b1'), fieldVal('let2') || fieldVal('digit')].filter(Boolean).join('-');
       case 'tr': {
