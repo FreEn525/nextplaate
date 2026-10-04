@@ -263,7 +263,7 @@
         return joinParts([region, fieldVal('nomer')]);
       }
       case 'sk': return joinParts([selText('region'), fieldVal('digit') + fieldVal('let2')]);   // Slovakia: AB 123AB
-      case 'tj': return fieldVal('nomer');                          // Tajikistan: 1234AB01, one string
+      case 'tj': return squash(fieldVal('nomer')) + selText('region2');   // Tajikistan: 7717XZ07, the plate then the region label
       case 'ua': return joinParts([selText('region1'), fieldVal('digit1'), fieldVal('b1') + fieldVal('b2')]);   // Ukraine: AA 0001 AA
       case 'ba':                                                    // Bosnia: A12-E-345, parts joined by dashes
         return [fieldVal('let1'), fieldVal('b1'), fieldVal('let2') || fieldVal('digit')].filter(Boolean).join('-');
