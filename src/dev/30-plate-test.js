@@ -213,7 +213,7 @@
           return;
         }
         sessionStorage.removeItem('nextplaate-plates-retry');
-        await capPut('plates-skip:' + cc, 'not saved: ' + e.message);
+        await capPut('failed:' + cc, { date: new Date().toISOString(), error: e.message });   // not a missing page: it is tested again next time
         ptMsg(`${cc} not saved after 3 tries (${e.message}). Going on with the next country.`);
         // falls through: the country is left out and the run goes on
       }
