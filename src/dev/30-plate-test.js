@@ -97,17 +97,23 @@
     }, CAPTURE_PAUSE_MS);
   }
 
-  // Starts from zero: the previous results are removed, so the report always matches the current rules
-  async function ptStart() {
-    const all = await capAll();
+  // Runs the countries that still need a test. "onlyMissing": keep the countries that fully passed.
+  // "all": start again from zero (use it after a change that affects every country).
+  async function ptStart(all) {
+    const kept = await capAll();
     const d = await capDb();
+    const drop = Object.keys(kept).filter(k => k.startsWith('plates:') || k.startsWith('plates-skip:'))
+      .filter(k => all || !(k.startsWith('plates:') && kept[k].passed === kept[k].total && kept[k].total > 0));
     await new Promise(res => {
       const t = d.transaction('kv', 'readwrite'), store = t.objectStore('kv');
-      Object.keys(all).filter(k => k.startsWith('plates:') || k.startsWith('plates-skip:')).forEach(k => store.delete(k));
+      drop.forEach(k => store.delete(k));
       t.oncomplete = res;
     });
-    sessionStorage.setItem(PT_QUEUE, JSON.stringify(CAPTURE_COUNTRIES.slice()));
-    location.href = '/' + CAPTURE_COUNTRIES[0] + '/add';
+    const done = new Set(Object.keys(kept).filter(k => k.startsWith('plates:') && !drop.includes(k)).map(k => k.slice(7)));
+    const left = CAPTURE_COUNTRIES.filter(c => !done.has(c) && !(kept['plates-skip:' + c] && !all));
+    if (!left.length) { ptMsg('Every country already passes. Click "Write report to folder".'); return; }
+    sessionStorage.setItem(PT_QUEUE, JSON.stringify(left));
+    location.href = '/' + left[0] + '/add';
   }
 
   // Report: a JSON with every row, and a Markdown table, written in the folder you choose
@@ -143,13 +149,15 @@
       build: () => [
         h('p', { id: 'ptMsg', class: 'presult', text: 'Tests the plates of a country on its upload page, without uploading anything.' }),
         h('button', { id: 'ptRun', class: 'btn ghost', text: 'Test this country' }),
-        h('button', { id: 'ptAll', class: 'btn ghost', text: 'Test all countries' }),
+        h('button', { id: 'ptAll', class: 'btn ghost', text: 'Test the countries not yet passing' }),
+        h('button', { id: 'ptAgain', class: 'btn ghost', text: 'Test everything again' }),
         h('button', { id: 'ptWrite', class: 'btn ghost', text: 'Write report to folder' })
       ]
     }],
     init: () => {
       $('ptRun').onclick = () => ptRun().catch(e => ptMsg('Test stopped: ' + e.message));
-      $('ptAll').onclick = () => ptStart().catch(e => ptMsg('Could not start: ' + e.message));
+      $('ptAll').onclick = () => ptStart(false).catch(e => ptMsg('Could not start: ' + e.message));
+      $('ptAgain').onclick = () => ptStart(true).catch(e => ptMsg('Could not start: ' + e.message));
       $('ptWrite').onclick = () => ptWrite().catch(e => ptMsg('Could not write: ' + e.message));
       ptStep();
     }
