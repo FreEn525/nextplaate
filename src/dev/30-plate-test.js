@@ -27,9 +27,19 @@
     const fields = [...document.querySelectorAll('input, select')]
       .filter(el => isPlateField(el) && el.offsetParent !== null && !el.disabled && el.id !== 'ctype');
     fields.forEach(el => { if (el.tagName === 'INPUT') el.value = ''; });
-    // one single plate field (France, Belgium...): the whole plate goes in it, dashes included
+    // one single plate text field (France, Belgium...): the whole plate goes in it, dashes included;
+    // the menus of the page (department, region) are set only when one of the tokens matches them
     const texts = fields.filter(el => el.tagName === 'INPUT');
-    if (texts.length === 1 && fields.length === 1) { texts[0].value = text; texts[0].dispatchEvent(new Event('input', { bubbles: true })); return true; }
+    if (texts.length === 1) {
+      texts[0].value = text;
+      texts[0].dispatchEvent(new Event('input', { bubbles: true }));
+      for (const el of fields.filter(el => el.tagName === 'SELECT')) {
+        const hit = tokens.map(t => t.toUpperCase()).find(t => [...el.options].some(o => o.value && (o.value.toUpperCase() === t || o.text.trim().toUpperCase().startsWith(t))));
+        const opt = hit && [...el.options].find(o => o.value && (o.value.toUpperCase() === hit || o.text.trim().toUpperCase().startsWith(hit)));
+        if (opt) { el.value = opt.value; el.dispatchEvent(new Event('change', { bubbles: true })); }
+      }
+      return true;
+    }
     let i = 0;
     for (const el of fields) {
       if (i >= tokens.length) break;
