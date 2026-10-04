@@ -13,7 +13,7 @@ Tampermonkey userscript that speeds up posting and uploading photos on [PlatesMa
 ## Installation
 
 1. Install [Tampermonkey](https://www.tampermonkey.net/).
-2. Install the script from Greasy Fork (link to be added) or open `nextplaate.user.js` from this repository and click "Raw".
+2. Install the script from [Greasy Fork](https://greasyfork.org/fr/scripts/598722-nextplaate), or open `nextplaate.user.js` from this repository and click "Raw".
 
 ## Updates
 
