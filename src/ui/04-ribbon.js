@@ -28,6 +28,7 @@
     .gbody{display:flex;flex-direction:column;gap:8px;padding:10px}
     .gtitle{padding:5px 10px;border-top:1px solid var(--line);background:var(--tint);color:var(--mute);font-size:11px;font-weight:600;text-align:center;text-transform:uppercase;letter-spacing:.04em}
     .gbody .btn{width:100%}
+    .pnote{margin:0;padding:6px 8px;border-radius:4px;background:var(--tint);color:var(--mute);font-size:12px}
     .btnrow{display:flex;gap:8px}
     .btnrow .btn{flex:1}
     .row{display:flex;align-items:center;gap:8px;font-size:12px}
@@ -82,6 +83,13 @@
   const $ = id => root.getElementById(id);
   let openId = null;
 
+  // Names of the pages a group works on (here.gallery, here.photo, here.edit, here.add)
+  const PAGE_NAMES = { gallery: 'a gallery', photo: 'a photo', edit: 'the edit', add: 'the upload' };
+  function pageNote(g) {
+    if (!g.pages || g.pages.some(p => here[p])) return null;
+    return h('p', { class: 'pnote', text: 'Works on ' + g.pages.map(p => PAGE_NAMES[p]).join(' or ') + ' page.' });
+  }
+
   // One icon per drawer that has features, one section per drawer; each feature group is a box with its title under it
   function mountRibbon(list) {
     const byDrawer = {};
@@ -94,7 +102,7 @@
       $('rail').append(btn);
       $('dbody').append(h('section', { class: 'dsec', 'data-drawer': d.id, hidden: true },
         byDrawer[d.id].map(g => h('div', { class: 'group' },
-          h('div', { class: 'gbody' }, g.build()),
+          h('div', { class: 'gbody' }, pageNote(g), g.build()),
           h('div', { class: 'gtitle', text: g.title })))));
     });
     $('dclose').onclick = () => closeDrawer();

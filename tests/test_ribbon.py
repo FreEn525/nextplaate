@@ -150,3 +150,12 @@ def test_choose_photos_button_opens_the_manager(page):
     click_in_panel(page, "qOpen")
     assert page.evaluate("() => document.getElementById('pmg-batch').style.display") == "block"
     assert page.evaluate("() => document.getElementById('pmg-host').style.display") == "none"
+
+
+def test_a_page_bound_group_says_where_it_works_and_keeps_its_settings(page):
+    open_at(page, GALLERY)
+    open_at(page, "https://platesmania.com/fr/nomer101")
+    click_icon(page, "gallery")
+    note = page.evaluate("() => document.getElementById('pmg-host').shadowRoot.querySelector('.dsec[data-drawer="gallery"] .pnote').textContent")
+    assert "gallery" in note
+    assert page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('delay') !== null")

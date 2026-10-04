@@ -49,6 +49,7 @@
    *  WHERE AM I  (which kind of PlatesMania page is open, decided once when the script loads)
    * ===================================================================== */
   const here = {
+    add: /^\/[a-z]{2}\/add\/?$/i.test(location.pathname),   // upload page of a country
     gallery: /\/gallery(\.php)?$/i.test(location.pathname) || /\/user\d+\/?$/i.test(location.pathname),
     photo: (location.pathname.match(/\/nomer(\d+)/i) || [])[1] || null,    // photo page: the photo id
     // Edit page: <textarea name="dop"> + <input type="hidden" name="id" value="{photo id}">
@@ -292,6 +293,7 @@
     .gbody{display:flex;flex-direction:column;gap:8px;padding:10px}
     .gtitle{padding:5px 10px;border-top:1px solid var(--line);background:var(--tint);color:var(--mute);font-size:11px;font-weight:600;text-align:center;text-transform:uppercase;letter-spacing:.04em}
     .gbody .btn{width:100%}
+    .pnote{margin:0;padding:6px 8px;border-radius:4px;background:var(--tint);color:var(--mute);font-size:12px}
     .btnrow{display:flex;gap:8px}
     .btnrow .btn{flex:1}
     .row{display:flex;align-items:center;gap:8px;font-size:12px}
@@ -346,6 +348,13 @@
   const $ = id => root.getElementById(id);
   let openId = null;
 
+  // Names of the pages a group works on (here.gallery, here.photo, here.edit, here.add)
+  const PAGE_NAMES = { gallery: 'a gallery', photo: 'a photo', edit: 'the edit', add: 'the upload' };
+  function pageNote(g) {
+    if (!g.pages || g.pages.some(p => here[p])) return null;
+    return h('p', { class: 'pnote', text: 'Works on ' + g.pages.map(p => PAGE_NAMES[p]).join(' or ') + ' page.' });
+  }
+
   // One icon per drawer that has features, one section per drawer; each feature group is a box with its title under it
   function mountRibbon(list) {
     const byDrawer = {};
@@ -358,7 +367,7 @@
       $('rail').append(btn);
       $('dbody').append(h('section', { class: 'dsec', 'data-drawer': d.id, hidden: true },
         byDrawer[d.id].map(g => h('div', { class: 'group' },
-          h('div', { class: 'gbody' }, g.build()),
+          h('div', { class: 'gbody' }, pageNote(g), g.build()),
           h('div', { class: 'gtitle', text: g.title })))));
     });
     $('dclose').onclick = () => closeDrawer();
@@ -593,7 +602,7 @@
   registerFeature({
     groups: [
       {
-        drawer: 'pair', title: 'Description',
+        drawer: 'pair', title: 'Description', pages: ['edit'],
         build: () => [
           h('button', { id: 'fillBtn', class: 'btn ghost', disabled: true, text: 'Fill description (F)' }),
           h('button', { id: 'backGallery', class: 'btn ghost', text: 'Back to my gallery', title: 'Go back to the last gallery you visited' })
@@ -755,7 +764,7 @@
 
   registerFeature({
     groups: [{
-      drawer: 'gallery', title: 'Likes',
+      drawer: 'gallery', title: 'Likes', pages: ['gallery'],
       build: () => [
         h('button', { id: 'likeAll', class: 'btn ghost', disabled: true, text: 'Like this page' }),
         h('div', { class: 'row' }, h('label', { for: 'pages', text: 'Pages to like' }), h('input', { type: 'number', id: 'pages', min: 1, step: 1 })),
@@ -823,7 +832,7 @@
 
   registerFeature({
     groups: [{
-      drawer: 'gallery', title: 'Pages',
+      drawer: 'gallery', title: 'Pages', pages: ['gallery'],
       build: () => [
         h('div', { class: 'btnrow' },
           h('button', { id: 'prevPage', class: 'btn ghost half', text: '◀ Previous' }),

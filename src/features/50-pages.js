@@ -36,7 +36,7 @@
 
   registerFeature({
     groups: [{
-      drawer: 'gallery', title: 'Pages',
+      drawer: 'gallery', title: 'Pages', pages: ['gallery'],
       build: () => [
         h('div', { class: 'btnrow' },
           h('button', { id: 'prevPage', class: 'btn ghost half', text: '◀ Previous' }),

@@ -88,7 +88,7 @@
   registerFeature({
     groups: [
       {
-        drawer: 'pair', title: 'Description',
+        drawer: 'pair', title: 'Description', pages: ['edit'],
         build: () => [
           h('button', { id: 'fillBtn', class: 'btn ghost', disabled: true, text: 'Fill description (F)' }),
           h('button', { id: 'backGallery', class: 'btn ghost', text: 'Back to my gallery', title: 'Go back to the last gallery you visited' })
