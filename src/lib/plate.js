@@ -98,7 +98,13 @@
       case 'li': return joinParts(['FL', fieldVal('digit')]);       // Liechtenstein: FL 12345 (the FL is fixed)
       case 'ru': return joinParts([selText('b1'), fieldVal('digit'), selText('b3') + selText('b4'), selText('region')]);   // Russia: А 001 АА 77
       case 'uz': return joinParts([selText('region'), fieldVal('b1'), fieldVal('dig1'), fieldVal('b2')]);   // Uzbekistan: PP A 123 AA
-      case 'gr': return joinParts([selText('b1') + selText('region'), fieldVal('digit')]);   // Greece: I + AZ (the region menu) + 6038 = IAZ 6038
+      case 'gr': {                                                  // Greece: IAZ 6038 (cars). 1972 system (9): IN-4662; mopeds (12): ZHE 3860. Only the shown fields
+        const ctype = fieldVal('ctype');
+        if (ctype === '9') return shownVal('let') + '-' + shownVal('digit');
+        if (ctype === '12') return joinParts([shownVal('let'), shownVal('digit')]);
+        const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };
+        return joinParts([menu('b1') + menu('region'), shownVal('digit')]);
+      }
       case 'by': {                                                  // Belarus: the fields shown depend on the type (taken from the site's own switch function)
         const row = BY_TYPES[fieldVal('ctype')];
         if (!row) return genericPlate();
