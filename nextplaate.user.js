@@ -176,7 +176,7 @@
    *    check or the rate limit (error 1015), every request stops for a while, and the state is kept
    *    in the browser so the next page knows it too.
    * ===================================================================== */
-  const SITE_GAP_MS = 1500;                 // between two requests to the site
+  const SITE_GAP_MS = 3000;                 // between two requests to the site
   const SITE_COOLDOWN_MS = 15 * 60 * 1000;  // after a block: no request for this long
   const SITE_TIMEOUT_MS = 15000;
   const siteQueue = [];

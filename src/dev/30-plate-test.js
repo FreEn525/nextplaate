@@ -109,7 +109,7 @@
       const t = img.getAttribute('alt').split(',')[0].trim();
       if (t) plates.add(t);
     });
-    return [...plates].slice(0, 6);
+    return [...plates].slice(0, 3);
   }
 
   // The form's option for a search type: the same label (case-insensitive), else the same code
