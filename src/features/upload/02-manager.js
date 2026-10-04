@@ -7,8 +7,8 @@
     <style>${UI_BASE}
       .ov{position:absolute;inset:0;background:rgba(17,17,17,.55);display:flex;justify-content:center;padding:22px}
       .sheet{background:var(--bg);border-radius:4px;width:min(1400px,100%);max-height:100%;min-height:0;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35)}
-      .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 18px;background:#fff;color:var(--ink);flex-wrap:wrap;border-bottom:1px solid var(--line)}
-      .top h2{margin:0;font-size:18px;display:flex;align-items:center;gap:14px}
+      .top{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:56px;padding:0 16px;background:#fff;color:var(--ink);flex-wrap:wrap;border-bottom:1px solid var(--line)}
+      .top h2{margin:0;font-size:16px;font-weight:700;display:flex;align-items:center;gap:14px}
       .top h2 small{font-size:14px;font-weight:500;color:var(--mute)}
       .acts{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
       .inl{display:inline-flex;align-items:center;gap:6px;font-size:13px}
@@ -77,7 +77,7 @@
             <button class="btn ghost" id="mFolder">Add a folder</button>
             <label class="inl"><input type="checkbox" id="mSub"> with sub-folders</label>
             <button class="btn ghost" id="mClear">Clear all</button>
-            <button class="btn ghost" id="mClose">Close (Esc)</button>
+            <button class="btn ghost" id="mClose" title="Close (Esc)">Close</button>
           </div>
         </div>
         <div class="paint">

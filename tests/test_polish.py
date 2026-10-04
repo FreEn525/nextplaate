@@ -128,3 +128,44 @@ def test_panel_fits_a_small_screen(browser):
     )
     assert box["left"] >= 0 and box["right"] <= 390
     c.close()
+
+
+def test_ctrl_a_still_works_when_the_site_swallows_keys(page, tmp_path):
+    open_at(page, GALLERY)
+    # a site script that stops every key before it reaches the bubble phase
+    page.evaluate("() => document.addEventListener('keydown', e => e.stopPropagation())")
+    page.keyboard.press("KeyU")
+    add_two_photos(page, tmp_path)
+    page.locator("#pmg-batch .card").first.click()
+    page.keyboard.press("Control+KeyA")
+    assert manager_selected(page) == 2
+
+
+def test_shortcut_list_shows_the_real_keys(page):
+    open_at(page, GALLERY)
+    click_icon(page, "keys")
+    keys = page.evaluate(
+        "() => [...document.getElementById('pmg-host').shadowRoot.querySelectorAll('.kbkey:not(.static)')].map(b => b.textContent)"
+    )
+    assert "?" not in keys and "S" in keys and "U" in keys
+
+
+def test_selecting_closes_the_drawer_so_photos_are_clickable(page):
+    open_at(page, GALLERY)
+    click_icon(page, "pair")
+    page.keyboard.press("KeyS")
+    assert page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('drawer').hidden")
+    page.locator('img[src*="/s/101.jpg"]').click()
+    stored = page.evaluate("() => localStorage.getItem('pmg_front')")
+    assert stored and "101" in stored
+
+
+def test_panel_status_stays_on_screen_on_a_phone(browser):
+    c = browser.new_context(viewport={"width": 390, "height": 740})
+    route_site(c)
+    p = c.new_page()
+    open_at(p, GALLERY)
+    p.keyboard.press("KeyS")
+    box = p.evaluate("() => { const r = document.getElementById('pmg-host').shadowRoot.getElementById('status').getBoundingClientRect(); return [r.left, r.right, innerWidth]; }")
+    assert box[0] >= 0 and box[1] <= box[2]
+    c.close()

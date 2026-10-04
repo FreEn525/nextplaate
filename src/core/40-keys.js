@@ -24,9 +24,10 @@
   const isTextField = el => !!el && (el.isContentEditable || el.tagName === 'TEXTAREA' ||
     (el.tagName === 'INPUT' && /^(text|number|search|url|email|password)$/i.test(el.type)));
 
-  document.addEventListener('keydown', e => {
+  // Capture phase on window: we see the key before the site does, so a site script cannot swallow it
+  window.addEventListener('keydown', e => {
     if (app.capture) { e.preventDefault(); e.stopPropagation(); app.capture(e); return; }
-    if (app.modal) { app.modal.onKey(e); return; }
+    if (app.modal) { app.modal.onKey(e); e.stopPropagation(); return; }
     if (e.key === 'Escape') {
       for (const f of escapeChain) if (f.onEscape()) return;
     }
@@ -38,5 +39,5 @@
     const field = e.target === host ? host.shadowRoot.activeElement : e.target;
     if (isTextField(field)) return;
     const k = keyMap[e.code];
-    if (k && k.run(e)) e.preventDefault();
-  });
+    if (k && k.run(e)) { e.preventDefault(); e.stopPropagation(); }
+  }, true);

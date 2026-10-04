@@ -2,6 +2,8 @@
    *  PAIR  (choose the front and rear photos of a car by clicking them on the site)
    * ===================================================================== */
   function startSelecting() {
+    closeDrawer();                                   // the photos must be clickable on the site
+    if (host.shadowRoot.activeElement) host.shadowRoot.activeElement.blur();
     if (state.front && state.rear) { state.front = state.rear = null; store.set('front', 'null'); store.set('rear', 'null'); }
     state.mode = !state.front ? 'front' : 'rear';
     render();
@@ -18,7 +20,7 @@
     const s = document.createElement('small');
     s.textContent = '#' + photo.id + (photo.alt ? ' · ' + photo.alt : '');
     t.appendChild(s);
-    const x = document.createElement('button'); x.className = 'x'; x.textContent = '✕'; x.title = 'Remove';
+    const x = document.createElement('button'); x.className = 'iconbtn'; x.innerHTML = icon('close'); x.title = 'Remove';
     x.onclick = () => { state[key] = null; store.set(key, 'null'); clearDone(); render(); };
     el.append(im, t, x);
   }

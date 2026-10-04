@@ -86,9 +86,9 @@
 
   function mountApp() {
     features.forEach(f => Object.assign(actions, f.keys || {}));
+    rebuildKeys();
     mountRibbon(features);
     features.forEach(f => f.init && f.init());
-    rebuildKeys();
     escapeChain = [...features.filter(f => f.onEscape), { onEscape: closeDrawer, escOrder: 100 }]   // Esc closes the open drawer last
       .sort((a, b) => (a.escOrder || 0) - (b.escOrder || 0));
   }
@@ -118,9 +118,10 @@
   const isTextField = el => !!el && (el.isContentEditable || el.tagName === 'TEXTAREA' ||
     (el.tagName === 'INPUT' && /^(text|number|search|url|email|password)$/i.test(el.type)));
 
-  document.addEventListener('keydown', e => {
+  // Capture phase on window: we see the key before the site does, so a site script cannot swallow it
+  window.addEventListener('keydown', e => {
     if (app.capture) { e.preventDefault(); e.stopPropagation(); app.capture(e); return; }
-    if (app.modal) { app.modal.onKey(e); return; }
+    if (app.modal) { app.modal.onKey(e); e.stopPropagation(); return; }
     if (e.key === 'Escape') {
       for (const f of escapeChain) if (f.onEscape()) return;
     }
@@ -132,8 +133,8 @@
     const field = e.target === host ? host.shadowRoot.activeElement : e.target;
     if (isTextField(field)) return;
     const k = keyMap[e.code];
-    if (k && k.run(e)) e.preventDefault();
-  });
+    if (k && k.run(e)) { e.preventDefault(); e.stopPropagation(); }
+  }, true);
   /* =====================================================================
    *  CODE GENERATION
    * ===================================================================== */
@@ -218,6 +219,9 @@
     .brand svg{display:block;flex:none}
     .brand b{font-weight:800;color:var(--brand-l)}
     .mute{color:var(--mute)}
+    .iconbtn{width:32px;height:32px;padding:0;display:grid;place-items:center;border:1px solid var(--line2);border-radius:4px;background:#fff;color:var(--mute);cursor:pointer}
+    .iconbtn:hover{background:var(--tint);color:var(--ink);border-color:var(--brand-b)}
+    .iconbtn svg{display:block;margin:auto}
   `;
 
   /* =====================================================================
@@ -258,18 +262,16 @@
     { id: 'keys', icon: 'keyboard', title: 'Shortcuts', keys: 'Esc' }
   ];
   const RIBBON_CSS = `
-    .side{display:flex;height:100%;align-items:stretch}
+    .side{display:flex;justify-content:flex-end;height:100%;align-items:stretch;pointer-events:none}
+    .side>*{pointer-events:auto}
     .rail{width:56px;flex:none;display:flex;flex-direction:column;align-items:center;gap:8px;padding:10px 0;background:#fff;border-left:1px solid var(--line2);box-shadow:-6px 0 20px rgba(0,0,0,.08)}
     .rail .logo{margin-bottom:6px}
-    .rbtn svg{display:block}
     .rbtn{width:40px;height:40px;display:grid;place-items:center;border:0;border-radius:6px;background:none;color:var(--mute);cursor:pointer}
     .rbtn:hover{background:var(--tint);color:var(--ink)}
     .rbtn[aria-pressed="true"]{background:var(--brand);color:var(--brand-t)}
     .drawer{width:min(340px,calc(100vw - 56px));display:flex;flex-direction:column;background:var(--bg);border-left:1px solid var(--line2);box-shadow:-10px 0 30px rgba(0,0,0,.14);position:relative}
-    .dhead{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#fff;border-bottom:1px solid var(--line)}
-    .dhead h2{margin:0;font-size:15px;font-weight:700}
-    .xbtn{width:28px;height:28px;display:grid;place-items:center;border:1px solid var(--line2);border-radius:4px;background:#fff;color:var(--mute);cursor:pointer}
-    .xbtn:hover{background:var(--tint);color:var(--ink)}
+    .dhead{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:56px;padding:0 16px;background:#fff;border-bottom:1px solid var(--line)}
+    .dhead h2{margin:0;font-size:16px;font-weight:700}
     .dbody{flex:1;min-height:0;overflow-y:auto;padding:12px;display:flex;flex-direction:column}
     .dsec{display:flex;flex-direction:column;gap:10px}
     .group{background:#fff;border:1px solid var(--line);border-radius:4px;display:flex;flex-direction:column;overflow:hidden}
@@ -297,7 +299,7 @@
     .qinfo{font-size:12px;color:var(--mute)}
     .dfoot{padding:8px 14px;background:#fff;border-top:1px solid var(--line)}
     .hint{font-size:11px;color:var(--mute)}
-    .toast{position:absolute;right:68px;bottom:44px;max-width:min(300px,calc(100vw - 96px));padding:8px 10px;background:#fff;border:1px solid var(--line2);border-radius:4px;box-shadow:0 6px 20px rgba(0,0,0,.15);font-size:13px;color:var(--ink)}
+    .toast{position:absolute;right:68px;bottom:44px;width:min(300px,calc(100vw - 96px));box-sizing:border-box;overflow-wrap:anywhere;padding:8px 10px;background:#fff;border:1px solid var(--line2);border-radius:4px;box-shadow:0 6px 20px rgba(0,0,0,.15);font-size:13px;color:var(--ink)}
     .toast:empty{display:none}
     .toast b{color:var(--ink)}
     .kblist{display:flex;flex-direction:column;gap:6px}
@@ -306,7 +308,8 @@
     .kbright{display:flex;align-items:center;gap:4px}
     .kbkey{min-width:58px;height:30px;padding:0 8px;border:1px solid var(--line2);border-radius:4px;background:#fff;color:var(--ink);font:700 12px system-ui,sans-serif;cursor:pointer}
     .kbkey:hover{border-color:var(--brand-b);background:var(--tint)}
-    .kbkey.static{cursor:default;color:var(--mute);font-weight:600}
+    .kbkey.static{cursor:default;color:var(--mute);font-weight:600;min-width:72px}
+    .kbspacer{width:26px;flex:none}
     .kbreset{width:26px;height:30px;border:0;background:none;color:var(--mute);cursor:pointer;font-size:14px}
     .kbreset:hover{color:var(--ink)}
     @media (max-width:520px){ .drawer{width:calc(100vw - 56px)} .rail{width:48px} }
@@ -314,13 +317,13 @@
 
   const host = document.createElement('div');
   host.id = 'pmg-host';
-  host.style.cssText = 'position:fixed;top:0;right:0;bottom:0;z-index:2147483647;';   // full height, on the right edge
+  host.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:2147483647;';   // covers the window but lets clicks through, except on the bar and the drawer
   const root = host.attachShadow({ mode: 'open' });   // shadow DOM: the site's CSS cannot reach the panel
   root.innerHTML = `
     <style>${UI_BASE}${RIBBON_CSS}</style>
     <div class="side" id="side">
       <aside class="drawer" id="drawer" hidden>
-        <header class="dhead"><h2 id="dtitle"></h2><button class="xbtn" id="dclose" title="Close (Esc)">${icon('close')}</button></header>
+        <header class="dhead"><h2 id="dtitle"></h2><button class="iconbtn" id="dclose" title="Close (Esc)">${icon('close')}</button></header>
         <div class="dbody" id="dbody"></div>
         <div class="dfoot"><small class="hint" id="hint"></small></div>
       </aside>
@@ -374,6 +377,8 @@
    *  PAIR  (choose the front and rear photos of a car by clicking them on the site)
    * ===================================================================== */
   function startSelecting() {
+    closeDrawer();                                   // the photos must be clickable on the site
+    if (host.shadowRoot.activeElement) host.shadowRoot.activeElement.blur();
     if (state.front && state.rear) { state.front = state.rear = null; store.set('front', 'null'); store.set('rear', 'null'); }
     state.mode = !state.front ? 'front' : 'rear';
     render();
@@ -390,7 +395,7 @@
     const s = document.createElement('small');
     s.textContent = '#' + photo.id + (photo.alt ? ' · ' + photo.alt : '');
     t.appendChild(s);
-    const x = document.createElement('button'); x.className = 'x'; x.textContent = '✕'; x.title = 'Remove';
+    const x = document.createElement('button'); x.className = 'iconbtn'; x.innerHTML = icon('close'); x.title = 'Remove';
     x.onclick = () => { state[key] = null; store.set(key, 'null'); clearDone(); render(); };
     el.append(im, t, x);
   }
@@ -820,8 +825,8 @@
           h('button', { class: 'kbkey', text: keyName(a.bound), title: 'Click, then press the new key', onclick: () => capture(id) }),
           h('button', { class: 'kbreset', text: '↺', title: 'Back to the default key', hidden: a.bound === a.code, onclick: () => { store.del('kb_' + id); rebuildKeys(); renderShortcuts(); } }))));
     rows.push(
-      h('div', { class: 'kbrow fixed' }, h('span', { class: 'kblabel', text: 'Cancel, close, stop' }), h('span', { class: 'kbkey static', text: 'Esc' })),
-      h('div', { class: 'kbrow fixed' }, h('span', { class: 'kblabel', text: 'Select all photos (batch window)' }), h('span', { class: 'kbkey static', text: 'Ctrl + A' })));
+      h('div', { class: 'kbrow fixed' }, h('span', { class: 'kblabel', text: 'Cancel, close, stop' }), h('span', { class: 'kbright' }, h('span', { class: 'kbkey static', text: 'Esc' }), h('span', { class: 'kbspacer' }))),
+      h('div', { class: 'kbrow fixed' }, h('span', { class: 'kblabel', text: 'Select all photos (batch window)' }), h('span', { class: 'kbright' }, h('span', { class: 'kbkey static', text: 'Ctrl + A' }), h('span', { class: 'kbspacer' }))));
     $('kbList').replaceChildren(...rows);
   }
 
@@ -942,8 +947,8 @@
     <style>${UI_BASE}
       .ov{position:absolute;inset:0;background:rgba(17,17,17,.55);display:flex;justify-content:center;padding:22px}
       .sheet{background:var(--bg);border-radius:4px;width:min(1400px,100%);max-height:100%;min-height:0;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35)}
-      .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 18px;background:#fff;color:var(--ink);flex-wrap:wrap;border-bottom:1px solid var(--line)}
-      .top h2{margin:0;font-size:18px;display:flex;align-items:center;gap:14px}
+      .top{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:56px;padding:0 16px;background:#fff;color:var(--ink);flex-wrap:wrap;border-bottom:1px solid var(--line)}
+      .top h2{margin:0;font-size:16px;font-weight:700;display:flex;align-items:center;gap:14px}
       .top h2 small{font-size:14px;font-weight:500;color:var(--mute)}
       .acts{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
       .inl{display:inline-flex;align-items:center;gap:6px;font-size:13px}
@@ -1012,7 +1017,7 @@
             <button class="btn ghost" id="mFolder">Add a folder</button>
             <label class="inl"><input type="checkbox" id="mSub"> with sub-folders</label>
             <button class="btn ghost" id="mClear">Clear all</button>
-            <button class="btn ghost" id="mClose">Close (Esc)</button>
+            <button class="btn ghost" id="mClose" title="Close (Esc)">Close</button>
           </div>
         </div>
         <div class="paint">

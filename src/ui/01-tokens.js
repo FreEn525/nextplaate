@@ -26,5 +26,8 @@
     .brand svg{display:block;flex:none}
     .brand b{font-weight:800;color:var(--brand-l)}
     .mute{color:var(--mute)}
+    .iconbtn{width:32px;height:32px;padding:0;display:grid;place-items:center;border:1px solid var(--line2);border-radius:4px;background:#fff;color:var(--mute);cursor:pointer}
+    .iconbtn:hover{background:var(--tint);color:var(--ink);border-color:var(--brand-b)}
+    .iconbtn svg{display:block;margin:auto}
   `;
 
