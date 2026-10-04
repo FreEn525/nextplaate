@@ -94,6 +94,63 @@
 
   const ptMsg = t => { const el = $('ptMsg'); if (el) el.textContent = t; };
 
+  // Plate types of the country: the search page lists them with the codes of the galleries (ctype=5 ...)
+  async function ptSearchTypes(cc) {
+    const res = await fetch(`/${cc}/search`, { credentials: 'same-origin' });
+    const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
+    const sel = doc.querySelector('select[name="ctype"]');
+    if (!sel) return [];
+    return [...sel.options].filter(o => o.value).map(o => ({ code: o.value, label: o.textContent.trim() }));
+  }
+
+  // Plates of one type, from the gallery of that type
+  async function ptGalleryType(cc, code) {
+    const res = await fetch(`/${cc}/gallery.php?ctype=${code}&few=0&gal=${cc}`, { credentials: 'same-origin' });
+    const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
+    const plates = new Set();
+    doc.querySelectorAll('img[src*="/inf/"][alt], img[src*="/m/"][alt]').forEach(img => {
+      const t = img.getAttribute('alt').split(',')[0].trim();
+      if (t) plates.add(t);
+    });
+    return [...plates].slice(0, 6);
+  }
+
+  // The form's option for a search type: the same label (case-insensitive), else the same code
+  function ptFormType(label, code) {
+    const sel = document.getElementById('ctype');
+    if (!sel) return null;
+    const want = label.toLowerCase();
+    const opt = [...sel.options].find(o => o.value && o.text.trim().toLowerCase() === want)
+      || [...sel.options].find(o => o.value && o.value === code);
+    return opt ? opt.value : null;
+  }
+
+  // Every plate type of this country, tested on the form of that type (no upload, read-only)
+  async function ptByType() {
+    const cc = here.country, types = await ptSearchTypes(cc), out = {};
+    for (const t of types) {
+      const formValue = ptFormType(t.label, t.code);
+      if (!formValue) { out[t.label] = { note: 'no matching type on the form' }; continue; }
+      const sel = document.getElementById('ctype');
+      sel.value = formValue; sel.dispatchEvent(new Event('change', { bubbles: true }));
+      await new Promise(r => setTimeout(r, 700));                   // the form shows the fields of this type
+      const rows = [];
+      for (const text of await ptGalleryType(cc, t.code)) {
+        const fits = ptType(text);
+        if (!fits) { rows.push({ shown: text, fits: false }); continue; }
+        await new Promise(r => setTimeout(r, 350));
+        const read = plateForForm() || '';
+        let found = null;
+        try { found = await countPlate(read); } catch (e) { found = 'error'; }
+        rows.push({ shown: text, read, fits: true, sitefound: found, ok: ptNorm(read) === ptNorm(text) && typeof found === 'number' && found > 0 });
+      }
+      ptType('');
+      out[t.label] = { code: t.code, passed: rows.filter(r => r.ok).length, tested: rows.filter(r => r.fits).length, rows };
+    }
+    console.log('[NextPlaate] plate types ' + cc, out);
+    return out;
+  }
+
   async function ptRun() {
     if (!here.add) { ptMsg('Open an upload page of the country first.'); return; }
     ptMsg('Testing…');
@@ -193,6 +250,7 @@
       build: () => [
         h('p', { id: 'ptMsg', class: 'presult', text: 'Tests the plates of a country on its upload page, without uploading anything.' }),
         h('button', { id: 'ptRun', class: 'btn ghost', text: 'Test this country' }),
+        h('button', { id: 'ptTypes', class: 'btn ghost', text: 'Test every plate type (this country)' }),
         h('button', { id: 'ptAll', class: 'btn ghost', text: 'Test the countries not yet passing' }),
         h('button', { id: 'ptAgain', class: 'btn ghost', text: 'Test everything again' }),
         h('button', { id: 'ptWrite', class: 'btn ghost', text: 'Write report to folder' })
@@ -200,6 +258,12 @@
     }],
     init: () => {
       $('ptRun').onclick = () => ptRun().catch(e => ptMsg('Test stopped: ' + e.message));
+      $('ptTypes').onclick = async () => {
+        if (!here.add) { ptMsg('Open an upload page first.'); return; }
+        ptMsg('Testing every type…');
+        const r = await ptByType();
+        ptMsg(Object.entries(r).map(([k, v]) => (v.note ? k + ': ' + v.note : k + ': ' + v.passed + '/' + v.tested)).join(' | '));
+      };
       $('ptAll').onclick = () => ptStart(false).catch(e => ptMsg('Could not start: ' + e.message));
       $('ptAgain').onclick = () => ptStart(true).catch(e => ptMsg('Could not start: ' + e.message));
       $('ptWrite').onclick = () => ptWrite().catch(e => ptMsg('Could not write: ' + e.message));
