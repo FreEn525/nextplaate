@@ -141,6 +141,7 @@
         let found = null;
         try { found = await countPlate(read); } catch (e) { found = 'error'; }
         rows.push({ shown: text, read, fits: true, sitefound: found, ok: ptNorm(read) === ptNorm(text) && typeof found === 'number' && found > 0 });
+        if (typeof found === 'number') dbAddPlate(cc, t.label, text, read, found);
       }
       ptType('');
       out[t.label] = { code: t.code, passed: rows.filter(r => r.ok).length, tested: rows.filter(r => r.fits).length, rows };
@@ -256,7 +257,8 @@
       await w.write(text);
       await w.close();
     }
-    ptMsg(`Report written: ${Object.keys(report.countries).length} countries.`);
+    const db = await dbExport();
+    ptMsg(`Report written: ${Object.keys(report.countries).length} countries, ${db.plates} plates in the database, ${db.requests} requests logged.`);
   }
 
   // For the offline check of the saved pages: types a text, returns what the script reads back

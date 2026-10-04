@@ -35,7 +35,9 @@
         const res = await fetch(job.url, { credentials: 'same-origin', signal: ctrl.signal });
         clearTimeout(timer);
         const text = await res.text();
-        if (res.status === 429 || SITE_BLOCK_RE.test(text)) {
+        const blocked = res.status === 429 || SITE_BLOCK_RE.test(text);
+        if (typeof devLog === 'function') devLog({ url: job.url, status: res.status, blocked, bytes: text.length });   // dev build only
+        if (blocked) {
           store.set('siteBlock', String(Date.now()));
           job.reject(new Error('the site asked to wait (check or rate limit)'));
           while (siteQueue.length) siteQueue.shift().reject(new Error('the site asked to wait (check or rate limit)'));
