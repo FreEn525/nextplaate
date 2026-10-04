@@ -27,12 +27,12 @@
       actions[id].bound = bindingOf(id);
       keyMap[actions[id].bound] = { id, ...actions[id] };
     });
-    updateHint();
   }
 
   function mountApp() {
     features.forEach(f => Object.assign(actions, f.keys || {}));
     rebuildKeys();
+    log('actions', Object.entries(actions).map(([id, a]) => id + '=' + a.bound).join(' '));
     mountRibbon(features);
     features.forEach(f => f.init && f.init());
     escapeChain = features.filter(f => f.onEscape).sort((a, b) => (a.escOrder || 0) - (b.escOrder || 0));

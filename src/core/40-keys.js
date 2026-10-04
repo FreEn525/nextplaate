@@ -9,7 +9,7 @@
   if (navigator.keyboard && navigator.keyboard.getLayoutMap) {
     navigator.keyboard.getLayoutMap().then(map => {
       const k = map.get('KeyA');
-      if (k && /^[a-z]$/i.test(k)) { prevKey = k.toUpperCase(); updateHint(); }
+      if (k && /^[a-z]$/i.test(k)) prevKey = k.toUpperCase();
     }).catch(() => {});
   }
 
@@ -26,6 +26,7 @@
 
   // Capture phase on window: we see the key before the site does, so a site script cannot swallow it
   window.addEventListener('keydown', e => {
+    log('key', e.code, 'target', e.target.tagName, e.target.id || '', 'modal', !!app.modal, 'capture', !!app.capture);
     if (app.capture) { e.preventDefault(); e.stopPropagation(); app.capture(e); return; }
     if (app.modal) {
       if ((e.ctrlKey || e.metaKey) && e.code === 'KeyA') e.preventDefault();   // never the page text
@@ -36,12 +37,13 @@
     }
     if (e.ctrlKey || e.metaKey || e.altKey || e.repeat) return;
     if (e.code === 'KeyA' && /^[a-z]$/i.test(e.key || '') && e.key.toUpperCase() !== prevKey) {
-      prevKey = e.key.toUpperCase(); updateHint();
+      prevKey = e.key.toUpperCase();
     }
     // Focus inside the panel: the event target is the panel itself, so look at the focused control
     const field = e.target === host ? host.shadowRoot.activeElement : e.target;
     if (isTextField(field)) return;
     const k = keyMap[e.code];
+    log('  action for', e.code, '=', k ? k.id : 'none');
     if (k && k.run(e)) {
       e.preventDefault(); e.stopPropagation();
       if (e.target === host && host.shadowRoot.activeElement) host.shadowRoot.activeElement.blur();   // no ring left on the icon

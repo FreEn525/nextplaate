@@ -6,6 +6,8 @@
     set(k, v) { try { localStorage.setItem('pmg_' + k, v); } catch (e) {} },
     del(k) { try { localStorage.removeItem('pmg_' + k); } catch (e) {} }
   };
+  // Console log of what the script sees (keys, window, drawers). Off with: localStorage.setItem('pmg_debug', '0')
+  const log = (...args) => { if (store.get('debug', '1') === '1') console.log('[NextPlaate]', ...args); };
   const loadPhoto = k => { try { return JSON.parse(store.get(k, 'null')); } catch (e) { return null; } };
 
   const state = {

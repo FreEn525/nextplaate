@@ -26,6 +26,8 @@
     set(k, v) { try { localStorage.setItem('pmg_' + k, v); } catch (e) {} },
     del(k) { try { localStorage.removeItem('pmg_' + k); } catch (e) {} }
   };
+  // Console log of what the script sees (keys, window, drawers). Off with: localStorage.setItem('pmg_debug', '0')
+  const log = (...args) => { if (store.get('debug', '1') === '1') console.log('[NextPlaate]', ...args); };
   const loadPhoto = k => { try { return JSON.parse(store.get(k, 'null')); } catch (e) { return null; } };
 
   const state = {
@@ -81,12 +83,12 @@
       actions[id].bound = bindingOf(id);
       keyMap[actions[id].bound] = { id, ...actions[id] };
     });
-    updateHint();
   }
 
   function mountApp() {
     features.forEach(f => Object.assign(actions, f.keys || {}));
     rebuildKeys();
+    log('actions', Object.entries(actions).map(([id, a]) => id + '=' + a.bound).join(' '));
     mountRibbon(features);
     features.forEach(f => f.init && f.init());
     escapeChain = features.filter(f => f.onEscape).sort((a, b) => (a.escOrder || 0) - (b.escOrder || 0));
@@ -102,7 +104,7 @@
   if (navigator.keyboard && navigator.keyboard.getLayoutMap) {
     navigator.keyboard.getLayoutMap().then(map => {
       const k = map.get('KeyA');
-      if (k && /^[a-z]$/i.test(k)) { prevKey = k.toUpperCase(); updateHint(); }
+      if (k && /^[a-z]$/i.test(k)) prevKey = k.toUpperCase();
     }).catch(() => {});
   }
 
@@ -119,6 +121,7 @@
 
   // Capture phase on window: we see the key before the site does, so a site script cannot swallow it
   window.addEventListener('keydown', e => {
+    log('key', e.code, 'target', e.target.tagName, e.target.id || '', 'modal', !!app.modal, 'capture', !!app.capture);
     if (app.capture) { e.preventDefault(); e.stopPropagation(); app.capture(e); return; }
     if (app.modal) {
       if ((e.ctrlKey || e.metaKey) && e.code === 'KeyA') e.preventDefault();   // never the page text
@@ -129,12 +132,13 @@
     }
     if (e.ctrlKey || e.metaKey || e.altKey || e.repeat) return;
     if (e.code === 'KeyA' && /^[a-z]$/i.test(e.key || '') && e.key.toUpperCase() !== prevKey) {
-      prevKey = e.key.toUpperCase(); updateHint();
+      prevKey = e.key.toUpperCase();
     }
     // Focus inside the panel: the event target is the panel itself, so look at the focused control
     const field = e.target === host ? host.shadowRoot.activeElement : e.target;
     if (isTextField(field)) return;
     const k = keyMap[e.code];
+    log('  action for', e.code, '=', k ? k.id : 'none');
     if (k && k.run(e)) {
       e.preventDefault(); e.stopPropagation();
       if (e.target === host && host.shadowRoot.activeElement) host.shadowRoot.activeElement.blur();   // no ring left on the icon
@@ -304,8 +308,6 @@
     .slot .x:hover{color:var(--ink)}
     .slot.empty{color:var(--mute);border-style:dashed;background:#fff;font-size:12px;justify-content:center}
     .qinfo{font-size:12px;color:var(--mute)}
-    .dfoot{padding:8px 14px;background:#fff;border-top:1px solid var(--line)}
-    .hint{font-size:11px;color:var(--mute)}
     .toast{position:absolute;left:50%;transform:translateX(-50%);bottom:16px;width:min(420px,calc(100vw - 32px));box-sizing:border-box;overflow-wrap:anywhere;padding:10px 16px;text-align:center;background:var(--ink);border-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,.35);font-size:14px;line-height:1.4;color:#fff}
     .toast:empty{display:none}
     .toast b{color:#fff;text-decoration:underline;text-decoration-color:var(--brand-b)}
@@ -333,7 +335,6 @@
       <aside class="drawer" id="drawer" hidden>
         <header class="dhead"><h2 id="dtitle"></h2><button class="iconbtn" id="dclose" title="Close (Esc)">${icon('close')}</button></header>
         <div class="dbody" id="dbody"></div>
-        <div class="dfoot"><small class="hint" id="hint"></small></div>
       </aside>
       <nav class="rail" id="rail"><div class="logo">${LOGO(28)}</div></nav>
     </div>
@@ -388,13 +389,6 @@
     if (ms) statusTimer = setTimeout(() => { $('status').innerHTML = ''; }, ms);
   }
 
-  // "Keys: S · F · L · U · N · R · Q ◀ ▶ D · Esc", built from the keys the features declared
-  function updateHint() {
-    const parts = Object.values(actions).filter(a => a.hintOrder)
-      .sort((a, b) => a.hintOrder - b.hintOrder)
-      .map(a => (typeof a.hint === 'function' ? a.hint() : keyName(a.bound)));
-    $('hint').textContent = 'Keys: ' + [...parts, 'Esc'].join(' · ');
-  }
   /* =====================================================================
    *  PAIR  (choose the front and rear photos of a car by clicking them on the site)
    * ===================================================================== */
@@ -1093,9 +1087,10 @@
   function managerKey(e) {
     const t = e.composedPath ? e.composedPath()[0] : e.target;
     const typing = t && mroot.contains(t) && (t.tagName === 'TEXTAREA' || (t.tagName === 'INPUT' && /^(text|number|search)$/i.test(t.type)));
+    log('window key', e.code, 'ctrl', e.ctrlKey, 'target', t && (t.tagName + (t.id ? '#' + t.id : '')), 'typing', !!typing, 'queue', queue.length);
     if (e.key === 'Escape') { e.preventDefault(); if (sel.size) { sel.clear(); syncSel(); } else closeManager(); return; }
     if (typing) return;
-    if ((e.ctrlKey || e.metaKey) && e.code === 'KeyA') { e.preventDefault(); queue.forEach(q => sel.add(q.id)); syncSel(); return; }
+    if ((e.ctrlKey || e.metaKey) && e.code === 'KeyA') { e.preventDefault(); queue.forEach(q => sel.add(q.id)); syncSel(); log('select all: ' + sel.size + ' photos selected'); return; }
     if (e.ctrlKey || e.metaKey || e.altKey) return;
     if (e.key === 'Delete' || e.key === 'Backspace') { if (sel.size) { e.preventDefault(); deleteSelected(); } return; }
     const m = /^(?:Digit|Numpad)([1-9])$/.exec(e.code);

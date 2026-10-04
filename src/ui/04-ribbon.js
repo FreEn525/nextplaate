@@ -47,8 +47,6 @@
     .slot .x:hover{color:var(--ink)}
     .slot.empty{color:var(--mute);border-style:dashed;background:#fff;font-size:12px;justify-content:center}
     .qinfo{font-size:12px;color:var(--mute)}
-    .dfoot{padding:8px 14px;background:#fff;border-top:1px solid var(--line)}
-    .hint{font-size:11px;color:var(--mute)}
     .toast{position:absolute;left:50%;transform:translateX(-50%);bottom:16px;width:min(420px,calc(100vw - 32px));box-sizing:border-box;overflow-wrap:anywhere;padding:10px 16px;text-align:center;background:var(--ink);border-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,.35);font-size:14px;line-height:1.4;color:#fff}
     .toast:empty{display:none}
     .toast b{color:#fff;text-decoration:underline;text-decoration-color:var(--brand-b)}
@@ -76,7 +74,6 @@
       <aside class="drawer" id="drawer" hidden>
         <header class="dhead"><h2 id="dtitle"></h2><button class="iconbtn" id="dclose" title="Close (Esc)">${icon('close')}</button></header>
         <div class="dbody" id="dbody"></div>
-        <div class="dfoot"><small class="hint" id="hint"></small></div>
       </aside>
       <nav class="rail" id="rail"><div class="logo">${LOGO(28)}</div></nav>
     </div>
@@ -131,10 +128,3 @@
     if (ms) statusTimer = setTimeout(() => { $('status').innerHTML = ''; }, ms);
   }
 
-  // "Keys: S · F · L · U · N · R · Q ◀ ▶ D · Esc", built from the keys the features declared
-  function updateHint() {
-    const parts = Object.values(actions).filter(a => a.hintOrder)
-      .sort((a, b) => a.hintOrder - b.hintOrder)
-      .map(a => (typeof a.hint === 'function' ? a.hint() : keyName(a.bound)));
-    $('hint').textContent = 'Keys: ' + [...parts, 'Esc'].join(' · ');
-  }

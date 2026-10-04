@@ -132,9 +132,10 @@
   function managerKey(e) {
     const t = e.composedPath ? e.composedPath()[0] : e.target;
     const typing = t && mroot.contains(t) && (t.tagName === 'TEXTAREA' || (t.tagName === 'INPUT' && /^(text|number|search)$/i.test(t.type)));
+    log('window key', e.code, 'ctrl', e.ctrlKey, 'target', t && (t.tagName + (t.id ? '#' + t.id : '')), 'typing', !!typing, 'queue', queue.length);
     if (e.key === 'Escape') { e.preventDefault(); if (sel.size) { sel.clear(); syncSel(); } else closeManager(); return; }
     if (typing) return;
-    if ((e.ctrlKey || e.metaKey) && e.code === 'KeyA') { e.preventDefault(); queue.forEach(q => sel.add(q.id)); syncSel(); return; }
+    if ((e.ctrlKey || e.metaKey) && e.code === 'KeyA') { e.preventDefault(); queue.forEach(q => sel.add(q.id)); syncSel(); log('select all: ' + sel.size + ' photos selected'); return; }
     if (e.ctrlKey || e.metaKey || e.altKey) return;
     if (e.key === 'Delete' || e.key === 'Backspace') { if (sel.size) { e.preventDefault(); deleteSelected(); } return; }
     const m = /^(?:Digit|Numpad)([1-9])$/.exec(e.code);

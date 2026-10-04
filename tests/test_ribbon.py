@@ -114,11 +114,7 @@ def test_escape_does_not_close_the_drawer(page):
 
 
 
-def test_hint_lists_the_keys(page):
-    open_at(page, GALLERY)
-    hint = shadow_text(page, "#hint")
-    assert hint.startswith("Keys: S · F · L · U · N · R ")
-    assert hint.endswith(" ◀ ▶ D · Esc")
+
 
 
 def test_fill_button_is_only_enabled_on_the_edit_page(page):
