@@ -71,7 +71,10 @@
         return joinParts([region, fieldVal('nomer')]);
       }
       case 'sk': return joinParts([selText('region'), fieldVal('digit') + fieldVal('let2')]);   // Slovakia: AB 123AB
-      case 'tj': return squash(fieldVal('nomer')) + selText('region2');   // Tajikistan: 7717XZ07, the plate then the region label
+      case 'tj': {                                                  // Tajikistan: 7717XZ07, the plate then the region label (once)
+        const n = squash(fieldVal('nomer')), r = selText('region2');
+        return r && !n.endsWith(r) ? n + r : n;
+      }
       case 'ua': return joinParts([selText('region1'), fieldVal('digit1'), fieldVal('b1') + fieldVal('b2')]);   // Ukraine: AA 0001 AA
       case 'lv': return joinParts([selText('b1') + selText('b2'), fieldVal('digit')]);   // Latvia: AB 1234
       case 'li': return joinParts(['FL', fieldVal('digit')]);       // Liechtenstein: FL 12345 (the FL is fixed)

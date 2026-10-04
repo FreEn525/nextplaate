@@ -31,7 +31,8 @@
     // one single plate text field (France, Belgium...): the whole plate goes in it, dashes included;
     // the menus of the page (department, region) are set only when one of the tokens matches them
     const texts = fields.filter(el => el.tagName === 'INPUT');
-    if (texts.length === 1 && /^nomer/.test(texts[0].id || texts[0].name)) {
+    const menuTakes = fields.some(el => el.tagName === 'SELECT' && tokens.some(t => [...el.options].some(o => o.value && (o.text.trim().toUpperCase() === t.toUpperCase() || o.value.toUpperCase() === t.toUpperCase()))));
+    if (texts.length === 1 && !menuTakes && /^nomer/.test(texts[0].id || texts[0].name)) {
       texts[0].value = text;
       texts[0].dispatchEvent(new Event('input', { bubbles: true }));
       for (const el of fields.filter(el => el.tagName === 'SELECT')) {
