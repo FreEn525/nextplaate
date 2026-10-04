@@ -1,26 +1,34 @@
   /* =====================================================================
-   *  RIBBON  (the NextPlaate panel: docked to the right edge of the page, tabs and groups like Word's ribbon)
+   *  RIBBON  (the NextPlaate panel: a vertical bar of icons on the right edge of the page;
+   *           an icon opens its drawer, which slides over the page)
    * ===================================================================== */
-  // Tabs appear in this order; a tab not listed here goes last.
-  const TAB_ORDER = ['Pair', 'Post', 'Likes', 'Upload'];
+  // The drawers, in bar order. A feature joins one of them with groups: [{ drawer: 'pair', title, build }].
+  const DRAWERS = [
+    { id: 'pair', icon: 'photos', title: 'Photos', keys: 'S' },
+    { id: 'post', icon: 'post', title: 'Post', keys: 'F' },
+    { id: 'likes', icon: 'likes', title: 'Likes', keys: 'L · ◀ ▶' },
+    { id: 'upload', icon: 'upload', title: 'Batch upload', keys: 'U · N' }
+  ];
   const RIBBON_CSS = `
-    .rb{display:flex;flex-direction:column;width:360px;height:100%;background:var(--bg);border-left:1px solid var(--line2);box-shadow:-10px 0 30px rgba(0,0,0,.14)}
-    .rb.min .tabs,.rb.min .body,.rb.min .foot{display:none}
-    .top{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#fff;border-top:3px solid var(--brand-b);border-bottom:1px solid var(--line)}
-    .min-btn{width:28px;height:28px;border:1px solid var(--line2);border-radius:4px;background:#fff;color:var(--mute);font-size:16px;line-height:1;cursor:pointer}
-    .min-btn:hover{background:var(--tint);color:var(--ink)}
-    .tabs{display:flex;background:#fff;border-bottom:1px solid var(--line)}
-    .tab{flex:1;height:38px;border:0;border-bottom:3px solid transparent;background:none;color:var(--mute);font:inherit;font-weight:600;cursor:pointer}
-    .tab:hover{color:var(--ink);background:var(--tint)}
-    .tab[aria-selected="true"]{color:var(--brand-l);border-bottom-color:var(--brand-l)}
-    .body{flex:1;min-height:0;overflow-y:auto;padding:10px;display:flex;flex-direction:column}
-    .tabpage{display:flex;flex-direction:column;gap:10px}
+    .side{display:flex;height:100%;align-items:stretch}
+    .rail{width:56px;flex:none;display:flex;flex-direction:column;align-items:center;gap:8px;padding:10px 0;background:#fff;border-left:1px solid var(--line2);box-shadow:-6px 0 20px rgba(0,0,0,.08)}
+    .rail .logo{margin-bottom:6px}
+    .rbtn{width:40px;height:40px;display:grid;place-items:center;border:0;border-radius:6px;background:none;color:var(--mute);cursor:pointer}
+    .rbtn:hover{background:var(--tint);color:var(--ink)}
+    .rbtn[aria-pressed="true"]{background:var(--brand);color:var(--brand-t)}
+    .drawer{width:340px;display:flex;flex-direction:column;background:var(--bg);border-left:1px solid var(--line2);box-shadow:-10px 0 30px rgba(0,0,0,.14);position:relative}
+    .dhead{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#fff;border-top:3px solid var(--brand-b);border-bottom:1px solid var(--line)}
+    .dhead h2{margin:0;font-size:15px;font-weight:700}
+    .xbtn{width:28px;height:28px;display:grid;place-items:center;border:1px solid var(--line2);border-radius:4px;background:#fff;color:var(--mute);cursor:pointer}
+    .xbtn:hover{background:var(--tint);color:var(--ink)}
+    .dbody{flex:1;min-height:0;overflow-y:auto;padding:12px;display:flex;flex-direction:column}
+    .dsec{display:flex;flex-direction:column;gap:10px}
     .group{background:#fff;border:1px solid var(--line);border-radius:4px;display:flex;flex-direction:column;overflow:hidden}
     .gbody{display:flex;flex-direction:column;gap:8px;padding:10px}
     .gtitle{padding:5px 10px;border-top:1px solid var(--line);background:var(--tint);color:var(--mute);font-size:11px;font-weight:600;text-align:center;text-transform:uppercase;letter-spacing:.04em}
     .gbody .btn{width:100%}
-    .gbody .btn.half{width:auto;flex:1}
     .btnrow{display:flex;gap:8px}
+    .btnrow .btn{flex:1}
     .row{display:flex;align-items:center;gap:8px;font-size:12px}
     .row label{font-weight:600;white-space:nowrap}
     .row input{width:90px}
@@ -38,10 +46,11 @@
     .slot .x:hover{color:var(--ink)}
     .slot.empty{color:var(--mute);border-style:dashed;background:#fff;font-size:12px;justify-content:center}
     .qinfo{font-size:12px;color:var(--mute)}
-    .foot{display:flex;flex-direction:column;gap:4px;padding:8px 12px;background:#fff;border-top:1px solid var(--line)}
-    .status{min-height:20px;font-size:13px;color:var(--mute)}
-    .status b{color:var(--ink)}
+    .dfoot{padding:8px 14px;background:#fff;border-top:1px solid var(--line)}
     .hint{font-size:11px;color:var(--mute)}
+    .toast{position:absolute;right:68px;bottom:44px;max-width:300px;padding:8px 10px;background:#fff;border:1px solid var(--line2);border-radius:4px;box-shadow:0 6px 20px rgba(0,0,0,.15);font-size:13px;color:var(--ink)}
+    .toast:empty{display:none}
+    .toast b{color:var(--ink)}
   `;
 
   const host = document.createElement('div');
@@ -50,41 +59,47 @@
   const root = host.attachShadow({ mode: 'open' });   // shadow DOM: the site's CSS cannot reach the panel
   root.innerHTML = `
     <style>${UI_BASE}${RIBBON_CSS}</style>
-    <div class="rb" id="rb">
-      <div class="top">${WORDMARK(26)}<button class="min-btn" id="min" title="Collapse or expand the panel">–</button></div>
-      <nav class="tabs" id="tabs"></nav>
-      <div class="body" id="body"></div>
-      <div class="foot"><div class="status" id="status"></div><small class="hint" id="hint"></small></div>
-    </div>`;
+    <div class="side" id="side">
+      <aside class="drawer" id="drawer" hidden>
+        <header class="dhead"><h2 id="dtitle"></h2><button class="xbtn" id="dclose" title="Close (Esc)">${icon('close')}</button></header>
+        <div class="dbody" id="dbody"></div>
+        <div class="dfoot"><small class="hint" id="hint"></small></div>
+      </aside>
+      <nav class="rail" id="rail"><div class="logo">${LOGO(28)}</div></nav>
+    </div>
+    <div class="toast" id="status"></div>`;
   document.body.appendChild(host);
   const $ = id => root.getElementById(id);
+  let openId = null;
 
-  // One tab per name, one section per tab; each feature group is a box with its title under it, like Word
+  // One icon per drawer that has features, one section per drawer; each feature group is a box with its title under it
   function mountRibbon(list) {
-    const byTab = {};
-    list.forEach(f => (f.groups || []).forEach(g => { (byTab[g.tab] = byTab[g.tab] || []).push(g); }));
-    const names = [...TAB_ORDER.filter(t => byTab[t]), ...Object.keys(byTab).filter(t => !TAB_ORDER.includes(t))];
-    names.forEach(name => {
-      $('tabs').append(h('button', { class: 'tab', text: name, 'data-tab': name, onclick: () => showTab(name) }));
-      $('body').append(h('section', { class: 'tabpage', 'data-tab': name, hidden: true },
-        byTab[name].map(g => h('div', { class: 'group' },
+    const byDrawer = {};
+    list.forEach(f => (f.groups || []).forEach(g => { (byDrawer[g.drawer] = byDrawer[g.drawer] || []).push(g); }));
+    DRAWERS.filter(d => byDrawer[d.id]).forEach(d => {
+      const btn = h('button', { class: 'rbtn', 'data-drawer': d.id, title: `${d.title} (${d.keys})`, onclick: () => openDrawer(d.id) });
+      btn.innerHTML = icon(d.icon);   // our own SVG constants, never user data
+      $('rail').append(btn);
+      $('dbody').append(h('section', { class: 'dsec', 'data-drawer': d.id, hidden: true },
+        byDrawer[d.id].map(g => h('div', { class: 'group' },
           h('div', { class: 'gbody' }, g.build()),
           h('div', { class: 'gtitle', text: g.title })))));
     });
-    showTab(names.includes(store.get('tab', '')) ? store.get('tab', '') : names[0]);
-    $('min').onclick = () => setMin(!$('rb').classList.contains('min'));
-    setMin(store.get('min', '0') === '1');
+    $('dclose').onclick = () => closeDrawer();
   }
-  function showTab(name) {
-    root.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === name)));
-    root.querySelectorAll('.tabpage').forEach(p => { p.hidden = p.dataset.tab !== name; });
-    store.set('tab', name);
+
+  // Clicking the open icon closes its drawer; only one drawer is open at a time
+  function openDrawer(id) {
+    openId = id === openId ? null : id;
+    root.querySelectorAll('.rbtn').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.drawer === openId)));
+    root.querySelectorAll('.dsec').forEach(s => { s.hidden = s.dataset.drawer !== openId; });
+    $('drawer').hidden = !openId;
+    $('dtitle').textContent = openId ? DRAWERS.find(d => d.id === openId).title : '';
   }
-  // Collapsed: only the header stays, and the panel stops covering the page below it
-  function setMin(on) {
-    $('rb').classList.toggle('min', on);
-    host.style.bottom = on ? 'auto' : '0';
-    store.set('min', on ? '1' : '0');
+  function closeDrawer() {
+    if (!openId) return false;
+    openDrawer(openId);
+    return true;
   }
 
   function setStatus(html) { $('status').innerHTML = html; }

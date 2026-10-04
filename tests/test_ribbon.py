@@ -1,4 +1,4 @@
-"""The panel (ribbon): docking, tabs, collapsing, key hints and page-dependent controls.
+"""The panel (ribbon): docking, icon bar, drawers, key hints and page-dependent controls.
 
 Run from the project root:  python -m pytest tests -q
 """
@@ -37,6 +37,33 @@ def rect(page):
     )
 
 
+def click_icon(page, drawer_id):
+    page.evaluate(
+        """(id) => {
+            const buttons = [...document.getElementById('pmg-host').shadowRoot.querySelectorAll('.rbtn')];
+            buttons.find(b => b.dataset.drawer === id).click();
+        }""",
+        drawer_id,
+    )
+
+
+def icon_drawers(page):
+    return page.evaluate(
+        "() => [...document.getElementById('pmg-host').shadowRoot.querySelectorAll('.rbtn')].map(b => b.dataset.drawer)"
+    )
+
+
+def drawer_open(page):
+    return page.evaluate("() => !document.getElementById('pmg-host').shadowRoot.getElementById('drawer').hidden")
+
+
+def visible_section(page):
+    return page.evaluate(
+        "() => { const s = [...document.getElementById('pmg-host').shadowRoot.querySelectorAll('.dsec')].find(x => !x.hidden);"
+        " return s ? s.dataset.drawer : null; }"
+    )
+
+
 def tab_names(page):
     return page.evaluate(
         "() => [...document.getElementById('pmg-host').shadowRoot.querySelectorAll('.tab')].map(t => t.textContent)"
@@ -63,33 +90,26 @@ def test_panel_is_docked_on_the_right_edge(page):
     assert r["height"] == pytest.approx(r["vh"], abs=1)
 
 
-def test_tabs_are_in_order(page):
+def test_bar_has_one_icon_per_drawer_in_order(page):
     open_at(page, GALLERY)
-    assert tab_names(page) == ["Pair", "Post", "Likes", "Upload"]
+    assert icon_drawers(page) == ["pair", "post", "likes", "upload"]
 
 
-def test_clicking_a_tab_shows_its_groups(page):
+def test_icon_opens_its_drawer_and_a_second_click_closes_it(page):
     open_at(page, GALLERY)
-    page.evaluate(
-        "() => document.getElementById('pmg-host').shadowRoot.querySelector('.tab:nth-child(2)').click()"
-    )
-    visible = page.evaluate(
-        "() => [...document.getElementById('pmg-host').shadowRoot.querySelectorAll('.tabpage')]"
-        ".filter(p => !p.hidden).map(p => p.dataset.tab)"
-    )
-    assert visible == ["Post"]
+    click_icon(page, "post")
+    assert drawer_open(page) and visible_section(page) == "post"
     assert page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('tag') !== null")
+    click_icon(page, "post")
+    assert not drawer_open(page)
 
 
-def test_collapse_keeps_only_the_header(page):
+def test_escape_closes_the_drawer(page):
     open_at(page, GALLERY)
-    page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('min').click()")
-    assert page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('rb').classList.contains('min')")
-    assert rect(page)["height"] < 120
-    # and it is remembered
-    page.reload()
-    page.wait_for_selector("#pmg-host")
-    assert page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('rb').classList.contains('min')")
+    click_icon(page, "likes")
+    assert drawer_open(page)
+    page.keyboard.press("Escape")
+    assert not drawer_open(page)
 
 
 def test_hint_lists_the_keys(page):

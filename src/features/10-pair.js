@@ -64,7 +64,7 @@
 
   registerFeature({
     groups: [{
-      tab: 'Pair', title: 'Photos',
+      drawer: 'pair', title: 'Photos',
       build: () => [
         h('button', { id: 'sel', class: 'btn ghost', text: 'Select photos (S)' }),
         h('button', { id: 'reset', class: 'btn ghost sm', text: 'Reset the pair' }),

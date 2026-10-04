@@ -1,6 +1,7 @@
 *
 !.gitignore
 !LICENSE
+!THIRD_PARTY.md
 !README.md
 !nextplaate.user.js
 !.github/

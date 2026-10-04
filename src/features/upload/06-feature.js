@@ -17,7 +17,7 @@
 
   registerFeature({
     groups: [{
-      tab: 'Upload', title: 'Batch upload',
+      drawer: 'upload', title: 'Batch upload',
       build: () => [
         h('div', { id: 'qInfo', class: 'qinfo', text: 'No photos queued yet.' }),
         h('button', { id: 'qOpen', class: 'btn ghost', text: 'Choose photos & countries (U)' }),
