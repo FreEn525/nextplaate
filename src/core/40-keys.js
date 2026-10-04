@@ -27,7 +27,10 @@
   // Capture phase on window: we see the key before the site does, so a site script cannot swallow it
   window.addEventListener('keydown', e => {
     if (app.capture) { e.preventDefault(); e.stopPropagation(); app.capture(e); return; }
-    if (app.modal) { app.modal.onKey(e); e.stopPropagation(); return; }
+    if (app.modal) {
+      if ((e.ctrlKey || e.metaKey) && e.code === 'KeyA') e.preventDefault();   // never the page text
+      app.modal.onKey(e); e.stopPropagation(); return;
+    }
     if (e.key === 'Escape') {
       for (const f of escapeChain) if (f.onEscape()) return;
     }

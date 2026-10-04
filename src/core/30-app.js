@@ -35,6 +35,5 @@
     rebuildKeys();
     mountRibbon(features);
     features.forEach(f => f.init && f.init());
-    escapeChain = [...features.filter(f => f.onEscape), { onEscape: closeDrawer, escOrder: 100 }]   // Esc closes the open drawer last
-      .sort((a, b) => (a.escOrder || 0) - (b.escOrder || 0));
+    escapeChain = features.filter(f => f.onEscape).sort((a, b) => (a.escOrder || 0) - (b.escOrder || 0));
   }

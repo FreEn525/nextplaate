@@ -2,7 +2,6 @@
    *  PAIR  (choose the front and rear photos of a car by clicking them on the site)
    * ===================================================================== */
   function startSelecting() {
-    closeDrawer();                                   // the photos must be clickable on the site
     if (host.shadowRoot.activeElement) host.shadowRoot.activeElement.blur();
     setStatus('Click the <b>FRONT</b> photo on the site. <b>Esc</b> cancels.', 0);
     if (state.front && state.rear) { state.front = state.rear = null; store.set('front', 'null'); store.set('rear', 'null'); }
@@ -27,6 +26,7 @@
   }
 
   function render() {
+    setPassive(!!state.mode);                        // while selecting, the photos must be clickable under the drawer
     renderSlot($('sFront'), 'Front', state.front, 'front');
     renderSlot($('sRear'), 'Rear', state.rear, 'rear');
     const ready = !!(state.front && state.rear);

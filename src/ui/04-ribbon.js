@@ -18,6 +18,7 @@
     .rbtn{width:40px;height:40px;display:grid;place-items:center;border:0;border-radius:6px;background:none;color:var(--mute);cursor:pointer}
     .rbtn:hover{background:var(--tint);color:var(--ink)}
     .rbtn[aria-pressed="true"]{background:var(--brand);color:var(--brand-t)}
+    .drawer.passive{pointer-events:none!important;opacity:.82}
     .drawer{width:min(340px,calc(100vw - 56px));display:flex;flex-direction:column;background:var(--bg);border-left:1px solid var(--line2);box-shadow:-10px 0 30px rgba(0,0,0,.14);position:relative}
     .dhead{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:56px;padding:0 16px;background:#fff;border-bottom:1px solid var(--line)}
     .dhead h2{margin:0;font-size:16px;font-weight:700}
@@ -48,15 +49,15 @@
     .qinfo{font-size:12px;color:var(--mute)}
     .dfoot{padding:8px 14px;background:#fff;border-top:1px solid var(--line)}
     .hint{font-size:11px;color:var(--mute)}
-    .toast{position:absolute;left:50%;transform:translateX(-50%);bottom:16px;width:min(420px,calc(100vw - 32px));box-sizing:border-box;overflow-wrap:anywhere;padding:10px 14px;text-align:center;background:#fff;border:1px solid var(--line2);border-radius:4px;box-shadow:0 6px 20px rgba(0,0,0,.15);font-size:13px;color:var(--ink)}
+    .toast{position:absolute;left:50%;transform:translateX(-50%);bottom:16px;width:min(420px,calc(100vw - 32px));box-sizing:border-box;overflow-wrap:anywhere;padding:10px 16px;text-align:center;background:var(--ink);border-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,.35);font-size:14px;line-height:1.4;color:#fff}
     .toast:empty{display:none}
-    .toast b{color:var(--ink)}
+    .toast b{color:#fff;text-decoration:underline;text-decoration-color:var(--brand-b)}
     .kblist{display:flex;flex-direction:column;gap:6px}
     .kbrow{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px}
         .kbright{display:flex;align-items:center;gap:4px}
-    .kbkey{min-width:58px;height:30px;padding:0 8px;border:1px solid var(--line2);border-radius:4px;background:#fff;color:var(--ink);font:700 12px system-ui,sans-serif;cursor:pointer}
+    .kbkey{width:84px;height:30px;padding:0 8px;border:1px solid var(--line2);border-radius:4px;background:#fff;color:var(--ink);font:700 12px system-ui,sans-serif;cursor:pointer}
     .kbkey:hover{border-color:var(--brand-b);background:var(--tint)}
-    .kbkey.static{cursor:default;min-width:72px}
+    .kbkey.static{cursor:default}
     .kbkey.static:hover{border-color:var(--line2);background:#fff}
     .kbspacer{width:26px;flex:none}
     .kbreset{width:26px;height:30px;border:0;background:none;color:var(--mute);cursor:pointer;font-size:14px}
@@ -99,19 +100,23 @@
     $('dclose').onclick = () => closeDrawer();
   }
 
-  // Clicking the open icon closes its drawer; only one drawer is open at a time
+  // Only one drawer is open at a time. It stays open until its X or another icon is clicked
   function openDrawer(id) {
-    openId = id === openId ? null : id;
+    if (id === openId) return;
+    openId = id;
     root.querySelectorAll('.rbtn').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.drawer === openId)));
     root.querySelectorAll('.dsec').forEach(s => { s.hidden = s.dataset.drawer !== openId; });
     $('drawer').hidden = !openId;
     $('dtitle').textContent = openId ? DRAWERS.find(d => d.id === openId).title : '';
   }
   function closeDrawer() {
-    if (!openId) return false;
-    openDrawer(openId);
-    return true;
+    openId = null;
+    root.querySelectorAll('.rbtn').forEach(b => b.setAttribute('aria-pressed', 'false'));
+    root.querySelectorAll('.dsec').forEach(s => { s.hidden = true; });
+    $('drawer').hidden = true;
   }
+  // While a selection runs, the drawer stays visible but lets clicks reach the site
+  function setPassive(on) { $('drawer').classList.toggle('passive', on); }
 
   // Shows a message at the bottom of the window. It goes away by itself after a few seconds (ms = 0: it stays)
   let statusTimer = null;

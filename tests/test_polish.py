@@ -150,14 +150,15 @@ def test_shortcut_list_shows_the_real_keys(page):
     assert "?" not in keys and "S" in keys and "U" in keys
 
 
-def test_selecting_closes_the_drawer_so_photos_are_clickable(page):
+def test_drawer_stays_open_while_selecting_and_lets_clicks_through(page):
     open_at(page, GALLERY)
     click_icon(page, "pair")
     page.keyboard.press("KeyS")
-    assert page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('drawer').hidden")
+    assert not page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('drawer').hidden")
     page.locator('img[src*="/s/101.jpg"]').click()
     stored = page.evaluate("() => localStorage.getItem('pmg_front')")
     assert stored and "101" in stored
+
 
 
 def test_panel_status_stays_on_screen_on_a_phone(browser):

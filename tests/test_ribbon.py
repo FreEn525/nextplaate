@@ -101,15 +101,17 @@ def test_icon_opens_its_drawer_and_a_second_click_closes_it(page):
     assert drawer_open(page) and visible_section(page) == "post"
     assert page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('tag') !== null")
     click_icon(page, "post")
-    assert not drawer_open(page)
+    assert drawer_open(page)                       # a second click on the same icon keeps it open
+    page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('dclose').click()")
+    assert not drawer_open(page)                   # only the X closes it
 
 
-def test_escape_closes_the_drawer(page):
+def test_escape_does_not_close_the_drawer(page):
     open_at(page, GALLERY)
     click_icon(page, "likes")
-    assert drawer_open(page)
     page.keyboard.press("Escape")
-    assert not drawer_open(page)
+    assert drawer_open(page)
+
 
 
 def test_hint_lists_the_keys(page):
