@@ -3,7 +3,7 @@
    * ===================================================================== */
   registerFeature({
     groups: [{
-      drawer: 'post', title: 'Details',
+      drawer: 'pair', title: 'Details',
       build: () => [
         h('div', { class: 'field' }, h('label', { for: 'place', text: 'Location' }),
           h('input', { type: 'text', id: 'place', autocomplete: 'off' })),

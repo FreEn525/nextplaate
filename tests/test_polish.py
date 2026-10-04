@@ -121,7 +121,7 @@ def test_panel_fits_a_small_screen(browser):
     route_site(c)
     p = c.new_page()
     open_at(p, GALLERY)
-    click_icon(p, "post")
+    click_icon(p, "pair")
     box = p.evaluate(
         """() => { const d = document.getElementById('pmg-host').shadowRoot.getElementById('drawer').getBoundingClientRect();
                    return { left: d.left, right: d.right, width: d.width }; }"""

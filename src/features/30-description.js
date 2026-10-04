@@ -88,7 +88,7 @@
   registerFeature({
     groups: [
       {
-        drawer: 'post', title: 'Description',
+        drawer: 'pair', title: 'Description',
         build: () => [h('button', { id: 'fillBtn', class: 'btn ghost', disabled: true, text: 'Fill description (F)' })]
       },
       {

@@ -268,8 +268,7 @@
    * ===================================================================== */
   // The drawers, in bar order. A feature joins one of them with groups: [{ drawer: 'pair', title, build }].
   const DRAWERS = [
-    { id: 'pair', icon: 'photos', title: 'Photos', keys: 'S' },
-    { id: 'post', icon: 'post', title: 'Post', keys: 'F' },
+    { id: 'pair', icon: 'photos', title: 'Photo pair', keys: 'S · F' },
     { id: 'gallery', icon: 'gallery', title: 'Gallery', keys: 'L · ◀ ▶' },
     { id: 'upload', icon: 'upload', title: 'Batch upload', keys: 'U · N' },
     { id: 'keys', icon: 'keyboard', title: 'Shortcuts', keys: 'Esc' }
@@ -459,7 +458,7 @@
 
   registerFeature({
     groups: [{
-      drawer: 'pair', title: 'Photos',
+      drawer: 'pair', title: 'Selection',
       build: () => [
         h('button', { id: 'sel', class: 'btn ghost', text: 'Select photos (S)' }),
         h('button', { id: 'reset', class: 'btn ghost sm', text: 'Reset the pair' }),
@@ -486,7 +485,7 @@
    * ===================================================================== */
   registerFeature({
     groups: [{
-      drawer: 'post', title: 'Details',
+      drawer: 'pair', title: 'Details',
       build: () => [
         h('div', { class: 'field' }, h('label', { for: 'place', text: 'Location' }),
           h('input', { type: 'text', id: 'place', autocomplete: 'off' })),
@@ -591,7 +590,7 @@
   registerFeature({
     groups: [
       {
-        drawer: 'post', title: 'Description',
+        drawer: 'pair', title: 'Description',
         build: () => [h('button', { id: 'fillBtn', class: 'btn ghost', disabled: true, text: 'Fill description (F)' })]
       },
       {
