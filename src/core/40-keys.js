@@ -20,6 +20,8 @@
     const arrows = { ArrowLeft: '←', ArrowRight: '→', ArrowUp: '↑', ArrowDown: '↓' };
     return arrows[code] || code.replace(/^Key|^Digit|^Numpad/, '');
   };
+  // Ctrl+A is the letter A, whatever the layout: on AZERTY that key has the code KeyQ
+  const isSelectAll = e => (e.key || '').toLowerCase() === 'a';
   // Text fields only: a checkbox, a select or a slider does not take the keys
   const isTextField = el => !!el && (el.isContentEditable || el.tagName === 'TEXTAREA' ||
     (el.tagName === 'INPUT' && /^(text|number|search|url|email|password)$/i.test(el.type)));
@@ -29,7 +31,7 @@
     log('key', e.code, 'target', e.target.tagName, e.target.id || '', 'modal', !!app.modal, 'capture', !!app.capture);
     if (app.capture) { e.preventDefault(); e.stopPropagation(); app.capture(e); return; }
     if (app.modal) {
-      if ((e.ctrlKey || e.metaKey) && e.code === 'KeyA') e.preventDefault();   // never the page text
+      if ((e.ctrlKey || e.metaKey) && isSelectAll(e)) e.preventDefault();   // never the page text
       app.modal.onKey(e); e.stopPropagation(); return;
     }
     if (e.key === 'Escape') {

@@ -204,3 +204,13 @@ def test_ctrl_a_selects_photos_even_if_a_site_field_had_the_focus(page, tmp_path
     add_two_photos(page, tmp_path)
     page.keyboard.press("Control+KeyA")
     assert manager_selected(page) == 2
+
+
+def test_ctrl_a_works_on_azerty_where_the_letter_a_has_the_code_keyq(page, tmp_path):
+    open_at(page, GALLERY)
+    page.keyboard.press("KeyU")
+    add_two_photos(page, tmp_path)
+    # what an AZERTY keyboard sends for Ctrl+A: the letter is a, the physical key is KeyQ
+    page.evaluate("""() => document.body.dispatchEvent(new KeyboardEvent('keydown',
+        { key: 'a', code: 'KeyQ', ctrlKey: true, bubbles: true, cancelable: true }))""")
+    assert manager_selected(page) == 2

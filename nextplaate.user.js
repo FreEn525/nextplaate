@@ -115,6 +115,8 @@
     const arrows = { ArrowLeft: '←', ArrowRight: '→', ArrowUp: '↑', ArrowDown: '↓' };
     return arrows[code] || code.replace(/^Key|^Digit|^Numpad/, '');
   };
+  // Ctrl+A is the letter A, whatever the layout: on AZERTY that key has the code KeyQ
+  const isSelectAll = e => (e.key || '').toLowerCase() === 'a';
   // Text fields only: a checkbox, a select or a slider does not take the keys
   const isTextField = el => !!el && (el.isContentEditable || el.tagName === 'TEXTAREA' ||
     (el.tagName === 'INPUT' && /^(text|number|search|url|email|password)$/i.test(el.type)));
@@ -124,7 +126,7 @@
     log('key', e.code, 'target', e.target.tagName, e.target.id || '', 'modal', !!app.modal, 'capture', !!app.capture);
     if (app.capture) { e.preventDefault(); e.stopPropagation(); app.capture(e); return; }
     if (app.modal) {
-      if ((e.ctrlKey || e.metaKey) && e.code === 'KeyA') e.preventDefault();   // never the page text
+      if ((e.ctrlKey || e.metaKey) && isSelectAll(e)) e.preventDefault();   // never the page text
       app.modal.onKey(e); e.stopPropagation(); return;
     }
     if (e.key === 'Escape') {
@@ -1086,11 +1088,11 @@
   }
   function managerKey(e) {
     const t = e.composedPath ? e.composedPath()[0] : e.target;
-    const typing = t && mroot.contains(t) && (t.tagName === 'TEXTAREA' || (t.tagName === 'INPUT' && /^(text|number|search)$/i.test(t.type)));
+    const typing = t instanceof Node && mroot.contains(t) && (t.tagName === 'TEXTAREA' || (t.tagName === 'INPUT' && /^(text|number|search)$/i.test(t.type)));
     log('window key', e.code, 'ctrl', e.ctrlKey, 'target', t && (t.tagName + (t.id ? '#' + t.id : '')), 'typing', !!typing, 'queue', queue.length);
     if (e.key === 'Escape') { e.preventDefault(); if (sel.size) { sel.clear(); syncSel(); } else closeManager(); return; }
     if (typing) return;
-    if ((e.ctrlKey || e.metaKey) && e.code === 'KeyA') { e.preventDefault(); queue.forEach(q => sel.add(q.id)); syncSel(); log('select all: ' + sel.size + ' photos selected'); return; }
+    if ((e.ctrlKey || e.metaKey) && isSelectAll(e)) { e.preventDefault(); queue.forEach(q => sel.add(q.id)); syncSel(); log('select all: ' + sel.size + ' photos selected'); return; }
     if (e.ctrlKey || e.metaKey || e.altKey) return;
     if (e.key === 'Delete' || e.key === 'Backspace') { if (sel.size) { e.preventDefault(); deleteSelected(); } return; }
     const m = /^(?:Digit|Numpad)([1-9])$/.exec(e.code);
