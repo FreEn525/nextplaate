@@ -50,11 +50,17 @@
       } else {
         const want = tokens[i].toUpperCase();
         const opt = [...el.options].find(o => o.value && (o.text.trim().toUpperCase().startsWith(want) || o.value.toUpperCase() === want));
-        if (opt) { el.value = opt.value; el.dispatchEvent(new Event('change', { bubbles: true })); i++; continue; }
+        if (opt) { el.value = opt.value; el.dataset.ptSet = '1'; el.dispatchEvent(new Event('change', { bubbles: true })); i++; continue; }
         // "TT" over two one-letter menus: the first letter goes in this menu, the rest carries on to the next one
         const one = [...el.options].find(o => o.value && o.text.trim().toUpperCase() === want[0]);
-        if (want.length > 1 && one) { el.value = one.value; el.dispatchEvent(new Event('change', { bubbles: true })); tokens[i] = tokens[i].slice(1); }
+        if (want.length > 1 && one) { el.value = one.value; el.dataset.ptSet = '1'; el.dispatchEvent(new Event('change', { bubbles: true })); tokens[i] = tokens[i].slice(1); }
       }
+    }
+    // menus the plate did not use go back to their empty choice, so a default value is not read as a part of the plate
+    for (const el of fields.filter(el => el.tagName === 'SELECT')) {
+      if (el.dataset.ptSet) { delete el.dataset.ptSet; continue; }
+      const empty = [...el.options].find(o => o.value === '');
+      if (empty && el.value !== '') { el.value = ''; el.dispatchEvent(new Event('change', { bubbles: true })); }
     }
     return i === tokens.length;   // false: the plate does not fit the fields of this page
   }
