@@ -139,6 +139,14 @@
         const region = label.match(/^\s*(\d{2})/);
         return joinParts([region && region[1], fieldVal('let'), fieldVal('digit')]);
       }
+      case 'es': {                                                  // Spain: diplomatic CD 32 022 (the dip menu shows its label CD, its value is a code)
+        if (fieldVal('ctype') === '2') return joinParts([selText('dip'), selText('region'), shownVal('digit1')]);
+        return genericPlate();
+      }
+      case 'dk': {                                                  // Denmark: vanity plates are seven boxes, one character each (MARIAKJ)
+        if (fieldVal('ctype') === '4') return ['b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7'].map(shownVal).join('').toUpperCase();
+        return genericPlate();
+      }
       case 'dz': return fieldVal('nomer').replace(/\s+/g, ' ');     // Algeria: the groups are typed as the site shows them (271201 00 16)
       default:
         return genericPlate();
