@@ -56,6 +56,21 @@
     return joinParts(parts).toUpperCase();
   }
 
+  // Belarus: for each type, the visible letter menus, the region menu and the digit field (site's disby1 function, run on each type)
+  const BY_TYPES = {
+    '1': { letters: ['b3', 'b4'], region: 'region5', digit: 'digit1', lettersFirst: false },   // Cars (2004)
+    '2': { letters: ['b1', 'b2'], region: 'region5', digit: 'digit1', lettersFirst: true },    // Trucks and buses (2004)
+    '4': { letters: ['b3', 'b4'], region: 'region5', digit: 'digit1', lettersFirst: false },   // Electric vehicles (cars)
+    '5': { letters: ['b1', 'b3'], region: 'region5', digit: 'digit1', lettersFirst: true },    // Trailers and semitrailers (2004)
+    '6': { letters: ['b3', 'b4'], region: 'region5', digit: 'digit1', lettersFirst: false },   // Motorcycles (2004)
+    '7': { letters: ['b1', 'b2'], region: 'region1', digit: 'digit1', lettersFirst: true },    // Special machinery (2004)
+    '8': { letters: ['b1', 'b2'], region: 'region5', digit: 'digit1', lettersFirst: true },    // Electric vehicles (trucks and buses)
+    '9': { letters: ['b3', 'b4'], region: 'region5', digit: 'digit1', lettersFirst: false },   // Electric vehicles (motorcycles)
+    '12': { letters: ['b3', 'b4'], region: 'region1', digit: 'digit2', lettersFirst: false },  // Transit plates (2004)
+    '13': { letters: ['b3', 'b4'], region: 'region3', digit: 'digit1', lettersFirst: false },  // Cars (2000)
+    '20': { letters: [], region: 'region6', digit: 'digit1', lettersFirst: false }              // Police
+  };
+
   function plateForForm() {
     switch (here.country) {
       case 'fr': return plateFR();
@@ -81,11 +96,12 @@
       case 'ru': return joinParts([selText('b1'), fieldVal('digit'), selText('b3') + selText('b4'), selText('region')]);   // Russia: А 001 АА 77
       case 'uz': return joinParts([selText('region'), fieldVal('b1'), fieldVal('dig1'), fieldVal('b2')]);   // Uzbekistan: PP A 123 AA
       case 'gr': return joinParts([selText('b1') + selText('region'), fieldVal('digit')]);   // Greece: I + AZ (the region menu) + 6038 = IAZ 6038
-      case 'by': {                                                  // Belarus: cars 6383 EC-6; trucks and buses (ctype 2, 15) AP 9665-1
-        const letters = selText('b3') + selText('b4'), region = selText('region5');
-        const truck = ['2', '15'].includes(fieldVal('ctype'));
-        if (truck) return joinParts([letters, fieldVal('digit1') + (region ? '-' + region : '')]);
-        return joinParts([fieldVal('digit1'), letters + (region ? '-' + region : '')]);
+      case 'by': {                                                  // Belarus: the fields shown depend on the type (taken from the site's own switch function)
+        const row = BY_TYPES[fieldVal('ctype')];
+        if (!row) return genericPlate();
+        const letters = row.letters.map(selText).join(''), digits = fieldVal(row.digit), region = selText(row.region);
+        const core = row.lettersFirst ? joinParts([letters, digits]) : joinParts([digits, letters]);   // trucks AP 9665, cars 6383 EC
+        return core + (region ? '-' + region : '');                    // the region follows a dash: AP 9665-1, 6383 EC-6
       }
       case 'cz': return joinParts([selText('b1') + selText('region') + selText('b2'), fieldVal('digit1')]);   // Czechia: 1CA 8407 (digit menu, letter menu, letter menu)
       case 'sk': return joinParts([selText('region') + '-' + fieldVal('digit') + fieldVal('let2')]);   // Slovakia: BA-427RF (a space is refused by the site)
