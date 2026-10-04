@@ -156,6 +156,6 @@ def test_a_page_bound_group_says_where_it_works_and_keeps_its_settings(page):
     open_at(page, GALLERY)
     open_at(page, "https://platesmania.com/fr/nomer101")
     click_icon(page, "gallery")
-    note = page.evaluate("() => document.getElementById('pmg-host').shadowRoot.querySelector('.dsec[data-drawer="gallery"] .pnote').textContent")
+    note = page.evaluate("() => document.getElementById('pmg-host').shadowRoot.querySelector('.dsec[data-drawer=\"gallery\"] .pnote').textContent")
     assert "gallery" in note
     assert page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('delay') !== null")
