@@ -1039,8 +1039,13 @@
       $('autoCheck').onchange = () => store.set('autoCheck', $('autoCheck').checked ? '1' : '0');
       $('plateCheck').onclick = () => checkPlate(true);
       // Safety net: some sites change a field without firing the events above. Reading a few fields is cheap.
+      // It checks when the plate has stayed the same for one whole round (so not while the user is typing)
+      let seen = null;
       setInterval(() => {
-        if (here.add && store.get('autoCheck', '1') === '1' && (plateForForm() || null) !== lastPlate) later(600);
+        if (!here.add || store.get('autoCheck', '1') !== '1') return;
+        const plate = plateForForm() || null;
+        if (plate === seen && plate !== lastPlate) checkPlate(false);
+        seen = plate;
       }, 500);
       $('plateOpen').onclick = () => {
         const plate = plateForForm();
