@@ -6,6 +6,7 @@
    *    keeps each result in the browser, and "Write report" saves the report into a folder you choose.
    * ===================================================================== */
   const PT_QUEUE = 'nextplaate-plates-run';        // the countries left in the run (sessionStorage)
+  const PT_PAUSE_MS = 2000;                        // between two countries (the site limits fast request bursts)
   const ptNorm = s => (s || '').replace(/[\s-]+/g, '').toUpperCase();
 
   // Plates shown in the country's gallery: the text of their photos (the alt of the "inf" image)
@@ -30,7 +31,7 @@
     // one single plate text field (France, Belgium...): the whole plate goes in it, dashes included;
     // the menus of the page (department, region) are set only when one of the tokens matches them
     const texts = fields.filter(el => el.tagName === 'INPUT');
-    if (texts.length === 1) {
+    if (texts.length === 1 && /^nomer/.test(texts[0].id || texts[0].name)) {
       texts[0].value = text;
       texts[0].dispatchEvent(new Event('input', { bubbles: true }));
       for (const el of fields.filter(el => el.tagName === 'SELECT')) {
@@ -93,7 +94,7 @@
     if (CHALLENGE.test(document.title)) { ptMsg('Cloudflare check: solve it in this tab, then click "Test all countries" again (it resumes).'); sessionStorage.removeItem(PT_QUEUE); return; }
     const cc = left[0];
     const m = location.pathname.match(/^\/([a-z]{2})\/add\/?$/i);
-    await new Promise(r => setTimeout(r, CAPTURE_LOAD_MS + 500));
+    await new Promise(r => setTimeout(r, 1000));
     if (m && m[1].toLowerCase() === cc) {
       const rows = await ptCollect();
       await capPut('plates:' + cc, { date: new Date().toISOString(), passed: rows.filter(r => r.ok).length, total: rows.filter(r => r.fits).length, other: rows.filter(r => !r.fits).length, rows });
@@ -107,7 +108,7 @@
     setTimeout(() => {
       if (sessionStorage.getItem(PT_QUEUE) === null) { ptMsg('Stopped.'); return; }
       location.href = '/' + rest[0] + '/add';
-    }, CAPTURE_PAUSE_MS);
+    }, PT_PAUSE_MS);
   }
 
   // Runs the countries that still need a test. "onlyMissing": keep the countries that fully passed.
