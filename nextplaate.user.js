@@ -272,7 +272,7 @@
       case 'li': return joinParts(['FL', fieldVal('digit')]);       // Liechtenstein: FL 12345 (the FL is fixed)
       case 'ru': return joinParts([selText('b1'), fieldVal('digit'), selText('b3') + selText('b4'), selText('region')]);   // Russia: А 001 АА 77
       case 'uz': return joinParts([selText('region'), fieldVal('b1'), fieldVal('dig1'), fieldVal('b2')]);   // Uzbekistan: PP A 123 AA
-      case 'gr': return joinParts([selText('b1') + fieldVal('let'), fieldVal('digit')]);   // Greece: IAZ 6038 (letters together, then digits)
+      case 'gr': return joinParts([selText('b1') + selText('region'), fieldVal('digit')]);   // Greece: I + AZ (the region menu) + 6038 = IAZ 6038
       case 'ba':                                                    // Bosnia: A12-E-345, parts joined by dashes
         return [fieldVal('let1'), fieldVal('b1'), fieldVal('let2') || fieldVal('digit')].filter(Boolean).join('-');
       case 'tr': {
