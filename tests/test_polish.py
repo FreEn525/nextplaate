@@ -81,7 +81,7 @@ def test_ctrl_a_selects_all_after_clicking_a_checkbox(page, tmp_path):
 
 def test_s_works_when_the_panel_has_the_focus(page):
     open_at(page, GALLERY)
-    click_icon(page, "likes")
+    click_icon(page, "gallery")
     page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('prevPage').focus()")
     page.keyboard.press("KeyS")
     assert "Cancel" in pair_selected(page)
@@ -183,11 +183,11 @@ def test_spamming_s_on_an_icon_leaves_no_focus_ring(page):
 
 def test_drawer_stays_open_after_reload(page):
     open_at(page, GALLERY)
-    click_icon(page, "likes")
+    click_icon(page, "gallery")
     page.reload()
     page.wait_for_selector("#pmg-host")
     assert page.evaluate("() => !document.getElementById('pmg-host').shadowRoot.getElementById('drawer').hidden")
-    assert page.evaluate("() => document.getElementById('pmg-host').shadowRoot.querySelector('.dsec:not([hidden])').dataset.drawer") == "likes"
+    assert page.evaluate("() => document.getElementById('pmg-host').shadowRoot.querySelector('.dsec:not([hidden])').dataset.drawer") == "gallery"
 
 
 def test_page_text_cannot_be_highlighted_while_the_window_is_open(page, tmp_path):

@@ -6,7 +6,7 @@
   const DRAWERS = [
     { id: 'pair', icon: 'photos', title: 'Photos', keys: 'S' },
     { id: 'post', icon: 'post', title: 'Post', keys: 'F' },
-    { id: 'likes', icon: 'likes', title: 'Likes', keys: 'L · ◀ ▶' },
+    { id: 'gallery', icon: 'gallery', title: 'Gallery', keys: 'L · ◀ ▶' },
     { id: 'upload', icon: 'upload', title: 'Batch upload', keys: 'U · N' },
     { id: 'keys', icon: 'keyboard', title: 'Shortcuts', keys: 'Esc' }
   ];

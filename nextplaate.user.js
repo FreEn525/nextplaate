@@ -200,6 +200,7 @@
     open: '<path d="m9 18 6-6-6-6" />',
     collapse: '<rect width="18" height="18" x="3" y="3" rx="2" /> <path d="M15 3v18" /> <path d="m8 9 3 3-3 3" />',
     keyboard: '<path d="M10 8h.01" /> <path d="M12 12h.01" /> <path d="M14 8h.01" /> <path d="M16 12h.01" /> <path d="M18 8h.01" /> <path d="M6 8h.01" /> <path d="M7 16h10" /> <path d="M8 12h.01" /> <rect width="20" height="16" x="2" y="4" rx="2" />',
+    gallery: '<rect width="7" height="7" x="3" y="3" rx="1" /> <rect width="7" height="7" x="14" y="3" rx="1" /> <rect width="7" height="7" x="14" y="14" rx="1" /> <rect width="7" height="7" x="3" y="14" rx="1" />',
   };
   const icon = name => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[name]}</svg>`;
   /* =====================================================================
@@ -269,7 +270,7 @@
   const DRAWERS = [
     { id: 'pair', icon: 'photos', title: 'Photos', keys: 'S' },
     { id: 'post', icon: 'post', title: 'Post', keys: 'F' },
-    { id: 'likes', icon: 'likes', title: 'Likes', keys: 'L · ◀ ▶' },
+    { id: 'gallery', icon: 'gallery', title: 'Gallery', keys: 'L · ◀ ▶' },
     { id: 'upload', icon: 'upload', title: 'Batch upload', keys: 'U · N' },
     { id: 'keys', icon: 'keyboard', title: 'Shortcuts', keys: 'Esc' }
   ];
@@ -594,7 +595,7 @@
         build: () => [h('button', { id: 'fillBtn', class: 'btn ghost', disabled: true, text: 'Fill description (F)' })]
       },
       {
-        drawer: 'post', title: 'Automation',
+        drawer: 'pair', title: 'Automation',
         build: () => [
           h('label', { class: 'chk' }, h('input', { type: 'checkbox', id: 'autoEdit' }), 'Auto-click “edit” on my photos'),
           h('label', { class: 'chk' }, h('input', { type: 'checkbox', id: 'autoFill' }), 'Auto-fill on the edit page'),
@@ -743,7 +744,7 @@
 
   registerFeature({
     groups: [{
-      drawer: 'likes', title: 'Likes',
+      drawer: 'gallery', title: 'Likes',
       build: () => [
         h('button', { id: 'likeAll', class: 'btn ghost', disabled: true, text: 'Like this page' }),
         h('div', { class: 'row' }, h('label', { for: 'pages', text: 'Pages to like' }), h('input', { type: 'number', id: 'pages', min: 1, step: 1 })),
@@ -811,7 +812,7 @@
 
   registerFeature({
     groups: [{
-      drawer: 'likes', title: 'Pages',
+      drawer: 'gallery', title: 'Pages',
       build: () => [
         h('div', { class: 'btnrow' },
           h('button', { id: 'prevPage', class: 'btn ghost half', text: '◀ Previous' }),

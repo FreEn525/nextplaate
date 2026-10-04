@@ -92,7 +92,7 @@ def test_panel_is_docked_on_the_right_edge(page):
 
 def test_bar_has_one_icon_per_drawer_in_order(page):
     open_at(page, GALLERY)
-    assert icon_drawers(page) == ["pair", "post", "likes", "upload", "keys"]
+    assert icon_drawers(page) == ["pair", "post", "gallery", "upload", "keys"]
 
 
 def test_icon_opens_its_drawer_and_a_second_click_closes_it(page):
@@ -108,7 +108,7 @@ def test_icon_opens_its_drawer_and_a_second_click_closes_it(page):
 
 def test_escape_does_not_close_the_drawer(page):
     open_at(page, GALLERY)
-    click_icon(page, "likes")
+    click_icon(page, "gallery")
     page.keyboard.press("Escape")
     assert drawer_open(page)
 

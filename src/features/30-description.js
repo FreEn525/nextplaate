@@ -92,7 +92,7 @@
         build: () => [h('button', { id: 'fillBtn', class: 'btn ghost', disabled: true, text: 'Fill description (F)' })]
       },
       {
-        drawer: 'post', title: 'Automation',
+        drawer: 'pair', title: 'Automation',
         build: () => [
           h('label', { class: 'chk' }, h('input', { type: 'checkbox', id: 'autoEdit' }), 'Auto-click “edit” on my photos'),
           h('label', { class: 'chk' }, h('input', { type: 'checkbox', id: 'autoFill' }), 'Auto-fill on the edit page'),

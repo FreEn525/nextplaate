@@ -124,7 +124,7 @@
 
   registerFeature({
     groups: [{
-      drawer: 'likes', title: 'Likes',
+      drawer: 'gallery', title: 'Likes',
       build: () => [
         h('button', { id: 'likeAll', class: 'btn ghost', disabled: true, text: 'Like this page' }),
         h('div', { class: 'row' }, h('label', { for: 'pages', text: 'Pages to like' }), h('input', { type: 'number', id: 'pages', min: 1, step: 1 })),
