@@ -2,8 +2,10 @@
    *  PLATE TEST  (dev only, read-only: nothing is uploaded, no photo is sent)
    *    On an upload page: takes the plates shown in the country's gallery, types each one into the
    *    plate fields (without touching anything else), and checks that our script reads it back
-   *    the same way AND that the site finds it. The results are logged in the console.
+   *    the same way AND that the site finds it. "Test all countries" does it for every country in turn,
+   *    keeps each result in the browser, and "Write report" saves the report into a folder you choose.
    * ===================================================================== */
+  const PT_QUEUE = 'nextplaate-plates-run';        // the countries left in the run (sessionStorage)
   const ptNorm = s => (s || '').replace(/[\s-]+/g, '').toUpperCase();
 
   // Plates shown in the country's gallery: the text of their photos (the alt of the "inf" image)
@@ -39,10 +41,8 @@
     return i === tokens.length;   // false: the plate does not fit the fields of this page
   }
 
-  async function ptRun() {
-    const out = $('ptMsg');
-    if (!here.add) { out.textContent = 'Open an upload page of the country first.'; return; }
-    out.textContent = 'Testing…';
+  // The test itself: returns one row per plate
+  async function ptCollect() {
     const plates = await ptGallery(here.country);
     const rows = [];
     for (const text of plates) {
@@ -55,19 +55,95 @@
       rows.push({ shown: text, read, fits, sitefound: found, ok });
     }
     ptType('');                                                    // clear the fields again
+    return rows;
+  }
+
+  const ptMsg = t => { const el = $('ptMsg'); if (el) el.textContent = t; };
+
+  async function ptRun() {
+    if (!here.add) { ptMsg('Open an upload page of the country first.'); return; }
+    ptMsg('Testing…');
+    const rows = await ptCollect();
     const passed = rows.filter(r => r.ok).length;
     console.log('[NextPlaate] plate test ' + here.country, rows);
-    out.textContent = `${here.country}: ${passed}/${rows.length} plates pass. Details in the console (F12).` +
-      (rows.some(r => !r.ok) ? '\nFailed: ' + rows.filter(r => !r.ok).map(r => r.shown).join(', ') : '');
+    ptMsg(`${here.country}: ${passed}/${rows.length} plates pass. Details in the console (F12).` +
+      (rows.some(r => !r.ok) ? '\nFailed: ' + rows.filter(r => !r.ok).map(r => r.shown).join(', ') : ''));
+  }
+
+  // "Test all countries": one page after the other, each result kept in the browser
+  async function ptStep() {
+    const left = JSON.parse(sessionStorage.getItem(PT_QUEUE) || 'null');
+    if (!left) return;
+    if (!left.length) { sessionStorage.removeItem(PT_QUEUE); ptMsg('All countries tested. Click "Write report to folder".'); return; }
+    if (CHALLENGE.test(document.title)) { ptMsg('Cloudflare check: solve it in this tab, then click "Test all countries" again (it resumes).'); sessionStorage.removeItem(PT_QUEUE); return; }
+    const cc = left[0];
+    const m = location.pathname.match(/^\/([a-z]{2})\/add\/?$/i);
+    await new Promise(r => setTimeout(r, CAPTURE_LOAD_MS + 500));
+    if (m && m[1].toLowerCase() === cc) {
+      const rows = await ptCollect();
+      await capPut('plates:' + cc, { date: new Date().toISOString(), passed: rows.filter(r => r.ok).length, total: rows.length, rows });
+    } else {
+      await capPut('plates-skip:' + cc, location.href);           // no upload page for this country
+    }
+    const rest = left.slice(1);
+    sessionStorage.setItem(PT_QUEUE, JSON.stringify(rest));
+    ptMsg(`${cc} tested. ${rest.length} left. Next in ${CAPTURE_PAUSE_MS / 1000} s…`);
+    if (!rest.length) { sessionStorage.removeItem(PT_QUEUE); ptMsg('All countries tested. Click "Write report to folder".'); return; }
+    setTimeout(() => {
+      if (sessionStorage.getItem(PT_QUEUE) === null) { ptMsg('Stopped.'); return; }
+      location.href = '/' + rest[0] + '/add';
+    }, CAPTURE_PAUSE_MS);
+  }
+
+  async function ptStart() {
+    const all = await capAll();
+    const left = CAPTURE_COUNTRIES.filter(c => !all['plates:' + c] && !all['plates-skip:' + c]);
+    if (!left.length) { ptMsg('Every country is already tested. Click "Write report to folder".'); return; }
+    sessionStorage.setItem(PT_QUEUE, JSON.stringify(left));
+    location.href = '/' + left[0] + '/add';
+  }
+
+  // Report: a JSON with every row, and a Markdown table, written in the folder you choose
+  async function ptWrite() {
+    const all = await capAll();
+    const report = { date: new Date().toISOString(), countries: {}, skipped: [], untested: [] };
+    for (const c of CAPTURE_COUNTRIES) {
+      if (all['plates:' + c]) report.countries[c] = all['plates:' + c];
+      else if (all['plates-skip:' + c]) report.skipped.push(c);
+      else report.untested.push(c);
+    }
+    const lines = ['# Plate test report', '', `Date: ${report.date}`, '',
+      '| country | passed | total | failed plates |', '|---|---|---|---|'];
+    for (const [c, r] of Object.entries(report.countries)) {
+      const failed = r.rows.filter(x => !x.ok).map(x => x.shown).join(', ');
+      lines.push(`| ${c} | ${r.passed} | ${r.total} | ${failed || '-'} |`);
+    }
+    lines.push('', `No upload page: ${report.skipped.join(' ') || '-'}`, `Not tested: ${report.untested.join(' ') || '-'}`);
+    if (!Object.keys(report.countries).length) { ptMsg('Nothing tested yet.'); return; }
+    const dir = await window.showDirectoryPicker({ mode: 'readwrite' });
+    for (const [name, text] of [['plates-report.json', JSON.stringify(report, null, 2)], ['plates-report.md', lines.join('\n')]]) {
+      const file = await dir.getFileHandle(name, { create: true });
+      const w = await file.createWritable();
+      await w.write(text);
+      await w.close();
+    }
+    ptMsg(`Report written: ${Object.keys(report.countries).length} countries.`);
   }
 
   registerFeature({
     groups: [{
       drawer: 'dev', title: 'Plate test',
       build: () => [
-        h('p', { id: 'ptMsg', class: 'presult', text: 'Tests this country\'s plates on the upload page, without uploading anything.' }),
-        h('button', { id: 'ptRun', class: 'btn ghost', text: 'Test this country' })
+        h('p', { id: 'ptMsg', class: 'presult', text: 'Tests the plates of a country on its upload page, without uploading anything.' }),
+        h('button', { id: 'ptRun', class: 'btn ghost', text: 'Test this country' }),
+        h('button', { id: 'ptAll', class: 'btn ghost', text: 'Test all countries' }),
+        h('button', { id: 'ptWrite', class: 'btn ghost', text: 'Write report to folder' })
       ]
     }],
-    init: () => { $('ptRun').onclick = () => ptRun().catch(e => { $('ptMsg').textContent = 'Test stopped: ' + e.message; }); }
+    init: () => {
+      $('ptRun').onclick = () => ptRun().catch(e => ptMsg('Test stopped: ' + e.message));
+      $('ptAll').onclick = () => ptStart().catch(e => ptMsg('Could not start: ' + e.message));
+      $('ptWrite').onclick = () => ptWrite().catch(e => ptMsg('Could not write: ' + e.message));
+      ptStep();
+    }
   });
