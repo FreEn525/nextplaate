@@ -132,6 +132,9 @@
       const sel = document.getElementById('ctype');
       sel.value = formValue; sel.dispatchEvent(new Event('change', { bubbles: true }));
       await new Promise(r => setTimeout(r, 700));                   // the form shows the fields of this type
+      // what this form shows for this type: the plate fields, their value and the label chosen (for the rules)
+      const fields = [...document.querySelectorAll('input, select')].filter(el => isPlateField(el) && el.offsetParent !== null && !el.disabled)
+        .map(el => ({ id: el.id || el.name, tag: el.tagName, value: el.value, label: el.tagName === 'SELECT' ? (el.options[el.selectedIndex] || {}).text : undefined }));
       const rows = [];
       for (const text of await ptGalleryType(cc, t.code)) {
         const fits = ptType(text);
@@ -144,7 +147,7 @@
         if (typeof found === 'number') dbAddPlate(cc, t.label, text, read, found);
       }
       ptType('');
-      out[t.label] = { code: t.code, passed: rows.filter(r => r.ok).length, tested: rows.filter(r => r.fits).length, rows };
+      out[t.label] = { code: t.code, formValue, fields, passed: rows.filter(r => r.ok).length, tested: rows.filter(r => r.fits).length, rows };
     }
     console.log('[NextPlaate] plate types ' + cc, out);
     return out;
