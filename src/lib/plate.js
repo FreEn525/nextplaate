@@ -68,7 +68,13 @@
     '9': { letters: ['b3', 'b4'], region: 'region5', digit: 'digit1', lettersFirst: false },   // Electric vehicles (motorcycles)
     '12': { letters: ['b3', 'b4'], region: 'region1', digit: 'digit2', lettersFirst: false },  // Transit plates (2004)
     '13': { letters: ['b3', 'b4'], region: 'region3', digit: 'digit1', lettersFirst: false },  // Cars (2000)
-    '20': { letters: [], region: 'region6', digit: 'digit1', lettersFirst: false }              // Police
+    '20': { letters: [], region: 'region6', digit: 'digit1', lettersFirst: false },             // Police
+    '14': { letters: [], region: 'region4', digit: 'digit1', lettersFirst: false },            // Cars (1992)
+    '15': { letters: [], region: 'region4', digit: 'digit2', lettersFirst: false },            // Trucks and buses (1992)
+    '16': { letters: [], region: '', digit: 'digit1', lettersFirst: false },                   // Trailers (1992)
+    '17': { letters: ['b3', 'b4'], region: 'region1', digit: 'digit2', lettersFirst: false },  // Taxi
+    '18': { letters: ['b3', 'b4'], region: '', digit: 'digit2', lettersFirst: false },         // Provisional (the T/BP mark is typed by the site)
+    '19': { letters: [], region: '', digit: 'digit2', lettersFirst: false }                    // Foreign citizens and enterprises
   };
 
   function plateForForm() {
