@@ -49,6 +49,7 @@
    *  WHERE AM I  (which kind of PlatesMania page is open, decided once when the script loads)
    * ===================================================================== */
   const here = {
+    country: (location.pathname.match(/^\/([a-z]{2})\//i) || [])[1] || '',   // country code of the page (fr, de...)
     add: /^\/[a-z]{2}\/add\/?$/i.test(location.pathname),   // upload page of a country
     gallery: /\/gallery(\.php)?$/i.test(location.pathname) || /\/user\d+\/?$/i.test(location.pathname),
     photo: (location.pathname.match(/\/nomer(\d+)/i) || [])[1] || null,    // photo page: the photo id
@@ -202,6 +203,7 @@
     collapse: '<rect width="18" height="18" x="3" y="3" rx="2" /> <path d="M15 3v18" /> <path d="m8 9 3 3-3 3" />',
     keyboard: '<path d="M10 8h.01" /> <path d="M12 12h.01" /> <path d="M14 8h.01" /> <path d="M16 12h.01" /> <path d="M18 8h.01" /> <path d="M6 8h.01" /> <path d="M7 16h10" /> <path d="M8 12h.01" /> <rect width="20" height="16" x="2" y="4" rx="2" />',
     gallery: '<rect width="7" height="7" x="3" y="3" rx="1" /> <rect width="7" height="7" x="14" y="3" rx="1" /> <rect width="7" height="7" x="14" y="14" rx="1" /> <rect width="7" height="7" x="3" y="14" rx="1" />',
+    car: '<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" /> <circle cx="7" cy="17" r="2" /> <path d="M9 17h6" /> <circle cx="17" cy="17" r="2" />',
   };
   const icon = name => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[name]}</svg>`;
   /* =====================================================================
@@ -271,6 +273,7 @@
   const DRAWERS = [
     { id: 'pair', icon: 'photos', title: 'Photo pair', keys: 'S · F' },
     { id: 'gallery', icon: 'gallery', title: 'Gallery', keys: 'L · ◀ ▶' },
+    { id: 'plate', icon: 'car', title: 'Plate check', keys: '' },
     { id: 'upload', icon: 'upload', title: 'Batch upload', keys: 'U · N' },
     { id: 'keys', icon: 'keyboard', title: 'Shortcuts', keys: 'Esc' }
   ];
@@ -313,6 +316,9 @@
     .slot .x:hover{color:var(--ink)}
     .slot.empty{color:var(--mute);border-style:dashed;background:#fff;font-size:12px;justify-content:center}
     .qinfo{font-size:12px;color:var(--mute)}
+    .lbl{font-size:12px;font-weight:600}
+    .presult{margin:0;font-size:13px}
+    .presult.warn{color:#8a4b00;font-weight:600}
     .toast{position:absolute;left:50%;transform:translateX(-50%);bottom:16px;width:min(420px,calc(100vw - 32px));box-sizing:border-box;overflow-wrap:anywhere;padding:10px 16px;text-align:center;background:var(--ink);border-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,.35);font-size:14px;line-height:1.4;color:#fff}
     .toast:empty{display:none}
     .toast b{color:#fff;text-decoration:underline;text-decoration-color:var(--brand-b)}
@@ -360,7 +366,7 @@
     const byDrawer = {};
     list.forEach(f => (f.groups || []).forEach(g => { (byDrawer[g.drawer] = byDrawer[g.drawer] || []).push(g); }));
     DRAWERS.filter(d => byDrawer[d.id]).forEach(d => {
-      const btn = h('button', { class: 'rbtn', 'data-drawer': d.id, title: `${d.title} (${d.keys})`, onclick: () => openDrawer(d.id) });
+      const btn = h('button', { class: 'rbtn', 'data-drawer': d.id, title: d.keys ? `${d.title} (${d.keys})` : d.title, onclick: () => openDrawer(d.id) });
       btn.innerHTML = icon(d.icon);   // our own SVG constants, never user data
       // settings (the Shortcuts drawer) sit at the bottom, apart from the working tools
       if (d.id === 'keys') $('rail').append(h('div', { class: 'rsep' }));
@@ -849,6 +855,87 @@
     }
   });
   /* =====================================================================
+   *  PLATE CHECK  (on the upload page: how many photos of this plate are already on the site)
+   *    The count comes from the site's own gallery search (the same one the duplicate scripts use).
+   *    When an upload tab checks its plate, the result is saved on its photo in the batch queue,
+   *    so the batch window shows a warning on that card before anything is sent.
+   * ===================================================================== */
+  const countCache = {};        // plate -> count, for this page
+  const plateInput = () => ['nomerpl', 'nomer'].map(id => document.getElementById(id))
+    .find(el => el && el.offsetParent !== null) || null;
+
+  async function countPlate(plate) {
+    if (countCache[plate] !== undefined) return countCache[plate];
+    const cc = here.country;
+    const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), 10000);
+    try {
+      const res = await fetch(`/${cc}/gallery.php?gal=${cc}&nomer=${encodeURIComponent(plate)}`, { credentials: 'same-origin', signal: ctrl.signal });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const m = (await res.text()).match(/Nombre total de plaques d.immatriculation trouvées\s*<b>(\d+)<\/b>/i);
+      if (!m) throw new Error('no count on the page (Cloudflare check?)');
+      countCache[plate] = +m[1];
+      return countCache[plate];
+    } finally { clearTimeout(timer); }
+  }
+
+  // The result goes to the photo this tab is loading, if the batch is running
+  function saveForBatch(plate, count) {
+    const b = getBatch();
+    if (!b || !b.active || !b.current) return;
+    qGet(b.current).then(it => {
+      if (!it) return;
+      it.plate = plate; it.dupes = count;
+      return qPut(it).then(() => {
+        const q = queue.find(x => x.id === it.id);
+        if (q) { q.plate = plate; q.dupes = count; if (managerOpen) refreshCard(q); }
+      });
+    }).catch(() => {});
+  }
+
+  async function checkPlate(manual) {
+    const field = plateInput();
+    const plate = field ? field.value.trim().toUpperCase() : '';
+    $('plateNow').textContent = plate || '—';
+    if (!here.add) { $('plateResult').textContent = 'Open an upload page to check a plate.'; return; }
+    if (!plate) { $('plateResult').textContent = 'Type the plate in the form to check it.'; return; }
+    if (!manual && store.get('autoCheck', '1') !== '1') return;
+    $('plateResult').textContent = 'Checking…';
+    try {
+      const n = await countPlate(plate);
+      if (!field || field.value.trim().toUpperCase() !== plate) return;   // the plate changed meanwhile
+      $('plateResult').textContent = n ? `${n} photo${n > 1 ? 's' : ''} of this plate already on the site.` : 'Not on the site yet.';
+      $('plateResult').classList.toggle('warn', n > 0);
+      saveForBatch(plate, n);
+    } catch (e) {
+      $('plateResult').textContent = 'Could not check: ' + e.message + '.';
+    }
+  }
+
+  let plateTimer = null;
+  document.addEventListener('input', e => {
+    if (e.target.id !== 'nomer' && e.target.id !== 'nomerpl') return;
+    clearTimeout(plateTimer);
+    plateTimer = setTimeout(() => checkPlate(false), 700);   // wait until the user stops typing
+  }, true);
+
+  registerFeature({
+    groups: [{
+      drawer: 'plate', title: 'Plate check', pages: ['add'],
+      build: () => [
+        h('div', { class: 'row' }, h('span', { class: 'lbl', text: 'Plate' }), h('b', { id: 'plateNow', text: '—' })),
+        h('p', { id: 'plateResult', class: 'presult', text: 'Type the plate in the form to check it.' }),
+        h('button', { id: 'plateCheck', class: 'btn ghost', text: 'Check now' }),
+        h('label', { class: 'chk' }, h('input', { type: 'checkbox', id: 'autoCheck' }), 'Check as I type')
+      ]
+    }],
+    init: () => {
+      $('autoCheck').checked = store.get('autoCheck', '1') === '1';
+      $('autoCheck').onchange = () => store.set('autoCheck', $('autoCheck').checked ? '1' : '0');
+      $('plateCheck').onclick = () => checkPlate(true);
+      checkPlate(false);
+    }
+  });
+  /* =====================================================================
    *  SHORTCUTS  (every key of the script, and a way to change them)
    * ===================================================================== */
   // Click a key, then press the new one. A key another action already uses is swapped with this one.
@@ -1020,6 +1107,7 @@
       .card img,.card .noprev{width:100%;aspect-ratio:4/3;display:block;background:var(--soft)}
       .card img{object-fit:cover}
       .card .noprev{display:flex;align-items:center;justify-content:center;color:var(--mute);font:600 11px system-ui,sans-serif;text-align:center;padding:6px}
+      .dupbadge{margin:4px 8px 0;padding:2px 8px;border-radius:4px;background:#fff3cd;color:#7a4f00;font-size:11px;font-weight:700;align-self:flex-start}
       .name{padding:6px 8px 0;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
       .row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:6px 8px 8px}
       .badge{min-width:36px;text-align:center;padding:2px 8px;border-radius:4px;background:var(--brand);color:var(--brand-t);font-weight:700;font-size:13px}
@@ -1216,6 +1304,7 @@
     c.className = 'card' + (it.country ? '' : ' none') + (it.status !== 'pending' ? ' ' + it.status : '') + (sel.has(it.id) ? ' sel' : '');
     c.dataset.id = it.id; c.appendChild(thumbNode(it));
     const nm = document.createElement('div'); nm.className = 'name'; nm.textContent = it.name; nm.title = it.name; c.appendChild(nm);
+    if (it.dupes) c.appendChild(h('div', { class: 'dupbadge', text: `⚠ ${it.dupes} already on the site`, title: it.plate || '' }));
     const row = document.createElement('div'); row.className = 'row';
     const bd = document.createElement('span'); bd.className = 'badge'; bd.textContent = it.country ? it.country.toUpperCase() : '?'; bd.title = it.country ? cName(it.country) : 'No country yet';
     row.appendChild(bd);

@@ -92,7 +92,7 @@ def test_panel_is_docked_on_the_right_edge(page):
 
 def test_bar_has_one_icon_per_drawer_in_order(page):
     open_at(page, GALLERY)
-    assert icon_drawers(page) == ["pair", "gallery", "upload", "keys"]
+    assert icon_drawers(page) == ["pair", "gallery", "plate", "upload", "keys"]
 
 
 def test_icon_opens_its_drawer_and_a_second_click_closes_it(page):

@@ -73,6 +73,7 @@ def edit_page(pid):
 UPLOAD_PAGE = (
     HEAD.format(title="Upload")
     + '<form id="frm" action="/fr/add" method="post" enctype="multipart/form-data">'
+    + '<input type="text" id="nomer" name="nomer">'
     + '<select id="ctype" name="ctype"><option value="1">Car</option><option value="2">Motorbike</option></select>'
     + '<input type="file" id="filename" name="filename">'
     + '<button type="button" id="pm-photo-editor-open">Upload through editor</button></form>'
@@ -109,6 +110,10 @@ def route_site(context):
             pid = body.get("id", ["101"])[0]
             return route.fulfill(status=200, content_type="text/html", body=inject(photo_page(pid)))
 
+        if path == "/fr/gallery.php" and "nomer" in query:
+            n = 2 if query["nomer"][0] == "AB123" else 0
+            html = HEAD.format(title="Search") + f"<p>Nombre total de plaques d’immatriculation trouvées <b>{n}</b></p></body></html>"
+            return route.fulfill(status=200, content_type="text/html; charset=utf-8", body=html)
         if path in ("/fr/gallery.php",):
             html = gallery_page(query.get("start", ["0"])[0])
         elif re.fullmatch(r"/fr/nomer\d+", path):

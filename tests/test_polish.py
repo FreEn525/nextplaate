@@ -222,3 +222,40 @@ def test_back_to_my_gallery_button_works_without_automation(page):
     open_at(page, PHOTO_101)                       # remembers the gallery visited before
     page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('backGallery').click()")
     page.wait_for_url(GALLERY)
+
+
+def test_plate_check_counts_photos_already_on_the_site(page):
+    open_at(page, "https://platesmania.com/fr/add")
+    page.locator("#nomer").fill("AB123")
+    page.wait_for_function(
+        "() => /already on the site/.test(document.getElementById('pmg-host').shadowRoot.getElementById('plateResult').textContent)",
+        timeout=10000)
+    text = page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('plateResult').textContent")
+    assert text.startswith("2 photos")
+
+
+def test_a_plate_checked_in_a_batch_tab_shows_on_its_card(page, tmp_path):
+    open_at(page, GALLERY)
+    page.keyboard.press("KeyU")
+    add_two_photos(page, tmp_path)
+    page.locator("#pmg-batch .card").first.click()
+    page.keyboard.press("Digit3")                 # FR
+    page.keyboard.press("Escape")
+    page.keyboard.press("Escape")
+    photo_id = page.evaluate("""() => new Promise(res => {
+        const r = indexedDB.open('pmg-batch', 1);
+        r.onsuccess = () => { const q = r.result.transaction('q').objectStore('q').getAll();
+            q.onsuccess = () => res(q.result[0].id); };
+    })""")
+    # this tab is the one loading that photo: the batch knows it is current
+    page.evaluate("(id) => sessionStorage.setItem('pmg_batch', JSON.stringify({ active: true, current: id, pendingSubmit: null, ts: Date.now() }))", photo_id)
+    open_at(page, "https://platesmania.com/fr/add")
+    page.locator("#nomer").fill("AB123")
+    page.wait_for_function(
+        "() => /already on the site/.test(document.getElementById('pmg-host').shadowRoot.getElementById('plateResult').textContent)",
+        timeout=10000)
+    page.wait_for_timeout(500)  # the result is saved in the queue
+    page.evaluate("() => document.activeElement && document.activeElement.blur()")  # U typed in the form would not open the window
+    page.keyboard.press("KeyU")
+    page.wait_for_function("() => document.getElementById('pmg-batch').shadowRoot.querySelector('.dupbadge') !== null", timeout=10000)
+    assert "2 already" in page.evaluate("() => document.getElementById('pmg-batch').shadowRoot.querySelector('.dupbadge').textContent")

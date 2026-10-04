@@ -42,6 +42,7 @@
       .card img,.card .noprev{width:100%;aspect-ratio:4/3;display:block;background:var(--soft)}
       .card img{object-fit:cover}
       .card .noprev{display:flex;align-items:center;justify-content:center;color:var(--mute);font:600 11px system-ui,sans-serif;text-align:center;padding:6px}
+      .dupbadge{margin:4px 8px 0;padding:2px 8px;border-radius:4px;background:#fff3cd;color:#7a4f00;font-size:11px;font-weight:700;align-self:flex-start}
       .name{padding:6px 8px 0;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
       .row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:6px 8px 8px}
       .badge{min-width:36px;text-align:center;padding:2px 8px;border-radius:4px;background:var(--brand);color:var(--brand-t);font-weight:700;font-size:13px}
@@ -238,6 +239,7 @@
     c.className = 'card' + (it.country ? '' : ' none') + (it.status !== 'pending' ? ' ' + it.status : '') + (sel.has(it.id) ? ' sel' : '');
     c.dataset.id = it.id; c.appendChild(thumbNode(it));
     const nm = document.createElement('div'); nm.className = 'name'; nm.textContent = it.name; nm.title = it.name; c.appendChild(nm);
+    if (it.dupes) c.appendChild(h('div', { class: 'dupbadge', text: `⚠ ${it.dupes} already on the site`, title: it.plate || '' }));
     const row = document.createElement('div'); row.className = 'row';
     const bd = document.createElement('span'); bd.className = 'badge'; bd.textContent = it.country ? it.country.toUpperCase() : '?'; bd.title = it.country ? cName(it.country) : 'No country yet';
     row.appendChild(bd);

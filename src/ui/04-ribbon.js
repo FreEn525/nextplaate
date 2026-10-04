@@ -6,6 +6,7 @@
   const DRAWERS = [
     { id: 'pair', icon: 'photos', title: 'Photo pair', keys: 'S · F' },
     { id: 'gallery', icon: 'gallery', title: 'Gallery', keys: 'L · ◀ ▶' },
+    { id: 'plate', icon: 'car', title: 'Plate check', keys: '' },
     { id: 'upload', icon: 'upload', title: 'Batch upload', keys: 'U · N' },
     { id: 'keys', icon: 'keyboard', title: 'Shortcuts', keys: 'Esc' }
   ];
@@ -48,6 +49,9 @@
     .slot .x:hover{color:var(--ink)}
     .slot.empty{color:var(--mute);border-style:dashed;background:#fff;font-size:12px;justify-content:center}
     .qinfo{font-size:12px;color:var(--mute)}
+    .lbl{font-size:12px;font-weight:600}
+    .presult{margin:0;font-size:13px}
+    .presult.warn{color:#8a4b00;font-weight:600}
     .toast{position:absolute;left:50%;transform:translateX(-50%);bottom:16px;width:min(420px,calc(100vw - 32px));box-sizing:border-box;overflow-wrap:anywhere;padding:10px 16px;text-align:center;background:var(--ink);border-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,.35);font-size:14px;line-height:1.4;color:#fff}
     .toast:empty{display:none}
     .toast b{color:#fff;text-decoration:underline;text-decoration-color:var(--brand-b)}
@@ -95,7 +99,7 @@
     const byDrawer = {};
     list.forEach(f => (f.groups || []).forEach(g => { (byDrawer[g.drawer] = byDrawer[g.drawer] || []).push(g); }));
     DRAWERS.filter(d => byDrawer[d.id]).forEach(d => {
-      const btn = h('button', { class: 'rbtn', 'data-drawer': d.id, title: `${d.title} (${d.keys})`, onclick: () => openDrawer(d.id) });
+      const btn = h('button', { class: 'rbtn', 'data-drawer': d.id, title: d.keys ? `${d.title} (${d.keys})` : d.title, onclick: () => openDrawer(d.id) });
       btn.innerHTML = icon(d.icon);   // our own SVG constants, never user data
       // settings (the Shortcuts drawer) sit at the bottom, apart from the working tools
       if (d.id === 'keys') $('rail').append(h('div', { class: 'rsep' }));
