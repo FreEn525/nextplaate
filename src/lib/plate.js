@@ -74,7 +74,10 @@
   function plateForForm() {
     switch (here.country) {
       case 'fr': return plateFR();
-      case 'de': return joinParts([fieldVal('region'), fieldVal('b1'), fieldVal('digit'), fieldVal('b2')]);
+      case 'de': {                                                  // Germany: only the fields shown for this type (a hidden menu keeps HD or H)
+        const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };
+        return joinParts([menu('region'), menu('b1'), shownVal('digit'), menu('b2')]);
+      }
       case 'gg': return fieldVal('digit');
       case 'hr':                                                    // region, then digits-letters: ZG 8899-JB (the site's example: ZG 1234-AB)
       case 'rs': {                                                  // Serbia: BG 123-AB
