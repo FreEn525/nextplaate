@@ -89,6 +89,10 @@
       }
       case 'cz': return joinParts([selText('b1') + selText('region') + selText('b2'), fieldVal('digit1')]);   // Czechia: 1CA 8407 (digit menu, letter menu, letter menu)
       case 'sk': return joinParts([selText('region') + '-' + fieldVal('digit') + fieldVal('let2')]);   // Slovakia: BA-427RF (a space is refused by the site)
+      case 'ee': {                                                  // Estonia: cars 123 ABC; motorcycles (ctype 3) ABC 123
+        const d = fieldVal('dig1'), l = fieldVal('let');
+        return fieldVal('ctype') === '3' ? joinParts([l, d]) : joinParts([d, l]);
+      }
       case 'ba':                                                    // Bosnia: A12-E-345, parts joined by dashes
         return [fieldVal('let1'), fieldVal('b1'), fieldVal('let2') || fieldVal('digit')].filter(Boolean).join('-');
       case 'tr': {
