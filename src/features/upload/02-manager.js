@@ -108,13 +108,13 @@
   const M = id => mroot.getElementById(id);
 
   function openManager() {
-    managerOpen = true; mhost.style.display = 'block'; host.style.display = 'none'; app.modal = { onKey: managerKey };
+    managerOpen = true; document.documentElement.classList.add('pmg-busy'); mhost.style.display = 'block'; host.style.display = 'none'; app.modal = { onKey: managerKey };
     renderChips(); fillMore(); renderGrid();
     qAll().then(a => { if (managerOpen && !multi) { queue = a; renderGrid(); fillThumbs(); } }).catch(() => {}); // pick up what other tabs finished
   }
   function closeManager() {
     try { hideZoom(); } catch (e) {}
-    managerOpen = false; mhost.style.display = 'none'; host.style.display = ''; app.modal = null;
+    managerOpen = false; document.documentElement.classList.remove('pmg-busy'); mhost.style.display = 'none'; host.style.display = ''; app.modal = null;
     updateBatchInfo();
   }
   // A confirmation drawn in this window (window.confirm would show the browser's own box)

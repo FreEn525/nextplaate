@@ -62,6 +62,7 @@
     .kbspacer{width:26px;flex:none}
     .kbreset{width:26px;height:30px;border:0;background:none;color:var(--mute);cursor:pointer;font-size:14px}
     .kbreset:hover{color:var(--ink)}
+    .kbreset.off{visibility:hidden}
     @media (max-width:520px){ .drawer{width:calc(100vw - 56px)} .rail{width:48px} }
   `;
 
@@ -98,6 +99,9 @@
           h('div', { class: 'gtitle', text: g.title })))));
     });
     $('dclose').onclick = () => closeDrawer();
+    // the drawer that was open stays open after a reload or a page change
+    const last = store.get('drawer', '');
+    if (byDrawer[last]) openDrawer(last);
   }
 
   // Only one drawer is open at a time. It stays open until its X or another icon is clicked
@@ -108,9 +112,10 @@
     root.querySelectorAll('.dsec').forEach(s => { s.hidden = s.dataset.drawer !== openId; });
     $('drawer').hidden = !openId;
     $('dtitle').textContent = openId ? DRAWERS.find(d => d.id === openId).title : '';
+    store.set('drawer', openId || '');
   }
   function closeDrawer() {
-    openId = null;
+    openId = null; store.set('drawer', '');
     root.querySelectorAll('.rbtn').forEach(b => b.setAttribute('aria-pressed', 'false'));
     root.querySelectorAll('.dsec').forEach(s => { s.hidden = true; });
     $('drawer').hidden = true;

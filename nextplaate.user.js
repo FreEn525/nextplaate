@@ -251,7 +251,8 @@
    *  PAGE STYLE (hover highlight while selecting)
    * ===================================================================== */
   const pageStyle = document.createElement('style');
-  pageStyle.textContent = '.pmg-hover{outline:4px solid #31708f!important;outline-offset:3px!important;cursor:crosshair!important}';
+  pageStyle.textContent = '.pmg-hover{outline:4px solid #31708f!important;outline-offset:3px!important;cursor:crosshair!important}'
+    + '.pmg-busy, .pmg-busy * {user-select:none!important;-webkit-user-select:none!important}';
   document.head.appendChild(pageStyle);
 
   /* =====================================================================
@@ -318,6 +319,7 @@
     .kbspacer{width:26px;flex:none}
     .kbreset{width:26px;height:30px;border:0;background:none;color:var(--mute);cursor:pointer;font-size:14px}
     .kbreset:hover{color:var(--ink)}
+    .kbreset.off{visibility:hidden}
     @media (max-width:520px){ .drawer{width:calc(100vw - 56px)} .rail{width:48px} }
   `;
 
@@ -354,6 +356,9 @@
           h('div', { class: 'gtitle', text: g.title })))));
     });
     $('dclose').onclick = () => closeDrawer();
+    // the drawer that was open stays open after a reload or a page change
+    const last = store.get('drawer', '');
+    if (byDrawer[last]) openDrawer(last);
   }
 
   // Only one drawer is open at a time. It stays open until its X or another icon is clicked
@@ -364,9 +369,10 @@
     root.querySelectorAll('.dsec').forEach(s => { s.hidden = s.dataset.drawer !== openId; });
     $('drawer').hidden = !openId;
     $('dtitle').textContent = openId ? DRAWERS.find(d => d.id === openId).title : '';
+    store.set('drawer', openId || '');
   }
   function closeDrawer() {
-    openId = null;
+    openId = null; store.set('drawer', '');
     root.querySelectorAll('.rbtn').forEach(b => b.setAttribute('aria-pressed', 'false'));
     root.querySelectorAll('.dsec').forEach(s => { s.hidden = true; });
     $('drawer').hidden = true;
@@ -838,7 +844,7 @@
         h('span', { class: 'kblabel', text: a.label }),
         h('span', { class: 'kbright' },
           h('button', { class: 'kbkey', text: keyName(a.bound), title: 'Click, then press the new key', onclick: () => capture(id) }),
-          h('button', { class: 'kbreset', text: '↺', title: 'Back to the default key', hidden: a.bound === a.code, onclick: () => { store.del('kb_' + id); rebuildKeys(); renderShortcuts(); } }))));
+          h('button', { class: 'kbreset' + (a.bound === a.code ? ' off' : ''), text: '↺', title: 'Back to the default key', onclick: () => { store.del('kb_' + id); rebuildKeys(); renderShortcuts(); } }))));
     rows.push(
       h('div', { class: 'kbrow fixed' }, h('span', { class: 'kblabel', text: 'Cancel, close, stop' }), h('span', { class: 'kbright' }, h('span', { class: 'kbkey static', text: 'Esc' }), h('span', { class: 'kbspacer' }))),
       h('div', { class: 'kbrow fixed' }, h('span', { class: 'kblabel', text: 'Select all photos (batch window)' }), h('span', { class: 'kbright' }, h('span', { class: 'kbkey static', text: 'Ctrl + A' }), h('span', { class: 'kbspacer' }))));
@@ -1063,13 +1069,13 @@
   const M = id => mroot.getElementById(id);
 
   function openManager() {
-    managerOpen = true; mhost.style.display = 'block'; host.style.display = 'none'; app.modal = { onKey: managerKey };
+    managerOpen = true; document.documentElement.classList.add('pmg-busy'); mhost.style.display = 'block'; host.style.display = 'none'; app.modal = { onKey: managerKey };
     renderChips(); fillMore(); renderGrid();
     qAll().then(a => { if (managerOpen && !multi) { queue = a; renderGrid(); fillThumbs(); } }).catch(() => {}); // pick up what other tabs finished
   }
   function closeManager() {
     try { hideZoom(); } catch (e) {}
-    managerOpen = false; mhost.style.display = 'none'; host.style.display = ''; app.modal = null;
+    managerOpen = false; document.documentElement.classList.remove('pmg-busy'); mhost.style.display = 'none'; host.style.display = ''; app.modal = null;
     updateBatchInfo();
   }
   // A confirmation drawn in this window (window.confirm would show the browser's own box)

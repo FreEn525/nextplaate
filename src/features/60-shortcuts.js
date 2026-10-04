@@ -11,7 +11,7 @@
         h('span', { class: 'kblabel', text: a.label }),
         h('span', { class: 'kbright' },
           h('button', { class: 'kbkey', text: keyName(a.bound), title: 'Click, then press the new key', onclick: () => capture(id) }),
-          h('button', { class: 'kbreset', text: '↺', title: 'Back to the default key', hidden: a.bound === a.code, onclick: () => { store.del('kb_' + id); rebuildKeys(); renderShortcuts(); } }))));
+          h('button', { class: 'kbreset' + (a.bound === a.code ? ' off' : ''), text: '↺', title: 'Back to the default key', onclick: () => { store.del('kb_' + id); rebuildKeys(); renderShortcuts(); } }))));
     rows.push(
       h('div', { class: 'kbrow fixed' }, h('span', { class: 'kblabel', text: 'Cancel, close, stop' }), h('span', { class: 'kbright' }, h('span', { class: 'kbkey static', text: 'Esc' }), h('span', { class: 'kbspacer' }))),
       h('div', { class: 'kbrow fixed' }, h('span', { class: 'kblabel', text: 'Select all photos (batch window)' }), h('span', { class: 'kbright' }, h('span', { class: 'kbkey static', text: 'Ctrl + A' }), h('span', { class: 'kbspacer' }))));

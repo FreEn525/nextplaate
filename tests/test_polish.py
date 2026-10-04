@@ -179,3 +179,19 @@ def test_spamming_s_on_an_icon_leaves_no_focus_ring(page):
         page.keyboard.press("KeyS")
     focused = page.evaluate("() => document.getElementById('pmg-host').shadowRoot.activeElement")
     assert focused is None
+
+
+def test_drawer_stays_open_after_reload(page):
+    open_at(page, GALLERY)
+    click_icon(page, "likes")
+    page.reload()
+    page.wait_for_selector("#pmg-host")
+    assert page.evaluate("() => !document.getElementById('pmg-host').shadowRoot.getElementById('drawer').hidden")
+    assert page.evaluate("() => document.getElementById('pmg-host').shadowRoot.querySelector('.dsec:not([hidden])').dataset.drawer") == "likes"
+
+
+def test_page_text_cannot_be_highlighted_while_the_window_is_open(page, tmp_path):
+    open_at(page, GALLERY)
+    page.keyboard.press("KeyU")
+    page.keyboard.press("Control+KeyA")
+    assert page.evaluate("() => String(window.getSelection())") == ""
