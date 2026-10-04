@@ -35,6 +35,24 @@
     return m ? `${m[1]}-${m[2]}-${m[3]}` : raw.toUpperCase().replace(/\s+/g, '-').trim();
   }
 
+  // Any other country: the visible plate fields, read in the order of the page (region, letters, digits...).
+  // A field that is not shown (another plate type) is left out. A field with no value is left out.
+  const PLATE_FIELD = /nomer|let|digit|region|^b\d|dip|drop|^dig|trl|letter/i;
+  function genericPlate() {
+    const parts = [];
+    for (const el of document.querySelectorAll('input, select')) {
+      const key = el.id || el.name || '';
+      if (!PLATE_FIELD.test(key) || el.offsetParent === null || el.disabled) continue;
+      if (el.tagName === 'SELECT') {
+        const opt = el.options[el.selectedIndex];
+        if (opt && opt.value) parts.push(opt.value.length > 3 ? opt.text.trim() : opt.value.trim());
+      } else if (el.value.trim()) {
+        parts.push(el.value.trim());
+      }
+    }
+    return joinParts(parts).toUpperCase();
+  }
+
   function plateForForm() {
     switch (here.country) {
       case 'fr': return plateFR();
@@ -51,6 +69,6 @@
         return m ? `${m[1]} ${m[2]} ${m[3]}` : fieldVal('nomer');
       }
       default:
-        return shownVal('nomerpl') || shownVal('nomer') || shownVal('nomer1') || joinParts([fieldVal('let'), fieldVal('digit')]);
+        return genericPlate();
     }
   }
