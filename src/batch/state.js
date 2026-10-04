@@ -54,17 +54,25 @@
   const readyCount = () => queue.filter(q => q.status === 'pending' && q.country).length;
 
   // ---- plate categories of each country (learned from that country's own /xx/add page) ----
-  const catsCache = {}; // code -> undefined (unknown) | null (loading) | [{v,l}]
+  // A failed or Cloudflare-blocked load is NOT remembered as "no categories": it is tried again after a cooldown.
+  const catsCache = {}; // code -> undefined (unknown) | null (loading, so callers share one request) | [{v,l}]
+  const catsFailedAt = {}; // code -> time of the last failed try
   async function ensureCats(code) {
     if (!code || catsCache[code] !== undefined) return;
-    try { const s = localStorage.getItem('pmg_cats_' + code); if (s) { catsCache[code] = JSON.parse(s); return; } } catch (e) {}
+    if (catsFailedAt[code] && Date.now() - catsFailedAt[code] < 60000) return;
+    try { const s = store.get('cats_' + code, ''); if (s) { catsCache[code] = JSON.parse(s); return; } } catch (e) {}
     catsCache[code] = null;
+    const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), 10000); // never wait forever
     try {
-      const html = await (await fetch('/' + code + '/add', { credentials: 'same-origin' })).text();
-      const sel = new DOMParser().parseFromString(html, 'text/html').querySelector('select[name="ctype"]');
-      catsCache[code] = sel ? [...sel.options].map(o => ({ v: o.value, l: o.textContent.trim() })) : [];
+      const res = await fetch('/' + code + '/add', { credentials: 'same-origin', signal: ctrl.signal });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const sel = new DOMParser().parseFromString(await res.text(), 'text/html').querySelector('select[name="ctype"]');
+      if (!sel) throw new Error('no category list on the page (Cloudflare check?)');
+      catsCache[code] = [...sel.options].map(o => ({ v: o.value, l: o.textContent.trim() }));
       store.set('cats_' + code, JSON.stringify(catsCache[code]));
-    } catch (e) { catsCache[code] = []; }
+    } catch (e) {
+      delete catsCache[code]; catsFailedAt[code] = Date.now();
+    } finally { clearTimeout(timer); }
     if (managerOpen) queue.filter(q => q.country === code).forEach(refreshCard);
   }
 
