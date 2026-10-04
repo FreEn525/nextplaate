@@ -97,12 +97,17 @@
     }, CAPTURE_PAUSE_MS);
   }
 
+  // Starts from zero: the previous results are removed, so the report always matches the current rules
   async function ptStart() {
     const all = await capAll();
-    const left = CAPTURE_COUNTRIES.filter(c => !all['plates:' + c] && !all['plates-skip:' + c]);
-    if (!left.length) { ptMsg('Every country is already tested. Click "Write report to folder".'); return; }
-    sessionStorage.setItem(PT_QUEUE, JSON.stringify(left));
-    location.href = '/' + left[0] + '/add';
+    const d = await capDb();
+    await new Promise(res => {
+      const t = d.transaction('kv', 'readwrite'), store = t.objectStore('kv');
+      Object.keys(all).filter(k => k.startsWith('plates:') || k.startsWith('plates-skip:')).forEach(k => store.delete(k));
+      t.oncomplete = res;
+    });
+    sessionStorage.setItem(PT_QUEUE, JSON.stringify(CAPTURE_COUNTRIES.slice()));
+    location.href = '/' + CAPTURE_COUNTRIES[0] + '/add';
   }
 
   // Report: a JSON with every row, and a Markdown table, written in the folder you choose
