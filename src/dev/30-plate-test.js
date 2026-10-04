@@ -27,6 +27,9 @@
     const fields = [...document.querySelectorAll('input, select')]
       .filter(el => isPlateField(el) && el.offsetParent !== null && !el.disabled && el.id !== 'ctype');
     fields.forEach(el => { if (el.tagName === 'INPUT') el.value = ''; });
+    // one single plate field (France, Belgium...): the whole plate goes in it, dashes included
+    const texts = fields.filter(el => el.tagName === 'INPUT');
+    if (texts.length === 1 && fields.length === 1) { texts[0].value = text; texts[0].dispatchEvent(new Event('input', { bubbles: true })); return true; }
     let i = 0;
     for (const el of fields) {
       if (i >= tokens.length) break;
