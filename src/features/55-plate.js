@@ -6,30 +6,19 @@
    * ===================================================================== */
   const countCache = new Map();   // search address -> number of photos, for this page
   const pending = new Map();      // search address -> the request in progress (same plate = one request)
-  let rateLimited = false;        // the site answered "rate limited" (error 1015): a reload clears it
 
   const searchUrl = plate => `/${here.country}/gallery.php?gal=${here.country}&nomer=${encodeURIComponent(plate).replace(/%20/g, '+')}`;
 
   async function fetchCount(url) {
-    const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), 10000);
-    try {
-      const res = await fetch(url, { credentials: 'same-origin', signal: ctrl.signal });
-      const text = await res.text();
-      if (res.status === 429 || /Error 1015|rate limited/i.test(text)) {
-        rateLimited = true;
-        throw new Error('the site limits the requests (error 1015): reload the page');
-      }
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      // the title reads "License plates found <b>N</b>" (the text depends on the account language)
-      const num = new DOMParser().parseFromString(text, 'text/html').querySelector('.breadcrumbs h1 b');
-      if (!num || !/^\s*\d+\s*$/.test(num.textContent)) throw new Error('no count on the page (Cloudflare check?)');
-      log('plate count', url, '=' + num.textContent.trim());
-      return +num.textContent;
-    } finally { clearTimeout(timer); }
+    const text = await siteFetch(url);
+    // the title reads "License plates found <b>N</b>" (the text depends on the account language)
+    const num = new DOMParser().parseFromString(text, 'text/html').querySelector('.breadcrumbs h1 b');
+    if (!num || !/^\s*\d+\s*$/.test(num.textContent)) throw new Error('no count on the page');
+    log('plate count', url, '=' + num.textContent.trim());
+    return +num.textContent;
   }
 
   function countPlate(plate) {
-    if (rateLimited) return Promise.reject(new Error('the site limits the requests (error 1015): reload the page'));
     const url = searchUrl(plate);
     if (countCache.has(url)) return Promise.resolve(countCache.get(url));
     if (pending.has(url)) return pending.get(url);

@@ -171,6 +171,57 @@
   const cName = code => { const c = COUNTRIES.find(x => x.code === code); return c ? c.name : String(code).toUpperCase(); };
   const uid = () => (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : Date.now() + '-' + Math.random().toString(36).slice(2);
   /* =====================================================================
+   *  SITE REQUESTS  (every request to PlatesMania goes through here)
+   *    One request at a time, with a pause between two of them. If the site answers with a Cloudflare
+   *    check or the rate limit (error 1015), every request stops for a while, and the state is kept
+   *    in the browser so the next page knows it too.
+   * ===================================================================== */
+  const SITE_GAP_MS = 1500;                 // between two requests to the site
+  const SITE_COOLDOWN_MS = 15 * 60 * 1000;  // after a block: no request for this long
+  const SITE_TIMEOUT_MS = 15000;
+  const siteQueue = [];
+  let siteBusy = false, siteLast = 0;
+  const siteSleep = ms => new Promise(r => setTimeout(r, ms));
+  const siteBlockedUntil = () => (+store.get('siteBlock', '0') || 0) + SITE_COOLDOWN_MS;
+  const SITE_BLOCK_RE = /Error 1015|rate limited|just a moment|attention required|cf-challenge|checking your browser/i;
+
+  // Resolves with the text of the page. Rejects with a clear message when the site asks to wait.
+  function siteFetch(url) {
+    if (Date.now() < siteBlockedUntil()) {
+      const mins = Math.ceil((siteBlockedUntil() - Date.now()) / 60000);
+      return Promise.reject(new Error(`the site asked to wait: try again in about ${mins} min`));
+    }
+    return new Promise((resolve, reject) => { siteQueue.push({ url, resolve, reject }); pumpSite(); });
+  }
+
+  async function pumpSite() {
+    if (siteBusy) return;
+    siteBusy = true;
+    while (siteQueue.length) {
+      const job = siteQueue.shift();
+      const wait = siteLast + SITE_GAP_MS - Date.now();
+      if (wait > 0) await siteSleep(wait);
+      siteLast = Date.now();
+      try {
+        const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), SITE_TIMEOUT_MS);
+        const res = await fetch(job.url, { credentials: 'same-origin', signal: ctrl.signal });
+        clearTimeout(timer);
+        const text = await res.text();
+        if (res.status === 429 || SITE_BLOCK_RE.test(text)) {
+          store.set('siteBlock', String(Date.now()));
+          job.reject(new Error('the site asked to wait (check or rate limit)'));
+          while (siteQueue.length) siteQueue.shift().reject(new Error('the site asked to wait (check or rate limit)'));
+          break;
+        }
+        if (!res.ok) job.reject(new Error('HTTP ' + res.status));
+        else job.resolve(text);
+      } catch (e) {
+        job.reject(new Error(e.name === 'AbortError' ? 'the site did not answer in time' : e.message));
+      }
+    }
+    siteBusy = false;
+  }
+  /* =====================================================================
    *  PHOTO DETECTION
    * ===================================================================== */
   // Works on the main photo (/m/) and on thumbnails (/s/): both sit inside a link to nomerXXXX
@@ -971,30 +1022,19 @@
    * ===================================================================== */
   const countCache = new Map();   // search address -> number of photos, for this page
   const pending = new Map();      // search address -> the request in progress (same plate = one request)
-  let rateLimited = false;        // the site answered "rate limited" (error 1015): a reload clears it
 
   const searchUrl = plate => `/${here.country}/gallery.php?gal=${here.country}&nomer=${encodeURIComponent(plate).replace(/%20/g, '+')}`;
 
   async function fetchCount(url) {
-    const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), 10000);
-    try {
-      const res = await fetch(url, { credentials: 'same-origin', signal: ctrl.signal });
-      const text = await res.text();
-      if (res.status === 429 || /Error 1015|rate limited/i.test(text)) {
-        rateLimited = true;
-        throw new Error('the site limits the requests (error 1015): reload the page');
-      }
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      // the title reads "License plates found <b>N</b>" (the text depends on the account language)
-      const num = new DOMParser().parseFromString(text, 'text/html').querySelector('.breadcrumbs h1 b');
-      if (!num || !/^\s*\d+\s*$/.test(num.textContent)) throw new Error('no count on the page (Cloudflare check?)');
-      log('plate count', url, '=' + num.textContent.trim());
-      return +num.textContent;
-    } finally { clearTimeout(timer); }
+    const text = await siteFetch(url);
+    // the title reads "License plates found <b>N</b>" (the text depends on the account language)
+    const num = new DOMParser().parseFromString(text, 'text/html').querySelector('.breadcrumbs h1 b');
+    if (!num || !/^\s*\d+\s*$/.test(num.textContent)) throw new Error('no count on the page');
+    log('plate count', url, '=' + num.textContent.trim());
+    return +num.textContent;
   }
 
   function countPlate(plate) {
-    if (rateLimited) return Promise.reject(new Error('the site limits the requests (error 1015): reload the page'));
     const url = searchUrl(plate);
     if (countCache.has(url)) return Promise.resolve(countCache.get(url));
     if (pending.has(url)) return pending.get(url);

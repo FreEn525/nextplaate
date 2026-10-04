@@ -11,8 +11,7 @@
 
   // Plates shown in the country's gallery: the text of their photos (the alt of the "inf" image)
   async function ptGallery(cc) {
-    const res = await fetch(`/${cc}/gallery.php?gal=${cc}`, { credentials: 'same-origin' });
-    const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
+    const doc = new DOMParser().parseFromString(await siteFetch(`/${cc}/gallery.php?gal=${cc}`), 'text/html');
     const plates = new Set();
     // the plate is the alt of the "inf" image, or the text before the comma in the alt of the main photo (ZG 2072-KA, Renault)
     doc.querySelectorAll('img[src*="/inf/"][alt], img[src*="/m/"][alt]').forEach(img => {
@@ -96,8 +95,7 @@
 
   // Plate types of the country: the search page lists them with the codes of the galleries (ctype=5 ...)
   async function ptSearchTypes(cc) {
-    const res = await fetch(`/${cc}/search`, { credentials: 'same-origin' });
-    const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
+    const doc = new DOMParser().parseFromString(await siteFetch(`/${cc}/search`), 'text/html');
     const sel = doc.querySelector('select[name="ctype"]');
     if (!sel) return [];
     return [...sel.options].filter(o => o.value).map(o => ({ code: o.value, label: o.textContent.trim() }));
@@ -105,8 +103,7 @@
 
   // Plates of one type, from the gallery of that type
   async function ptGalleryType(cc, code) {
-    const res = await fetch(`/${cc}/gallery.php?ctype=${code}&few=0&gal=${cc}`, { credentials: 'same-origin' });
-    const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
+    const doc = new DOMParser().parseFromString(await siteFetch(`/${cc}/gallery.php?ctype=${code}&few=0&gal=${cc}`), 'text/html');
     const plates = new Set();
     doc.querySelectorAll('img[src*="/inf/"][alt], img[src*="/m/"][alt]').forEach(img => {
       const t = img.getAttribute('alt').split(',')[0].trim();
