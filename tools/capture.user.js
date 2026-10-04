@@ -73,12 +73,16 @@
     const s = await summary();
     if (!s.saved.length) { say('Nothing captured yet.'); return; }
     const dir = await window.showDirectoryPicker({ mode: 'readwrite' });
-    for (const c of s.saved) {
-      const file = await dir.getFileHandle(c + '.html', { create: true });
-      const w = await file.createWritable();
-      await w.write(s.all['page:' + c]);
-      await w.close();
+    const failed = [];
+    for (const c of s.saved) {                                     // one file at a time: an error does not stop the rest
+      try {
+        const file = await dir.getFileHandle(c + '.html', { create: true });
+        const w = await file.createWritable();
+        await w.write(s.all['page:' + c]);
+        await w.close();
+      } catch (e) { failed.push(c + ' (' + e.name + ')'); }
     }
+    if (failed.length) { say('Not written: ' + failed.join(', ') + '. Click "Write to folder" again.'); return; }
     const index = {
       date: new Date().toISOString(),
       saved: s.saved, skipped: s.skipped, missing: s.missing,
