@@ -48,16 +48,16 @@
     .qinfo{font-size:12px;color:var(--mute)}
     .dfoot{padding:8px 14px;background:#fff;border-top:1px solid var(--line)}
     .hint{font-size:11px;color:var(--mute)}
-    .toast{position:absolute;right:68px;bottom:44px;width:min(300px,calc(100vw - 96px));box-sizing:border-box;overflow-wrap:anywhere;padding:8px 10px;background:#fff;border:1px solid var(--line2);border-radius:4px;box-shadow:0 6px 20px rgba(0,0,0,.15);font-size:13px;color:var(--ink)}
+    .toast{position:absolute;left:50%;transform:translateX(-50%);bottom:16px;width:min(420px,calc(100vw - 32px));box-sizing:border-box;overflow-wrap:anywhere;padding:10px 14px;text-align:center;background:#fff;border:1px solid var(--line2);border-radius:4px;box-shadow:0 6px 20px rgba(0,0,0,.15);font-size:13px;color:var(--ink)}
     .toast:empty{display:none}
     .toast b{color:var(--ink)}
     .kblist{display:flex;flex-direction:column;gap:6px}
     .kbrow{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px}
-    .kbrow.fixed{color:var(--mute)}
-    .kbright{display:flex;align-items:center;gap:4px}
+        .kbright{display:flex;align-items:center;gap:4px}
     .kbkey{min-width:58px;height:30px;padding:0 8px;border:1px solid var(--line2);border-radius:4px;background:#fff;color:var(--ink);font:700 12px system-ui,sans-serif;cursor:pointer}
     .kbkey:hover{border-color:var(--brand-b);background:var(--tint)}
-    .kbkey.static{cursor:default;color:var(--mute);font-weight:600;min-width:72px}
+    .kbkey.static{cursor:default;min-width:72px}
+    .kbkey.static:hover{border-color:var(--line2);background:#fff}
     .kbspacer{width:26px;flex:none}
     .kbreset{width:26px;height:30px;border:0;background:none;color:var(--mute);cursor:pointer;font-size:14px}
     .kbreset:hover{color:var(--ink)}
@@ -113,7 +113,13 @@
     return true;
   }
 
-  function setStatus(html) { $('status').innerHTML = html; }
+  // Shows a message at the bottom of the window. It goes away by itself after a few seconds (ms = 0: it stays)
+  let statusTimer = null;
+  function setStatus(html, ms = 6000) {
+    clearTimeout(statusTimer);
+    $('status').innerHTML = html;
+    if (ms) statusTimer = setTimeout(() => { $('status').innerHTML = ''; }, ms);
+  }
 
   // "Keys: S · F · L · U · N · R · Q ◀ ▶ D · Esc", built from the keys the features declared
   function updateHint() {

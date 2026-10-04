@@ -169,3 +169,12 @@ def test_panel_status_stays_on_screen_on_a_phone(browser):
     box = p.evaluate("() => { const r = document.getElementById('pmg-host').shadowRoot.getElementById('status').getBoundingClientRect(); return [r.left, r.right, innerWidth]; }")
     assert box[0] >= 0 and box[1] <= box[2]
     c.close()
+
+
+def test_spamming_s_on_an_icon_leaves_no_focus_ring(page):
+    open_at(page, GALLERY)
+    click_icon(page, "pair")                        # the icon now has the focus
+    for _ in range(4):
+        page.keyboard.press("KeyS")
+    focused = page.evaluate("() => document.getElementById('pmg-host').shadowRoot.activeElement")
+    assert focused is None

@@ -39,5 +39,8 @@
     const field = e.target === host ? host.shadowRoot.activeElement : e.target;
     if (isTextField(field)) return;
     const k = keyMap[e.code];
-    if (k && k.run(e)) { e.preventDefault(); e.stopPropagation(); }
+    if (k && k.run(e)) {
+      e.preventDefault(); e.stopPropagation();
+      if (e.target === host && host.shadowRoot.activeElement) host.shadowRoot.activeElement.blur();   // no ring left on the icon
+    }
   }, true);

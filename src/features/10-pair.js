@@ -4,11 +4,12 @@
   function startSelecting() {
     closeDrawer();                                   // the photos must be clickable on the site
     if (host.shadowRoot.activeElement) host.shadowRoot.activeElement.blur();
+    setStatus('Click the <b>FRONT</b> photo on the site. <b>Esc</b> cancels.', 0);
     if (state.front && state.rear) { state.front = state.rear = null; store.set('front', 'null'); store.set('rear', 'null'); }
     state.mode = !state.front ? 'front' : 'rear';
     render();
   }
-  function stopSelecting() { state.mode = null; clearHover(); render(); }
+  function stopSelecting() { state.mode = null; clearHover(); render(); setStatus('', 0); }
 
   function renderSlot(el, label, photo, key) {
     el.innerHTML = '';
@@ -34,10 +35,6 @@
     sel.classList.toggle('ghost', !state.mode);
     sel.textContent = state.mode ? 'Cancel selection (S)' : (ready ? 'Select a new pair (S)' : 'Select photos (S)');
 
-    if (state.mode === 'front') setStatus('Click the <b>FRONT</b> photo on the page. (Esc to cancel)');
-    else if (state.mode === 'rear') setStatus('Now click the <b>REAR</b> photo. (Esc to cancel)');
-    else if (ready) setStatus('Pair ready. Open the front photo to start the automatic edit.');
-    else setStatus('Press <b>S</b>, then click the front and rear photos.');
   }
 
   let hovered = null;
@@ -62,6 +59,8 @@
     clearDone(); // new selection = fresh start for auto-edit
     state.mode = state.mode === 'front' ? (state.rear ? null : 'rear') : null;
     render();
+    if (state.mode === 'rear') setStatus('Now click the <b>REAR</b> photo. <b>Esc</b> cancels.', 0);
+    else if (!state.mode && state.front && state.rear) setStatus('Pair ready. Open the front photo to start the automatic edit.');
   }, true);
 
   registerFeature({
