@@ -49,7 +49,8 @@
         el.dispatchEvent(new Event('input', { bubbles: true }));
       } else {
         const want = tokens[i].toUpperCase();
-        const opt = [...el.options].find(o => o.value && (o.text.trim().toUpperCase().startsWith(want) || o.value.toUpperCase() === want));
+        const opt = [...el.options].find(o => o.value && (o.text.trim().toUpperCase() === want || o.value.toUpperCase() === want))
+          || [...el.options].find(o => o.value && o.text.trim().toUpperCase().startsWith(want));   // exact label first: A before AM
         if (opt) { el.value = opt.value; el.dataset.ptSet = '1'; el.dispatchEvent(new Event('change', { bubbles: true })); i++; continue; }
         // "TT" over two one-letter menus: the first letter goes in this menu, the rest carries on to the next one
         const one = [...el.options].find(o => o.value && o.text.trim().toUpperCase() === want[0]);
@@ -165,6 +166,17 @@
     }
     ptMsg(`Report written: ${Object.keys(report.countries).length} countries.`);
   }
+
+  // For the offline check of the saved pages: types a text, returns what the script reads back
+  window.nextplaateDev = {
+    testText: async text => {
+      const fits = ptType(text);
+      await new Promise(r => setTimeout(r, 350));
+      const read = plateForForm() || '';
+      ptType('');
+      return { fits, read };
+    }
+  };
 
   registerFeature({
     groups: [{
