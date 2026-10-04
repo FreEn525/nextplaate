@@ -245,7 +245,7 @@ def test_a_plate_checked_in_a_batch_tab_shows_on_its_card(page, tmp_path):
     photo_id = page.evaluate("""() => new Promise(res => {
         const r = indexedDB.open('pmg-batch', 1);
         r.onsuccess = () => { const q = r.result.transaction('q').objectStore('q').getAll();
-            q.onsuccess = () => res(q.result[0].id); };
+            q.onsuccess = () => res(q.result.find(x => x.country === "fr").id); };
     })""")
     # this tab is the one loading that photo: the batch knows it is current
     page.evaluate("(id) => sessionStorage.setItem('pmg_batch', JSON.stringify({ active: true, current: id, pendingSubmit: null, ts: Date.now() }))", photo_id)
