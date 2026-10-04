@@ -15,9 +15,11 @@
     const cc = here.country;
     const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), 10000);
     try {
-      const res = await fetch(`/${cc}/gallery.php?gal=${cc}&nomer=${encodeURIComponent(plate)}`, { credentials: 'same-origin', signal: ctrl.signal });
+      const url = `/${cc}/gallery.php?gal=${cc}&nomer=${encodeURIComponent(plate)}`;
+      const res = await fetch(url, { credentials: 'same-origin', signal: ctrl.signal });
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const m = (await res.text()).match(/Nombre total de plaques d.immatriculation trouvées\s*<b>(\d+)<\/b>/i);
+      log('plate count', plate, m ? '=' + m[1] : 'NOT FOUND in ' + url);
       if (!m) throw new Error('no count on the page (Cloudflare check?)');
       countCache[plate] = +m[1];
       return countCache[plate];
