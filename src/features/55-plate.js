@@ -18,7 +18,10 @@
       const url = `/${cc}/gallery.php?gal=${cc}&nomer=${encodeURIComponent(plate)}`;
       const res = await fetch(url, { credentials: 'same-origin', signal: ctrl.signal });
       if (!res.ok) throw new Error('HTTP ' + res.status);
-      const m = (await res.text()).match(/Nombre total de plaques d.immatriculation trouvées\s*<b>(\d+)<\/b>/i);
+      // the title reads "License plates found <b>N</b>" (the text depends on the account language): the number is what counts
+      const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
+      const num = doc.querySelector('.breadcrumbs h1 b') || [...doc.querySelectorAll('h1 b')][0];
+      const m = num && /^\s*\d+\s*$/.test(num.textContent) ? [null, num.textContent.trim()] : null;
       log('plate count', plate, m ? '=' + m[1] : 'NOT FOUND in ' + url);
       if (!m) throw new Error('no count on the page (Cloudflare check?)');
       countCache[plate] = +m[1];

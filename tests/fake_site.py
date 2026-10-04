@@ -112,7 +112,7 @@ def route_site(context):
 
         if path == "/fr/gallery.php" and "nomer" in query:
             n = 2 if query["nomer"][0] == "AB123" else 0
-            html = HEAD.format(title="Search") + f"<p>Nombre total de plaques d’immatriculation trouvées <b>{n}</b></p></body></html>"
+            html = HEAD.format(title="Search") + f'<div class="breadcrumbs"><h1 class="pull-left">License plates found <b>{n}</b></h1></div></body></html>'
             return route.fulfill(status=200, content_type="text/html; charset=utf-8", body=html)
         if path in ("/fr/gallery.php",):
             html = gallery_page(query.get("start", ["0"])[0])
