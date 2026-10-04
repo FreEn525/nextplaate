@@ -7,11 +7,6 @@
    *  The photos live in IndexedDB (the files themselves) so every tab can read them; the original file
    *  is what gets uploaded, the previews are only for the window.
    * ===================================================================== */
-  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const COUNTRIES = ('al:Albania|dz:Algeria|ad:Andorra|ar:Argentina|am:Armenia|au:Australia|at:Austria|az:Azerbaijan|bs:Bahamas|bh:Bahrain|by:Belarus|be:Belgium|ba:Bosnia and Herzegovina|br:Brazil|bg:Bulgaria|kh:Cambodia|ca:Canada|cl:Chile|cn:China|hr:Croatia|cy:Cyprus|cz:Czech Republic|dk:Denmark|eg:Egypt|ee:Estonia|fi:Finland|fr:France|ge:Georgia|de:Germany|gi:Gibraltar (UK)|gr:Greece|gu:Guam (USA)|gg:Guernsey (UK)|hk:Hong Kong (CN)|hu:Hungary|is:Iceland|id:Indonesia|ir:Iran|iq:Iraq|ie:Ireland|il:Israel|it:Italy|jp:Japan|je:Jersey (UK)|kz:Kazakhstan|ke:Kenya|kw:Kuwait|kg:Kyrgyzstan|la:Laos|lv:Latvia|li:Liechtenstein|lt:Lithuania|lu:Luxembourg|my:Malaysia|mt:Malta|mx:Mexico|md:Moldova|mc:Monaco|mn:Mongolia|me:Montenegro|ma:Morocco|nl:Netherlands|nz:New Zealand|mk:North Macedonia|mp:Northern Mariana Islands (USA)|no:Norway|ps:Palestinian Authority|pl:Poland|pt:Portugal|qa:Qatar|ro:Romania|ru:Russia|sm:San Marino|sa:Saudi Arabia|rs:Serbia|sc:Seychelles|sg:Singapore|sk:Slovakia|si:Slovenia|kr:South Korea|es:Spain|se:Sweden|ch:Switzerland|tj:Tajikistan|th:Thailand|tr:Turkey|ae:UAE|us:USA|su:USSR|ua:Ukraine|uk:United Kingdom|uz:Uzbekistan|va:Vatican|vn:Vietnam|ax:Åland (FI)|xx:Non-recognized and partially recognized states')
-    .split('|').map(s => { const i = s.indexOf(':'); return { code: s.slice(0, i), name: s.slice(i + 1) }; });
-  const cName = code => { const c = COUNTRIES.find(x => x.code === code); return c ? c.name : String(code).toUpperCase(); };
-  const uid = () => (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : Date.now() + '-' + Math.random().toString(36).slice(2);
 
   // ---- storage of the queue (IndexedDB: holds the photo files themselves) ----
   let _db = null;

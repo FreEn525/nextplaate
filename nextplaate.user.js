@@ -43,6 +43,110 @@
   const markFilled = id => { const s = filledSet(); s.add(id); store.set('filled', JSON.stringify([...s])); };
 
   /* =====================================================================
+   *  WHERE AM I  (which kind of PlatesMania page is open, decided once when the script loads)
+   * ===================================================================== */
+  const here = {
+    gallery: /\/gallery(\.php)?$/i.test(location.pathname) || /\/user\d+\/?$/i.test(location.pathname),
+    photo: (location.pathname.match(/\/nomer(\d+)/i) || [])[1] || null,    // photo page: the photo id
+    // Edit page: <textarea name="dop"> + <input type="hidden" name="id" value="{photo id}">
+    edit: !!(document.querySelector('textarea[name="dop"]') && document.querySelector('form input[name="id"]'))
+  };
+  /* =====================================================================
+   *  APP  (feature registry: a feature declares its ribbon groups, its keys and its Esc behaviour)
+   * ===================================================================== */
+  // A feature is registered when the script loads, but touches nothing on the page then:
+  // mountApp() builds the panel first, and only then runs each feature's init().
+  //   registerFeature({
+  //     groups:   [{ tab: 'Pair', title: 'Photos', build: () => nodes }],  // controls, in the ribbon
+  //     keys:     { KeyS: { run: () => true, hint: 'S', hintOrder: 10 } }, // run() returns true when it handled the key
+  //     onEscape: () => true, escOrder: 10,                                 // true when it handled Esc (lower runs first)
+  //     init:     () => { ... }                                             // wires the controls, once the panel exists
+  //   })
+  const features = [];
+  let keyMap = {};          // e.code -> key spec, from every feature
+  let escapeChain = [];     // features with onEscape, in escOrder
+  const app = { modal: null }; // { onKey(e) } while a full window owns the keyboard (the batch manager)
+
+  const registerFeature = f => { features.push(f); };
+
+  function mountApp() {
+    mountRibbon(features);
+    features.forEach(f => f.init && f.init());
+    features.forEach(f => Object.assign(keyMap, f.keys || {}));
+    escapeChain = features.filter(f => f.onEscape).sort((a, b) => (a.escOrder || 0) - (b.escOrder || 0));
+    updateHint();
+  }
+  /* =====================================================================
+   *  KEYBOARD  (one listener for the whole script)
+   *    Order: the open window (batch manager) first, then Esc, then the keys each feature declared.
+   *    Ignored while typing, or with Ctrl/Cmd/Alt. Keys are read from e.code: the physical key, on any layout.
+   * ===================================================================== */
+  // Letter printed on the physical left key ("previous page"): Q on AZERTY, A on QWERTY. Learned from the real layout.
+  let prevKey = /^fr|^be/i.test(navigator.language || '') ? 'Q' : 'A';
+  if (navigator.keyboard && navigator.keyboard.getLayoutMap) {
+    navigator.keyboard.getLayoutMap().then(map => {
+      const k = map.get('KeyA');
+      if (k && /^[a-z]$/i.test(k)) { prevKey = k.toUpperCase(); updateHint(); }
+    }).catch(() => {});
+  }
+
+  document.addEventListener('keydown', e => {
+    if (app.modal) { app.modal.onKey(e); return; }
+    if (e.key === 'Escape') {
+      for (const f of escapeChain) if (f.onEscape()) return;
+    }
+    if (e.ctrlKey || e.metaKey || e.altKey || e.repeat) return;
+    if (e.code === 'KeyA' && /^[a-z]$/i.test(e.key || '') && e.key.toUpperCase() !== prevKey) {
+      prevKey = e.key.toUpperCase(); updateHint();
+    }
+    const t = e.target;
+    if (t === host || (t && (/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.isContentEditable))) return;
+    const k = keyMap[e.code];
+    if (k && k.run(e)) e.preventDefault();
+  });
+  /* =====================================================================
+   *  CODE GENERATION
+   * ===================================================================== */
+  function block(title, o, alt) {
+    const link = `https://platesmania.com/${o.lang}/nomer${o.id}`;
+    const img = `https://${o.srv}.platesmania.com/${o.folder}/m/${o.id}.jpg`;
+    const tags = $('tag').value.split(',').map(t => t.trim().replace(/^#/, '')).filter(Boolean);
+    const head = tags.length ? tags.map(t => `<a href="/gallery.php?dop=${t}">#${t}</a>`).join(' ') + ' \n' : '';
+    return `${head}${$('place').value.trim()}
+
+<font color="#b8860b">━━━━━━ ◆ ━━━━━━</font>
+<font color="#7a1f1f"><b>${title}</b></font>
+<font color="#b8860b">━━━━━━ ◆ ━━━━━━</font>
+<a href='${link}'><img src='${img}' width=230 height=175 border=0 alt='${alt}'></a>
+<font color="#b8860b">━━━━━━━━━━━━━━━━━</font>`;
+  }
+
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const COUNTRIES = ('al:Albania|dz:Algeria|ad:Andorra|ar:Argentina|am:Armenia|au:Australia|at:Austria|az:Azerbaijan|bs:Bahamas|bh:Bahrain|by:Belarus|be:Belgium|ba:Bosnia and Herzegovina|br:Brazil|bg:Bulgaria|kh:Cambodia|ca:Canada|cl:Chile|cn:China|hr:Croatia|cy:Cyprus|cz:Czech Republic|dk:Denmark|eg:Egypt|ee:Estonia|fi:Finland|fr:France|ge:Georgia|de:Germany|gi:Gibraltar (UK)|gr:Greece|gu:Guam (USA)|gg:Guernsey (UK)|hk:Hong Kong (CN)|hu:Hungary|is:Iceland|id:Indonesia|ir:Iran|iq:Iraq|ie:Ireland|il:Israel|it:Italy|jp:Japan|je:Jersey (UK)|kz:Kazakhstan|ke:Kenya|kw:Kuwait|kg:Kyrgyzstan|la:Laos|lv:Latvia|li:Liechtenstein|lt:Lithuania|lu:Luxembourg|my:Malaysia|mt:Malta|mx:Mexico|md:Moldova|mc:Monaco|mn:Mongolia|me:Montenegro|ma:Morocco|nl:Netherlands|nz:New Zealand|mk:North Macedonia|mp:Northern Mariana Islands (USA)|no:Norway|ps:Palestinian Authority|pl:Poland|pt:Portugal|qa:Qatar|ro:Romania|ru:Russia|sm:San Marino|sa:Saudi Arabia|rs:Serbia|sc:Seychelles|sg:Singapore|sk:Slovakia|si:Slovenia|kr:South Korea|es:Spain|se:Sweden|ch:Switzerland|tj:Tajikistan|th:Thailand|tr:Turkey|ae:UAE|us:USA|su:USSR|ua:Ukraine|uk:United Kingdom|uz:Uzbekistan|va:Vatican|vn:Vietnam|ax:Åland (FI)|xx:Non-recognized and partially recognized states')
+    .split('|').map(s => { const i = s.indexOf(':'); return { code: s.slice(0, i), name: s.slice(i + 1) }; });
+  const cName = code => { const c = COUNTRIES.find(x => x.code === code); return c ? c.name : String(code).toUpperCase(); };
+  const uid = () => (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : Date.now() + '-' + Math.random().toString(36).slice(2);
+  /* =====================================================================
+   *  PHOTO DETECTION
+   * ===================================================================== */
+  // Works on the main photo (/m/) and on thumbnails (/s/): both sit inside a link to nomerXXXX
+  function findPhoto(el) {
+    if (!el || !el.closest) return null;
+    let img = el.closest('img');
+    if (!img) { const a = el.closest('a'); if (a) img = a.querySelector('img'); }
+    if (!img || !img.src) return null;
+    const m = img.src.match(/\/\/(img\d+)\.platesmania\.com\/(\d+)\/\w\/(\d+)\.jpg/i);
+    if (!m) return null;
+    const a = img.closest('a');
+    const lm = ((a && a.href) || location.href).match(/platesmania\.com\/([a-z]{2})\//i);
+    return {
+      img,
+      photo: { srv: m[1], folder: m[2], id: m[3], lang: lm ? lm[1] : 'de',
+               alt: (img.alt || '').replace(/['"<>]/g, '').trim(), thumb: img.src }
+    };
+  }
+
+  /* =====================================================================
    *  SHARED LOOK  (one palette + one set of controls for the panel AND the batch window)
    * ===================================================================== */
   // NextPlaate mark: a plate with a green band and a double chevron ("next")
@@ -73,6 +177,24 @@
   `;
 
   /* =====================================================================
+   *  DOM HELPERS  (features build their controls with h(), never with innerHTML on data)
+   * ===================================================================== */
+  // h('button', { class: 'btn', text: 'Go', onclick: fn }, child, [more children])
+  function h(tag, props, ...kids) {
+    const el = document.createElement(tag);
+    for (const [k, v] of Object.entries(props || {})) {
+      if (v === undefined || v === null) continue;
+      if (k === 'text') el.textContent = v;
+      else if (k === 'class') el.className = v;
+      else if (k === 'for') el.htmlFor = v;
+      else if (/^on[a-z]+$/.test(k)) el.addEventListener(k.slice(2), v);
+      else if (k.startsWith('data-')) el.setAttribute(k, v);
+      else el[k] = v;                      // id, value, checked, disabled, hidden, title, min, max, step, placeholder...
+    }
+    kids.flat().forEach(c => { if (c !== null && c !== undefined && c !== false) el.append(c); });
+    return el;
+  }
+  /* =====================================================================
    *  PAGE STYLE (hover highlight while selecting)
    * ===================================================================== */
   const pageStyle = document.createElement('style');
@@ -80,172 +202,113 @@
   document.head.appendChild(pageStyle);
 
   /* =====================================================================
-   *  PANEL  (shadow DOM keeps the site CSS out)
+   *  RIBBON  (the NextPlaate panel: docked to the right edge of the page, tabs and groups like Word's ribbon)
    * ===================================================================== */
+  // Tabs appear in this order; a tab not listed here goes last.
+  const TAB_ORDER = ['Pair', 'Post', 'Likes', 'Upload'];
+  const RIBBON_CSS = `
+    .rb{display:flex;flex-direction:column;width:360px;height:100%;background:var(--bg);border-left:1px solid var(--line2);box-shadow:-10px 0 30px rgba(0,0,0,.14)}
+    .rb.min .tabs,.rb.min .body,.rb.min .foot{display:none}
+    .top{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#fff;border-top:3px solid var(--brand-b);border-bottom:1px solid var(--line)}
+    .min-btn{width:28px;height:28px;border:1px solid var(--line2);border-radius:4px;background:#fff;color:var(--mute);font-size:16px;line-height:1;cursor:pointer}
+    .min-btn:hover{background:var(--tint);color:var(--ink)}
+    .tabs{display:flex;background:#fff;border-bottom:1px solid var(--line)}
+    .tab{flex:1;height:38px;border:0;border-bottom:3px solid transparent;background:none;color:var(--mute);font:inherit;font-weight:600;cursor:pointer}
+    .tab:hover{color:var(--ink);background:var(--tint)}
+    .tab[aria-selected="true"]{color:var(--brand-l);border-bottom-color:var(--brand-l)}
+    .body{flex:1;min-height:0;overflow-y:auto;padding:10px;display:flex;flex-direction:column}
+    .tabpage{display:flex;flex-direction:column;gap:10px}
+    .group{background:#fff;border:1px solid var(--line);border-radius:4px;display:flex;flex-direction:column;overflow:hidden}
+    .gbody{display:flex;flex-direction:column;gap:8px;padding:10px}
+    .gtitle{padding:5px 10px;border-top:1px solid var(--line);background:var(--tint);color:var(--mute);font-size:11px;font-weight:600;text-align:center;text-transform:uppercase;letter-spacing:.04em}
+    .gbody .btn{width:100%}
+    .gbody .btn.half{width:auto;flex:1}
+    .btnrow{display:flex;gap:8px}
+    .row{display:flex;align-items:center;gap:8px;font-size:12px}
+    .row label{font-weight:600;white-space:nowrap}
+    .row input{width:90px}
+    .field{display:flex;flex-direction:column;gap:4px}
+    .field label{font-size:12px;font-weight:600}
+    .field input{width:100%}
+    .chk{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer}
+    .chk input{width:16px;height:16px;margin:0}
+    .slots{display:flex;flex-direction:column;gap:8px}
+    .slot{display:flex;align-items:center;gap:8px;min-height:52px;padding:6px 8px;border:1px solid var(--line);border-radius:var(--r);background:#f7f7f7}
+    .slot img{width:52px;height:40px;object-fit:cover;border-radius:4px;border:1px solid var(--line);flex:none}
+    .slot .t{flex:1;min-width:0;font-size:12px}
+    .slot .t small{display:block;color:var(--mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .slot .x{background:none;border:0;font-size:16px;color:var(--mute);cursor:pointer}
+    .slot .x:hover{color:var(--ink)}
+    .slot.empty{color:var(--mute);border-style:dashed;background:#fff;font-size:12px;justify-content:center}
+    .qinfo{font-size:12px;color:var(--mute)}
+    .foot{display:flex;flex-direction:column;gap:4px;padding:8px 12px;background:#fff;border-top:1px solid var(--line)}
+    .status{min-height:20px;font-size:13px;color:var(--mute)}
+    .status b{color:var(--ink)}
+    .hint{font-size:11px;color:var(--mute)}
+  `;
+
   const host = document.createElement('div');
   host.id = 'pmg-host';
-  host.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:2147483647;';
-  const root = host.attachShadow({ mode: 'open' });
+  host.style.cssText = 'position:fixed;top:0;right:0;bottom:0;z-index:2147483647;';   // full height, on the right edge
+  const root = host.attachShadow({ mode: 'open' });   // shadow DOM: the site's CSS cannot reach the panel
   root.innerHTML = `
-    <style>${UI_BASE}
-      .p{width:340px;background:var(--bg);border:1px solid var(--line2);border-radius:4px;box-shadow:0 8px 30px rgba(0,0,0,.18);overflow:hidden}
-      .bar{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#fff;color:var(--ink);border-top:3px solid var(--brand-b);border-bottom:1px solid var(--line)}
-      .bar{font-size:16px}
-      .bar button{background:none;border:0;color:var(--mute);font-size:20px;line-height:1;cursor:pointer;padding:0 4px}
-      .body{padding:10px;display:flex;flex-direction:column;gap:8px;max-height:calc(100vh - 90px);overflow-y:auto}
-      .p.min .body{display:none}
-      .status{min-height:20px;padding:2px 4px;font-size:13px;color:var(--mute)}
-      .status b{color:var(--ink)}
-
-      details.sec{background:#fff;border:1px solid var(--line);border-radius:4px}
-      details.sec>summary{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;cursor:pointer;
-         font-weight:600;font-size:13px;list-style:none;user-select:none}
-      details.sec>summary::-webkit-details-marker{display:none}
-      details.sec>summary::after{content:"+";color:var(--mute);font-weight:400;font-size:16px}
-      details.sec[open]>summary::after{content:"–"}
-      .in{padding:0 12px 12px;display:flex;flex-direction:column;gap:8px}
-
-      .slot{display:flex;align-items:center;gap:10px;min-height:56px;padding:6px 10px;border:1px solid var(--line);border-radius:var(--r);background:#f7f7f7}
-      .slot img{width:64px;height:48px;object-fit:cover;border-radius:4px;border:1px solid var(--line)}
-      .slot .t{flex:1;min-width:0;font-size:13px}
-      .slot .t small{display:block;color:var(--mute)}
-      .slot .x{background:none;border:0;font-size:18px;color:var(--mute);cursor:pointer}
-      .slot .x:hover{color:var(--ink)}
-      .slot.empty{color:var(--mute);border-style:dashed;background:#fff}
-
-      label{font-size:12px;font-weight:600;margin-bottom:-4px}
-      input[type=text]{width:100%}
-      .chk{display:flex;align-items:center;gap:8px;margin:0;font-size:13px;font-weight:400;cursor:pointer}
-      .chk input{width:16px;height:16px;margin:0}
-      .row{display:flex;align-items:center;gap:8px;font-size:12px}
-      .row label{margin:0;white-space:nowrap}
-      .row input{width:90px}
-      .foot{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:2px 2px 0}
-      .foot small{color:var(--mute);font-size:11px}
-      .qinfo{font-size:12px;color:var(--mute)}
-    </style>
-
-    <div class="p" id="panel">
-      <div class="bar">${WORDMARK(30)}<button id="min" title="Minimize">–</button></div>
-      <div class="body">
-
-        <div class="status" id="status"></div>
-
-        <!-- BATCH UPLOAD -->
-        <details class="sec" open>
-          <summary>Batch upload</summary>
-          <div class="in">
-            <div class="qinfo" id="qInfo">No photos queued yet.</div>
-            <button class="btn ghost" id="qOpen">Choose photos &amp; countries (U)</button>
-            <button class="btn" id="qGo" disabled>Start uploading</button>
-            <div class="row"><label for="qDelay">Delay between tabs (s)</label><input type="number" id="qDelay" min="5" max="120" step="1"></div>
-            <button class="btn ghost" id="qStop" hidden>Stop opening tabs</button>
-          </div>
-        </details>
-
-        <!-- 1 · PAIR -->
-        <details class="sec" open>
-          <summary>1 · Photo pair</summary>
-          <div class="in">
-            <button class="btn ghost" id="sel">Select photos (S)</button>
-            <div class="slot" id="sFront"></div>
-            <div class="slot" id="sRear"></div>
-          </div>
-        </details>
-
-        <!-- 2 · DETAILS -->
-        <details class="sec" open>
-          <summary>2 · Post details</summary>
-          <div class="in">
-            <label for="place">Location</label>
-            <input type="text" id="place" autocomplete="off">
-            <label for="tag">Hashtags (comma separated)</label>
-            <input type="text" id="tag" autocomplete="off" placeholder="oldtimer,tuning">
-          </div>
-        </details>
-
-        <!-- 3 · DESCRIPTION -->
-        <details class="sec" open>
-          <summary>3 · Description</summary>
-          <div class="in">
-            <button class="btn ghost" id="fillBtn" disabled title="Available on the edit page">Fill description (F)</button>
-            <label class="chk"><input type="checkbox" id="autoEdit"> Auto-click “edit” on my photos</label>
-            <label class="chk"><input type="checkbox" id="autoFill"> Auto-fill on the edit page</label>
-            <label class="chk"><input type="checkbox" id="autoSave"> Auto-click “Save” after filling</label>
-            <label class="chk"><input type="checkbox" id="autoReturn"> Return to my gallery when finished</label>
-          </div>
-        </details>
-
-        <!-- LIKES -->
-        <details class="sec" open>
-          <summary>Likes</summary>
-          <div class="in">
-            <button class="btn ghost" id="likeAll" disabled>Like this page</button>
-            <div class="row"><label for="pages">Pages to like</label><input type="number" id="pages" min="1" step="1"></div>
-            <div class="row"><label for="delay">Delay between likes (ms)</label><input type="number" id="delay" min="100" step="50"></div>
-          </div>
-        </details>
-
-        <div class="foot">
-          <small id="hint"></small>
-          <button class="btn ghost sm" id="reset">Reset</button>
-        </div>
-      </div>
+    <style>${UI_BASE}${RIBBON_CSS}</style>
+    <div class="rb" id="rb">
+      <div class="top">${WORDMARK(26)}<button class="min-btn" id="min" title="Collapse or expand the panel">–</button></div>
+      <nav class="tabs" id="tabs"></nav>
+      <div class="body" id="body"></div>
+      <div class="foot"><div class="status" id="status"></div><small class="hint" id="hint"></small></div>
     </div>`;
   document.body.appendChild(host);
   const $ = id => root.getElementById(id);
 
-  $('place').value = store.get('place', 'Mainz - Germany');
-  $('tag').value = store.get('tag', 'oldtimer');
-  $('delay').value = store.get('delay', '200');
-  if (store.get('min', '0') === '1') $('panel').classList.add('min');
-
-  // Options: always visible, remembered
-  [['autoEdit', '0'], ['autoFill', '0'], ['autoSave', '0'], ['autoReturn', '1']].forEach(([id, def]) => {
-    $(id).checked = store.get(id, def) === '1';
-    $(id).onchange = () => store.set(id, $(id).checked ? '1' : '0');
-  });
-
-  /* =====================================================================
-   *  PHOTO DETECTION
-   * ===================================================================== */
-  // Works on the main photo (/m/) and on thumbnails (/s/): both sit inside a link to nomerXXXX
-  function findPhoto(el) {
-    if (!el || !el.closest) return null;
-    let img = el.closest('img');
-    if (!img) { const a = el.closest('a'); if (a) img = a.querySelector('img'); }
-    if (!img || !img.src) return null;
-    const m = img.src.match(/\/\/(img\d+)\.platesmania\.com\/(\d+)\/\w\/(\d+)\.jpg/i);
-    if (!m) return null;
-    const a = img.closest('a');
-    const lm = ((a && a.href) || location.href).match(/platesmania\.com\/([a-z]{2})\//i);
-    return {
-      img,
-      photo: { srv: m[1], folder: m[2], id: m[3], lang: lm ? lm[1] : 'de',
-               alt: (img.alt || '').replace(/['"<>]/g, '').trim(), thumb: img.src }
-    };
+  // One tab per name, one section per tab; each feature group is a box with its title under it, like Word
+  function mountRibbon(list) {
+    const byTab = {};
+    list.forEach(f => (f.groups || []).forEach(g => { (byTab[g.tab] = byTab[g.tab] || []).push(g); }));
+    const names = [...TAB_ORDER.filter(t => byTab[t]), ...Object.keys(byTab).filter(t => !TAB_ORDER.includes(t))];
+    names.forEach(name => {
+      $('tabs').append(h('button', { class: 'tab', text: name, 'data-tab': name, onclick: () => showTab(name) }));
+      $('body').append(h('section', { class: 'tabpage', 'data-tab': name, hidden: true },
+        byTab[name].map(g => h('div', { class: 'group' },
+          h('div', { class: 'gbody' }, g.build()),
+          h('div', { class: 'gtitle', text: g.title })))));
+    });
+    showTab(names.includes(store.get('tab', '')) ? store.get('tab', '') : names[0]);
+    $('min').onclick = () => setMin(!$('rb').classList.contains('min'));
+    setMin(store.get('min', '0') === '1');
+  }
+  function showTab(name) {
+    root.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === name)));
+    root.querySelectorAll('.tabpage').forEach(p => { p.hidden = p.dataset.tab !== name; });
+    store.set('tab', name);
+  }
+  // Collapsed: only the header stays, and the panel stops covering the page below it
+  function setMin(on) {
+    $('rb').classList.toggle('min', on);
+    host.style.bottom = on ? 'auto' : '0';
+    store.set('min', on ? '1' : '0');
   }
 
-  /* =====================================================================
-   *  CODE GENERATION
-   * ===================================================================== */
-  function block(title, o, alt) {
-    const link = `https://platesmania.com/${o.lang}/nomer${o.id}`;
-    const img = `https://${o.srv}.platesmania.com/${o.folder}/m/${o.id}.jpg`;
-    const tags = $('tag').value.split(',').map(t => t.trim().replace(/^#/, '')).filter(Boolean);
-    const head = tags.length ? tags.map(t => `<a href="/gallery.php?dop=${t}">#${t}</a>`).join(' ') + ' \n' : '';
-    return `${head}${$('place').value.trim()}
+  function setStatus(html) { $('status').innerHTML = html; }
 
-<font color="#b8860b">━━━━━━ ◆ ━━━━━━</font>
-<font color="#7a1f1f"><b>${title}</b></font>
-<font color="#b8860b">━━━━━━ ◆ ━━━━━━</font>
-<a href='${link}'><img src='${img}' width=230 height=175 border=0 alt='${alt}'></a>
-<font color="#b8860b">━━━━━━━━━━━━━━━━━</font>`;
+  // "Keys: S · F · L · U · N · R · Q ◀ ▶ D · Esc", built from the keys the features declared
+  function updateHint() {
+    const parts = Object.values(keyMap).filter(k => k.hint)
+      .sort((a, b) => (a.hintOrder || 0) - (b.hintOrder || 0))
+      .map(k => (typeof k.hint === 'function' ? k.hint() : k.hint));
+    $('hint').textContent = 'Keys: ' + [...parts, 'Esc'].join(' · ');
   }
-
   /* =====================================================================
-   *  UI RENDERING
+   *  PAIR  (choose the front and rear photos of a car by clicking them on the site)
    * ===================================================================== */
+  function startSelecting() {
+    if (state.front && state.rear) { state.front = state.rear = null; store.set('front', 'null'); store.set('rear', 'null'); }
+    state.mode = !state.front ? 'front' : 'rear';
+    render();
+  }
+  function stopSelecting() { state.mode = null; clearHover(); render(); }
+
   function renderSlot(el, label, photo, key) {
     el.innerHTML = '';
     el.classList.toggle('empty', !photo);
@@ -261,8 +324,6 @@
     el.append(im, t, x);
   }
 
-  function setStatus(html) { $('status').innerHTML = html; }
-
   function render() {
     renderSlot($('sFront'), 'Front', state.front, 'front');
     renderSlot($('sRear'), 'Rear', state.rear, 'rear');
@@ -276,41 +337,7 @@
     else if (state.mode === 'rear') setStatus('Now click the <b>REAR</b> photo. (Esc to cancel)');
     else if (ready) setStatus('Pair ready. Open the front photo to start the automatic edit.');
     else setStatus('Press <b>S</b>, then click the front and rear photos.');
-
-    $('hint').textContent = `Keys: S · F · L · U · N · R · ${prevKey} ◀ ▶ D · Esc`;
   }
-
-  // Letter shown for the "previous page" key: the physical left key, labelled for YOUR layout
-  //   AZERTY -> Q   |   QWERTY / QWERTZ -> A
-  let prevKey = /^fr|^be/i.test(navigator.language || '') ? 'Q' : 'A';
-  if (navigator.keyboard && navigator.keyboard.getLayoutMap) {
-    navigator.keyboard.getLayoutMap().then(map => {
-      const k = map.get('KeyA');
-      if (k && /^[a-z]$/i.test(k)) { prevKey = k.toUpperCase(); render(); }
-    }).catch(() => {});
-  }
-
-  /* =====================================================================
-   *  SELECTION MODE
-   * ===================================================================== */
-  function startSelecting() {
-    if (state.front && state.rear) { state.front = state.rear = null; store.set('front', 'null'); store.set('rear', 'null'); }
-    state.mode = !state.front ? 'front' : 'rear';
-    render();
-  }
-  function stopSelecting() { state.mode = null; clearHover(); render(); }
-
-  $('sel').onclick = () => (state.mode ? stopSelecting() : startSelecting());
-  $('reset').onclick = () => {
-    state.front = state.rear = null; state.mode = null;
-    store.set('front', 'null'); store.set('rear', 'null'); clearDone();
-    clearHover(); render();
-  };
-  $('min').onclick = () => {
-    const p = $('panel'); p.classList.toggle('min'); store.set('min', p.classList.contains('min') ? '1' : '0');
-  };
-  $('place').oninput = () => store.set('place', $('place').value);
-  $('tag').oninput = () => store.set('tag', $('tag').value);
 
   let hovered = null;
   function clearHover() { if (hovered) { hovered.classList.remove('pmg-hover'); hovered = null; } }
@@ -336,18 +363,59 @@
     render();
   }, true);
 
+  registerFeature({
+    groups: [{
+      tab: 'Pair', title: 'Photos',
+      build: () => [
+        h('button', { id: 'sel', class: 'btn ghost', text: 'Select photos (S)' }),
+        h('button', { id: 'reset', class: 'btn ghost sm', text: 'Reset the pair' }),
+        h('div', { class: 'slots' }, h('div', { id: 'sFront', class: 'slot empty' }), h('div', { id: 'sRear', class: 'slot empty' }))
+      ]
+    }],
+    keys: {
+      KeyS: { run: () => { $('sel').click(); return true; }, hint: 'S', hintOrder: 10 }
+    },
+    onEscape: () => { if (!state.mode) return false; stopSelecting(); return true; },
+    escOrder: 20,
+    init: () => {
+      $('sel').onclick = () => (state.mode ? stopSelecting() : startSelecting());
+      $('reset').onclick = () => {
+        state.front = state.rear = null; state.mode = null;
+        store.set('front', 'null'); store.set('rear', 'null'); clearDone();
+        clearHover(); render();
+      };
+      render();
+    }
+  });
+  /* =====================================================================
+   *  DETAILS  (location and hashtags written at the top of every description)
+   * ===================================================================== */
+  registerFeature({
+    groups: [{
+      tab: 'Post', title: 'Details',
+      build: () => [
+        h('div', { class: 'field' }, h('label', { for: 'place', text: 'Location' }),
+          h('input', { type: 'text', id: 'place', autocomplete: 'off' })),
+        h('div', { class: 'field' }, h('label', { for: 'tag', text: 'Hashtags (comma separated)' }),
+          h('input', { type: 'text', id: 'tag', autocomplete: 'off', placeholder: 'oldtimer,tuning' }))
+      ]
+    }],
+    init: () => {
+      $('place').value = store.get('place', 'Mainz - Germany');
+      $('tag').value = store.get('tag', 'oldtimer');
+      $('place').oninput = () => store.set('place', $('place').value);
+      $('tag').oninput = () => store.set('tag', $('tag').value);
+    }
+  });
   /* =====================================================================
    *  EDIT FLOW:  photo page --(auto edit)--> edit page --(auto fill)--> (auto save)
    * ===================================================================== */
-  // Edit page: <textarea name="dop"> + <input type="hidden" name="id" value="{photo id}">
+  // The edit page is detected in 20-here.js (here.edit)
   const descBox = document.querySelector('textarea[name="dop"]');
   const photoIdInput = document.querySelector('form input[name="id"]');
-  const onEditPage = !!(descBox && photoIdInput);
-  $('fillBtn').disabled = !onEditPage;
-  $('fillBtn').title = onEditPage ? 'Fill the description of this photo' : 'Only available on the edit page';
 
   function fillDescription() {
-    if (!onEditPage) return;
+    if (!here.edit) return;
     if (!(state.front && state.rear)) {
       setStatus('Select the front and rear photos first (press <b>S</b>), then come back to edit.');
       return;
@@ -378,11 +446,10 @@
       setStatus(`Description filled for <b>#${id}</b>. Check it, then click Save.`);
     }
   }
-  $('fillBtn').onclick = fillDescription;
 
   // On a photo page of the selected pair, click the site's own "edit" button (once per photo)
   function autoEdit() {
-    if (!$('autoEdit').checked || onEditPage) return;
+    if (!$('autoEdit').checked || here.edit) return;
     if (!(state.front && state.rear)) return;
     const m = location.pathname.match(/\/nomer(\d+)/i);
     if (!m) return;
@@ -400,8 +467,7 @@
    *  BACK TO THE GALLERY WHEN EVERYTHING IS DONE
    * ===================================================================== */
   // Remember the last gallery / user page visited (and how far it was scrolled)
-  const isGalleryPage = /\/gallery(\.php)?$/i.test(location.pathname) || /\/user\d+\/?$/i.test(location.pathname);
-  if (isGalleryPage) {
+  if (here.gallery) {
     store.set('lastGallery', location.href);
     if (store.get('restoreScroll', '0') === '1') {
       store.set('restoreScroll', '0');
@@ -413,7 +479,7 @@
 
   // After the second photo is saved the site shows its photo page: that is the signal to go back
   function backToGallery() {
-    if (!$('autoReturn').checked || onEditPage) return false;
+    if (!$('autoReturn').checked || here.edit) return false;
     if (store.get('returnPending', '0') !== '1') return false;
     if (!(state.front && state.rear)) return false;
     const m = location.pathname.match(/\/nomer(\d+)/i);
@@ -427,6 +493,37 @@
     return true;
   }
 
+
+  registerFeature({
+    groups: [
+      {
+        tab: 'Post', title: 'Description',
+        build: () => [h('button', { id: 'fillBtn', class: 'btn ghost', disabled: true, text: 'Fill description (F)' })]
+      },
+      {
+        tab: 'Post', title: 'Automation',
+        build: () => [
+          h('label', { class: 'chk' }, h('input', { type: 'checkbox', id: 'autoEdit' }), 'Auto-click “edit” on my photos'),
+          h('label', { class: 'chk' }, h('input', { type: 'checkbox', id: 'autoFill' }), 'Auto-fill on the edit page'),
+          h('label', { class: 'chk' }, h('input', { type: 'checkbox', id: 'autoSave' }), 'Auto-click “Save” after filling'),
+          h('label', { class: 'chk' }, h('input', { type: 'checkbox', id: 'autoReturn' }), 'Return to my gallery when finished')
+        ]
+      }
+    ],
+    keys: {
+      KeyF: { run: () => { if (!here.edit) return false; $('fillBtn').click(); return true; }, hint: 'F', hintOrder: 20 }
+    },
+    init: () => {
+      $('fillBtn').disabled = !here.edit;
+      $('fillBtn').title = here.edit ? 'Fill the description of this photo' : 'Only available on the edit page';
+      $('fillBtn').onclick = fillDescription;
+      // Options: always visible, remembered
+      [['autoEdit', '0'], ['autoFill', '0'], ['autoSave', '0'], ['autoReturn', '1']].forEach(([id, def]) => {
+        $(id).checked = store.get(id, def) === '1';
+        $(id).onchange = () => store.set(id, $(id).checked ? '1' : '0');
+      });
+    }
+  });
   /* =====================================================================
    *  LIKE THE PHOTOS SHOWN ON THE PAGE
    * ===================================================================== */
@@ -451,10 +548,6 @@
   };
   const pagesWanted = () => Math.min(MAX_PAGES, Math.max(1, parseInt($('pages').value, 10) || 1));
 
-  $('delay').oninput = () => store.set('delay', $('delay').value);
-  $('pages').value = store.get('pages', '1');
-  $('pages').oninput = () => { store.set('pages', $('pages').value); updateLikeBtn(); };
-  $('pages').max = MAX_PAGES;
 
   const unlikedHearts = () =>
     [...document.querySelectorAll('i.rating.fa-heart-o[id^="unit_ul"]')].filter(el => !clickedLikes.has(el.id));
@@ -540,8 +633,6 @@
     updateLikeBtn();
     setStatus(stopped ? `Stopped after <b>${done}</b> like${done > 1 ? 's' : ''}.` : `Liked <b>${done}</b> photo${done > 1 ? 's' : ''}.`);
   }
-  $('likeAll').onclick = likeAll;
-  host.addEventListener('mouseenter', updateLikeBtn); // pages can load photos lazily
 
   // A multi-page run resumes by itself after each page load
   function resumeLikeRun() {
@@ -556,6 +647,93 @@
     setTimeout(() => { if (getRun()) runStep(); }, 600); // short pause so the page is fully loaded
   }
 
+
+  registerFeature({
+    groups: [{
+      tab: 'Likes', title: 'Likes',
+      build: () => [
+        h('button', { id: 'likeAll', class: 'btn ghost', disabled: true, text: 'Like this page' }),
+        h('div', { class: 'row' }, h('label', { for: 'pages', text: 'Pages to like' }), h('input', { type: 'number', id: 'pages', min: 1, step: 1 })),
+        h('div', { class: 'row' }, h('label', { for: 'delay', text: 'Delay between likes (ms)' }), h('input', { type: 'number', id: 'delay', min: 100, step: 50 }))
+      ]
+    }],
+    keys: {
+      KeyL: {
+        run: () => { // like this page (or "Pages to like" pages); press again while running = stop
+          if (liking || getRun() || unlikedHearts().length || (pagesWanted() > 1 && document.querySelector('i.rating[id^="unit_ul"]'))) { likeAll(); return true; }
+          if (document.querySelector('i.rating[id^="unit_ul"]')) { setStatus('Nothing left to like on this page.'); return true; }
+          return false;
+        },
+        hint: 'L', hintOrder: 30
+      }
+    },
+    onEscape: () => { if (!(liking || getRun())) return false; cancelLikeRun('Auto-like stopped.'); return true; },
+    escOrder: 30,
+    init: () => {
+      $('delay').value = store.get('delay', '200');
+      $('delay').oninput = () => store.set('delay', $('delay').value);
+      $('pages').value = store.get('pages', '1');
+      $('pages').oninput = () => { store.set('pages', $('pages').value); updateLikeBtn(); };
+      $('pages').max = MAX_PAGES;
+      $('likeAll').onclick = likeAll;
+      host.addEventListener('mouseenter', updateLikeBtn); // pages can load photos lazily
+      updateLikeBtn();
+    }
+  });
+  /* =====================================================================
+   *  PAGE NAVIGATION  (previous / next page of a gallery)
+   * ===================================================================== */
+  // The site's pagination is <ul class="pagination"> « 1 2 3 »: the active page is <li class="active">,
+  // so the previous / next page is simply the <li> before / after it.
+  // Address of the previous (-1) / next (+1) page, or null on the first / last page
+  function pageHref(dir) {
+    const ul = document.querySelector('ul.pagination');
+    if (!ul) return null;
+    const items = [...ul.children].filter(li => li.tagName === 'LI');
+    const i = items.findIndex(li => li.classList.contains('active'));
+    const target = i < 0 ? null : items[i + dir];
+    const a = target && target.querySelector('a');
+    const href = a && a.getAttribute('href');
+    if (!a || !href || href === '#' || /^javascript:/i.test(href)) return null;
+    // A link that points back to the page we are on (e.g. "»" on the last page) is not a new page
+    if (a.href.split('#')[0] === location.href.split('#')[0]) return null;
+    try {
+      const cur = new URLSearchParams(location.search).get('start');
+      const nxt = new URL(a.href).searchParams.get('start');
+      if ((cur !== null || nxt !== null) && (cur || '0') === (nxt || '0')) return null;
+    } catch (e) {}
+    return a.href;
+  }
+
+  function goToPage(dir) {
+    if (!document.querySelector('ul.pagination')) return false; // no pagination here: leave the key alone
+    if (liking || getRun()) { setStatus('Auto-like is running. Press <b>L</b> or <b>Esc</b> to stop it first.'); return true; }
+    const href = pageHref(dir);
+    if (!href) { setStatus(dir > 0 ? 'This is the <b>last</b> page.' : 'This is the <b>first</b> page.'); return true; }
+    setStatus(dir > 0 ? 'Next page…' : 'Previous page…');
+    location.href = href;
+    return true;
+  }
+
+
+  registerFeature({
+    groups: [{
+      tab: 'Likes', title: 'Pages',
+      build: () => [
+        h('div', { class: 'btnrow' },
+          h('button', { id: 'prevPage', class: 'btn ghost half', text: '◀ Previous' }),
+          h('button', { id: 'nextPage', class: 'btn ghost half', text: 'Next ▶' }))
+      ]
+    }],
+    keys: {
+      KeyA: { run: () => goToPage(-1), hint: () => prevKey + ' ◀ ▶ D', hintOrder: 60 }, // left key -> previous page
+      KeyD: { run: () => goToPage(+1) }                                                 // right key -> next page
+    },
+    init: () => {
+      $('prevPage').onclick = () => goToPage(-1);
+      $('nextPage').onclick = () => goToPage(+1);
+    }
+  });
   /* =====================================================================
    *  BATCH UPLOAD
    *  U opens a window: add photos (or a folder), click photos to select them (blue), give the selection a
@@ -565,11 +743,6 @@
    *  The photos live in IndexedDB (the files themselves) so every tab can read them; the original file
    *  is what gets uploaded, the previews are only for the window.
    * ===================================================================== */
-  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const COUNTRIES = ('al:Albania|dz:Algeria|ad:Andorra|ar:Argentina|am:Armenia|au:Australia|at:Austria|az:Azerbaijan|bs:Bahamas|bh:Bahrain|by:Belarus|be:Belgium|ba:Bosnia and Herzegovina|br:Brazil|bg:Bulgaria|kh:Cambodia|ca:Canada|cl:Chile|cn:China|hr:Croatia|cy:Cyprus|cz:Czech Republic|dk:Denmark|eg:Egypt|ee:Estonia|fi:Finland|fr:France|ge:Georgia|de:Germany|gi:Gibraltar (UK)|gr:Greece|gu:Guam (USA)|gg:Guernsey (UK)|hk:Hong Kong (CN)|hu:Hungary|is:Iceland|id:Indonesia|ir:Iran|iq:Iraq|ie:Ireland|il:Israel|it:Italy|jp:Japan|je:Jersey (UK)|kz:Kazakhstan|ke:Kenya|kw:Kuwait|kg:Kyrgyzstan|la:Laos|lv:Latvia|li:Liechtenstein|lt:Lithuania|lu:Luxembourg|my:Malaysia|mt:Malta|mx:Mexico|md:Moldova|mc:Monaco|mn:Mongolia|me:Montenegro|ma:Morocco|nl:Netherlands|nz:New Zealand|mk:North Macedonia|mp:Northern Mariana Islands (USA)|no:Norway|ps:Palestinian Authority|pl:Poland|pt:Portugal|qa:Qatar|ro:Romania|ru:Russia|sm:San Marino|sa:Saudi Arabia|rs:Serbia|sc:Seychelles|sg:Singapore|sk:Slovakia|si:Slovenia|kr:South Korea|es:Spain|se:Sweden|ch:Switzerland|tj:Tajikistan|th:Thailand|tr:Turkey|ae:UAE|us:USA|su:USSR|ua:Ukraine|uk:United Kingdom|uz:Uzbekistan|va:Vatican|vn:Vietnam|ax:Åland (FI)|xx:Non-recognized and partially recognized states')
-    .split('|').map(s => { const i = s.indexOf(':'); return { code: s.slice(0, i), name: s.slice(i + 1) }; });
-  const cName = code => { const c = COUNTRIES.find(x => x.code === code); return c ? c.name : String(code).toUpperCase(); };
-  const uid = () => (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : Date.now() + '-' + Math.random().toString(36).slice(2);
 
   // ---- storage of the queue (IndexedDB: holds the photo files themselves) ----
   let _db = null;
@@ -737,13 +910,13 @@
   const M = id => mroot.getElementById(id);
 
   function openManager() {
-    managerOpen = true; mhost.style.display = 'block'; host.style.display = 'none';
+    managerOpen = true; mhost.style.display = 'block'; host.style.display = 'none'; app.modal = { onKey: managerKey };
     renderChips(); fillMore(); renderGrid();
     qAll().then(a => { if (managerOpen && !multi) { queue = a; renderGrid(); fillThumbs(); } }).catch(() => {}); // pick up what other tabs finished
   }
   function closeManager() {
     try { hideZoom(); } catch (e) {}
-    managerOpen = false; mhost.style.display = 'none'; host.style.display = '';
+    managerOpen = false; mhost.style.display = 'none'; host.style.display = ''; app.modal = null;
     updateBatchInfo();
   }
   function managerKey(e) {
@@ -1079,26 +1252,6 @@
   };
   M('mStart').onclick = () => { closeManager(); startMulti(); };
 
-  // ---- panel summary + buttons ----
-  function updateBatchInfo() {
-    const ready = readyCount(), noC = queue.filter(q => q.status === 'pending' && !q.country).length;
-    const done = queue.filter(isFinished).length;
-    const b = getBatch(), active = !!(b && b.active);
-    const opened = queue.filter(q => q.status === 'opened').length;
-    $('qInfo').textContent = queue.length
-      ? `${queue.length} photo${queue.length > 1 ? 's' : ''} · ${ready} ready · ${noC} without country · ${done} uploaded${opened ? ' · ' + opened + ' open in tabs' : ''}`
-      : 'No photos queued yet.';
-    const go = $('qGo');
-    go.disabled = ready === 0 || !!multi;
-    go.textContent = multi ? `Opening tabs… ${multi.opened}/${multi.total}` : `Start uploading${ready ? ' (' + ready + ')' : ''}`;
-    $('qStop').hidden = !multi;
-  }
-  $('qDelay').value = Math.min(120, Math.max(5, +store.get('qDelay', '10') || 10));
-  $('qDelay').onchange = () => { const v = Math.min(120, Math.max(5, Math.round(+$('qDelay').value) || 10)); $('qDelay').value = v; store.set('qDelay', String(v)); };
-  $('qOpen').onclick = openManager;
-  $('qGo').onclick = startMulti;
-  $('qStop').onclick = () => stopMulti('Stopped. Photos already opened stay in their tabs; the others are still waiting.');
-
   // ---- "Start uploading": one new tab per photo, spaced out so Cloudflare does not get nervous ----
   // Each tab gets its photo through the address (#pmg=ID), loads it into the editor and is then on its own.
   let multi = null;                       // { list, total, opened, timer }
@@ -1308,86 +1461,59 @@
   }
 
   /* =====================================================================
-   *  PAGE NAVIGATION  (previous / next page of a gallery)
+   *  UPLOAD TAB  (the ribbon controls of the batch upload: summary, open the manager, start, stop)
    * ===================================================================== */
-  // The site's pagination is <ul class="pagination"> « 1 2 3 »: the active page is <li class="active">,
-  // so the previous / next page is simply the <li> before / after it.
-  // Address of the previous (-1) / next (+1) page, or null on the first / last page
-  function pageHref(dir) {
-    const ul = document.querySelector('ul.pagination');
-    if (!ul) return null;
-    const items = [...ul.children].filter(li => li.tagName === 'LI');
-    const i = items.findIndex(li => li.classList.contains('active'));
-    const target = i < 0 ? null : items[i + dir];
-    const a = target && target.querySelector('a');
-    const href = a && a.getAttribute('href');
-    if (!a || !href || href === '#' || /^javascript:/i.test(href)) return null;
-    // A link that points back to the page we are on (e.g. "»" on the last page) is not a new page
-    if (a.href.split('#')[0] === location.href.split('#')[0]) return null;
-    try {
-      const cur = new URLSearchParams(location.search).get('start');
-      const nxt = new URL(a.href).searchParams.get('start');
-      if ((cur !== null || nxt !== null) && (cur || '0') === (nxt || '0')) return null;
-    } catch (e) {}
-    return a.href;
+  function updateBatchInfo() {
+    const ready = readyCount(), noC = queue.filter(q => q.status === 'pending' && !q.country).length;
+    const done = queue.filter(isFinished).length;
+    const b = getBatch(), active = !!(b && b.active);
+    const opened = queue.filter(q => q.status === 'opened').length;
+    $('qInfo').textContent = queue.length
+      ? `${queue.length} photo${queue.length > 1 ? 's' : ''} · ${ready} ready · ${noC} without country · ${done} uploaded${opened ? ' · ' + opened + ' open in tabs' : ''}`
+      : 'No photos queued yet.';
+    const go = $('qGo');
+    go.disabled = ready === 0 || !!multi;
+    go.textContent = multi ? `Opening tabs… ${multi.opened}/${multi.total}` : `Start uploading${ready ? ' (' + ready + ')' : ''}`;
+    $('qStop').hidden = !multi;
   }
 
-  function goToPage(dir) {
-    if (!document.querySelector('ul.pagination')) return false; // no pagination here: leave the key alone
-    if (liking || getRun()) { setStatus('Auto-like is running. Press <b>L</b> or <b>Esc</b> to stop it first.'); return true; }
-    const href = pageHref(dir);
-    if (!href) { setStatus(dir > 0 ? 'This is the <b>last</b> page.' : 'This is the <b>first</b> page.'); return true; }
-    setStatus(dir > 0 ? 'Next page…' : 'Previous page…');
-    location.href = href;
-    return true;
-  }
-
-  /* =====================================================================
-   *  KEYBOARD SHORTCUTS  (ignored while typing, or with Ctrl/Cmd/Alt)
-   *    S  select photos · F fill description (edit page) · U batch upload · N start uploading · R reload photo
-   *    Esc  cancel (selection, auto-like, tab opening)
-   *    L  like the page, or "Pages to like" pages (again, or Esc = stop)
-   *    Q (A on QWERTY) previous page · D next page   (same physical keys on any layout)
-   * ===================================================================== */
-  document.addEventListener('keydown', e => {
-    if (managerOpen) { managerKey(e); return; }
-    if (e.key === 'Escape') {
-      if (multi) { stopMulti('Stopped. The photos not yet opened are still waiting.'); return; }
-      if (state.mode) { stopSelecting(); return; }
-      if (liking || getRun()) { cancelLikeRun('Auto-like stopped.'); return; }
+  registerFeature({
+    groups: [{
+      tab: 'Upload', title: 'Batch upload',
+      build: () => [
+        h('div', { id: 'qInfo', class: 'qinfo', text: 'No photos queued yet.' }),
+        h('button', { id: 'qOpen', class: 'btn ghost', text: 'Choose photos & countries (U)' }),
+        h('button', { id: 'qGo', class: 'btn', disabled: true, text: 'Start uploading' }),
+        h('button', { id: 'qStop', class: 'btn ghost', hidden: true, text: 'Stop opening tabs' }),
+        h('div', { class: 'row' }, h('label', { for: 'qDelay', text: 'Delay between tabs (s)' }),
+          h('input', { type: 'number', id: 'qDelay', min: 5, max: 120, step: 1 }))
+      ]
+    }],
+    keys: {
+      KeyU: { run: () => { openManager(); return true; }, hint: 'U', hintOrder: 40 },            // batch upload manager
+      KeyN: { run: () => { if (!queue.length) return false; startMulti(); return true; }, hint: 'N', hintOrder: 50 }, // start uploading
+      KeyR: { run: () => { if (!batchResumable()) return false; resumeCurrent(); return true; }, hint: 'R', hintOrder: 55 } // (re)load the current photo
+    },
+    onEscape: () => { if (!multi) return false; stopMulti('Stopped. The photos not yet opened are still waiting.'); return true; },
+    escOrder: 10,
+    init: () => {
+      $('qDelay').value = Math.min(120, Math.max(5, +store.get('qDelay', '10') || 10));
+      $('qDelay').onchange = () => { const v = Math.min(120, Math.max(5, Math.round(+$('qDelay').value) || 10)); $('qDelay').value = v; store.set('qDelay', String(v)); };
+      $('qOpen').onclick = openManager;
+      $('qGo').onclick = startMulti;
+      $('qStop').onclick = () => stopMulti('Stopped. Photos already opened stay in their tabs; the others are still waiting.');
+      updateBatchInfo();
     }
-    if (e.ctrlKey || e.metaKey || e.altKey || e.repeat) return;
-    // Learn the letter printed on the physical left key (Q on AZERTY, A on QWERTY) for the hint
-    if (e.code === 'KeyA' && /^[a-z]$/i.test(e.key || '') && e.key.toUpperCase() !== prevKey) {
-      prevKey = e.key.toUpperCase(); render();
-    }
-    const t = e.target;
-    if (t === host || (t && (/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.isContentEditable))) return;
-    const k = e.code; // physical key, so it works on any layout
-    if (k === 'KeyS') { e.preventDefault(); $('sel').click(); }
-    else if (k === 'KeyF' && onEditPage) { e.preventDefault(); $('fillBtn').click(); }
-    else if (k === 'KeyL') { // like this page (or "Pages to like" pages); press again while running = stop
-      if (liking || getRun() || unlikedHearts().length || (pagesWanted() > 1 && document.querySelector('i.rating[id^="unit_ul"]'))) {
-        e.preventDefault(); likeAll();
-      } else if (document.querySelector('i.rating[id^="unit_ul"]')) { e.preventDefault(); setStatus('Nothing left to like on this page.'); }
-    }
-    else if (k === 'KeyU') { e.preventDefault(); openManager(); } // batch upload manager
-    else if (k === 'KeyN' && queue.length) { e.preventDefault(); startMulti(); }   // start uploading
-    else if (k === 'KeyR' && batchResumable()) { e.preventDefault(); resumeCurrent(); } // (re)load current photo
-    else if (k === 'KeyA') { if (goToPage(-1)) e.preventDefault(); } // left key  -> previous page
-    else if (k === 'KeyD') { if (goToPage(+1)) e.preventDefault(); } // right key -> next page
   });
-
   /* =====================================================================
-   *  START
+   *  START  (once the panel exists: mount the features, then do what this page needs)
    * ===================================================================== */
   // Cloudflare check page in this tab? Tell the tab that is opening the others to stop.
   if (/just a moment|attention required|un instant|checking your browser/i.test(document.title) || document.querySelector('#challenge-form, .cf-error-details')) {
     store.set('cfhit', String(Date.now()));
   }
-  render();
-  updateLikeBtn();
-  if (onEditPage) { if ($('autoFill').checked) fillDescription(); }
+  mountApp();
+  if (here.edit) { if ($('autoFill').checked) fillDescription(); }
   else if (!backToGallery()) { autoEdit(); resumeLikeRun(); }
   batchOnLoad().catch(() => {});
 })();

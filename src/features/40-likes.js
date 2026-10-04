@@ -22,10 +22,6 @@
   };
   const pagesWanted = () => Math.min(MAX_PAGES, Math.max(1, parseInt($('pages').value, 10) || 1));
 
-  $('delay').oninput = () => store.set('delay', $('delay').value);
-  $('pages').value = store.get('pages', '1');
-  $('pages').oninput = () => { store.set('pages', $('pages').value); updateLikeBtn(); };
-  $('pages').max = MAX_PAGES;
 
   const unlikedHearts = () =>
     [...document.querySelectorAll('i.rating.fa-heart-o[id^="unit_ul"]')].filter(el => !clickedLikes.has(el.id));
@@ -111,8 +107,6 @@
     updateLikeBtn();
     setStatus(stopped ? `Stopped after <b>${done}</b> like${done > 1 ? 's' : ''}.` : `Liked <b>${done}</b> photo${done > 1 ? 's' : ''}.`);
   }
-  $('likeAll').onclick = likeAll;
-  host.addEventListener('mouseenter', updateLikeBtn); // pages can load photos lazily
 
   // A multi-page run resumes by itself after each page load
   function resumeLikeRun() {
@@ -127,3 +121,36 @@
     setTimeout(() => { if (getRun()) runStep(); }, 600); // short pause so the page is fully loaded
   }
 
+
+  registerFeature({
+    groups: [{
+      tab: 'Likes', title: 'Likes',
+      build: () => [
+        h('button', { id: 'likeAll', class: 'btn ghost', disabled: true, text: 'Like this page' }),
+        h('div', { class: 'row' }, h('label', { for: 'pages', text: 'Pages to like' }), h('input', { type: 'number', id: 'pages', min: 1, step: 1 })),
+        h('div', { class: 'row' }, h('label', { for: 'delay', text: 'Delay between likes (ms)' }), h('input', { type: 'number', id: 'delay', min: 100, step: 50 }))
+      ]
+    }],
+    keys: {
+      KeyL: {
+        run: () => { // like this page (or "Pages to like" pages); press again while running = stop
+          if (liking || getRun() || unlikedHearts().length || (pagesWanted() > 1 && document.querySelector('i.rating[id^="unit_ul"]'))) { likeAll(); return true; }
+          if (document.querySelector('i.rating[id^="unit_ul"]')) { setStatus('Nothing left to like on this page.'); return true; }
+          return false;
+        },
+        hint: 'L', hintOrder: 30
+      }
+    },
+    onEscape: () => { if (!(liking || getRun())) return false; cancelLikeRun('Auto-like stopped.'); return true; },
+    escOrder: 30,
+    init: () => {
+      $('delay').value = store.get('delay', '200');
+      $('delay').oninput = () => store.set('delay', $('delay').value);
+      $('pages').value = store.get('pages', '1');
+      $('pages').oninput = () => { store.set('pages', $('pages').value); updateLikeBtn(); };
+      $('pages').max = MAX_PAGES;
+      $('likeAll').onclick = likeAll;
+      host.addEventListener('mouseenter', updateLikeBtn); // pages can load photos lazily
+      updateLikeBtn();
+    }
+  });

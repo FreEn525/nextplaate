@@ -1,43 +1,31 @@
 // Builds nextplaate.user.js from the modules in src/.
-// Order matters: the modules are joined in this order inside one shared scope.
+//
+// Every group is joined in this order, inside one shared scope, so the modules can call each other:
+//   meta     the userscript header (name, version, grants)
+//   core     the wrapper, storage, the page check, the feature registry and the keyboard
+//   lib      pure helpers: photo detection, description code, countries
+//   ui       the design tokens, the DOM helper, the docked ribbon
+//   features one file per feature (features/upload/ holds the batch upload)
+//   boot     the start-up sequence, then the closing of the wrapper
+// Inside a group, files are sorted by name (use the 00-, 10-, ... prefixes to set the order).
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
-import { join, dirname } from 'node:path';
+import { join, dirname, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const ORDER = [
-  'core/00-meta.txt',
-  'core/01-wrapper-start.js',
-  'core/storage.js',
-  'ui/shared-look.js',
-  'ui/page-style.js',
-  'ui/panel.js',
-  'photos/detection.js',
-  'photos/codegen.js',
-  'ui/rendering.js',
-  'ui/selection.js',
-  'edit/edit-flow.js',
-  'edit/back-to-gallery.js',
-  'edit/like.js',
-  'batch/state.js',
-  'batch/manager.js',
-  'batch/adding.js',
-  'batch/panel.js',
-  'batch/start-upload.js',
-  'batch/tab-load.js',
-  'batch/tab-alive.js',
-  'nav/pagination.js',
-  'input/shortcuts.js',
-  'start.js',
-  'core/99-wrapper-end.js',
-];
+const GROUPS = ['meta', 'core', 'lib', 'ui', 'features', 'boot'];
 
-// Every file in src/ must be listed, so a forgotten module fails the build instead of vanishing.
-const all = readdirSync(join(root, "src"), { recursive: true }).filter(p => p.endsWith(".js") || p.endsWith(".txt")).map(p => p.replaceAll("\\", "/"));
-const listed = new Set(ORDER);
-const missing = all.map(p => p.replace(/^src\//, '')).filter(p => !listed.has(p));
-if (missing.length) throw new Error('Not listed in build order: ' + missing.join(', '));
+const files = readdirSync(join(root, 'src'), { recursive: true })
+  .map(p => p.split(sep).join('/'))
+  .filter(p => /\.(js|txt)$/.test(p));
 
-const out = ORDER.map(f => readFileSync(join(root, 'src', f), 'utf8')).join('');
+const orphans = files.filter(p => !GROUPS.some(g => p.startsWith(g + '/')));
+if (orphans.length) throw new Error('Not in a build group: ' + orphans.join(', '));
+
+const ordered = GROUPS.flatMap(g =>
+  files.filter(p => p.startsWith(g + '/')).sort((a, b) => a.localeCompare(b, 'en', { numeric: true })));
+
+const out = ordered.map(p => readFileSync(join(root, 'src', p), 'utf8')).join('');
 writeFileSync(join(root, 'nextplaate.user.js'), out);
-console.log(`Built nextplaate.user.js from ${ORDER.length} modules (${out.split('\n').length} lines)`);
+console.log(`Built nextplaate.user.js from ${ordered.length} modules (${out.split('\n').length} lines)`);
+console.log(ordered.map(p => '  ' + p).join('\n'));

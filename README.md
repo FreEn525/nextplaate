@@ -28,16 +28,18 @@ MIT, see [LICENSE](LICENSE).
 The source is split into modules in `src/`. `nextplaate.user.js` is generated from them and must not be edited by hand.
 
 ```
-src/core/      header, wrapper, storage
-src/ui/        shared look, page style, panel, rendering, selection
-src/photos/    photo detection, code generation
-src/edit/      edit flow, back to gallery, like
-src/batch/     upload queue, manager, adding photos, tabs
-src/nav/       gallery pagination
-src/input/     keyboard shortcuts
-src/start.js   startup
+src/meta/        userscript header (name, version, grants)
+src/core/        wrapper, storage, page detection, feature registry, keyboard
+src/lib/         helpers: photo detection, description code, countries
+src/ui/          design tokens, DOM helper, the docked ribbon
+src/features/    one file per feature (upload/ holds the batch upload)
+src/boot/        start-up sequence
 ```
 
-Build locally with `node scripts/build.mjs`. A GitHub Action rebuilds the file on every push that touches `src/`, and Greasy Fork picks up the new version from the repository.
+A feature is one file that calls `registerFeature({...})`: its ribbon groups, its keys and its Esc behaviour. Copy an existing one (for example `src/features/20-details.js`) as a starting point.
 
-Remember to raise `@version` in `src/core/00-meta.txt` before pushing a release. Without a new version number, installed copies do not update.
+Build locally with `node scripts/build.mjs`. Test with `python -m pytest tests -q` (needs `pip install playwright pytest` and `playwright install chromium`). The tests run the script against a simulated PlatesMania.
+
+A GitHub Action rebuilds the file on every push that touches `src/`, and Greasy Fork picks up the new version from the repository.
+
+Remember to raise `@version` in `src/meta/00-header.txt` before pushing a release. Without a new version number, installed copies do not update.

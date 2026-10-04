@@ -33,3 +33,22 @@
     return true;
   }
 
+
+  registerFeature({
+    groups: [{
+      tab: 'Likes', title: 'Pages',
+      build: () => [
+        h('div', { class: 'btnrow' },
+          h('button', { id: 'prevPage', class: 'btn ghost half', text: '◀ Previous' }),
+          h('button', { id: 'nextPage', class: 'btn ghost half', text: 'Next ▶' }))
+      ]
+    }],
+    keys: {
+      KeyA: { run: () => goToPage(-1), hint: () => prevKey + ' ◀ ▶ D', hintOrder: 60 }, // left key -> previous page
+      KeyD: { run: () => goToPage(+1) }                                                 // right key -> next page
+    },
+    init: () => {
+      $('prevPage').onclick = () => goToPage(-1);
+      $('nextPage').onclick = () => goToPage(+1);
+    }
+  });
