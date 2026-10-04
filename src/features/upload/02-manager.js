@@ -108,7 +108,8 @@
   const M = id => mroot.getElementById(id);
 
   function openManager() {
-    managerOpen = true; document.documentElement.classList.add('pmg-busy'); mhost.style.display = 'block'; host.style.display = 'none'; app.modal = { onKey: managerKey };
+    managerOpen = true; document.documentElement.classList.add('pmg-busy'); mhost.style.display = 'block';
+    if (document.activeElement) document.activeElement.blur(); host.style.display = 'none'; app.modal = { onKey: managerKey };
     renderChips(); fillMore(); renderGrid();
     qAll().then(a => { if (managerOpen && !multi) { queue = a; renderGrid(); fillThumbs(); } }).catch(() => {}); // pick up what other tabs finished
   }
@@ -130,7 +131,7 @@
   }
   function managerKey(e) {
     const t = e.composedPath ? e.composedPath()[0] : e.target;
-    const typing = t && (t.tagName === 'TEXTAREA' || (t.tagName === 'INPUT' && /^(text|number|search)$/i.test(t.type)));
+    const typing = t && mroot.contains(t) && (t.tagName === 'TEXTAREA' || (t.tagName === 'INPUT' && /^(text|number|search)$/i.test(t.type)));
     if (e.key === 'Escape') { e.preventDefault(); if (sel.size) { sel.clear(); syncSel(); } else closeManager(); return; }
     if (typing) return;
     if ((e.ctrlKey || e.metaKey) && e.code === 'KeyA') { e.preventDefault(); queue.forEach(q => sel.add(q.id)); syncSel(); return; }

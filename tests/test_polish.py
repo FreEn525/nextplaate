@@ -195,3 +195,12 @@ def test_page_text_cannot_be_highlighted_while_the_window_is_open(page, tmp_path
     page.keyboard.press("KeyU")
     page.keyboard.press("Control+KeyA")
     assert page.evaluate("() => String(window.getSelection())") == ""
+
+
+def test_ctrl_a_selects_photos_even_if_a_site_field_had_the_focus(page, tmp_path):
+    open_at(page, GALLERY)
+    page.evaluate("() => { const i = document.createElement('input'); i.id = 'siteSearch'; document.body.prepend(i); i.focus(); }")
+    page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('qOpen').click()")
+    add_two_photos(page, tmp_path)
+    page.keyboard.press("Control+KeyA")
+    assert manager_selected(page) == 2
