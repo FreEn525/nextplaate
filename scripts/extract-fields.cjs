@@ -15,7 +15,11 @@ function functionSource(s, name) {
     if (s[e] === '{') d++;
     else if (s[e] === '}') { d--; if (!d) break; }
   }
-  return s.slice(a, e + 1) || (start && null);
+  // braces inside strings can unbalance the count: then the body stops at the next function
+  if (e >= s.length || e - a > 60000) { const next = s.indexOf('function ', start + 1); return s.slice(a, next > 0 ? next : a + 60000); }
+  // HTML inside a string can break the parse: keep the code before the first closing tag
+  const body = s.slice(a, e + 1);
+  return body.includes('</') ? body.slice(0, body.indexOf('</')) : body;
 }
 
 const allFunctions = s => [...new Set([...s.matchAll(/function\s+(\w+)\s*\(/g)].map(m => m[1]))];
@@ -43,7 +47,7 @@ function idsUsed(src) {
 
 function run(s, fnName, typeValue) {
   const src = functionSource(s, fnName);
-  const mk = () => ({ style: {}, disabled: false, value: '', options: [], selectedIndex: 0, checked: false, removeAttribute() {}, setAttribute() {}, appendChild() {}, addEventListener() {} });
+  const mk = () => ({ style: {}, disabled: false, value: '', options: [], selectedIndex: 0, checked: false, removeAttribute() {}, setAttribute() {}, appendChild() {}, addEventListener() {}, parentElement: { style: {}, removeAttribute() {}, setAttribute() {}, appendChild() {} } });
   const els = {};
   for (const id of idsUsed(src)) els[id] = mk();
   els.ctype = { ...mk(), value: typeValue };
