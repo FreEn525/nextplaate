@@ -43,21 +43,27 @@
       return true;
     }
     let i = 0;
-    for (const el of fields) {
+    // two passes: a menu that comes before its letters in the page gets them on the second pass
+    for (let pass = 0; pass < 2 && i < tokens.length; pass++) for (const el of fields) {
       if (i >= tokens.length) break;
+      if (el.dataset.ptUsed) continue;
       if (el.tagName === 'INPUT') {
+        // on the first pass a digits field only takes a piece that has digits: letters wait for their menu
+        if (pass === 0 && !/\d/.test(tokens[i]) && !/let|letter/i.test(el.id || el.name || '')) continue;
         el.value = tokens[i++];
+        el.dataset.ptUsed = '1';
         el.dispatchEvent(new Event('input', { bubbles: true }));
       } else {
         const want = tokens[i].toUpperCase();
         const opt = [...el.options].find(o => o.value && (o.text.trim().toUpperCase() === want || o.value.toUpperCase() === want))
           || [...el.options].find(o => o.value && o.text.trim().toUpperCase().startsWith(want));   // exact label first: A before AM
-        if (opt) { el.value = opt.value; el.dataset.ptSet = '1'; el.dispatchEvent(new Event('change', { bubbles: true })); i++; continue; }
+        if (opt) { el.value = opt.value; el.dataset.ptSet = '1'; el.dataset.ptUsed = '1'; el.dispatchEvent(new Event('change', { bubbles: true })); i++; continue; }
         // "TT" over two one-letter menus: the first letter goes in this menu, the rest carries on to the next one
         const one = [...el.options].find(o => o.value && o.text.trim().toUpperCase() === want[0]);
-        if (want.length > 1 && one) { el.value = one.value; el.dataset.ptSet = '1'; el.dispatchEvent(new Event('change', { bubbles: true })); tokens[i] = tokens[i].slice(1); }
+        if (want.length > 1 && one) { el.value = one.value; el.dataset.ptSet = '1'; el.dataset.ptUsed = '1'; el.dispatchEvent(new Event('change', { bubbles: true })); tokens[i] = tokens[i].slice(1); }
       }
     }
+    fields.forEach(el => { delete el.dataset.ptUsed; });
     // menus the plate did not use go back to their empty choice, so a default value is not read as a part of the plate
     for (const el of fields.filter(el => el.tagName === 'SELECT')) {
       if (el.dataset.ptSet) { delete el.dataset.ptSet; continue; }
