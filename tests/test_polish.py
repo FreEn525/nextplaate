@@ -270,12 +270,3 @@ def test_plate_is_written_in_the_search_format(page):
         "() => /already on the site/.test(document.getElementById('pmg-host').shadowRoot.getElementById('plateResult').textContent)",
         timeout=10000)
     assert any("nomer=AB-123-CD" in u for u in requests), requests
-
-
-def test_save_this_page_downloads_its_html(page):
-    open_at(page, "https://platesmania.com/fr/add")
-    with page.expect_download() as info:
-        page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('savePage').click()")
-    download = info.value
-    assert download.suggested_filename.startswith("platesmania-fr_add")
-    assert download.suggested_filename.endswith(".html")

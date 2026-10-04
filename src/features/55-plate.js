@@ -89,23 +89,8 @@
   document.addEventListener('blur', e => { if (here.add && PLATE_FIELDS.includes(e.target.id)) later(0); }, true);
   document.addEventListener('change', e => { if (here.add && e.target.tagName === 'SELECT') later(0); }, true);
 
-  // Developer tool: saves the page you are on as an HTML file, to build the tests from the real markup
-  function savePage() {
-    const name = 'platesmania-' + (location.pathname + location.search).replace(/[^\w]+/g, '_').replace(/^_|_$/g, '') + '.html';
-    const blob = new Blob(['<!-- ' + location.href + ' -->\n' + document.documentElement.outerHTML], { type: 'text/html' });
-    const link = h('a', { href: URL.createObjectURL(blob), download: name });
-    document.body.append(link);
-    link.click();
-    link.remove();
-    setTimeout(() => URL.revokeObjectURL(link.href), 2000);
-    setStatus(`Page saved as <b>${name}</b>.`);
-  }
-
   registerFeature({
     groups: [{
-      drawer: 'plate', title: 'Developer',
-      build: () => [h('button', { id: 'savePage', class: 'btn ghost', text: 'Save this page (HTML)' })]
-    }, {
       drawer: 'plate', title: 'Plate check', pages: ['add'],
       build: () => [
         h('div', { class: 'row' }, h('span', { class: 'lbl', text: 'Plate' }), h('b', { id: 'plateNow', text: '—' })),
@@ -120,7 +105,6 @@
       $('autoCheck').checked = store.get('autoCheck', '1') === '1';
       $('autoCheck').onchange = () => store.set('autoCheck', $('autoCheck').checked ? '1' : '0');
       $('plateCheck').onclick = () => checkPlate(true);
-      $('savePage').onclick = savePage;
       $('plateOpen').onclick = () => {
         const plate = plateForForm();
         if (plate) window.open(searchUrl(plate), '_blank');

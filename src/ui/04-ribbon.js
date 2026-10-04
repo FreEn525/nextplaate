@@ -8,7 +8,8 @@
     { id: 'gallery', icon: 'gallery', title: 'Gallery', keys: 'L · ◀ ▶' },
     { id: 'plate', icon: 'car', title: 'Plate check', keys: '' },
     { id: 'upload', icon: 'upload', title: 'Batch upload', keys: 'U · N' },
-    { id: 'keys', icon: 'keyboard', title: 'Shortcuts', keys: 'Esc' }
+    { id: 'keys', icon: 'keyboard', title: 'Shortcuts', keys: 'Esc' },
+    { id: 'dev', icon: 'wrench', title: 'Developer', keys: '' }        // shown only when the dev tools are built in
   ];
   const RIBBON_CSS = `
     .side{display:flex;justify-content:flex-end;height:100%;align-items:stretch;pointer-events:none}

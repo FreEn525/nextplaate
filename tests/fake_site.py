@@ -4,12 +4,13 @@ It only reproduces the markup NextPlaate reads: the gallery (thumbnails, paginat
 a photo page, the edit page and the upload page. Nothing here talks to the real site.
 """
 import base64
+import os
 import pathlib
 import re
 from urllib.parse import parse_qs, urlparse
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SCRIPT = (ROOT / "nextplaate.user.js").read_text(encoding="utf-8")
+SCRIPT = (ROOT / os.environ.get("NEXTPLAATE_SCRIPT", "nextplaate.user.js")).read_text(encoding="utf-8")
 
 # 1x1 PNG, used for every photo and thumbnail
 PNG = base64.b64decode(

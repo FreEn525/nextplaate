@@ -260,6 +260,7 @@
     keyboard: '<path d="M10 8h.01" /> <path d="M12 12h.01" /> <path d="M14 8h.01" /> <path d="M16 12h.01" /> <path d="M18 8h.01" /> <path d="M6 8h.01" /> <path d="M7 16h10" /> <path d="M8 12h.01" /> <rect width="20" height="16" x="2" y="4" rx="2" />',
     gallery: '<rect width="7" height="7" x="3" y="3" rx="1" /> <rect width="7" height="7" x="14" y="3" rx="1" /> <rect width="7" height="7" x="14" y="14" rx="1" /> <rect width="7" height="7" x="3" y="14" rx="1" />',
     car: '<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" /> <circle cx="7" cy="17" r="2" /> <path d="M9 17h6" /> <circle cx="17" cy="17" r="2" />',
+    wrench: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />',
   };
   const icon = name => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[name]}</svg>`;
   /* =====================================================================
@@ -331,7 +332,8 @@
     { id: 'gallery', icon: 'gallery', title: 'Gallery', keys: 'L · ◀ ▶' },
     { id: 'plate', icon: 'car', title: 'Plate check', keys: '' },
     { id: 'upload', icon: 'upload', title: 'Batch upload', keys: 'U · N' },
-    { id: 'keys', icon: 'keyboard', title: 'Shortcuts', keys: 'Esc' }
+    { id: 'keys', icon: 'keyboard', title: 'Shortcuts', keys: 'Esc' },
+    { id: 'dev', icon: 'wrench', title: 'Developer', keys: '' }        // shown only when the dev tools are built in
   ];
   const RIBBON_CSS = `
     .side{display:flex;justify-content:flex-end;height:100%;align-items:stretch;pointer-events:none}
@@ -1003,23 +1005,8 @@
   document.addEventListener('blur', e => { if (here.add && PLATE_FIELDS.includes(e.target.id)) later(0); }, true);
   document.addEventListener('change', e => { if (here.add && e.target.tagName === 'SELECT') later(0); }, true);
 
-  // Developer tool: saves the page you are on as an HTML file, to build the tests from the real markup
-  function savePage() {
-    const name = 'platesmania-' + (location.pathname + location.search).replace(/[^\w]+/g, '_').replace(/^_|_$/g, '') + '.html';
-    const blob = new Blob(['<!-- ' + location.href + ' -->\n' + document.documentElement.outerHTML], { type: 'text/html' });
-    const link = h('a', { href: URL.createObjectURL(blob), download: name });
-    document.body.append(link);
-    link.click();
-    link.remove();
-    setTimeout(() => URL.revokeObjectURL(link.href), 2000);
-    setStatus(`Page saved as <b>${name}</b>.`);
-  }
-
   registerFeature({
     groups: [{
-      drawer: 'plate', title: 'Developer',
-      build: () => [h('button', { id: 'savePage', class: 'btn ghost', text: 'Save this page (HTML)' })]
-    }, {
       drawer: 'plate', title: 'Plate check', pages: ['add'],
       build: () => [
         h('div', { class: 'row' }, h('span', { class: 'lbl', text: 'Plate' }), h('b', { id: 'plateNow', text: '—' })),
@@ -1034,7 +1021,6 @@
       $('autoCheck').checked = store.get('autoCheck', '1') === '1';
       $('autoCheck').onchange = () => store.set('autoCheck', $('autoCheck').checked ? '1' : '0');
       $('plateCheck').onclick = () => checkPlate(true);
-      $('savePage').onclick = savePage;
       $('plateOpen').onclick = () => {
         const plate = plateForForm();
         if (plate) window.open(searchUrl(plate), '_blank');
