@@ -6,7 +6,7 @@
    *    keeps each result in the browser, and "Write report" saves the report into a folder you choose.
    * ===================================================================== */
   const PT_QUEUE = 'nextplaate-plates-run';        // the countries left in the run (sessionStorage)
-  const PT_PAUSE_MS = 2000;                        // between two countries (the site limits fast request bursts)
+  const PT_PAUSE_MS = 5000;                        // between two countries (the site limits fast request bursts)
   const ptNorm = s => (s || '').replace(/[\s-]+/g, '').toUpperCase();
 
   // Plates shown in the country's gallery: the text of their photos (the alt of the "inf" image)
@@ -76,6 +76,7 @@
   // The test itself: returns one row per plate
   async function ptCollect() {
     const plates = await ptGallery(here.country);
+    if (!plates.length) throw new Error('no plate in the gallery (Cloudflare check, or none listed)');
     const rows = [];
     for (const text of plates) {
       const fits = ptType(text);
@@ -113,7 +114,8 @@
     const m = location.pathname.match(/^\/([a-z]{2})\/add\/?$/i);
     await new Promise(r => setTimeout(r, 1000));
     if (m && m[1].toLowerCase() === cc) {
-      const rows = await ptCollect();
+      let rows;
+      try { rows = await ptCollect(); } catch (e) { ptMsg(`${cc} not saved (${e.message}). Stopped: test it again later.`); sessionStorage.removeItem(PT_QUEUE); return; }
       await capPut('plates:' + cc, { date: new Date().toISOString(), passed: rows.filter(r => r.ok).length, total: rows.filter(r => r.fits).length, other: rows.filter(r => !r.fits).length, rows });
     } else {
       await capPut('plates-skip:' + cc, location.href);           // no upload page for this country
