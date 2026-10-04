@@ -3,7 +3,8 @@
    * ===================================================================== */
   const store = {
     get(k, d) { try { const v = localStorage.getItem('pmg_' + k); return v === null ? d : v; } catch (e) { return d; } },
-    set(k, v) { try { localStorage.setItem('pmg_' + k, v); } catch (e) {} }
+    set(k, v) { try { localStorage.setItem('pmg_' + k, v); } catch (e) {} },
+    del(k) { try { localStorage.removeItem('pmg_' + k); } catch (e) {} }
   };
   const loadPhoto = k => { try { return JSON.parse(store.get(k, 'null')); } catch (e) { return null; } };
 

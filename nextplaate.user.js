@@ -23,7 +23,8 @@
    * ===================================================================== */
   const store = {
     get(k, d) { try { const v = localStorage.getItem('pmg_' + k); return v === null ? d : v; } catch (e) { return d; } },
-    set(k, v) { try { localStorage.setItem('pmg_' + k, v); } catch (e) {} }
+    set(k, v) { try { localStorage.setItem('pmg_' + k, v); } catch (e) {} },
+    del(k) { try { localStorage.removeItem('pmg_' + k); } catch (e) {} }
   };
   const loadPhoto = k => { try { return JSON.parse(store.get(k, 'null')); } catch (e) { return null; } };
 
@@ -52,35 +53,50 @@
     edit: !!(document.querySelector('textarea[name="dop"]') && document.querySelector('form input[name="id"]'))
   };
   /* =====================================================================
-   *  APP  (feature registry: a feature declares its ribbon groups, its keys and its Esc behaviour)
+   *  APP  (feature registry: a feature declares its ribbon groups, its key actions and its Esc behaviour)
    * ===================================================================== */
   // A feature is registered when the script loads, but touches nothing on the page then:
   // mountApp() builds the panel first, and only then runs each feature's init().
   //   registerFeature({
   //     groups:   [{ drawer: 'pair', title: 'Photos', build: () => nodes }], // controls, in a drawer of the bar
-  //     keys:     { KeyS: { run: () => true, hint: 'S', hintOrder: 10 } }, // run() returns true when it handled the key
+  //     keys:     { select: { code: 'KeyS', label: 'Select photos', run: () => true, hintOrder: 10 } },
+  //               // run() returns true when it handled the key. The key can be changed by the user (Shortcuts drawer).
   //     onEscape: () => true, escOrder: 10,                                 // true when it handled Esc (lower runs first)
   //     init:     () => { ... }                                             // wires the controls, once the panel exists
   //   })
   const features = [];
-  let keyMap = {};          // e.code -> key spec, from every feature
+  const actions = {};       // action id -> key spec (with .bound: the key it currently uses)
+  let keyMap = {};          // e.code -> action, rebuilt when a key changes
   let escapeChain = [];     // features with onEscape, in escOrder
-  const app = { modal: null }; // { onKey(e) } while a full window owns the keyboard (the batch manager)
+  const app = { modal: null, capture: null }; // modal: { onKey(e) } while a full window owns the keyboard; capture: waits for a new key
 
   const registerFeature = f => { features.push(f); };
 
+  // The key an action uses: the user's choice if any, else its default
+  const bindingOf = id => store.get('kb_' + id, actions[id].code);
+
+  function rebuildKeys() {
+    keyMap = {};
+    Object.keys(actions).forEach(id => {
+      actions[id].bound = bindingOf(id);
+      keyMap[actions[id].bound] = { id, ...actions[id] };
+    });
+    updateHint();
+  }
+
   function mountApp() {
+    features.forEach(f => Object.assign(actions, f.keys || {}));
     mountRibbon(features);
     features.forEach(f => f.init && f.init());
-    features.forEach(f => Object.assign(keyMap, f.keys || {}));
+    rebuildKeys();
     escapeChain = [...features.filter(f => f.onEscape), { onEscape: closeDrawer, escOrder: 100 }]   // Esc closes the open drawer last
-    .sort((a, b) => (a.escOrder || 0) - (b.escOrder || 0));
-    updateHint();
+      .sort((a, b) => (a.escOrder || 0) - (b.escOrder || 0));
   }
   /* =====================================================================
    *  KEYBOARD  (one listener for the whole script)
-   *    Order: the open window (batch manager) first, then Esc, then the keys each feature declared.
-   *    Ignored while typing, or with Ctrl/Cmd/Alt. Keys are read from e.code: the physical key, on any layout.
+   *    Order: a key being chosen (Shortcuts drawer), then the open window (batch manager), then Esc,
+   *    then the key actions of the features. Ignored while typing in a text field. Keys are read from
+   *    e.code: the physical key, on any layout.
    * ===================================================================== */
   // Letter printed on the physical left key ("previous page"): Q on AZERTY, A on QWERTY. Learned from the real layout.
   let prevKey = /^fr|^be/i.test(navigator.language || '') ? 'Q' : 'A';
@@ -91,7 +107,19 @@
     }).catch(() => {});
   }
 
+  // Name shown for a key code: KeyS -> S, Digit3 -> 3, ArrowLeft -> ←
+  const keyName = code => {
+    if (code === 'KeyA') return prevKey;   // the physical left key is labelled for YOUR layout
+    if (!code) return '?';
+    const arrows = { ArrowLeft: '←', ArrowRight: '→', ArrowUp: '↑', ArrowDown: '↓' };
+    return arrows[code] || code.replace(/^Key|^Digit|^Numpad/, '');
+  };
+  // Text fields only: a checkbox, a select or a slider does not take the keys
+  const isTextField = el => !!el && (el.isContentEditable || el.tagName === 'TEXTAREA' ||
+    (el.tagName === 'INPUT' && /^(text|number|search|url|email|password)$/i.test(el.type)));
+
   document.addEventListener('keydown', e => {
+    if (app.capture) { e.preventDefault(); e.stopPropagation(); app.capture(e); return; }
     if (app.modal) { app.modal.onKey(e); return; }
     if (e.key === 'Escape') {
       for (const f of escapeChain) if (f.onEscape()) return;
@@ -100,8 +128,9 @@
     if (e.code === 'KeyA' && /^[a-z]$/i.test(e.key || '') && e.key.toUpperCase() !== prevKey) {
       prevKey = e.key.toUpperCase(); updateHint();
     }
-    const t = e.target;
-    if (t === host || (t && (/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.isContentEditable))) return;
+    // Focus inside the panel: the event target is the panel itself, so look at the focused control
+    const field = e.target === host ? host.shadowRoot.activeElement : e.target;
+    if (isTextField(field)) return;
     const k = keyMap[e.code];
     if (k && k.run(e)) e.preventDefault();
   });
@@ -158,6 +187,7 @@
     close: '<path d="M18 6 6 18" /> <path d="m6 6 12 12" />',
     open: '<path d="m9 18 6-6-6-6" />',
     collapse: '<rect width="18" height="18" x="3" y="3" rx="2" /> <path d="M15 3v18" /> <path d="m8 9 3 3-3 3" />',
+    keyboard: '<path d="M10 8h.01" /> <path d="M12 12h.01" /> <path d="M14 8h.01" /> <path d="M16 12h.01" /> <path d="M18 8h.01" /> <path d="M6 8h.01" /> <path d="M7 16h10" /> <path d="M8 12h.01" /> <rect width="20" height="16" x="2" y="4" rx="2" />',
   };
   const icon = name => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[name]}</svg>`;
   /* =====================================================================
@@ -224,17 +254,19 @@
     { id: 'pair', icon: 'photos', title: 'Photos', keys: 'S' },
     { id: 'post', icon: 'post', title: 'Post', keys: 'F' },
     { id: 'likes', icon: 'likes', title: 'Likes', keys: 'L · ◀ ▶' },
-    { id: 'upload', icon: 'upload', title: 'Batch upload', keys: 'U · N' }
+    { id: 'upload', icon: 'upload', title: 'Batch upload', keys: 'U · N' },
+    { id: 'keys', icon: 'keyboard', title: 'Shortcuts', keys: 'Esc' }
   ];
   const RIBBON_CSS = `
     .side{display:flex;height:100%;align-items:stretch}
     .rail{width:56px;flex:none;display:flex;flex-direction:column;align-items:center;gap:8px;padding:10px 0;background:#fff;border-left:1px solid var(--line2);box-shadow:-6px 0 20px rgba(0,0,0,.08)}
     .rail .logo{margin-bottom:6px}
+    .rbtn svg{display:block}
     .rbtn{width:40px;height:40px;display:grid;place-items:center;border:0;border-radius:6px;background:none;color:var(--mute);cursor:pointer}
     .rbtn:hover{background:var(--tint);color:var(--ink)}
     .rbtn[aria-pressed="true"]{background:var(--brand);color:var(--brand-t)}
-    .drawer{width:340px;display:flex;flex-direction:column;background:var(--bg);border-left:1px solid var(--line2);box-shadow:-10px 0 30px rgba(0,0,0,.14);position:relative}
-    .dhead{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#fff;border-top:3px solid var(--brand-b);border-bottom:1px solid var(--line)}
+    .drawer{width:min(340px,calc(100vw - 56px));display:flex;flex-direction:column;background:var(--bg);border-left:1px solid var(--line2);box-shadow:-10px 0 30px rgba(0,0,0,.14);position:relative}
+    .dhead{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#fff;border-bottom:1px solid var(--line)}
     .dhead h2{margin:0;font-size:15px;font-weight:700}
     .xbtn{width:28px;height:28px;display:grid;place-items:center;border:1px solid var(--line2);border-radius:4px;background:#fff;color:var(--mute);cursor:pointer}
     .xbtn:hover{background:var(--tint);color:var(--ink)}
@@ -265,9 +297,19 @@
     .qinfo{font-size:12px;color:var(--mute)}
     .dfoot{padding:8px 14px;background:#fff;border-top:1px solid var(--line)}
     .hint{font-size:11px;color:var(--mute)}
-    .toast{position:absolute;right:68px;bottom:44px;max-width:300px;padding:8px 10px;background:#fff;border:1px solid var(--line2);border-radius:4px;box-shadow:0 6px 20px rgba(0,0,0,.15);font-size:13px;color:var(--ink)}
+    .toast{position:absolute;right:68px;bottom:44px;max-width:min(300px,calc(100vw - 96px));padding:8px 10px;background:#fff;border:1px solid var(--line2);border-radius:4px;box-shadow:0 6px 20px rgba(0,0,0,.15);font-size:13px;color:var(--ink)}
     .toast:empty{display:none}
     .toast b{color:var(--ink)}
+    .kblist{display:flex;flex-direction:column;gap:6px}
+    .kbrow{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px}
+    .kbrow.fixed{color:var(--mute)}
+    .kbright{display:flex;align-items:center;gap:4px}
+    .kbkey{min-width:58px;height:30px;padding:0 8px;border:1px solid var(--line2);border-radius:4px;background:#fff;color:var(--ink);font:700 12px system-ui,sans-serif;cursor:pointer}
+    .kbkey:hover{border-color:var(--brand-b);background:var(--tint)}
+    .kbkey.static{cursor:default;color:var(--mute);font-weight:600}
+    .kbreset{width:26px;height:30px;border:0;background:none;color:var(--mute);cursor:pointer;font-size:14px}
+    .kbreset:hover{color:var(--ink)}
+    @media (max-width:520px){ .drawer{width:calc(100vw - 56px)} .rail{width:48px} }
   `;
 
   const host = document.createElement('div');
@@ -323,9 +365,9 @@
 
   // "Keys: S · F · L · U · N · R · Q ◀ ▶ D · Esc", built from the keys the features declared
   function updateHint() {
-    const parts = Object.values(keyMap).filter(k => k.hint)
-      .sort((a, b) => (a.hintOrder || 0) - (b.hintOrder || 0))
-      .map(k => (typeof k.hint === 'function' ? k.hint() : k.hint));
+    const parts = Object.values(actions).filter(a => a.hintOrder)
+      .sort((a, b) => a.hintOrder - b.hintOrder)
+      .map(a => (typeof a.hint === 'function' ? a.hint() : keyName(a.bound)));
     $('hint').textContent = 'Keys: ' + [...parts, 'Esc'].join(' · ');
   }
   /* =====================================================================
@@ -402,7 +444,7 @@
       ]
     }],
     keys: {
-      KeyS: { run: () => { $('sel').click(); return true; }, hint: 'S', hintOrder: 10 }
+      select: { code: 'KeyS', label: 'Select photos', run: () => { $('sel').click(); return true; }, hintOrder: 10 }
     },
     onEscape: () => { if (!state.mode) return false; stopSelecting(); return true; },
     escOrder: 20,
@@ -540,7 +582,7 @@
       }
     ],
     keys: {
-      KeyF: { run: () => { if (!here.edit) return false; $('fillBtn').click(); return true; }, hint: 'F', hintOrder: 20 }
+      fill: { code: 'KeyF', label: 'Fill the description', run: () => { if (!here.edit) return false; $('fillBtn').click(); return true; }, hintOrder: 20 }
     },
     init: () => {
       $('fillBtn').disabled = !here.edit;
@@ -687,13 +729,13 @@
       ]
     }],
     keys: {
-      KeyL: {
+      like: { code: 'KeyL', label: 'Like the page',
         run: () => { // like this page (or "Pages to like" pages); press again while running = stop
           if (liking || getRun() || unlikedHearts().length || (pagesWanted() > 1 && document.querySelector('i.rating[id^="unit_ul"]'))) { likeAll(); return true; }
           if (document.querySelector('i.rating[id^="unit_ul"]')) { setStatus('Nothing left to like on this page.'); return true; }
           return false;
         },
-        hint: 'L', hintOrder: 30
+        hintOrder: 30
       }
     },
     onEscape: () => { if (!(liking || getRun())) return false; cancelLikeRun('Auto-like stopped.'); return true; },
@@ -755,13 +797,68 @@
       ]
     }],
     keys: {
-      KeyA: { run: () => goToPage(-1), hint: () => prevKey + ' ◀ ▶ D', hintOrder: 60 }, // left key -> previous page
-      KeyD: { run: () => goToPage(+1) }                                                 // right key -> next page
+      prev: { code: 'KeyA', label: 'Previous page', run: () => goToPage(-1), hint: () => keyName(actions.prev.bound) + ' ◀ ▶ ' + keyName(actions.next.bound), hintOrder: 60 }, // left key
+      next: { code: 'KeyD', label: 'Next page', run: () => goToPage(+1) }                                                 // right key -> next page
     },
     init: () => {
       $('prevPage').onclick = () => goToPage(-1);
       $('nextPage').onclick = () => goToPage(+1);
     }
+  });
+  /* =====================================================================
+   *  SHORTCUTS  (every key of the script, and a way to change them)
+   * ===================================================================== */
+  // Click a key, then press the new one. A key another action already uses is swapped with this one.
+  const MODIFIERS = ['Shift', 'Control', 'Alt', 'Meta'];
+
+  function renderShortcuts() {
+    const rows = Object.entries(actions)
+      .sort(([, a], [, b]) => (a.hintOrder || 99) - (b.hintOrder || 99))
+      .map(([id, a]) => h('div', { class: 'kbrow' },
+        h('span', { class: 'kblabel', text: a.label }),
+        h('span', { class: 'kbright' },
+          h('button', { class: 'kbkey', text: keyName(a.bound), title: 'Click, then press the new key', onclick: () => capture(id) }),
+          h('button', { class: 'kbreset', text: '↺', title: 'Back to the default key', hidden: a.bound === a.code, onclick: () => { store.del('kb_' + id); rebuildKeys(); renderShortcuts(); } }))));
+    rows.push(
+      h('div', { class: 'kbrow fixed' }, h('span', { class: 'kblabel', text: 'Cancel, close, stop' }), h('span', { class: 'kbkey static', text: 'Esc' })),
+      h('div', { class: 'kbrow fixed' }, h('span', { class: 'kblabel', text: 'Select all photos (batch window)' }), h('span', { class: 'kbkey static', text: 'Ctrl + A' })));
+    $('kbList').replaceChildren(...rows);
+  }
+
+  function capture(id) {
+    setStatus(`Press the new key for <b>${actions[id].label}</b>… (Esc cancels)`);
+    app.capture = e => {
+      if (MODIFIERS.includes(e.key)) return;                       // wait for the real key
+      app.capture = null;
+      if (e.key === 'Escape') { setStatus('Change cancelled.'); renderShortcuts(); return; }
+      if (e.ctrlKey || e.metaKey || e.altKey) { setStatus('Use a single key, without Ctrl or Alt.'); renderShortcuts(); return; }
+      setBinding(id, e.code);
+    };
+  }
+
+  function setBinding(id, code) {
+    const other = Object.keys(actions).find(o => o !== id && actions[o].bound === code);
+    if (other) store.set('kb_' + other, actions[id].bound);       // swap with the other action
+    store.set('kb_' + id, code);
+    rebuildKeys(); renderShortcuts();
+    setStatus(`<b>${actions[id].label}</b> is now <b>${keyName(code)}</b>${other ? ` (${actions[other].label} got the old key)` : ''}.`);
+  }
+
+  function resetAll() {
+    Object.keys(actions).forEach(id => store.del('kb_' + id));
+    rebuildKeys(); renderShortcuts();
+    setStatus('Shortcuts back to the defaults.');
+  }
+
+  registerFeature({
+    groups: [{
+      drawer: 'keys', title: 'Keys',
+      build: () => [
+        h('div', { id: 'kbList', class: 'kblist' }),
+        h('button', { class: 'btn ghost', text: 'Reset all to the defaults', onclick: resetAll })
+      ]
+    }],
+    init: () => renderShortcuts()
   });
   /* =====================================================================
    *  BATCH UPLOAD
@@ -845,7 +942,7 @@
     <style>${UI_BASE}
       .ov{position:absolute;inset:0;background:rgba(17,17,17,.55);display:flex;justify-content:center;padding:22px}
       .sheet{background:var(--bg);border-radius:4px;width:min(1400px,100%);max-height:100%;min-height:0;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35)}
-      .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 18px;background:#fff;color:var(--ink);flex-wrap:wrap;border-top:3px solid var(--brand-b);border-bottom:1px solid var(--line)}
+      .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 18px;background:#fff;color:var(--ink);flex-wrap:wrap;border-bottom:1px solid var(--line)}
       .top h2{margin:0;font-size:18px;display:flex;align-items:center;gap:14px}
       .top h2 small{font-size:14px;font-weight:500;color:var(--mute)}
       .acts{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
@@ -898,6 +995,12 @@
 
       .foot{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 18px;background:#fff;border-top:1px solid var(--line);flex-wrap:wrap}
       #mInfo{font-size:13px;color:var(--mute)}
+      .cfm{position:absolute;inset:0;z-index:6;background:rgba(17,17,17,.45);display:flex;align-items:center;justify-content:center;padding:16px}
+      .cbox{background:#fff;border-radius:6px;padding:20px;max-width:420px;width:100%;box-shadow:0 18px 50px rgba(0,0,0,.3)}
+      .cbox h3{margin:0 0 8px;font-size:16px}
+      .cbox p{margin:0 0 16px;color:var(--mute);font-size:14px}
+      .cbox .acts{display:flex;justify-content:flex-end;gap:8px}
+      @media (max-width:640px){ .ov{padding:0} .sheet{border-radius:0} .top h2 small{display:none} .tools .inl{margin-left:0} .grid{grid-template-columns:repeat(auto-fill,minmax(min(var(--cw,300px),100%),1fr))} }
     </style>
     <div class="zoom" id="zoom" hidden><img alt=""><span class="zl"></span></div>
     <div class="ov" id="ov">
@@ -933,6 +1036,7 @@
         </div>
       </div>
     </div>
+    <div class="cfm" id="cfm" hidden><div class="cbox" role="dialog" aria-modal="true"><h3 id="cfmTitle"></h3><p id="cfmText"></p><div class="acts"><button class="btn ghost" id="cfmNo">Cancel</button><button class="btn danger" id="cfmYes">Clear</button></div></div></div>
     <input type="file" id="fMulti" multiple accept="image/*" hidden>
     <input type="file" id="fFolder" webkitdirectory multiple hidden>`;
   document.body.appendChild(mhost);
@@ -948,9 +1052,20 @@
     managerOpen = false; mhost.style.display = 'none'; host.style.display = ''; app.modal = null;
     updateBatchInfo();
   }
+  // A confirmation drawn in this window (window.confirm would show the browser's own box)
+  function askConfirm(title, text, okLabel) {
+    return new Promise(resolve => {
+      M('cfmTitle').textContent = title; M('cfmText').textContent = text; M('cfmYes').textContent = okLabel;
+      const done = ok => { M('cfm').hidden = true; app.modal = { onKey: managerKey }; resolve(ok); };
+      M('cfm').hidden = false;
+      M('cfmYes').onclick = () => done(true);
+      M('cfmNo').onclick = () => done(false);
+      app.modal = { onKey: e => { if (e.key === 'Escape') { e.preventDefault(); done(false); } else if (e.key === 'Enter') { e.preventDefault(); done(true); } } };
+    });
+  }
   function managerKey(e) {
     const t = e.composedPath ? e.composedPath()[0] : e.target;
-    const typing = t && /^(INPUT|SELECT|TEXTAREA)$/.test(t.tagName);
+    const typing = t && (t.tagName === 'TEXTAREA' || (t.tagName === 'INPUT' && /^(text|number|search)$/i.test(t.type)));
     if (e.key === 'Escape') { e.preventDefault(); if (sel.size) { sel.clear(); syncSel(); } else closeManager(); return; }
     if (typing) return;
     if ((e.ctrlKey || e.metaKey) && e.code === 'KeyA') { e.preventDefault(); queue.forEach(q => sel.add(q.id)); syncSel(); return; }
@@ -1275,7 +1390,7 @@
   });
   M('mClose').onclick = closeManager;
   M('mClear').onclick = async () => {
-    if (!queue.length || !confirm('Remove all photos from the batch list?')) return;
+    if (!queue.length || !(await askConfirm('Clear the list?', 'All photos leave the batch list. Your files on disk are not touched.', 'Clear'))) return;
     try { await qClear(); } catch (e) {}
     queue = []; sel.clear(); setBatch(null); renderGrid(); updateBatchInfo();
   };
@@ -1519,9 +1634,9 @@
       ]
     }],
     keys: {
-      KeyU: { run: () => { openManager(); return true; }, hint: 'U', hintOrder: 40 },            // batch upload manager
-      KeyN: { run: () => { if (!queue.length) return false; startMulti(); return true; }, hint: 'N', hintOrder: 50 }, // start uploading
-      KeyR: { run: () => { if (!batchResumable()) return false; resumeCurrent(); return true; }, hint: 'R', hintOrder: 55 } // (re)load the current photo
+      open: { code: 'KeyU', label: 'Open the batch manager', run: () => { openManager(); return true; }, hintOrder: 40 },            // batch upload manager
+      start: { code: 'KeyN', label: 'Start uploading', run: () => { if (!queue.length) return false; startMulti(); return true; }, hintOrder: 50 }, // start uploading
+      resume: { code: 'KeyR', label: 'Reload the current photo', run: () => { if (!batchResumable()) return false; resumeCurrent(); return true; }, hintOrder: 55 } // (re)load the current photo
     },
     onEscape: () => { if (!multi) return false; stopMulti('Stopped. The photos not yet opened are still waiting.'); return true; },
     escOrder: 10,

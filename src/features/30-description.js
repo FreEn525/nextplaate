@@ -102,7 +102,7 @@
       }
     ],
     keys: {
-      KeyF: { run: () => { if (!here.edit) return false; $('fillBtn').click(); return true; }, hint: 'F', hintOrder: 20 }
+      fill: { code: 'KeyF', label: 'Fill the description', run: () => { if (!here.edit) return false; $('fillBtn').click(); return true; }, hintOrder: 20 }
     },
     init: () => {
       $('fillBtn').disabled = !here.edit;

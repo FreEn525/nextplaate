@@ -28,9 +28,9 @@
       ]
     }],
     keys: {
-      KeyU: { run: () => { openManager(); return true; }, hint: 'U', hintOrder: 40 },            // batch upload manager
-      KeyN: { run: () => { if (!queue.length) return false; startMulti(); return true; }, hint: 'N', hintOrder: 50 }, // start uploading
-      KeyR: { run: () => { if (!batchResumable()) return false; resumeCurrent(); return true; }, hint: 'R', hintOrder: 55 } // (re)load the current photo
+      open: { code: 'KeyU', label: 'Open the batch manager', run: () => { openManager(); return true; }, hintOrder: 40 },            // batch upload manager
+      start: { code: 'KeyN', label: 'Start uploading', run: () => { if (!queue.length) return false; startMulti(); return true; }, hintOrder: 50 }, // start uploading
+      resume: { code: 'KeyR', label: 'Reload the current photo', run: () => { if (!batchResumable()) return false; resumeCurrent(); return true; }, hintOrder: 55 } // (re)load the current photo
     },
     onEscape: () => { if (!multi) return false; stopMulti('Stopped. The photos not yet opened are still waiting.'); return true; },
     escOrder: 10,

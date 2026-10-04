@@ -132,13 +132,13 @@
       ]
     }],
     keys: {
-      KeyL: {
+      like: { code: 'KeyL', label: 'Like the page',
         run: () => { // like this page (or "Pages to like" pages); press again while running = stop
           if (liking || getRun() || unlikedHearts().length || (pagesWanted() > 1 && document.querySelector('i.rating[id^="unit_ul"]'))) { likeAll(); return true; }
           if (document.querySelector('i.rating[id^="unit_ul"]')) { setStatus('Nothing left to like on this page.'); return true; }
           return false;
         },
-        hint: 'L', hintOrder: 30
+        hintOrder: 30
       }
     },
     onEscape: () => { if (!(liking || getRun())) return false; cancelLikeRun('Auto-like stopped.'); return true; },

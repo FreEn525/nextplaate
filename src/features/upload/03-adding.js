@@ -156,7 +156,7 @@
   });
   M('mClose').onclick = closeManager;
   M('mClear').onclick = async () => {
-    if (!queue.length || !confirm('Remove all photos from the batch list?')) return;
+    if (!queue.length || !(await askConfirm('Clear the list?', 'All photos leave the batch list. Your files on disk are not touched.', 'Clear'))) return;
     try { await qClear(); } catch (e) {}
     queue = []; sel.clear(); setBatch(null); renderGrid(); updateBatchInfo();
   };

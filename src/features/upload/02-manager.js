@@ -7,7 +7,7 @@
     <style>${UI_BASE}
       .ov{position:absolute;inset:0;background:rgba(17,17,17,.55);display:flex;justify-content:center;padding:22px}
       .sheet{background:var(--bg);border-radius:4px;width:min(1400px,100%);max-height:100%;min-height:0;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35)}
-      .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 18px;background:#fff;color:var(--ink);flex-wrap:wrap;border-top:3px solid var(--brand-b);border-bottom:1px solid var(--line)}
+      .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 18px;background:#fff;color:var(--ink);flex-wrap:wrap;border-bottom:1px solid var(--line)}
       .top h2{margin:0;font-size:18px;display:flex;align-items:center;gap:14px}
       .top h2 small{font-size:14px;font-weight:500;color:var(--mute)}
       .acts{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
@@ -60,6 +60,12 @@
 
       .foot{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 18px;background:#fff;border-top:1px solid var(--line);flex-wrap:wrap}
       #mInfo{font-size:13px;color:var(--mute)}
+      .cfm{position:absolute;inset:0;z-index:6;background:rgba(17,17,17,.45);display:flex;align-items:center;justify-content:center;padding:16px}
+      .cbox{background:#fff;border-radius:6px;padding:20px;max-width:420px;width:100%;box-shadow:0 18px 50px rgba(0,0,0,.3)}
+      .cbox h3{margin:0 0 8px;font-size:16px}
+      .cbox p{margin:0 0 16px;color:var(--mute);font-size:14px}
+      .cbox .acts{display:flex;justify-content:flex-end;gap:8px}
+      @media (max-width:640px){ .ov{padding:0} .sheet{border-radius:0} .top h2 small{display:none} .tools .inl{margin-left:0} .grid{grid-template-columns:repeat(auto-fill,minmax(min(var(--cw,300px),100%),1fr))} }
     </style>
     <div class="zoom" id="zoom" hidden><img alt=""><span class="zl"></span></div>
     <div class="ov" id="ov">
@@ -95,6 +101,7 @@
         </div>
       </div>
     </div>
+    <div class="cfm" id="cfm" hidden><div class="cbox" role="dialog" aria-modal="true"><h3 id="cfmTitle"></h3><p id="cfmText"></p><div class="acts"><button class="btn ghost" id="cfmNo">Cancel</button><button class="btn danger" id="cfmYes">Clear</button></div></div></div>
     <input type="file" id="fMulti" multiple accept="image/*" hidden>
     <input type="file" id="fFolder" webkitdirectory multiple hidden>`;
   document.body.appendChild(mhost);
@@ -110,9 +117,20 @@
     managerOpen = false; mhost.style.display = 'none'; host.style.display = ''; app.modal = null;
     updateBatchInfo();
   }
+  // A confirmation drawn in this window (window.confirm would show the browser's own box)
+  function askConfirm(title, text, okLabel) {
+    return new Promise(resolve => {
+      M('cfmTitle').textContent = title; M('cfmText').textContent = text; M('cfmYes').textContent = okLabel;
+      const done = ok => { M('cfm').hidden = true; app.modal = { onKey: managerKey }; resolve(ok); };
+      M('cfm').hidden = false;
+      M('cfmYes').onclick = () => done(true);
+      M('cfmNo').onclick = () => done(false);
+      app.modal = { onKey: e => { if (e.key === 'Escape') { e.preventDefault(); done(false); } else if (e.key === 'Enter') { e.preventDefault(); done(true); } } };
+    });
+  }
   function managerKey(e) {
     const t = e.composedPath ? e.composedPath()[0] : e.target;
-    const typing = t && /^(INPUT|SELECT|TEXTAREA)$/.test(t.tagName);
+    const typing = t && (t.tagName === 'TEXTAREA' || (t.tagName === 'INPUT' && /^(text|number|search)$/i.test(t.type)));
     if (e.key === 'Escape') { e.preventDefault(); if (sel.size) { sel.clear(); syncSel(); } else closeManager(); return; }
     if (typing) return;
     if ((e.ctrlKey || e.metaKey) && e.code === 'KeyA') { e.preventDefault(); queue.forEach(q => sel.add(q.id)); syncSel(); return; }

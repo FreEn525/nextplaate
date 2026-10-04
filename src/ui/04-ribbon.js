@@ -7,17 +7,19 @@
     { id: 'pair', icon: 'photos', title: 'Photos', keys: 'S' },
     { id: 'post', icon: 'post', title: 'Post', keys: 'F' },
     { id: 'likes', icon: 'likes', title: 'Likes', keys: 'L · ◀ ▶' },
-    { id: 'upload', icon: 'upload', title: 'Batch upload', keys: 'U · N' }
+    { id: 'upload', icon: 'upload', title: 'Batch upload', keys: 'U · N' },
+    { id: 'keys', icon: 'keyboard', title: 'Shortcuts', keys: 'Esc' }
   ];
   const RIBBON_CSS = `
     .side{display:flex;height:100%;align-items:stretch}
     .rail{width:56px;flex:none;display:flex;flex-direction:column;align-items:center;gap:8px;padding:10px 0;background:#fff;border-left:1px solid var(--line2);box-shadow:-6px 0 20px rgba(0,0,0,.08)}
     .rail .logo{margin-bottom:6px}
+    .rbtn svg{display:block}
     .rbtn{width:40px;height:40px;display:grid;place-items:center;border:0;border-radius:6px;background:none;color:var(--mute);cursor:pointer}
     .rbtn:hover{background:var(--tint);color:var(--ink)}
     .rbtn[aria-pressed="true"]{background:var(--brand);color:var(--brand-t)}
-    .drawer{width:340px;display:flex;flex-direction:column;background:var(--bg);border-left:1px solid var(--line2);box-shadow:-10px 0 30px rgba(0,0,0,.14);position:relative}
-    .dhead{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#fff;border-top:3px solid var(--brand-b);border-bottom:1px solid var(--line)}
+    .drawer{width:min(340px,calc(100vw - 56px));display:flex;flex-direction:column;background:var(--bg);border-left:1px solid var(--line2);box-shadow:-10px 0 30px rgba(0,0,0,.14);position:relative}
+    .dhead{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#fff;border-bottom:1px solid var(--line)}
     .dhead h2{margin:0;font-size:15px;font-weight:700}
     .xbtn{width:28px;height:28px;display:grid;place-items:center;border:1px solid var(--line2);border-radius:4px;background:#fff;color:var(--mute);cursor:pointer}
     .xbtn:hover{background:var(--tint);color:var(--ink)}
@@ -48,9 +50,19 @@
     .qinfo{font-size:12px;color:var(--mute)}
     .dfoot{padding:8px 14px;background:#fff;border-top:1px solid var(--line)}
     .hint{font-size:11px;color:var(--mute)}
-    .toast{position:absolute;right:68px;bottom:44px;max-width:300px;padding:8px 10px;background:#fff;border:1px solid var(--line2);border-radius:4px;box-shadow:0 6px 20px rgba(0,0,0,.15);font-size:13px;color:var(--ink)}
+    .toast{position:absolute;right:68px;bottom:44px;max-width:min(300px,calc(100vw - 96px));padding:8px 10px;background:#fff;border:1px solid var(--line2);border-radius:4px;box-shadow:0 6px 20px rgba(0,0,0,.15);font-size:13px;color:var(--ink)}
     .toast:empty{display:none}
     .toast b{color:var(--ink)}
+    .kblist{display:flex;flex-direction:column;gap:6px}
+    .kbrow{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px}
+    .kbrow.fixed{color:var(--mute)}
+    .kbright{display:flex;align-items:center;gap:4px}
+    .kbkey{min-width:58px;height:30px;padding:0 8px;border:1px solid var(--line2);border-radius:4px;background:#fff;color:var(--ink);font:700 12px system-ui,sans-serif;cursor:pointer}
+    .kbkey:hover{border-color:var(--brand-b);background:var(--tint)}
+    .kbkey.static{cursor:default;color:var(--mute);font-weight:600}
+    .kbreset{width:26px;height:30px;border:0;background:none;color:var(--mute);cursor:pointer;font-size:14px}
+    .kbreset:hover{color:var(--ink)}
+    @media (max-width:520px){ .drawer{width:calc(100vw - 56px)} .rail{width:48px} }
   `;
 
   const host = document.createElement('div');
@@ -106,8 +118,8 @@
 
   // "Keys: S · F · L · U · N · R · Q ◀ ▶ D · Esc", built from the keys the features declared
   function updateHint() {
-    const parts = Object.values(keyMap).filter(k => k.hint)
-      .sort((a, b) => (a.hintOrder || 0) - (b.hintOrder || 0))
-      .map(k => (typeof k.hint === 'function' ? k.hint() : k.hint));
+    const parts = Object.values(actions).filter(a => a.hintOrder)
+      .sort((a, b) => a.hintOrder - b.hintOrder)
+      .map(a => (typeof a.hint === 'function' ? a.hint() : keyName(a.bound)));
     $('hint').textContent = 'Keys: ' + [...parts, 'Esc'].join(' · ');
   }

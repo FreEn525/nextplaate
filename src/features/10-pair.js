@@ -72,7 +72,7 @@
       ]
     }],
     keys: {
-      KeyS: { run: () => { $('sel').click(); return true; }, hint: 'S', hintOrder: 10 }
+      select: { code: 'KeyS', label: 'Select photos', run: () => { $('sel').click(); return true; }, hintOrder: 10 }
     },
     onEscape: () => { if (!state.mode) return false; stopSelecting(); return true; },
     escOrder: 20,

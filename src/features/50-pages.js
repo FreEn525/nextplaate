@@ -44,8 +44,8 @@
       ]
     }],
     keys: {
-      KeyA: { run: () => goToPage(-1), hint: () => prevKey + ' ◀ ▶ D', hintOrder: 60 }, // left key -> previous page
-      KeyD: { run: () => goToPage(+1) }                                                 // right key -> next page
+      prev: { code: 'KeyA', label: 'Previous page', run: () => goToPage(-1), hint: () => keyName(actions.prev.bound) + ' ◀ ▶ ' + keyName(actions.next.bound), hintOrder: 60 }, // left key
+      next: { code: 'KeyD', label: 'Next page', run: () => goToPage(+1) }                                                 // right key -> next page
     },
     init: () => {
       $('prevPage').onclick = () => goToPage(-1);

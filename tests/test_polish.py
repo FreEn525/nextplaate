@@ -1,0 +1,130 @@
+"""Panel and window details: keys while the panel has the focus, Ctrl+A, the in-window confirmation,
+rebinding a key, and the layout on a small screen.
+
+Run from the project root:  python -m pytest tests -q
+"""
+import pytest
+
+from fake_site import PNG, route_site
+
+GALLERY = "https://platesmania.com/fr/gallery.php"
+
+
+@pytest.fixture
+def page(browser):
+    c = browser.new_context(viewport={"width": 1280, "height": 800})
+    route_site(c)
+    p = c.new_page()
+    p.errors = []
+    p.on("pageerror", lambda e: p.errors.append(str(e)))
+    p.dialogs = []
+    p.on("dialog", lambda d: (p.dialogs.append(d.message), d.dismiss()))
+    yield p
+    c.close()
+
+
+def open_at(page, url):
+    page.goto(url)
+    page.wait_for_selector("#pmg-host")
+
+
+def click_in_panel(page, element_id):
+    page.evaluate(
+        """(id) => document.getElementById('pmg-host').shadowRoot.getElementById(id).click()""", element_id
+    )
+
+
+def click_icon(page, drawer_id):
+    page.evaluate(
+        """(id) => [...document.getElementById('pmg-host').shadowRoot.querySelectorAll('.rbtn')]
+            .find(b => b.dataset.drawer === id).click()""",
+        drawer_id,
+    )
+
+
+def pair_selected(page):
+    return page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('sel').textContent")
+
+
+def manager_cards(page):
+    return page.evaluate("() => document.getElementById('pmg-batch').shadowRoot.querySelectorAll('.card').length")
+
+
+def manager_selected(page):
+    return page.evaluate(
+        "() => document.getElementById('pmg-batch').shadowRoot.querySelectorAll('.card.sel').length"
+    )
+
+
+def add_two_photos(page, tmp_path):
+    names = ["a.png", "b.png"]
+    files = []
+    for n in names:
+        f = tmp_path / n
+        f.write_bytes(PNG)
+        files.append(f)
+    page.locator("#pmg-batch #fMulti").set_input_files(files)
+    page.wait_for_function(
+        "() => document.getElementById('pmg-batch').shadowRoot.querySelectorAll('.card').length === 2", timeout=15000
+    )
+
+
+def test_ctrl_a_selects_all_after_clicking_a_checkbox(page, tmp_path):
+    open_at(page, GALLERY)
+    page.keyboard.press("KeyU")
+    add_two_photos(page, tmp_path)
+    # focus a checkbox first: it must not block the shortcut
+    page.evaluate("() => document.getElementById('pmg-batch').shadowRoot.getElementById('mSub').focus()")
+    page.keyboard.press("Control+KeyA")
+    assert manager_selected(page) == 2
+
+
+def test_s_works_when_the_panel_has_the_focus(page):
+    open_at(page, GALLERY)
+    click_icon(page, "likes")
+    page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('prevPage').focus()")
+    page.keyboard.press("KeyS")
+    assert "Cancel" in pair_selected(page)
+
+
+def test_clear_asks_inside_the_window_not_with_the_browser(page, tmp_path):
+    open_at(page, GALLERY)
+    page.keyboard.press("KeyU")
+    add_two_photos(page, tmp_path)
+    page.evaluate("() => document.getElementById('pmg-batch').shadowRoot.getElementById('mClear').click()")
+    page.wait_for_function("() => !document.getElementById('pmg-batch').shadowRoot.getElementById('cfm').hidden")
+    assert page.dialogs == []
+    page.evaluate("() => document.getElementById('pmg-batch').shadowRoot.getElementById('cfmNo').click()")
+    assert manager_cards(page) == 2
+    page.evaluate("() => document.getElementById('pmg-batch').shadowRoot.getElementById('mClear').click()")
+    page.evaluate("() => document.getElementById('pmg-batch').shadowRoot.getElementById('cfmYes').click()")
+    page.wait_for_function("() => document.getElementById('pmg-batch').shadowRoot.querySelectorAll('.card').length === 0")
+
+
+def test_a_key_can_be_rebound_from_the_shortcuts_drawer(page):
+    open_at(page, GALLERY)
+    click_icon(page, "keys")
+    page.evaluate(
+        """() => [...document.getElementById('pmg-host').shadowRoot.querySelectorAll('.kbrow')]
+            .find(r => r.textContent.includes('Select photos')).querySelector('.kbkey').click()"""
+    )
+    page.keyboard.press("KeyJ")
+    page.keyboard.press("KeyS")                     # the old key does nothing now
+    assert "Cancel" not in pair_selected(page)
+    page.keyboard.press("KeyJ")                     # the new one selects
+    assert "Cancel" in pair_selected(page)
+    assert page.evaluate("() => localStorage.getItem('pmg_kb_select')") == "KeyJ"
+
+
+def test_panel_fits_a_small_screen(browser):
+    c = browser.new_context(viewport={"width": 390, "height": 740})
+    route_site(c)
+    p = c.new_page()
+    open_at(p, GALLERY)
+    click_icon(p, "post")
+    box = p.evaluate(
+        """() => { const d = document.getElementById('pmg-host').shadowRoot.getElementById('drawer').getBoundingClientRect();
+                   return { left: d.left, right: d.right, width: d.width }; }"""
+    )
+    assert box["left"] >= 0 and box["right"] <= 390
+    c.close()
