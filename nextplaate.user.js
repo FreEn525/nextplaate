@@ -861,7 +861,9 @@
    *    so the batch window shows a warning on that card before anything is sent.
    * ===================================================================== */
   const countCache = {};        // plate -> count, for this page
-  const plateInput = () => ['nomerpl', 'nomer'].map(id => document.getElementById(id))
+  // The plate field: #nomer on most upload pages, #nomer1 or #nomerpl on some others
+  const PLATE_FIELDS = ['nomer', 'nomer1', 'nomerpl'];
+  const plateInput = () => PLATE_FIELDS.map(id => document.getElementById(id))
     .find(el => el && el.offsetParent !== null) || null;
 
   async function countPlate(plate) {
@@ -896,7 +898,9 @@
     const field = plateInput();
     const plate = field ? field.value.trim().toUpperCase() : '';
     $('plateNow').textContent = plate || '—';
+    log('plate check', { manual, page: here.add ? 'upload' : 'other', field: field && field.id, plate });
     if (!here.add) { $('plateResult').textContent = 'Open an upload page to check a plate.'; return; }
+    if (!field) { $('plateResult').textContent = 'No plate field found on this page (looked for ' + PLATE_FIELDS.map(i => '#' + i).join(', ') + ').'; return; }
     if (!plate) { $('plateResult').textContent = 'Type the plate in the form to check it.'; return; }
     if (!manual && store.get('autoCheck', '1') !== '1') return;
     $('plateResult').textContent = 'Checking…';
