@@ -110,3 +110,25 @@ def test_no_script_errors_on_any_page(page):
     for url in (GALLERY, EDIT_101):
         open_at(page, url)
     assert page.errors == []
+
+
+def click_in_panel(page, element_id):
+    page.evaluate(
+        "(id) => document.getElementById('pmg-host').shadowRoot.getElementById(id).click()", element_id
+    )
+
+
+def test_page_buttons_move_between_pages(page):
+    open_at(page, GALLERY)
+    click_in_panel(page, "nextPage")
+    page.wait_for_url("https://platesmania.com/fr/gallery.php?start=10")
+    open_at(page, "https://platesmania.com/fr/gallery.php?start=10")
+    click_in_panel(page, "prevPage")
+    page.wait_for_url(GALLERY)
+
+
+def test_choose_photos_button_opens_the_manager(page):
+    open_at(page, GALLERY)
+    click_in_panel(page, "qOpen")
+    assert page.evaluate("() => document.getElementById('pmg-batch').style.display") == "block"
+    assert page.evaluate("() => document.getElementById('pmg-host').style.display") == "none"
