@@ -103,7 +103,13 @@
         const core = row.lettersFirst ? joinParts([letters, digits]) : joinParts([digits, letters]);   // trucks AP 9665, cars 6383 EC
         return core + (region ? '-' + region : '');                    // the region follows a dash: AP 9665-1, 6383 EC-6
       }
-      case 'cz': return joinParts([selText('b1') + selText('region') + selText('b2'), fieldVal('digit1')]);   // Czechia: 1CA 8407 (digit menu, letter menu, letter menu)
+      case 'cz': {                                                  // Czechia: 1CA 8407. Only the fields shown for this type (the site's disczn function); a hidden menu keeps a value
+        if (shownVal('nomer')) return fieldVal('nomer');            // vanity, export transit, mopeds: one field
+        const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };
+        const letters = menu('b1') + menu('region') + menu('b2');
+        const digits = ['digit1', 'digit2', 'digit3'].map(shownVal).filter(Boolean).join('');
+        return joinParts([letters, digits]);
+      }
       case 'sk': return joinParts([selText('region') + '-' + fieldVal('digit') + fieldVal('let2')]);   // Slovakia: BA-427RF (a space is refused by the site)
       case 'ee':                                                    // Estonia: motorcycles (ctype 3) are ABC 123; the other types are read from their fields
         return fieldVal('ctype') === '3' ? joinParts([fieldVal('let'), fieldVal('dig1')]) : genericPlate();
