@@ -199,6 +199,8 @@
   const shownVal = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? el.value.trim() : ''; };
   const squash = s => s.replace(/[\s-]+/g, '').toUpperCase();     // "ab-123 cd" -> "AB123CD"
   const joinParts = parts => parts.filter(Boolean).join(' ');
+  // a select shows its label (BJ, VZ...), which is what the site expects; its value is an internal code
+  const selText = id => { const el = document.getElementById(id); if (!el) return ''; if (el.tagName === 'SELECT') { const o = el.options[el.selectedIndex]; return o && o.value ? o.text.trim() : ''; } return el.value.trim(); };
 
   // France: the format depends on the plate type chosen in the form (#ctype)
   function plateFR() {
@@ -254,15 +256,15 @@
       case 'hr':                                                    // region, then digits-letters: ZG 8899-JB (the site's example: ZG 1234-AB)
       case 'rs': {                                                  // Serbia: BG 123-AB
         const digit = fieldVal('digit') || fieldVal('digit1'), letters = fieldVal('b1') + fieldVal('b2');
-        return joinParts([fieldVal('region') || fieldVal('region1'), digit && letters ? `${digit}-${letters}` : digit || letters]);
+        return joinParts([selText('region') || selText('region1'), digit && letters ? `${digit}-${letters}` : digit || letters]);
       }
       case 'si': {                                                  // Slovenia: LJ 123-AB (the region code, then the plate)
         const region = (document.getElementById('drop_1') || { value: '' }).value.trim();
         return joinParts([region, fieldVal('nomer')]);
       }
-      case 'sk': return joinParts([fieldVal('region'), fieldVal('digit') + fieldVal('let2')]);   // Slovakia: AB 123AB
+      case 'sk': return joinParts([selText('region'), fieldVal('digit') + fieldVal('let2')]);   // Slovakia: AB 123AB
       case 'tj': return fieldVal('nomer');                          // Tajikistan: 1234AB01, one string
-      case 'ua': return joinParts([fieldVal('region1'), fieldVal('digit1'), fieldVal('b1') + fieldVal('b2')]);   // Ukraine: AA 0001 AA
+      case 'ua': return joinParts([selText('region1'), fieldVal('digit1'), fieldVal('b1') + fieldVal('b2')]);   // Ukraine: AA 0001 AA
       case 'ba':                                                    // Bosnia: A12-E-345, parts joined by dashes
         return [fieldVal('let1'), fieldVal('b1'), fieldVal('let2') || fieldVal('digit')].filter(Boolean).join('-');
       case 'tr': {
