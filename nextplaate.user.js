@@ -1038,6 +1038,10 @@
       $('autoCheck').checked = store.get('autoCheck', '1') === '1';
       $('autoCheck').onchange = () => store.set('autoCheck', $('autoCheck').checked ? '1' : '0');
       $('plateCheck').onclick = () => checkPlate(true);
+      // Safety net: some sites change a field without firing the events above. Reading a few fields is cheap.
+      setInterval(() => {
+        if (here.add && store.get('autoCheck', '1') === '1' && (plateForForm() || null) !== lastPlate) later(600);
+      }, 500);
       $('plateOpen').onclick = () => {
         const plate = plateForForm();
         if (plate) window.open(searchUrl(plate), '_blank');
