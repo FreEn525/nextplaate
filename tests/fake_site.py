@@ -111,7 +111,7 @@ def route_site(context):
             return route.fulfill(status=200, content_type="text/html", body=inject(photo_page(pid)))
 
         if path == "/fr/gallery.php" and "nomer" in query:
-            n = 2 if query["nomer"][0] == "AB123" else 0
+            n = 2 if re.sub(r"[\s-]+", "", query["nomer"][0]).upper() == "AB123CD" else 0
             html = HEAD.format(title="Search") + f'<div class="breadcrumbs"><h1 class="pull-left">License plates found <b>{n}</b></h1></div></body></html>'
             return route.fulfill(status=200, content_type="text/html; charset=utf-8", body=html)
         if path in ("/fr/gallery.php",):

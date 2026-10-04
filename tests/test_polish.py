@@ -226,7 +226,7 @@ def test_back_to_my_gallery_button_works_without_automation(page):
 
 def test_plate_check_counts_photos_already_on_the_site(page):
     open_at(page, "https://platesmania.com/fr/add")
-    page.locator("#nomer").fill("AB123")
+    page.locator("#nomer").fill("AB123CD")
     page.wait_for_function(
         "() => /already on the site/.test(document.getElementById('pmg-host').shadowRoot.getElementById('plateResult').textContent)",
         timeout=10000)
@@ -250,7 +250,7 @@ def test_a_plate_checked_in_a_batch_tab_shows_on_its_card(page, tmp_path):
     # this tab is the one loading that photo: the batch knows it is current
     page.evaluate("(id) => sessionStorage.setItem('pmg_batch', JSON.stringify({ active: true, current: id, pendingSubmit: null, ts: Date.now() }))", photo_id)
     open_at(page, "https://platesmania.com/fr/add")
-    page.locator("#nomer").fill("AB123")
+    page.locator("#nomer").fill("AB123CD")
     page.wait_for_function(
         "() => /already on the site/.test(document.getElementById('pmg-host').shadowRoot.getElementById('plateResult').textContent)",
         timeout=10000)
@@ -259,3 +259,14 @@ def test_a_plate_checked_in_a_batch_tab_shows_on_its_card(page, tmp_path):
     page.keyboard.press("KeyU")
     page.wait_for_function("() => document.getElementById('pmg-batch').shadowRoot.querySelector('.dupbadge') !== null", timeout=10000)
     assert "2 already" in page.evaluate("() => document.getElementById('pmg-batch').shadowRoot.querySelector('.dupbadge').textContent")
+
+
+def test_plate_is_written_in_the_search_format(page):
+    open_at(page, "https://platesmania.com/fr/add")
+    requests = []
+    page.on("request", lambda r: requests.append(r.url) if "gallery.php" in r.url else None)
+    page.locator("#nomer").fill("ab-123-cd")
+    page.wait_for_function(
+        "() => /already on the site/.test(document.getElementById('pmg-host').shadowRoot.getElementById('plateResult').textContent)",
+        timeout=10000)
+    assert any("AB+123+CD" in u for u in requests), requests
