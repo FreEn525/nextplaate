@@ -256,6 +256,13 @@
         const digit = fieldVal('digit') || fieldVal('digit1'), letters = fieldVal('b1') + fieldVal('b2');
         return joinParts([fieldVal('region') || fieldVal('region1'), digit && letters ? `${digit}-${letters}` : digit || letters]);
       }
+      case 'si': {                                                  // Slovenia: LJ 123-AB (the region code, then the plate)
+        const region = (document.getElementById('drop_1') || { value: '' }).value.trim();
+        return joinParts([region, fieldVal('nomer')]);
+      }
+      case 'sk': return joinParts([fieldVal('region'), fieldVal('digit') + fieldVal('let2')]);   // Slovakia: AB 123AB
+      case 'tj': return fieldVal('nomer');                          // Tajikistan: 1234AB01, one string
+      case 'ua': return joinParts([fieldVal('region1'), fieldVal('digit1'), fieldVal('b1') + fieldVal('b2')]);   // Ukraine: AA 0001 AA
       case 'ba':                                                    // Bosnia: A12-E-345, parts joined by dashes
         return [fieldVal('let1'), fieldVal('b1'), fieldVal('let2') || fieldVal('digit')].filter(Boolean).join('-');
       case 'tr': {
