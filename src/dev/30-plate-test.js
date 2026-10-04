@@ -100,7 +100,7 @@
     const passed = rows.filter(r => r.ok).length, tested = rows.filter(r => r.fits).length;
     console.log('[NextPlaate] plate test ' + here.country, rows);
     ptMsg(`${here.country}: ${passed}/${tested} plates pass (${rows.length - tested} of another type, not tested). Details in the console (F12).` +
-      (rows.some(r => !r.ok) ? '\nFailed: ' + rows.filter(r => !r.ok).map(r => r.shown).join(', ') : ''));
+      (rows.some(r => r.fits && !r.ok) ? '\nFailed: ' + rows.filter(r => r.fits && !r.ok).map(r => r.shown).join(', ') : ''));
   }
 
   // "Test all countries": one page after the other, each result kept in the browser
