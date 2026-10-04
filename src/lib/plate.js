@@ -87,11 +87,7 @@
         const region = label.match(/^\s*(\d{2})/);
         return joinParts([region && region[1], fieldVal('let'), fieldVal('digit')]);
       }
-      case 'dz': {
-        const digits = squash(fieldVal('nomer')).replace(/\D+/g, '');
-        const m = digits.match(/^(\d{1,6})(\d{3})(\d{2})$/);
-        return m ? `${m[1]} ${m[2]} ${m[3]}` : fieldVal('nomer');
-      }
+      case 'dz': return fieldVal('nomer').replace(/\s+/g, ' ');     // Algeria: the groups are typed as the site shows them (271201 00 16)
       default:
         return genericPlate();
     }
