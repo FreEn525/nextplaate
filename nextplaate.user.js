@@ -251,6 +251,10 @@
       case 'fr': return plateFR();
       case 'de': return joinParts([fieldVal('region'), fieldVal('b1'), fieldVal('digit'), fieldVal('b2')]);
       case 'gg': return fieldVal('digit');
+      case 'hr': {                                                  // region, then digits-letters: ZG 8899-JB
+        const digit = fieldVal('digit'), letters = fieldVal('b1') + fieldVal('b2');
+        return joinParts([fieldVal('region'), digit && letters ? `${digit}-${letters}` : digit || letters]);
+      }
       case 'tr': {
         const sel = document.querySelector('select[name="region"]');
         const region = sel && sel.value.match(/^\d{2}/);
