@@ -269,7 +269,7 @@ def test_plate_is_written_in_the_search_format(page):
     page.wait_for_function(
         "() => /already on the site/.test(document.getElementById('pmg-host').shadowRoot.getElementById('plateResult').textContent)",
         timeout=10000)
-    assert any("AB+123+CD" in u for u in requests), requests
+    assert any("nomer=AB-123-CD" in u for u in requests), requests
 
 
 def test_save_this_page_downloads_its_html(page):
