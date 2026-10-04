@@ -204,14 +204,24 @@
         }
       } catch (e) {
         if (/asked to wait|check or rate limit/.test(e.message)) { ptPause(left, e.message); return; }   // the queue is kept: it resumes by itself
-        ptMsg(`${cc} not saved (${e.message}). Stopped: test it again later.`);
-        sessionStorage.removeItem(PT_QUEUE);
-        return;
+        // a slow or failed answer is not a block: try the same country again after a minute, 3 times at most
+        const tries = +(sessionStorage.getItem('nextplaate-plates-retry') || '0') + 1;
+        if (tries <= 3) {
+          sessionStorage.setItem('nextplaate-plates-retry', String(tries));
+          ptMsg(`${cc}: ${e.message}. Try ${tries}/3 in 60 s…`);
+          setTimeout(() => { location.href = '/' + cc + '/add'; }, 60000);
+          return;
+        }
+        sessionStorage.removeItem('nextplaate-plates-retry');
+        await capPut('plates-skip:' + cc, 'not saved: ' + e.message);
+        ptMsg(`${cc} not saved after 3 tries (${e.message}). Going on with the next country.`);
+        // falls through: the country is left out and the run goes on
       }
     }
     const rest = left.slice(1);
     sessionStorage.setItem(PT_QUEUE, JSON.stringify(rest));
     sessionStorage.removeItem('nextplaate-plates-try');
+    sessionStorage.removeItem('nextplaate-plates-retry');
     ptMsg(`${cc} tested. ${rest.length} left. Next in ${PT_PAUSE_MS / 1000} s…`);
     if (!rest.length) { sessionStorage.removeItem(PT_QUEUE); ptMsg('All countries tested. Click "Write report to folder".'); return; }
     setTimeout(() => {
