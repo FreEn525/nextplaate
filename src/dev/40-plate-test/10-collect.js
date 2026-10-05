@@ -35,7 +35,11 @@
       const t = img.getAttribute('alt').split(',')[0].trim();
       if (t) plates.add(t);
     });
-    return [...plates].slice(0, 3);
+    const out = [...plates].slice(0, 3);
+    // what the page says about the size of the gallery ("License plates found 2.949"): null when the page does not say
+    const found = doc.querySelector('.breadcrumbs h1 b');
+    out.count = found && /\d/.test(found.textContent) ? +found.textContent.replace(/[^\d]/g, '') : null;
+    return out;
   }
 
   // The form's option for a search type: the same label (case-insensitive), else the same code

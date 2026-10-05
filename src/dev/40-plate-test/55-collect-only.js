@@ -6,7 +6,7 @@
   let ptCollectStop = false;
 
   async function ptCollectAll() {
-    const small = await capAll('db:', 'empty:');
+    const small = await capAll('db:', 'empty:', 'unreadable:');
     const dbAll = Object.keys(small).filter(k => k.startsWith('db:')).map(k => small[k]);
     const todo = [];
     for (const cc of TEST_COUNTRIES) {
@@ -15,12 +15,12 @@
       // fine: the plate is typed as it is and read back, whatever the category
       if (!types || !types.length || !/id="frm"/.test(await capGet('page:' + cc) || '')) continue;
       const confirmed = new Set(dbAll.filter(r => r.country === cc && (r.count > 0 || r.source === 'gallery')).map(r => r.category));
-      for (const t of types) if (!confirmed.has(t.label) && !small['empty:' + cc + '|' + t.label]) todo.push({ cc, ...t });
+      for (const t of types) if (!confirmed.has(t.label) && !(small['empty:' + cc + '|' + t.label] || {}).hasOwnProperty('count') && !small['unreadable:' + cc + '|' + t.label]) todo.push({ cc, ...t });
     }
     if (!todo.length) { ptMsg('Nothing to collect: every category has a plate or an empty gallery.'); return; }
     ptCollectStop = false;
     $('ptCollectStop').hidden = false;
-    let done = 0, plates = 0, empty = 0, errors = 0, paused = false;
+    let done = 0, plates = 0, empty = 0, unreadable = 0, errors = 0, paused = false;
     for (const t of todo) {
       if (ptCollectStop) break;
       ptMsg(`Collecting ${done + 1} of ${todo.length}: ${t.cc.toUpperCase()}, ${t.label}…  (${plates} plates so far)`);
@@ -30,13 +30,19 @@
         if (/asked to wait|rate limit/.test(e.message)) { paused = true; break; }   // the site asked to stop: click again later
         errors++; done++; continue;
       }
-      if (!texts.length) { await capPut('empty:' + t.cc + '|' + t.label, { country: t.cc, category: t.label, date: new Date().toISOString() }); empty++; }
+      if (!texts.length) {
+        // the page says how many plates the gallery holds: only "0" is an empty gallery. Plates that exist but whose text the script
+        // cannot read in the list (the plate image has no text, as in Cambodia) are kept apart, with their number.
+        if (texts.count === 0) { await capPut('empty:' + t.cc + '|' + t.label, { country: t.cc, category: t.label, count: 0, date: new Date().toISOString() }); empty++; }
+        else if (texts.count > 0) { await capPut('unreadable:' + t.cc + '|' + t.label, { country: t.cc, category: t.label, count: texts.count, date: new Date().toISOString() }); unreadable++; }
+        else errors++;                                              // the page gave no count: not marked, tried again next time
+      }
       for (const text of texts.slice(0, PT_PER_CATEGORY)) { dbAddPlate(t.cc, t.label, text, '', null, 'gallery'); plates++; }
       done++;
     }
     $('ptCollectStop').hidden = true;
     const left = todo.length - done;
     ptMsg((paused ? 'Paused: the site asked to wait. ' : ptCollectStop ? 'Stopped. ' : 'Finished. ') +
-      `${plates} plates in ${done - empty - errors} categories, ${empty} empty galleries, ${errors} errors, ${left} left. ` +
+      `${plates} plates in ${done - empty - unreadable - errors} categories, ${empty} empty galleries, ${unreadable} with plates whose text cannot be read, ${errors} errors, ${left} left. ` +
       (left ? 'Click Collect again later: it carries on where it stopped.' : 'Now write the database to a folder (Database box).'));
   }
