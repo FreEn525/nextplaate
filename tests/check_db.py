@@ -25,6 +25,10 @@ DB = REF / "plates-db.json"
 DEV = (ROOT / "nextplaate.dev.user.js").read_text(encoding="utf-8")
 
 
+# (country, category) -> the one field the whole plate is typed in
+CATEGORY_FIELD = {('lv', 'Diplomatic'): 'nomer', ('lv', 'Vanity Plates'): 'nomer'}
+
+
 def norm(s):
     return re.sub(r"[\s-]+", "", s or "").upper()
 
@@ -89,7 +93,9 @@ def check_country(page, code, cases):
         if not set_category(page, c["category"]):
             results.append({**c, "status": "no-type"})
             continue
-        res = page.evaluate("(t) => window.nextplaateDev.testText(t)", c["plate"])
+        # countries whose form takes the whole plate in one field (CATEGORY_FIELD); the others are split as the plate test does
+        field = CATEGORY_FIELD.get((c["country"], c["category"]))
+        res = page.evaluate("([t, o]) => window.nextplaateDev.testText(t, o)", [c["plate"], {"field": field} if field else None])
         ok = bool(res["fits"]) and norm(res["read"]) == norm(c["plate"])
         results.append({**c, "status": "ok" if ok else ("not-fit" if not res["fits"] else "wrong"),
                         "read": res["read"], "fits": res["fits"]})

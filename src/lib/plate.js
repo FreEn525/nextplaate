@@ -87,7 +87,14 @@
         return joinParts([menu('region'), menu('b1'), shownVal('digit'), menu('b2')]);
       }
       case 'gg': return fieldVal('digit');
-      case 'hr':                                                    // region, then digits-letters: ZG 8899-JB (the site's example: ZG 1234-AB)
+      case 'hr': {                                                  // Croatia: ZG 8899-JB; vanity (5) is region + the letter boxes shown: ZG ZMAJ
+        if (fieldVal('ctype') === '5') {
+          const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };
+          return joinParts([selText('region'), ['b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7'].map(menu).join('')]);
+        }
+        const digit = fieldVal('digit') || fieldVal('digit1'), letters = fieldVal('b1') + fieldVal('b2');
+        return joinParts([selText('region') || selText('region1'), digit && letters ? `${digit}-${letters}` : digit || letters]);
+      }
       case 'rs': {                                                  // Serbia: BG 123-AB
         const digit = fieldVal('digit') || fieldVal('digit1'), letters = fieldVal('b1') + fieldVal('b2');
         return joinParts([selText('region') || selText('region1'), digit && letters ? `${digit}-${letters}` : digit || letters]);

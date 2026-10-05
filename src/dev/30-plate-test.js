@@ -305,11 +305,20 @@
 
   // For the offline check of the saved pages: types a text, returns what the script reads back
   window.nextplaateDev = {
-    testText: async text => {
-      const fits = ptType(text);
+    // opts.field: the whole text goes into this one field (how a user types a single-field plate), no token split
+    testText: async (text, opts) => {
+      let fits = true;
+      if (opts && opts.field) {
+        const el = document.getElementById(opts.field);
+        if (el) { el.value = text; el.dispatchEvent(new Event('input', { bubbles: true })); }
+        else fits = false;
+      } else {
+        fits = ptType(text);
+      }
       await new Promise(r => setTimeout(r, 350));
       const read = plateForForm() || '';
-      ptType('');
+      if (opts && opts.field) { const el = document.getElementById(opts.field); if (el) { el.value = ''; el.dispatchEvent(new Event('input', { bubbles: true })); } }
+      else ptType('');
       return { fits, read };
     }
   };
