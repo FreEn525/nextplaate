@@ -42,6 +42,15 @@ def norm(s):
     return re.sub(r"[\s|-]+", "", s or "").upper().translate(CYR)
 
 
+def same_plate(read, plate):
+    """The plate read from the form is the plate of the gallery, spaces included. The site's search keeps the spaces ('D09003' does not find
+    'D 09 003', 'EL 557CP' does not find 'EL5 57CP') but treats a dash like a space ('TAE-1009' and 'TAE 1009' find the same plate)."""
+    def strict(s):
+        s = (s or "").replace("*", "D")   # the Russian search writes the diplomatic D as *
+        return re.sub(r"\s+", " ", re.sub(r"[-|]", " ", s)).strip().upper().translate(CYR)
+    return strict(read) == strict(plate)
+
+
 def load_cases(country=None):
     """One case per (country, category, plate) that the site confirmed (count > 0)."""
     rows = json.loads(DB.read_text(encoding="utf-8"))
@@ -123,8 +132,15 @@ def run_case(page, c, how):
     if not page.evaluate(SHOWN_FIELDS_JS):
         return {**c, "status": "no-field"}                            # the form shows no field to type a plate of this type
     res = page.evaluate("([t, o]) => window.nextplaateDev.testText(t, o)", [c["plate"], {"settle": SETTLE_MS, "country": c["country"], "category": c["category"]}])
-    ok = bool(res["fits"]) and norm(res["read"]) == norm(c["plate"])
-    return {**c, "status": "ok" if ok else ("not-fit" if not res["fits"] else "wrong"), "read": res["read"], "fits": res["fits"], "how": how}
+    if not res["fits"]:
+        status = "not-fit"
+    elif same_plate(res["read"], c["plate"]):
+        status = "ok"
+    elif norm(res["read"]) == norm(c["plate"]):
+        status = "spacing"          # the same characters with other spaces: only the site can say whether its search accepts it
+    else:
+        status = "wrong"
+    return {**c, "status": status, "read": res["read"], "fits": res["fits"], "how": how}
 
 
 def check_country(page, code, cases):
@@ -223,6 +239,11 @@ def main():
                     cell["via"] = r["how"]                          # not in the menu of the form: read in another type, or no menu
             else:
                 cell["failed"].append({"plate": r["plate"], "read": r.get("read", ""), "status": r["status"]})
+        # the plates whose read differs from the gallery text only by spaces: the dev build asks the site about each (Verify the reads)
+        spacing = [{"country": r["country"], "category": r["category"], "plate": r["plate"], "read": r["read"]}
+                   for r in sorted(all_results, key=lambda r: (r["country"], r["category"], r["plate"])) if r["status"] == "spacing"]
+        (ROOT / "data" / "verify").mkdir(exist_ok=True)
+        (ROOT / "data" / "verify" / "reads.json").write_text(json.dumps(spacing, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
         (ROOT / "data" / "check.json").write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
 
     if args.report:

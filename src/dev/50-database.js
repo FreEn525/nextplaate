@@ -17,18 +17,19 @@
 
   // Exports the database and the request log, in the folder you choose
   async function dbExport() {
-    const all = await capAll('db:', 'log:', 'empty:');
+    const all = await capAll('db:', 'log:', 'empty:', 'verify:');
     const plates = Object.keys(all).filter(k => k.startsWith('db:')).map(k => all[k]);
     const log = Object.keys(all).filter(k => k.startsWith('log:')).sort().map(k => all[k]);
     const empty = Object.keys(all).filter(k => k.startsWith('empty:')).sort().map(k => all[k]);   // categories whose gallery has no plate
+    const verify = Object.keys(all).filter(k => k.startsWith('verify:')).sort().map(k => all[k]);   // what the site said about each read (Verify the reads)
     const dir = await window.showDirectoryPicker({ mode: 'readwrite' });
-    for (const [name, data] of [['plates-db.json', plates], ['request-log.json', log], ['empty-categories.json', empty]]) {
+    for (const [name, data] of [['plates-db.json', plates], ['request-log.json', log], ['empty-categories.json', empty], ['verify-results.json', verify]]) {
       const file = await dir.getFileHandle(name, { create: true });
       const w = await file.createWritable();
       await w.write(JSON.stringify(data, null, 2));
       await w.close();
     }
-    return { plates: plates.length, requests: log.length, empty: empty.length };
+    return { plates: plates.length, requests: log.length, empty: empty.length, verify: verify.length };
   }
 
   // Loads plates-db.json (and empty-categories.json) back into this browser, for a browser whose database is empty or
@@ -77,7 +78,7 @@
         if (!files.length) return;
         dbImport(files).then(r => show(`Loaded: ${r.added} added, ${r.kept} already here. `), e => say('Could not load: ' + e.message));
       };
-      $('dbExport').onclick = () => dbExport().then(r => say(`Written: ${r.plates} plates, ${r.empty} empty categories, ${r.requests} requests.`), e => say('Could not write: ' + e.message));
+      $('dbExport').onclick = () => dbExport().then(r => say(`Written: ${r.plates} plates, ${r.empty} empty categories, ${r.verify} checked reads, ${r.requests} requests.`), e => say('Could not write: ' + e.message));
       show();
     }
   });

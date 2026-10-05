@@ -479,6 +479,8 @@
     const letters = menu('b1') + menu('region') + menu('b2');
     const digits = ['digit1', 'digit2', 'digit3'].map(shownVal).filter(Boolean).join('');
     // electric vehicles write EL themselves (disabled field): EL5 57CP; trailers of 1977 start with a two-digit field: 24 DOA-99
+    // electric vehicles: EL5 57CP, the field takes 557CP and the site puts the space after the first digit
+    if (shownVal('el') === 'EL' && /^\d\w{4}$/.test(digits.replace(/\s+/g, ''))) { const d = digits.replace(/\s+/g, ''); return 'EL' + d[0] + ' ' + d.slice(1); }
     return joinParts([shownVal('el') + letters, digits]);
   };
   // Germany: only the fields shown for this type (a hidden menu keeps HD or H)
@@ -492,7 +494,7 @@
   };
   // Denmark: vanity plates are seven boxes, one character each (MARIAKJ)
   PLATE_RULES.dk = () => {
-    if (fieldVal('ctype') === '4') return ['b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7'].map(shownVal).join('').toUpperCase();
+    if (fieldVal('ctype') === '4') return ['b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7'].map(menu).join('').toUpperCase();
     return genericPlate();
   };
   PLATE_RULES.dz = () => fieldVal('nomer').replace(/\s+/g, ' ');     // Algeria: the groups are typed as the site shows them (271201 00 16)
@@ -570,7 +572,9 @@
   // Israel: the plate is one free text (nomer) and letters written by the site in a disabled field (b1): in front (S- of the sportcars: S-100 294)
   // or after (צ of the military: 172539-צ); diplomatic plates may also have a menu (CD, UN...) in front, "-" meaning none
   PLATE_RULES.il = () => {
-    const b1 = shownVal('b1'), nomer = shownVal('nomer'), dip = menu('dip');
+    const b1 = shownVal('b1'), dip = menu('dip');
+    // sportcars: S-100 294, but the number is typed as six digits (100294): the site keeps the space after the third
+    const nomer = b1.endsWith('-') ? shownVal('nomer').replace(/^(\d{3})(\d{3})$/, '$1 $2') : shownVal('nomer');
     const kind = dip && dip !== '-' ? dip : '';
     return b1.endsWith('-') ? joinParts([kind, b1 + nomer]) : joinParts([kind, nomer, b1]);
   };
@@ -603,7 +607,8 @@
   PLATE_RULES.jp = () => joinParts([menu('region').split(' - ').pop().trim(), shownVal('code'), menu('hiragana'), charsOf(['d1', 'd2', 'd3', 'd4'], 'before')]);
   // Kyrgyzstan (2016 and later types): the region code (the menu reads "01 - Bishkek City"), then the plate text typed as it is.
   // The diplomatic type has its own set of fields (dip_*) and is read as a generic plate.
-  PLATE_RULES.kg = () => fieldVal('ctype') === '10' ? shownVal('nomerpl') : joinParts([menu('region').split(' - ')[0].trim(), shownVal('nomerpl')]);
+  PLATE_RULES.kg = () => fieldVal('ctype') === '10' ? shownVal('nomerpl').replace(/\s+/g, '').replace(/^([A-Z]+)(\d{2})(\d{3})$/, '$1 $2 $3') :   // diplomatic: D 09 003 (typed D09003)
+    joinParts([menu('region').split(' - ')[0].trim(), shownVal('nomerpl')]);
   // Cambodia: the authorities (5) and the vehicles without paid duty (7) have a province menu (region5, region7) that is not part of the
   // plate (2-0459, 1-7172); the other types are read from their fields
   PLATE_RULES.kh = () => ['5', '7'].includes(fieldVal('ctype')) ? shownVal('nomer') : genericPlate();
@@ -678,8 +683,10 @@
   // Russia: А 001 АА 77. Only the menus shown for this type (the site's disru20 function). Diplomatic: 032 D 345 77 (the country code typed in
   // "code", the letter menu dipb1, the digits, the region); diplomatic motorcycles: D 017 02 77 (dipb2 first)
   PLATE_RULES.ru = () => {
-    if (menu('dipb1')) return joinParts([shownVal('code'), menu('dipb1'), shownVal('digit'), menu('region')]);
-    if (menu('dipb2')) return joinParts([menu('dipb2'), shownVal('code'), shownVal('digit'), menu('region')]);
+    // the site's search writes the diplomatic letter D as * (032 * 345 77 finds the plate the gallery shows as 032 D 345 77)
+    const star = t => (t === 'D' ? '*' : t);
+    if (menu('dipb1')) return joinParts([shownVal('code'), star(menu('dipb1')), shownVal('digit'), menu('region')]);
+    if (menu('dipb2')) return joinParts([star(menu('dipb2')), shownVal('code'), shownVal('digit'), menu('region')]);
     return joinParts([menu('b1') + menu('b2'), shownVal('digit'), menu('b3') + menu('b4'), menu('region')]);
   };
   // Saudi Arabia: 3273 JRS = the digits, then the letters, in Latin script (the menus read "٣ / 3": the part after the slash);

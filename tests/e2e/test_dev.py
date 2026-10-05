@@ -35,7 +35,7 @@ def test_developer_drawer_groups_and_status(browser):
     page.wait_for_selector("#pmg-host")
     page.evaluate("() => document.getElementById('pmg-host').shadowRoot.querySelector('.rbtn[data-drawer=\"dev\"]').click()")
     titles = page.evaluate("() => [...document.getElementById('pmg-host').shadowRoot.querySelectorAll('.dsec[data-drawer=\"dev\"] .gtitle')].map(e => e.textContent)")
-    assert titles == ["Status", "Save the page", "Capture", "Plate test", "Database"]
+    assert titles == ["Status", "Save the page", "Capture", "Plate test", "Verify the reads", "Database"]
     # the status box reads the dev store: nothing kept yet on a fresh profile
     page.wait_for_function("() => document.getElementById('pmg-host').shadowRoot.getElementById('devStatus').textContent.includes('Upload pages kept')")
     text = page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('devStatus').textContent")
@@ -112,4 +112,24 @@ def test_the_status_box_does_not_read_the_saved_pages(browser):
     page.wait_for_function(f"() => {SHADOW}.getElementById('devStatus').textContent.includes('Upload pages kept')")
     heap_mb = page.evaluate("() => performance.memory ? performance.memory.usedJSHeapSize / 1048576 : 0")
     assert heap_mb < 60, f"the dev panel holds {heap_mb:.0f} MB: it read the saved pages"   # 30 pages of 3 MB would be 90 MB or more
+    c.close()
+
+
+@needs_dev
+def test_verify_the_reads_asks_the_site_and_searches_the_gallery_text_when_the_read_is_not_found(browser, tmp_path):
+    c, page = _dev_page(browser)
+    asked = []
+
+    def gallery(route):
+        url = route.request.url
+        asked.append(url)
+        count = 1 if "EL5+57CP" in url else 0        # the site knows the gallery text, not the read
+        route.fulfill(status=200, content_type="text/html", body=f'<html><body><div class="breadcrumbs"><h1>License plates found <b>{count}</b></h1></div></body></html>')
+    c.route("**/cz/gallery.php?*", gallery)
+    f = tmp_path / "reads.json"
+    f.write_text('[{"country":"cz","category":"Electric vehicles","plate":"EL5 57CP","read":"EL 557CP"}]', encoding="utf-8")
+    page.locator("#pmg-host #vrFile").set_input_files(f)
+    page.wait_for_function(f"() => {SHADOW}.getElementById('vrMsg').textContent.startsWith('Finished')", timeout=20000)
+    assert any("EL+557CP" in u for u in asked) and any("EL5+57CP" in u for u in asked)   # the read first, then the gallery text
+    assert "0 reads found, 1 not found" in page.evaluate(f"() => {SHADOW}.getElementById('vrMsg').textContent")
     c.close()

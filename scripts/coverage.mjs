@@ -21,7 +21,8 @@ const index = json('data/index.json');
 const limits = existsSync(join(root, 'data/limits.json')) ? json('data/limits.json') : {};   // known limits of the site's own form, with the reason
 
 const rows = [], failing = [], unknown = {}, untestable = {}, emptyGal = {};
-let cats = 0, ok = 0, bad = 0, none = 0, noForm = 0, noPlate = 0, lim = 0;
+let cats = 0, ok = 0, bad = 0, none = 0, noForm = 0, noPlate = 0, lim = 0, spc = 0;
+const spacing = [];
 const limited = [];
 for (const c of index) {
   const list = json(`data/countries/${c.code}/search.json`).categories.map(x => x.label);
@@ -39,6 +40,8 @@ for (const c of index) {
     if (!r) { n++; (unknown[c.code] ??= []).push(label); continue; }
     if (r.ok === r.total) o++;
     // every failed plate says the form cannot take this category at all: not a rule to fix
+    // the same characters as the gallery text but other spaces: the site's search decides (dev build: Verify the reads)
+    else if (r.failed.every(f => f.status === 'spacing')) { spc++; spacing.push({ code: c.code, label, r }); }
     else if (limits[c.code + '|' + label]) { lim++; limited.push({ code: c.code, label, reason: limits[c.code + '|' + label], r }); }
     else if (r.ok === 0 && r.failed.every(f => f.status === 'no-type')) { u++; (untestable[c.code] ??= []).push({ label, why: 'absente du menu du formulaire' }); }
     else if (r.ok === 0 && r.failed.every(f => f.status === 'no-field')) { u++; (untestable[c.code] ??= []).push({ label, why: "le formulaire n'a aucun champ de plaque pour ce type" }); }
@@ -65,6 +68,7 @@ out.push('# Couverture des règles de plaque', '',
   `| Vérifiées | ${ok} | ${pct(ok, cats)} |`,
   `| **À corriger** | **${bad}** | ${pct(bad, cats)} |`,
   `| **À trouver** (aucune plaque connue) | **${none}** | ${pct(none, cats)} |`,
+  `| À vérifier sur le site : mêmes caractères, espaces différents | ${spc} | ${pct(spc, cats)} |`,
   `| Limite connue du formulaire du site (voir plus bas) | ${lim} | ${pct(lim, cats)} |`,
   `| Galerie vide sur le site (aucune plaque n'existe) | ${noPlate} | ${pct(noPlate, cats)} |`,
   `| Sans champ de plaque dans le formulaire ou sans page d'ajout | ${noForm} | ${pct(noForm, cats)} |`, '');
@@ -88,6 +92,10 @@ out.push('## Catégories à trouver (par pays)', '', 'Pour chacune : trouver une
 for (const code of Object.keys(unknown).sort()) {
   out.push(`<details><summary><b>${code}</b> : ${unknown[code].length}</summary>`, '', ...unknown[code].map(l => `- ${l}`), '', '</details>', '');
 }
+
+out.push('## À vérifier sur le site : espaces', '', "Le script lit les mêmes caractères que le texte de la galerie, mais avec d'autres espaces (EL 557CP au lieu de EL5 57CP). La recherche du site garde les espaces (D09003 ne trouve pas D 09 003) mais traite le tiret comme un espace. Le build dev, boîte « Verify the reads », demande au site si chaque lecture est trouvée.", '');
+for (const l of spacing) out.push(`- **${l.code}** ${l.label} (${l.r.ok}/${l.r.total}) : ${l.r.failed.slice(0, 2).map(f => '`' + f.plate + '` lu `' + f.read + '`').join(', ')}`);
+out.push('');
 
 out.push('## Limites connues du formulaire', '', "Plaques de galerie que le formulaire d'ajout du site ne peut pas écrire exactement, avec la cause. Ce n'est pas une règle à corriger.", '');
 for (const l of limited) out.push(`- **${l.code}** ${l.label} (${l.r.ok}/${l.r.total}) : ${l.reason}`);
