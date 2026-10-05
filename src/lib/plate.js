@@ -107,7 +107,12 @@
         const n = squash(fieldVal('nomer')), r = selText('region2');
         return r && !n.endsWith(r) ? n + r : n;
       }
-      case 'ua': return joinParts([selText('region1'), fieldVal('digit1'), fieldVal('b1') + fieldVal('b2')]);   // Ukraine: AA 0001 AA
+      case 'ua': {                                                  // Ukraine: AA 0001 AA. Only the fields shown for the type (a hidden menu keeps BH, HA, OM)
+        const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };
+        const region = menu('region1') || menu('region2') || menu('region3');
+        const digit = ['digit1', 'digit2', 'digit3', 'digit4'].map(shownVal).find(Boolean) || '';
+        return joinParts([region, digit, menu('b1') + menu('b2')]);
+      }
       case 'lv': {                                                  // Latvia: AB 1234; vanity (6) and diplomatic (9) are typed in one field: C-4307, PENNY
         if (['6', '9'].includes(fieldVal('ctype'))) return fieldVal('nomer').toUpperCase();
         return joinParts([selText('b1') + selText('b2'), fieldVal('digit')]);
