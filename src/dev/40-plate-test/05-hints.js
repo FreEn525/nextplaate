@@ -7,6 +7,7 @@
   //   keepDigits: a piece that is only digits is not cut into menu choices
   //   extra: more field ids to type into (a menu the plate-field list does not know)
   //   right: the last piece is a number written one digit per menu (d1..d4), from the right
+  //   set: [{ id, text, when }]: choose that option of a menu first, when the plate matches the pattern
   //   chars: 'before' | 'after': one menu per character (Arabic-script forms), see ptTypeChars in 00-typing.js
   const PT_HINTS = {
     'lv|Diplomatic': { field: 'nomer' },
@@ -19,6 +20,8 @@
     'gr|Agricultural vehicles': { order: ['let', 'digit'] },   // its region menu (prefectures) is not part of the plate text
     'si|Trailers': { order: ['nomer', 'drop_1'] },
     'mn|*': { order: ['region', 'b1', 'b2', 'digit'] },
+    'mn|Motorcycles': { order: ['region', 'b1', 'b2', 'digit'], set: [{ id: 'format', text: 'RRA 1234', when: '^\\S{3}\\s' }, { id: 'format', text: 'RR 1234', when: '^\\S{2}\\s' }] },   // three letters: the RRA format, two: RR
+    'mc|Provisional': { drop: ['MC'] },
     'jp|*': { right: true },
     'rs|Diplomatic': { order: ['region1', 'dip'] },
     'tj|Trailers (2009)': { order: ['region2', 'nomer'] },

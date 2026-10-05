@@ -30,6 +30,15 @@
   let ptDrop = null;    // tokens that the form already has (see 05-hints.js)
   let ptPrefix = null;  // text the site writes itself in front of the plate (ÅL of an Åland plate)
   let ptExtra = null;   // more field ids that count as plate fields for this category (reg1 of Palestine)
+  // choose a menu's option before typing, when the plate looks like a pattern (Mongolia: the three-letter motorcycle plates need the RRA format)
+  function ptApplySet(text, set) {
+    for (const s of set || []) {
+      if (s.when && !new RegExp(s.when).test(text)) continue;
+      const el = document.getElementById(s.id);
+      const opt = el && [...el.options].find(o => o.text.trim() === s.text);
+      if (opt) { el.value = opt.value; el.dispatchEvent(new Event('change', { bubbles: true })); }
+    }
+  }
   let ptKeepDigits = false;   // a piece that is only digits stays whole (see ptTypeOnce)
   let ptRight = false;  // the last piece is a number written one digit per menu, from the right (Japan: 7410, 718)
   let ptChars = null;   // 'before' or 'after': the forms with one menu per character (see ptTypeChars)
@@ -87,7 +96,7 @@
     // the months of a seasonal plate are typed without their brackets: (04/10) goes in as 04/10
     let tokens = text.split(/[\s|-]+/).filter(Boolean).map(t => t.replace(/^\((.*)\)$/, '$1')).flatMap(t => split ? (t.match(/\d+|[^\d]+/g) || []) : [t]);
     const fields = [...document.querySelectorAll('input, select')]
-      .filter(el => (isPlateField(el) || (ptExtra && ptExtra.includes(el.id)) || /^(nonr|trz|tx|hiragana|code|mm|moto|spec|gov|tt95|police|dop1|el|checksum|pol[12]|num[12]|ltype|mb[12]|dealp|mnum[12]|mtype|mil_b\d|d\d)$/.test(el.id)) && el.offsetParent !== null && !el.disabled && el.id !== 'ctype' && el.id !== 'drop_2');   // the type menus are not typed into
+      .filter(el => (isPlateField(el) || (ptExtra && ptExtra.includes(el.id)) || /^(nonr|trz|tx|hiragana|code|mm|moto|spec|gov|tt95|police|dop1|el|milb[12]|checksum|pol[12]|num[12]|ltype|mb[12]|dealp|mnum[12]|mtype|mil_b\d|d\d)$/.test(el.id)) && el.offsetParent !== null && !el.disabled && el.id !== 'ctype' && el.id !== 'drop_2');   // the type menus are not typed into
     // fixed fields are set by the site for a type (T, TAX, BP, P): they keep their value and no token goes in them
     const FIXED = ['trz', 'tx'];   // inputs the site fills itself (T, TAX, BP)
     fields.forEach(el => {

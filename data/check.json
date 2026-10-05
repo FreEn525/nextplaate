@@ -2371,25 +2371,9 @@
    "failed": []
   },
   "Military (1993)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "2723 АЯ",
-     "read": "2723",
-     "status": "not-fit"
-    },
-    {
-     "plate": "2883 АЗ",
-     "read": "2883",
-     "status": "not-fit"
-    },
-    {
-     "plate": "8906 АВ",
-     "read": "8906",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Military (2012)": {
    "ok": 3,
@@ -2696,25 +2680,9 @@
    "failed": []
   },
   "Provisional": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "1517 WW MC",
-     "read": "1517 WW",
-     "status": "not-fit"
-    },
-    {
-     "plate": "1725 WW MC",
-     "read": "1725 WW",
-     "status": "not-fit"
-    },
-    {
-     "plate": "2000 WW MC",
-     "read": "2000 WW",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Royal family": {
    "ok": 3,
@@ -2840,20 +2808,9 @@
    "failed": []
   },
   "Motorcycles": {
-   "ok": 1,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "БӨЗ 3510",
-     "read": "БӨ З",
-     "status": "not-fit"
-    },
-    {
-     "plate": "БӨЗ 5517",
-     "read": "БӨ З",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Special machinery": {
    "ok": 3,

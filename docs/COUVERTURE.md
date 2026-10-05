@@ -11,10 +11,10 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | Pays du site | 96 | |
 | Pays capturés (pages sauvegardées) | 96 | 100 % |
 | **Pays non capturés** | **0** | |
-| Pays avec une règle propre | 45 sur 96 | |
+| Pays avec une règle propre | 47 sur 96 | |
 | Catégories (pays capturés) | 829 | |
-| Vérifiées | 781 | 94 % |
-| **À corriger** | **19** | 2 % |
+| Vérifiées | 785 | 95 % |
+| **À corriger** | **15** | 2 % |
 | **À trouver** (aucune plaque connue) | **0** | 0 % |
 | Limite connue du formulaire du site (voir plus bas) | 7 | 1 % |
 | Galerie vide sur le site (aucune plaque n'existe) | 22 | 3 % |
@@ -50,17 +50,6 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | kz | Foreigners (2012) | 0/3 | `C 463 02` | `463 02 C` |
 | kz | Foreigners (2012) | 0/3 | `H 194 10` | `194 10 H` |
 | kz | Foreigners (2012) | 0/3 | `H 476 05` | `476 05 H` |
-| kz | Military (1993) | 0/3 | `2723 АЯ` | `2723` |
-| kz | Military (1993) | 0/3 | `2883 АЗ` | `2883` |
-| kz | Military (1993) | 0/3 | `8906 АВ` | `8906` |
-| ma | Regular plates | 0/3 | `3385|د|40` | `3385|د|40 أ` |
-| ma | Regular plates | 0/3 | `66555|د|1` | `66555|د|1 أ` |
-| ma | Regular plates | 0/3 | `70144|د|8` | `70144|د|8 أ` |
-| mc | Provisional | 0/3 | `1517 WW MC` | `1517 WW` |
-| mc | Provisional | 0/3 | `1725 WW MC` | `1725 WW` |
-| mc | Provisional | 0/3 | `2000 WW MC` | `2000 WW` |
-| mn | Motorcycles | 1/3 | `БӨЗ 3510` | `БӨ З` |
-| mn | Motorcycles | 1/3 | `БӨЗ 5517` | `БӨ З` |
 | ps | Dealer | 0/3 | `62-100-76` | `6 2 100` |
 | ps | Dealer | 0/3 | `64-074-76` | `6 4 074` |
 | ps | Dealer | 0/3 | `65-067-76` | `6 5 067` |
@@ -79,16 +68,13 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 |---|---|---|---|---|---|---|---|---|
 | il Israel | generic | 8 | 5 | 3 |  |  |  | oui |
 | de Germany | own | 16 | 14 | 2 |  |  |  | oui |
-| kz Kazakhstan | generic | 18 | 16 | 2 |  |  |  | oui |
 | th Thailand | own | 9 | 7 | 2 |  |  |  | oui |
 | az Azerbaijan | generic | 5 | 4 | 1 |  |  |  | oui |
 | ch Switzerland | generic | 11 | 10 | 1 |  |  |  | oui |
 | cy Cyprus | generic | 5 | 4 | 1 |  |  |  | oui |
 | it Italy | own | 14 | 13 | 1 |  |  |  | oui |
 | kg Kyrgyzstan | own | 12 | 11 | 1 |  |  |  | oui |
-| ma Morocco | generic | 2 | 1 | 1 |  |  |  | oui |
-| mc Monaco | generic | 4 | 3 | 1 |  |  |  | oui |
-| mn Mongolia | own | 4 | 3 | 1 |  |  |  | oui |
+| kz Kazakhstan | own | 18 | 17 | 1 |  |  |  | oui |
 | ps Palestinian Authority | own | 6 | 5 | 1 |  |  |  | oui |
 | sk Slovakia | own | 21 | 18 | 1 |  | 2 |  | oui |
 | ad Andorra | generic | 5 | 5 |  |  |  |  | oui |
@@ -141,9 +127,12 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | lt Lithuania | generic | 9 | 9 |  |  |  |  | oui |
 | lu Luxembourg | generic | 5 | 5 |  |  |  |  | oui |
 | lv Latvia | own | 9 | 9 |  |  |  |  | oui |
+| ma Morocco | generic | 2 | 2 |  |  |  |  | oui |
+| mc Monaco | own | 4 | 4 |  |  |  |  | oui |
 | md Moldova | own | 8 | 8 |  |  |  |  | oui |
 | me Montenegro | own | 6 | 6 |  |  |  |  | oui |
 | mk North Macedonia | generic | 8 | 7 |  |  | 1 |  | oui |
+| mn Mongolia | own | 4 | 4 |  |  |  |  | oui |
 | mp Northern Mariana Islands (USA) | generic | 6 | 2 |  |  | 4 |  | oui |
 | mt Malta | generic | 6 | 6 |  |  |  |  | oui |
 | mx Mexico | generic | 20 | 20 |  |  |  |  | oui |
