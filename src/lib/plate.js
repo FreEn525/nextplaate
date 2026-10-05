@@ -110,6 +110,14 @@
         if (ctype === '6') return joinParts([selText('fon'), selText('region') + shownVal('digit')]);
         return genericPlate();
       }
+      case 'is': {                                                  // Iceland: vanity plates are six boxes, one character each (LYNGAR)
+        if (fieldVal('ctype') === '8') return ['b1', 'b2', 'b3', 'b4', 'b5', 'b6'].map(shownVal).join('').toUpperCase();
+        return genericPlate();
+      }
+      case 'md': {                                                  // Moldova: trailers of 1992 are written C-AV 703 (region letter, letters, digits)
+        if (fieldVal('ctype') === '3') return joinParts([selText('region1') + '-' + fieldVal('let2'), fieldVal('digit')]);
+        return genericPlate();
+      }
       case 'si': {                                                  // Slovenia: LJ 123-AB (the region code, then the plate)
         const region = (document.getElementById('drop_1') || { value: '' }).value.trim();
         return joinParts([region, fieldVal('nomer')]);
