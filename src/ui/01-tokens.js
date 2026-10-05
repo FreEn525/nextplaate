@@ -6,7 +6,7 @@
   const WORDMARK = h => `<span class="brand">${LOGO(h)}<span>Next<b>Plaate</b></span></span>`;
   const UI_BASE = `
     :host{--ink:#2d2d2d;--mute:#687074;--line:#e4e4e4;--line2:#cfcfcf;--bg:#f5f5f5;--soft:#eeeeee;--off:#e8e8e8;
-          --brand:#d9edf7;--brand-h:#c4e3f3;--brand-b:#bce8f1;--brand-t:#245269;--brand-l:#3781c5;--tint:#f1f8fc;--accent:#3498db;--danger:#d9534f;--r:4px;
+          --brand:#d9edf7;--brand-h:#c4e3f3;--brand-b:#bce8f1;--brand-t:#1f4f7a;--brand-l:#3781c5;--tint:#f1f8fc;--accent:#3498db;--danger:#d9534f;--r:4px;
           font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink)}
     *{box-sizing:border-box}
     [hidden]{display:none!important}
