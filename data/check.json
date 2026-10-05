@@ -1170,25 +1170,9 @@
    "failed": []
   },
   "Regional authorities": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "BBL 4 7675",
-     "read": "4 7675",
-     "status": "wrong"
-    },
-    {
-     "plate": "NRW 3-58E",
-     "read": "3 58E",
-     "status": "wrong"
-    },
-    {
-     "plate": "RPL 4 8731",
-     "read": "4 8731",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Regular plates": {
    "ok": 3,
@@ -1196,44 +1180,18 @@
    "failed": []
   },
   "Seasonal plates": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "AC W 2005 (04/10)",
-     "read": "AC W 2005",
-     "status": "not-fit"
-    },
-    {
-     "plate": "EI KK 88 (04/10)",
-     "read": "EI KK 88",
-     "status": "not-fit"
-    },
-    {
-     "plate": "ILL Z 300 (03/10)",
-     "read": "ILL Z 300",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Seasonal plates (Oldtimers)": {
-   "ok": 0,
+   "ok": 2,
    "total": 3,
    "failed": [
     {
-     "plate": "GS KV 72H (05/10)",
-     "read": "GS KV 72 H",
-     "status": "not-fit"
-    },
-    {
      "plate": "H NG 382H (04/10)",
-     "read": "N G 382 H",
-     "status": "not-fit"
-    },
-    {
-     "plate": "NU SW 57H (04/10)",
-     "read": "NU SW 57 H",
-     "status": "not-fit"
+     "read": "N G 382H H (04/10)",
+     "status": "wrong"
     }
    ]
   },
@@ -1503,9 +1461,25 @@
    "failed": []
   },
   "FNI (transit)": {
-   "ok": 3,
+   "ok": 0,
    "total": 3,
-   "failed": []
+   "failed": [
+    {
+     "plate": "644 TJW 92",
+     "read": "644",
+     "status": "wrong"
+    },
+    {
+     "plate": "733 TXH 75",
+     "read": "733",
+     "status": "wrong"
+    },
+    {
+     "plate": "791 TNE 92",
+     "read": "791",
+     "status": "wrong"
+    }
+   ]
   },
   "French military in Germany": {
    "ok": 3,
@@ -1553,14 +1527,46 @@
    "failed": []
   },
   "SIV (temporary)": {
-   "ok": 3,
+   "ok": 0,
    "total": 3,
-   "failed": []
+   "failed": [
+    {
+     "plate": "WW-254-DW",
+     "read": "WW",
+     "status": "wrong"
+    },
+    {
+     "plate": "WW-295-BD",
+     "read": "WW",
+     "status": "wrong"
+    },
+    {
+     "plate": "WW-518-JF",
+     "read": "WW",
+     "status": "wrong"
+    }
+   ]
   },
   "SIV (transit plates)": {
-   "ok": 3,
+   "ok": 0,
    "total": 3,
-   "failed": []
+   "failed": [
+    {
+     "plate": "HL-670-GQ",
+     "read": "HL",
+     "status": "wrong"
+    },
+    {
+     "plate": "HM-235-JD",
+     "read": "HM",
+     "status": "wrong"
+    },
+    {
+     "plate": "HM-624-XX",
+     "read": "HM",
+     "status": "wrong"
+    }
+   ]
   }
  },
  "ge": {
