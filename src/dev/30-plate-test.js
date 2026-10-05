@@ -254,10 +254,9 @@
   // Runs the countries that still need a test. "onlyMissing": keep the countries that fully passed.
   // "all": start again from zero (use it after a change that affects every country).
   // Every plate type of every country: same loop, one country after the other, saved as types:xx
+  // Every country again: the earlier results are replaced, and the database saves the searches already made
   async function ptStartTypes() {
-    const kept = await capAll();
-    const left = CAPTURE_COUNTRIES.filter(c => !kept['types:' + c] && !kept['plates-skip:' + c]);
-    if (!left.length) { ptMsg('Every country already has its types. Click "Write report to folder".'); return; }
+    const left = CAPTURE_COUNTRIES.slice();
     sessionStorage.setItem(PT_MODE, 'types');
     sessionStorage.setItem(PT_QUEUE, JSON.stringify(left));
     location.href = '/' + left[0] + '/add';
