@@ -20,12 +20,64 @@
     const all = await capAll();
     const plates = Object.keys(all).filter(k => k.startsWith('db:')).map(k => all[k]);
     const log = Object.keys(all).filter(k => k.startsWith('log:')).sort().map(k => all[k]);
+    const empty = Object.keys(all).filter(k => k.startsWith('empty:')).sort().map(k => all[k]);   // categories whose gallery has no plate
     const dir = await window.showDirectoryPicker({ mode: 'readwrite' });
-    for (const [name, data] of [['plates-db.json', plates], ['request-log.json', log]]) {
+    for (const [name, data] of [['plates-db.json', plates], ['request-log.json', log], ['empty-categories.json', empty]]) {
       const file = await dir.getFileHandle(name, { create: true });
       const w = await file.createWritable();
       await w.write(JSON.stringify(data, null, 2));
       await w.close();
     }
-    return { plates: plates.length, requests: log.length };
+    return { plates: plates.length, requests: log.length, empty: empty.length };
   }
+
+  // Loads plates-db.json (and empty-categories.json) back into this browser, for a browser whose database is empty or
+  // behind the files. An entry already here is kept (it may be newer): only the missing ones are added.
+  async function dbImport(files) {
+    const known = new Set(Object.keys(await capAll()));
+    let added = 0, kept = 0;
+    for (const file of files) {
+      const rows = JSON.parse(await file.text());
+      if (!Array.isArray(rows)) throw new Error(file.name + ' is not a list');
+      for (const r of rows) {
+        const key = r.plate !== undefined
+          ? 'db:' + r.country + '|' + r.category + '|' + ptNorm(r.plate)
+          : 'empty:' + r.country + '|' + r.category;
+        if (known.has(key)) { kept++; continue; }
+        await capPut(key, r);
+        known.add(key);
+        added++;
+      }
+    }
+    return { added, kept };
+  }
+
+  async function dbCounts() {
+    const keys = Object.keys(await capAll());
+    return `${keys.filter(k => k.startsWith('db:')).length} plates, ${keys.filter(k => k.startsWith('empty:')).length} empty categories`;
+  }
+
+  registerFeature({
+    groups: [{
+      drawer: 'dev', title: 'Database',
+      build: () => [
+        h('p', { id: 'dbMsg', class: 'presult', text: 'Plates the tools have seen, kept in this browser.' }),
+        h('button', { id: 'dbImport', class: 'btn ghost', text: 'Load plates-db.json into this browser' }),
+        h('input', { id: 'dbFile', type: 'file', accept: '.json', multiple: true, hidden: true }),
+        h('button', { id: 'dbExport', class: 'btn ghost', text: 'Write the database to a folder' })
+      ]
+    }],
+    init: () => {
+      const say = t => { $('dbMsg').textContent = t; };
+      const show = (before = '') => dbCounts().then(t => say(before + 'In this browser: ' + t + '.'), () => {});
+      $('dbImport').onclick = () => $('dbFile').click();
+      $('dbFile').onchange = () => {
+        const files = [...$('dbFile').files];
+        $('dbFile').value = '';
+        if (!files.length) return;
+        dbImport(files).then(r => show(`Loaded: ${r.added} added, ${r.kept} already here. `), e => say('Could not load: ' + e.message));
+      };
+      $('dbExport').onclick = () => dbExport().then(r => say(`Written: ${r.plates} plates, ${r.empty} empty categories, ${r.requests} requests.`), e => say('Could not write: ' + e.message));
+      show();
+    }
+  });

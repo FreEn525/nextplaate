@@ -12,6 +12,7 @@
       ['Upload pages kept', `${count('page:')} / ${total}` + (count('skip:') ? `  (${count('skip:')} without a page)` : '')],
       ['Search pages kept', `${count('search:')} / ${total}` + (count('skipsearch:') ? `  (${count('skipsearch:')} without a page)` : '')],
       ['Plates in the database', String(count('db:'))],
+      ['Categories with an empty gallery', String(count('empty:'))],
       ['Requests logged', String(count('log:'))],
       ['Site', blocked ? 'paused until ' + new Date(siteBlockedUntil()).toLocaleTimeString() : 'no pause']
     ];

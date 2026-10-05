@@ -35,10 +35,62 @@ def test_developer_drawer_groups_and_status(browser):
     page.wait_for_selector("#pmg-host")
     page.evaluate("() => document.getElementById('pmg-host').shadowRoot.querySelector('.rbtn[data-drawer=\"dev\"]').click()")
     titles = page.evaluate("() => [...document.getElementById('pmg-host').shadowRoot.querySelectorAll('.dsec[data-drawer=\"dev\"] .gtitle')].map(e => e.textContent)")
-    assert titles == ["Status", "Save the page", "Capture", "Plate test"]
+    assert titles == ["Status", "Save the page", "Capture", "Plate test", "Database"]
     # the status box reads the dev store: nothing kept yet on a fresh profile
     page.wait_for_function("() => document.getElementById('pmg-host').shadowRoot.getElementById('devStatus').textContent.includes('Upload pages kept')")
     text = page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('devStatus').textContent")
     assert "0 / 96" in text
     page.screenshot(path=os.environ.get("DEV_SHOT", "dev-drawer.png")) if os.environ.get("DEV_SHOT") else None
+    c.close()
+
+
+SEED_JS = """async ([key, value]) => {
+  const db = await new Promise((res, rej) => { const r = indexedDB.open('nextplaate-dev', 1); r.onupgradeneeded = () => r.result.createObjectStore('kv'); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); });
+  await new Promise(res => { const t = db.transaction('kv', 'readwrite'); t.objectStore('kv').put(value, key); t.oncomplete = res; });
+}"""
+SHADOW = "document.getElementById('pmg-host').shadowRoot"
+
+
+def _dev_page(browser):
+    c = browser.new_context()
+    route_site(c)
+    page = c.new_page()
+    page.goto("https://platesmania.com/fr/add")
+    page.wait_for_selector("#pmg-host")
+    page.evaluate(f"() => {SHADOW}.querySelector('.rbtn[data-drawer=\"dev\"]').click()")
+    return c, page
+
+
+@needs_dev
+def test_load_database_file_adds_only_missing_plates(browser, tmp_path):
+    c, page = _dev_page(browser)
+    f = tmp_path / "plates-db.json"
+    f.write_text('[{"country":"fr","category":"Mopeds","plate":"AB-123-CD","read":"AB-123-CD","count":2,"date":"2026-10-05T00:00:00Z"},'
+                 '{"country":"fr","category":"Mopeds","plate":"EF-456-GH","read":"EF-456-GH","count":1,"date":"2026-10-05T00:00:00Z"}]', encoding="utf-8")
+    page.locator("#pmg-host #dbFile").set_input_files(f)
+    page.wait_for_function(f"() => {SHADOW}.getElementById('dbMsg').textContent.includes('Loaded')")
+    assert "2 added, 0 already here" in page.evaluate(f"() => {SHADOW}.getElementById('dbMsg').textContent")
+    page.locator("#pmg-host #dbFile").set_input_files(f)                     # the same file again: nothing is added twice
+    page.wait_for_function(f"() => {SHADOW}.getElementById('dbMsg').textContent.includes('0 added')")
+    c.close()
+
+
+@needs_dev
+def test_collect_takes_the_gallery_plates_of_missing_categories_only(browser):
+    c, page = _dev_page(browser)
+    search = '<select name="ctype"><option value="1">Cars</option><option value="2">Mopeds</option></select>'
+    page.evaluate(SEED_JS, ["search:fr", search])
+    page.evaluate(SEED_JS, ["page:fr", '<select id="ctype"></select>'])
+    page.evaluate(SEED_JS, ["db:fr|Cars|AA-111-AA", {"country": "fr", "category": "Cars", "plate": "AA-111-AA", "read": "AA-111-AA", "count": 3, "date": "2026-10-05T00:00:00Z"}])
+    asked = []
+
+    def gallery(route):
+        asked.append(route.request.url)
+        route.fulfill(status=200, content_type="text/html",
+                      body='<html><body><img src="https://img1.platesmania.com/10/m/1.jpg" alt="XY-777-ZZ, Renault"></body></html>')
+    c.route("**/fr/gallery.php?ctype=*", gallery)
+    page.evaluate(f"() => {SHADOW}.getElementById('ptCollect').click()")
+    page.wait_for_function(f"() => {SHADOW}.getElementById('ptMsg').textContent.startsWith('Finished')", timeout=20000)
+    assert len(asked) == 1 and "ctype=2" in asked[0]          # Cars already has a plate: only Mopeds is asked
+    page.evaluate(f"() => {SHADOW}.getElementById('dbRefresh') && 0")
     c.close()

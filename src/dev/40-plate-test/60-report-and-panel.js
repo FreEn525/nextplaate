@@ -69,6 +69,8 @@
           h('button', { id: 'ptTypes', class: 'btn ghost', text: 'Test every type' })),
         h('button', { id: 'ptFill', class: 'btn ghost', text: 'Fill missing plates' }),
         h('div', { class: 'sub', text: 'Every country' }),
+        h('button', { id: 'ptCollect', class: 'btn', text: 'Collect plates (one request per category)' }),
+        h('button', { id: 'ptCollectStop', class: 'btn ghost', hidden: true, text: 'Stop collecting' }),
         h('button', { id: 'ptAll', class: 'btn ghost', text: 'Test the countries not yet passing' }),
         h('button', { id: 'ptTypesAll', class: 'btn ghost', text: 'Test the countries with failures' }),
         h('button', { id: 'ptFillAll', class: 'btn ghost', text: 'Fill missing plates' }),
@@ -85,6 +87,8 @@
         const r = await ptByType();
         ptMsg(Object.entries(r).map(([k, v]) => (v.note ? k + ': ' + v.note : k + ': ' + v.passed + '/' + v.tested)).join(' | '));
       };
+      $('ptCollect').onclick = () => ptCollectAll().catch(e => ptMsg('Collect stopped: ' + e.message));
+      $('ptCollectStop').onclick = () => { ptCollectStop = true; };
       $('ptTypesAll').onclick = () => ptStartTypes().catch(e => ptMsg('Could not start: ' + e.message));
       $('ptFillAll').onclick = () => ptStartFill().catch(e => ptMsg('Could not start: ' + e.message));
       $('ptFill').onclick = () => { if (!here.add) { ptMsg('Open an upload page first.'); return; } ptMsg('Filling…'); ptFillMissing().catch(e => ptMsg('Fill stopped: ' + e.message)); };

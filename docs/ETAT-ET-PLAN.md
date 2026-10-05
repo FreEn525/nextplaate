@@ -166,3 +166,9 @@ Chaque page d'ajout et de recherche a été lue pays par pays : `data/countries/
 - **Trois formes de formulaire** (voir `docs/FORMULAIRES.md`, champ `layout` de `form.json`) : menu de type (`ctype` pour 81 pays, `drop_2` pour `ad mt nz ps sm va`), menu de région seulement (`drop_1` : `ae au ca mx us xx`, plaque en texte libre ; la recherche y filtre par région), texte libre (`my nl sg`).
 - **Couverture** : 829 catégories, 297 vérifiées, 0 à corriger, 468 à trouver, 64 non testables par le formulaire (formulaire sans menu de type : `nl`, `mx`, `my`, `sg`).
 - **À étudier ensuite** : la recherche de chaque pays a des filtres `region`, `model`, `modgen`, `markamodtype` (marque, modèle, génération) : voir `data/countries/<cc>/search.json`.
+
+### Récupérer les plaques manquantes sans ouvrir de pages (branche `dev/collect-and-import`)
+
+- **Collect plates** (tiroir Developer, « Plate test », « Every country ») : une requête de galerie par catégorie sans plaque confirmée, rien d'autre : pas de changement de page, pas de saisie. Les plaques (jusqu'à 3 par catégorie, venues de la même page : pas de requête en plus) sont lues ensuite hors ligne par `check_db.py` sur les pages sauvegardées. Une galerie vide est notée (`empty:`) et ne sera plus redemandée. Après un blocage du site, on reclique : il reprend où il s'est arrêté.
+- **Database** (même tiroir) : *Load plates-db.json into this browser* (ajoute seulement les plaques absentes de la base du navigateur), *Write the database to a folder* (écrit `plates-db.json`, `request-log.json`, `empty-categories.json`).
+- **Pourquoi 3 plaques et pas 1** : le temps dépend du nombre de requêtes, pas du nombre de plaques. Plusieurs plaques ne coûtent donc rien et protègent d'une preuve trompeuse (la Serbie « Trailers » n'avait qu'une plaque confirmée, qui a révélé une règle fausse).
