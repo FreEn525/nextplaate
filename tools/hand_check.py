@@ -14,14 +14,14 @@ from playwright.sync_api import sync_playwright   # noqa: E402
 
 # one plate per country whose rule changed; the plate is one of those the site shows in that category's gallery
 PICKS = [
-    ("ru", "Cars", "у 007 ут 198"), ("gr", "Taxi", "TAE-1009"), ("jp", "Private owners", "山梨 336 な 718"),
-    ("pl", "Diplomatic", "W 016600"), ("ua", "Military (2004)", "1133 Ф4"), ("th", "Taxi", "ทห 7776"),
-    ("ir", "Taxi", "۵۱ت۱۶۵ ۲۲"), ("kr", "Commercial vehicles", "경기50바 4521"), ("la", "Military", "ກທ 5868"),
-    ("mn", "Special machinery", "7073 УН"), ("sg", "Buses", "PC 9090 A"), ("mx", "Cars (AAA-000-A)", "MBG-133-A"),
-    ("hr", "Dealer", "OS PP-178"), ("uz", "Foreign citizens", "01 H 010229"), ("lv", "Dealer", "B 1122-6"),
-    ("sa", "Cars", "3273 JRS"), ("eg", "Cars (2008)", "٣٦٢١ جىر"), ("vn", "Government and public administrations", "80A-039.27"),
+    ("il", "Sportcars", "S-100 294"), ("il", "Military", "172539-צ"), ("it", "Dealer", "00 P 1FLYG"), ("kg", "Diplomatic", "D 09 003"),
+    ("kz", "Foreigners (2012)", "C 463 02"), ("pt", "National Republican Guard", "GNR T-399"), ("ge", "Test license plates (TEST)", "TEST-050"),
+    ("de", "Plates for oldtimers (type \"H\")", "HEI Z 924 H"), ("ch", "Vehicles w/o paid duty (with \"Z\")", "ZH 1257 Z"),
+    ("gi", "Regular car plates (G 1234 A)", "G 1267 G"), ("ax", "Vanity Plates", "BOMAN2"), ("dk", "Vanity Plates", "USANO1"),
+    ("mc", "Provisional", "1517 WW MC"), ("mn", "Motorcycles", "БӨЗ 3510"), ("si", "Trailers", "H4-86 KP"),
+    ("ru", "Diplomatic", "032 D 345 77"), ("cz", "Electric vehicles", "EL5 57CP"), ("ma", "Regular plates", "3385|د|40"),
 ]
-DUMP = r"""() => [...document.querySelectorAll('#frm input, #frm select')].filter((el, i, all) => all.indexOf(el) < all.indexOf(document.querySelector('#frm input[type=file]')) && el.offsetParent !== null && el.type !== 'file' && el.type !== 'hidden' && !/^(ctype|drop_2|fon\d*|font|r\d+)$/.test(el.id))
+DUMP = r"""() => [...document.querySelectorAll('#frm input, #frm select')].filter((el, i, all) => all.indexOf(el) < all.indexOf(document.querySelector('#frm input[type=file]')) && el.offsetParent !== null && el.type !== 'file' && el.type !== 'hidden' && !/^(ctype|drop_2|fon\d*|font|r\d+|shortplate|noseals|oldfont|largeletter\w*|dip_month|dip_year|format1_input|kg2016\w*)$|_r\d+$/.test(el.id))
   .map(el => ({ id: el.id || el.name, disabled: el.disabled, sel: el.tagName === 'SELECT', value: el.tagName === 'SELECT' ? (el.options[el.selectedIndex] || {}).text : el.value }))"""
 
 

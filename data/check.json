@@ -610,15 +610,9 @@
    "failed": []
   },
   "Vehicles w/o paid duty (with \"Z\")": {
-   "ok": 2,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ZH 1257 Z",
-     "read": "VS H 1257 Z",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Work and fire vehicles (blue)": {
    "ok": 3,
@@ -914,20 +908,9 @@
    "failed": []
   },
   "Plates for oldtimers (type \"H\")": {
-   "ok": 1,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "HEI Z 924 H",
-     "read": "EI Z 924 H",
-     "status": "wrong"
-    },
-    {
-     "plate": "HH CW 311 H",
-     "read": "CW 311 H",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Red license plates": {
    "ok": 3,
@@ -950,15 +933,9 @@
    "failed": []
   },
   "Seasonal plates (Oldtimers)": {
-   "ok": 2,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "H NG 382H (04/10)",
-     "read": "N G 382H H (04/10)",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Short-term transit plates": {
    "ok": 3,
@@ -1358,20 +1335,9 @@
  },
  "gi": {
   "Regular car plates (G 1234 A)": {
-   "ok": 1,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "G 1267 G",
-     "read": "G 1267",
-     "status": "wrong"
-    },
-    {
-     "plate": "G 4684 G",
-     "read": "G 4684",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Regular car plates (G 12345)": {
    "ok": 3,
@@ -1745,25 +1711,9 @@
    "failed": []
   },
   "Diplomatic": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "33-232-21",
-     "read": "0 33-232-21",
-     "status": "wrong"
-    },
-    {
-     "plate": "58-077-21",
-     "read": "0 58-077-21",
-     "status": "wrong"
-    },
-    {
-     "plate": "94-081-22",
-     "read": "0 94-081-22",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Military": {
    "ok": 3,
@@ -1771,25 +1721,9 @@
    "failed": []
   },
   "Military Police": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "222-מ.צ",
-     "read": "222-מ.צ מ.צ",
-     "status": "wrong"
-    },
-    {
-     "plate": "224-מ.צ",
-     "read": "224-מ.צ מ.צ",
-     "status": "wrong"
-    },
-    {
-     "plate": "260-מ.צ",
-     "read": "260-מ.צ מ.צ",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Police": {
    "ok": 3,
@@ -1807,25 +1741,9 @@
    "failed": []
   },
   "Sportcars": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "S-100 294",
-     "read": "S- S-100 294",
-     "status": "wrong"
-    },
-    {
-     "plate": "S-102 440",
-     "read": "S- S-102 440",
-     "status": "wrong"
-    },
-    {
-     "plate": "S-108 069",
-     "read": "S- S-108 069",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   }
  },
  "iq": {
@@ -2017,25 +1935,9 @@
    "failed": []
   },
   "Dealer": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "00 P 1FLYG",
-     "read": "00 P P",
-     "status": "not-fit"
-    },
-    {
-     "plate": "BM P 10569",
-     "read": "BM P P",
-     "status": "not-fit"
-    },
-    {
-     "plate": "LN P GAVT0",
-     "read": "LN P P",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Diplomatic": {
    "ok": 3,
@@ -2186,25 +2088,9 @@
  },
  "kg": {
   "Diplomatic": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "D 09 003",
-     "read": "WHITE D 09 003",
-     "status": "wrong"
-    },
-    {
-     "plate": "D 26 004",
-     "read": "WHITE D 26",
-     "status": "not-fit"
-    },
-    {
-     "plate": "D 52 100",
-     "read": "WHITE D 52",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Foreign citizens and enterprises (1994)": {
    "ok": 3,
@@ -2345,25 +2231,9 @@
    "failed": []
   },
   "Foreigners (2012)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "C 463 02",
-     "read": "463 02 C",
-     "status": "wrong"
-    },
-    {
-     "plate": "H 194 10",
-     "read": "194 10 H",
-     "status": "wrong"
-    },
-    {
-     "plate": "H 476 05",
-     "read": "476 05 H",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "High authorities": {
    "ok": 3,
@@ -4184,12 +4054,12 @@
    "failed": [
     {
      "plate": "บพ 9595",
-     "read": "พส 9595",
+     "read": "พบ 9595",
      "status": "wrong"
     },
     {
      "plate": "บว 9988",
-     "read": "วส 9988",
+     "read": "วบ 9988",
      "status": "wrong"
     }
    ]

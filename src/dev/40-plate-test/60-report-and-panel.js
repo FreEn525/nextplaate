@@ -41,10 +41,10 @@
     type: (text, cc, category) => {   // types a plate and leaves the fields as they are (tools/diag_typing.py, tools/hand_check.py); tries both cuts like testText
       const h = ptHint(cc, category);
       ptApplySet(text, h.set);
-      ptOrder = h.order || null; ptDrop = h.drop || null; ptPrefix = h.prefix || null; ptChars = h.chars || null; ptRight = !!h.right; ptExtra = h.extra || null; ptKeepDigits = !!h.keepDigits;
+      ptOrder = h.order || null; ptDrop = h.drop || null; ptPrefix = h.prefix || null; ptChars = h.chars || null; ptRight = !!h.right; ptExtra = h.extra || null; ptKeepDigits = !!h.keepDigits; ptKeepStart = !!h.keepStart; ptDropEnd = !!h.dropEnd; ptOnlyFirst = !!h.onlyFirst;
       let fits = ptChars ? ptType(text) : ptTypeOnce(text, false);
       if (!ptChars && ptNorm(plateForForm() || '') !== ptNorm(text)) { const alt = ptTypeOnce(text, true); if (ptNorm(plateForForm() || '') === ptNorm(text)) fits = alt; }
-      ptOrder = ptDrop = ptPrefix = ptChars = ptExtra = null; ptRight = ptKeepDigits = false;
+      ptOrder = ptDrop = ptPrefix = ptChars = ptExtra = null; ptRight = ptKeepDigits = ptKeepStart = ptDropEnd = ptOnlyFirst = false;
       return fits;
     },
     read: () => plateForForm() || '',
@@ -61,6 +61,9 @@
       ptRight = !!hint.right;
       ptExtra = hint.extra || null;
       ptKeepDigits = !!hint.keepDigits;
+      ptKeepStart = !!hint.keepStart;
+      ptDropEnd = !!hint.dropEnd;
+      ptOnlyFirst = !!hint.onlyFirst;
       ptApplySet(text, hint.set);
       if (field) {
         const el = document.getElementById(field);
@@ -83,7 +86,7 @@
       else if (field) { const el = document.getElementById(field); if (el) { el.value = ''; el.dispatchEvent(new Event('input', { bubbles: true })); } }
       else ptType('');
       ptOrder = ptDrop = ptPrefix = ptChars = ptExtra = null;
-      ptRight = ptKeepDigits = false;
+      ptRight = ptKeepDigits = ptKeepStart = ptDropEnd = ptOnlyFirst = false;
       return { fits, read };
     }
   };

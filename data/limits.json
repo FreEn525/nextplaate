@@ -5,5 +5,11 @@
   "gi|Regular car plates (G 1234 A)": "Le champ de la plaque n'accepte pas la lettre finale (G 1267 G) : le site la retire à la saisie.",
   "sc|Ambassador, chief of diplomatic mission": "Le texte de galerie (S 16958) ne contient pas les lettres que le formulaire ajoute (CD).",
   "sc|Government": "Le texte de galerie (S 13069) ne contient pas les lettres que le formulaire ajoute (GS).",
-  "ir|Disabled": "Le texte de galerie écrit une lettre (ژ) là où le formulaire met le symbole du fauteuil roulant."
+  "ir|Disabled": "Le texte de galerie écrit une lettre (ژ) là où le formulaire met le symbole du fauteuil roulant.",
+  "az|Foreign citizens and enterprises": "Le formulaire de l'Azerbaïdjan n'a pas ce type : sa plaque (H 014401, une lettre et six chiffres) ne peut pas y être écrite.",
+  "cy|Trailers": "Une plaque sur trois (14001 CT) n'a pas la forme P 12345 que le formulaire produit.",
+  "ps|Dealer": "Le menu du premier chiffre n'a que 1 à 9 : la plaque 62-100-76 (deux chiffres) ne peut pas y être écrite.",
+  "sk|Sportcars (AB S(A)123)": "Le code AA des plaques (AA S 009) n'est pas dans le menu de région du formulaire.",
+  "th|Private owners": "Le menu de la première lettre n'a pas le ฒ : la plaque 4ฒฆ 5147 (une sur trois) ne peut pas y être écrite.",
+  "th|Vanity Plates": "Le menu de la première lettre n'a pas le บ : les plaques บพ 9595 et บว 9988 ne peuvent pas y être écrites."
 }

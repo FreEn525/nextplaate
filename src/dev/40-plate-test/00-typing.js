@@ -10,6 +10,8 @@
   const PT_PAUSE_MS = 5000;                        // between two countries (the site limits fast request bursts)
   // Russian menus use the Latin look-alikes (A B E K M H O P C T Y X) while the gallery writes the Cyrillic letters: both compare equal
   const ptCanon = s => String(s || '').toUpperCase().replace(/[АВЕКМНОРСТУХ]/g, c => 'ABEKMHOPCTYX'['АВЕКМНОРСТУХ'.indexOf(c)]);
+  // the form in which a piece of the plate is compared with what the site wrote: no dot, slash or dash (E.A. = EA, S- = S, מ.צ = מצ)
+  const ptSite = s => ptCanon(s).replace(/[./-]/g, '');
   const ptNorm = s => (s || '').replace(/[\s-]+/g, '').toUpperCase();
 
   // Plates shown in the country's gallery: the text of their photos (the alt of the "inf" image)
@@ -39,6 +41,9 @@
       if (opt) { el.value = opt.value; el.dispatchEvent(new Event('change', { bubbles: true })); }
     }
   }
+  let ptOnlyFirst = false;   // only the first piece equal to what the site wrote is dropped (see hints)
+  let ptKeepStart = false;   // the site-written letters are at the end, not at the start (see hints)
+  let ptDropEnd = false;     // the last piece (before a season) is what the site wrote itself: it is dropped
   let ptKeepDigits = false;   // a piece that is only digits stays whole (see ptTypeOnce)
   let ptRight = false;  // the last piece is a number written one digit per menu, from the right (Japan: 7410, 718)
   let ptChars = null;   // 'before' or 'after': the forms with one menu per character (see ptTypeChars)
@@ -127,25 +132,29 @@
     tokens = tokens.filter(t => !fixedVals.includes(ptCanon(t)));
     if (ptDrop) tokens = tokens.filter(t => !ptDrop.includes(ptCanon(t)));
     // a plate field that is not shown but holds a text was filled by the site for this type (the TA of a Bosnian taxi): not typed
-    const filled = el => ptCanon(el.tagName === 'SELECT' ? ((el.options[el.selectedIndex] || {}).text || '').trim() : el.value).replace(/[./]/g, '');   // E.A. of a Greek police plate is EA, ກທ/ of a Lao military one is ກທ
+    const filled = el => ptSite(el.tagName === 'SELECT' ? ((el.options[el.selectedIndex] || {}).text || '').trim() : el.value);   // E.A. of a Greek police plate is EA, ກທ/ of a Lao military one is ກທ
     // what the site wrote itself: a menu or a field that is shown but disabled (any plate field), or a hidden field of the known kinds
     const siteFilled = [...document.querySelectorAll('input, select')]
       .filter(el => el.id !== 'ctype' && el.id !== 'drop_2' && (el.disabled && el.offsetParent !== null
-        ? isPlateField(el) || /^(trz|tx)$|nomer|fixed|special|police|arm|^dop$/i.test(el.id || el.name || '')
+        ? isPlateField(el) || (!!el.closest('#frm') && !/^(fon\d*|font|r\d+|markaavto|model|modgen|markamodtype|filename)$|checkbox/i.test(el.id || el.name || ''))   // a disabled field shown in the form holds what the site writes
         : el.tagName !== 'SELECT' && el.offsetParent === null && /^(trz|tx)$|nomer|let|digit|trl|^dig|fixed|special|^b\d/i.test(el.id || el.name || '')))
       .map(filled).filter(Boolean);
     // the plate starts with what the site wrote (the G of "G 1267 G"): that first piece is not typed; a later equal piece is
-    const shifted = tokens.length > 1 && siteFilled.includes(ptCanon(tokens[0]));
+    const shifted = !ptKeepStart && tokens.length > 1 && siteFilled.includes(ptSite(tokens[0]));
     if (shifted) tokens.shift();
     // a first piece that starts with what the site wrote (the T of TB, written in a hidden field): that start is not typed
     const shownFilled = [...document.querySelectorAll('input, select')].filter(el => el.disabled && el.offsetParent !== null && el.id !== 'ctype').map(filled).filter(Boolean);
-    const start = [...shownFilled].sort((a, b) => b.length - a.length).find(v => tokens[0] && ptCanon(tokens[0]).length > v.length && ptCanon(tokens[0]).startsWith(v));
-    if (start && !shifted) tokens[0] = tokens[0].slice(start.length);   // not when the whole first piece was already taken off
+    const start = [...shownFilled].sort((a, b) => b.length - a.length).find(v => tokens[0] && ptSite(tokens[0]).length > v.length && ptSite(tokens[0]).startsWith(v));
+    if (start && !shifted && !ptKeepStart) tokens[0] = tokens[0].slice(start.length);   // not when the whole first piece was already taken off
     // the same at the end (the 挂 of a Chinese trailer plate, written by the site after the text)
-    const last = tokens.length - 1;
-    const end = [...shownFilled].sort((a, b) => b.length - a.length).find(v => last >= 0 && ptCanon(tokens[last]).length > v.length && ptCanon(tokens[last]).endsWith(v));
-    if (end) tokens[last] = tokens[last].slice(0, tokens[last].length - end.length);
-    tokens = tokens.filter(t => !siteFilled.includes(ptCanon(t)));
+    // the last piece, not counting a season (04/10): "72H" or "H" is typed without the H the site writes after the number
+    let last = tokens.length - 1;
+    while (last > 0 && /^\d{2}\/\d{2}$/.test(tokens[last])) last--;
+    if (ptDropEnd && last > 0 && shownFilled.includes(ptSite(tokens[last]))) { tokens.splice(last, 1); last = -1; }
+    const end = last >= 0 ? [...shownFilled].sort((a, b) => b.length - a.length).find(v => ptSite(tokens[last]).length > v.length && ptSite(tokens[last]).endsWith(v)) : null;
+    if (end && last >= 0) tokens[last] = tokens[last].slice(0, tokens[last].length - end.length);
+    // every piece equal to what the site wrote is not typed again, unless the category says only the first one is (Gibraltar: G 1267 G)
+    if (!ptOnlyFirst && !ptKeepStart) tokens = tokens.filter(t => !siteFilled.includes(ptSite(t)));
     // one single plate text field (France, Belgium...): the whole plate goes in it, dashes included;
     // the menus of the page (department, region) are set only when one of the tokens matches them
     const texts = fields.filter(el => el.tagName === 'INPUT');
