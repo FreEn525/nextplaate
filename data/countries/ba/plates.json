@@ -21,6 +21,30 @@
     "date": "2026-10-05T01:42:14.058Z"
   },
   {
+    "category": "Diplomatic",
+    "plate": "11-A-683",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:34:35.611Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "29-A-308",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:34:35.611Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "56-A-040",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:34:35.611Z",
+    "source": "gallery"
+  },
+  {
     "category": "Provisional",
     "plate": "MT-313658",
     "read": "MT-313658",
@@ -61,5 +85,29 @@
     "read": "T30-O-974",
     "count": 2,
     "date": "2026-10-05T01:42:07.360Z"
+  },
+  {
+    "category": "Taxi",
+    "plate": "TA-044771",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:34:32.691Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Taxi",
+    "plate": "TA-048706",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:34:32.691Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Taxi",
+    "plate": "TA-341779",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:34:32.691Z",
+    "source": "gallery"
   }
 ]

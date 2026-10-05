@@ -1,24 +1,67 @@
 [
   {
+    "category": "Motorcycles (1996)",
+    "plate": "0542 AA 02",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:53:05.960Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (1996)",
+    "plate": "0772 AA 02",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:53:05.960Z",
+    "source": "gallery"
+  },
+  {
     "category": "Motorcycles (2009)",
     "plate": "121 A20",
-    "read": "121A2001",
-    "count": 0,
-    "date": "2026-10-05T01:55:20.325Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:50.895Z",
+    "source": "gallery"
   },
   {
     "category": "Motorcycles (2009)",
     "plate": "223 G07",
-    "read": "223G0701",
-    "count": 0,
-    "date": "2026-10-05T01:55:20.679Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:50.895Z",
+    "source": "gallery"
   },
   {
     "category": "Motorcycles (2009)",
     "plate": "707 U07",
-    "read": "707U0701",
-    "count": 0,
-    "date": "2026-10-05T01:55:21.032Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:50.895Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Organizations (1996)",
+    "plate": "0526 B 01",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:59.957Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Organizations (1996)",
+    "plate": "1474 A 04",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:59.957Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Organizations (1996)",
+    "plate": "2080 A 04",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:59.957Z",
+    "source": "gallery"
   },
   {
     "category": "Organizations (2009)",
@@ -42,66 +85,147 @@
     "date": "2026-10-05T01:55:17.500Z"
   },
   {
+    "category": "Police (2009)",
+    "plate": "0247 M 01",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:53.889Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police (2009)",
+    "plate": "0270 M 01",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:53.889Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police (2009)",
+    "plate": "2200 M 02",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:53.889Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Private owners (1996)",
+    "plate": "AH 9832 02",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:56.956Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Private owners (1996)",
+    "plate": "BM 8126 01",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:56.956Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Private owners (1996)",
+    "plate": "X 6778 01",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:56.956Z",
+    "source": "gallery"
+  },
+  {
     "category": "Private owners (2009)",
     "plate": "0009SJ02",
-    "read": "0009SJ0201",
-    "count": 0,
-    "date": "2026-10-05T01:55:13.264Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:41.914Z",
+    "source": "gallery"
   },
   {
     "category": "Private owners (2009)",
     "plate": "6600OV20",
-    "read": "6600OV2001",
-    "count": 0,
-    "date": "2026-10-05T01:55:13.617Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:41.914Z",
+    "source": "gallery"
   },
   {
     "category": "Private owners (2009)",
     "plate": "7717XZ07",
-    "read": "7717XZ0701",
-    "count": 0,
-    "date": "2026-10-05T01:55:13.970Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:41.914Z",
+    "source": "gallery"
   },
   {
     "category": "Public transport (2009)",
     "plate": "0356TK02",
-    "read": "0356TK0201",
-    "count": 0,
-    "date": "2026-10-05T01:55:15.028Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:44.897Z",
+    "source": "gallery"
   },
   {
     "category": "Public transport (2009)",
     "plate": "5099TT06",
-    "read": "5099TT0601",
-    "count": 0,
-    "date": "2026-10-05T01:55:15.381Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:44.897Z",
+    "source": "gallery"
   },
   {
     "category": "Public transport (2009)",
     "plate": "8223TT02",
-    "read": "8223TT0201",
-    "count": 0,
-    "date": "2026-10-05T01:55:15.735Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:44.897Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (1996)",
+    "plate": "A 0021 A 04",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:53:02.873Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (1996)",
+    "plate": "A 0910 A 02",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:53:02.873Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (1996)",
+    "plate": "A 0950 A 01",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:53:02.873Z",
+    "source": "gallery"
   },
   {
     "category": "Trailers (2009)",
     "plate": "01AB 0096",
-    "read": "01AB009601",
-    "count": 0,
-    "date": "2026-10-05T01:55:18.560Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:47.845Z",
+    "source": "gallery"
   },
   {
     "category": "Trailers (2009)",
     "plate": "02DD 6000",
-    "read": "02DD600001",
-    "count": 0,
-    "date": "2026-10-05T01:55:18.913Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:47.845Z",
+    "source": "gallery"
   },
   {
     "category": "Trailers (2009)",
     "plate": "07MA 7070",
-    "read": "07MA707001",
-    "count": 0,
-    "date": "2026-10-05T01:55:19.266Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:47.845Z",
+    "source": "gallery"
   }
 ]

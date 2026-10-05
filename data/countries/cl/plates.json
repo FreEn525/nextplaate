@@ -1,1 +1,250 @@
-[]
+[
+  {
+    "category": "Buses (AB-CD-12)",
+    "plate": "BB-JZ-70",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:07.215Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Buses (AB-CD-12)",
+    "plate": "CJ-RS-57",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:07.215Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Buses (AB-CD-12)",
+    "plate": "GC-BC-87",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:07.215Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (AB-12-34)",
+    "plate": "BJ-14-65",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:19.232Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (AB-12-34)",
+    "plate": "RD-69-57",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:19.232Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (AB-12-34)",
+    "plate": "YE-88-81",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:19.232Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (AB-CD-12)",
+    "plate": "JD-CJ-59",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:35:52.135Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (AB-CD-12)",
+    "plate": "RB-LS-27",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:35:52.135Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (AB-CD-12)",
+    "plate": "TV-TF-56",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:35:52.135Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "CD-3809",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:16.246Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "OI-0254",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:16.246Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "OI-1515",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:16.246Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Free economic zones (AB-12-34)",
+    "plate": "DD-64-33",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:31.288Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Free economic zones (AB-12-34)",
+    "plate": "ZF-68-17",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:31.289Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Free economic zones (AB-12-34)",
+    "plate": "ZF-83-12",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:31.288Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Free economic zones (AB-CD-12)",
+    "plate": "GP-FS-13",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:04.165Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Free economic zones (AB-CD-12)",
+    "plate": "RZ-PV-23",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:04.165Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Free economic zones (AB-CD-12)",
+    "plate": "SG-JZ-35",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:04.165Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (AB-123)",
+    "plate": "MR-456",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:10.185Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (AB-123)",
+    "plate": "SE-926",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:10.185Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (AB-123)",
+    "plate": "XJ-778",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:10.185Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (ABC-12)",
+    "plate": "PPY-80",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:13.193Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (ABC-12)",
+    "plate": "ZLF-84",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:13.193Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (ABC-12)",
+    "plate": "ZMS-60",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:13.193Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Shared taxis (AB-CD-12)",
+    "plate": "FD-WD-63",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:35:58.164Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Shared taxis (AB-CD-12)",
+    "plate": "TS-ZX-99",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:35:58.164Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special airport taxis and tourist vehicles (AB-CD-12)",
+    "plate": "SL-SW-92",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:01.157Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Taxi (AB-12-34)",
+    "plate": "UE-15-72",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:22.240Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Taxi (AB-CD-12)",
+    "plate": "FK-RH-71",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:35:55.156Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Taxi (AB-CD-12)",
+    "plate": "KD-BS-87",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:35:55.156Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Taxi (AB-CD-12)",
+    "plate": "TV-WK-46",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:35:55.156Z",
+    "source": "gallery"
+  }
+]

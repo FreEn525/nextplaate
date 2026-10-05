@@ -1,1 +1,146 @@
-[]
+[
+  {
+    "category": "Cars (1995, ABC 123)",
+    "plate": "AHB 458",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:38.274Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (1995, ABC 123)",
+    "plate": "RBO 305",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:38.274Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (1995, ABC 123)",
+    "plate": "RZZ 573",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:38.274Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (Mercosur, AB 123 CD)",
+    "plate": "AD 979 PY",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:31.368Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (Mercosur, AB 123 CD)",
+    "plate": "AI 454 XX",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:31.368Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (Mercosur, AB 123 CD)",
+    "plate": "AI 506 VG",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:31.368Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "D001BMB",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:42.321Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "D001BXA",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:42.321Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "D023AEB",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:42.321Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (1995, 123 ABC)",
+    "plate": "234 KYA",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:50.263Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (1995, 123 ABC)",
+    "plate": "321 LOM",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:50.263Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (1995, 123 ABC)",
+    "plate": "546 FCU",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:50.263Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (Mercosur, A123BCD)",
+    "plate": "A098UBM",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:34.398Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (Mercosur, A123BCD)",
+    "plate": "A124YDA",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:34.398Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (Mercosur, A123BCD)",
+    "plate": "A269SSV",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:34.398Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (1995, 101 ABC 123)",
+    "plate": "101 GPI 331",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:46.276Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (1995, 101 ABC 123)",
+    "plate": "101 KQI 074",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:46.276Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (1995, 101 ABC 123)",
+    "plate": "101 LWR 090",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:46.276Z",
+    "source": "gallery"
+  }
+]

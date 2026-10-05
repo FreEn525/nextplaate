@@ -1,1 +1,122 @@
-[]
+[
+  {
+    "category": "Cars (1234(5))",
+    "plate": "2096",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:20.277Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (1234(5))",
+    "plate": "43874",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:20.277Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (1234(5))",
+    "plate": "58357",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:20.277Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (A 1234)",
+    "plate": "N 1400",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:13.865Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (A 1234)",
+    "plate": "R 1314",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:13.865Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (A 1234)",
+    "plate": "S 5600",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:13.865Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (A 1234)",
+    "plate": "P 7356",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:24.359Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (A 1234)",
+    "plate": "R 5285",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:24.359Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (A 1234)",
+    "plate": "R 6646",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:24.359Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Provisional (1234)",
+    "plate": "0039",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:28.312Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Provisional (1234)",
+    "plate": "0186",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:28.312Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Provisional (1234)",
+    "plate": "0247",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:28.312Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "RIC 23",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:17.264Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "S0S0",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:17.264Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "YACHT",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:17.264Z",
+    "source": "gallery"
+  }
+]

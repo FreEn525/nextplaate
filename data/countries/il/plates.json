@@ -1,1 +1,194 @@
-[]
+[
+  {
+    "category": "Dealer",
+    "plate": "602-529",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:25.044Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Dealer",
+    "plate": "603-867",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:25.044Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Dealer",
+    "plate": "604-210",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:25.044Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "33-232-21",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:28.098Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "58-077-21",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:28.098Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "94-081-22",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:28.098Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military",
+    "plate": "172539-צ",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:19.065Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military",
+    "plate": "247331-צ",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:19.065Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military",
+    "plate": "283361-צ",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:19.065Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military Police",
+    "plate": "222-מ.צ",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:31.061Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military Police",
+    "plate": "224-מ.צ",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:31.061Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military Police",
+    "plate": "260-מ.צ",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:31.061Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police",
+    "plate": "18-000-מ",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:16.030Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police",
+    "plate": "25-235-מ",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:16.030Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police",
+    "plate": "40-096-מ",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:16.030Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Regular plates",
+    "plate": "15-710-75",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:13.109Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Regular plates",
+    "plate": "23-139-67",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:13.109Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Regular plates",
+    "plate": "540-58-204",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:13.109Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "142-416",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:22.029Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "160-344",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:22.029Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "229-829",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:22.029Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Sportcars",
+    "plate": "S-100 294",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:34.105Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Sportcars",
+    "plate": "S-102 440",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:34.105Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Sportcars",
+    "plate": "S-108 069",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:34.105Z",
+    "source": "gallery"
+  }
+]

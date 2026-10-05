@@ -1,1 +1,122 @@
-[]
+[
+  {
+    "category": "AB1(234)",
+    "plate": "NU6023",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:19.994Z",
+    "source": "gallery"
+  },
+  {
+    "category": "AB1(234)",
+    "plate": "XZ9383",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:19.994Z",
+    "source": "gallery"
+  },
+  {
+    "category": "AB1(234)",
+    "plate": "YJ2505",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:19.994Z",
+    "source": "gallery"
+  },
+  {
+    "category": "ABC1(23)",
+    "plate": "PAC633",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:22.952Z",
+    "source": "gallery"
+  },
+  {
+    "category": "ABC1(23)",
+    "plate": "PBM561",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:22.952Z",
+    "source": "gallery"
+  },
+  {
+    "category": "ABC1(23)",
+    "plate": "PUU739",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:22.952Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (1(2)ABC / A1BCD)",
+    "plate": "11YRC",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:25.883Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (1(2)ABC / A1BCD)",
+    "plate": "C9PYU",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:25.883Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (1(2)ABC / A1BCD)",
+    "plate": "D1EFT",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:25.883Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers",
+    "plate": "6Y891",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:31.972Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers",
+    "plate": "12N39",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:31.972Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers",
+    "plate": "732R9",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:31.972Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "CHELLI",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:28.965Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "NANCY5",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:28.965Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "WOKN",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:28.965Z",
+    "source": "gallery"
+  }
+]

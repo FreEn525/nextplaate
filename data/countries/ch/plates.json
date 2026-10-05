@@ -42,6 +42,54 @@
     "date": "2026-10-05T01:00:41.967Z"
   },
   {
+    "category": "Dealer (with \"U\")",
+    "plate": "VD 479 U",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:32.903Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Dealer (with \"U\")",
+    "plate": "VD 941 U",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:32.903Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Dealer (with \"U\")",
+    "plate": "VD 1171 U",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:32.903Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "CD GE 9-570",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:38.919Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "CD GE 72-9",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:38.919Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "CD GE 245-03",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:38.919Z",
+    "source": "gallery"
+  },
+  {
     "category": "Except vehicles and snowmobiles (brown)",
     "plate": "SG 892",
     "read": "SG 892",
@@ -61,6 +109,30 @@
     "read": "SZ 19",
     "count": 4,
     "date": "2026-10-05T01:00:48.704Z"
+  },
+  {
+    "category": "Military (black)",
+    "plate": "M 1327",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:35.954Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military (black)",
+    "plate": "M 67315",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:35.954Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military (black)",
+    "plate": "M 69442",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:35.954Z",
+    "source": "gallery"
   },
   {
     "category": "Motorcycles",
@@ -124,6 +196,30 @@
     "read": "VS 23488",
     "count": 1,
     "date": "2026-10-05T01:00:45.513Z"
+  },
+  {
+    "category": "Vehicles w/o paid duty (with \"Z\")",
+    "plate": "GE 1892 Z",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:29.848Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Vehicles w/o paid duty (with \"Z\")",
+    "plate": "VS 549 Z",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:29.848Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Vehicles w/o paid duty (with \"Z\")",
+    "plate": "ZH 1257 Z",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:29.848Z",
+    "source": "gallery"
   },
   {
     "category": "Work and fire vehicles (blue)",

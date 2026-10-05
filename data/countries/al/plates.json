@@ -61,5 +61,29 @@
     "read": "CV 138",
     "count": 1,
     "date": "2026-10-05T01:41:22.891Z"
+  },
+  {
+    "category": "Trailers (2011)",
+    "plate": "AG R 547",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:01.807Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (2011)",
+    "plate": "AH R 476",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:01.807Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (2011)",
+    "plate": "AM R 189",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:32:01.807Z",
+    "source": "gallery"
   }
 ]

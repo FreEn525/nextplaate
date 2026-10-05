@@ -1,1 +1,98 @@
-[]
+[
+  {
+    "category": "Cars",
+    "plate": "1835",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:46:46.863Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars",
+    "plate": "1889",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:46:46.863Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars",
+    "plate": "4201",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:46:46.863Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "AA75",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:46:49.829Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "AC34",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:46:49.829Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "HX86",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:46:49.829Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Provisional",
+    "plate": "1517 WW MC",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:46:55.887Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Provisional",
+    "plate": "1725 WW MC",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:46:55.886Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Provisional",
+    "plate": "2000 WW MC",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:46:55.886Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Royal family",
+    "plate": "MC32",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:46:52.865Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Royal family",
+    "plate": "MC44",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:46:52.865Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Royal family",
+    "plate": "MC54",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:46:52.865Z",
+    "source": "gallery"
+  }
+]

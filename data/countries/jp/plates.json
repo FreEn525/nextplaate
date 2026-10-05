@@ -1,1 +1,98 @@
-[]
+[
+  {
+    "category": "Commercial vehicles",
+    "plate": "世田谷 310 あ 7410",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:49.142Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Commercial vehicles",
+    "plate": "大宮 830 い 1122",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:49.142Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Commercial vehicles",
+    "plate": "奈良 100 あ 9832",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:49.142Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Commercial vehicles (Kei car)",
+    "plate": "袖ヶ浦 480 り 7690",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:55.179Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Commercial vehicles (Kei car)",
+    "plate": "豊橋 480 り 3995",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:55.179Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Commercial vehicles (Kei car)",
+    "plate": "金沢 580 り 33",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:55.179Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Private owners",
+    "plate": "多摩 300 Y 8223",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:46.147Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Private owners",
+    "plate": "山梨 301 せ 6028",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:46.147Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Private owners",
+    "plate": "山梨 336 な 718",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:46.147Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Private owners (Kei car)",
+    "plate": "なにわ 480 と 1145",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:52.151Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Private owners (Kei car)",
+    "plate": "横浜 581 ち 882",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:52.151Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Private owners (Kei car)",
+    "plate": "横浜 583 と 1714",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:52.151Z",
+    "source": "gallery"
+  }
+]

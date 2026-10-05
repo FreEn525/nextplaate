@@ -4,293 +4,392 @@
     "plate": "0619 OP",
     "read": "0619-OP",
     "count": 2,
-    "date": "2026-10-05T01:44:13.316Z"
+    "date": "2026-10-05T02:30:56.630Z"
   },
   {
     "category": "Cars (1992)",
     "plate": "6099 KO",
     "read": "6099-KO",
     "count": 2,
-    "date": "2026-10-05T01:44:13.672Z"
+    "date": "2026-10-05T02:30:56.986Z"
   },
   {
     "category": "Cars (1992)",
     "plate": "9507 AH",
     "read": "9507-AH",
     "count": 2,
-    "date": "2026-10-05T01:44:14.028Z"
+    "date": "2026-10-05T02:30:57.342Z"
   },
   {
     "category": "Cars (2000)",
     "plate": "3897 MBI",
-    "read": "3897 BI-M",
-    "count": 0,
-    "date": "2026-10-05T01:44:11.527Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:34:20.591Z",
+    "source": "gallery"
   },
   {
     "category": "Cars (2000)",
     "plate": "5897 TAB",
-    "read": "5897 AB-T",
-    "count": 0,
-    "date": "2026-10-05T01:44:11.887Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:34:20.591Z",
+    "source": "gallery"
   },
   {
     "category": "Cars (2000)",
     "plate": "6234 BAB",
-    "read": "6234 AB-B",
-    "count": 0,
-    "date": "2026-10-05T01:44:12.246Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:34:20.591Z",
+    "source": "gallery"
   },
   {
     "category": "Cars (2004)",
     "plate": "0801 KT-3",
     "read": "0801 KT-3",
     "count": 1,
-    "date": "2026-10-05T01:43:21.335Z"
+    "date": "2026-10-05T02:30:01.747Z"
   },
   {
     "category": "Cars (2004)",
     "plate": "4717 KH-7",
     "read": "4717 KH-7",
     "count": 2,
-    "date": "2026-10-05T01:43:21.695Z"
+    "date": "2026-10-05T02:30:02.107Z"
   },
   {
     "category": "Cars (2004)",
     "plate": "6383 EC-6",
     "read": "6383 EC-6",
     "count": 1,
-    "date": "2026-10-05T01:43:22.055Z"
+    "date": "2026-10-05T02:30:02.467Z"
   },
   {
     "category": "Diplomatic",
     "plate": "CC 9605-1",
     "read": "CC 9605-1",
     "count": 8,
-    "date": "2026-10-05T01:45:01.270Z"
+    "date": "2026-10-05T02:13:07.127Z"
   },
   {
     "category": "Diplomatic",
     "plate": "CD 2006-7",
     "read": "CD 2006-7",
     "count": 3,
-    "date": "2026-10-05T01:45:01.627Z"
+    "date": "2026-10-05T02:13:07.485Z"
   },
   {
     "category": "Diplomatic",
     "plate": "CD 9406-7",
     "read": "CD 9406-7",
     "count": 1,
-    "date": "2026-10-05T01:45:01.985Z"
+    "date": "2026-10-05T02:13:07.842Z"
   },
   {
     "category": "Electric vehicles (cars)",
     "plate": "E140 AO-6",
     "read": "E140 AO-6",
     "count": 2,
-    "date": "2026-10-05T01:45:03.052Z"
+    "date": "2026-10-05T02:13:08.909Z"
   },
   {
     "category": "Electric vehicles (cars)",
     "plate": "E284 AB-3",
     "read": "E284 AB-3",
     "count": 1,
-    "date": "2026-10-05T01:45:03.411Z"
+    "date": "2026-10-05T02:13:09.267Z"
   },
   {
     "category": "Electric vehicles (cars)",
     "plate": "E673 AE-2",
     "read": "E673 AE-2",
     "count": 1,
-    "date": "2026-10-05T01:45:03.769Z"
+    "date": "2026-10-05T02:13:09.625Z"
   },
   {
     "category": "Electric vehicles (motorcycles)",
     "plate": "E043 AA-7",
     "read": "E043 AA-7",
     "count": 1,
-    "date": "2026-10-05T01:45:06.627Z"
+    "date": "2026-10-05T02:13:12.474Z"
   },
   {
     "category": "Electric vehicles (motorcycles)",
     "plate": "E071 AA-4",
     "read": "E071 AA-4",
     "count": 1,
-    "date": "2026-10-05T01:45:06.988Z"
+    "date": "2026-10-05T02:13:12.832Z"
   },
   {
     "category": "Electric vehicles (motorcycles)",
     "plate": "E368 AA-5",
     "read": "E368 AA-5",
     "count": 1,
-    "date": "2026-10-05T01:45:07.346Z"
+    "date": "2026-10-05T02:13:13.191Z"
   },
   {
     "category": "Electric vehicles (trucks and buses)",
     "plate": "AA E047-1",
     "read": "AA E047-1",
     "count": 1,
-    "date": "2026-10-05T01:45:04.842Z"
+    "date": "2026-10-05T02:13:10.692Z"
   },
   {
     "category": "Electric vehicles (trucks and buses)",
     "plate": "AA E099-7",
     "read": "AA E099-7",
     "count": 2,
-    "date": "2026-10-05T01:45:05.202Z"
+    "date": "2026-10-05T02:13:11.050Z"
   },
   {
     "category": "Electric vehicles (trucks and buses)",
     "plate": "EE E001-5",
     "read": "EE E001-5",
     "count": 2,
-    "date": "2026-10-05T01:45:05.560Z"
+    "date": "2026-10-05T02:13:11.408Z"
+  },
+  {
+    "category": "Foreign citizens and enterprises",
+    "plate": "P 40418",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:34:29.618Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Foreign citizens and enterprises",
+    "plate": "P 90010",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:34:29.618Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Foreign citizens and enterprises",
+    "plate": "P 91179",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:34:29.618Z",
+    "source": "gallery"
   },
   {
     "category": "Motorcycles (2004)",
     "plate": "0700 AM-1",
     "read": "0700 AM-1",
     "count": 1,
-    "date": "2026-10-05T01:43:26.692Z"
+    "date": "2026-10-05T02:30:07.109Z"
   },
   {
     "category": "Motorcycles (2004)",
     "plate": "4444 AK-5",
     "read": "4444 AK-5",
     "count": 3,
-    "date": "2026-10-05T01:43:27.052Z"
+    "date": "2026-10-05T02:30:07.467Z"
   },
   {
     "category": "Motorcycles (2004)",
     "plate": "7104 AK-5",
     "read": "7104 AK-5",
     "count": 1,
-    "date": "2026-10-05T01:43:27.411Z"
+    "date": "2026-10-05T02:30:07.826Z"
   },
   {
     "category": "Police",
     "plate": "1290 ГК",
     "read": "1290-ГК",
     "count": 1,
-    "date": "2026-10-05T01:44:59.495Z"
+    "date": "2026-10-05T02:13:05.355Z"
   },
   {
     "category": "Police",
     "plate": "1356 БН",
     "read": "1356-БН",
     "count": 1,
-    "date": "2026-10-05T01:44:59.851Z"
+    "date": "2026-10-05T02:13:05.710Z"
   },
   {
     "category": "Police",
     "plate": "3780 МН",
     "read": "3780-МН",
     "count": 2,
-    "date": "2026-10-05T01:45:00.206Z"
+    "date": "2026-10-05T02:13:06.065Z"
+  },
+  {
+    "category": "Provisional",
+    "plate": "KP BP 6804",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:34:26.587Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Provisional",
+    "plate": "MK BP 8462",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:34:26.587Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Provisional",
+    "plate": "MT BP 8913",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:34:26.587Z",
+    "source": "gallery"
   },
   {
     "category": "Special machinery (2004)",
     "plate": "CE-4 5628",
     "read": "CE-4 5628",
     "count": 1,
-    "date": "2026-10-05T01:43:28.477Z"
+    "date": "2026-10-05T02:30:08.893Z"
   },
   {
     "category": "Special machinery (2004)",
     "plate": "IH-4 3152",
     "read": "IH-4 3152",
     "count": 1,
-    "date": "2026-10-05T01:43:28.835Z"
+    "date": "2026-10-05T02:30:09.252Z"
   },
   {
     "category": "Special machinery (2004)",
     "plate": "KA-7 4049",
     "read": "KA-7 4049",
     "count": 1,
-    "date": "2026-10-05T01:43:29.193Z"
+    "date": "2026-10-05T02:30:09.611Z"
+  },
+  {
+    "category": "Taxi",
+    "plate": "1 TAX 7359",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:34:23.559Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Taxi",
+    "plate": "3 TAX 1184",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:34:23.559Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Taxi",
+    "plate": "3 TAX 4222",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:34:23.559Z",
+    "source": "gallery"
   },
   {
     "category": "Trailers (1992)",
     "plate": "0222 KA",
-    "read": "0222",
-    "count": 390,
-    "date": "2026-10-05T01:44:16.866Z"
+    "read": "0222 KA",
+    "count": 9,
+    "date": "2026-10-05T02:31:30.837Z"
   },
   {
     "category": "Trailers (1992)",
     "plate": "0429 OM",
-    "read": "0429",
-    "count": 63,
-    "date": "2026-10-05T01:44:17.223Z"
+    "read": "0429 OM",
+    "count": 1,
+    "date": "2026-10-05T02:31:31.195Z"
   },
   {
     "category": "Trailers (1992)",
     "plate": "7287 TA",
-    "read": "7287",
-    "count": 69,
-    "date": "2026-10-05T01:44:17.580Z"
+    "read": "7287 TA",
+    "count": 1,
+    "date": "2026-10-05T02:31:31.554Z"
   },
   {
     "category": "Trailers and semitrailers (2004)",
     "plate": "A 1057 K-1",
     "read": "A 1057 K-1",
     "count": 1,
-    "date": "2026-10-05T01:43:24.907Z"
+    "date": "2026-10-05T02:30:05.322Z"
   },
   {
     "category": "Trailers and semitrailers (2004)",
     "plate": "A 6447 A-1",
     "read": "A 6447 A-1",
     "count": 1,
-    "date": "2026-10-05T01:43:25.266Z"
+    "date": "2026-10-05T02:30:05.681Z"
   },
   {
     "category": "Trailers and semitrailers (2004)",
     "plate": "A 9400 E-7",
     "read": "A 9400 E-7",
     "count": 1,
-    "date": "2026-10-05T01:43:25.625Z"
+    "date": "2026-10-05T02:30:06.041Z"
+  },
+  {
+    "category": "Transit plates (2004)",
+    "plate": "6IB T 2754",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:34:17.613Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Transit plates (2004)",
+    "plate": "6IB T 3399",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:34:17.613Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Transit plates (2004)",
+    "plate": "8AP T 6938",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:34:17.613Z",
+    "source": "gallery"
   },
   {
     "category": "Trucks and buses (1992)",
     "plate": "AC 9877",
-    "read": "9877-AC",
-    "count": 0,
-    "date": "2026-10-05T01:44:15.088Z"
+    "read": "AC 9877",
+    "count": 3,
+    "date": "2026-10-05T02:31:23.749Z"
   },
   {
     "category": "Trucks and buses (1992)",
     "plate": "CA 0776",
-    "read": "0776-CA",
-    "count": 0,
-    "date": "2026-10-05T01:44:15.444Z"
+    "read": "CA 0776",
+    "count": 2,
+    "date": "2026-10-05T02:31:26.727Z"
   },
   {
     "category": "Trucks and buses (1992)",
     "plate": "KM 6937",
-    "read": "6937-KM",
-    "count": 0,
-    "date": "2026-10-05T01:44:15.800Z"
+    "read": "KM 6937",
+    "count": 1,
+    "date": "2026-10-05T02:31:29.772Z"
   },
   {
     "category": "Trucks and buses (2004)",
     "plate": "AK 2257-6",
     "read": "AK 2257-6",
     "count": 1,
-    "date": "2026-10-05T01:43:23.122Z"
+    "date": "2026-10-05T02:30:03.535Z"
   },
   {
     "category": "Trucks and buses (2004)",
     "plate": "AP 6981-1",
     "read": "AP 6981-1",
     "count": 2,
-    "date": "2026-10-05T01:43:23.481Z"
+    "date": "2026-10-05T02:30:03.895Z"
   },
   {
     "category": "Trucks and buses (2004)",
     "plate": "AP 9665-1",
     "read": "AP 9665-1",
     "count": 1,
-    "date": "2026-10-05T01:43:23.839Z"
+    "date": "2026-10-05T02:30:04.254Z"
   }
 ]

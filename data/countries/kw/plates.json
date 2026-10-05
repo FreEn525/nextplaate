@@ -1,1 +1,74 @@
-[]
+[
+  {
+    "category": "Cars",
+    "plate": "15-54370",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:34.469Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars",
+    "plate": "22-30625",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:34.469Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars",
+    "plate": "90-38328",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:34.469Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "105-202",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:43.498Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "110-140",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:43.498Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "600 3",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:40.475Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "1226 3",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:40.475Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "3225 3",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:40.475Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Public transport",
+    "plate": "95-15792",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:37.463Z",
+    "source": "gallery"
+  }
+]

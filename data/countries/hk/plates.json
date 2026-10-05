@@ -1,1 +1,50 @@
-[]
+[
+  {
+    "category": "AB 1234",
+    "plate": "NC 1399",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:40:39.866Z",
+    "source": "gallery"
+  },
+  {
+    "category": "AB 1234",
+    "plate": "NM 9868",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:40:39.866Z",
+    "source": "gallery"
+  },
+  {
+    "category": "AB 1234",
+    "plate": "YS 667",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:40:39.866Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "73V03V0M",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:40:42.823Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "814",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:40:42.823Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "BR1GHT 8",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:40:42.823Z",
+    "source": "gallery"
+  }
+]

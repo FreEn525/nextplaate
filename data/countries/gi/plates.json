@@ -1,1 +1,98 @@
-[]
+[
+  {
+    "category": "Regular car plates (G 1234 A)",
+    "plate": "G 1267 G",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:27.597Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Regular car plates (G 1234 A)",
+    "plate": "G 4684 G",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:27.597Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Regular car plates (G 1234 A)",
+    "plate": "G 6810 B",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:27.597Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Regular car plates (G 12345)",
+    "plate": "G 42",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:24.647Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Regular car plates (G 12345)",
+    "plate": "G 132",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:24.647Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Regular car plates (G 12345)",
+    "plate": "G 6647",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:24.647Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Temporary",
+    "plate": "G 1552 D",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:33.619Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Temporary",
+    "plate": "G 1906 E",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:33.620Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Temporary",
+    "plate": "G 2209 D",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:33.619Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers",
+    "plate": "GT 0046",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:30.575Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers",
+    "plate": "GT 0049",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:30.575Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers",
+    "plate": "GT 0133",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:30.575Z",
+    "source": "gallery"
+  }
+]

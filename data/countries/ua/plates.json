@@ -1,24 +1,51 @@
 [
   {
+    "category": "Cars and trucks (1995)",
+    "plate": "14 296-45 TA",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:36.289Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars and trucks (1995)",
+    "plate": "16 095-93 OT",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:36.289Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars and trucks (1995)",
+    "plate": "18 566-48 PB",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:36.289Z",
+    "source": "gallery"
+  },
+  {
     "category": "Dealer (2004)",
     "plate": "T4 TE 2773",
-    "read": "T4 2773 TE",
-    "count": 0,
-    "date": "2026-10-05T01:56:46.613Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:24.148Z",
+    "source": "gallery"
   },
   {
     "category": "Dealer (2004)",
     "plate": "T4 TP 4881",
-    "read": "T4 4881 TP",
-    "count": 0,
-    "date": "2026-10-05T01:56:50.581Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:24.147Z",
+    "source": "gallery"
   },
   {
     "category": "Dealer (2004)",
     "plate": "T5 BI 7208",
-    "read": "T5 7208 BI",
-    "count": 0,
-    "date": "2026-10-05T01:56:53.619Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:24.148Z",
+    "source": "gallery"
   },
   {
     "category": "Diplomatic",
@@ -40,6 +67,54 @@
     "read": "221",
     "count": 367,
     "date": "2026-10-05T01:58:23.612Z"
+  },
+  {
+    "category": "Government agencies",
+    "plate": "AE 103 E",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:33.209Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Government agencies",
+    "plate": "HA 121 G",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:33.209Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Government agencies",
+    "plate": "IM 113 G",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:33.209Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military (2004)",
+    "plate": "1133 Ф4",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:27.209Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military (2004)",
+    "plate": "1175 Ф4",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:27.209Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military (2004)",
+    "plate": "6437 Т5",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:27.209Z",
+    "source": "gallery"
   },
   {
     "category": "Mopeds (2004)",
@@ -124,6 +199,30 @@
     "read": "14 1735",
     "count": 1,
     "date": "2026-10-05T01:57:05.707Z"
+  },
+  {
+    "category": "Public transport (1995)",
+    "plate": "04 000-06 AA",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:39.241Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Public transport (1995)",
+    "plate": "04 017-32 AA",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:39.241Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Public transport (1995)",
+    "plate": "04 036-33 AA",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:39.241Z",
+    "source": "gallery"
   },
   {
     "category": "Public transport (2004)",
@@ -233,23 +332,42 @@
   {
     "category": "Transit plates (2004)",
     "plate": "05 CH 8725",
-    "read": "05 8725 CH",
-    "count": 0,
-    "date": "2026-10-05T01:56:34.282Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:21.121Z",
+    "source": "gallery"
   },
   {
     "category": "Transit plates (2004)",
     "plate": "16 BP 3159",
-    "read": "16 3159 BP",
-    "count": 0,
-    "date": "2026-10-05T01:56:37.201Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:21.121Z",
+    "source": "gallery"
   },
   {
     "category": "Transit plates (2004)",
     "plate": "21 BA 0640",
-    "read": "21 0640 BA",
-    "count": 0,
-    "date": "2026-10-05T01:56:40.192Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:21.121Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "11 SOPRANOS",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:42.288Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "16 STORM",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:42.288Z",
+    "source": "gallery"
   },
   {
     "category": "Vanity Plates",
@@ -257,6 +375,14 @@
     "read": "HA OM",
     "count": 0,
     "date": "2026-10-05T01:31:47.333Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "16 VRSNSMV",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:42.288Z",
+    "source": "gallery"
   },
   {
     "category": "Vanity Plates",
@@ -296,22 +422,25 @@
   {
     "category": "Work vehicles (2004)",
     "plate": "02058 T AX",
-    "read": "AX 02058",
-    "count": 0,
-    "date": "2026-10-05T01:57:14.627Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:30.261Z",
+    "source": "gallery"
   },
   {
     "category": "Work vehicles (2004)",
     "plate": "03213 T AI",
-    "read": "AI 03213",
-    "count": 0,
-    "date": "2026-10-05T01:57:17.635Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:30.261Z",
+    "source": "gallery"
   },
   {
     "category": "Work vehicles (2004)",
     "plate": "10696 T AE",
-    "read": "AE 10696",
-    "count": 0,
-    "date": "2026-10-05T01:57:20.618Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:30.261Z",
+    "source": "gallery"
   }
 ]

@@ -1,1 +1,50 @@
-[]
+[
+  {
+    "category": "JSY123",
+    "plate": "J139991",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:43:01.165Z",
+    "source": "gallery"
+  },
+  {
+    "category": "JSY123",
+    "plate": "JSY18",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:43:01.165Z",
+    "source": "gallery"
+  },
+  {
+    "category": "JSY123",
+    "plate": "JSY746",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:43:01.165Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Regular plates (J123456)",
+    "plate": "J10381",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:58.248Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Regular plates (J123456)",
+    "plate": "J76466",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:58.248Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Regular plates (J123456)",
+    "plate": "J87037",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:58.248Z",
+    "source": "gallery"
+  }
+]

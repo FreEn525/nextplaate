@@ -107,23 +107,26 @@
   {
     "category": "Temporary",
     "plate": "016 B 964 29",
-    "read": "016 B 964 29",
-    "count": 0,
-    "date": "2026-10-05T01:43:05.899Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:35:17.830Z",
+    "source": "gallery"
   },
   {
     "category": "Temporary",
     "plate": "879 M 985 26",
-    "read": "879 M 985 26",
-    "count": 0,
-    "date": "2026-10-05T01:43:06.254Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:35:17.830Z",
+    "source": "gallery"
   },
   {
     "category": "Temporary",
     "plate": "883 M 948 26",
-    "read": "883 M 948 26",
-    "count": 0,
-    "date": "2026-10-05T01:43:06.609Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:35:17.830Z",
+    "source": "gallery"
   },
   {
     "category": "Vanity Plates",

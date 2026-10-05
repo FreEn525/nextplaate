@@ -1,1 +1,314 @@
-[]
+[
+  {
+    "category": "Agricultural vehicles (1234)",
+    "plate": "M.A. 1258",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:35.629Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Agricultural vehicles (1234)",
+    "plate": "M.A. 2501",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:35.629Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Agricultural vehicles (1234)",
+    "plate": "M.A. 2555",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:35.629Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (12345)",
+    "plate": "22620",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:05.440Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (12345)",
+    "plate": "41576",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:05.440Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (12345)",
+    "plate": "44778",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:05.440Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (A1234)",
+    "plate": "H4739",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:08.441Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (A1234)",
+    "plate": "N1031",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:08.441Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (A1234)",
+    "plate": "S6287",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:08.441Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic (123)",
+    "plate": "CD 60",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:41.605Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic (123)",
+    "plate": "CD101",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:41.605Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic (123)",
+    "plate": "CD109",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:41.605Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Electric vehicles (123(4))",
+    "plate": "VE139",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:29.582Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Electric vehicles (123(4))",
+    "plate": "VE148",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:29.582Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Electric vehicles (123(4))",
+    "plate": "VE156",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:29.582Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Mopeds",
+    "plate": "H228",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:17.504Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Mopeds",
+    "plate": "H661",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:17.504Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Mopeds",
+    "plate": "H834",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:17.504Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "T395",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:14.445Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "V985",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:14.445Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "X350",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:14.445Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Oldtimers (123)",
+    "plate": "102H",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:26.535Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Oldtimers (123)",
+    "plate": "112H",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:26.535Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Oldtimers (123)",
+    "plate": "119H",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:26.535Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police (123)",
+    "plate": "192",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:38.570Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police (123)",
+    "plate": "207",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:38.571Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police (123)",
+    "plate": "209",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:38.571Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special machinery (1234)",
+    "plate": "M.O. 0283",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:32.556Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special machinery (1234)",
+    "plate": "M.O. 0374",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:32.556Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special machinery (1234)",
+    "plate": "M.O. 0403",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:32.556Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Temporary (E 1234/1234 E)",
+    "plate": "8766 E",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:23.506Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Temporary (E 1234/1234 E)",
+    "plate": "9521 E",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:23.506Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Temporary (E 1234/1234 E)",
+    "plate": "E 2459",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:23.506Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (1234)",
+    "plate": "R2737",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:20.534Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (1234)",
+    "plate": "R3111",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:20.534Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (1234)",
+    "plate": "R3122",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:20.534Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "ELI46",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:11.436Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "JAY20",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:11.436Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "SM001",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:11.436Z",
+    "source": "gallery"
+  }
+]

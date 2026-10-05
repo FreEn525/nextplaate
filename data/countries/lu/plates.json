@@ -4,83 +4,107 @@
     "plate": "E 1934",
     "read": "E 1934",
     "count": 2,
-    "date": "2026-10-05T01:16:41.518Z"
+    "date": "2026-10-05T02:07:09.808Z"
   },
   {
     "category": "1966 year system",
     "plate": "F 8564",
     "read": "F 8564",
     "count": 2,
-    "date": "2026-10-05T01:16:41.873Z"
+    "date": "2026-10-05T02:07:10.163Z"
   },
   {
     "category": "1966 year system",
     "plate": "P 1933",
     "read": "P 1933",
     "count": 1,
-    "date": "2026-10-05T01:16:42.228Z"
+    "date": "2026-10-05T02:07:10.517Z"
   },
   {
     "category": "1978 year system",
     "plate": "RV 456",
     "read": "RV 456",
     "count": 1,
-    "date": "2026-10-05T01:16:39.746Z"
+    "date": "2026-10-05T02:07:08.039Z"
   },
   {
     "category": "1978 year system",
     "plate": "TA 236",
     "read": "TA 236",
     "count": 2,
-    "date": "2026-10-05T01:16:40.101Z"
+    "date": "2026-10-05T02:07:08.395Z"
   },
   {
     "category": "1978 year system",
     "plate": "TV 684",
     "read": "TV 684",
     "count": 2,
-    "date": "2026-10-05T01:16:40.457Z"
+    "date": "2026-10-05T02:07:08.750Z"
   },
   {
     "category": "2003 year system",
     "plate": "BX 4563",
     "read": "BX 4563",
     "count": 1,
-    "date": "2026-10-05T01:16:37.975Z"
+    "date": "2026-10-05T02:07:06.270Z"
   },
   {
     "category": "2003 year system",
     "plate": "HG 0519",
     "read": "HG 0519",
     "count": 1,
-    "date": "2026-10-05T01:16:38.332Z"
+    "date": "2026-10-05T02:07:06.624Z"
   },
   {
     "category": "2003 year system",
     "plate": "PM 0601",
     "read": "PM 0601",
     "count": 1,
-    "date": "2026-10-05T01:16:38.686Z"
+    "date": "2026-10-05T02:07:06.979Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "CD 33-00",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:46:25.839Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "CD 73-45",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:46:25.839Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "CD 77-31",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:46:25.840Z",
+    "source": "gallery"
   },
   {
     "category": "Vanity Plates",
     "plate": "1427",
     "read": "1427",
     "count": 6,
-    "date": "2026-10-05T01:16:43.289Z"
+    "date": "2026-10-05T02:07:11.577Z"
   },
   {
     "category": "Vanity Plates",
     "plate": "23313",
     "read": "23313",
     "count": 1,
-    "date": "2026-10-05T01:16:43.642Z"
+    "date": "2026-10-05T02:07:11.931Z"
   },
   {
     "category": "Vanity Plates",
     "plate": "53377",
     "read": "53377",
     "count": 1,
-    "date": "2026-10-05T01:16:43.996Z"
+    "date": "2026-10-05T02:07:12.284Z"
   }
 ]

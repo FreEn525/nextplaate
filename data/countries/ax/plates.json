@@ -1,1 +1,122 @@
-[]
+[
+  {
+    "category": "Cars (ÅL 12345)",
+    "plate": "ÅL 10500",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:33.360Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (ÅL 12345)",
+    "plate": "ÅL 12968",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:33.360Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (ÅL 12345)",
+    "plate": "ÅL 16319",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:33.360Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (ÅLA 1234)",
+    "plate": "ÅLA 4642",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:36.377Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (ÅLA 1234)",
+    "plate": "ÅLA 5168",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:36.377Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (ÅLA 1234)",
+    "plate": "ÅLA 7020",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:36.377Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Provisional (ÅF 1234)",
+    "plate": "ÅF 6841",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:45.349Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Provisional (ÅF 1234)",
+    "plate": "ÅF 6962",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:45.348Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Provisional (ÅF 1234)",
+    "plate": "ÅF 6993",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:45.349Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (ÅS 1234)",
+    "plate": "ÅS 2704",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:42.419Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (ÅS 1234)",
+    "plate": "ÅS 8594",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:42.419Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (ÅS 1234)",
+    "plate": "ÅS 10959",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:42.419Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "ÅLAND 2",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:39.440Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "BOMAN2",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:39.440Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "LEO",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:39.440Z",
+    "source": "gallery"
+  }
+]

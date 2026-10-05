@@ -1,24 +1,51 @@
 [
   {
+    "category": "Dealer",
+    "plate": "OS PP-178",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:55.364Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Dealer",
+    "plate": "OS PP-274",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:55.364Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Dealer",
+    "plate": "ZG PP-1442",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:55.364Z",
+    "source": "gallery"
+  },
+  {
     "category": "Diplomatic",
     "plate": "025-A-020",
-    "read": "KR 020-R",
-    "count": 0,
-    "date": "2026-10-05T01:49:29.108Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:10.384Z",
+    "source": "gallery"
   },
   {
     "category": "Diplomatic",
     "plate": "053-A-024",
-    "read": "KR 024-R",
-    "count": 0,
-    "date": "2026-10-05T01:49:29.466Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:10.384Z",
+    "source": "gallery"
   },
   {
     "category": "Diplomatic",
     "plate": "097-A-001",
-    "read": "KR 001-R",
-    "count": 0,
-    "date": "2026-10-05T01:49:29.823Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:10.384Z",
+    "source": "gallery"
   },
   {
     "category": "Exceptional vehicles",
@@ -42,6 +69,30 @@
     "date": "2026-10-05T01:48:07.325Z"
   },
   {
+    "category": "Export transit plates",
+    "plate": "RH 199-BE",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:04.393Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Export transit plates",
+    "plate": "RH 290-AP",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:04.393Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Export transit plates",
+    "plate": "RH 718-BA",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:04.393Z",
+    "source": "gallery"
+  },
+  {
     "category": "Foreign citizens and enterprises",
     "plate": "ST 8783-U",
     "read": "ST 8783-U",
@@ -63,6 +114,30 @@
     "date": "2026-10-05T01:48:05.539Z"
   },
   {
+    "category": "Military",
+    "plate": "HV 236-MP",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:01.411Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military",
+    "plate": "HV 271-LV",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:01.410Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military",
+    "plate": "HV 420-LZ",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:01.411Z",
+    "source": "gallery"
+  },
+  {
     "category": "Motorcycles",
     "plate": "PU 563-OO",
     "read": "PU 563-OO",
@@ -82,6 +157,54 @@
     "read": "PU 7189-C",
     "count": 1,
     "date": "2026-10-05T01:48:09.109Z"
+  },
+  {
+    "category": "Oldtimers",
+    "plate": "KR PV-081",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:58.362Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Oldtimers",
+    "plate": "ZG PV-0470",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:58.361Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Oldtimers",
+    "plate": "ZG PV-4004",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:36:58.361Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police",
+    "plate": "170-344",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:07.373Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police",
+    "plate": "190-452",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:07.373Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police",
+    "plate": "190-487",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:07.373Z",
+    "source": "gallery"
   },
   {
     "category": "Regular plates",

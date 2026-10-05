@@ -1,5 +1,53 @@
 [
   {
+    "category": "Agricultural vehicles (1960)",
+    "plate": "CB 88-39",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:54.385Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Agricultural vehicles (1960)",
+    "plate": "HO 43-40",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:54.385Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Agricultural vehicles (1960)",
+    "plate": "PB 50-23",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:54.385Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (1960)",
+    "plate": "ABJ 45-96",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:36.328Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (1960)",
+    "plate": "AHC 50-49",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:36.328Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (1960)",
+    "plate": "HOK 68-32",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:36.328Z",
+    "source": "gallery"
+  },
+  {
     "category": "Cars (2001)",
     "plate": "1CA 8407",
     "read": "1CA 8407",
@@ -19,6 +67,30 @@
     "read": "9C2 1553",
     "count": 2,
     "date": "2026-10-05T01:45:19.455Z"
+  },
+  {
+    "category": "Commercial vehicles (1960)",
+    "plate": "ALC 17-07",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:42.378Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Commercial vehicles (1960)",
+    "plate": "AX 63-60",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:42.378Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Commercial vehicles (1960)",
+    "plate": "KMA 17-57",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:42.378Z",
+    "source": "gallery"
   },
   {
     "category": "Dealer (2001)",
@@ -44,44 +116,74 @@
   {
     "category": "Diplomatic (2004)",
     "plate": "011 HC08",
-    "read": "011HC08",
-    "count": 0,
-    "date": "2026-10-05T01:46:05.870Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:51.417Z",
+    "source": "gallery"
   },
   {
     "category": "Diplomatic (2004)",
     "plate": "023 XX15",
-    "read": "023XX15",
-    "count": 0,
-    "date": "2026-10-05T01:46:06.224Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:51.417Z",
+    "source": "gallery"
   },
   {
     "category": "Diplomatic (2004)",
     "plate": "061 CD23",
-    "read": "061CD23",
-    "count": 0,
-    "date": "2026-10-05T01:46:06.579Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:51.417Z",
+    "source": "gallery"
   },
   {
     "category": "Diplomatic (2025)",
     "plate": "001 42CD",
-    "read": "00142CD",
-    "count": 0,
-    "date": "2026-10-05T01:46:24.575Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:06.414Z",
+    "source": "gallery"
   },
   {
     "category": "Diplomatic (2025)",
     "plate": "002 28CD",
-    "read": "00228CD",
-    "count": 0,
-    "date": "2026-10-05T01:46:24.932Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:06.414Z",
+    "source": "gallery"
   },
   {
     "category": "Diplomatic (2025)",
     "plate": "006 26CD",
-    "read": "00626CD",
-    "count": 0,
-    "date": "2026-10-05T01:46:25.286Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:06.414Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Electric vehicles",
+    "plate": "EL5 57CP",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:48.359Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Electric vehicles",
+    "plate": "EL6 41FT",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:48.359Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Electric vehicles",
+    "plate": "EL8 39AE",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:48.359Z",
+    "source": "gallery"
   },
   {
     "category": "Export transit plates",
@@ -103,6 +205,54 @@
     "read": "AL6 LZE",
     "count": 3,
     "date": "2026-10-05T01:46:08.343Z"
+  },
+  {
+    "category": "Foreign citizens and enterprises (1960)",
+    "plate": "FMA 06-82",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:45.440Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Foreign citizens and enterprises (1960)",
+    "plate": "KMA 01-42",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:45.440Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Foreign citizens and enterprises (1960)",
+    "plate": "SUJ 22-45",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:45.440Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military (1960)",
+    "plate": "214 75-56",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:00.378Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military (1960)",
+    "plate": "217 43-76",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:00.378Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military (1960)",
+    "plate": "220 11-55",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:00.378Z",
+    "source": "gallery"
   },
   {
     "category": "Mopeds (1956)",
@@ -147,6 +297,30 @@
     "date": "2026-10-05T01:46:23.514Z"
   },
   {
+    "category": "Motorcycles (1960)",
+    "plate": "BV1 77-15",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:39.444Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (1960)",
+    "plate": "OVA 32-50",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:39.444Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (1960)",
+    "plate": "PE1 45-70",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:39.444Z",
+    "source": "gallery"
+  },
+  {
     "category": "Motorcycles (2001)",
     "plate": "2A B016",
     "read": "2A B016",
@@ -166,6 +340,30 @@
     "read": "9T 9851",
     "count": 1,
     "date": "2026-10-05T01:45:21.234Z"
+  },
+  {
+    "category": "Oldtimers (2001)",
+    "plate": "01V 6727",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:33.295Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Oldtimers (2001)",
+    "plate": "01V 7673",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:33.295Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Oldtimers (2001)",
+    "plate": "08V 0580",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:33.295Z",
+    "source": "gallery"
   },
   {
     "category": "Paper transit plates (2001)",
@@ -191,23 +389,74 @@
   {
     "category": "Special machinery (2001)",
     "plate": "A01 3505",
-    "read": "A 013505",
-    "count": 0,
-    "date": "2026-10-05T01:46:19.253Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:03.438Z",
+    "source": "gallery"
   },
   {
     "category": "Special machinery (2001)",
     "plate": "A01 6597",
-    "read": "A 016597",
-    "count": 0,
-    "date": "2026-10-05T01:46:19.611Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:03.438Z",
+    "source": "gallery"
   },
   {
     "category": "Special machinery (2001)",
     "plate": "K00 8685",
-    "read": "K 008685",
-    "count": 0,
-    "date": "2026-10-05T01:46:19.971Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:03.438Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Sportcars (2001)",
+    "plate": "01R 0580",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:30.301Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Sportcars (2001)",
+    "plate": "03R 0138",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:30.301Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Sportcars (2001)",
+    "plate": "11R 0470",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:30.301Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (1977)",
+    "plate": "24 DOA-99",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:57.388Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (1977)",
+    "plate": "40-AH-85",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:57.388Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (1977)",
+    "plate": "44-AI-59",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:37:57.388Z",
+    "source": "gallery"
   },
   {
     "category": "Vanity Plates",

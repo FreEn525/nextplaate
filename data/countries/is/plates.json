@@ -191,22 +191,25 @@
   {
     "category": "Vanity Plates",
     "plate": "LYNGAR",
-    "read": "L Y N G A R",
-    "count": 0,
-    "date": "2026-10-05T01:49:51.548Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:40:45.798Z",
+    "source": "gallery"
   },
   {
     "category": "Vanity Plates",
     "plate": "PUFFIN",
-    "read": "P U F F I N",
-    "count": 0,
-    "date": "2026-10-05T01:49:51.917Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:40:45.798Z",
+    "source": "gallery"
   },
   {
     "category": "Vanity Plates",
     "plate": "T BÍRD",
-    "read": "T B Í R D N",
-    "count": 0,
-    "date": "2026-10-05T01:49:52.279Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:40:45.798Z",
+    "source": "gallery"
   }
 ]

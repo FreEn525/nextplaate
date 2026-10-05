@@ -1,1 +1,554 @@
-[]
+[
+  {
+    "category": "ATV and snowmobiles",
+    "plate": "тр 1295 71",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:14.244Z",
+    "source": "gallery"
+  },
+  {
+    "category": "ATV and snowmobiles",
+    "plate": "ун 0061 07",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:14.244Z",
+    "source": "gallery"
+  },
+  {
+    "category": "ATV and snowmobiles",
+    "plate": "ун 0068 07",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:14.244Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars",
+    "plate": "у 007 ут 198",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:48:57.041Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars",
+    "plate": "у 475 та 27",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:48:57.041Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars",
+    "plate": "у 800 му 36",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:48:57.041Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "032 D 345 77",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:59.418Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "145 D 256 77",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:59.418Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "900 D 006 86",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:59.418Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic (Ambassador, chief of diplomatic mission)",
+    "plate": "011 CD 1 77",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:56.355Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic (Ambassador, chief of diplomatic mission)",
+    "plate": "086 CD 1 77",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:56.355Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic (Ambassador, chief of diplomatic mission)",
+    "plate": "127 CD 1 77",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:56.355Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic motorcycles",
+    "plate": "D 017 02 77",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:02.382Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic motorcycles",
+    "plate": "T 559 01 50",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:02.382Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic motorcycles",
+    "plate": "T 559 06 50",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:50:02.382Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Export transit plates",
+    "plate": "аа 907 67",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:35.330Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Export transit plates",
+    "plate": "вт 150 16",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:35.330Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Export transit plates",
+    "plate": "хх 195 65",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:35.330Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Foreign citizens and enterprises",
+    "plate": "ва 125 в 34",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:29.299Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Foreign citizens and enterprises",
+    "plate": "ва 791 в 34",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:29.299Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Foreign citizens and enterprises",
+    "plate": "нн 476 м 50",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:29.299Z",
+    "source": "gallery"
+  },
+  {
+    "category": "High authorities",
+    "plate": "в 347 аа",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:48:59.227Z",
+    "source": "gallery"
+  },
+  {
+    "category": "High authorities",
+    "plate": "р 054 аа",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:48:59.227Z",
+    "source": "gallery"
+  },
+  {
+    "category": "High authorities",
+    "plate": "р 157 аа",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:48:59.227Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military cars",
+    "plate": "0303 аа 15",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:17.296Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military cars",
+    "plate": "7415 во 15",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:17.296Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military cars",
+    "plate": "7778 мо 77",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:17.295Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military motorcycles",
+    "plate": "0030 ав 25",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:26.297Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military motorcycles",
+    "plate": "0131 ав 43",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:26.297Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military motorcycles",
+    "plate": "0346 со 15",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:26.297Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military trailers",
+    "plate": "мм 0024 18",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:20.367Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military trailers",
+    "plate": "рн 8380 21",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:20.367Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military trailers",
+    "plate": "хт 1456 50",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:20.367Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military Transits",
+    "plate": "ам 7308 25",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:44.349Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military Transits",
+    "plate": "ам 7479 25",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:44.349Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military Transits",
+    "plate": "ма 5793 77",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:44.349Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "0572 ра 27",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:11.279Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "0592 ас 75",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:11.279Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "5098 ам 55",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:11.279Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Paper transit plates",
+    "plate": "ма 2745 93",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:38.312Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Paper transit plates",
+    "plate": "ое 2895 99",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:38.312Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Paper transit plates",
+    "plate": "ух 1989 66",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:38.312Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police cars",
+    "plate": "м 0100 07",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:47.348Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police cars",
+    "plate": "о 2288 78",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:47.348Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police cars",
+    "plate": "р 5674 50",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:47.348Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police motorcycles",
+    "plate": "0001 а 99",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:53.360Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police motorcycles",
+    "plate": "0151 а 77",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:53.360Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police motorcycles",
+    "plate": "0168 а 77",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:53.360Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police trailers",
+    "plate": "004 в 99",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:50.472Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police trailers",
+    "plate": "008 в 99",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:50.472Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police trailers",
+    "plate": "020 а 27",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:50.472Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Public transport",
+    "plate": "вм 596 99",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:02.200Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Public transport",
+    "plate": "рк 695 77",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:02.200Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Public transport",
+    "plate": "хс 011 77",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:02.200Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "0021 ов 54",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:08.298Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "1057 ху 07",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:08.298Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "6696 сс 65",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:08.298Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special military vehicles",
+    "plate": "0224 от 39",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:23.330Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special military vehicles",
+    "plate": "0248 ут 12",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:23.329Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special military vehicles",
+    "plate": "0360 ун 50",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:23.330Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special Vehicles Transits",
+    "plate": "но 4633 52",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:41.421Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special Vehicles Transits",
+    "plate": "нт 3432 52",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:41.421Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special Vehicles Transits",
+    "plate": "рт 5760 61",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:41.421Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers",
+    "plate": "ак 0464 70",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:05.240Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers",
+    "plate": "оо 6945 25",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:05.240Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers",
+    "plate": "см 8783 61",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:05.240Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Transit plates",
+    "plate": "сх 993 е 54",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:32.426Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Transit plates",
+    "plate": "тк 653 т 77",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:32.426Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Transit plates",
+    "plate": "уу 199 к 77",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:49:32.426Z",
+    "source": "gallery"
+  }
+]

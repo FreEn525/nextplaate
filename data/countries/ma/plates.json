@@ -2,9 +2,10 @@
   {
     "category": "Regular plates",
     "plate": "3385|د|40",
-    "read": "3385|د|40 أ",
-    "count": 0,
-    "date": "2026-10-05T01:51:15.708Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:16.940Z",
+    "source": "gallery"
   },
   {
     "category": "Regular plates",
@@ -15,10 +16,19 @@
   },
   {
     "category": "Regular plates",
+    "plate": "66555|د|1",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:16.940Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Regular plates",
     "plate": "70144|د|8",
-    "read": "70144|د|8 أ",
-    "count": 0,
-    "date": "2026-10-05T01:51:16.417Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:16.940Z",
+    "source": "gallery"
   },
   {
     "category": "Trailers",

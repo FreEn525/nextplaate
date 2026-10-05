@@ -1,1 +1,290 @@
-[]
+[
+  {
+    "category": "Cars (1993)",
+    "plate": "MAI-023",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:36.483Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (1993)",
+    "plate": "SAB-284",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:36.483Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (1993)",
+    "plate": "UQU-405",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:36.483Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (2024)",
+    "plate": "BB-220-SS",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:27.515Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (2024)",
+    "plate": "GG-385-GD",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:27.515Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (2024)",
+    "plate": "II-227-PP",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:27.515Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "002 D 420",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:57.590Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "002 D 524",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:57.590Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "019 AS 008",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:57.590Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military",
+    "plate": "AA-007",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:54.562Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military",
+    "plate": "AI-108",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:54.562Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military",
+    "plate": "MP-839",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:54.562Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "OO 0631",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:33.489Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "OO 2583",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:33.489Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "WW 0424",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:33.489Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Temporary",
+    "plate": "G 0745",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:48.492Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Temporary",
+    "plate": "GB-0648",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:48.492Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Temporary",
+    "plate": "GP-7928",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:48.492Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Test license plates (TEST)",
+    "plate": "TEST-050",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:51.580Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Test license plates (TEST)",
+    "plate": "TEST-59",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:51.580Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Test license plates (TEST)",
+    "plate": "TEST-652",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:51.580Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers and special equipment (1993)",
+    "plate": "EA-566",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:39.536Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers and special equipment (1993)",
+    "plate": "KK-709",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:39.536Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers and special equipment (1993)",
+    "plate": "RR-512",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:39.536Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers and special equipment (2024)",
+    "plate": "BB-028-U",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:30.450Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers and special equipment (2024)",
+    "plate": "NN-655-L",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:30.450Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers and special equipment (2024)",
+    "plate": "SN-333-T",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:30.450Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Transit plates (123 ABC)",
+    "plate": "442 ABL",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:45.568Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Transit plates (123 ABC)",
+    "plate": "542 ACQ",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:45.568Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Transit plates (123 ABC)",
+    "plate": "818 ACM",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:45.568Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Transit plates (1234 AB)",
+    "plate": "1447 EJ",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:42.539Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Transit plates (1234 AB)",
+    "plate": "6170 NO",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:42.539Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Transit plates (1234 AB)",
+    "plate": "7400 AU",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:38:42.539Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "F11",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:00.642Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "NLO1",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:00.642Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "PCRO0M",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:00.641Z",
+    "source": "gallery"
+  }
+]

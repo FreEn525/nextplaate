@@ -5,8 +5,8 @@
     "upload": true,
     "uploadTypes": 5,
     "searchCategories": 5,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 15,
+    "categoriesWithPlate": 5
   },
   {
     "code": "ae",
@@ -23,8 +23,8 @@
     "upload": true,
     "uploadTypes": 4,
     "searchCategories": 4,
-    "plates": 9,
-    "categoriesWithPlate": 3
+    "plates": 12,
+    "categoriesWithPlate": 4
   },
   {
     "code": "am",
@@ -32,8 +32,8 @@
     "upload": true,
     "uploadTypes": 8,
     "searchCategories": 8,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 24,
+    "categoriesWithPlate": 8
   },
   {
     "code": "ar",
@@ -41,8 +41,8 @@
     "upload": true,
     "uploadTypes": 6,
     "searchCategories": 6,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 18,
+    "categoriesWithPlate": 6
   },
   {
     "code": "at",
@@ -50,8 +50,8 @@
     "upload": true,
     "uploadTypes": 9,
     "searchCategories": 9,
-    "plates": 24,
-    "categoriesWithPlate": 8
+    "plates": 27,
+    "categoriesWithPlate": 9
   },
   {
     "code": "au",
@@ -68,8 +68,8 @@
     "upload": true,
     "uploadTypes": 5,
     "searchCategories": 5,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 15,
+    "categoriesWithPlate": 5
   },
   {
     "code": "az",
@@ -77,8 +77,8 @@
     "upload": true,
     "uploadTypes": 4,
     "searchCategories": 5,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 15,
+    "categoriesWithPlate": 5
   },
   {
     "code": "ba",
@@ -86,8 +86,8 @@
     "upload": true,
     "uploadTypes": 5,
     "searchCategories": 5,
-    "plates": 9,
-    "categoriesWithPlate": 3
+    "plates": 15,
+    "categoriesWithPlate": 5
   },
   {
     "code": "be",
@@ -113,8 +113,8 @@
     "upload": true,
     "uploadTypes": 7,
     "searchCategories": 7,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 21,
+    "categoriesWithPlate": 7
   },
   {
     "code": "br",
@@ -122,8 +122,8 @@
     "upload": true,
     "uploadTypes": 13,
     "searchCategories": 13,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 39,
+    "categoriesWithPlate": 13
   },
   {
     "code": "bs",
@@ -131,8 +131,8 @@
     "upload": true,
     "uploadTypes": 7,
     "searchCategories": 7,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 18,
+    "categoriesWithPlate": 7
   },
   {
     "code": "by",
@@ -140,8 +140,8 @@
     "upload": true,
     "uploadTypes": 18,
     "searchCategories": 18,
-    "plates": 42,
-    "categoriesWithPlate": 14
+    "plates": 54,
+    "categoriesWithPlate": 18
   },
   {
     "code": "ca",
@@ -158,8 +158,8 @@
     "upload": true,
     "uploadTypes": 11,
     "searchCategories": 11,
-    "plates": 21,
-    "categoriesWithPlate": 7
+    "plates": 33,
+    "categoriesWithPlate": 11
   },
   {
     "code": "cl",
@@ -167,8 +167,8 @@
     "upload": true,
     "uploadTypes": 5,
     "searchCategories": 15,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 31,
+    "categoriesWithPlate": 12
   },
   {
     "code": "cn",
@@ -176,8 +176,8 @@
     "upload": true,
     "uploadTypes": 6,
     "searchCategories": 6,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 18,
+    "categoriesWithPlate": 6
   },
   {
     "code": "cy",
@@ -185,8 +185,8 @@
     "upload": true,
     "uploadTypes": 5,
     "searchCategories": 5,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 15,
+    "categoriesWithPlate": 5
   },
   {
     "code": "cz",
@@ -194,8 +194,8 @@
     "upload": true,
     "uploadTypes": 22,
     "searchCategories": 22,
-    "plates": 33,
-    "categoriesWithPlate": 11
+    "plates": 63,
+    "categoriesWithPlate": 21
   },
   {
     "code": "de",
@@ -203,8 +203,8 @@
     "upload": true,
     "uploadTypes": 15,
     "searchCategories": 16,
-    "plates": 27,
-    "categoriesWithPlate": 9
+    "plates": 48,
+    "categoriesWithPlate": 16
   },
   {
     "code": "dk",
@@ -239,8 +239,8 @@
     "upload": true,
     "uploadTypes": 4,
     "searchCategories": 4,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 12,
+    "categoriesWithPlate": 4
   },
   {
     "code": "es",
@@ -275,8 +275,8 @@
     "upload": true,
     "uploadTypes": 12,
     "searchCategories": 12,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 36,
+    "categoriesWithPlate": 12
   },
   {
     "code": "gg",
@@ -284,8 +284,8 @@
     "upload": true,
     "uploadTypes": 3,
     "searchCategories": 3,
-    "plates": 6,
-    "categoriesWithPlate": 2
+    "plates": 9,
+    "categoriesWithPlate": 3
   },
   {
     "code": "gi",
@@ -293,8 +293,8 @@
     "upload": true,
     "uploadTypes": 4,
     "searchCategories": 4,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 12,
+    "categoriesWithPlate": 4
   },
   {
     "code": "gr",
@@ -302,8 +302,8 @@
     "upload": true,
     "uploadTypes": 16,
     "searchCategories": 16,
-    "plates": 13,
-    "categoriesWithPlate": 5
+    "plates": 46,
+    "categoriesWithPlate": 16
   },
   {
     "code": "gu",
@@ -311,8 +311,8 @@
     "upload": true,
     "uploadTypes": 9,
     "searchCategories": 9,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 12,
+    "categoriesWithPlate": 5
   },
   {
     "code": "hk",
@@ -320,8 +320,8 @@
     "upload": true,
     "uploadTypes": 2,
     "searchCategories": 2,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 6,
+    "categoriesWithPlate": 2
   },
   {
     "code": "hr",
@@ -329,8 +329,8 @@
     "upload": true,
     "uploadTypes": 11,
     "searchCategories": 11,
-    "plates": 18,
-    "categoriesWithPlate": 6
+    "plates": 33,
+    "categoriesWithPlate": 11
   },
   {
     "code": "hu",
@@ -347,8 +347,8 @@
     "upload": true,
     "uploadTypes": 7,
     "searchCategories": 7,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 21,
+    "categoriesWithPlate": 7
   },
   {
     "code": "ie",
@@ -356,8 +356,8 @@
     "upload": true,
     "uploadTypes": 3,
     "searchCategories": 3,
-    "plates": 6,
-    "categoriesWithPlate": 2
+    "plates": 9,
+    "categoriesWithPlate": 3
   },
   {
     "code": "il",
@@ -365,8 +365,8 @@
     "upload": true,
     "uploadTypes": 9,
     "searchCategories": 8,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 24,
+    "categoriesWithPlate": 8
   },
   {
     "code": "iq",
@@ -374,8 +374,8 @@
     "upload": true,
     "uploadTypes": 4,
     "searchCategories": 4,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 12,
+    "categoriesWithPlate": 4
   },
   {
     "code": "ir",
@@ -383,8 +383,8 @@
     "upload": true,
     "uploadTypes": 16,
     "searchCategories": 16,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 42,
+    "categoriesWithPlate": 16
   },
   {
     "code": "is",
@@ -401,8 +401,8 @@
     "upload": true,
     "uploadTypes": 14,
     "searchCategories": 14,
-    "plates": 33,
-    "categoriesWithPlate": 12
+    "plates": 39,
+    "categoriesWithPlate": 14
   },
   {
     "code": "je",
@@ -410,8 +410,8 @@
     "upload": true,
     "uploadTypes": 2,
     "searchCategories": 2,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 6,
+    "categoriesWithPlate": 2
   },
   {
     "code": "jp",
@@ -419,8 +419,8 @@
     "upload": true,
     "uploadTypes": 4,
     "searchCategories": 4,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 12,
+    "categoriesWithPlate": 4
   },
   {
     "code": "ke",
@@ -428,8 +428,8 @@
     "upload": true,
     "uploadTypes": 12,
     "searchCategories": 12,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 35,
+    "categoriesWithPlate": 12
   },
   {
     "code": "kg",
@@ -437,8 +437,8 @@
     "upload": true,
     "uploadTypes": 12,
     "searchCategories": 12,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 36,
+    "categoriesWithPlate": 12
   },
   {
     "code": "kh",
@@ -446,8 +446,8 @@
     "upload": true,
     "uploadTypes": 7,
     "searchCategories": 7,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 18,
+    "categoriesWithPlate": 6
   },
   {
     "code": "kr",
@@ -455,8 +455,8 @@
     "upload": true,
     "uploadTypes": 3,
     "searchCategories": 3,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 9,
+    "categoriesWithPlate": 3
   },
   {
     "code": "kw",
@@ -464,8 +464,8 @@
     "upload": true,
     "uploadTypes": 4,
     "searchCategories": 4,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 9,
+    "categoriesWithPlate": 4
   },
   {
     "code": "kz",
@@ -473,8 +473,8 @@
     "upload": true,
     "uploadTypes": 18,
     "searchCategories": 18,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 54,
+    "categoriesWithPlate": 18
   },
   {
     "code": "la",
@@ -482,8 +482,8 @@
     "upload": true,
     "uploadTypes": 9,
     "searchCategories": 9,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 27,
+    "categoriesWithPlate": 9
   },
   {
     "code": "li",
@@ -491,8 +491,8 @@
     "upload": true,
     "uploadTypes": 9,
     "searchCategories": 9,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 27,
+    "categoriesWithPlate": 9
   },
   {
     "code": "lt",
@@ -509,8 +509,8 @@
     "upload": true,
     "uploadTypes": 5,
     "searchCategories": 5,
-    "plates": 12,
-    "categoriesWithPlate": 4
+    "plates": 15,
+    "categoriesWithPlate": 5
   },
   {
     "code": "lv",
@@ -527,7 +527,7 @@
     "upload": true,
     "uploadTypes": 2,
     "searchCategories": 2,
-    "plates": 6,
+    "plates": 7,
     "categoriesWithPlate": 2
   },
   {
@@ -536,8 +536,8 @@
     "upload": true,
     "uploadTypes": 4,
     "searchCategories": 4,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 12,
+    "categoriesWithPlate": 4
   },
   {
     "code": "md",
@@ -563,8 +563,8 @@
     "upload": true,
     "uploadTypes": 8,
     "searchCategories": 8,
-    "plates": 18,
-    "categoriesWithPlate": 6
+    "plates": 21,
+    "categoriesWithPlate": 7
   },
   {
     "code": "mn",
@@ -572,8 +572,8 @@
     "upload": true,
     "uploadTypes": 4,
     "searchCategories": 4,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 12,
+    "categoriesWithPlate": 4
   },
   {
     "code": "mp",
@@ -581,8 +581,8 @@
     "upload": true,
     "uploadTypes": 6,
     "searchCategories": 6,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 5,
+    "categoriesWithPlate": 2
   },
   {
     "code": "mt",
@@ -590,8 +590,8 @@
     "upload": true,
     "uploadTypes": 6,
     "searchCategories": 6,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 18,
+    "categoriesWithPlate": 6
   },
   {
     "code": "mx",
@@ -635,8 +635,8 @@
     "upload": true,
     "uploadTypes": 5,
     "searchCategories": 5,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 15,
+    "categoriesWithPlate": 5
   },
   {
     "code": "pl",
@@ -644,8 +644,8 @@
     "upload": true,
     "uploadTypes": 13,
     "searchCategories": 12,
-    "plates": 33,
-    "categoriesWithPlate": 11
+    "plates": 40,
+    "categoriesWithPlate": 12
   },
   {
     "code": "ps",
@@ -653,8 +653,8 @@
     "upload": true,
     "uploadTypes": 6,
     "searchCategories": 6,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 18,
+    "categoriesWithPlate": 6
   },
   {
     "code": "pt",
@@ -662,8 +662,8 @@
     "upload": true,
     "uploadTypes": 4,
     "searchCategories": 4,
-    "plates": 9,
-    "categoriesWithPlate": 3
+    "plates": 12,
+    "categoriesWithPlate": 4
   },
   {
     "code": "qa",
@@ -671,8 +671,8 @@
     "upload": true,
     "uploadTypes": 6,
     "searchCategories": 6,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 18,
+    "categoriesWithPlate": 6
   },
   {
     "code": "ro",
@@ -680,8 +680,8 @@
     "upload": true,
     "uploadTypes": 5,
     "searchCategories": 5,
-    "plates": 12,
-    "categoriesWithPlate": 4
+    "plates": 15,
+    "categoriesWithPlate": 5
   },
   {
     "code": "rs",
@@ -689,8 +689,8 @@
     "upload": true,
     "uploadTypes": 10,
     "searchCategories": 10,
-    "plates": 9,
-    "categoriesWithPlate": 3
+    "plates": 30,
+    "categoriesWithPlate": 10
   },
   {
     "code": "ru",
@@ -698,8 +698,8 @@
     "upload": true,
     "uploadTypes": 21,
     "searchCategories": 23,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 69,
+    "categoriesWithPlate": 23
   },
   {
     "code": "sa",
@@ -707,8 +707,8 @@
     "upload": true,
     "uploadTypes": 6,
     "searchCategories": 6,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 18,
+    "categoriesWithPlate": 6
   },
   {
     "code": "sc",
@@ -716,8 +716,8 @@
     "upload": true,
     "uploadTypes": 9,
     "searchCategories": 9,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 24,
+    "categoriesWithPlate": 8
   },
   {
     "code": "se",
@@ -743,8 +743,8 @@
     "upload": true,
     "uploadTypes": 4,
     "searchCategories": 4,
-    "plates": 1,
-    "categoriesWithPlate": 1
+    "plates": 10,
+    "categoriesWithPlate": 4
   },
   {
     "code": "sk",
@@ -752,8 +752,8 @@
     "upload": true,
     "uploadTypes": 21,
     "searchCategories": 21,
-    "plates": 48,
-    "categoriesWithPlate": 16
+    "plates": 57,
+    "categoriesWithPlate": 19
   },
   {
     "code": "sm",
@@ -761,8 +761,8 @@
     "upload": true,
     "uploadTypes": 13,
     "searchCategories": 13,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 39,
+    "categoriesWithPlate": 13
   },
   {
     "code": "su",
@@ -770,8 +770,8 @@
     "upload": true,
     "uploadTypes": 15,
     "searchCategories": 15,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 45,
+    "categoriesWithPlate": 15
   },
   {
     "code": "th",
@@ -779,8 +779,8 @@
     "upload": true,
     "uploadTypes": 9,
     "searchCategories": 9,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 27,
+    "categoriesWithPlate": 9
   },
   {
     "code": "tj",
@@ -788,8 +788,8 @@
     "upload": true,
     "uploadTypes": 10,
     "searchCategories": 10,
-    "plates": 15,
-    "categoriesWithPlate": 5
+    "plates": 29,
+    "categoriesWithPlate": 10
   },
   {
     "code": "tr",
@@ -806,8 +806,8 @@
     "upload": true,
     "uploadTypes": 19,
     "searchCategories": 19,
-    "plates": 45,
-    "categoriesWithPlate": 15
+    "plates": 60,
+    "categoriesWithPlate": 19
   },
   {
     "code": "uk",
@@ -833,8 +833,8 @@
     "upload": true,
     "uploadTypes": 9,
     "searchCategories": 9,
-    "plates": 21,
-    "categoriesWithPlate": 7
+    "plates": 27,
+    "categoriesWithPlate": 9
   },
   {
     "code": "va",
@@ -842,8 +842,8 @@
     "upload": true,
     "uploadTypes": 6,
     "searchCategories": 6,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 14,
+    "categoriesWithPlate": 5
   },
   {
     "code": "vn",
@@ -851,8 +851,8 @@
     "upload": true,
     "uploadTypes": 8,
     "searchCategories": 8,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 24,
+    "categoriesWithPlate": 8
   },
   {
     "code": "xx",

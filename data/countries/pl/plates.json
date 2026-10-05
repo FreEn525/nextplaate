@@ -15,10 +15,34 @@
   },
   {
     "category": "1976 year system",
+    "plate": "ROK 8992",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:48:23.065Z",
+    "source": "gallery"
+  },
+  {
+    "category": "1976 year system",
     "plate": "WBO 5331",
     "read": "BA 5331",
     "count": 0,
     "date": "2026-10-05T01:52:24.028Z"
+  },
+  {
+    "category": "1976 year system",
+    "plate": "WGW 823N",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:48:23.065Z",
+    "source": "gallery"
+  },
+  {
+    "category": "1976 year system",
+    "plate": "WIC 8729",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:48:23.065Z",
+    "source": "gallery"
   },
   {
     "category": "Authorities",
@@ -40,6 +64,30 @@
     "read": "HPW A512",
     "count": 1,
     "date": "2026-10-05T01:52:16.914Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "W 016600",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:48:26.130Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "W 028011",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:48:26.130Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "W 110500",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:48:26.130Z",
+    "source": "gallery"
   },
   {
     "category": "Electric vehicles",
@@ -128,9 +176,18 @@
   {
     "category": "Provisional and testing",
     "plate": "B2 5891",
-    "read": "B 5891",
-    "count": 0,
-    "date": "2026-10-05T01:52:19.757Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:48:17.062Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Provisional and testing",
+    "plate": "C3 4089",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:48:17.061Z",
+    "source": "gallery"
   },
   {
     "category": "Provisional and testing",
@@ -142,9 +199,10 @@
   {
     "category": "Provisional and testing",
     "plate": "S0 3853",
-    "read": "S 3853",
-    "count": 0,
-    "date": "2026-10-05T01:52:20.472Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:48:17.062Z",
+    "source": "gallery"
   },
   {
     "category": "Regular car plates",
@@ -191,43 +249,49 @@
   {
     "category": "Sportcars",
     "plate": "K0 069U",
-    "read": "K 069U",
-    "count": 0,
-    "date": "2026-10-05T01:52:34.376Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:48:29.140Z",
+    "source": "gallery"
   },
   {
     "category": "Sportcars",
     "plate": "K0 414U",
-    "read": "K 414U",
-    "count": 0,
-    "date": "2026-10-05T01:52:34.733Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:48:29.140Z",
+    "source": "gallery"
   },
   {
     "category": "Sportcars",
     "plate": "W8 751Y",
-    "read": "W 751Y",
-    "count": 0,
-    "date": "2026-10-05T01:52:35.089Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:48:29.140Z",
+    "source": "gallery"
   },
   {
     "category": "Vanity Plates",
     "plate": "G0 ARTY",
-    "read": "G ARTY",
-    "count": 0,
-    "date": "2026-10-05T01:52:21.535Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:48:20.063Z",
+    "source": "gallery"
   },
   {
     "category": "Vanity Plates",
     "plate": "P3 KOTEK",
-    "read": "P KOTEK",
-    "count": 0,
-    "date": "2026-10-05T01:52:21.892Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:48:20.062Z",
+    "source": "gallery"
   },
   {
     "category": "Vanity Plates",
     "plate": "P5 ATS",
-    "read": "P ATS",
-    "count": 0,
-    "date": "2026-10-05T01:52:22.249Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:48:20.063Z",
+    "source": "gallery"
   }
 ]

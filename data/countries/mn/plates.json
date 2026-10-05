@@ -1,1 +1,98 @@
-[]
+[
+  {
+    "category": "Cars",
+    "plate": "2294 БӨН",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:46:58.882Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars",
+    "plate": "4067 УЕН",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:46:58.882Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars",
+    "plate": "9393 УБЦ",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:46:58.882Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "БӨЗ 3510",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:07.858Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "БӨЗ 5517",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:07.858Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "УК 2368",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:07.858Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "7073 УН",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:04.850Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "7743 УР",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:04.850Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "8188 УН",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:04.850Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers",
+    "plate": "6079 ОЧ",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:01.880Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers",
+    "plate": "6673 АА",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:01.880Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers",
+    "plate": "9561 АЧ",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:01.880Z",
+    "source": "gallery"
+  }
+]

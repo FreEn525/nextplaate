@@ -21,6 +21,54 @@
     "date": "2026-10-05T01:10:23.233Z"
   },
   {
+    "category": "Administrative and technical staff",
+    "plate": "ΞΑ-2401",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:54.699Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Administrative and technical staff",
+    "plate": "ΞΑ-21040",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:54.699Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Administrative and technical staff",
+    "plate": "ΞΑ-21089",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:54.699Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Agricultural vehicles",
+    "plate": "AM 56394",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:57.676Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Agricultural vehicles",
+    "plate": "AM 58921",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:57.676Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Agricultural vehicles",
+    "plate": "AM 66363",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:57.676Z",
+    "source": "gallery"
+  },
+  {
     "category": "Cars",
     "plate": "ITI-9245",
     "read": "ITI 9245",
@@ -40,6 +88,78 @@
     "read": "XPI 2312",
     "count": 1,
     "date": "2026-10-05T01:09:41.035Z"
+  },
+  {
+    "category": "Coast Guard",
+    "plate": "ΛΣ-3001",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:40:06.695Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Coast Guard",
+    "plate": "ΛΣ-3458",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:40:06.695Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Coast Guard",
+    "plate": "ΛΣ-3528",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:40:06.695Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic corps",
+    "plate": "ΔΣ 10-69",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:51.786Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic corps",
+    "plate": "ΔΣ 89-13",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:51.786Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic corps",
+    "plate": "ΔΣ 101-4",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:51.786Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Government and public administrations",
+    "plate": "KHH-4282",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:36.616Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Government and public administrations",
+    "plate": "KHY-4940",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:36.616Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Government and public administrations",
+    "plate": "KTY-5145",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:36.616Z",
+    "source": "gallery"
   },
   {
     "category": "Mopeds",
@@ -84,10 +204,154 @@
     "date": "2026-10-05T01:10:07.022Z"
   },
   {
+    "category": "Oldtimers",
+    "plate": "IO-26283",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:48.640Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Oldtimers",
+    "plate": "IO-27906",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:48.639Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Oldtimers",
+    "plate": "IO-29025",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:48.639Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police",
+    "plate": "EA-21706",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:40:03.708Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police",
+    "plate": "EA-25939",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:40:03.708Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police",
+    "plate": "EA-29360",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:40:03.708Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Private trailers",
+    "plate": "TB-26090",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:40:00.670Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Private trailers",
+    "plate": "TB-66423",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:40:00.670Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Private trailers",
+    "plate": "TE-11777",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:40:00.670Z",
+    "source": "gallery"
+  },
+  {
     "category": "Tax-exempt vehicles",
     "plate": "EEE-5204",
     "read": "EEE 5204",
     "count": 1,
     "date": "2026-10-05T01:09:47.619Z"
+  },
+  {
+    "category": "Taxi",
+    "plate": "TAE-1009",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:45.665Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Taxi",
+    "plate": "TAE-1015",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:45.665Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Taxi",
+    "plate": "TAE-1577",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:45.665Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers",
+    "plate": "P-41876",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:42.688Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers",
+    "plate": "P-62450",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:42.688Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers",
+    "plate": "P-69721",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:42.688Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trucks",
+    "plate": "EKB-8477",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:39.695Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trucks",
+    "plate": "IAB-1921",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:39.695Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trucks",
+    "plate": "IAZ-6038",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:39:39.695Z",
+    "source": "gallery"
   }
 ]

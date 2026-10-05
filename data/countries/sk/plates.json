@@ -84,6 +84,30 @@
     "date": "2026-10-05T01:54:31.748Z"
   },
   {
+    "category": "Diplomatic",
+    "plate": "EE 10228",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:05.809Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "ZZ 44238",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:05.809Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "ZZ 72047",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:05.809Z",
+    "source": "gallery"
+  },
+  {
     "category": "Electric vehicles",
     "plate": "BB-578IB",
     "read": "BB-578IB",
@@ -147,6 +171,30 @@
     "date": "2026-10-05T01:54:26.430Z"
   },
   {
+    "category": "Military",
+    "plate": "67-38966",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:02.783Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military",
+    "plate": "71-00089",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:02.783Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military",
+    "plate": "72-56208",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:02.783Z",
+    "source": "gallery"
+  },
+  {
     "category": "Motorcycles",
     "plate": "AA 845RP",
     "read": "AA-845RP",
@@ -208,6 +256,30 @@
     "read": "H 768AA",
     "count": 1,
     "date": "2026-10-05T01:54:35.297Z"
+  },
+  {
+    "category": "Police",
+    "plate": "P-00040",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:59.798Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police",
+    "plate": "P-00502",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:59.798Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police",
+    "plate": "P-00540",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:59.798Z",
+    "source": "gallery"
   },
   {
     "category": "Provincial governments, university rectors",
@@ -296,23 +368,26 @@
   {
     "category": "Sportcars (AB S(A)123)",
     "plate": "AA S 009",
-    "read": "SA AA 009",
-    "count": 0,
-    "date": "2026-10-05T01:54:36.360Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:53.768Z",
+    "source": "gallery"
   },
   {
     "category": "Sportcars (AB S(A)123)",
     "plate": "AA S 010",
-    "read": "SA AA 010",
-    "count": 0,
-    "date": "2026-10-05T01:54:36.716Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:53.768Z",
+    "source": "gallery"
   },
   {
     "category": "Sportcars (AB S(A)123)",
     "plate": "AA S 359",
-    "read": "SA AA 359",
-    "count": 0,
-    "date": "2026-10-05T01:54:37.072Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:53.768Z",
+    "source": "gallery"
   },
   {
     "category": "Vanity Plates",

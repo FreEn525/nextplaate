@@ -1,1 +1,218 @@
-[]
+[
+  {
+    "category": "Authorities",
+    "plate": "ກກ 0277",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:37.685Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Authorities",
+    "plate": "ກກ 0594",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:37.685Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Authorities",
+    "plate": "ກກ 4499",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:37.685Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "ຂຕ-1192",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:40.626Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "ຂຕ-1777",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:40.626Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "ສທ23-78",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:40.626Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Foreign citizens and enterprises",
+    "plate": "ກກ 0362",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:31.667Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Foreign citizens and enterprises",
+    "plate": "ກຂ 6595",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:31.667Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Foreign citizens and enterprises",
+    "plate": "ກຂ 8688",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:31.667Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military",
+    "plate": "ກທ 5868",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:43.708Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military",
+    "plate": "ກທ/1 0040",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:43.708Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military",
+    "plate": "ກທ/116 0043",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:43.708Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Organizations",
+    "plate": "ບກ 0312",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:28.688Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Organizations",
+    "plate": "ບກ 0453",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:28.688Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Organizations",
+    "plate": "ບກ 8318",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:28.688Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police",
+    "plate": "ປກສ 1099",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:46.754Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police",
+    "plate": "ປກສ 1132",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:46.754Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police",
+    "plate": "ປກສ/06 0143",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:46.754Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Private owners",
+    "plate": "ກກ 1145",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:25.639Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Private owners",
+    "plate": "ກກ 7478",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:25.639Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Private owners",
+    "plate": "ກຕ 9532",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:25.639Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Temporary",
+    "plate": "ຂຄ3-541",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:49.680Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Temporary",
+    "plate": "ຂຄ3-659",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:49.680Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Temporary",
+    "plate": "ຂຄ3-730",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:49.680Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Сompany (1% paid tax)",
+    "plate": "ບກ 0136",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:34.680Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Сompany (1% paid tax)",
+    "plate": "ບກ 0153",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:34.680Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Сompany (1% paid tax)",
+    "plate": "ບກ 0365",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:45:34.680Z",
+    "source": "gallery"
+  }
+]

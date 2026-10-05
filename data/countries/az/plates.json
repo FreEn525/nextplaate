@@ -1,1 +1,122 @@
-[]
+[
+  {
+    "category": "Cars",
+    "plate": "99 GX 999",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:33:20.513Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars",
+    "plate": "99 JC 274",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:33:20.513Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars",
+    "plate": "99 OF 123",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:33:20.513Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Foreign citizens and enterprises",
+    "plate": "H 014401",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:33:32.462Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Foreign citizens and enterprises",
+    "plate": "H 027803",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:33:32.462Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Foreign citizens and enterprises",
+    "plate": "H 029505",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:33:32.462Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "99 C 559",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:33:26.395Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "99 E 885",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:33:26.395Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "99 H 383",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:33:26.395Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Public transport",
+    "plate": "10 TA 465",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:33:23.403Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Public transport",
+    "plate": "10 TH 012",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:33:23.403Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Public transport",
+    "plate": "90 TA 325",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:33:23.403Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "09 K-430",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:33:29.377Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "10 R-889",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:33:29.377Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "41 T-001",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:33:29.377Z",
+    "source": "gallery"
+  }
+]

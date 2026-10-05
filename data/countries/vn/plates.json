@@ -1,1 +1,194 @@
-[]
+[
+  {
+    "category": "Cars",
+    "plate": "30K-1990",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:09.385Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars",
+    "plate": "47A-271.12",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:09.385Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars",
+    "plate": "51N-096.00",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:09.385Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Commercial vehicles",
+    "plate": "47C-144.72",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:27.377Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Commercial vehicles",
+    "plate": "47F-001.48",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:27.377Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Commercial vehicles",
+    "plate": "47H-046.91",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:27.377Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "41-671-NG-01",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:30.316Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "80-441-NG-93",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:30.316Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "80-442-NG-49",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:30.316Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Government and public administrations",
+    "plate": "80A-039.27",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:18.275Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Government and public administrations",
+    "plate": "80B-5872",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:18.275Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Government and public administrations",
+    "plate": "99A-003.43",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:18.275Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Government motorcycles",
+    "plate": "29-B1 0910",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:24.340Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Government motorcycles",
+    "plate": "51-B2 0223",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:24.340Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Government motorcycles",
+    "plate": "79-A1 000.22",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:24.340Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military",
+    "plate": "KC-56-49",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:21.290Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military",
+    "plate": "KC-57-26",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:21.290Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military",
+    "plate": "TH-12-13",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:21.290Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "47-K1 270.77",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:12.370Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "79-N2 936.29",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:12.370Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "79-N6 9877",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:12.370Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Specialty plates",
+    "plate": "15CD-015.02",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:15.297Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Specialty plates",
+    "plate": "34LA-1010",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:15.297Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Specialty plates",
+    "plate": "79LD-002.51",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:55:15.297Z",
+    "source": "gallery"
+  }
+]

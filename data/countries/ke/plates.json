@@ -1,1 +1,282 @@
-[]
+[
+  {
+    "category": "Agricultural vehicles (KTCA 123B)",
+    "plate": "KTCA 881E",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:19.376Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Agricultural vehicles (KTCA 123B)",
+    "plate": "KTCC 255D",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:19.376Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Agricultural vehicles (KTCA 123B)",
+    "plate": "KTCC 682B",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:19.376Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Authorities (GK A123B/GKA 123B)",
+    "plate": "GKA 538T",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:04.383Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Authorities (GK A123B/GKA 123B)",
+    "plate": "GKB 715W",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:04.383Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Authorities (GK A123B/GKA 123B)",
+    "plate": "GKB 877S",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:04.383Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (KAB 123)",
+    "plate": "KDS 749",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:01.358Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (KAB 123)",
+    "plate": "KMV 905",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:01.358Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (KAB 123)",
+    "plate": "KZG 807",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:01.358Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (KAB 123C)",
+    "plate": "KDQ 736K",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:43:58.459Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (KAB 123C)",
+    "plate": "KDS 611X",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:43:58.459Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (KAB 123C)",
+    "plate": "KDW 309A",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:43:58.459Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Dealer (KA 1234)",
+    "plate": "KD 1097",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:28.483Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Dealer (KA 1234)",
+    "plate": "KD 1921",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:28.483Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Dealer (KA 1234)",
+    "plate": "KD 2497",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:28.483Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic (1(23) CD 4(56)(A)K)",
+    "plate": "22 CD 252K",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:10.395Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic (1(23) CD 4(56)(A)K)",
+    "plate": "63 UN 497K",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:10.395Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic (1(23) CD 4(56)(A)K)",
+    "plate": "127 CD 80K",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:10.395Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Exceptional vehicles (KHMA 123B)",
+    "plate": "KHMA 526W",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:22.445Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Exceptional vehicles (KHMA 123B)",
+    "plate": "KHMA 886G",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:22.445Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Exceptional vehicles (KHMA 123B)",
+    "plate": "KHMA 961J",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:22.445Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (KMAB 123C)",
+    "plate": "KMEQ 985K",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:13.347Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (KMAB 123C)",
+    "plate": "KMGD 713H",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:13.347Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (KMAB 123C)",
+    "plate": "KMGV 785U",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:13.347Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Provincial governments, university rectors (12CG345A)",
+    "plate": "06CG042A",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:07.349Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Provincial governments, university rectors (12CG345A)",
+    "plate": "13CG056A",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:07.349Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Provincial governments, university rectors (12CG345A)",
+    "plate": "47CG179A",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:07.349Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (ZA 1234)",
+    "plate": "ZB 9753",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:25.412Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (ZA 1234)",
+    "plate": "ZD 6239",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:25.412Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (ZA 1234)",
+    "plate": "ZF 1116",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:25.412Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Tuk-tuks (KTWA 123B)",
+    "plate": "KTWA 265C",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:16.427Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Tuk-tuks (KTWA 123B)",
+    "plate": "KTWC 548J",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:16.427Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Tuk-tuks (KTWA 123B)",
+    "plate": "KTWD 799F",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:16.427Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "MALIK",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:31.464Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "PAKAM",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:44:31.464Z",
+    "source": "gallery"
+  }
+]

@@ -21,6 +21,174 @@
     "date": "2026-10-05T01:53:01.258Z"
   },
   {
+    "category": "Diplomatic",
+    "plate": "BG 80-A-010",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:11.616Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "BG 86-A-009",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:11.616Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "BG 162-A-017",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:11.616Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military",
+    "plate": "K-5605",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:23.722Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military",
+    "plate": "P-1864",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:23.722Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military",
+    "plate": "P-2019",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:23.722Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Mopeds",
+    "plate": "BG 223-09",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:14.712Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Mopeds",
+    "plate": "BG 265-09",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:14.712Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Mopeds",
+    "plate": "LE 037-81",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:14.712Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "BG 64-565",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:02.646Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "BG 66-711",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:02.646Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "BG 70-493",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:02.646Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Oldtimers",
+    "plate": "BG OT-190",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:17.851Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Oldtimers",
+    "plate": "BG OT-241",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:17.851Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Oldtimers",
+    "plate": "ČA OT-003",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:17.851Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police",
+    "plate": "П 009-299",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:08.685Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police",
+    "plate": "П 009-502",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:08.685Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police",
+    "plate": "П 024-923",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:08.685Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "BG AEA-96",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:20.675Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "BG AEC-49",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:20.676Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "BG AEC-58",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:20.676Z",
+    "source": "gallery"
+  },
+  {
     "category": "Trailers",
     "plate": "AC-334 LE",
     "read": "ČA AC",
@@ -44,22 +212,25 @@
   {
     "category": "Vanity Plates",
     "plate": "BG REV",
-    "read": "BG RE",
-    "count": 0,
-    "date": "2026-10-05T01:53:31.267Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:05.600Z",
+    "source": "gallery"
   },
   {
     "category": "Vanity Plates",
     "plate": "NS MMMM",
-    "read": "NS MM",
-    "count": 0,
-    "date": "2026-10-05T01:53:31.628Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:05.600Z",
+    "source": "gallery"
   },
   {
     "category": "Vanity Plates",
     "plate": "VA XXXXX",
-    "read": "VA XX",
-    "count": 0,
-    "date": "2026-10-05T01:53:31.991Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:51:05.600Z",
+    "source": "gallery"
   }
 ]

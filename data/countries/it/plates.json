@@ -56,6 +56,30 @@
     "date": "2026-10-05T01:50:05.968Z"
   },
   {
+    "category": "Dealer",
+    "plate": "00 P 1FLYG",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:40.082Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Dealer",
+    "plate": "BM P 10569",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:40.082Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Dealer",
+    "plate": "LN P GAVT0",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:40.082Z",
+    "source": "gallery"
+  },
+  {
     "category": "Diplomatic",
     "plate": "CD 0064 DS",
     "read": "CD 0064 DS",
@@ -75,6 +99,30 @@
     "read": "CD 0343 AK",
     "count": 1,
     "date": "2026-10-05T01:50:22.566Z"
+  },
+  {
+    "category": "Mopeds",
+    "plate": "5N JGK",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:37.147Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Mopeds",
+    "plate": "X9D XGL",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:37.147Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Mopeds",
+    "plate": "XBB V9B",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:37.147Z",
+    "source": "gallery"
   },
   {
     "category": "Motorcycles (1927 year series)",
@@ -142,23 +190,26 @@
   {
     "category": "Road machinery",
     "plate": "AKF 511",
-    "read": "KR AKF 511",
-    "count": 0,
-    "date": "2026-10-05T01:50:37.223Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:43.122Z",
+    "source": "gallery"
   },
   {
     "category": "Road machinery",
     "plate": "ANL 084",
-    "read": "KR ANL 084",
-    "count": 0,
-    "date": "2026-10-05T01:50:37.578Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:43.122Z",
+    "source": "gallery"
   },
   {
     "category": "Road machinery",
     "plate": "ANY 257",
-    "read": "KR ANY 257",
-    "count": 0,
-    "date": "2026-10-05T01:50:37.932Z"
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:42:43.122Z",
+    "source": "gallery"
   },
   {
     "category": "Specialty plates",

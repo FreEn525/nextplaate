@@ -1,1 +1,74 @@
-[]
+[
+  {
+    "category": "Cars (2007)",
+    "plate": "29무 3759",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:20.876Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (2007)",
+    "plate": "45보 6266",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:20.876Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (2007)",
+    "plate": "98너 6838",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:20.876Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Commercial vehicles",
+    "plate": "경기50바 4521",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:23.817Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Commercial vehicles",
+    "plate": "경기72아 3023",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:23.817Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Commercial vehicles",
+    "plate": "경기99사 9822",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:23.817Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Electric vehicles",
+    "plate": "63부 5555",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:26.873Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Electric vehicles",
+    "plate": "64마 6213",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:26.873Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Electric vehicles",
+    "plate": "82고 3163",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:26.873Z",
+    "source": "gallery"
+  }
+]

@@ -1,149 +1,197 @@
 [
   {
+    "category": "Foreign citizens",
+    "plate": "01 H 010229",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:45.238Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Foreign citizens",
+    "plate": "01 H 012673",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:45.238Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Foreign citizens",
+    "plate": "01 H 015022",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:45.238Z",
+    "source": "gallery"
+  },
+  {
     "category": "High authorities",
     "plate": "PAA 104",
     "read": "01 M 104",
     "count": 0,
-    "date": "2026-10-05T02:00:03.026Z"
+    "date": "2026-10-05T02:02:25.344Z"
   },
   {
     "category": "High authorities",
     "plate": "PAA 252",
     "read": "01 M 252",
     "count": 2,
-    "date": "2026-10-05T02:00:06.067Z"
+    "date": "2026-10-05T02:02:25.698Z"
   },
   {
     "category": "High authorities",
     "plate": "PAA 310",
     "read": "01 M 310",
     "count": 0,
-    "date": "2026-10-05T02:00:09.051Z"
+    "date": "2026-10-05T02:02:26.052Z"
+  },
+  {
+    "category": "Joint ventures and foreign enterprises",
+    "plate": "01 M 000081",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:48.280Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Joint ventures and foreign enterprises",
+    "plate": "01 M 024863",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:48.280Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Joint ventures and foreign enterprises",
+    "plate": "10 M 002031",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:54:48.280Z",
+    "source": "gallery"
   },
   {
     "category": "Motorcycles",
     "plate": "010 LA 50",
     "read": "010 LA 50",
     "count": 1,
-    "date": "2026-10-05T01:59:10.126Z"
+    "date": "2026-10-05T02:02:18.240Z"
   },
   {
     "category": "Motorcycles",
     "plate": "141 GA 01",
     "read": "141 GA 01",
     "count": 1,
-    "date": "2026-10-05T01:59:10.482Z"
+    "date": "2026-10-05T02:02:18.597Z"
   },
   {
     "category": "Motorcycles",
     "plate": "168 JA 01",
     "read": "168 JA 01",
     "count": 1,
-    "date": "2026-10-05T01:59:10.839Z"
+    "date": "2026-10-05T02:02:18.955Z"
   },
   {
     "category": "Organizations",
     "plate": "10 023 XBA",
     "read": "10 023 XBA",
     "count": 1,
-    "date": "2026-10-05T01:58:57.684Z"
+    "date": "2026-10-05T02:02:05.883Z"
   },
   {
     "category": "Organizations",
     "plate": "10 363 PSP",
     "read": "10 363 PSP",
     "count": 1,
-    "date": "2026-10-05T01:58:58.040Z"
+    "date": "2026-10-05T02:02:06.239Z"
   },
   {
     "category": "Organizations",
     "plate": "10 400 VSG",
     "read": "10 400 VSG",
     "count": 1,
-    "date": "2026-10-05T01:58:58.397Z"
+    "date": "2026-10-05T02:02:06.594Z"
   },
   {
     "category": "Private owners",
     "plate": "10 B 555 MW",
     "read": "10 B 555 MW",
     "count": 2,
-    "date": "2026-10-05T01:58:55.906Z"
+    "date": "2026-10-05T02:02:04.107Z"
   },
   {
     "category": "Private owners",
     "plate": "10 S 998 EA",
     "read": "10 S 998 EA",
     "count": 1,
-    "date": "2026-10-05T01:58:56.264Z"
+    "date": "2026-10-05T02:02:04.465Z"
   },
   {
     "category": "Private owners",
     "plate": "10 X 757 SS",
     "read": "10 X 757 SS",
     "count": 1,
-    "date": "2026-10-05T01:58:56.621Z"
+    "date": "2026-10-05T02:02:04.822Z"
   },
   {
     "category": "Special machinery (Organizations)",
     "plate": "078 CA 01",
     "read": "078 CA 01",
     "count": 1,
-    "date": "2026-10-05T01:59:13.675Z"
+    "date": "2026-10-05T02:02:21.792Z"
   },
   {
     "category": "Special machinery (Organizations)",
     "plate": "166 GA 10",
     "read": "166 GA 10",
     "count": 1,
-    "date": "2026-10-05T01:59:14.032Z"
+    "date": "2026-10-05T02:02:22.148Z"
   },
   {
     "category": "Special machinery (Organizations)",
     "plate": "429 NA 10",
     "read": "429 NA 10",
     "count": 1,
-    "date": "2026-10-05T01:59:14.390Z"
+    "date": "2026-10-05T02:02:22.506Z"
   },
   {
     "category": "Special machinery (Private owners)",
     "plate": "222 QA 75",
     "read": "222 QA 75",
     "count": 1,
-    "date": "2026-10-05T01:59:15.450Z"
+    "date": "2026-10-05T02:02:23.568Z"
   },
   {
     "category": "Special machinery (Private owners)",
     "plate": "345 NA 10",
     "read": "345 NA 10",
     "count": 1,
-    "date": "2026-10-05T01:59:15.805Z"
+    "date": "2026-10-05T02:02:23.925Z"
   },
   {
     "category": "Special machinery (Private owners)",
     "plate": "550 BA 01",
     "read": "550 BA 01",
     "count": 1,
-    "date": "2026-10-05T01:59:16.162Z"
+    "date": "2026-10-05T02:02:24.284Z"
   },
   {
     "category": "Trailers",
     "plate": "0821 CA 40",
     "read": "0821 CA 40",
     "count": 1,
-    "date": "2026-10-05T01:59:11.900Z"
+    "date": "2026-10-05T02:02:20.017Z"
   },
   {
     "category": "Trailers",
     "plate": "1091 CA 40",
     "read": "1091 CA 40",
     "count": 1,
-    "date": "2026-10-05T01:59:12.257Z"
+    "date": "2026-10-05T02:02:20.374Z"
   },
   {
     "category": "Trailers",
     "plate": "9075 AA 90",
     "read": "9075 AA 90",
     "count": 1,
-    "date": "2026-10-05T01:59:12.615Z"
+    "date": "2026-10-05T02:02:20.730Z"
   }
 ]

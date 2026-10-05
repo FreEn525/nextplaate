@@ -1,5 +1,77 @@
 [
   {
+    "category": "Cars",
+    "plate": "GO FR-917",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:11.849Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars",
+    "plate": "LJ 59-5UZ",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:11.849Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars",
+    "plate": "LJ 75-ZUM",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:11.849Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "CE 63-RU",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:17.890Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "KR BS-31",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:17.890Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "LJ UM-03",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:17.890Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers",
+    "plate": "H4-86 KP",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:14.800Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers",
+    "plate": "L4-14 CE",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:14.800Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers",
+    "plate": "VD-24 LJ",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:52:14.800Z",
+    "source": "gallery"
+  },
+  {
     "category": "Vanity Plates",
     "plate": "LJ EK0D0M",
     "read": "LJ EK0D0M",

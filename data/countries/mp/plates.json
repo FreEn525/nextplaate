@@ -1,1 +1,42 @@
-[]
+[
+  {
+    "category": "Regular plates",
+    "plate": "ACR 838",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:41.038Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Regular plates",
+    "plate": "ADG 683",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:41.038Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Regular plates",
+    "plate": "AFA 771",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:41.038Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Veteran",
+    "plate": "AF 074",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:49.950Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Veteran",
+    "plate": "CG 022",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T12:47:49.950Z",
+    "source": "gallery"
+  }
+]
