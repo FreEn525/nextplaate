@@ -15,6 +15,7 @@
     'li|*': { drop: ['FL'] },
     'jp|*': { right: true },
     'rs|Diplomatic': { order: ['region1', 'dip'] },
+    'tj|Trailers (2009)': { order: ['region2', 'nomer'] },
     'th|*': { keepDigits: true },
     'ps|*': { extra: ['reg1'] },
     'kg|*': { order: ['region', 'nomerpl'] },

@@ -354,6 +354,10 @@
   const selText = id => { const el = document.getElementById(id); if (!el) return ''; if (el.tagName === 'SELECT') { const o = el.options[el.selectedIndex]; return o && o.value ? o.text.trim() : ''; } return el.value.trim(); };
 
   const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };   // a menu's label, only when the menu is shown (a hidden one keeps an old value)
+  // Forms with one menu per character (Iran, Egypt, Saudi Arabia, Iraq): the label of a shown menu in one script ("١ / 1" keeps the
+  // part before the slash, or after it), and a run of such menus joined
+  const menuPart = (id, side) => { const t = menu(id); if (!t) return ''; const p = t.split('/'); return (side === 'after' ? p[p.length - 1] : p[0]).trim(); };
+  const charsOf = (ids, side) => ids.map(id => menuPart(id, side)).filter(t => t && t !== '•' && t !== '-').join('');
   // The menu that chooses the plate type: #ctype on most upload pages, #drop_2 in Andorra and Malta, none in the Netherlands
   const typeMenuEl = () => document.getElementById('ctype') || document.getElementById('drop_2');
   const PLATE_RULES = {};   // country code -> function that reads the plate from the upload form; one file per country, in this folder
@@ -454,6 +458,8 @@
   // Estonia: motorcycles (ctype 3) are ABC 123; the other types are read from their fields
   PLATE_RULES.ee = () =>
     fieldVal('ctype') === '3' ? joinParts([fieldVal('let'), fieldVal('dig1')]) : genericPlate();
+  // Egypt: ٣٦٢١ جىر = the digits, then the letters (police: a digit and letters from the p menus). The governorate is not in the plate text
+  PLATE_RULES.eg = () => joinParts([charsOf(['d1', 'd2', 'd3', 'd4', 'd5', 'd6'], 'before'), charsOf(['p1', 'p2', 'b1', 'b2', 'b3'], 'before')]);
   // Spain: diplomatic CD 32 022 (the dip menu shows its label CD, its value is a code)
   PLATE_RULES.es = () => {
     if (fieldVal('ctype') === '2') return joinParts([selText('dip'), selText('region'), shownVal('digit1')]);
@@ -515,10 +521,38 @@
     if (written) return joinParts([region, region ? written + '-' + core : written + ' ' + core]);
     return joinParts([region, core]);
   };
+  // Iraq: 1988 and 2001 systems are written in Arabic digits (١٠٣٧٠٤), 2008 as E 74525, 2022 as 21 O 17000 (Latin, with the governorate number first)
+  PLATE_RULES.iq = () => {
+    const ctype = fieldVal('ctype'), side = ['3', '4'].includes(ctype) ? 'before' : 'after';
+    const region = ctype === '1' ? menuPart('region2', 'before') : '';
+    return joinParts([region, charsOf(['b1l', 'b1', 'b2', 'b3'], side), charsOf(['d1', 'd2', 'd3', 'd4', 'd5', 'd6'], side)]);
+  };
+  // Iran: ۵۱ت۱۶۵ ۲۲ = two digits, the letter (written by the site for some types, a menu for others), three digits, then the code
+  // Plates for driving abroad (15, 16) are one free text (38E889) and a code menu.
+  PLATE_RULES.ir = () => shownVal('nomer') ? joinParts([shownVal('nomer'), menuPart('region2', 'before')]) : joinParts([
+    charsOf(['d1', 'd2'], 'before') + (shownVal('let') || charsOf(['b1'], 'before')) + charsOf(['d3', 'd4', 'd5', 'd6', 'd7', 'd8'], 'before'),
+    menuPart('region1', 'before') || menuPart('region3', 'before')
+  ]);
   // Iceland: vanity plates are six boxes, one character each (LYNGAR)
   PLATE_RULES.is = () => {
     if (fieldVal('ctype') === '8') return ['b1', 'b2', 'b3', 'b4', 'b5', 'b6'].map(shownVal).join('').toUpperCase();
     return genericPlate();
+  };
+  // Japan: 世田谷 310 あ 7410 = the place (the menu reads "Setagaya - 世田谷": the part after the dash), the class number, the hiragana,
+  // the digits one per menu (a blank "•" for a short number)
+  PLATE_RULES.jp = () => joinParts([menu('region').split(' - ').pop().trim(), shownVal('code'), menu('hiragana'), charsOf(['d1', 'd2', 'd3', 'd4'], 'before')]);
+  // Kyrgyzstan (2016 and later types): the region code (the menu reads "01 - Bishkek City"), then the plate text typed as it is.
+  // The diplomatic type has its own set of fields (dip_*) and is read as a generic plate.
+  PLATE_RULES.kg = () => fieldVal('ctype') === '10' ? genericPlate() : joinParts([menu('region').split(' - ')[0].trim(), shownVal('nomerpl')]);
+  // Korea: 29무 3759 / 경기50바 4521 = the province (commercial vehicles: the menu reads "경기 (Gyeonggi Province)"), the two digits, the
+  // letter (a menu), then the four digits
+  PLATE_RULES.kr = () => joinParts([menu('region').split(' (')[0].trim() + shownVal('digit1') + menu('let1') + menu('let2'), shownVal('digit')]);
+  // Laos: the letters are written by the site (military ກທ/, police, temporary: a disabled "dop" field, sometimes with a second part "dop1"),
+  // chosen from a menu (diplomatic) or two letter menus (private owners, organisations: ກກ 1145). The province menu is not in the plate text.
+  PLATE_RULES.la = () => {
+    const dop = shownVal('dop').replace(/\/+$/, '') + shownVal('dop1');
+    if (dop) return joinParts([dop, shownVal('digit')]);
+    return joinParts([menu('dip') || menu('b1') + menu('b2'), shownVal('digit')]);
   };
   PLATE_RULES.li = () => joinParts(['FL', fieldVal('digit').replace(/^FL\s*/i, '')]);   // Liechtenstein: FL 12345 (the FL is fixed; the digit field may already hold it)
   // Latvia: AB 1234; vanity (6) and diplomatic (9) are typed in one field: C-4307, PENNY
@@ -538,23 +572,34 @@
     if (ctype === '6') return joinParts([selText('fon'), selText('region') + shownVal('digit')]);
     return genericPlate();
   };
-  // Poland: CNA 32756 = region menu (only when shown) + nomerpl
+  // Poland: CNA 32756 = region menu (only when shown) + b1 (one more letter or digit: K0, ROK) + nomerpl; diplomatic (12): W 016600 = the W
+  // written by the site, the code menu, then three digits
   PLATE_RULES.pl = () => {
-    const el = document.getElementById('region');
-    const region = el && el.offsetParent !== null ? selText('region') : '';
-    return joinParts([region, fieldVal('nomerpl').toUpperCase()]);
+    if (shownVal('dip')) return joinParts([shownVal('dip'), menu('region') + shownVal('digit')]);
+    return joinParts([menu('region') + shownVal('b1'), fieldVal('nomerpl').toUpperCase()]);
   };
-  // Serbia: BG 123-AB; trailers (2): OO-442 VR; vanity (4): region then the letter boxes
+  // Palestine: 4-7752-94 = a one-digit menu (reg1), the digits, then two characters
+  PLATE_RULES.ps = () => joinParts([menu('reg1'), shownVal('digit1'), shownVal('digit2')]);
+  // Serbia: BG 123-AB; trailers (2): OO-442 VR (two letters, digits, then the region menu); vanity (4): region then the letter boxes;
+  // diplomatic (6), military (10), oldtimers (8), special machinery (9) put their text in "dip" after the region; police (5) has a
+  // letter written by the site (П 009-299)
   PLATE_RULES.rs = () => {
     const ctype = fieldVal('ctype');
-    if (ctype === '2') return joinParts([menu('b1') + menu('b2') + '-' + shownVal('digit2'), menu('region2')]);   // trailers: OO-442 VR (two letters, digits, then the region menu)
+    if (ctype === '2') return joinParts([menu('b1') + menu('b2') + '-' + shownVal('digit2'), menu('region2')]);
     if (ctype === '4') return joinParts([menu('region1'), ['b1', 'b2', 'b3', 'b4', 'b5'].map(menu).join('')]);
-    const digit = fieldVal('digit') || fieldVal('digit1'), letters = fieldVal('b1') + fieldVal('b2');
-    return joinParts([selText('region') || selText('region1'), digit && letters ? `${digit}-${letters}` : digit || letters]);
+    const digit = shownVal('digit') || shownVal('digit1'), letters = menu('b1') + menu('b2');
+    const core = digit && letters ? `${digit}-${letters}` : digit || letters;
+    return joinParts([menu('region') || menu('region1'), shownVal('police'), shownVal('dip'), core, ctype === '6' ? shownVal('digit2') : '']);
   };
   // Russia: А 001 АА 77. Only the menus shown for this type (the site's disru20 function)
   PLATE_RULES.ru = () => {
     return joinParts([menu('b1') + menu('b2'), shownVal('digit'), menu('b3') + menu('b4'), menu('region')]);
+  };
+  // Saudi Arabia: 3273 JRS = the digits, then the letters, in Latin script (the menus read "٣ / 3": the part after the slash);
+  // the 1996 system is written in Arabic script (١ لكأ: the part before the slash)
+  PLATE_RULES.sa = () => {
+    const side = fieldVal('ctype') === '6' ? 'before' : 'after';
+    return joinParts([charsOf(['d1', 'd2', 'd3', 'd4'], side), charsOf(['b1', 'b2', 'b3'], side)]);
   };
   // Slovenia: LJ 123-AB (the region code, then the plate)
   PLATE_RULES.si = () => {
@@ -563,15 +608,25 @@
   };
   // Slovakia: BA 427RF; the types with a middle letter (dealer, oldtimers...) read it: PO M 704
   PLATE_RULES.sk = () => {
+    // diplomatic (EE 10228), military (67-38966) and police (P-00040) put their number in "police", after a menu, the digits or a letter written by the site
+    if (shownVal('police')) return joinParts([menu('dip') || shownVal('let1'), shownVal('digit'), shownVal('police')]);
     const region = selText('region');
     if (shownVal('let1')) return joinParts([region, shownVal('let1'), fieldVal('digit')]);
     if (!fieldVal('digit')) return genericPlate();                // vanity and provisional types have no digit field: read the shown fields
     return region + '-' + fieldVal('digit') + fieldVal('let2');   // a space is refused by the site
   };
+  // Thailand: 4ฒฆ 5147 / ณข 1801 / ก-3826 = an optional digit (b1, "-" for none), a special letter whose menu depends on the type (b1mt, b1c, b1p,
+  // b1v, b1i, b1com, b1txc, b1dop), the letters (b2, b3, b4), then the digits. The province menus are not in the plate text.
+  PLATE_RULES.th = () => {
+    const letters = ['b1', 'b1mt', 'b1c', 'b1p', 'b1v', 'b1i', 'b1com', 'b1txc', 'b1dop', 'b2', 'b3', 'b4'].map(id => menu(id)).filter(t => t && t !== '-').join('');
+    return joinParts([letters + shownVal('digit1'), shownVal('digit') + shownVal('digit5')]);   // trucks: 10-7100 (digit1 then digit), police: digit5 alone
+  };
   // Tajikistan: 7717XZ07 = the number, then the region code (once). A number that already ends with a region code is kept as it is
   PLATE_RULES.tj = () => {
     const el = document.getElementById('region2'), shown = el && el.offsetParent !== null;
     const n = squash(fieldVal('nomer'));
+    if (menu('region1')) return n + menu('region1');   // 1996 system: the number, then the code (X6778 01)
+    if (fieldVal('ctype') === '8') return (shown ? selText('region2') : '') + n;   // trailers 2009: the region code first (01AB 0096)
     const codes = shown ? [...el.options].map(o => o.text.trim()).filter(Boolean) : [];
     if (codes.some(c => n.endsWith(c))) return n;
     const r = shown ? selText('region2') : '';
@@ -590,19 +645,28 @@
     if (ctype === '16') return joinParts([shownVal('digit1'), menu('b1') + menu('b2') + menu('b3')]);     // motorcycles 1995: 0708 CKA
     if (ctype === '14') return joinParts([shownVal('digit1'), menu('region4')]);                          // special machinery 1995: 00828 AC
     if (ctype === '15') return joinParts([menu('region4'), shownVal('digit4')]);                          // trailers for special vehicles: AB 07067
-    if (ctype === '18') return joinParts([shownVal('digit1'), menu('region5')]);                          // work vehicles 1995: T0625 PB (number, then the letters menu)
+    if (ctype === '18') return joinParts([fieldVal('tt95') + shownVal('digit1'), menu('region5')]);       // work vehicles 1995: T0625 PB (the T is written by the site)
+    if (ctype === '20') return joinParts([menu('region3'), shownVal('nomer')]);                           // vanity plates: 11 SOPRANOS
+    if (ctype === '8') return joinParts([shownVal('digit1'), menu('mil_b1') + menu('mil_b2')]);           // military 2004: 1133 Ф4
+    if (ctype === '10') return joinParts([menu('region1'), shownVal('digit2'), menu('gov')]);             // government agencies: AE 103 E
+    if (ctype === '9') return joinParts([shownVal('digit1'), menu('b3'), menu('region1')]);               // work vehicles 2004: 02058 T AX
+    if (ctype === '5' || ctype === '6') return joinParts([menu('region2') || menu('region3'), menu('b1') + menu('b2'), shownVal('digit4')]);   // transit and dealer: 05 CH 8725, T4 TE 2773
     if (ctype === '17') return joinParts([shownVal('dlet1'), shownVal('digit2'), shownVal('digit4')]);   // diplomatic: DP 201 191
     const region = menu('region1') || menu('region2') || menu('region3');
     const digit = ['digit1', 'digit2', 'digit3', 'digit4'].map(shownVal).find(Boolean) || '';
     return joinParts([region, digit, menu('b1') + menu('b2')]);
   };
-  // Uzbekistan: PP A 123 AA (cars); motorcycles, trailers, special machinery: 010 LA 50; high authorities: PAA 252
+  // Uzbekistan: PP A 123 AA (cars); motorcycles, trailers, special machinery: 010 LA 50; high authorities: PAA 252; foreign citizens and
+  // joint ventures: 01 H 010229 (the letter is written by the site). Only the fields shown for the type: a hidden one keeps an old value
   PLATE_RULES.uz = () => {
     const ctype = fieldVal('ctype');
     if (ctype === '9') return joinParts([selText('b3'), fieldVal('dig1')]);
     if (['5', '6', '7', '8'].includes(ctype)) return joinParts([fieldVal('dig3'), fieldVal('b4'), selText('region')]);
-    return joinParts([selText('region'), fieldVal('b1'), fieldVal('dig1'), fieldVal('b2')]);
+    return joinParts([selText('region'), shownVal('b1'), shownVal('dig1') || shownVal('dig2'), shownVal('b2')]);
   };
+  // Vietnam: 47A-271.12 = the province code, the series letter(s) typed in "mm", the digits as the site shows them (with their dot);
+  // specialty plates take the letters from a menu (15CD-015.02); diplomatic and some others are one free text ("moto")
+  PLATE_RULES.vn = () => shownVal('moto') || joinParts([menu('region') + shownVal('mm') + menu('spec'), shownVal('digit')]);
   const plateForForm = () => (PLATE_RULES[here.country] || genericPlate)();   // a country without a rule uses the plain visible fields
   /* =====================================================================
    *  ICONS  (Lucide, ISC licence, https://lucide.dev: see THIRD_PARTY.md)

@@ -166,7 +166,7 @@
       } else {
         const want = ptCanon(tokens[i]);
         const opt = [...el.options].find(o => o.value && (ptCanon(o.text.trim()) === want || ptCanon(o.value) === want))
-          || [...el.options].find(o => o.value && o.text.split(' - ').some(part => ptCanon(part.trim()) === want))   // "Setagaya - 世田谷"
+          || [...el.options].find(o => o.value && o.text.split(/ - | \(/).some(part => ptCanon(part.replace(/\)$/, '').trim()) === want))   // "Setagaya - 世田谷", "경기 (Gyeonggi Province)"
           || [...el.options].find(o => o.value && ptCanon(o.text.trim()).startsWith(want));   // exact label first: A before AM
         if (opt) { el.value = opt.value; el.dataset.ptSet = '1'; el.dataset.ptUsed = '1'; el.dispatchEvent(new Event('change', { bubbles: true })); i++; continue; }
         // "TT" over two one-letter menus, "EKB" over a menu of "EK" and one of "B": this menu takes the longest of its choices
@@ -186,7 +186,8 @@
     }
     // pieces left over go on the last text field that was typed (a free field takes "FR-917" after the menu took "GO")
     if (i < tokens.length && lastInput) {
-      const joined = [lastInput.value, ...tokens.slice(i)].join(' ');
+      let joined = [lastInput.value, ...tokens.slice(i)].join(' ');
+      if (lastInput.maxLength > 0 && joined.length > lastInput.maxLength) joined = joined.replace(/ /g, '');   // a field of 6 takes "AH9832", not "AH 9832"
       if (lastInput.maxLength < 0 || lastInput.maxLength >= joined.length) {
         lastInput.value = joined;
         lastInput.dispatchEvent(new Event('input', { bubbles: true }));

@@ -60,8 +60,16 @@
       } else {
         fits = ptType(text);
       }
-      await new Promise(r => setTimeout(r, opts && opts.settle != null ? opts.settle : 350));   // the real site needs its scripts to settle; the saved pages need almost nothing
-      const read = plateForForm() || '';
+      const settle = () => new Promise(r => setTimeout(r, opts && opts.settle != null ? opts.settle : 350));   // the real site needs its scripts to settle; the saved pages need almost nothing
+      await settle();
+      let read = plateForForm() || '';
+      // the first way of cutting the plate into pieces is not always the right one: try the cut into digits and letters too
+      if (!field && !ptChars && ptNorm(read) !== ptNorm(text)) {
+        const alt = ptTypeOnce(text, true);
+        await settle();
+        const again = plateForForm() || '';
+        if (ptNorm(again) === ptNorm(text)) { fits = alt; read = again; }
+      }
       if (field) { const el = document.getElementById(field); if (el) { el.value = ''; el.dispatchEvent(new Event('input', { bubbles: true })); } }
       else ptType('');
       ptOrder = ptDrop = ptPrefix = ptChars = ptExtra = null;

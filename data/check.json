@@ -197,18 +197,18 @@
    "failed": [
     {
      "plate": "ÅLA 4642",
-     "read": "Å L L A",
-     "status": "not-fit"
+     "read": "Å L L A4642",
+     "status": "wrong"
     },
     {
      "plate": "ÅLA 5168",
-     "read": "Å L L A",
-     "status": "not-fit"
+     "read": "Å L L A5168",
+     "status": "wrong"
     },
     {
      "plate": "ÅLA 7020",
-     "read": "Å L L A",
-     "status": "not-fit"
+     "read": "Å L L A7020",
+     "status": "wrong"
     }
    ]
   },
@@ -978,18 +978,18 @@
    "failed": [
     {
      "plate": "EL5 57CP",
-     "read": "EL",
-     "status": "not-fit"
+     "read": "557CP",
+     "status": "wrong"
     },
     {
      "plate": "EL6 41FT",
-     "read": "EL",
-     "status": "not-fit"
+     "read": "641FT",
+     "status": "wrong"
     },
     {
      "plate": "EL8 39AE",
-     "read": "EL",
-     "status": "not-fit"
+     "read": "839AE",
+     "status": "wrong"
     }
    ]
   },
@@ -2694,67 +2694,19 @@
  },
  "kr": {
   "Cars (2007)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "29무 3759",
-     "read": "29무 가 3759",
-     "status": "wrong"
-    },
-    {
-     "plate": "45보 6266",
-     "read": "45보 가 6266",
-     "status": "wrong"
-    },
-    {
-     "plate": "98너 6838",
-     "read": "98너 가 6838",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Commercial vehicles": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "경기50바 4521",
-     "read": "강원 (GANGWON PROVINCE) 경기50바 바 4521",
-     "status": "wrong"
-    },
-    {
-     "plate": "경기72아 3023",
-     "read": "강원 (GANGWON PROVINCE) 경기72아 바 3023",
-     "status": "wrong"
-    },
-    {
-     "plate": "경기99사 9822",
-     "read": "강원 (GANGWON PROVINCE) 경기99사 바 9822",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Electric vehicles": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "63부 5555",
-     "read": "63부 가 5555",
-     "status": "wrong"
-    },
-    {
-     "plate": "64마 6213",
-     "read": "64마 가 6213",
-     "status": "wrong"
-    },
-    {
-     "plate": "82고 3163",
-     "read": "82고 가 3163",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   }
  },
  "kw": {
@@ -3301,12 +3253,12 @@
     },
     {
      "plate": "P PG288",
-     "read": "Single-row plate TZG288",
+     "read": "Single-row plate GSG288",
      "status": "wrong"
     },
     {
      "plate": "P PG607",
-     "read": "Single-row plate TZG607",
+     "read": "Single-row plate GSG607",
      "status": "wrong"
     }
    ]
@@ -4210,25 +4162,9 @@
    "failed": []
   },
   "Diplomatic": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "EE 10228",
-     "read": "1",
-     "status": "wrong"
-    },
-    {
-     "plate": "ZZ 44238",
-     "read": "2",
-     "status": "wrong"
-    },
-    {
-     "plate": "ZZ 72047",
-     "read": "2",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Electric vehicles": {
    "ok": 3,
@@ -4246,25 +4182,9 @@
    "failed": []
   },
   "Military": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "67-38966",
-     "read": "-67",
-     "status": "wrong"
-    },
-    {
-     "plate": "71-00089",
-     "read": "-71",
-     "status": "wrong"
-    },
-    {
-     "plate": "72-56208",
-     "read": "-72",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Motorcycles": {
    "ok": 3,
@@ -4282,25 +4202,9 @@
    "failed": []
   },
   "Police": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "P-00040",
-     "read": "P",
-     "status": "wrong"
-    },
-    {
-     "plate": "P-00502",
-     "read": "P",
-     "status": "wrong"
-    },
-    {
-     "plate": "P-00540",
-     "read": "P",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Provincial governments, university rectors": {
    "ok": 3,
@@ -4559,20 +4463,9 @@
  },
  "tj": {
   "Motorcycles (1996)": {
-   "ok": 0,
+   "ok": 2,
    "total": 2,
-   "failed": [
-    {
-     "plate": "0542 AA 02",
-     "read": "0542",
-     "status": "not-fit"
-    },
-    {
-     "plate": "0772 AA 02",
-     "read": "0772",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Motorcycles (2009)": {
    "ok": 3,
@@ -4580,25 +4473,9 @@
    "failed": []
   },
   "Organizations (1996)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "0526 B 01",
-     "read": "0526B",
-     "status": "wrong"
-    },
-    {
-     "plate": "1474 A 04",
-     "read": "1474A",
-     "status": "wrong"
-    },
-    {
-     "plate": "2080 A 04",
-     "read": "2080A",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Organizations (2009)": {
    "ok": 1,
@@ -4611,25 +4488,9 @@
    "failed": []
   },
   "Private owners (1996)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "AH 9832 02",
-     "read": "AH",
-     "status": "not-fit"
-    },
-    {
-     "plate": "BM 8126 01",
-     "read": "BM",
-     "status": "not-fit"
-    },
-    {
-     "plate": "X 6778 01",
-     "read": "X6778",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Private owners (2009)": {
    "ok": 3,
@@ -4642,46 +4503,14 @@
    "failed": []
   },
   "Trailers (1996)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "A 0021 A 04",
-     "read": "A",
-     "status": "not-fit"
-    },
-    {
-     "plate": "A 0910 A 02",
-     "read": "A",
-     "status": "not-fit"
-    },
-    {
-     "plate": "A 0950 A 01",
-     "read": "A",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Trailers (2009)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "01AB 0096",
-     "read": "01AB009602",
-     "status": "wrong"
-    },
-    {
-     "plate": "02DD 6000",
-     "read": "02DD600002",
-     "status": "wrong"
-    },
-    {
-     "plate": "07MA 7070",
-     "read": "07MA707002",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   }
  },
  "tr": {
@@ -4905,25 +4734,9 @@
  },
  "uz": {
   "Foreign citizens": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "01 H 010229",
-     "read": "01 H",
-     "status": "wrong"
-    },
-    {
-     "plate": "01 H 012673",
-     "read": "01 H",
-     "status": "wrong"
-    },
-    {
-     "plate": "01 H 015022",
-     "read": "01 H",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "High authorities": {
    "ok": 1,
@@ -4931,25 +4744,9 @@
    "failed": []
   },
   "Joint ventures and foreign enterprises": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "01 M 000081",
-     "read": "01 M",
-     "status": "wrong"
-    },
-    {
-     "plate": "01 M 024863",
-     "read": "01 M",
-     "status": "wrong"
-    },
-    {
-     "plate": "10 M 002031",
-     "read": "10 M",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Motorcycles": {
    "ok": 3,
@@ -4957,25 +4754,9 @@
    "failed": []
   },
   "Organizations": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "10 023 XBA",
-     "read": "10 M 023 XBA",
-     "status": "wrong"
-    },
-    {
-     "plate": "10 363 PSP",
-     "read": "10 M 363 PSP",
-     "status": "wrong"
-    },
-    {
-     "plate": "10 400 VSG",
-     "read": "10 M 400 VSG",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Private owners": {
    "ok": 3,
