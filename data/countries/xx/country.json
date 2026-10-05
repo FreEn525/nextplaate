@@ -2,7 +2,7 @@
   "code": "xx",
   "name": "Non-recognized and partially recognized states",
   "pages": {
-    "upload": false,
+    "upload": true,
     "search": true
   },
   "typeMenu": null

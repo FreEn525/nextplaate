@@ -2,7 +2,7 @@
   "code": "ca",
   "name": "Canada",
   "pages": {
-    "upload": false,
+    "upload": true,
     "search": true
   },
   "typeMenu": null

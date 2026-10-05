@@ -2,7 +2,7 @@
   "code": "sg",
   "name": "Singapore",
   "pages": {
-    "upload": false,
+    "upload": true,
     "search": true
   },
   "typeMenu": null

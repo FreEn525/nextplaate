@@ -2,8 +2,8 @@
   "code": "sm",
   "name": "San Marino",
   "pages": {
-    "upload": false,
+    "upload": true,
     "search": true
   },
-  "typeMenu": null
+  "typeMenu": "drop_2"
 }

@@ -3,6 +3,7 @@
   "title": "Upload new license plate, Netherlands",
   "action": "add",
   "typeMenu": null,
+  "layout": "free-text",
   "visibleFrom": "page-at-load",
   "types": [],
   "hooks": [],
@@ -506,5 +507,5 @@
       "type": "checkbox"
     }
   ],
-  "notes": ["no plate type menu: the category is not chosen in this form"]
+  "notes": ["no plate type menu: the plate is typed freely"]
 }

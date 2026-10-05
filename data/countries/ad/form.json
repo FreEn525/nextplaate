@@ -3,6 +3,7 @@
   "title": "Upload new license plate, Andorra",
   "action": "add",
   "typeMenu": "drop_2",
+  "layout": "type-menu",
   "visibleFrom": "page-at-load",
   "types": [
     {

@@ -15,8 +15,8 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | Catégories (pays capturés) | 829 | |
 | Vérifiées | 297 | 36 % |
 | **À corriger** | **0** | 0 % |
-| **À trouver** (aucune plaque connue) | **438** | 53 % |
-| Non testables par le formulaire (pas de page d'ajout ni de menu de type) | 94 | 11 % |
+| **À trouver** (aucune plaque connue) | **468** | 56 % |
+| Non testables par le formulaire (pas de page d'ajout ni de menu de type) | 64 | 8 % |
 
 ## À corriger
 
@@ -35,6 +35,7 @@ Aucune.
 | su USSR | generic | 15 | 0 |  | 15 |  | oui |
 | cz Czech Republic | own | 22 | 8 |  | 14 |  | oui |
 | br Brazil | generic | 13 | 0 |  | 13 |  | oui |
+| sm San Marino | generic | 13 | 0 |  | 13 |  | oui |
 | ge Georgia | generic | 12 | 0 |  | 12 |  | oui |
 | ke Kenya | generic | 12 | 0 |  | 12 |  | oui |
 | kg Kyrgyzstan | generic | 12 | 0 |  | 12 |  | oui |
@@ -61,13 +62,16 @@ Aucune.
 | hr Croatia | own | 11 | 5 |  | 6 |  | oui |
 | mp Northern Mariana Islands (USA) | generic | 6 | 0 |  | 6 |  | oui |
 | mt Malta | generic | 6 | 0 |  | 6 |  | oui |
+| ps Palestinian Authority | generic | 6 | 0 |  | 6 |  | oui |
 | qa Qatar | generic | 6 | 0 |  | 6 |  | oui |
 | sa Saudi Arabia | generic | 6 | 0 |  | 6 |  | oui |
 | sk Slovakia | own | 21 | 15 |  | 6 |  | oui |
+| va Vatican | generic | 6 | 0 |  | 6 |  | oui |
 | ad Andorra | generic | 5 | 0 |  | 5 |  | oui |
 | ax Åland (FI) | generic | 5 | 0 |  | 5 |  | oui |
 | az Azerbaijan | generic | 5 | 0 |  | 5 |  | oui |
 | cy Cyprus | generic | 5 | 0 |  | 5 |  | oui |
+| nz New Zealand | generic | 5 | 0 |  | 5 |  | oui |
 | pl Poland | own | 12 | 7 |  | 5 |  | oui |
 | ch Switzerland | generic | 11 | 7 |  | 4 |  | oui |
 | eg Egypt | generic | 4 | 0 |  | 4 |  | oui |
@@ -99,10 +103,10 @@ Aucune.
 | ma Morocco | generic | 2 | 1 |  | 1 |  | oui |
 | pt Portugal | generic | 4 | 3 |  | 1 |  | oui |
 | ro Romania | generic | 5 | 4 |  | 1 |  | oui |
-| ae UAE | generic | 0 | 0 |  |  |  | non |
-| au Australia | generic | 0 | 0 |  |  |  | non |
+| ae UAE | generic | 0 | 0 |  |  |  | oui |
+| au Australia | generic | 0 | 0 |  |  |  | oui |
 | be Belgium | generic | 5 | 5 |  |  |  | oui |
-| ca Canada | generic | 0 | 0 |  |  |  | non |
+| ca Canada | generic | 0 | 0 |  |  |  | oui |
 | ee Estonia | own | 10 | 10 |  |  |  | oui |
 | es Spain | own | 6 | 6 |  |  |  | oui |
 | fi Finland | generic | 9 | 9 |  |  |  | oui |
@@ -110,20 +114,16 @@ Aucune.
 | hu Hungary | generic | 23 | 23 |  |  |  | oui |
 | lt Lithuania | generic | 9 | 9 |  |  |  | oui |
 | md Moldova | own | 8 | 8 |  |  |  | oui |
-| mx Mexico | generic | 20 | 0 |  |  | 20 | non |
-| my Malaysia | generic | 4 | 0 |  |  | 4 | non |
+| mx Mexico | generic | 20 | 0 |  |  | 20 | oui |
+| my Malaysia | generic | 4 | 0 |  |  | 4 | oui |
 | nl Netherlands | generic | 27 | 0 |  |  | 27 | oui |
 | no Norway | generic | 12 | 12 |  |  |  | oui |
-| nz New Zealand | generic | 5 | 0 |  |  | 5 | non |
-| ps Palestinian Authority | generic | 6 | 0 |  |  | 6 | non |
 | se Sweden | generic | 8 | 8 |  |  |  | oui |
-| sg Singapore | generic | 13 | 0 |  |  | 13 | non |
-| sm San Marino | generic | 13 | 0 |  |  | 13 | non |
+| sg Singapore | generic | 13 | 0 |  |  | 13 | oui |
 | tr Turkey | own | 6 | 6 |  |  |  | oui |
 | uk United Kingdom | generic | 10 | 10 |  |  |  | oui |
-| us USA | generic | 0 | 0 |  |  |  | non |
-| va Vatican | generic | 6 | 0 |  |  | 6 | non |
-| xx Non-recognized and partially recognized states | generic | 0 | 0 |  |  |  | non |
+| us USA | generic | 0 | 0 |  |  |  | oui |
+| xx Non-recognized and partially recognized states | generic | 0 | 0 |  |  |  | oui |
 
 ## Catégories à trouver (par pays)
 
@@ -723,6 +723,16 @@ Pour chacune : trouver une plaque réelle sur le site, la saisir, puis relancer 
 
 </details>
 
+<details><summary><b>nz</b> : 5</summary>
+
+- AB1(234)
+- ABC1(23)
+- Motorcycles (1(2)ABC / A1BCD)
+- Vanity Plates
+- Trailers
+
+</details>
+
 <details><summary><b>pl</b> : 5</summary>
 
 - Provisional and testing
@@ -730,6 +740,17 @@ Pour chacune : trouver une plaque réelle sur le site, la saisir, puis relancer 
 - 1976 year system
 - Diplomatic
 - Sportcars
+
+</details>
+
+<details><summary><b>ps</b> : 6</summary>
+
+- Private owners (1994)
+- Public transport (1994)
+- Gaza Strip (2012)
+- Private owners (2018)
+- Authorities
+- Dealer
 
 </details>
 
@@ -841,6 +862,24 @@ Pour chacune : trouver une plaque réelle sur le site, la saisir, puis relancer 
 
 </details>
 
+<details><summary><b>sm</b> : 13</summary>
+
+- Cars (12345)
+- Cars (A1234)
+- Vanity Plates
+- Motorcycles
+- Mopeds
+- Trailers (1234)
+- Temporary (E 1234/1234 E)
+- Oldtimers (123)
+- Electric vehicles (123(4))
+- Special machinery (1234)
+- Agricultural vehicles (1234)
+- Police (123)
+- Diplomatic (123)
+
+</details>
+
 <details><summary><b>su</b> : 15</summary>
 
 - Private-owned cars (1977)
@@ -909,6 +948,17 @@ Pour chacune : trouver une plaque réelle sur le site, la saisir, puis relancer 
 
 </details>
 
+<details><summary><b>va</b> : 6</summary>
+
+- Private (CV)
+- State (SCV)
+- Pope/pre-reform (S.C.V. red)
+- Private (CV) motorcycle/tractor
+- State (SCV) motorcycle/tractor
+- Dealer (PROVA SCV)
+
+</details>
+
 <details><summary><b>vn</b> : 8</summary>
 
 - Cars
@@ -926,14 +976,10 @@ Pour chacune : trouver une plaque réelle sur le site, la saisir, puis relancer 
 
 Ces catégories existent dans la recherche du site mais le formulaire d'ajout ne permet pas de les choisir : leur règle ne peut pas être prouvée par ce moyen.
 
-- **mx** (pas de page d'ajout) : 20 catégorie(s)
-- **my** (pas de page d'ajout) : 4 catégorie(s)
+- **mx** (pas de menu de type) : 20 catégorie(s)
+- **my** (pas de menu de type) : 4 catégorie(s)
 - **nl** (pas de menu de type) : 27 catégorie(s)
-- **nz** (pas de page d'ajout) : 5 catégorie(s)
-- **ps** (pas de page d'ajout) : 6 catégorie(s)
-- **sg** (pas de page d'ajout) : 13 catégorie(s)
-- **sm** (pas de page d'ajout) : 13 catégorie(s)
-- **va** (pas de page d'ajout) : 6 catégorie(s)
+- **sg** (pas de menu de type) : 13 catégorie(s)
 
 ## Pays non capturés
 

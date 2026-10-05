@@ -3,6 +3,7 @@
   "title": "Upload new license plate, Czech Republic",
   "action": "add",
   "typeMenu": "ctype",
+  "layout": "type-menu",
   "visibleFrom": "site-script",
   "types": [
     {
@@ -556,7 +557,7 @@
       "tag": "select",
       "id": null,
       "name": "markaavto",
-      "options": 3948
+      "options": 3949
     },
     {
       "tag": "select",

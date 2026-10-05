@@ -2,7 +2,7 @@
   "code": "au",
   "name": "Australia",
   "pages": {
-    "upload": false,
+    "upload": true,
     "search": true
   },
   "typeMenu": null

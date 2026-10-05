@@ -2,8 +2,8 @@
   "code": "ps",
   "name": "Palestinian Authority",
   "pages": {
-    "upload": false,
+    "upload": true,
     "search": true
   },
-  "typeMenu": null
+  "typeMenu": "drop_2"
 }

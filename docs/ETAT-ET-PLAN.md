@@ -159,3 +159,10 @@ Chaque page d'ajout et de recherche a été lue pays par pays : `data/countries/
 
 - **3 règles fausses corrigées**, `check_db` 871/871 : Allemagne « Authorities » (`regionfed` + `regionfed1` + `digit`), Ukraine « Work vehicles (1995) » (`digit1` + `region5`, le champ qu'on ne lisait pas), Serbie « Trailers » (deux lettres, chiffres, puis le menu `region2`). Pour la Serbie, le test saisissait les jetons dans l'ordre de la page, qui n'est pas l'ordre de lecture : `TYPING_ORDER` dans `check_db.py` donne l'ordre pour cette catégorie.
 - **`drop_2`** (Andorre, Malte) : reconnu par le gestionnaire d'envoi (`01-queue.js`, `05-tab.js`), par les outils de test et par `check_db` via `typeMenuEl()` (`lib/plate/00-helpers.js`). Les Pays-Bas (formulaire sans menu de type) ne provoquent plus d'erreur « no category list » dans le gestionnaire d'envoi : la liste est simplement vide.
+
+### Les 96 pays ont tous une page d'ajout (branche `data/complete-96`)
+
+- **Reçu** : 96 pages d'ajout et 96 pages de recherche. Les 13 pays « sans page d'ajout » n'étaient qu'un défaut de ma capture (elle exigeait `#ctype`) : tous ont un formulaire, y compris `cz`.
+- **Trois formes de formulaire** (voir `docs/FORMULAIRES.md`, champ `layout` de `form.json`) : menu de type (`ctype` pour 81 pays, `drop_2` pour `ad mt nz ps sm va`), menu de région seulement (`drop_1` : `ae au ca mx us xx`, plaque en texte libre ; la recherche y filtre par région), texte libre (`my nl sg`).
+- **Couverture** : 829 catégories, 297 vérifiées, 0 à corriger, 468 à trouver, 64 non testables par le formulaire (formulaire sans menu de type : `nl`, `mx`, `my`, `sg`).
+- **À étudier ensuite** : la recherche de chaque pays a des filtres `region`, `model`, `modgen`, `markamodtype` (marque, modèle, génération) : voir `data/countries/<cc>/search.json`.

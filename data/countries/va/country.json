@@ -2,8 +2,8 @@
   "code": "va",
   "name": "Vatican",
   "pages": {
-    "upload": false,
+    "upload": true,
     "search": true
   },
-  "typeMenu": null
+  "typeMenu": "drop_2"
 }

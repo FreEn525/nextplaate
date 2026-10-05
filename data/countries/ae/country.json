@@ -2,7 +2,7 @@
   "code": "ae",
   "name": "UAE",
   "pages": {
-    "upload": false,
+    "upload": true,
     "search": true
   },
   "typeMenu": null

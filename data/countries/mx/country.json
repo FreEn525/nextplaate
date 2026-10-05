@@ -2,7 +2,7 @@
   "code": "mx",
   "name": "Mexico",
   "pages": {
-    "upload": false,
+    "upload": true,
     "search": true
   },
   "typeMenu": null

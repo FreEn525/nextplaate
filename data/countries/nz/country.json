@@ -2,8 +2,8 @@
   "code": "nz",
   "name": "New Zealand",
   "pages": {
-    "upload": false,
+    "upload": true,
     "search": true
   },
-  "typeMenu": null
+  "typeMenu": "drop_2"
 }

@@ -2,7 +2,7 @@
   "code": "us",
   "name": "USA",
   "pages": {
-    "upload": false,
+    "upload": true,
     "search": true
   },
   "typeMenu": null

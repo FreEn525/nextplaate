@@ -11,7 +11,7 @@
   {
     "code": "ae",
     "name": "UAE",
-    "upload": false,
+    "upload": true,
     "uploadTypes": 0,
     "searchCategories": 0,
     "plates": 0,
@@ -56,7 +56,7 @@
   {
     "code": "au",
     "name": "Australia",
-    "upload": false,
+    "upload": true,
     "uploadTypes": 0,
     "searchCategories": 0,
     "plates": 0,
@@ -146,7 +146,7 @@
   {
     "code": "ca",
     "name": "Canada",
-    "upload": false,
+    "upload": true,
     "uploadTypes": 0,
     "searchCategories": 0,
     "plates": 0,
@@ -596,7 +596,7 @@
   {
     "code": "mx",
     "name": "Mexico",
-    "upload": false,
+    "upload": true,
     "uploadTypes": 0,
     "searchCategories": 20,
     "plates": 0,
@@ -605,7 +605,7 @@
   {
     "code": "my",
     "name": "Malaysia",
-    "upload": false,
+    "upload": true,
     "uploadTypes": 0,
     "searchCategories": 4,
     "plates": 0,
@@ -632,8 +632,8 @@
   {
     "code": "nz",
     "name": "New Zealand",
-    "upload": false,
-    "uploadTypes": 0,
+    "upload": true,
+    "uploadTypes": 5,
     "searchCategories": 5,
     "plates": 0,
     "categoriesWithPlate": 0
@@ -650,8 +650,8 @@
   {
     "code": "ps",
     "name": "Palestinian Authority",
-    "upload": false,
-    "uploadTypes": 0,
+    "upload": true,
+    "uploadTypes": 6,
     "searchCategories": 6,
     "plates": 0,
     "categoriesWithPlate": 0
@@ -731,7 +731,7 @@
   {
     "code": "sg",
     "name": "Singapore",
-    "upload": false,
+    "upload": true,
     "uploadTypes": 0,
     "searchCategories": 13,
     "plates": 0,
@@ -758,8 +758,8 @@
   {
     "code": "sm",
     "name": "San Marino",
-    "upload": false,
-    "uploadTypes": 0,
+    "upload": true,
+    "uploadTypes": 13,
     "searchCategories": 13,
     "plates": 0,
     "categoriesWithPlate": 0
@@ -821,7 +821,7 @@
   {
     "code": "us",
     "name": "USA",
-    "upload": false,
+    "upload": true,
     "uploadTypes": 0,
     "searchCategories": 0,
     "plates": 0,
@@ -839,8 +839,8 @@
   {
     "code": "va",
     "name": "Vatican",
-    "upload": false,
-    "uploadTypes": 0,
+    "upload": true,
+    "uploadTypes": 6,
     "searchCategories": 6,
     "plates": 0,
     "categoriesWithPlate": 0
@@ -857,7 +857,7 @@
   {
     "code": "xx",
     "name": "Non-recognized and partially recognized states",
-    "upload": false,
+    "upload": true,
     "uploadTypes": 0,
     "searchCategories": 0,
     "plates": 0,

@@ -81,7 +81,11 @@ for (const cc of codes) {
       // The menu that chooses the plate type: #ctype on most pages; Andorra and Malta call it drop_2; the Netherlands has none
       // (its "fon" menu is the look of the plate, and the category follows from the plate text).
       const typeMenu = all.find(f => f.id === 'ctype') || all.find(f => f.id === 'drop_2') || null;
-      if (!typeMenu) notes.push('no plate type menu: the category is not chosen in this form');
+      // How the form describes the plate: a type menu (ctype / drop_2), or only a region menu (drop_1: US states, Australian
+      // states, Canadian provinces, emirates) with a free plate text, or just a free plate text
+      const hasRegion = all.some(x => x.id === 'drop_1' && x.tag === 'select');
+      const layout = typeMenu ? 'type-menu' : hasRegion ? 'region-menu' : 'free-text';
+      if (!typeMenu) notes.push(hasRegion ? 'no plate type menu: the plate is chosen by region (#drop_1) and typed freely' : 'no plate type menu: the plate is typed freely');
       else if (typeMenu.id !== 'ctype') notes.push(`the plate type menu is #${typeMenu.id}, not #ctype`);
       if (iFile < 0) notes.push('no photo field');
       const before = iFile < 0 ? all : all.slice(0, iFile);               // everything before the photo field: the plate
@@ -100,6 +104,7 @@ for (const cc of codes) {
       write(join(OUT, cc, 'form.json'), {
         code: cc, title: title(html), action: (form.match(/action="([^"]*)"/) || [])[1] ?? null,
         typeMenu: typeMenu ? typeMenu.id : null,
+        layout,
         visibleFrom: fromScript ? 'site-script' : 'page-at-load',
         types,
         hooks: f.functions ?? [],
@@ -144,7 +149,7 @@ for (const cc of codes) {
   fOnly.forEach(l => onlyForm.push(`${cc}: ${l}`)); sOnly.forEach(l => onlySearch.push(`${cc}: ${l}`));
   f.plateFields.forEach(x => { const k = x.id || x.name; (vocab[k] ??= new Set()).add(cc); });
   f.otherFields.forEach(x => { const k = x.id || x.name; (otherVocab[k] ??= new Set()).add(cc); });
-  rows.push({ cc, menu: f.typeMenu ?? '-', types: f.types.length, cats: se.categories.length, fromScript: f.visibleFrom === 'site-script', errors: f.types.filter(t => t.error).length, fields: f.plateFields.length, sOnly: sOnly.length, fOnly: fOnly.length, notes: f.notes });
+  rows.push({ cc, menu: f.typeMenu ?? '-', layout: f.layout, types: f.types.length, cats: se.categories.length, fromScript: f.visibleFrom === 'site-script', errors: f.types.filter(t => t.error).length, fields: f.plateFields.length, sOnly: sOnly.length, fOnly: fOnly.length, notes: f.notes });
 }
 const sum = k => rows.reduce((n, r) => n + r[k], 0);
 const md = [
@@ -156,13 +161,14 @@ const md = [
   `- Types dans les formulaires d'ajout : ${sum('types')}. Catégories dans les pages de recherche : ${sum('cats')}.`,
   `- Champs visibles par type : calculés avec le script du site dans ${rows.filter(r => r.fromScript).length} pays ; lus tels que la page les affiche au chargement dans ${rows.filter(r => !r.fromScript).length} pays (aucune fonction d'affichage : ${rows.filter(r => !r.fromScript).map(r => r.cc).join(', ')}).`,
   `- Types où le calcul a échoué : ${sum('errors')}.`, '',
-  '## À comprendre', '',
-  '- **Pays-Bas** : pas de menu de type. Le champ `fon` décrit l\'apparence de la plaque (bandeau, une ou deux lignes, couleur), pas la catégorie : la catégorie (voiture, taxi, remorque...) ne se choisit pas dans ce formulaire. Les 27 catégories de recherche ne peuvent donc pas être testées une à une par le formulaire.',
-  '- **Andorre et Malte** : le menu de type existe mais s\'appelle `drop_2`. L\'outil de test actuel ne cherche que `#ctype`, donc ces catégories sont toujours « à trouver ».',
+  '## Les trois formes de formulaire', '',
+  `- **Menu de type** (\`ctype\` : ${rows.filter(r => r.menu === 'ctype').length} pays ; \`drop_2\` : ${rows.filter(r => r.menu === 'drop_2').map(r => r.cc).join(', ')}) : la catégorie se choisit dans le formulaire, donc sa règle peut être essayée une à une.`,
+  `- **Menu de région seulement** (\`drop_1\`, texte libre pour la plaque) : ${rows.filter(r => r.layout === 'region-menu').map(r => r.cc).join(', ')}. Le formulaire ne choisit pas de catégorie : la recherche du site filtre par région (ae, au, ca, us, xx n'ont donc aucune catégorie de recherche ; mx en a 20 qui ne se choisissent pas dans le formulaire).`,
+  `- **Texte libre** (aucun menu) : ${rows.filter(r => r.layout === 'free-text').map(r => r.cc).join(', ')}. La catégorie se déduit du texte de la plaque côté site (Pays-Bas : le champ \`fon\` ne décrit que l'apparence).`,
   '', '### Noms de catégorie qui ne correspondent pas entre le formulaire et la recherche', '',
   ...(onlyForm.length || onlySearch.length ? [...onlyForm.map(l => `- formulaire seulement : ${l}`), ...onlySearch.map(l => `- recherche seulement : ${l}`)] : ['Aucun.']), '',
-  '## Par pays', '', '| Pays | Menu de type | Types (ajout) | Catégories (recherche) | Champs de plaque | Champs visibles | Erreurs | Notes |', '|---|---|---|---|---|---|---|---|',
-  ...rows.map(r => `| ${r.cc} | ${r.menu} | ${r.types} | ${r.cats} | ${r.fields} | ${r.fromScript ? 'script du site' : 'page au chargement'} | ${r.errors || ''} | ${r.notes.join(' ; ')} |`), '',
+  '## Par pays', '', '| Pays | Forme | Menu de type | Types (ajout) | Catégories (recherche) | Champs de plaque | Champs visibles | Erreurs | Notes |', '|---|---|---|---|---|---|---|---|---|',
+  ...rows.map(r => `| ${r.cc} | ${r.layout} | ${r.menu} | ${r.types} | ${r.cats} | ${r.fields} | ${r.fromScript ? 'script du site' : 'page au chargement'} | ${r.errors || ''} | ${r.notes.join(' ; ')} |`), '',
   '## Champs de plaque (identifiants et nombre de pays qui les ont)', '',
   Object.entries(vocab).sort((a, b) => b[1].size - a[1].size || a[0].localeCompare(b[0])).map(([k, v]) => `\`${k}\` ${v.size}`).join(' · '), '',
   '## Autres champs du formulaire (après la photo)', '',

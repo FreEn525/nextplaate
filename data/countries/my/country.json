@@ -2,7 +2,7 @@
   "code": "my",
   "name": "Malaysia",
   "pages": {
-    "upload": false,
+    "upload": true,
     "search": true
   },
   "typeMenu": null

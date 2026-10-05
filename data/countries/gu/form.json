@@ -3,6 +3,7 @@
   "title": "Upload new license plate, Guam (USA)",
   "action": "add",
   "typeMenu": "ctype",
+  "layout": "type-menu",
   "visibleFrom": "site-script",
   "types": [
     {
