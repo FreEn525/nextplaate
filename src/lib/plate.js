@@ -169,6 +169,8 @@
         // trailers 2004: A 1057 K-1 (letter, digits, letter, dash region); special machinery: IH-4 3152 (letters, dash region, digits)
         if (ctype === '5') return joinParts([fieldVal('b1'), fieldVal('digit1'), fieldVal('b3')]) + '-' + selText('region5');
         if (ctype === '16') return joinParts([fieldVal('digit1'), selText('b3') + selText('b1')]);   // trailers 1992: 0222 KA (b3 then b1)
+        if (ctype === '13') return joinParts([fieldVal('digit1'), selText('b3') + selText('b4') + selText('region3')]);   // cars 2000: 3897 MBI (digits, then the three letters)
+        if (ctype === '15') return joinParts([selText('region4'), fieldVal('digit2')]);   // trucks 1992: AC 9877 (letters, then digits)
         if (ctype === '7') return joinParts([selText('b1') + selText('b2') + (selText('region1') ? '-' + selText('region1') : ''), fieldVal('digit1')]);
         const row = BY_TYPES[ctype];
         if (!row) return genericPlate();
