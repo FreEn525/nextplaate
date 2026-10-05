@@ -85,7 +85,7 @@
     if (ptPrefix && ptCanon(text).startsWith(ptCanon(ptPrefix))) text = text.slice(ptPrefix.length).trim();
     let tokens = text.split(/[\s-]+/).filter(Boolean).flatMap(t => split ? (t.match(/\d+|[^\d]+/g) || []) : [t]);
     const fields = [...document.querySelectorAll('input, select')]
-      .filter(el => (isPlateField(el) || (ptExtra && ptExtra.includes(el.id)) || /^(nonr|trz|tx|hiragana|code|mm|moto|spec|gov|tt95|police|mil_b\d|d\d)$/.test(el.id)) && el.offsetParent !== null && !el.disabled && el.id !== 'ctype' && el.id !== 'drop_2');   // the type menus are not typed into
+      .filter(el => (isPlateField(el) || (ptExtra && ptExtra.includes(el.id)) || /^(nonr|trz|tx|hiragana|code|mm|moto|spec|gov|tt95|police|dop1|mil_b\d|d\d)$/.test(el.id)) && el.offsetParent !== null && !el.disabled && el.id !== 'ctype' && el.id !== 'drop_2');   // the type menus are not typed into
     // fixed fields are set by the site for a type (T, TAX, BP, P): they keep their value and no token goes in them
     const FIXED = ['trz', 'tx'];   // inputs the site fills itself (T, TAX, BP)
     fields.forEach(el => {
@@ -116,11 +116,11 @@
     tokens = tokens.filter(t => !fixedVals.includes(ptCanon(t)));
     if (ptDrop) tokens = tokens.filter(t => !ptDrop.includes(ptCanon(t)));
     // a plate field that is not shown but holds a text was filled by the site for this type (the TA of a Bosnian taxi): not typed
-    const filled = el => ptCanon(el.tagName === 'SELECT' ? ((el.options[el.selectedIndex] || {}).text || '').trim() : el.value).replace(/\./g, '');   // E.A. of a Greek police plate is EA
+    const filled = el => ptCanon(el.tagName === 'SELECT' ? ((el.options[el.selectedIndex] || {}).text || '').trim() : el.value).replace(/[./]/g, '');   // E.A. of a Greek police plate is EA, ກທ/ of a Lao military one is ກທ
     // what the site wrote itself: a menu or a field that is shown but disabled (any plate field), or a hidden field of the known kinds
     const siteFilled = [...document.querySelectorAll('input, select')]
       .filter(el => el.id !== 'ctype' && el.id !== 'drop_2' && (el.disabled && el.offsetParent !== null
-        ? isPlateField(el) || /^(trz|tx)$|nomer|fixed|special|police/i.test(el.id || el.name || '')
+        ? isPlateField(el) || /^(trz|tx)$|nomer|fixed|special|police|^dop$/i.test(el.id || el.name || '')
         : el.tagName !== 'SELECT' && el.offsetParent === null && /^(trz|tx)$|nomer|let|digit|trl|^dig|fixed|special|^b\d/i.test(el.id || el.name || '')))
       .map(filled).filter(Boolean);
     // the plate starts with what the site wrote (the G of "G 1267 G"): that first piece is not typed; a later equal piece is

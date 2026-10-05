@@ -2916,25 +2916,9 @@
    "failed": []
   },
   "Diplomatic": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ຂຕ-1192",
-     "read": "2 1192",
-     "status": "wrong"
-    },
-    {
-     "plate": "ຂຕ-1777",
-     "read": "2 1777",
-     "status": "wrong"
-    },
-    {
-     "plate": "ສທ23-78",
-     "read": "1 2378",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Foreign citizens and enterprises": {
    "ok": 3,
@@ -2942,25 +2926,9 @@
    "failed": []
   },
   "Military": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ກທ 5868",
-     "read": "5868",
-     "status": "wrong"
-    },
-    {
-     "plate": "ກທ/1 0040",
-     "read": "",
-     "status": "not-fit"
-    },
-    {
-     "plate": "ກທ/116 0043",
-     "read": "",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Organizations": {
    "ok": 3,
@@ -2968,25 +2936,9 @@
    "failed": []
   },
   "Police": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ປກສ 1099",
-     "read": "1099",
-     "status": "wrong"
-    },
-    {
-     "plate": "ປກສ 1132",
-     "read": "1132",
-     "status": "wrong"
-    },
-    {
-     "plate": "ປກສ/06 0143",
-     "read": "",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Private owners": {
    "ok": 3,
@@ -2994,25 +2946,9 @@
    "failed": []
   },
   "Temporary": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ຂຄ3-541",
-     "read": "3541",
-     "status": "wrong"
-    },
-    {
-     "plate": "ຂຄ3-659",
-     "read": "3659",
-     "status": "wrong"
-    },
-    {
-     "plate": "ຂຄ3-730",
-     "read": "3730",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Сompany (1% paid tax)": {
    "ok": 3,
