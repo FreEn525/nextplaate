@@ -115,7 +115,7 @@ Chaque étape : une branche courte, tests verts, un commit clair.
 ## 7. Avancement (branche `refactor/data-structure`)
 
 - **Fait** : `data/` (47 pays, 974 plaques, 481 catégories de recherche, un dossier par pays, généré par `scripts/build-data.mjs`, schéma dans `data/README.md`) ; `.gitignore` versionne `data/`, `docs/`, le logo ; `tests/` rangé en `e2e/` (pytest) et `offline/` (contrôles sur pages sauvegardées), diagnostics dans `tools/`. Les 37 tests e2e et `check_known` (16/16) passent après le déplacement.
-- **À corriger** : `check_db` donne 864/871. Les 7 échecs sont des plaques ukrainiennes « Work vehicles (1995) » (ex. `Т1668 МК` lu `Т1668`) : une règle à reprendre dans `lib/plate`.
+- **Règles de plaque** : le suivi chiffré est dans `docs/COUVERTURE.md` (généré). État : 294 catégories vérifiées sur 481, 3 à corriger (Allemagne « Authorities and federal agencies », Serbie « Trailers », Ukraine « Work vehicles (1995) » : 7 plaques), 184 sans plaque connue, 49 pays du site jamais capturés.
 - **Suite** : étape 1 (registre de réglages), puis étape 2 (découper `plate.js` par pays, un fichier par pays à côté de ses données).
 
 ### Découpage et vitesse (branche `refactor/split-and-speed`)
@@ -124,3 +124,7 @@ Chaque étape : une branche courte, tests verts, un commit clair.
 - **Découpage** : `lib/plate.js` (233 lignes) devient `lib/plate/` : `00-helpers.js`, `zz-entry.js` et 27 fichiers pays (`PLATE_RULES.<cc>`) ; `dev/30-plate-test.js` (473) devient 7 fichiers ; `upload/02-manager.js` (303) devient 3 ; le CSS du ruban a son fichier ; `countries.js` a une ligne par pays. Comportement identique (même résultat sur `check_db`).
 - **Vitesse** : `check_db` 110 s → 19 s (le test attendait 350 ms par plaque pour rien sur des pages sauvegardées ; 8 navigateurs au lieu de 4). Tests e2e 26 s → 8 s (exécution parallèle avec pytest-xdist, et horloge simulée Playwright à la place d'une attente de 12 s).
 - **Bug trouvé** : sur une copie Windows (fins de ligne CRLF), le build dev gardait le nom `NextPlaate` au lieu de `NextPlaate (dev)` : il aurait remplacé le script publié dans Tampermonkey. Corrigé dans `scripts/build.mjs`.
+
+### Suivi de la couverture
+
+`docs/COUVERTURE.md` est généré, jamais écrit à la main. À chaque règle corrigée ou plaque trouvée : `python tests/offline/check_db.py` (écrit `data/check.json`), puis `node scripts/coverage.mjs`, puis commit des deux fichiers.

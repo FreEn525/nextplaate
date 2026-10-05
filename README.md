@@ -41,7 +41,7 @@ src/boot/        start-up sequence
 
 A feature is one file that calls `registerFeature({...})`: its ribbon groups, its keys and its Esc behaviour. Copy an existing one (for example `src/features/20-details.js`) as a starting point.
 
-Build locally with `node scripts/build.mjs`. Test with `python -m pytest -q` (needs `pip install playwright pytest pytest-xdist` and `playwright install chromium`). The tests run in parallel against a simulated PlatesMania (about 8 s). `python tests/offline/check_db.py` replays every known plate on the saved pages (about 20 s); `node scripts/build-data.mjs` rebuilds `data/` from them.
+Build locally with `node scripts/build.mjs`. Test with `python -m pytest -q` (needs `pip install playwright pytest pytest-xdist` and `playwright install chromium`). The tests run in parallel against a simulated PlatesMania (about 8 s). `python tests/offline/check_db.py` replays every known plate on the saved pages (about 20 s); `node scripts/build-data.mjs` rebuilds `data/` from them, and `node scripts/coverage.mjs` updates `docs/COUVERTURE.md` (countries and categories still to fix or to find).
 
 A GitHub Action rebuilds the file on every push that touches `src/`, and Greasy Fork picks up the new version from the repository.
 

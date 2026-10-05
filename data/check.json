@@ -1,0 +1,1609 @@
+{
+ "al": {
+  "Cars (1993)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Cars (2011)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Motorcycles (2011)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "at": {
+  "1947 year system": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Dealer (1947)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Diplomatic": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Export transit plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Official services and consulates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Provisional": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Regular plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Vanity Plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "ba": {
+  "1998 year system": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Provisional": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Regular plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "be": {
+  "1951 year system": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Diplomatic": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Regular plates (2010)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Vanity Plates (2010)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Vanity Plates (2014)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "bg": {
+  "Cars": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Diplomatic": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Foreign citizens and enterprises": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Military": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Motorcycles": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Vanity Plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "by": {
+  "Cars (1992)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Cars (2004)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Diplomatic": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Electric vehicles (cars)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Electric vehicles (motorcycles)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Electric vehicles (trucks and buses)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Motorcycles (2004)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Police": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Special machinery (2004)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Trailers (1992)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Trailers and semitrailers (2004)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Trucks and buses (2004)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "ch": {
+  "Agricultural vehicles (green)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Cars": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Except vehicles and snowmobiles (brown)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Motorcycles": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Provisional": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Slow vehicles (yellow)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Work and fire vehicles (blue)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "cz": {
+  "Cars (2001)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Dealer (2001)": {
+   "ok": 1,
+   "total": 1,
+   "failed": []
+  },
+  "Export transit plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Mopeds (1956)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Mopeds (2001)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Motorcycles (2001)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Paper transit plates (2001)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Vanity Plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "de": {
+  "Authorities and federal agencies": {
+   "ok": 0,
+   "total": 3,
+   "failed": [
+    {
+     "plate": "BD 16 7004",
+     "read": "7004",
+     "status": "wrong"
+    },
+    {
+     "plate": "BP 17-924",
+     "read": "924",
+     "status": "wrong"
+    },
+    {
+     "plate": "BW 7 590",
+     "read": "590",
+     "status": "wrong"
+    }
+   ]
+  },
+  "Diplomatic": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Export transit plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Insurance plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Military": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Official services and consulates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Red license plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Regular plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Short-term transit plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "dk": {
+  "1958/1966-1976 - system": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Commercial vehicles": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Diplomatic": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Export plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Lower-taxed commercial vehicles": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Regular plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Temporary License plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "dz": {
+  "Consular corps ((11)1 A 1 CC)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Diplomatic corps (C(M)D (11)1 (11)1)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Regular plates ((1)11111 111 11)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Temporary ((1)11111 11 11)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "ee": {
+  "Diplomatic": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Motorcycles": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Oldtimers": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Regular car plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Regular car plates (US-size)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Special machinery": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Sportcars": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Trailers": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Transit plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Vanity Plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "es": {
+  "1900 year series": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "1971 year series": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Diplomatic": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Official and military plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Ordinary (2000)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Specialty plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "fi": {
+  "Cars": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Dealer": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Diplomatic": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Export transit plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Military": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Motorcycles": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Oldtimers": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Provisional": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Special machinery": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "fr": {
+  "Diplomatic": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "FNI (administration)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "FNI (agricultural machinery)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "FNI (free zones)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "FNI (regular)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "FNI (transit)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "French military in Germany": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "German military in France": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Military": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Mopeds": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Paris Fire Brigade": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "SIV (free zones)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "SIV (garage)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "SIV (oldtimers)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "SIV (ordinary)": {
+   "ok": 6,
+   "total": 6,
+   "failed": []
+  },
+  "SIV (temporary)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "SIV (transit plates)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "gg": {
+  "Dealer": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Regular plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "gr": {
+  "1972 year system": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Cars": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Mopeds": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Motorcycles": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Tax-exempt vehicles": {
+   "ok": 1,
+   "total": 1,
+   "failed": []
+  }
+ },
+ "hr": {
+  "Exceptional vehicles": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Foreign citizens and enterprises": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Motorcycles": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Regular plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Vanity Plates": {
+   "ok": 2,
+   "total": 2,
+   "failed": []
+  }
+ },
+ "hu": {
+  "Agricultural vehicles (1990)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Army (1990)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Cars (1990)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Commercial vehicles (1990)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Diplomatic": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Electric vehicles (1990)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Ministry of Interior (1990)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Mopeds (1990)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Motorcycles (1990)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "National Ambulance Service (1990)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Oldtimers (1990)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Oldtimers (2022)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Oldtimers (OT 12-345)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Regular plates (2022)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Slow vehicles (red) (1990)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Specialty plates (2022)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Sportcars (1990)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Sportcars (2022)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Taxi (2022)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Temporary (1990)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Temporary (2022)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Vanity Plates (1990)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Vanity Plates (2022)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "ie": {
+  "Regular plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Trailers": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "is": {
+  "\"Oil\"": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "ATV and snowmobiles": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Cars": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Commercial vehicles": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Dealer": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Diplomatic": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Mopeds": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Oldtimers": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Special machinery": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "it": {
+  "Agricultural vehicles": {
+   "ok": 1,
+   "total": 1,
+   "failed": []
+  },
+  "Cars (1927 year series)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Cars (1994 year series)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Diplomatic": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Motorcycles (1927 year series)": {
+   "ok": 2,
+   "total": 2,
+   "failed": []
+  },
+  "Motorcycles (1994 year series)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Police": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Specialty plates": {
+   "ok": 1,
+   "total": 1,
+   "failed": []
+  },
+  "Temporary": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Trailers (1927 year series)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Trailers (1994 year series)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "lt": {
+  "Cars": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Diplomatic": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Electric vehicles": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Mopeds": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Motorcycles": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Oldtimers": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Trailers": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Transit plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Vanity Plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "lu": {
+  "1966 year system": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "1978 year system": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "2003 year system": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Vanity Plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "lv": {
+  "Diplomatic": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Electric vehicles": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Motorcycles": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Regular car plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Taxi": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Transit plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Vanity Plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "ma": {
+  "Trailers": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "md": {
+  "Cars (1992)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Cars (2015)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Motorcycles (1992)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Motorcycles (2015)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Public transport (1992)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Public transport (2015)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Trailers (1992)": {
+   "ok": 1,
+   "total": 1,
+   "failed": []
+  },
+  "Trailers (2015)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "me": {
+  "Cars": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Mopeds": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Motorcycles": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Trailers": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "mk": {
+  "Authorities": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Exceptional vehicles": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Foreign citizens and enterprises": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Regular plates (1993)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Regular plates (2012)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Taxi": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "no": {
+  "1913-1971 - system": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Cars": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Commercial vehicles": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Dealer": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Diplomatic": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Export/Tourist": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Military": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Sportcars": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Tax-exempt vehicles": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Temporary": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Trailers, motorcycles, special vehicles": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Vanity Plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "pl": {
+  "Authorities": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Electric vehicles": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Military": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Oldtimers": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Professional plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Regular car plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Special vehicles and motorcycles": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "pt": {
+  "National Republican Guard": {
+   "ok": 1,
+   "total": 1,
+   "failed": []
+  },
+  "Regular plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Trailers": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "ro": {
+  "Diplomatic": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Long-term temporary": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Provisional": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Regular plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "rs": {
+  "Cars": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Trailers": {
+   "ok": 0,
+   "total": 1,
+   "failed": [
+    {
+     "plate": "OO-442 VR",
+     "read": "O-442 O",
+     "status": "wrong"
+    }
+   ]
+  }
+ },
+ "se": {
+  "Dealer": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Diplomatic": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Military": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Regular plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Sportcars": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Taxi": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Transit plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Vanity Plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "si": {
+  "Vanity Plates": {
+   "ok": 1,
+   "total": 1,
+   "failed": []
+  }
+ },
+ "sk": {
+  "Agricultural vehicles (AB F(A)123)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Cars": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Dealer (AB M(A)123)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Dealer (M(A) 123AB)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Electric vehicles": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Export transit plates (AB V(A)123)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Export transit plates (V(A) 123AB)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Motorcycles": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Oldtimers (AB H(A)123)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Oldtimers (H(A) 123AB)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Provincial governments, university rectors": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Provisional (C 123AB)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Provisional (C(A) 12345)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Special machinery": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Vanity Plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "tj": {
+  "Organizations (2009)": {
+   "ok": 1,
+   "total": 1,
+   "failed": []
+  }
+ },
+ "tr": {
+  "Diplomatic": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Government and public administrations": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Police": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Provincial governments, university rectors": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Regular plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Temporary": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "ua": {
+  "Diplomatic": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Mopeds (2004)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Motorcycles (1995)": {
+   "ok": 2,
+   "total": 2,
+   "failed": []
+  },
+  "Motorcycles (2004)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Police (2004)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Public transport (2004)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Regular plates (2004)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Special machinery (1995)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Trailers (1995)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Trailers for special vehicles (1995)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Work vehicles (1995)": {
+   "ok": 0,
+   "total": 3,
+   "failed": [
+    {
+     "plate": "Т0625 РВ",
+     "read": "Т0625",
+     "status": "wrong"
+    },
+    {
+     "plate": "Т1668 МК",
+     "read": "Т1668",
+     "status": "wrong"
+    },
+    {
+     "plate": "Т2966 ЗС",
+     "read": "Т2966",
+     "status": "wrong"
+    }
+   ]
+  }
+ },
+ "uk": {
+  "1903 year system": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "1932 year system": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "1963 year system": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "1983 year system": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "2001 year system": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Diplomatic": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Northern Ireland (1966)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Temporary import": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Trailers (A1234567)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Trailers (C123456)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ },
+ "uz": {
+  "High authorities": {
+   "ok": 1,
+   "total": 1,
+   "failed": []
+  },
+  "Motorcycles": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Organizations": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Private owners": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Special machinery (Organizations)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Special machinery (Private owners)": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
+  "Trailers": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  }
+ }
+}

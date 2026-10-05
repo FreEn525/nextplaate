@@ -165,6 +165,18 @@ def main():
     total_ok = len(all_results) - len(fails)
     print(f"\nplates: {total_ok} / {len(all_results)} ok")
 
+    if not args.country:
+        # the result of a full run, kept in the repository: scripts/coverage.mjs turns it into docs/COUVERTURE.md
+        out = {}
+        for r in sorted(all_results, key=lambda r: (r["country"], r["category"], r["plate"])):
+            cell = out.setdefault(r["country"], {}).setdefault(r["category"], {"ok": 0, "total": 0, "failed": []})
+            cell["total"] += 1
+            if r["status"] == "ok":
+                cell["ok"] += 1
+            else:
+                cell["failed"].append({"plate": r["plate"], "read": r.get("read", ""), "status": r["status"]})
+        (ROOT / "data" / "check.json").write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+
     if args.report:
         with open(args.report, "w", encoding="utf-8") as f:
             json.dump(all_results, f, ensure_ascii=False, indent=2)
