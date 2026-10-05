@@ -3,5 +3,6 @@
     if (shownVal('nomer')) return fieldVal('nomer');            // vanity, export transit, mopeds: one field
     const letters = menu('b1') + menu('region') + menu('b2');
     const digits = ['digit1', 'digit2', 'digit3'].map(shownVal).filter(Boolean).join('');
-    return joinParts([letters, digits]);
+    // electric vehicles write EL themselves (disabled field): EL5 57CP; trailers of 1977 start with a two-digit field: 24 DOA-99
+    return joinParts([shownVal('el') + letters, digits]);
   };

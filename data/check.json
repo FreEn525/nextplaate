@@ -191,20 +191,9 @@
    "failed": []
   },
   "Vanity Plates": {
-   "ok": 1,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "BOMAN2",
-     "read": "BOM",
-     "status": "wrong"
-    },
-    {
-     "plate": "ÅLAND 2",
-     "read": "ÅLA",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   }
  },
  "az": {
@@ -811,25 +800,9 @@
    "failed": []
   },
   "Electric vehicles": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "EL5 57CP",
-     "read": "557CP",
-     "status": "wrong"
-    },
-    {
-     "plate": "EL6 41FT",
-     "read": "641FT",
-     "status": "wrong"
-    },
-    {
-     "plate": "EL8 39AE",
-     "read": "839AE",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Export transit plates": {
    "ok": 3,
@@ -888,25 +861,9 @@
    "failed": []
   },
   "Trailers (1977)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "24 DOA-99",
-     "read": "DO2 4",
-     "status": "not-fit"
-    },
-    {
-     "plate": "40-AH-85",
-     "read": "AH4 0",
-     "status": "not-fit"
-    },
-    {
-     "plate": "44-AI-59",
-     "read": "AI4 4",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Vanity Plates": {
    "ok": 3,
@@ -1051,20 +1008,9 @@
    "failed": []
   },
   "Vanity Plates": {
-   "ok": 1,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "777",
-     "read": "777AAAA",
-     "status": "wrong"
-    },
-    {
-     "plate": "USANO1",
-     "read": "USANO1J",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   }
  },
  "dz": {
@@ -2851,25 +2797,9 @@
    "failed": []
   },
   "Police": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "P PG273",
-     "read": "P TZG273",
-     "status": "wrong"
-    },
-    {
-     "plate": "P PG288",
-     "read": "P GSG288",
-     "status": "wrong"
-    },
-    {
-     "plate": "P PG607",
-     "read": "P GSG607",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Trailers": {
    "ok": 3,
@@ -3646,67 +3576,20 @@
    "failed": []
   },
   "Diplomatic": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "032 D 345 77",
-     "read": "345 77",
-     "status": "wrong"
-    },
-    {
-     "plate": "145 D 256 77",
-     "read": "256 77",
-     "status": "wrong"
-    },
-    {
-     "plate": "900 D 006 86",
-     "read": "006 86",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Diplomatic (Ambassador, chief of diplomatic mission)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "011 CD 1 77",
-     "read": "1 77",
-     "status": "wrong"
-    },
-    {
-     "plate": "086 CD 1 77",
-     "read": "1 77",
-     "status": "wrong"
-    },
-    {
-     "plate": "127 CD 1 77",
-     "read": "1 77",
-     "status": "wrong"
-    }
-   ]
+   "failed": [],
+   "via": "other-type"
   },
   "Diplomatic motorcycles": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "D 017 02 77",
-     "read": "02 77",
-     "status": "wrong"
-    },
-    {
-     "plate": "T 559 01 50",
-     "read": "01 50",
-     "status": "wrong"
-    },
-    {
-     "plate": "T 559 06 50",
-     "read": "06 50",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Export transit plates": {
    "ok": 3,
@@ -4040,25 +3923,9 @@
    "failed": []
   },
   "Trailers": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "H4-86 KP",
-     "read": "KP H4 86",
-     "status": "wrong"
-    },
-    {
-     "plate": "L4-14 CE",
-     "read": "CE L4 14",
-     "status": "wrong"
-    },
-    {
-     "plate": "VD-24 LJ",
-     "read": "LJ VD 24",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Vanity Plates": {
    "ok": 1,

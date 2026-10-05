@@ -87,7 +87,7 @@
     // the months of a seasonal plate are typed without their brackets: (04/10) goes in as 04/10
     let tokens = text.split(/[\s-]+/).filter(Boolean).map(t => t.replace(/^\((.*)\)$/, '$1')).flatMap(t => split ? (t.match(/\d+|[^\d]+/g) || []) : [t]);
     const fields = [...document.querySelectorAll('input, select')]
-      .filter(el => (isPlateField(el) || (ptExtra && ptExtra.includes(el.id)) || /^(nonr|trz|tx|hiragana|code|mm|moto|spec|gov|tt95|police|dop1|checksum|pol[12]|num[12]|ltype|mb[12]|dealp|mnum[12]|mtype|mil_b\d|d\d)$/.test(el.id)) && el.offsetParent !== null && !el.disabled && el.id !== 'ctype' && el.id !== 'drop_2');   // the type menus are not typed into
+      .filter(el => (isPlateField(el) || (ptExtra && ptExtra.includes(el.id)) || /^(nonr|trz|tx|hiragana|code|mm|moto|spec|gov|tt95|police|dop1|el|checksum|pol[12]|num[12]|ltype|mb[12]|dealp|mnum[12]|mtype|mil_b\d|d\d)$/.test(el.id)) && el.offsetParent !== null && !el.disabled && el.id !== 'ctype' && el.id !== 'drop_2');   // the type menus are not typed into
     // fixed fields are set by the site for a type (T, TAX, BP, P): they keep their value and no token goes in them
     const FIXED = ['trz', 'tx'];   // inputs the site fills itself (T, TAX, BP)
     fields.forEach(el => {
@@ -126,11 +126,12 @@
         : el.tagName !== 'SELECT' && el.offsetParent === null && /^(trz|tx)$|nomer|let|digit|trl|^dig|fixed|special|^b\d/i.test(el.id || el.name || '')))
       .map(filled).filter(Boolean);
     // the plate starts with what the site wrote (the G of "G 1267 G"): that first piece is not typed; a later equal piece is
-    if (tokens.length > 1 && siteFilled.includes(ptCanon(tokens[0]))) tokens.shift();
+    const shifted = tokens.length > 1 && siteFilled.includes(ptCanon(tokens[0]));
+    if (shifted) tokens.shift();
     // a first piece that starts with what the site wrote (the T of TB, written in a hidden field): that start is not typed
     const shownFilled = [...document.querySelectorAll('input, select')].filter(el => el.disabled && el.offsetParent !== null && el.id !== 'ctype').map(filled).filter(Boolean);
     const start = [...shownFilled].sort((a, b) => b.length - a.length).find(v => tokens[0] && ptCanon(tokens[0]).length > v.length && ptCanon(tokens[0]).startsWith(v));
-    if (start) tokens[0] = tokens[0].slice(start.length);
+    if (start && !shifted) tokens[0] = tokens[0].slice(start.length);   // not when the whole first piece was already taken off
     // the same at the end (the 挂 of a Chinese trailer plate, written by the site after the text)
     const last = tokens.length - 1;
     const end = [...shownFilled].sort((a, b) => b.length - a.length).find(v => last >= 0 && ptCanon(tokens[last]).length > v.length && ptCanon(tokens[last]).endsWith(v));
@@ -201,7 +202,7 @@
     // menus the plate did not use go back to their empty choice, so a default value is not read as a part of the plate
     for (const el of fields.filter(el => el.tagName === 'SELECT')) {
       if (el.dataset.ptSet) { delete el.dataset.ptSet; continue; }
-      const empty = [...el.options].find(o => o.value === '') || [...el.options].find(o => ['-', '•'].includes(o.text.trim()));   // a blank choice may be written "-"
+      const empty = [...el.options].find(o => o.value === '') || [...el.options].find(o => !o.text.trim() || ['-', '•'].includes(o.text.trim()));   // a blank choice may be written "-"
       if (empty && el.value !== '') { el.value = ''; el.dispatchEvent(new Event('change', { bubbles: true })); }
     }
     return i === tokens.length;   // false: the plate does not fit the fields of this page
