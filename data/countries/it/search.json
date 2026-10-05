@@ -1,0 +1,701 @@
+{
+  "code": "it",
+  "title": "Lookup License plates of Italy",
+  "categories": [
+    {
+      "id": "1",
+      "label": "Cars (1994 year series)"
+    },
+    {
+      "id": "2",
+      "label": "Motorcycles (1994 year series)"
+    },
+    {
+      "id": "3",
+      "label": "Trailers (1994 year series)"
+    },
+    {
+      "id": "4",
+      "label": "Temporary"
+    },
+    {
+      "id": "5",
+      "label": "Cars (1927 year series)"
+    },
+    {
+      "id": "6",
+      "label": "Motorcycles (1927 year series)"
+    },
+    {
+      "id": "7",
+      "label": "Trailers (1927 year series)"
+    },
+    {
+      "id": "8",
+      "label": "Specialty plates"
+    },
+    {
+      "id": "9",
+      "label": "Diplomatic"
+    },
+    {
+      "id": "10",
+      "label": "Police"
+    },
+    {
+      "id": "11",
+      "label": "Mopeds"
+    },
+    {
+      "id": "12",
+      "label": "Dealer"
+    },
+    {
+      "id": "13",
+      "label": "Agricultural vehicles"
+    },
+    {
+      "id": "14",
+      "label": "Road machinery"
+    }
+  ],
+  "fields": [
+    {
+      "tag": "input",
+      "id": "nomer",
+      "name": "nomer",
+      "type": "text",
+      "maxlength": 20,
+      "example": "AB 123 AB"
+    },
+    {
+      "tag": "select",
+      "id": "region",
+      "name": "aregions[]",
+      "options": []
+    },
+    {
+      "tag": "select",
+      "id": "fon",
+      "name": "fon",
+      "options": [
+        {
+          "value": "",
+          "label": "Select colour of background"
+        },
+        {
+          "value": "3",
+          "label": "Single-row plate with euroband (back)"
+        },
+        {
+          "value": "9",
+          "label": "Single-row plate with euroband (front)"
+        },
+        {
+          "value": "4",
+          "label": "Two-row plate with euroband"
+        },
+        {
+          "value": "1",
+          "label": "Single-row plate without euroband (back)"
+        },
+        {
+          "value": "10",
+          "label": "Single-row plate without euroband (front)"
+        },
+        {
+          "value": "2",
+          "label": "Two-row plate without euroband"
+        },
+        {
+          "value": "13",
+          "label": "yellow /Single-row plate"
+        },
+        {
+          "value": "12",
+          "label": "yellow /Two-row plate"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": null,
+      "name": "markaavto",
+      "options": {
+        "count": 3949,
+        "first": [
+          {
+            "value": "",
+            "label": "-"
+          },
+          {
+            "value": "200",
+            "label": "I don`t know..."
+          },
+          {
+            "value": "2955",
+            "label": "212"
+          },
+          {
+            "value": "3693",
+            "label": "2Twenty"
+          },
+          {
+            "value": "3746",
+            "label": "3-2 (Bahai)"
+          }
+        ]
+      }
+    },
+    {
+      "tag": "select",
+      "id": "model",
+      "name": "model",
+      "options": []
+    },
+    {
+      "tag": "select",
+      "id": "modgen",
+      "name": "modgen",
+      "options": []
+    },
+    {
+      "tag": "input",
+      "id": "markamodtype",
+      "name": null,
+      "type": "text"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "date1",
+      "type": "text",
+      "example": "From date"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "date2",
+      "type": "text",
+      "example": "To date"
+    },
+    {
+      "tag": "input",
+      "id": "dop",
+      "name": "dop",
+      "type": "text",
+      "maxlength": 100,
+      "example": "Extra information"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": null,
+      "type": "search",
+      "example": "Tags"
+    },
+    {
+      "tag": "select",
+      "id": null,
+      "name": "tags[]",
+      "options": [
+        {
+          "value": "4",
+          "label": "abandoned vehicle"
+        },
+        {
+          "value": "67",
+          "label": "ADR"
+        },
+        {
+          "value": "47",
+          "label": "aerial device truck"
+        },
+        {
+          "value": "5",
+          "label": "aerography"
+        },
+        {
+          "value": "18",
+          "label": "ambulance"
+        },
+        {
+          "value": "52",
+          "label": "archive photo"
+        },
+        {
+          "value": "16",
+          "label": "armored"
+        },
+        {
+          "value": "60",
+          "label": "ATV"
+        },
+        {
+          "value": "21",
+          "label": "bus"
+        },
+        {
+          "value": "8",
+          "label": "cabriolet"
+        },
+        {
+          "value": "20",
+          "label": "cash-in-transit vehicle"
+        },
+        {
+          "value": "38",
+          "label": "concrete mixer"
+        },
+        {
+          "value": "14",
+          "label": "damaged"
+        },
+        {
+          "value": "26",
+          "label": "deliberately changed license plate"
+        },
+        {
+          "value": "53",
+          "label": "drilling rig"
+        },
+        {
+          "value": "40",
+          "label": "dumper"
+        },
+        {
+          "value": "63",
+          "label": "excavator"
+        },
+        {
+          "value": "15",
+          "label": "fire appliance"
+        },
+        {
+          "value": "64",
+          "label": "food truck"
+        },
+        {
+          "value": "42",
+          "label": "garbage truck"
+        },
+        {
+          "value": "58",
+          "label": "hearse"
+        },
+        {
+          "value": "27",
+          "label": "improper parking"
+        },
+        {
+          "value": "9",
+          "label": "limousine"
+        },
+        {
+          "value": "57",
+          "label": "motorcycle"
+        },
+        {
+          "value": "46",
+          "label": "motorhome"
+        },
+        {
+          "value": "13",
+          "label": "new letter combination"
+        },
+        {
+          "value": "43",
+          "label": "non-standard plate"
+        },
+        {
+          "value": "10",
+          "label": "oldtimer"
+        },
+        {
+          "value": "50",
+          "label": "plate for brand or model of vehicle"
+        },
+        {
+          "value": "23",
+          "label": "police"
+        },
+        {
+          "value": "59",
+          "label": "remade plate"
+        },
+        {
+          "value": "69",
+          "label": "rental"
+        },
+        {
+          "value": "68",
+          "label": "repeater"
+        },
+        {
+          "value": "1",
+          "label": "road accident"
+        },
+        {
+          "value": "65",
+          "label": "road roller"
+        },
+        {
+          "value": "66",
+          "label": "roof box"
+        },
+        {
+          "value": "56",
+          "label": "spyspot"
+        },
+        {
+          "value": "39",
+          "label": "tanker"
+        },
+        {
+          "value": "24",
+          "label": "taxicab"
+        },
+        {
+          "value": "45",
+          "label": "test drive"
+        },
+        {
+          "value": "49",
+          "label": "tow truck"
+        },
+        {
+          "value": "62",
+          "label": "tractor"
+        },
+        {
+          "value": "41",
+          "label": "tractor unit"
+        },
+        {
+          "value": "2",
+          "label": "traffic code violation"
+        },
+        {
+          "value": "33",
+          "label": "trailer"
+        },
+        {
+          "value": "19",
+          "label": "training vehicle"
+        },
+        {
+          "value": "25",
+          "label": "transferred/reissued plate"
+        },
+        {
+          "value": "61",
+          "label": "trike"
+        },
+        {
+          "value": "22",
+          "label": "truck"
+        },
+        {
+          "value": "37",
+          "label": "truck-mounted crane"
+        },
+        {
+          "value": "28",
+          "label": "tuning"
+        },
+        {
+          "value": "6",
+          "label": "unmarked with emergency lights"
+        },
+        {
+          "value": "44",
+          "label": "vinyl wrapping"
+        },
+        {
+          "value": "48",
+          "label": "wedding car"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": null,
+      "type": "search",
+      "example": "Tags"
+    },
+    {
+      "tag": "select",
+      "id": null,
+      "name": "tagsno[]",
+      "options": [
+        {
+          "value": "4",
+          "label": "abandoned vehicle"
+        },
+        {
+          "value": "67",
+          "label": "ADR"
+        },
+        {
+          "value": "47",
+          "label": "aerial device truck"
+        },
+        {
+          "value": "5",
+          "label": "aerography"
+        },
+        {
+          "value": "18",
+          "label": "ambulance"
+        },
+        {
+          "value": "52",
+          "label": "archive photo"
+        },
+        {
+          "value": "16",
+          "label": "armored"
+        },
+        {
+          "value": "60",
+          "label": "ATV"
+        },
+        {
+          "value": "21",
+          "label": "bus"
+        },
+        {
+          "value": "8",
+          "label": "cabriolet"
+        },
+        {
+          "value": "20",
+          "label": "cash-in-transit vehicle"
+        },
+        {
+          "value": "38",
+          "label": "concrete mixer"
+        },
+        {
+          "value": "14",
+          "label": "damaged"
+        },
+        {
+          "value": "26",
+          "label": "deliberately changed license plate"
+        },
+        {
+          "value": "53",
+          "label": "drilling rig"
+        },
+        {
+          "value": "40",
+          "label": "dumper"
+        },
+        {
+          "value": "63",
+          "label": "excavator"
+        },
+        {
+          "value": "15",
+          "label": "fire appliance"
+        },
+        {
+          "value": "64",
+          "label": "food truck"
+        },
+        {
+          "value": "42",
+          "label": "garbage truck"
+        },
+        {
+          "value": "58",
+          "label": "hearse"
+        },
+        {
+          "value": "27",
+          "label": "improper parking"
+        },
+        {
+          "value": "9",
+          "label": "limousine"
+        },
+        {
+          "value": "57",
+          "label": "motorcycle"
+        },
+        {
+          "value": "46",
+          "label": "motorhome"
+        },
+        {
+          "value": "13",
+          "label": "new letter combination"
+        },
+        {
+          "value": "43",
+          "label": "non-standard plate"
+        },
+        {
+          "value": "10",
+          "label": "oldtimer"
+        },
+        {
+          "value": "50",
+          "label": "plate for brand or model of vehicle"
+        },
+        {
+          "value": "23",
+          "label": "police"
+        },
+        {
+          "value": "59",
+          "label": "remade plate"
+        },
+        {
+          "value": "69",
+          "label": "rental"
+        },
+        {
+          "value": "68",
+          "label": "repeater"
+        },
+        {
+          "value": "1",
+          "label": "road accident"
+        },
+        {
+          "value": "65",
+          "label": "road roller"
+        },
+        {
+          "value": "66",
+          "label": "roof box"
+        },
+        {
+          "value": "56",
+          "label": "spyspot"
+        },
+        {
+          "value": "39",
+          "label": "tanker"
+        },
+        {
+          "value": "24",
+          "label": "taxicab"
+        },
+        {
+          "value": "45",
+          "label": "test drive"
+        },
+        {
+          "value": "49",
+          "label": "tow truck"
+        },
+        {
+          "value": "62",
+          "label": "tractor"
+        },
+        {
+          "value": "41",
+          "label": "tractor unit"
+        },
+        {
+          "value": "2",
+          "label": "traffic code violation"
+        },
+        {
+          "value": "33",
+          "label": "trailer"
+        },
+        {
+          "value": "19",
+          "label": "training vehicle"
+        },
+        {
+          "value": "25",
+          "label": "transferred/reissued plate"
+        },
+        {
+          "value": "61",
+          "label": "trike"
+        },
+        {
+          "value": "22",
+          "label": "truck"
+        },
+        {
+          "value": "37",
+          "label": "truck-mounted crane"
+        },
+        {
+          "value": "28",
+          "label": "tuning"
+        },
+        {
+          "value": "6",
+          "label": "unmarked with emergency lights"
+        },
+        {
+          "value": "44",
+          "label": "vinyl wrapping"
+        },
+        {
+          "value": "48",
+          "label": "wedding car"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "usr",
+      "type": "text",
+      "example": "User ID"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "com",
+      "type": "text",
+      "example": "&gt;"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "vote",
+      "type": "text",
+      "example": "&gt;"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "few",
+      "type": "radio",
+      "value": "0"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "few",
+      "type": "radio",
+      "value": "2"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "few",
+      "type": "radio",
+      "value": "1"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "hide",
+      "type": "checkbox",
+      "value": "1"
+    }
+  ],
+  "notes": []
+}

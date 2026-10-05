@@ -1,95 +1,9 @@
 {
   "code": "fi",
   "name": "Finland",
-  "upload": {
-    "typeMenu": true,
-    "hooks": ["disfi"],
-    "types": [
-      {
-        "id": "1",
-        "label": "Cars",
-        "visible": ["let1", "fon", "digit"]
-      },
-      {
-        "id": "2",
-        "label": "Oldtimers",
-        "visible": ["let1", "fon", "digit"]
-      },
-      {
-        "id": "3",
-        "label": "Special machinery",
-        "visible": ["let2", "fon", "digit"]
-      },
-      {
-        "id": "4",
-        "label": "Dealer",
-        "visible": ["let1", "fon", "digit"]
-      },
-      {
-        "id": "5",
-        "label": "Provisional",
-        "visible": ["let1", "fon", "digit"]
-      },
-      {
-        "id": "6",
-        "label": "Export transit plates",
-        "visible": ["let1", "digit"]
-      },
-      {
-        "id": "7",
-        "label": "Military",
-        "visible": ["digit"]
-      },
-      {
-        "id": "8",
-        "label": "Motorcycles",
-        "visible": ["let1", "fon", "digit"]
-      },
-      {
-        "id": "9",
-        "label": "Diplomatic",
-        "visible": ["digit", "dipcode", "dipletter"]
-      }
-    ]
+  "pages": {
+    "upload": true,
+    "search": true
   },
-  "search": {
-    "categories": [
-      {
-        "id": "1",
-        "label": "Cars"
-      },
-      {
-        "id": "2",
-        "label": "Oldtimers"
-      },
-      {
-        "id": "3",
-        "label": "Special machinery"
-      },
-      {
-        "id": "4",
-        "label": "Dealer"
-      },
-      {
-        "id": "5",
-        "label": "Provisional"
-      },
-      {
-        "id": "6",
-        "label": "Export transit plates"
-      },
-      {
-        "id": "7",
-        "label": "Military"
-      },
-      {
-        "id": "8",
-        "label": "Motorcycles"
-      },
-      {
-        "id": "9",
-        "label": "Diplomatic"
-      }
-    ]
-  }
+  "typeMenu": "ctype"
 }

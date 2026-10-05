@@ -5,21 +5,22 @@ const fs = require('fs'), path = require('path');
 const dir = process.argv[2] || path.join(__dirname, '..', 'reference', 'real', 'countries');
 const PLATE_ID = /nomer|let|digit|region|^b\d|dip|drop|^dig|trl|letter|^fon|^el$|^tx$|^trz$|^nonr$/i;
 
-// The whole source of "function name(...) { ... }", braces counted
+// The whole source of "function name(...) { ... }", braces counted. A function lives in one <script> block, so the
+// text stops at its </script>; comments are removed first (a commented-out "if (...) {" would unbalance the count).
 function functionSource(s, name) {
   const a = s.indexOf('function ' + name + '(');
   if (a < 0) return null;
-  let d = 0, e = s.indexOf('{', a);
-  const start = e;
-  for (; e < s.length; e++) {
-    if (s[e] === '{') d++;
-    else if (s[e] === '}') { d--; if (!d) break; }
+  const close = s.indexOf('</script>', a);
+  const block = s.slice(a, close < 0 ? a + 200000 : close)
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/(^|[^:"'\\])\/\/[^\n]*/g, '$1');
+  let d = 0, e = block.indexOf('{');
+  if (e < 0) return null;
+  for (; e < block.length; e++) {
+    if (block[e] === '{') d++;
+    else if (block[e] === '}') { d--; if (!d) return block.slice(0, e + 1); }
   }
-  // braces inside strings can unbalance the count: then the body stops at the next function
-  if (e >= s.length || e - a > 60000) { const next = s.indexOf('function ', start + 1); return s.slice(a, next > 0 ? next : a + 60000); }
-  // HTML inside a string can break the parse: keep the code before the first closing tag
-  const body = s.slice(a, e + 1);
-  return body.includes('</') ? body.slice(0, body.indexOf('</')) : body;
+  return null;                                   // never balanced: not a usable function
 }
 
 const allFunctions = s => [...new Set([...s.matchAll(/function\s+(\w+)\s*\(/g)].map(m => m[1]))];
@@ -47,7 +48,7 @@ function idsUsed(src) {
 
 function run(s, fnName, typeValue) {
   const src = functionSource(s, fnName);
-  const mk = () => ({ style: {}, disabled: false, value: '', options: [], selectedIndex: 0, checked: false, removeAttribute() {}, setAttribute() {}, appendChild() {}, addEventListener() {}, parentElement: { style: {}, removeAttribute() {}, setAttribute() {}, appendChild() {} } });
+  const mk = () => ({ style: {}, disabled: false, value: '', options: [{ text: '', value: '' }], selectedIndex: 0, checked: false, removeAttribute() {}, setAttribute() {}, appendChild() {}, addEventListener() {}, parentElement: { style: {}, removeAttribute() {}, setAttribute() {}, appendChild() {} } });
   const els = {};
   for (const id of idsUsed(src)) els[id] = mk();
   // every plate field of the page, even the ones the function never mentions
@@ -68,10 +69,19 @@ function run(s, fnName, typeValue) {
     if (!h) continue;
     try { new Function(h); helpers += h + ';\n'; } catch (e) { /* not usable here */ }
   }
-  try {
-    new Function('document', 'Option', 'window', helpers + src + ';\n' + fnName + '();')(doc, Option, {});
-  } catch (e) {
-    return { error: e.message };
+  // Germany's helpers use a global that the page sets elsewhere ("selectReg = document.getElementById('regionfed1')")
+  let globals = /\bselectReg\b/.test(helpers + src) ? "var selectReg = document.getElementById('regionfed1');\n" : '';
+  // A page data table (bmObject1: authority -> codes) is not needed to know which fields show: an empty one is declared,
+  // and the run is tried again (at most 3 tables)
+  for (let attempt = 0; attempt < 4; attempt++) {
+    try {
+      new Function('document', 'Option', 'window', globals + helpers + src + ';\n' + fnName + '();')(doc, Option, {});
+      return { els };
+    } catch (e) {
+      const missing = /^(bmObject\d*) is not defined$/.exec(e.message);
+      if (!missing || attempt === 3) return { error: e.message };
+      globals += `var ${missing[1]} = {};\n`;
+    }
   }
   return { els };
 }

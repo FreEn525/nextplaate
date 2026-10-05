@@ -1,86 +1,9 @@
 {
   "code": "dk",
   "name": "Denmark",
-  "upload": {
-    "typeMenu": true,
-    "hooks": ["disdk"],
-    "types": [
-      {
-        "id": "1",
-        "label": "Regular plates",
-        "visible": ["digit", "let", "fon"]
-      },
-      {
-        "id": "2",
-        "label": "Commercial vehicles",
-        "visible": ["digit", "let", "fon"]
-      },
-      {
-        "id": "3",
-        "label": "Lower-taxed commercial vehicles",
-        "visible": ["digit", "let", "fon"]
-      },
-      {
-        "id": "4",
-        "label": "Vanity Plates",
-        "visible": ["b1", "b2", "b3", "b4", "b5", "b6", "b7", "fon"]
-      },
-      {
-        "id": "5",
-        "label": "1958/1966-1976 - system",
-        "visible": ["let", "nomerpl", "fon"]
-      },
-      {
-        "id": "6",
-        "label": "Diplomatic",
-        "visible": ["digit", "let", "fon"]
-      },
-      {
-        "id": "7",
-        "label": "Export plates",
-        "visible": ["digit", "fon"]
-      },
-      {
-        "id": "8",
-        "label": "Temporary License plates",
-        "visible": ["digit", "fon"]
-      }
-    ]
+  "pages": {
+    "upload": true,
+    "search": true
   },
-  "search": {
-    "categories": [
-      {
-        "id": "1",
-        "label": "Regular plates"
-      },
-      {
-        "id": "2",
-        "label": "Commercial vehicles"
-      },
-      {
-        "id": "3",
-        "label": "Lower-taxed commercial vehicles"
-      },
-      {
-        "id": "4",
-        "label": "Vanity Plates"
-      },
-      {
-        "id": "5",
-        "label": "1958/1966-1976 - system"
-      },
-      {
-        "id": "6",
-        "label": "Diplomatic"
-      },
-      {
-        "id": "7",
-        "label": "Export plates"
-      },
-      {
-        "id": "8",
-        "label": "Temporary License plates"
-      }
-    ]
-  }
+  "typeMenu": "ctype"
 }

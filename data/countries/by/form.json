@@ -1,0 +1,1593 @@
+{
+  "code": "by",
+  "title": "Upload new license plate, Belarus",
+  "action": "add",
+  "typeMenu": "ctype",
+  "visibleFrom": "site-script",
+  "types": [
+    {
+      "id": "1",
+      "label": "Cars (2004)",
+      "visible": ["b3", "b4", "region5", "fon", "digit1"]
+    },
+    {
+      "id": "2",
+      "label": "Trucks and buses (2004)",
+      "visible": ["b1", "b2", "region5", "fon", "digit1"]
+    },
+    {
+      "id": "5",
+      "label": "Trailers and semitrailers (2004)",
+      "visible": ["b1", "b3", "region5", "fon", "digit1"]
+    },
+    {
+      "id": "6",
+      "label": "Motorcycles (2004)",
+      "visible": ["b3", "b4", "region5", "fon2", "digit1"]
+    },
+    {
+      "id": "7",
+      "label": "Special machinery (2004)",
+      "visible": ["b1", "b2", "region1", "digit1"]
+    },
+    {
+      "id": "12",
+      "label": "Transit plates (2004)",
+      "visible": ["b3", "b4", "region1", "trz", "digit2"]
+    },
+    {
+      "id": "13",
+      "label": "Cars (2000)",
+      "class": "white-red-select",
+      "visible": ["b3", "b4", "region3", "fon", "digit1"]
+    },
+    {
+      "id": "14",
+      "label": "Cars (1992)",
+      "class": "white-red-select",
+      "visible": ["region4", "fon", "digit1"]
+    },
+    {
+      "id": "15",
+      "label": "Trucks and buses (1992)",
+      "class": "white-red-select",
+      "visible": ["region4", "fon", "digit2"]
+    },
+    {
+      "id": "16",
+      "label": "Trailers (1992)",
+      "class": "white-red-select",
+      "visible": ["b1", "b3", "region4", "fon1", "digit1"]
+    },
+    {
+      "id": "17",
+      "label": "Taxi",
+      "class": "yellow-black-select",
+      "visible": ["b3", "b4", "region1", "tx", "digit2"]
+    },
+    {
+      "id": "18",
+      "label": "Provisional",
+      "visible": ["b3", "b4", "trz", "digit2"]
+    },
+    {
+      "id": "19",
+      "label": "Foreign citizens and enterprises",
+      "class": "yellow-black-select",
+      "visible": ["fon", "nonr", "digit2"]
+    },
+    {
+      "id": "20",
+      "label": "Police",
+      "class": "red-white-select",
+      "visible": ["region6", "fon", "digit1"]
+    },
+    {
+      "id": "3",
+      "label": "Diplomatic",
+      "class": "red-white-select",
+      "visible": ["region5", "fon", "digit1", "dip"]
+    },
+    {
+      "id": "4",
+      "label": "Electric vehicles (cars)",
+      "class": "green-white-select",
+      "visible": ["b3", "b4", "region5", "fon", "digit1"]
+    },
+    {
+      "id": "8",
+      "label": "Electric vehicles (trucks and buses)",
+      "class": "green-white-select",
+      "visible": ["b1", "b2", "region5", "fon", "digit1"]
+    },
+    {
+      "id": "9",
+      "label": "Electric vehicles (motorcycles)",
+      "class": "green-white-select",
+      "visible": ["b3", "b4", "region5", "digit1"]
+    }
+  ],
+  "hooks": ["disby1"],
+  "plateFields": [
+    {
+      "tag": "select",
+      "id": "b1",
+      "name": "b1",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "",
+          "label": "-"
+        },
+        {
+          "value": "A",
+          "label": "A"
+        },
+        {
+          "value": "B",
+          "label": "B"
+        },
+        {
+          "value": "C",
+          "label": "C"
+        },
+        {
+          "value": "E",
+          "label": "E"
+        },
+        {
+          "value": "H",
+          "label": "H"
+        },
+        {
+          "value": "I",
+          "label": "I"
+        },
+        {
+          "value": "K",
+          "label": "K"
+        },
+        {
+          "value": "M",
+          "label": "M"
+        },
+        {
+          "value": "O",
+          "label": "O"
+        },
+        {
+          "value": "P",
+          "label": "P"
+        },
+        {
+          "value": "T",
+          "label": "T"
+        },
+        {
+          "value": "X",
+          "label": "X"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "b2",
+      "name": "b2",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "",
+          "label": "-"
+        },
+        {
+          "value": "A",
+          "label": "A"
+        },
+        {
+          "value": "B",
+          "label": "B"
+        },
+        {
+          "value": "C",
+          "label": "C"
+        },
+        {
+          "value": "E",
+          "label": "E"
+        },
+        {
+          "value": "H",
+          "label": "H"
+        },
+        {
+          "value": "I",
+          "label": "I"
+        },
+        {
+          "value": "K",
+          "label": "K"
+        },
+        {
+          "value": "M",
+          "label": "M"
+        },
+        {
+          "value": "O",
+          "label": "O"
+        },
+        {
+          "value": "P",
+          "label": "P"
+        },
+        {
+          "value": "T",
+          "label": "T"
+        },
+        {
+          "value": "X",
+          "label": "X"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "region1",
+      "name": "region1",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "0",
+          "label": "0"
+        },
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        },
+        {
+          "value": "6",
+          "label": "6"
+        },
+        {
+          "value": "7",
+          "label": "7"
+        },
+        {
+          "value": "8",
+          "label": "8"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "dip",
+      "name": "dip",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "1",
+          "label": "CD"
+        },
+        {
+          "value": "2",
+          "label": "CC"
+        },
+        {
+          "value": "3",
+          "label": "Trailers"
+        },
+        {
+          "value": "4",
+          "label": "Diplomatic motorcycles"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": "digit1",
+      "name": "digit1",
+      "type": "text",
+      "maxlength": 4
+    },
+    {
+      "tag": "select",
+      "id": "region6",
+      "name": "region6",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "БН",
+          "label": "БН"
+        },
+        {
+          "value": "ВТ",
+          "label": "ВТ"
+        },
+        {
+          "value": "ГК",
+          "label": "ГК"
+        },
+        {
+          "value": "ГС",
+          "label": "ГС"
+        },
+        {
+          "value": "МГ",
+          "label": "МГ"
+        },
+        {
+          "value": "ММ",
+          "label": "ММ"
+        },
+        {
+          "value": "МН",
+          "label": "МН"
+        },
+        {
+          "value": "МО",
+          "label": "МО"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "region3",
+      "name": "region3",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "A",
+          "label": "A"
+        },
+        {
+          "value": "B",
+          "label": "B"
+        },
+        {
+          "value": "C",
+          "label": "C"
+        },
+        {
+          "value": "E",
+          "label": "E"
+        },
+        {
+          "value": "M",
+          "label": "M"
+        },
+        {
+          "value": "O",
+          "label": "O"
+        },
+        {
+          "value": "T",
+          "label": "T"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "region4",
+      "name": "region4",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "AA",
+          "label": "AA"
+        },
+        {
+          "value": "AB",
+          "label": "AB"
+        },
+        {
+          "value": "AC",
+          "label": "AC"
+        },
+        {
+          "value": "AE",
+          "label": "AE"
+        },
+        {
+          "value": "AH",
+          "label": "AH"
+        },
+        {
+          "value": "AI",
+          "label": "AI"
+        },
+        {
+          "value": "AK",
+          "label": "AK"
+        },
+        {
+          "value": "AM",
+          "label": "AM"
+        },
+        {
+          "value": "AO",
+          "label": "AO"
+        },
+        {
+          "value": "AP",
+          "label": "AP"
+        },
+        {
+          "value": "AT",
+          "label": "AT"
+        },
+        {
+          "value": "AX",
+          "label": "AX"
+        },
+        {
+          "value": "BA",
+          "label": "BA"
+        },
+        {
+          "value": "BB",
+          "label": "BB"
+        },
+        {
+          "value": "BC",
+          "label": "BC"
+        },
+        {
+          "value": "BE",
+          "label": "BE"
+        },
+        {
+          "value": "BH",
+          "label": "BH"
+        },
+        {
+          "value": "BI",
+          "label": "BI"
+        },
+        {
+          "value": "BK",
+          "label": "BK"
+        },
+        {
+          "value": "BM",
+          "label": "BM"
+        },
+        {
+          "value": "BO",
+          "label": "BO"
+        },
+        {
+          "value": "BP",
+          "label": "BP"
+        },
+        {
+          "value": "BT",
+          "label": "BT"
+        },
+        {
+          "value": "BX",
+          "label": "BX"
+        },
+        {
+          "value": "CA",
+          "label": "CA"
+        },
+        {
+          "value": "CB",
+          "label": "CB"
+        },
+        {
+          "value": "CC",
+          "label": "CC"
+        },
+        {
+          "value": "CE",
+          "label": "CE"
+        },
+        {
+          "value": "CH",
+          "label": "CH"
+        },
+        {
+          "value": "CI",
+          "label": "CI"
+        },
+        {
+          "value": "CK",
+          "label": "CK"
+        },
+        {
+          "value": "CM",
+          "label": "CM"
+        },
+        {
+          "value": "CO",
+          "label": "CO"
+        },
+        {
+          "value": "CP",
+          "label": "CP"
+        },
+        {
+          "value": "CT",
+          "label": "CT"
+        },
+        {
+          "value": "CX",
+          "label": "CX"
+        },
+        {
+          "value": "EA",
+          "label": "EA"
+        },
+        {
+          "value": "EB",
+          "label": "EB"
+        },
+        {
+          "value": "EC",
+          "label": "EC"
+        },
+        {
+          "value": "EE",
+          "label": "EE"
+        },
+        {
+          "value": "EH",
+          "label": "EH"
+        },
+        {
+          "value": "EI",
+          "label": "EI"
+        },
+        {
+          "value": "EK",
+          "label": "EK"
+        },
+        {
+          "value": "EM",
+          "label": "EM"
+        },
+        {
+          "value": "EO",
+          "label": "EO"
+        },
+        {
+          "value": "EP",
+          "label": "EP"
+        },
+        {
+          "value": "ET",
+          "label": "ET"
+        },
+        {
+          "value": "EX",
+          "label": "EX"
+        },
+        {
+          "value": "HA",
+          "label": "HA"
+        },
+        {
+          "value": "HB",
+          "label": "HB"
+        },
+        {
+          "value": "HC",
+          "label": "HC"
+        },
+        {
+          "value": "HE",
+          "label": "HE"
+        },
+        {
+          "value": "HH",
+          "label": "HH"
+        },
+        {
+          "value": "HI",
+          "label": "HI"
+        },
+        {
+          "value": "HK",
+          "label": "HK"
+        },
+        {
+          "value": "HM",
+          "label": "HM"
+        },
+        {
+          "value": "HO",
+          "label": "HO"
+        },
+        {
+          "value": "HP",
+          "label": "HP"
+        },
+        {
+          "value": "HT",
+          "label": "HT"
+        },
+        {
+          "value": "HX",
+          "label": "HX"
+        },
+        {
+          "value": "IA",
+          "label": "IA"
+        },
+        {
+          "value": "IB",
+          "label": "IB"
+        },
+        {
+          "value": "IC",
+          "label": "IC"
+        },
+        {
+          "value": "IE",
+          "label": "IE"
+        },
+        {
+          "value": "IH",
+          "label": "IH"
+        },
+        {
+          "value": "II",
+          "label": "II"
+        },
+        {
+          "value": "IK",
+          "label": "IK"
+        },
+        {
+          "value": "IM",
+          "label": "IM"
+        },
+        {
+          "value": "IO",
+          "label": "IO"
+        },
+        {
+          "value": "IP",
+          "label": "IP"
+        },
+        {
+          "value": "IT",
+          "label": "IT"
+        },
+        {
+          "value": "IX",
+          "label": "IX"
+        },
+        {
+          "value": "KA",
+          "label": "KA"
+        },
+        {
+          "value": "KB",
+          "label": "KB"
+        },
+        {
+          "value": "KC",
+          "label": "KC"
+        },
+        {
+          "value": "KE",
+          "label": "KE"
+        },
+        {
+          "value": "KH",
+          "label": "KH"
+        },
+        {
+          "value": "KI",
+          "label": "KI"
+        },
+        {
+          "value": "KK",
+          "label": "KK"
+        },
+        {
+          "value": "KM",
+          "label": "KM"
+        },
+        {
+          "value": "KO",
+          "label": "KO"
+        },
+        {
+          "value": "KP",
+          "label": "KP"
+        },
+        {
+          "value": "KT",
+          "label": "KT"
+        },
+        {
+          "value": "KX",
+          "label": "KX"
+        },
+        {
+          "value": "MA",
+          "label": "MA"
+        },
+        {
+          "value": "MB",
+          "label": "MB"
+        },
+        {
+          "value": "MC",
+          "label": "MC"
+        },
+        {
+          "value": "ME",
+          "label": "ME"
+        },
+        {
+          "value": "MH",
+          "label": "MH"
+        },
+        {
+          "value": "MI",
+          "label": "MI"
+        },
+        {
+          "value": "MK",
+          "label": "MK"
+        },
+        {
+          "value": "MM",
+          "label": "MM"
+        },
+        {
+          "value": "MO",
+          "label": "MO"
+        },
+        {
+          "value": "MP",
+          "label": "MP"
+        },
+        {
+          "value": "MT",
+          "label": "MT"
+        },
+        {
+          "value": "MX",
+          "label": "MX"
+        },
+        {
+          "value": "OA",
+          "label": "OA"
+        },
+        {
+          "value": "OB",
+          "label": "OB"
+        },
+        {
+          "value": "OC",
+          "label": "OC"
+        },
+        {
+          "value": "OE",
+          "label": "OE"
+        },
+        {
+          "value": "OH",
+          "label": "OH"
+        },
+        {
+          "value": "OI",
+          "label": "OI"
+        },
+        {
+          "value": "OK",
+          "label": "OK"
+        },
+        {
+          "value": "OM",
+          "label": "OM"
+        },
+        {
+          "value": "OO",
+          "label": "OO"
+        },
+        {
+          "value": "OP",
+          "label": "OP"
+        },
+        {
+          "value": "OT",
+          "label": "OT"
+        },
+        {
+          "value": "OX",
+          "label": "OX"
+        },
+        {
+          "value": "PA",
+          "label": "PA"
+        },
+        {
+          "value": "PB",
+          "label": "PB"
+        },
+        {
+          "value": "PC",
+          "label": "PC"
+        },
+        {
+          "value": "PE",
+          "label": "PE"
+        },
+        {
+          "value": "PH",
+          "label": "PH"
+        },
+        {
+          "value": "PI",
+          "label": "PI"
+        },
+        {
+          "value": "PK",
+          "label": "PK"
+        },
+        {
+          "value": "PM",
+          "label": "PM"
+        },
+        {
+          "value": "PO",
+          "label": "PO"
+        },
+        {
+          "value": "PP",
+          "label": "PP"
+        },
+        {
+          "value": "PT",
+          "label": "PT"
+        },
+        {
+          "value": "PX",
+          "label": "PX"
+        },
+        {
+          "value": "TA",
+          "label": "TA"
+        },
+        {
+          "value": "TB",
+          "label": "TB"
+        },
+        {
+          "value": "TC",
+          "label": "TC"
+        },
+        {
+          "value": "TE",
+          "label": "TE"
+        },
+        {
+          "value": "TH",
+          "label": "TH"
+        },
+        {
+          "value": "TI",
+          "label": "TI"
+        },
+        {
+          "value": "TK",
+          "label": "TK"
+        },
+        {
+          "value": "TM",
+          "label": "TM"
+        },
+        {
+          "value": "TO",
+          "label": "TO"
+        },
+        {
+          "value": "TP",
+          "label": "TP"
+        },
+        {
+          "value": "TT",
+          "label": "TT"
+        },
+        {
+          "value": "TX",
+          "label": "TX"
+        },
+        {
+          "value": "XA",
+          "label": "XA"
+        },
+        {
+          "value": "XB",
+          "label": "XB"
+        },
+        {
+          "value": "XC",
+          "label": "XC"
+        },
+        {
+          "value": "XE",
+          "label": "XE"
+        },
+        {
+          "value": "XH",
+          "label": "XH"
+        },
+        {
+          "value": "XI",
+          "label": "XI"
+        },
+        {
+          "value": "XK",
+          "label": "XK"
+        },
+        {
+          "value": "XM",
+          "label": "XM"
+        },
+        {
+          "value": "XO",
+          "label": "XO"
+        },
+        {
+          "value": "XP",
+          "label": "XP"
+        },
+        {
+          "value": "XT",
+          "label": "XT"
+        },
+        {
+          "value": "XX",
+          "label": "XX"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": "tx",
+      "name": "tx",
+      "type": "text",
+      "maxlength": 1,
+      "hiddenAtLoad": true
+    },
+    {
+      "tag": "select",
+      "id": "b3",
+      "name": "b3",
+      "options": [
+        {
+          "value": "",
+          "label": "-"
+        },
+        {
+          "value": "A",
+          "label": "A"
+        },
+        {
+          "value": "B",
+          "label": "B"
+        },
+        {
+          "value": "C",
+          "label": "C"
+        },
+        {
+          "value": "E",
+          "label": "E"
+        },
+        {
+          "value": "H",
+          "label": "H"
+        },
+        {
+          "value": "I",
+          "label": "I"
+        },
+        {
+          "value": "K",
+          "label": "K"
+        },
+        {
+          "value": "M",
+          "label": "M"
+        },
+        {
+          "value": "O",
+          "label": "O"
+        },
+        {
+          "value": "P",
+          "label": "P"
+        },
+        {
+          "value": "T",
+          "label": "T"
+        },
+        {
+          "value": "X",
+          "label": "X"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "b4",
+      "name": "b4",
+      "options": [
+        {
+          "value": "",
+          "label": "-"
+        },
+        {
+          "value": "A",
+          "label": "A"
+        },
+        {
+          "value": "B",
+          "label": "B"
+        },
+        {
+          "value": "C",
+          "label": "C"
+        },
+        {
+          "value": "E",
+          "label": "E"
+        },
+        {
+          "value": "H",
+          "label": "H"
+        },
+        {
+          "value": "I",
+          "label": "I"
+        },
+        {
+          "value": "K",
+          "label": "K"
+        },
+        {
+          "value": "M",
+          "label": "M"
+        },
+        {
+          "value": "O",
+          "label": "O"
+        },
+        {
+          "value": "P",
+          "label": "P"
+        },
+        {
+          "value": "T",
+          "label": "T"
+        },
+        {
+          "value": "X",
+          "label": "X"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "nonr",
+      "name": "nonr",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "P",
+          "label": "P"
+        },
+        {
+          "value": "M",
+          "label": "M"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": "trz",
+      "name": "trz",
+      "type": "text",
+      "maxlength": 2,
+      "hiddenAtLoad": true
+    },
+    {
+      "tag": "input",
+      "id": "digit2",
+      "name": "digit2",
+      "type": "text",
+      "maxlength": 5,
+      "hiddenAtLoad": true,
+      "digitsOnly": true
+    },
+    {
+      "tag": "select",
+      "id": "region5",
+      "name": "region5",
+      "options": [
+        {
+          "value": "0",
+          "label": "0"
+        },
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        },
+        {
+          "value": "6",
+          "label": "6"
+        },
+        {
+          "value": "7",
+          "label": "7"
+        },
+        {
+          "value": "8",
+          "label": "8"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "fon",
+      "name": "fon",
+      "options": [
+        {
+          "value": "1",
+          "label": "Single-row plate"
+        },
+        {
+          "value": "2",
+          "label": "Two-row plate"
+        },
+        {
+          "value": "5",
+          "label": "Single-row plate (Green characters BY)"
+        },
+        {
+          "value": "6",
+          "label": "Two-row plate (Green characters BY)"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "fon1",
+      "name": "fon1",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "1",
+          "label": "Single-row plate"
+        },
+        {
+          "value": "2",
+          "label": "Two-row plate"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "fon2",
+      "name": "fon2",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "2",
+          "label": "Two-row plate"
+        },
+        {
+          "value": "6",
+          "label": "Two-row plate (Green characters BY)"
+        }
+      ]
+    }
+  ],
+  "otherFields": [
+    {
+      "tag": "select",
+      "id": null,
+      "name": "markaavto",
+      "options": 3948
+    },
+    {
+      "tag": "select",
+      "id": "model",
+      "name": "model",
+      "options": 0
+    },
+    {
+      "tag": "select",
+      "id": "modgen",
+      "name": "modgen",
+      "options": 0
+    },
+    {
+      "tag": "input",
+      "id": "markamodtype",
+      "name": null,
+      "type": "text"
+    },
+    {
+      "tag": "textarea",
+      "id": null,
+      "name": "dop"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": null,
+      "type": "search"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox13",
+      "name": "CheckBox[13]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox50",
+      "name": "CheckBox[50]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox25",
+      "name": "CheckBox[25]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox26",
+      "name": "CheckBox[26]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox43",
+      "name": "CheckBox[43]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox59",
+      "name": "CheckBox[59]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox68",
+      "name": "CheckBox[68]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox60",
+      "name": "CheckBox[60]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox21",
+      "name": "CheckBox[21]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox8",
+      "name": "CheckBox[8]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox58",
+      "name": "CheckBox[58]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox9",
+      "name": "CheckBox[9]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox57",
+      "name": "CheckBox[57]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox46",
+      "name": "CheckBox[46]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox62",
+      "name": "CheckBox[62]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox33",
+      "name": "CheckBox[33]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox61",
+      "name": "CheckBox[61]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox22",
+      "name": "CheckBox[22]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox47",
+      "name": "CheckBox[47]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox38",
+      "name": "CheckBox[38]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox53",
+      "name": "CheckBox[53]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox40",
+      "name": "CheckBox[40]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox63",
+      "name": "CheckBox[63]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox64",
+      "name": "CheckBox[64]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox42",
+      "name": "CheckBox[42]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox65",
+      "name": "CheckBox[65]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox39",
+      "name": "CheckBox[39]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox49",
+      "name": "CheckBox[49]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox41",
+      "name": "CheckBox[41]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox37",
+      "name": "CheckBox[37]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox67",
+      "name": "CheckBox[67]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox18",
+      "name": "CheckBox[18]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox20",
+      "name": "CheckBox[20]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox15",
+      "name": "CheckBox[15]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox23",
+      "name": "CheckBox[23]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox69",
+      "name": "CheckBox[69]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox24",
+      "name": "CheckBox[24]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox19",
+      "name": "CheckBox[19]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox48",
+      "name": "CheckBox[48]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox4",
+      "name": "CheckBox[4]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox5",
+      "name": "CheckBox[5]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox16",
+      "name": "CheckBox[16]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox14",
+      "name": "CheckBox[14]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox66",
+      "name": "CheckBox[66]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox45",
+      "name": "CheckBox[45]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox6",
+      "name": "CheckBox[6]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox44",
+      "name": "CheckBox[44]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox52",
+      "name": "CheckBox[52]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox27",
+      "name": "CheckBox[27]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox1",
+      "name": "CheckBox[1]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox56",
+      "name": "CheckBox[56]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox2",
+      "name": "CheckBox[2]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "hide",
+      "name": "hidefoto",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "enablesave",
+      "name": "enablesave",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "patternenable",
+      "name": "patternenable",
+      "type": "checkbox"
+    }
+  ],
+  "notes": []
+}

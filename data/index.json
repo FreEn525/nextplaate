@@ -3,7 +3,7 @@
     "code": "ad",
     "name": "Andorra",
     "upload": true,
-    "uploadTypes": 0,
+    "uploadTypes": 5,
     "searchCategories": 5,
     "plates": 0,
     "categoriesWithPlate": 0
@@ -282,7 +282,7 @@
     "code": "mt",
     "name": "Malta",
     "upload": true,
-    "uploadTypes": 0,
+    "uploadTypes": 6,
     "searchCategories": 6,
     "plates": 0,
     "categoriesWithPlate": 0

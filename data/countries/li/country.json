@@ -1,95 +1,9 @@
 {
   "code": "li",
   "name": "Liechtenstein",
-  "upload": {
-    "typeMenu": true,
-    "hooks": ["disli"],
-    "types": [
-      {
-        "id": "1",
-        "label": "Cars",
-        "visible": ["fon", "digit"]
-      },
-      {
-        "id": "2",
-        "label": "Motorcycles",
-        "visible": ["digit"]
-      },
-      {
-        "id": "3",
-        "label": "Short-term transit plates",
-        "visible": ["fon", "digit"]
-      },
-      {
-        "id": "4",
-        "label": "Agricultural vehicles (green)",
-        "visible": ["fon", "digit"]
-      },
-      {
-        "id": "5",
-        "label": "Exceptional vehicles",
-        "visible": ["fon", "digit"]
-      },
-      {
-        "id": "6",
-        "label": "Work and fire vehicles (blue)",
-        "visible": ["fon", "digit"]
-      },
-      {
-        "id": "7",
-        "label": "Provisional",
-        "visible": ["fon", "digit"]
-      },
-      {
-        "id": "8",
-        "label": "Dealer (with \"U\")",
-        "visible": ["b1", "fon", "digit"]
-      },
-      {
-        "id": "9",
-        "label": "Light motor vehicles",
-        "visible": ["digit"]
-      }
-    ]
+  "pages": {
+    "upload": true,
+    "search": true
   },
-  "search": {
-    "categories": [
-      {
-        "id": "1",
-        "label": "Cars"
-      },
-      {
-        "id": "2",
-        "label": "Motorcycles"
-      },
-      {
-        "id": "3",
-        "label": "Short-term transit plates"
-      },
-      {
-        "id": "4",
-        "label": "Agricultural vehicles (green)"
-      },
-      {
-        "id": "5",
-        "label": "Exceptional vehicles"
-      },
-      {
-        "id": "6",
-        "label": "Work and fire vehicles (blue)"
-      },
-      {
-        "id": "7",
-        "label": "Provisional"
-      },
-      {
-        "id": "8",
-        "label": "Dealer (with \"U\")"
-      },
-      {
-        "id": "9",
-        "label": "Light motor vehicles"
-      }
-    ]
-  }
+  "typeMenu": "ctype"
 }

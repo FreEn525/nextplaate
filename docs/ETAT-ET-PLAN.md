@@ -136,3 +136,14 @@ Chaque étape : une branche courte, tests verts, un commit clair.
 - **Ensuite** : analyse des pages (script qui lit sans deviner), mise à jour de `data/` et de `docs/COUVERTURE.md`, puis ajouter les nouveaux codes à `TEST_COUNTRIES` (`src/dev/30-capture.js`) pour que les tests de plaques les parcourent.
 - **Tiroir développeur** : boîte *Status* (pages gardées, plaques en base, requêtes, pause du site), boutons du test de plaques rangés par portée (ce pays / tous les pays / résultats). Fichiers `src/dev/` renumérotés : `00-store`, `10-status`, `20-save-page`, `30-capture`, `40-plate-test/`, `50-database`.
 - **Vérification du code** : revue ciblée des écritures HTML (`innerHTML`, `setStatus`) : les données de l'utilisateur passent par `esc()`, le reste est du texte du script ; rien à corriger. La revue automatique n'a trouvé qu'un vrai défaut (une erreur passagère du site comptée comme « pas de page »), corrigé. Les recherches sur ce qui est possible sont dans `docs/POSSIBILITES.md`.
+
+### Analyse des 47 pays déjà sauvegardés (branche `data/form-analysis`)
+
+Chaque page d'ajout et de recherche a été lue pays par pays : `data/countries/<cc>/form.json` et `search.json`, résumé dans `docs/FORMULAIRES.md`, tout relancé par `node scripts/refresh-data.mjs`. Ce qu'on a compris :
+
+- **Le menu de type ne s'appelle pas toujours `ctype`** : Andorre et Malte utilisent `drop_2`, les Pays-Bas n'en ont aucun (`fon` n'y décrit que l'apparence de la plaque : la catégorie ne se choisit pas dans le formulaire). Les outils de test ne cherchent que `ctype` : c'est pourquoi ces 3 pays n'ont aucune catégorie vérifiée.
+- **Allemagne, « Authorities and federal agencies »** (règle en échec) : le formulaire affiche `fon`, `regionfed`, `regionfed1` et `digit`. La règle actuelle ne lit que le nombre, d'où `7004` au lieu de `BD 16 7004`.
+- **441 types dans les formulaires, 481 catégories en recherche** : 431 se correspondent ; les autres sont des noms qui diffèrent (République tchèque 1977/1960, Pologne « Small-size », Allemagne « NATO ») ou les Pays-Bas.
+- **Extracteur de champs visibles** : 23 erreurs avant, 0 maintenant (commentaires `// ... {` qui faussaient le comptage des accolades, tables de données de la page absentes). 7 pays n'ont aucune fonction d'affichage (`ad dz lt mt nl si uk`) : on lit alors ce que la page affiche au chargement (`visibleFrom: page-at-load`).
+- **`bmObject`** n'est pas propre aux marques : l'Allemagne l'utilise pour « autorité fédérale → codes ». À regarder avant de supposer quoi que ce soit sur les marques et modèles.
+- **Capture des 49 autres pays** : en attente des fichiers (rien n'est encore écrit dans `reference/real/countries`).

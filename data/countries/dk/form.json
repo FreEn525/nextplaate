@@ -1,0 +1,1676 @@
+{
+  "code": "dk",
+  "title": "Upload new license plate, Denmark",
+  "action": "add",
+  "typeMenu": "ctype",
+  "visibleFrom": "site-script",
+  "types": [
+    {
+      "id": "1",
+      "label": "Regular plates",
+      "visible": ["digit", "let", "fon"]
+    },
+    {
+      "id": "2",
+      "label": "Commercial vehicles",
+      "class": "yellow-black-select",
+      "visible": ["digit", "let", "fon"]
+    },
+    {
+      "id": "3",
+      "label": "Lower-taxed commercial vehicles",
+      "visible": ["digit", "let", "fon"]
+    },
+    {
+      "id": "4",
+      "label": "Vanity Plates",
+      "visible": ["b1", "b2", "b3", "b4", "b5", "b6", "b7", "fon"]
+    },
+    {
+      "id": "5",
+      "label": "1958/1966-1976 - system",
+      "visible": ["let", "nomerpl", "fon"]
+    },
+    {
+      "id": "6",
+      "label": "Diplomatic",
+      "class": "white-blue-select",
+      "visible": ["digit", "let", "fon"]
+    },
+    {
+      "id": "7",
+      "label": "Export plates",
+      "visible": ["digit", "fon"]
+    },
+    {
+      "id": "8",
+      "label": "Temporary License plates",
+      "visible": ["digit", "fon"]
+    }
+  ],
+  "hooks": ["disdk"],
+  "plateFields": [
+    {
+      "tag": "select",
+      "id": "fon",
+      "name": "fon",
+      "options": [
+        {
+          "value": "1",
+          "label": "Single-row plate with euroband"
+        },
+        {
+          "value": "2",
+          "label": "Single-row plate without euroband"
+        },
+        {
+          "value": "3",
+          "label": "Two-row plate with euroband"
+        },
+        {
+          "value": "4",
+          "label": "Two-row plate without euroband"
+        },
+        {
+          "value": "101",
+          "label": "Single-row plate with euroband / Repeater plates"
+        },
+        {
+          "value": "102",
+          "label": "Single-row plate without euroband / Repeater plates"
+        },
+        {
+          "value": "103",
+          "label": "Two-row plate with euroband / Repeater plates"
+        },
+        {
+          "value": "104",
+          "label": "Two-row plate without euroband / Repeater plates"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "dkfont",
+      "name": "dkfont",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "0",
+          "label": "Thin characters"
+        },
+        {
+          "value": "1",
+          "label": "Bold characters"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": "let",
+      "name": "let",
+      "type": "text",
+      "maxlength": 2
+    },
+    {
+      "tag": "input",
+      "id": "exp",
+      "name": "exp",
+      "type": "text",
+      "maxlength": 2,
+      "example": "25",
+      "hiddenAtLoad": true,
+      "digitsOnly": true
+    },
+    {
+      "tag": "input",
+      "id": "digit",
+      "name": "digit",
+      "type": "text",
+      "maxlength": 5,
+      "digitsOnly": true
+    },
+    {
+      "tag": "input",
+      "id": "nomerpl",
+      "name": "nomerpl",
+      "type": "text",
+      "maxlength": 6,
+      "hiddenAtLoad": true
+    },
+    {
+      "tag": "select",
+      "id": "b1",
+      "name": "b1",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "A",
+          "label": "A"
+        },
+        {
+          "value": "Æ",
+          "label": "Æ"
+        },
+        {
+          "value": "Å",
+          "label": "Å"
+        },
+        {
+          "value": "B",
+          "label": "B"
+        },
+        {
+          "value": "C",
+          "label": "C"
+        },
+        {
+          "value": "D",
+          "label": "D"
+        },
+        {
+          "value": "E",
+          "label": "E"
+        },
+        {
+          "value": "F",
+          "label": "F"
+        },
+        {
+          "value": "G",
+          "label": "G"
+        },
+        {
+          "value": "H",
+          "label": "H"
+        },
+        {
+          "value": "I",
+          "label": "I"
+        },
+        {
+          "value": "J",
+          "label": "J"
+        },
+        {
+          "value": "K",
+          "label": "K"
+        },
+        {
+          "value": "L",
+          "label": "L"
+        },
+        {
+          "value": "M",
+          "label": "M"
+        },
+        {
+          "value": "N",
+          "label": "N"
+        },
+        {
+          "value": "O",
+          "label": "O"
+        },
+        {
+          "value": "Ø",
+          "label": "Ø"
+        },
+        {
+          "value": "P",
+          "label": "P"
+        },
+        {
+          "value": "R",
+          "label": "R"
+        },
+        {
+          "value": "S",
+          "label": "S"
+        },
+        {
+          "value": "T",
+          "label": "T"
+        },
+        {
+          "value": "U",
+          "label": "U"
+        },
+        {
+          "value": "V",
+          "label": "V"
+        },
+        {
+          "value": "W",
+          "label": "W"
+        },
+        {
+          "value": "X",
+          "label": "X"
+        },
+        {
+          "value": "Y",
+          "label": "Y"
+        },
+        {
+          "value": "Z",
+          "label": "Z"
+        },
+        {
+          "value": "0",
+          "label": "0"
+        },
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        },
+        {
+          "value": "6",
+          "label": "6"
+        },
+        {
+          "value": "7",
+          "label": "7"
+        },
+        {
+          "value": "8",
+          "label": "8"
+        },
+        {
+          "value": "9",
+          "label": "9"
+        },
+        {
+          "value": "-",
+          "label": ""
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "b2",
+      "name": "b2",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "A",
+          "label": "A"
+        },
+        {
+          "value": "Æ",
+          "label": "Æ"
+        },
+        {
+          "value": "Å",
+          "label": "Å"
+        },
+        {
+          "value": "B",
+          "label": "B"
+        },
+        {
+          "value": "C",
+          "label": "C"
+        },
+        {
+          "value": "D",
+          "label": "D"
+        },
+        {
+          "value": "E",
+          "label": "E"
+        },
+        {
+          "value": "F",
+          "label": "F"
+        },
+        {
+          "value": "G",
+          "label": "G"
+        },
+        {
+          "value": "H",
+          "label": "H"
+        },
+        {
+          "value": "I",
+          "label": "I"
+        },
+        {
+          "value": "J",
+          "label": "J"
+        },
+        {
+          "value": "K",
+          "label": "K"
+        },
+        {
+          "value": "L",
+          "label": "L"
+        },
+        {
+          "value": "M",
+          "label": "M"
+        },
+        {
+          "value": "N",
+          "label": "N"
+        },
+        {
+          "value": "O",
+          "label": "O"
+        },
+        {
+          "value": "Ø",
+          "label": "Ø"
+        },
+        {
+          "value": "P",
+          "label": "P"
+        },
+        {
+          "value": "R",
+          "label": "R"
+        },
+        {
+          "value": "S",
+          "label": "S"
+        },
+        {
+          "value": "T",
+          "label": "T"
+        },
+        {
+          "value": "U",
+          "label": "U"
+        },
+        {
+          "value": "V",
+          "label": "V"
+        },
+        {
+          "value": "W",
+          "label": "W"
+        },
+        {
+          "value": "X",
+          "label": "X"
+        },
+        {
+          "value": "Y",
+          "label": "Y"
+        },
+        {
+          "value": "Z",
+          "label": "Z"
+        },
+        {
+          "value": "0",
+          "label": "0"
+        },
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        },
+        {
+          "value": "6",
+          "label": "6"
+        },
+        {
+          "value": "7",
+          "label": "7"
+        },
+        {
+          "value": "8",
+          "label": "8"
+        },
+        {
+          "value": "9",
+          "label": "9"
+        },
+        {
+          "value": "-",
+          "label": ""
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "b3",
+      "name": "b3",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "A",
+          "label": "A"
+        },
+        {
+          "value": "Æ",
+          "label": "Æ"
+        },
+        {
+          "value": "Å",
+          "label": "Å"
+        },
+        {
+          "value": "B",
+          "label": "B"
+        },
+        {
+          "value": "C",
+          "label": "C"
+        },
+        {
+          "value": "D",
+          "label": "D"
+        },
+        {
+          "value": "E",
+          "label": "E"
+        },
+        {
+          "value": "F",
+          "label": "F"
+        },
+        {
+          "value": "G",
+          "label": "G"
+        },
+        {
+          "value": "H",
+          "label": "H"
+        },
+        {
+          "value": "I",
+          "label": "I"
+        },
+        {
+          "value": "J",
+          "label": "J"
+        },
+        {
+          "value": "K",
+          "label": "K"
+        },
+        {
+          "value": "L",
+          "label": "L"
+        },
+        {
+          "value": "M",
+          "label": "M"
+        },
+        {
+          "value": "N",
+          "label": "N"
+        },
+        {
+          "value": "O",
+          "label": "O"
+        },
+        {
+          "value": "Ø",
+          "label": "Ø"
+        },
+        {
+          "value": "P",
+          "label": "P"
+        },
+        {
+          "value": "R",
+          "label": "R"
+        },
+        {
+          "value": "S",
+          "label": "S"
+        },
+        {
+          "value": "T",
+          "label": "T"
+        },
+        {
+          "value": "U",
+          "label": "U"
+        },
+        {
+          "value": "V",
+          "label": "V"
+        },
+        {
+          "value": "W",
+          "label": "W"
+        },
+        {
+          "value": "X",
+          "label": "X"
+        },
+        {
+          "value": "Y",
+          "label": "Y"
+        },
+        {
+          "value": "Z",
+          "label": "Z"
+        },
+        {
+          "value": "0",
+          "label": "0"
+        },
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        },
+        {
+          "value": "6",
+          "label": "6"
+        },
+        {
+          "value": "7",
+          "label": "7"
+        },
+        {
+          "value": "8",
+          "label": "8"
+        },
+        {
+          "value": "9",
+          "label": "9"
+        },
+        {
+          "value": "-",
+          "label": ""
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "b4",
+      "name": "b4",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "A",
+          "label": "A"
+        },
+        {
+          "value": "Æ",
+          "label": "Æ"
+        },
+        {
+          "value": "Å",
+          "label": "Å"
+        },
+        {
+          "value": "B",
+          "label": "B"
+        },
+        {
+          "value": "C",
+          "label": "C"
+        },
+        {
+          "value": "D",
+          "label": "D"
+        },
+        {
+          "value": "E",
+          "label": "E"
+        },
+        {
+          "value": "F",
+          "label": "F"
+        },
+        {
+          "value": "G",
+          "label": "G"
+        },
+        {
+          "value": "H",
+          "label": "H"
+        },
+        {
+          "value": "I",
+          "label": "I"
+        },
+        {
+          "value": "J",
+          "label": "J"
+        },
+        {
+          "value": "K",
+          "label": "K"
+        },
+        {
+          "value": "L",
+          "label": "L"
+        },
+        {
+          "value": "M",
+          "label": "M"
+        },
+        {
+          "value": "N",
+          "label": "N"
+        },
+        {
+          "value": "O",
+          "label": "O"
+        },
+        {
+          "value": "Ø",
+          "label": "Ø"
+        },
+        {
+          "value": "P",
+          "label": "P"
+        },
+        {
+          "value": "R",
+          "label": "R"
+        },
+        {
+          "value": "S",
+          "label": "S"
+        },
+        {
+          "value": "T",
+          "label": "T"
+        },
+        {
+          "value": "U",
+          "label": "U"
+        },
+        {
+          "value": "V",
+          "label": "V"
+        },
+        {
+          "value": "W",
+          "label": "W"
+        },
+        {
+          "value": "X",
+          "label": "X"
+        },
+        {
+          "value": "Y",
+          "label": "Y"
+        },
+        {
+          "value": "Z",
+          "label": "Z"
+        },
+        {
+          "value": "0",
+          "label": "0"
+        },
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        },
+        {
+          "value": "6",
+          "label": "6"
+        },
+        {
+          "value": "7",
+          "label": "7"
+        },
+        {
+          "value": "8",
+          "label": "8"
+        },
+        {
+          "value": "9",
+          "label": "9"
+        },
+        {
+          "value": "-",
+          "label": ""
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "b5",
+      "name": "b5",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "A",
+          "label": "A"
+        },
+        {
+          "value": "Æ",
+          "label": "Æ"
+        },
+        {
+          "value": "Å",
+          "label": "Å"
+        },
+        {
+          "value": "B",
+          "label": "B"
+        },
+        {
+          "value": "C",
+          "label": "C"
+        },
+        {
+          "value": "D",
+          "label": "D"
+        },
+        {
+          "value": "E",
+          "label": "E"
+        },
+        {
+          "value": "F",
+          "label": "F"
+        },
+        {
+          "value": "G",
+          "label": "G"
+        },
+        {
+          "value": "H",
+          "label": "H"
+        },
+        {
+          "value": "I",
+          "label": "I"
+        },
+        {
+          "value": "J",
+          "label": "J"
+        },
+        {
+          "value": "K",
+          "label": "K"
+        },
+        {
+          "value": "L",
+          "label": "L"
+        },
+        {
+          "value": "M",
+          "label": "M"
+        },
+        {
+          "value": "N",
+          "label": "N"
+        },
+        {
+          "value": "O",
+          "label": "O"
+        },
+        {
+          "value": "Ø",
+          "label": "Ø"
+        },
+        {
+          "value": "P",
+          "label": "P"
+        },
+        {
+          "value": "R",
+          "label": "R"
+        },
+        {
+          "value": "S",
+          "label": "S"
+        },
+        {
+          "value": "T",
+          "label": "T"
+        },
+        {
+          "value": "U",
+          "label": "U"
+        },
+        {
+          "value": "V",
+          "label": "V"
+        },
+        {
+          "value": "W",
+          "label": "W"
+        },
+        {
+          "value": "X",
+          "label": "X"
+        },
+        {
+          "value": "Y",
+          "label": "Y"
+        },
+        {
+          "value": "Z",
+          "label": "Z"
+        },
+        {
+          "value": "0",
+          "label": "0"
+        },
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        },
+        {
+          "value": "6",
+          "label": "6"
+        },
+        {
+          "value": "7",
+          "label": "7"
+        },
+        {
+          "value": "8",
+          "label": "8"
+        },
+        {
+          "value": "9",
+          "label": "9"
+        },
+        {
+          "value": "-",
+          "label": ""
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "b6",
+      "name": "b6",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "A",
+          "label": "A"
+        },
+        {
+          "value": "Æ",
+          "label": "Æ"
+        },
+        {
+          "value": "Å",
+          "label": "Å"
+        },
+        {
+          "value": "B",
+          "label": "B"
+        },
+        {
+          "value": "C",
+          "label": "C"
+        },
+        {
+          "value": "D",
+          "label": "D"
+        },
+        {
+          "value": "E",
+          "label": "E"
+        },
+        {
+          "value": "F",
+          "label": "F"
+        },
+        {
+          "value": "G",
+          "label": "G"
+        },
+        {
+          "value": "H",
+          "label": "H"
+        },
+        {
+          "value": "I",
+          "label": "I"
+        },
+        {
+          "value": "J",
+          "label": "J"
+        },
+        {
+          "value": "K",
+          "label": "K"
+        },
+        {
+          "value": "L",
+          "label": "L"
+        },
+        {
+          "value": "M",
+          "label": "M"
+        },
+        {
+          "value": "N",
+          "label": "N"
+        },
+        {
+          "value": "O",
+          "label": "O"
+        },
+        {
+          "value": "Ø",
+          "label": "Ø"
+        },
+        {
+          "value": "P",
+          "label": "P"
+        },
+        {
+          "value": "R",
+          "label": "R"
+        },
+        {
+          "value": "S",
+          "label": "S"
+        },
+        {
+          "value": "T",
+          "label": "T"
+        },
+        {
+          "value": "U",
+          "label": "U"
+        },
+        {
+          "value": "V",
+          "label": "V"
+        },
+        {
+          "value": "W",
+          "label": "W"
+        },
+        {
+          "value": "X",
+          "label": "X"
+        },
+        {
+          "value": "Y",
+          "label": "Y"
+        },
+        {
+          "value": "Z",
+          "label": "Z"
+        },
+        {
+          "value": "0",
+          "label": "0"
+        },
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        },
+        {
+          "value": "6",
+          "label": "6"
+        },
+        {
+          "value": "7",
+          "label": "7"
+        },
+        {
+          "value": "8",
+          "label": "8"
+        },
+        {
+          "value": "9",
+          "label": "9"
+        },
+        {
+          "value": "-",
+          "label": ""
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "b7",
+      "name": "b7",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "A",
+          "label": "A"
+        },
+        {
+          "value": "Æ",
+          "label": "Æ"
+        },
+        {
+          "value": "Å",
+          "label": "Å"
+        },
+        {
+          "value": "B",
+          "label": "B"
+        },
+        {
+          "value": "C",
+          "label": "C"
+        },
+        {
+          "value": "D",
+          "label": "D"
+        },
+        {
+          "value": "E",
+          "label": "E"
+        },
+        {
+          "value": "F",
+          "label": "F"
+        },
+        {
+          "value": "G",
+          "label": "G"
+        },
+        {
+          "value": "H",
+          "label": "H"
+        },
+        {
+          "value": "I",
+          "label": "I"
+        },
+        {
+          "value": "J",
+          "label": "J"
+        },
+        {
+          "value": "K",
+          "label": "K"
+        },
+        {
+          "value": "L",
+          "label": "L"
+        },
+        {
+          "value": "M",
+          "label": "M"
+        },
+        {
+          "value": "N",
+          "label": "N"
+        },
+        {
+          "value": "O",
+          "label": "O"
+        },
+        {
+          "value": "Ø",
+          "label": "Ø"
+        },
+        {
+          "value": "P",
+          "label": "P"
+        },
+        {
+          "value": "R",
+          "label": "R"
+        },
+        {
+          "value": "S",
+          "label": "S"
+        },
+        {
+          "value": "T",
+          "label": "T"
+        },
+        {
+          "value": "U",
+          "label": "U"
+        },
+        {
+          "value": "V",
+          "label": "V"
+        },
+        {
+          "value": "W",
+          "label": "W"
+        },
+        {
+          "value": "X",
+          "label": "X"
+        },
+        {
+          "value": "Y",
+          "label": "Y"
+        },
+        {
+          "value": "Z",
+          "label": "Z"
+        },
+        {
+          "value": "0",
+          "label": "0"
+        },
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        },
+        {
+          "value": "6",
+          "label": "6"
+        },
+        {
+          "value": "7",
+          "label": "7"
+        },
+        {
+          "value": "8",
+          "label": "8"
+        },
+        {
+          "value": "9",
+          "label": "9"
+        },
+        {
+          "value": "-",
+          "label": ""
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": "valid",
+      "name": "valid",
+      "type": "text",
+      "maxlength": 6,
+      "example": "DDMMYY",
+      "digitsOnly": true
+    },
+    {
+      "tag": "input",
+      "id": "expdate",
+      "name": "expdate",
+      "type": "text",
+      "maxlength": 6,
+      "example": "DDMMYY",
+      "digitsOnly": true
+    }
+  ],
+  "otherFields": [
+    {
+      "tag": "select",
+      "id": null,
+      "name": "markaavto",
+      "options": 3948
+    },
+    {
+      "tag": "select",
+      "id": "model",
+      "name": "model",
+      "options": 0
+    },
+    {
+      "tag": "select",
+      "id": "modgen",
+      "name": "modgen",
+      "options": 0
+    },
+    {
+      "tag": "input",
+      "id": "markamodtype",
+      "name": null,
+      "type": "text"
+    },
+    {
+      "tag": "textarea",
+      "id": null,
+      "name": "dop"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": null,
+      "type": "search"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox13",
+      "name": "CheckBox[13]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox50",
+      "name": "CheckBox[50]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox25",
+      "name": "CheckBox[25]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox26",
+      "name": "CheckBox[26]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox43",
+      "name": "CheckBox[43]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox59",
+      "name": "CheckBox[59]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox68",
+      "name": "CheckBox[68]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox60",
+      "name": "CheckBox[60]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox21",
+      "name": "CheckBox[21]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox8",
+      "name": "CheckBox[8]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox58",
+      "name": "CheckBox[58]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox9",
+      "name": "CheckBox[9]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox57",
+      "name": "CheckBox[57]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox46",
+      "name": "CheckBox[46]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox62",
+      "name": "CheckBox[62]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox33",
+      "name": "CheckBox[33]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox61",
+      "name": "CheckBox[61]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox22",
+      "name": "CheckBox[22]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox47",
+      "name": "CheckBox[47]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox38",
+      "name": "CheckBox[38]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox53",
+      "name": "CheckBox[53]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox40",
+      "name": "CheckBox[40]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox63",
+      "name": "CheckBox[63]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox64",
+      "name": "CheckBox[64]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox42",
+      "name": "CheckBox[42]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox65",
+      "name": "CheckBox[65]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox39",
+      "name": "CheckBox[39]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox49",
+      "name": "CheckBox[49]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox41",
+      "name": "CheckBox[41]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox37",
+      "name": "CheckBox[37]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox67",
+      "name": "CheckBox[67]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox18",
+      "name": "CheckBox[18]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox20",
+      "name": "CheckBox[20]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox15",
+      "name": "CheckBox[15]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox23",
+      "name": "CheckBox[23]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox69",
+      "name": "CheckBox[69]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox24",
+      "name": "CheckBox[24]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox19",
+      "name": "CheckBox[19]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox48",
+      "name": "CheckBox[48]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox4",
+      "name": "CheckBox[4]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox5",
+      "name": "CheckBox[5]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox16",
+      "name": "CheckBox[16]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox14",
+      "name": "CheckBox[14]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox66",
+      "name": "CheckBox[66]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox45",
+      "name": "CheckBox[45]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox6",
+      "name": "CheckBox[6]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox44",
+      "name": "CheckBox[44]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox52",
+      "name": "CheckBox[52]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox27",
+      "name": "CheckBox[27]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox1",
+      "name": "CheckBox[1]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox56",
+      "name": "CheckBox[56]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox2",
+      "name": "CheckBox[2]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "hide",
+      "name": "hidefoto",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "enablesave",
+      "name": "enablesave",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "patternenable",
+      "name": "patternenable",
+      "type": "checkbox"
+    }
+  ],
+  "notes": []
+}

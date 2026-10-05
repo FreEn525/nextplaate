@@ -1,68 +1,9 @@
 {
   "code": "me",
   "name": "Montenegro",
-  "upload": {
-    "typeMenu": true,
-    "hooks": ["disme"],
-    "types": [
-      {
-        "id": "1",
-        "label": "Cars",
-        "visible": ["digit", "let1", "fon", "region"]
-      },
-      {
-        "id": "2",
-        "label": "Trailers",
-        "visible": ["digit", "let2", "region"]
-      },
-      {
-        "id": "3",
-        "label": "Motorcycles",
-        "visible": ["digit", "let1", "region"]
-      },
-      {
-        "id": "4",
-        "label": "Mopeds",
-        "visible": ["digit", "let1", "region"]
-      },
-      {
-        "id": "5",
-        "label": "Vanity Plates",
-        "visible": ["fon", "b1", "b2", "b3", "b4", "b5", "region"]
-      },
-      {
-        "id": "6",
-        "label": "Police",
-        "visible": ["digit", "fon", "region"]
-      }
-    ]
+  "pages": {
+    "upload": true,
+    "search": true
   },
-  "search": {
-    "categories": [
-      {
-        "id": "1",
-        "label": "Cars"
-      },
-      {
-        "id": "2",
-        "label": "Trailers"
-      },
-      {
-        "id": "3",
-        "label": "Motorcycles"
-      },
-      {
-        "id": "4",
-        "label": "Mopeds"
-      },
-      {
-        "id": "5",
-        "label": "Vanity Plates"
-      },
-      {
-        "id": "6",
-        "label": "Police"
-      }
-    ]
-  }
+  "typeMenu": "ctype"
 }

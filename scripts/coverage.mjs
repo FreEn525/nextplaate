@@ -1,6 +1,7 @@
 // Writes docs/COUVERTURE.md: which countries and categories the plate rules cover, and what is left.
 //   node scripts/coverage.mjs
-// Reads  data/countries/<cc>/country.json   categories of the site (node scripts/build-data.mjs)
+// Reads  data/countries/<cc>/search.json    categories of the site (node scripts/analyze-pages.mjs)
+//        data/countries/<cc>/search.json    categories of the site (node scripts/analyze-pages.mjs)
 //        data/check.json                    result of the last full run of tests/offline/check_db.py
 //        src/lib/plate/<cc>.js              a country with its own rule (the others read the visible fields)
 //        src/lib/countries.js               every country of the site
@@ -21,8 +22,7 @@ const index = json('data/index.json');
 const rows = [], failing = [], unknown = {};
 let cats = 0, ok = 0, bad = 0, none = 0;
 for (const c of index) {
-  const country = json(`data/countries/${c.code}/country.json`);
-  const list = (country.search?.categories ?? []).map(x => x.label);
+  const list = json(`data/countries/${c.code}/search.json`).categories.map(x => x.label);
   const res = check[c.code] ?? {};
   let o = 0, b = 0, n = 0;
   for (const label of list) {

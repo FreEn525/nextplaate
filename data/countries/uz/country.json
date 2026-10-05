@@ -1,95 +1,9 @@
 {
   "code": "uz",
   "name": "Uzbekistan",
-  "upload": {
-    "typeMenu": true,
-    "hooks": ["disuz"],
-    "types": [
-      {
-        "id": "1",
-        "label": "Private owners",
-        "visible": ["b1", "b2", "dig1", "region", "fon"]
-      },
-      {
-        "id": "2",
-        "label": "Organizations",
-        "visible": ["b2", "dig1", "region", "fon"]
-      },
-      {
-        "id": "3",
-        "label": "Foreign citizens",
-        "visible": ["dig2", "region"]
-      },
-      {
-        "id": "4",
-        "label": "Joint ventures and foreign enterprises",
-        "visible": ["dig2", "region"]
-      },
-      {
-        "id": "5",
-        "label": "Motorcycles",
-        "visible": ["b4", "dig3", "region"]
-      },
-      {
-        "id": "6",
-        "label": "Trailers",
-        "visible": ["b4", "dig3", "region"]
-      },
-      {
-        "id": "7",
-        "label": "Special machinery (Organizations)",
-        "visible": ["b4", "dig3", "region"]
-      },
-      {
-        "id": "8",
-        "label": "Special machinery (Private owners)",
-        "visible": ["b4", "dig3", "region"]
-      },
-      {
-        "id": "9",
-        "label": "High authorities",
-        "visible": ["b3", "dig1"]
-      }
-    ]
+  "pages": {
+    "upload": true,
+    "search": true
   },
-  "search": {
-    "categories": [
-      {
-        "id": "1",
-        "label": "Private owners"
-      },
-      {
-        "id": "2",
-        "label": "Organizations"
-      },
-      {
-        "id": "3",
-        "label": "Foreign citizens"
-      },
-      {
-        "id": "4",
-        "label": "Joint ventures and foreign enterprises"
-      },
-      {
-        "id": "5",
-        "label": "Motorcycles"
-      },
-      {
-        "id": "6",
-        "label": "Trailers"
-      },
-      {
-        "id": "7",
-        "label": "Special machinery (Organizations)"
-      },
-      {
-        "id": "8",
-        "label": "Special machinery (Private owners)"
-      },
-      {
-        "id": "9",
-        "label": "High authorities"
-      }
-    ]
-  }
+  "typeMenu": "ctype"
 }

@@ -1,0 +1,995 @@
+{
+  "code": "sk",
+  "title": "Upload new license plate, Slovakia",
+  "action": "add",
+  "typeMenu": "ctype",
+  "visibleFrom": "site-script",
+  "types": [
+    {
+      "id": "1",
+      "label": "Cars",
+      "visible": ["digit", "let2", "region", "fon", "regionfed1"]
+    },
+    {
+      "id": "2",
+      "label": "Motorcycles",
+      "visible": ["digit", "let2", "region", "fon", "regionfed1"]
+    },
+    {
+      "id": "3",
+      "label": "Export transit plates (AB V(A)123)",
+      "class": "yellow-black-select",
+      "visible": ["digit", "let1", "region", "fon", "regionfed1"]
+    },
+    {
+      "id": "14",
+      "label": "Export transit plates (V(A) 123AB)",
+      "visible": ["digit11", "let11", "let2", "fon", "regionfed1"]
+    },
+    {
+      "id": "4",
+      "label": "Provincial governments, university rectors",
+      "visible": ["digit", "let1", "region", "fon", "regionfed1"]
+    },
+    {
+      "id": "5",
+      "label": "Dealer (AB M(A)123)",
+      "class": "white-red-select",
+      "visible": ["digit", "let1", "region", "fon", "regionfed1"]
+    },
+    {
+      "id": "15",
+      "label": "Dealer (M(A) 123AB)",
+      "visible": ["digit11", "let11", "let2", "fon", "regionfed1"]
+    },
+    {
+      "id": "6",
+      "label": "Oldtimers (AB H(A)123)",
+      "class": "yelred",
+      "visible": ["digit", "let1", "region", "fon", "regionfed1"]
+    },
+    {
+      "id": "16",
+      "label": "Oldtimers (H(A) 123AB)",
+      "visible": ["digit11", "let11", "let2", "fon", "regionfed1"]
+    },
+    {
+      "id": "7",
+      "label": "Sportcars (AB S(A)123)",
+      "visible": ["digit", "let1", "region", "fon", "regionfed1"]
+    },
+    {
+      "id": "17",
+      "label": "Sportcars (S(A) 123AB)",
+      "visible": ["digit11", "let11", "let2", "fon", "regionfed1"]
+    },
+    {
+      "id": "8",
+      "label": "Special machinery",
+      "class": "lgreenblck",
+      "visible": ["digit", "let1", "region", "fon", "regionfed1"]
+    },
+    {
+      "id": "9",
+      "label": "Vanity Plates",
+      "visible": ["let2", "nomerpl", "fon", "regionfed1"]
+    },
+    {
+      "id": "10",
+      "label": "Police",
+      "visible": ["fon", "regionfed1"]
+    },
+    {
+      "id": "11",
+      "label": "Military",
+      "visible": ["digit", "fon", "regionfed1"]
+    },
+    {
+      "id": "12",
+      "label": "Electric vehicles",
+      "class": "lgreenblck",
+      "visible": ["digit", "let2", "region", "fon", "regionfed1"]
+    },
+    {
+      "id": "13",
+      "label": "Diplomatic",
+      "class": "dipcolor",
+      "visible": ["dip", "fon", "regionfed1"]
+    },
+    {
+      "id": "18",
+      "label": "Agricultural vehicles (F(A) 123AB)",
+      "visible": ["digit11", "let11", "let2", "fon", "regionfed1"]
+    },
+    {
+      "id": "19",
+      "label": "Agricultural vehicles (AB F(A)123)",
+      "class": "whitegreen",
+      "visible": ["digit", "let1", "region", "fon", "regionfed1"]
+    },
+    {
+      "id": "20",
+      "label": "Provisional (C(A) 12345)",
+      "class": "whitegreen",
+      "visible": ["let2", "nomerpl", "fon", "regionfed1"]
+    },
+    {
+      "id": "21",
+      "label": "Provisional (C 123AB)",
+      "visible": ["digit11", "let11", "let2", "fon", "regionfed1"]
+    }
+  ],
+  "hooks": ["dissk"],
+  "plateFields": [
+    {
+      "tag": "select",
+      "id": "fon",
+      "name": "fon",
+      "options": [
+        {
+          "value": "1",
+          "label": "Single-row plate (with euroband and coat of arms)"
+        },
+        {
+          "value": "2",
+          "label": "Single-row plate (with euroband and dash)"
+        },
+        {
+          "value": "3",
+          "label": "Single-row plate without euroband"
+        },
+        {
+          "value": "4",
+          "label": "Two-row plate (with euroband and coat of arms)"
+        },
+        {
+          "value": "5",
+          "label": "Two-row plate with euroband"
+        },
+        {
+          "value": "6",
+          "label": "Two-row plate without euroband"
+        },
+        {
+          "value": "11",
+          "label": "Single-row plate (2023)"
+        },
+        {
+          "value": "12",
+          "label": "Two-row plate (2023)"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": "let11",
+      "name": "let11",
+      "type": "text",
+      "maxlength": 2,
+      "hiddenAtLoad": true,
+      "digitsOnly": true
+    },
+    {
+      "tag": "input",
+      "id": "digit11",
+      "name": "digit11",
+      "type": "text",
+      "maxlength": 3,
+      "hiddenAtLoad": true,
+      "digitsOnly": true
+    },
+    {
+      "tag": "select",
+      "id": "region",
+      "name": "region",
+      "options": [
+        {
+          "value": "21903",
+          "label": "AA"
+        },
+        {
+          "value": "21904",
+          "label": "AB"
+        },
+        {
+          "value": "21905",
+          "label": "AC"
+        },
+        {
+          "value": "21906",
+          "label": "AD"
+        },
+        {
+          "value": "21908",
+          "label": "AE"
+        },
+        {
+          "value": "21925",
+          "label": "AF"
+        },
+        {
+          "value": "21927",
+          "label": "AG"
+        },
+        {
+          "value": "21941",
+          "label": "AH"
+        },
+        {
+          "value": "21945",
+          "label": "AI"
+        },
+        {
+          "value": "21954",
+          "label": "AJ"
+        },
+        {
+          "value": "21957",
+          "label": "AK"
+        },
+        {
+          "value": "21973",
+          "label": "AL"
+        },
+        {
+          "value": "21974",
+          "label": "AM"
+        },
+        {
+          "value": "21975",
+          "label": "AN"
+        },
+        {
+          "value": "21976",
+          "label": "AO"
+        },
+        {
+          "value": "21988",
+          "label": "AP"
+        },
+        {
+          "value": "21901",
+          "label": "BA"
+        },
+        {
+          "value": "21902",
+          "label": "BB"
+        },
+        {
+          "value": "21907",
+          "label": "BJ"
+        },
+        {
+          "value": "21909",
+          "label": "BL"
+        },
+        {
+          "value": "21910",
+          "label": "BN"
+        },
+        {
+          "value": "21911",
+          "label": "BR"
+        },
+        {
+          "value": "21912",
+          "label": "BS"
+        },
+        {
+          "value": "21913",
+          "label": "BT"
+        },
+        {
+          "value": "21914",
+          "label": "BY"
+        },
+        {
+          "value": "21915",
+          "label": "CA"
+        },
+        {
+          "value": "21916",
+          "label": "DK"
+        },
+        {
+          "value": "21917",
+          "label": "DS"
+        },
+        {
+          "value": "21918",
+          "label": "DT"
+        },
+        {
+          "value": "21989",
+          "label": "EL"
+        },
+        {
+          "value": "21992",
+          "label": "EV"
+        },
+        {
+          "value": "21919",
+          "label": "GA"
+        },
+        {
+          "value": "21920",
+          "label": "GL"
+        },
+        {
+          "value": "21921",
+          "label": "HC"
+        },
+        {
+          "value": "21922",
+          "label": "HE"
+        },
+        {
+          "value": "21923",
+          "label": "IL"
+        },
+        {
+          "value": "21924",
+          "label": "KA"
+        },
+        {
+          "value": "21926",
+          "label": "KE"
+        },
+        {
+          "value": "21928",
+          "label": "KK"
+        },
+        {
+          "value": "21929",
+          "label": "KM"
+        },
+        {
+          "value": "21930",
+          "label": "KN"
+        },
+        {
+          "value": "21931",
+          "label": "KS"
+        },
+        {
+          "value": "21932",
+          "label": "LC"
+        },
+        {
+          "value": "21933",
+          "label": "LE"
+        },
+        {
+          "value": "21934",
+          "label": "LM"
+        },
+        {
+          "value": "21935",
+          "label": "LV"
+        },
+        {
+          "value": "21936",
+          "label": "MA"
+        },
+        {
+          "value": "21937",
+          "label": "MI"
+        },
+        {
+          "value": "21938",
+          "label": "ML"
+        },
+        {
+          "value": "21939",
+          "label": "MT"
+        },
+        {
+          "value": "21940",
+          "label": "MY"
+        },
+        {
+          "value": "21942",
+          "label": "NM"
+        },
+        {
+          "value": "21943",
+          "label": "NO"
+        },
+        {
+          "value": "21944",
+          "label": "NR"
+        },
+        {
+          "value": "21946",
+          "label": "NZ"
+        },
+        {
+          "value": "21947",
+          "label": "PB"
+        },
+        {
+          "value": "21948",
+          "label": "PD"
+        },
+        {
+          "value": "21949",
+          "label": "PE"
+        },
+        {
+          "value": "21950",
+          "label": "PK"
+        },
+        {
+          "value": "21951",
+          "label": "PN"
+        },
+        {
+          "value": "21952",
+          "label": "PO"
+        },
+        {
+          "value": "21953",
+          "label": "PP"
+        },
+        {
+          "value": "21955",
+          "label": "PT"
+        },
+        {
+          "value": "21956",
+          "label": "PU"
+        },
+        {
+          "value": "21958",
+          "label": "RA"
+        },
+        {
+          "value": "21959",
+          "label": "RK"
+        },
+        {
+          "value": "21960",
+          "label": "RS"
+        },
+        {
+          "value": "21961",
+          "label": "RV"
+        },
+        {
+          "value": "21962",
+          "label": "SA"
+        },
+        {
+          "value": "21963",
+          "label": "SB"
+        },
+        {
+          "value": "21964",
+          "label": "SC"
+        },
+        {
+          "value": "21965",
+          "label": "SE"
+        },
+        {
+          "value": "21966",
+          "label": "SI"
+        },
+        {
+          "value": "21967",
+          "label": "SK"
+        },
+        {
+          "value": "21968",
+          "label": "SL"
+        },
+        {
+          "value": "21969",
+          "label": "SN"
+        },
+        {
+          "value": "21970",
+          "label": "SO"
+        },
+        {
+          "value": "21971",
+          "label": "SP"
+        },
+        {
+          "value": "21972",
+          "label": "SV"
+        },
+        {
+          "value": "21977",
+          "label": "TN"
+        },
+        {
+          "value": "21978",
+          "label": "TO"
+        },
+        {
+          "value": "21979",
+          "label": "TR"
+        },
+        {
+          "value": "21980",
+          "label": "TS"
+        },
+        {
+          "value": "21981",
+          "label": "TT"
+        },
+        {
+          "value": "21982",
+          "label": "TV"
+        },
+        {
+          "value": "21983",
+          "label": "VK"
+        },
+        {
+          "value": "21984",
+          "label": "VT"
+        },
+        {
+          "value": "21985",
+          "label": "ZA"
+        },
+        {
+          "value": "21986",
+          "label": "ZC"
+        },
+        {
+          "value": "21987",
+          "label": "ZH"
+        },
+        {
+          "value": "21990",
+          "label": "ZM"
+        },
+        {
+          "value": "21991",
+          "label": "ZV"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": "let1",
+      "name": "let1",
+      "type": "text",
+      "maxlength": 2,
+      "hiddenAtLoad": true,
+      "digitsOnly": true
+    },
+    {
+      "tag": "input",
+      "id": "digit",
+      "name": "digit",
+      "type": "text",
+      "maxlength": 3,
+      "digitsOnly": true
+    },
+    {
+      "tag": "input",
+      "id": "let2",
+      "name": "let2",
+      "type": "text",
+      "maxlength": 2,
+      "digitsOnly": true
+    },
+    {
+      "tag": "input",
+      "id": "nomerpl",
+      "name": "nomerpl",
+      "type": "text",
+      "maxlength": 5,
+      "hiddenAtLoad": true
+    },
+    {
+      "tag": "select",
+      "id": "dip",
+      "name": "dip",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "1",
+          "label": "EE"
+        },
+        {
+          "value": "2",
+          "label": "ZZ"
+        },
+        {
+          "value": "3",
+          "label": "CD"
+        },
+        {
+          "value": "4",
+          "label": "CC"
+        },
+        {
+          "value": "5",
+          "label": "CH"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": "police",
+      "name": "police",
+      "type": "text",
+      "maxlength": 5,
+      "hiddenAtLoad": true,
+      "digitsOnly": true
+    }
+  ],
+  "otherFields": [
+    {
+      "tag": "select",
+      "id": null,
+      "name": "markaavto",
+      "options": 3948
+    },
+    {
+      "tag": "select",
+      "id": "model",
+      "name": "model",
+      "options": 0
+    },
+    {
+      "tag": "select",
+      "id": "modgen",
+      "name": "modgen",
+      "options": 0
+    },
+    {
+      "tag": "input",
+      "id": "markamodtype",
+      "name": null,
+      "type": "text"
+    },
+    {
+      "tag": "textarea",
+      "id": null,
+      "name": "dop"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": null,
+      "type": "search"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox13",
+      "name": "CheckBox[13]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox50",
+      "name": "CheckBox[50]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox25",
+      "name": "CheckBox[25]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox26",
+      "name": "CheckBox[26]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox43",
+      "name": "CheckBox[43]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox59",
+      "name": "CheckBox[59]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox68",
+      "name": "CheckBox[68]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox60",
+      "name": "CheckBox[60]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox21",
+      "name": "CheckBox[21]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox8",
+      "name": "CheckBox[8]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox58",
+      "name": "CheckBox[58]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox9",
+      "name": "CheckBox[9]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox57",
+      "name": "CheckBox[57]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox46",
+      "name": "CheckBox[46]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox62",
+      "name": "CheckBox[62]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox33",
+      "name": "CheckBox[33]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox61",
+      "name": "CheckBox[61]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox22",
+      "name": "CheckBox[22]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox47",
+      "name": "CheckBox[47]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox38",
+      "name": "CheckBox[38]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox53",
+      "name": "CheckBox[53]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox40",
+      "name": "CheckBox[40]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox63",
+      "name": "CheckBox[63]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox64",
+      "name": "CheckBox[64]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox42",
+      "name": "CheckBox[42]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox65",
+      "name": "CheckBox[65]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox39",
+      "name": "CheckBox[39]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox49",
+      "name": "CheckBox[49]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox41",
+      "name": "CheckBox[41]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox37",
+      "name": "CheckBox[37]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox67",
+      "name": "CheckBox[67]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox18",
+      "name": "CheckBox[18]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox20",
+      "name": "CheckBox[20]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox15",
+      "name": "CheckBox[15]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox23",
+      "name": "CheckBox[23]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox69",
+      "name": "CheckBox[69]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox24",
+      "name": "CheckBox[24]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox19",
+      "name": "CheckBox[19]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox48",
+      "name": "CheckBox[48]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox4",
+      "name": "CheckBox[4]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox5",
+      "name": "CheckBox[5]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox16",
+      "name": "CheckBox[16]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox14",
+      "name": "CheckBox[14]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox66",
+      "name": "CheckBox[66]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox45",
+      "name": "CheckBox[45]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox6",
+      "name": "CheckBox[6]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox44",
+      "name": "CheckBox[44]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox52",
+      "name": "CheckBox[52]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox27",
+      "name": "CheckBox[27]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox1",
+      "name": "CheckBox[1]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox56",
+      "name": "CheckBox[56]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox2",
+      "name": "CheckBox[2]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "hide",
+      "name": "hidefoto",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "enablesave",
+      "name": "enablesave",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "patternenable",
+      "name": "patternenable",
+      "type": "checkbox"
+    }
+  ],
+  "notes": []
+}

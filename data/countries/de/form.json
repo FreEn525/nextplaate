@@ -1,0 +1,1847 @@
+{
+  "code": "de",
+  "title": "Upload new license plate, Germany",
+  "action": "add",
+  "typeMenu": "ctype",
+  "visibleFrom": "site-script",
+  "types": [
+    {
+      "id": "1",
+      "label": "Regular plates",
+      "visible": ["fon", "region", "b1", "digit"]
+    },
+    {
+      "id": "2",
+      "label": "Short-term transit plates",
+      "visible": ["fon", "region", "digit"]
+    },
+    {
+      "id": "3",
+      "label": "Export transit plates",
+      "visible": ["fon", "region", "digit", "b2"]
+    },
+    {
+      "id": "6",
+      "label": "Plates for oldtimers (type \"H\")",
+      "visible": ["fon", "region", "b1", "digit"]
+    },
+    {
+      "id": "7",
+      "label": "Seasonal plates",
+      "visible": ["fon", "region", "b1", "digit"]
+    },
+    {
+      "id": "8",
+      "label": "Red license plates",
+      "class": "white-red-select",
+      "visible": ["fon", "region", "digit"]
+    },
+    {
+      "id": "10",
+      "label": "Official services and consulates",
+      "visible": ["fon", "region", "digit"]
+    },
+    {
+      "id": "11",
+      "label": "Electric vehicles",
+      "visible": ["fon", "region", "b1", "digit"]
+    },
+    {
+      "id": "12",
+      "label": "Seasonal plates (Oldtimers)",
+      "visible": ["fon", "region", "b1", "digit"]
+    },
+    {
+      "id": "13",
+      "label": "Transferable license plates",
+      "visible": ["fon", "region", "b1", "digit"]
+    },
+    {
+      "id": "14",
+      "label": "Regional authorities",
+      "visible": ["fon", "regionreg", "digit"]
+    },
+    {
+      "id": "15",
+      "label": "Authorities and federal agencies",
+      "visible": ["fon", "regionfed", "regionfed1", "digit"]
+    },
+    {
+      "id": "16",
+      "label": "Military",
+      "visible": ["fon", "regionmil", "b1", "digit"]
+    },
+    {
+      "id": "17",
+      "label": "Insurance plates",
+      "visible": ["fon", "digit", "inslet"]
+    },
+    {
+      "id": "4",
+      "label": "Diplomatic",
+      "visible": ["fon", "dipf", "regiondip", "digit", "b2"]
+    }
+  ],
+  "hooks": ["deToggleNoSeals", "deShortplateForFon", "updateInsuranceUI", "disde2"],
+  "plateFields": [
+    {
+      "tag": "select",
+      "id": "fon",
+      "name": "fon",
+      "options": [
+        {
+          "value": "1",
+          "label": "Single-row plate"
+        },
+        {
+          "value": "2",
+          "label": "Two-row plate"
+        },
+        {
+          "value": "3",
+          "label": "Two-row plate (US-style)"
+        },
+        {
+          "value": "7",
+          "label": "Two-row plate (Motorcycles)"
+        },
+        {
+          "value": "4",
+          "label": "Single-row plate (DIN)"
+        },
+        {
+          "value": "5",
+          "label": "Two-row plate (DIN)"
+        },
+        {
+          "value": "6",
+          "label": "Two-row plate (DIN US-style)"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "color",
+      "name": "color",
+      "options": [
+        {
+          "value": "0",
+          "label": "Black characters"
+        },
+        {
+          "value": "1",
+          "label": "Green characters"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": "shortplate",
+      "name": "shortplate",
+      "type": "checkbox",
+      "value": "1"
+    },
+    {
+      "tag": "input",
+      "id": "noseals",
+      "name": "noseals",
+      "type": "checkbox",
+      "value": "1"
+    },
+    {
+      "tag": "select",
+      "id": "insbg",
+      "name": "insbg",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "1",
+          "label": "Blue"
+        },
+        {
+          "value": "2",
+          "label": "Green"
+        },
+        {
+          "value": "3",
+          "label": "Black"
+        },
+        {
+          "value": "4",
+          "label": "Red"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "region",
+      "name": "region",
+      "options": {
+        "count": 769,
+        "first": [
+          {
+            "value": "A",
+            "label": "A"
+          },
+          {
+            "value": "AA",
+            "label": "AA"
+          },
+          {
+            "value": "AB",
+            "label": "AB"
+          },
+          {
+            "value": "ABG",
+            "label": "ABG"
+          },
+          {
+            "value": "ABI",
+            "label": "ABI"
+          }
+        ]
+      }
+    },
+    {
+      "tag": "select",
+      "id": "regionreg",
+      "name": "regionreg",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "B",
+          "label": "B"
+        },
+        {
+          "value": "BBL",
+          "label": "BBL"
+        },
+        {
+          "value": "BWL",
+          "label": "BWL"
+        },
+        {
+          "value": "BYL",
+          "label": "BYL"
+        },
+        {
+          "value": "HB",
+          "label": "HB"
+        },
+        {
+          "value": "HEL",
+          "label": "HEL"
+        },
+        {
+          "value": "HH",
+          "label": "HH"
+        },
+        {
+          "value": "LSA",
+          "label": "LSA"
+        },
+        {
+          "value": "LSN",
+          "label": "LSN"
+        },
+        {
+          "value": "MVL",
+          "label": "MVL"
+        },
+        {
+          "value": "NL",
+          "label": "NL"
+        },
+        {
+          "value": "NRW",
+          "label": "NRW"
+        },
+        {
+          "value": "RPL",
+          "label": "RPL"
+        },
+        {
+          "value": "SAL",
+          "label": "SAL"
+        },
+        {
+          "value": "SH",
+          "label": "SH"
+        },
+        {
+          "value": "THL",
+          "label": "THL"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "regionfed",
+      "name": "regionfed",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "BD",
+          "label": "BD"
+        },
+        {
+          "value": "BG",
+          "label": "BG"
+        },
+        {
+          "value": "BP",
+          "label": "BP"
+        },
+        {
+          "value": "BP",
+          "label": "BP"
+        },
+        {
+          "value": "BW",
+          "label": "BW"
+        },
+        {
+          "value": "THW",
+          "label": "THW"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "dipf",
+      "name": "dipf",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "0",
+          "label": "0"
+        },
+        {
+          "value": "B",
+          "label": "B"
+        },
+        {
+          "value": "BN",
+          "label": "BN"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "regiondip",
+      "name": "regiondip",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "10",
+          "label": "10"
+        },
+        {
+          "value": "11",
+          "label": "11"
+        },
+        {
+          "value": "12",
+          "label": "12"
+        },
+        {
+          "value": "13",
+          "label": "13"
+        },
+        {
+          "value": "14",
+          "label": "14"
+        },
+        {
+          "value": "15",
+          "label": "15"
+        },
+        {
+          "value": "16",
+          "label": "16"
+        },
+        {
+          "value": "17",
+          "label": "17"
+        },
+        {
+          "value": "18",
+          "label": "18"
+        },
+        {
+          "value": "19",
+          "label": "19"
+        },
+        {
+          "value": "20",
+          "label": "20"
+        },
+        {
+          "value": "21",
+          "label": "21"
+        },
+        {
+          "value": "22",
+          "label": "22"
+        },
+        {
+          "value": "23",
+          "label": "23"
+        },
+        {
+          "value": "24",
+          "label": "24"
+        },
+        {
+          "value": "25",
+          "label": "25"
+        },
+        {
+          "value": "26",
+          "label": "26"
+        },
+        {
+          "value": "27",
+          "label": "27"
+        },
+        {
+          "value": "28",
+          "label": "28"
+        },
+        {
+          "value": "29",
+          "label": "29"
+        },
+        {
+          "value": "30",
+          "label": "30"
+        },
+        {
+          "value": "31",
+          "label": "31"
+        },
+        {
+          "value": "32",
+          "label": "32"
+        },
+        {
+          "value": "33",
+          "label": "33"
+        },
+        {
+          "value": "34",
+          "label": "34"
+        },
+        {
+          "value": "35",
+          "label": "35"
+        },
+        {
+          "value": "36",
+          "label": "36"
+        },
+        {
+          "value": "37",
+          "label": "37"
+        },
+        {
+          "value": "38",
+          "label": "38"
+        },
+        {
+          "value": "39",
+          "label": "39"
+        },
+        {
+          "value": "40",
+          "label": "40"
+        },
+        {
+          "value": "41",
+          "label": "41"
+        },
+        {
+          "value": "42",
+          "label": "42"
+        },
+        {
+          "value": "43",
+          "label": "43"
+        },
+        {
+          "value": "44",
+          "label": "44"
+        },
+        {
+          "value": "45",
+          "label": "45"
+        },
+        {
+          "value": "46",
+          "label": "46"
+        },
+        {
+          "value": "47",
+          "label": "47"
+        },
+        {
+          "value": "48",
+          "label": "48"
+        },
+        {
+          "value": "49",
+          "label": "49"
+        },
+        {
+          "value": "50",
+          "label": "50"
+        },
+        {
+          "value": "51",
+          "label": "51"
+        },
+        {
+          "value": "52",
+          "label": "52"
+        },
+        {
+          "value": "53",
+          "label": "53"
+        },
+        {
+          "value": "54",
+          "label": "54"
+        },
+        {
+          "value": "55",
+          "label": "55"
+        },
+        {
+          "value": "56",
+          "label": "56"
+        },
+        {
+          "value": "57",
+          "label": "57"
+        },
+        {
+          "value": "58",
+          "label": "58"
+        },
+        {
+          "value": "59",
+          "label": "59"
+        },
+        {
+          "value": "60",
+          "label": "60"
+        },
+        {
+          "value": "61",
+          "label": "61"
+        },
+        {
+          "value": "62",
+          "label": "62"
+        },
+        {
+          "value": "63",
+          "label": "63"
+        },
+        {
+          "value": "64",
+          "label": "64"
+        },
+        {
+          "value": "65",
+          "label": "65"
+        },
+        {
+          "value": "66",
+          "label": "66"
+        },
+        {
+          "value": "67",
+          "label": "67"
+        },
+        {
+          "value": "68",
+          "label": "68"
+        },
+        {
+          "value": "69",
+          "label": "69"
+        },
+        {
+          "value": "70",
+          "label": "70"
+        },
+        {
+          "value": "71",
+          "label": "71"
+        },
+        {
+          "value": "72",
+          "label": "72"
+        },
+        {
+          "value": "73",
+          "label": "73"
+        },
+        {
+          "value": "74",
+          "label": "74"
+        },
+        {
+          "value": "75",
+          "label": "75"
+        },
+        {
+          "value": "76",
+          "label": "76"
+        },
+        {
+          "value": "77",
+          "label": "77"
+        },
+        {
+          "value": "78",
+          "label": "78"
+        },
+        {
+          "value": "79",
+          "label": "79"
+        },
+        {
+          "value": "80",
+          "label": "80"
+        },
+        {
+          "value": "81",
+          "label": "81"
+        },
+        {
+          "value": "82",
+          "label": "82"
+        },
+        {
+          "value": "83",
+          "label": "83"
+        },
+        {
+          "value": "84",
+          "label": "84"
+        },
+        {
+          "value": "85",
+          "label": "85"
+        },
+        {
+          "value": "86",
+          "label": "86"
+        },
+        {
+          "value": "87",
+          "label": "87"
+        },
+        {
+          "value": "88",
+          "label": "88"
+        },
+        {
+          "value": "89",
+          "label": "89"
+        },
+        {
+          "value": "90",
+          "label": "90"
+        },
+        {
+          "value": "91",
+          "label": "91"
+        },
+        {
+          "value": "92",
+          "label": "92"
+        },
+        {
+          "value": "93",
+          "label": "93"
+        },
+        {
+          "value": "94",
+          "label": "94"
+        },
+        {
+          "value": "95",
+          "label": "95"
+        },
+        {
+          "value": "96",
+          "label": "96"
+        },
+        {
+          "value": "97",
+          "label": "97"
+        },
+        {
+          "value": "98",
+          "label": "98"
+        },
+        {
+          "value": "99",
+          "label": "99"
+        },
+        {
+          "value": "100",
+          "label": "100"
+        },
+        {
+          "value": "101",
+          "label": "101"
+        },
+        {
+          "value": "102",
+          "label": "102"
+        },
+        {
+          "value": "103",
+          "label": "103"
+        },
+        {
+          "value": "104",
+          "label": "104"
+        },
+        {
+          "value": "105",
+          "label": "105"
+        },
+        {
+          "value": "106",
+          "label": "106"
+        },
+        {
+          "value": "107",
+          "label": "107"
+        },
+        {
+          "value": "108",
+          "label": "108"
+        },
+        {
+          "value": "109",
+          "label": "109"
+        },
+        {
+          "value": "110",
+          "label": "110"
+        },
+        {
+          "value": "111",
+          "label": "111"
+        },
+        {
+          "value": "112",
+          "label": "112"
+        },
+        {
+          "value": "113",
+          "label": "113"
+        },
+        {
+          "value": "114",
+          "label": "114"
+        },
+        {
+          "value": "115",
+          "label": "115"
+        },
+        {
+          "value": "116",
+          "label": "116"
+        },
+        {
+          "value": "117",
+          "label": "117"
+        },
+        {
+          "value": "118",
+          "label": "118"
+        },
+        {
+          "value": "119",
+          "label": "119"
+        },
+        {
+          "value": "120",
+          "label": "120"
+        },
+        {
+          "value": "121",
+          "label": "121"
+        },
+        {
+          "value": "122",
+          "label": "122"
+        },
+        {
+          "value": "123",
+          "label": "123"
+        },
+        {
+          "value": "124",
+          "label": "124"
+        },
+        {
+          "value": "125",
+          "label": "125"
+        },
+        {
+          "value": "126",
+          "label": "126"
+        },
+        {
+          "value": "127",
+          "label": "127"
+        },
+        {
+          "value": "128",
+          "label": "128"
+        },
+        {
+          "value": "129",
+          "label": "129"
+        },
+        {
+          "value": "130",
+          "label": "130"
+        },
+        {
+          "value": "131",
+          "label": "131"
+        },
+        {
+          "value": "132",
+          "label": "132"
+        },
+        {
+          "value": "133",
+          "label": "133"
+        },
+        {
+          "value": "134",
+          "label": "134"
+        },
+        {
+          "value": "135",
+          "label": "135"
+        },
+        {
+          "value": "136",
+          "label": "136"
+        },
+        {
+          "value": "137",
+          "label": "137"
+        },
+        {
+          "value": "138",
+          "label": "138"
+        },
+        {
+          "value": "139",
+          "label": "139"
+        },
+        {
+          "value": "140",
+          "label": "140"
+        },
+        {
+          "value": "141",
+          "label": "141"
+        },
+        {
+          "value": "142",
+          "label": "142"
+        },
+        {
+          "value": "143",
+          "label": "143"
+        },
+        {
+          "value": "144",
+          "label": "144"
+        },
+        {
+          "value": "146",
+          "label": "146"
+        },
+        {
+          "value": "147",
+          "label": "147"
+        },
+        {
+          "value": "148",
+          "label": "148"
+        },
+        {
+          "value": "151",
+          "label": "151"
+        },
+        {
+          "value": "152",
+          "label": "152"
+        },
+        {
+          "value": "153",
+          "label": "153"
+        },
+        {
+          "value": "154",
+          "label": "154"
+        },
+        {
+          "value": "155",
+          "label": "155"
+        },
+        {
+          "value": "156",
+          "label": "156"
+        },
+        {
+          "value": "157",
+          "label": "157"
+        },
+        {
+          "value": "158",
+          "label": "158"
+        },
+        {
+          "value": "159",
+          "label": "159"
+        },
+        {
+          "value": "160",
+          "label": "160"
+        },
+        {
+          "value": "161",
+          "label": "161"
+        },
+        {
+          "value": "162",
+          "label": "162"
+        },
+        {
+          "value": "163",
+          "label": "163"
+        },
+        {
+          "value": "164",
+          "label": "164"
+        },
+        {
+          "value": "165",
+          "label": "165"
+        },
+        {
+          "value": "166",
+          "label": "166"
+        },
+        {
+          "value": "167",
+          "label": "167"
+        },
+        {
+          "value": "168",
+          "label": "168"
+        },
+        {
+          "value": "169",
+          "label": "169"
+        },
+        {
+          "value": "170",
+          "label": "170"
+        },
+        {
+          "value": "171",
+          "label": "171"
+        },
+        {
+          "value": "172",
+          "label": "172"
+        },
+        {
+          "value": "173",
+          "label": "173"
+        },
+        {
+          "value": "174",
+          "label": "174"
+        },
+        {
+          "value": "175",
+          "label": "175"
+        },
+        {
+          "value": "176",
+          "label": "176"
+        },
+        {
+          "value": "177",
+          "label": "177"
+        },
+        {
+          "value": "178",
+          "label": "178"
+        },
+        {
+          "value": "179",
+          "label": "179"
+        },
+        {
+          "value": "180",
+          "label": "180"
+        },
+        {
+          "value": "181",
+          "label": "181"
+        },
+        {
+          "value": "182",
+          "label": "182"
+        },
+        {
+          "value": "183",
+          "label": "183"
+        },
+        {
+          "value": "184",
+          "label": "184"
+        },
+        {
+          "value": "185",
+          "label": "185"
+        },
+        {
+          "value": "186",
+          "label": "186"
+        },
+        {
+          "value": "187",
+          "label": "187"
+        },
+        {
+          "value": "188",
+          "label": "188"
+        },
+        {
+          "value": "189",
+          "label": "189"
+        },
+        {
+          "value": "190",
+          "label": "190"
+        },
+        {
+          "value": "191",
+          "label": "191"
+        },
+        {
+          "value": "192",
+          "label": "192"
+        },
+        {
+          "value": "193",
+          "label": "193"
+        },
+        {
+          "value": "194",
+          "label": "194"
+        },
+        {
+          "value": "195",
+          "label": "195"
+        },
+        {
+          "value": "196",
+          "label": "196"
+        },
+        {
+          "value": "197",
+          "label": "197"
+        },
+        {
+          "value": "198",
+          "label": "198"
+        },
+        {
+          "value": "199",
+          "label": "199"
+        },
+        {
+          "value": "200",
+          "label": "200"
+        },
+        {
+          "value": "201",
+          "label": "201"
+        },
+        {
+          "value": "202",
+          "label": "202"
+        },
+        {
+          "value": "203",
+          "label": "203"
+        },
+        {
+          "value": "204",
+          "label": "204"
+        },
+        {
+          "value": "205",
+          "label": "205"
+        },
+        {
+          "value": "206",
+          "label": "206"
+        },
+        {
+          "value": "300",
+          "label": "300"
+        },
+        {
+          "value": "301",
+          "label": "301"
+        },
+        {
+          "value": "302",
+          "label": "302"
+        },
+        {
+          "value": "303",
+          "label": "303"
+        },
+        {
+          "value": "304",
+          "label": "304"
+        },
+        {
+          "value": "305",
+          "label": "305"
+        },
+        {
+          "value": "306",
+          "label": "306"
+        },
+        {
+          "value": "307",
+          "label": "307"
+        },
+        {
+          "value": "308",
+          "label": "308"
+        },
+        {
+          "value": "309",
+          "label": "309"
+        },
+        {
+          "value": "310",
+          "label": "310"
+        },
+        {
+          "value": "311",
+          "label": "311"
+        },
+        {
+          "value": "312",
+          "label": "312"
+        },
+        {
+          "value": "313",
+          "label": "313"
+        },
+        {
+          "value": "314",
+          "label": "314"
+        },
+        {
+          "value": "315",
+          "label": "315"
+        },
+        {
+          "value": "317",
+          "label": "317"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "regionfed1",
+      "name": "regionfed1",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "20901",
+          "label": "1"
+        },
+        {
+          "value": "20903",
+          "label": "3"
+        },
+        {
+          "value": "20904",
+          "label": "4"
+        },
+        {
+          "value": "20905",
+          "label": "5"
+        },
+        {
+          "value": "20906",
+          "label": "6"
+        },
+        {
+          "value": "20907",
+          "label": "7"
+        },
+        {
+          "value": "20908",
+          "label": "8"
+        },
+        {
+          "value": "20909",
+          "label": "9"
+        },
+        {
+          "value": "20910",
+          "label": "10"
+        },
+        {
+          "value": "20911",
+          "label": "11"
+        },
+        {
+          "value": "20912",
+          "label": "12"
+        },
+        {
+          "value": "20913",
+          "label": "13"
+        },
+        {
+          "value": "20914",
+          "label": "14"
+        },
+        {
+          "value": "20915",
+          "label": "15"
+        },
+        {
+          "value": "20916",
+          "label": "16"
+        },
+        {
+          "value": "20918",
+          "label": "18"
+        },
+        {
+          "value": "20919",
+          "label": "19"
+        },
+        {
+          "value": "20920",
+          "label": "20"
+        },
+        {
+          "value": "20921",
+          "label": "21"
+        },
+        {
+          "value": "20922",
+          "label": "22"
+        },
+        {
+          "value": "20926",
+          "label": "26"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "regionmil",
+      "name": "regionmil",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "2044",
+          "label": "Bundeswehr"
+        },
+        {
+          "value": "2043",
+          "label": "North Atlantic Treaty Organisation"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": "b1",
+      "name": "b1",
+      "type": "text",
+      "maxlength": 2,
+      "digitsOnly": true
+    },
+    {
+      "tag": "input",
+      "id": "digit",
+      "name": "digit",
+      "type": "text",
+      "maxlength": 8
+    },
+    {
+      "tag": "input",
+      "id": "insz",
+      "name": "insz",
+      "type": "text",
+      "maxlength": 1,
+      "hiddenAtLoad": true
+    },
+    {
+      "tag": "input",
+      "id": "inslet",
+      "name": "inslet",
+      "type": "text",
+      "maxlength": 3,
+      "hiddenAtLoad": true,
+      "digitsOnly": true
+    },
+    {
+      "tag": "select",
+      "id": "dw",
+      "name": "dw",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "0",
+          "label": "0"
+        },
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        },
+        {
+          "value": "6",
+          "label": "6"
+        },
+        {
+          "value": "7",
+          "label": "7"
+        },
+        {
+          "value": "8",
+          "label": "8"
+        },
+        {
+          "value": "9",
+          "label": "9"
+        },
+        {
+          "value": "0H",
+          "label": "0H"
+        },
+        {
+          "value": "1H",
+          "label": "1H"
+        },
+        {
+          "value": "2H",
+          "label": "2H"
+        },
+        {
+          "value": "3H",
+          "label": "3H"
+        },
+        {
+          "value": "4H",
+          "label": "4H"
+        },
+        {
+          "value": "5H",
+          "label": "5H"
+        },
+        {
+          "value": "6H",
+          "label": "6H"
+        },
+        {
+          "value": "7H",
+          "label": "7H"
+        },
+        {
+          "value": "8H",
+          "label": "8H"
+        },
+        {
+          "value": "9H",
+          "label": "9H"
+        },
+        {
+          "value": "0E",
+          "label": "0E"
+        },
+        {
+          "value": "1E",
+          "label": "1E"
+        },
+        {
+          "value": "2E",
+          "label": "2E"
+        },
+        {
+          "value": "3E",
+          "label": "3E"
+        },
+        {
+          "value": "4E",
+          "label": "4E"
+        },
+        {
+          "value": "5E",
+          "label": "5E"
+        },
+        {
+          "value": "6E",
+          "label": "6E"
+        },
+        {
+          "value": "7E",
+          "label": "7E"
+        },
+        {
+          "value": "8E",
+          "label": "8E"
+        },
+        {
+          "value": "9E",
+          "label": "9E"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": "b2",
+      "name": "b2",
+      "type": "text",
+      "maxlength": 1,
+      "hiddenAtLoad": true,
+      "digitsOnly": true
+    },
+    {
+      "tag": "input",
+      "id": "season",
+      "name": "season",
+      "type": "text",
+      "maxlength": 6,
+      "example": "04/10",
+      "hiddenAtLoad": true,
+      "digitsOnly": true
+    },
+    {
+      "tag": "input",
+      "id": "transdate",
+      "name": "transdate",
+      "type": "text",
+      "maxlength": 8,
+      "example": "20.04.15",
+      "hiddenAtLoad": true,
+      "digitsOnly": true
+    }
+  ],
+  "otherFields": [
+    {
+      "tag": "select",
+      "id": null,
+      "name": "markaavto",
+      "options": 3948
+    },
+    {
+      "tag": "select",
+      "id": "model",
+      "name": "model",
+      "options": 0
+    },
+    {
+      "tag": "select",
+      "id": "modgen",
+      "name": "modgen",
+      "options": 0
+    },
+    {
+      "tag": "input",
+      "id": "markamodtype",
+      "name": null,
+      "type": "text"
+    },
+    {
+      "tag": "textarea",
+      "id": null,
+      "name": "dop"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": null,
+      "type": "search"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox13",
+      "name": "CheckBox[13]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox50",
+      "name": "CheckBox[50]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox25",
+      "name": "CheckBox[25]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox26",
+      "name": "CheckBox[26]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox43",
+      "name": "CheckBox[43]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox59",
+      "name": "CheckBox[59]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox68",
+      "name": "CheckBox[68]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox60",
+      "name": "CheckBox[60]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox21",
+      "name": "CheckBox[21]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox8",
+      "name": "CheckBox[8]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox58",
+      "name": "CheckBox[58]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox9",
+      "name": "CheckBox[9]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox57",
+      "name": "CheckBox[57]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox46",
+      "name": "CheckBox[46]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox62",
+      "name": "CheckBox[62]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox33",
+      "name": "CheckBox[33]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox61",
+      "name": "CheckBox[61]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox22",
+      "name": "CheckBox[22]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox47",
+      "name": "CheckBox[47]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox38",
+      "name": "CheckBox[38]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox53",
+      "name": "CheckBox[53]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox40",
+      "name": "CheckBox[40]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox63",
+      "name": "CheckBox[63]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox64",
+      "name": "CheckBox[64]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox42",
+      "name": "CheckBox[42]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox65",
+      "name": "CheckBox[65]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox39",
+      "name": "CheckBox[39]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox49",
+      "name": "CheckBox[49]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox41",
+      "name": "CheckBox[41]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox37",
+      "name": "CheckBox[37]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox67",
+      "name": "CheckBox[67]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox18",
+      "name": "CheckBox[18]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox20",
+      "name": "CheckBox[20]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox15",
+      "name": "CheckBox[15]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox23",
+      "name": "CheckBox[23]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox69",
+      "name": "CheckBox[69]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox24",
+      "name": "CheckBox[24]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox19",
+      "name": "CheckBox[19]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox48",
+      "name": "CheckBox[48]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox4",
+      "name": "CheckBox[4]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox5",
+      "name": "CheckBox[5]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox16",
+      "name": "CheckBox[16]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox14",
+      "name": "CheckBox[14]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox66",
+      "name": "CheckBox[66]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox45",
+      "name": "CheckBox[45]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox6",
+      "name": "CheckBox[6]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox44",
+      "name": "CheckBox[44]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox52",
+      "name": "CheckBox[52]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox27",
+      "name": "CheckBox[27]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox1",
+      "name": "CheckBox[1]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox56",
+      "name": "CheckBox[56]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox2",
+      "name": "CheckBox[2]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "hide",
+      "name": "hidefoto",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "enablesave",
+      "name": "enablesave",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "patternenable",
+      "name": "patternenable",
+      "type": "checkbox"
+    }
+  ],
+  "notes": []
+}

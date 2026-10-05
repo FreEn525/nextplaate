@@ -1,59 +1,9 @@
 {
   "code": "ro",
   "name": "Romania",
-  "upload": {
-    "typeMenu": true,
-    "hooks": ["disro"],
-    "types": [
-      {
-        "id": "1",
-        "label": "Regular plates",
-        "visible": ["letter", "dig1", "region", "fon"]
-      },
-      {
-        "id": "2",
-        "label": "Provisional",
-        "visible": ["dig2", "region", "fon"]
-      },
-      {
-        "id": "3",
-        "label": "Diplomatic",
-        "visible": ["dig2", "dip", "fon"]
-      },
-      {
-        "id": "4",
-        "label": "Long-term temporary",
-        "visible": ["dig2", "region", "fon"]
-      },
-      {
-        "id": "5",
-        "label": "Ministry of Interior",
-        "visible": ["dig2", "fon"]
-      }
-    ]
+  "pages": {
+    "upload": true,
+    "search": true
   },
-  "search": {
-    "categories": [
-      {
-        "id": "1",
-        "label": "Regular plates"
-      },
-      {
-        "id": "2",
-        "label": "Provisional"
-      },
-      {
-        "id": "3",
-        "label": "Diplomatic"
-      },
-      {
-        "id": "4",
-        "label": "Long-term temporary"
-      },
-      {
-        "id": "5",
-        "label": "Ministry of Interior"
-      }
-    ]
-  }
+  "typeMenu": "ctype"
 }

@@ -1,50 +1,9 @@
 {
   "code": "al",
   "name": "Albania",
-  "upload": {
-    "typeMenu": true,
-    "hooks": ["disal"],
-    "types": [
-      {
-        "id": "1",
-        "label": "Cars (2011)",
-        "visible": ["let1", "let2", "fon", "digit"]
-      },
-      {
-        "id": "2",
-        "label": "Motorcycles (2011)",
-        "visible": ["let1", "digit"]
-      },
-      {
-        "id": "3",
-        "label": "Trailers (2011)",
-        "visible": ["let1", "fon", "digit"]
-      },
-      {
-        "id": "4",
-        "label": "Cars (1993)",
-        "visible": ["let2", "region", "fon", "digit"]
-      }
-    ]
+  "pages": {
+    "upload": true,
+    "search": true
   },
-  "search": {
-    "categories": [
-      {
-        "id": "1",
-        "label": "Cars (2011)"
-      },
-      {
-        "id": "2",
-        "label": "Motorcycles (2011)"
-      },
-      {
-        "id": "3",
-        "label": "Trailers (2011)"
-      },
-      {
-        "id": "4",
-        "label": "Cars (1993)"
-      }
-    ]
-  }
+  "typeMenu": "ctype"
 }

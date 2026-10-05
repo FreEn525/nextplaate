@@ -1,59 +1,9 @@
 {
   "code": "lu",
   "name": "Luxembourg",
-  "upload": {
-    "typeMenu": true,
-    "hooks": ["dislu"],
-    "types": [
-      {
-        "id": "1",
-        "label": "2003 year system",
-        "visible": ["letter", "digit", "fon"]
-      },
-      {
-        "id": "2",
-        "label": "1978 year system",
-        "visible": ["letter", "digit", "fon"]
-      },
-      {
-        "id": "3",
-        "label": "1966 year system",
-        "visible": ["letter", "digit", "fon"]
-      },
-      {
-        "id": "4",
-        "label": "Vanity Plates",
-        "visible": ["digit", "fon"]
-      },
-      {
-        "id": "5",
-        "label": "Diplomatic",
-        "visible": ["letter", "digit", "fon"]
-      }
-    ]
+  "pages": {
+    "upload": true,
+    "search": true
   },
-  "search": {
-    "categories": [
-      {
-        "id": "1",
-        "label": "2003 year system"
-      },
-      {
-        "id": "2",
-        "label": "1978 year system"
-      },
-      {
-        "id": "3",
-        "label": "1966 year system"
-      },
-      {
-        "id": "4",
-        "label": "Vanity Plates"
-      },
-      {
-        "id": "5",
-        "label": "Diplomatic"
-      }
-    ]
-  }
+  "typeMenu": "ctype"
 }

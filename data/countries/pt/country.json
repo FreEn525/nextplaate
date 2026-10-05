@@ -1,50 +1,9 @@
 {
   "code": "pt",
   "name": "Portugal",
-  "upload": {
-    "typeMenu": true,
-    "hooks": ["dispt"],
-    "types": [
-      {
-        "id": "1",
-        "label": "Regular plates",
-        "visible": ["fon", "nomer"]
-      },
-      {
-        "id": "2",
-        "label": "Trailers",
-        "visible": ["fon", "nomer"]
-      },
-      {
-        "id": "3",
-        "label": "National Republican Guard",
-        "visible": ["fon", "nomer"]
-      },
-      {
-        "id": "4",
-        "label": "Diplomatic",
-        "visible": ["fon"]
-      }
-    ]
+  "pages": {
+    "upload": true,
+    "search": true
   },
-  "search": {
-    "categories": [
-      {
-        "id": "1",
-        "label": "Regular plates"
-      },
-      {
-        "id": "2",
-        "label": "Trailers"
-      },
-      {
-        "id": "3",
-        "label": "National Republican Guard"
-      },
-      {
-        "id": "4",
-        "label": "Diplomatic"
-      }
-    ]
-  }
+  "typeMenu": "ctype"
 }

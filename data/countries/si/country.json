@@ -1,50 +1,9 @@
 {
   "code": "si",
   "name": "Slovenia",
-  "upload": {
-    "typeMenu": true,
-    "hooks": [],
-    "types": [
-      {
-        "id": "1",
-        "label": "Cars",
-        "visible": []
-      },
-      {
-        "id": "2",
-        "label": "Trailers",
-        "visible": []
-      },
-      {
-        "id": "3",
-        "label": "Vanity Plates",
-        "visible": []
-      },
-      {
-        "id": "4",
-        "label": "Motorcycles",
-        "visible": []
-      }
-    ]
+  "pages": {
+    "upload": true,
+    "search": true
   },
-  "search": {
-    "categories": [
-      {
-        "id": "1",
-        "label": "Cars"
-      },
-      {
-        "id": "2",
-        "label": "Trailers"
-      },
-      {
-        "id": "3",
-        "label": "Vanity Plates"
-      },
-      {
-        "id": "4",
-        "label": "Motorcycles"
-      }
-    ]
-  }
+  "typeMenu": "ctype"
 }

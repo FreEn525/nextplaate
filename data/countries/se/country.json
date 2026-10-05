@@ -1,86 +1,9 @@
 {
   "code": "se",
   "name": "Sweden",
-  "upload": {
-    "typeMenu": true,
-    "hooks": ["dislse"],
-    "types": [
-      {
-        "id": "1",
-        "label": "Regular plates",
-        "visible": ["let", "digit", "fon"]
-      },
-      {
-        "id": "2",
-        "label": "Vanity Plates",
-        "visible": ["nomer", "fon"]
-      },
-      {
-        "id": "3",
-        "label": "Taxi",
-        "visible": ["let", "digit", "fon"]
-      },
-      {
-        "id": "4",
-        "label": "Dealer",
-        "visible": ["let", "digit", "fon"]
-      },
-      {
-        "id": "5",
-        "label": "Transit plates",
-        "visible": ["let", "digit", "fon"]
-      },
-      {
-        "id": "6",
-        "label": "Sportcars",
-        "visible": ["let", "digit", "fon"]
-      },
-      {
-        "id": "7",
-        "label": "Military",
-        "visible": ["nomer", "fon"]
-      },
-      {
-        "id": "8",
-        "label": "Diplomatic",
-        "visible": ["nomer", "fon"]
-      }
-    ]
+  "pages": {
+    "upload": true,
+    "search": true
   },
-  "search": {
-    "categories": [
-      {
-        "id": "1",
-        "label": "Regular plates"
-      },
-      {
-        "id": "2",
-        "label": "Vanity Plates"
-      },
-      {
-        "id": "3",
-        "label": "Taxi"
-      },
-      {
-        "id": "4",
-        "label": "Dealer"
-      },
-      {
-        "id": "5",
-        "label": "Transit plates"
-      },
-      {
-        "id": "6",
-        "label": "Sportcars"
-      },
-      {
-        "id": "7",
-        "label": "Military"
-      },
-      {
-        "id": "8",
-        "label": "Diplomatic"
-      }
-    ]
-  }
+  "typeMenu": "ctype"
 }

@@ -1,59 +1,9 @@
 {
   "code": "be",
   "name": "Belgium",
-  "upload": {
-    "typeMenu": true,
-    "hooks": ["disbe"],
-    "types": [
-      {
-        "id": "1",
-        "label": "Regular plates (2010)",
-        "visible": ["nomer", "fon"]
-      },
-      {
-        "id": "2",
-        "label": "Vanity Plates (2014)",
-        "visible": ["nomerpl", "fon"]
-      },
-      {
-        "id": "3",
-        "label": "Vanity Plates (2010)",
-        "visible": ["nomerpl", "fon"]
-      },
-      {
-        "id": "4",
-        "label": "1951 year system",
-        "visible": ["nomerpl", "fon"]
-      },
-      {
-        "id": "5",
-        "label": "Diplomatic",
-        "visible": ["nomerpl", "fon"]
-      }
-    ]
+  "pages": {
+    "upload": true,
+    "search": true
   },
-  "search": {
-    "categories": [
-      {
-        "id": "1",
-        "label": "Regular plates (2010)"
-      },
-      {
-        "id": "2",
-        "label": "Vanity Plates (2014)"
-      },
-      {
-        "id": "3",
-        "label": "Vanity Plates (2010)"
-      },
-      {
-        "id": "4",
-        "label": "1951 year system"
-      },
-      {
-        "id": "5",
-        "label": "Diplomatic"
-      }
-    ]
-  }
+  "typeMenu": "ctype"
 }

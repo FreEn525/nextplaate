@@ -1,77 +1,9 @@
 {
   "code": "dz",
   "name": "Algeria",
-  "upload": {
-    "typeMenu": true,
-    "hooks": [],
-    "types": [
-      {
-        "id": "1",
-        "label": "Regular plates ((1)11111 111 11)",
-        "visible": []
-      },
-      {
-        "id": "2",
-        "label": "Temporary ((1)11111 11 11)",
-        "visible": []
-      },
-      {
-        "id": "3",
-        "label": "Police ((1)11111)",
-        "visible": []
-      },
-      {
-        "id": "4",
-        "label": "Protection Civile ((111)111111)",
-        "visible": []
-      },
-      {
-        "id": "5",
-        "label": "Military (111111111)",
-        "visible": []
-      },
-      {
-        "id": "6",
-        "label": "Diplomatic corps (C(M)D (11)1 (11)1)",
-        "visible": []
-      },
-      {
-        "id": "7",
-        "label": "Consular corps ((11)1 A 1 CC)",
-        "visible": []
-      }
-    ]
+  "pages": {
+    "upload": true,
+    "search": true
   },
-  "search": {
-    "categories": [
-      {
-        "id": "1",
-        "label": "Regular plates ((1)11111 111 11)"
-      },
-      {
-        "id": "2",
-        "label": "Temporary ((1)11111 11 11)"
-      },
-      {
-        "id": "3",
-        "label": "Police ((1)11111)"
-      },
-      {
-        "id": "4",
-        "label": "Protection Civile ((111)111111)"
-      },
-      {
-        "id": "5",
-        "label": "Military (111111111)"
-      },
-      {
-        "id": "6",
-        "label": "Diplomatic corps (C(M)D (11)1 (11)1)"
-      },
-      {
-        "id": "7",
-        "label": "Consular corps ((11)1 A 1 CC)"
-      }
-    ]
-  }
+  "typeMenu": "ctype"
 }
