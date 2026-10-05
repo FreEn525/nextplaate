@@ -255,8 +255,16 @@
   // "all": start again from zero (use it after a change that affects every country).
   // Every plate type of every country: same loop, one country after the other, saved as types:xx
   // Every country again: the earlier results are replaced, and the database saves the searches already made
+  // Only the countries that still have a failure in the last saved run (or were never tested)
   async function ptStartTypes() {
-    const left = CAPTURE_COUNTRIES.slice();
+    const kept = await capAll();
+    const failing = c => {
+      const t = kept['types:' + c];
+      if (!t) return true;
+      return Object.values(t.types || {}).some(x => x.error || (x.rows || []).some(r => r.fits && !r.ok));
+    };
+    const left = CAPTURE_COUNTRIES.filter(c => failing(c) && !kept['plates-skip:' + c]);
+    if (!left.length) { ptMsg('No country has a failure in the last run. Nothing to test.'); return; }
     sessionStorage.setItem(PT_MODE, 'types');
     sessionStorage.setItem(PT_QUEUE, JSON.stringify(left));
     location.href = '/' + left[0] + '/add';
@@ -345,7 +353,7 @@
         h('p', { id: 'ptMsg', class: 'presult', text: 'Tests the plates of a country on its upload page, without uploading anything.' }),
         h('button', { id: 'ptRun', class: 'btn ghost', text: 'Test this country' }),
         h('button', { id: 'ptTypes', class: 'btn ghost', text: 'Test every plate type (this country)' }),
-        h('button', { id: 'ptTypesAll', class: 'btn ghost', text: 'Test every type of every country' }),
+        h('button', { id: 'ptTypesAll', class: 'btn ghost', text: 'Test the countries with failures' }),
         h('button', { id: 'ptAll', class: 'btn ghost', text: 'Test the countries not yet passing' }),
         h('button', { id: 'ptAgain', class: 'btn ghost', text: 'Test everything again' }),
         h('button', { id: 'ptWrite', class: 'btn ghost', text: 'Write report to folder' })
