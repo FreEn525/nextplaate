@@ -38,7 +38,7 @@
 
   // For the offline check of the saved pages: types a text, returns what the script reads back
   window.nextplaateDev = {
-    type: (text, cc, category) => { const h = ptHint(cc, category); ptOrder = h.order || null; ptDrop = h.drop || null; ptPrefix = h.prefix || null; ptChars = h.chars || null; ptRight = !!h.right; const fits = ptType(text); ptOrder = ptDrop = ptPrefix = ptChars = null; ptRight = false; return fits; },   // types a plate and leaves the fields as they are (tools/diag_typing.py)
+    type: (text, cc, category) => { const h = ptHint(cc, category); ptOrder = h.order || null; ptDrop = h.drop || null; ptPrefix = h.prefix || null; ptChars = h.chars || null; ptRight = !!h.right; ptExtra = h.extra || null; const fits = ptType(text); ptOrder = ptDrop = ptPrefix = ptChars = ptExtra = null; ptRight = false; return fits; },   // types a plate and leaves the fields as they are (tools/diag_typing.py)
     read: () => plateForForm() || '',
     // opts.country and opts.category pick the typing hints (05-hints.js): the whole text in one field, the reading order,
     // the tokens the form already has. opts.settle: how long to wait after typing.
@@ -51,6 +51,7 @@
       ptPrefix = hint.prefix || null;
       ptChars = hint.chars || null;
       ptRight = !!hint.right;
+      ptExtra = hint.extra || null;
       if (field) {
         const el = document.getElementById(field);
         if (el) { el.value = text; el.dispatchEvent(new Event('input', { bubbles: true })); }
@@ -62,7 +63,7 @@
       const read = plateForForm() || '';
       if (field) { const el = document.getElementById(field); if (el) { el.value = ''; el.dispatchEvent(new Event('input', { bubbles: true })); } }
       else ptType('');
-      ptOrder = ptDrop = ptPrefix = ptChars = null;
+      ptOrder = ptDrop = ptPrefix = ptChars = ptExtra = null;
       ptRight = false;
       return { fits, read };
     }

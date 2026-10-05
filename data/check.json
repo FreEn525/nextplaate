@@ -3706,104 +3706,40 @@
    "failed": [
     {
      "plate": "62-100-76",
-     "read": "62 100",
+     "read": "6 2 100",
      "status": "not-fit"
     },
     {
      "plate": "64-074-76",
-     "read": "64 074",
+     "read": "6 4 074",
      "status": "not-fit"
     },
     {
      "plate": "65-067-76",
-     "read": "65 067",
+     "read": "6 5 067",
      "status": "not-fit"
     }
    ]
   },
   "Gaza Strip (2012)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "3-0653-28",
-     "read": "3 0653",
-     "status": "not-fit"
-    },
-    {
-     "plate": "3-2005-10",
-     "read": "3 2005",
-     "status": "not-fit"
-    },
-    {
-     "plate": "3-4181-06",
-     "read": "3 4181",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Private owners (1994)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "4-7752-94",
-     "read": "4 7752",
-     "status": "not-fit"
-    },
-    {
-     "plate": "5-1097-98",
-     "read": "5 1097",
-     "status": "not-fit"
-    },
-    {
-     "plate": "8-2446-46",
-     "read": "8 2446",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Private owners (2018)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "5-9098-H",
-     "read": "5 9098",
-     "status": "not-fit"
-    },
-    {
-     "plate": "6-5513-H",
-     "read": "6 5513",
-     "status": "not-fit"
-    },
-    {
-     "plate": "6-9136-E",
-     "read": "6 9136",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Public transport (1994)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "6-2337-30",
-     "read": "6 2337",
-     "status": "not-fit"
-    },
-    {
-     "plate": "6-8509-30",
-     "read": "6 8509",
-     "status": "not-fit"
-    },
-    {
-     "plate": "7-7099-34",
-     "read": "7 7099",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   }
  },
  "pt": {

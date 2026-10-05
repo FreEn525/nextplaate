@@ -29,6 +29,7 @@
   let ptOrder = null;   // field ids in the order the plate is read, or null: the order of the page
   let ptDrop = null;    // tokens that the form already has (see 05-hints.js)
   let ptPrefix = null;  // text the site writes itself in front of the plate (ÅL of an Åland plate)
+  let ptExtra = null;   // more field ids that count as plate fields for this category (reg1 of Palestine)
   let ptRight = false;  // the last piece is a number written one digit per menu, from the right (Japan: 7410, 718)
   let ptChars = null;   // 'before' or 'after': the forms with one menu per character (see ptTypeChars)
   function ptType(text) {
@@ -84,7 +85,7 @@
     if (ptPrefix && ptCanon(text).startsWith(ptCanon(ptPrefix))) text = text.slice(ptPrefix.length).trim();
     let tokens = text.split(/[\s-]+/).filter(Boolean).flatMap(t => split ? (t.match(/\d+|[^\d]+/g) || []) : [t]);
     const fields = [...document.querySelectorAll('input, select')]
-      .filter(el => (isPlateField(el) || /^(nonr|trz|tx|hiragana|code|mm|moto|spec|gov|tt95|police|mil_b\d|d\d)$/.test(el.id)) && el.offsetParent !== null && !el.disabled && el.id !== 'ctype' && el.id !== 'drop_2');   // the type menus are not typed into
+      .filter(el => (isPlateField(el) || (ptExtra && ptExtra.includes(el.id)) || /^(nonr|trz|tx|hiragana|code|mm|moto|spec|gov|tt95|police|mil_b\d|d\d)$/.test(el.id)) && el.offsetParent !== null && !el.disabled && el.id !== 'ctype' && el.id !== 'drop_2');   // the type menus are not typed into
     // fixed fields are set by the site for a type (T, TAX, BP, P): they keep their value and no token goes in them
     const FIXED = ['trz', 'tx'];   // inputs the site fills itself (T, TAX, BP)
     fields.forEach(el => {
