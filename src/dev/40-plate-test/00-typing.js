@@ -30,6 +30,7 @@
   let ptDrop = null;    // tokens that the form already has (see 05-hints.js)
   let ptPrefix = null;  // text the site writes itself in front of the plate (ÅL of an Åland plate)
   let ptExtra = null;   // more field ids that count as plate fields for this category (reg1 of Palestine)
+  let ptKeepDigits = false;   // a piece that is only digits stays whole (see ptTypeOnce)
   let ptRight = false;  // the last piece is a number written one digit per menu, from the right (Japan: 7410, 718)
   let ptChars = null;   // 'before' or 'after': the forms with one menu per character (see ptTypeChars)
   function ptType(text) {
@@ -172,7 +173,8 @@
         // that starts the piece, the rest carries on to the next field
         const starts = [...el.options].filter(o => o.value && ptCanon(o.text.trim()) && want.startsWith(ptCanon(o.text.trim())) && ptCanon(o.text.trim()).length < want.length)
           .sort((a, b) => b.text.trim().length - a.text.trim().length)[0];
-        if (starts) { el.value = starts.value; el.dataset.ptSet = '1'; el.dataset.ptUsed = '1'; el.dispatchEvent(new Event('change', { bubbles: true })); tokens[i] = tokens[i].slice(ptCanon(starts.text.trim()).length); continue; }
+        if (starts && !(ptKeepDigits && /^\d+$/.test(want))) {   // Thailand: a piece that is only digits is not cut into menu choices (the 1 of 1024)
+           el.value = starts.value; el.dataset.ptSet = '1'; el.dataset.ptUsed = '1'; el.dispatchEvent(new Event('change', { bubbles: true })); tokens[i] = tokens[i].slice(ptCanon(starts.text.trim()).length); continue; }
         // a later piece of the plate that is exactly one of this menu's choices (the 06 of "003 BS 06" for a region menu)
         const ahead = tokens.findIndex((t, k) => k > i && [...el.options].some(o => o.value && (ptCanon(o.text.trim()) === ptCanon(t) || ptCanon(o.value) === ptCanon(t))));
         if (ahead > i) {
@@ -195,7 +197,7 @@
     // menus the plate did not use go back to their empty choice, so a default value is not read as a part of the plate
     for (const el of fields.filter(el => el.tagName === 'SELECT')) {
       if (el.dataset.ptSet) { delete el.dataset.ptSet; continue; }
-      const empty = [...el.options].find(o => o.value === '');
+      const empty = [...el.options].find(o => o.value === '') || [...el.options].find(o => ['-', '•'].includes(o.text.trim()));   // a blank choice may be written "-"
       if (empty && el.value !== '') { el.value = ''; el.dispatchEvent(new Event('change', { bubbles: true })); }
     }
     return i === tokens.length;   // false: the plate does not fit the fields of this page

@@ -2329,15 +2329,9 @@
    "failed": []
   },
   "Vanity Plates": {
-   "ok": 2,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "T BÍRD",
-     "read": "TBÍRDN",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   }
  },
  "it": {
@@ -4501,36 +4495,14 @@
  },
  "th": {
   "Cars (1970)": {
-   "ok": 2,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ย-1024",
-     "read": "9 ย 1024",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Commercial": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ณข 1801",
-     "read": "9 ณ ข 1801",
-     "status": "wrong"
-    },
-    {
-     "plate": "ณข 5444",
-     "read": "9 ณ ข 5444",
-     "status": "wrong"
-    },
-    {
-     "plate": "ณข 568",
-     "read": "9 ณ ข 568",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Dealer": {
    "ok": 3,
@@ -4553,26 +4525,15 @@
    "failed": [
     {
      "plate": "4ฒฆ 5147",
-     "read": "4 ฆ ฒ 5147",
+     "read": "4ฆฒ 5147",
      "status": "wrong"
     }
    ]
   },
   "Taxi": {
-   "ok": 1,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ทห 7776",
-     "read": "1 ท ห 7776",
-     "status": "wrong"
-    },
-    {
-     "plate": "ทฬ 1493",
-     "read": "1 ท ฬ 1493",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Trucks and buses": {
    "ok": 3,
@@ -4580,22 +4541,17 @@
    "failed": []
   },
   "Vanity Plates": {
-   "ok": 0,
+   "ok": 1,
    "total": 3,
    "failed": [
     {
-     "plate": "ฆส 4545",
-     "read": "1 ฆ ส 4545",
-     "status": "wrong"
-    },
-    {
      "plate": "บพ 9595",
-     "read": "R 1 พ ส 9595",
+     "read": "พส 9595",
      "status": "wrong"
     },
     {
      "plate": "บว 9988",
-     "read": "R 1 ว ส 9988",
+     "read": "วส 9988",
      "status": "wrong"
     }
    ]

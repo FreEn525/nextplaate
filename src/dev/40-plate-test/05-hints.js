@@ -4,6 +4,7 @@
   //   order: the field ids in the order the plate is read      field: one field takes the whole text
   //   drop:  tokens that the form already has (written by the site, or fixed): they are not typed
   //   prefix: text the site writes in front of the plate (ÅL, ÅS): removed from the plate before it is typed
+  //   keepDigits: a piece that is only digits is not cut into menu choices
   //   extra: more field ids to type into (a menu the plate-field list does not know)
   //   right: the last piece is a number written one digit per menu (d1..d4), from the right
   //   chars: 'before' | 'after': one menu per character (Arabic-script forms), see ptTypeChars in 00-typing.js
@@ -14,6 +15,7 @@
     'li|*': { drop: ['FL'] },
     'jp|*': { right: true },
     'rs|Diplomatic': { order: ['region1', 'dip'] },
+    'th|*': { keepDigits: true },
     'ps|*': { extra: ['reg1'] },
     'kg|*': { order: ['region', 'nomerpl'] },
     'kg|Diplomatic': { order: null },
