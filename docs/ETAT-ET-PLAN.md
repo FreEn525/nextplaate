@@ -128,3 +128,11 @@ Chaque étape : une branche courte, tests verts, un commit clair.
 ### Suivi de la couverture
 
 `docs/COUVERTURE.md` est généré, jamais écrit à la main. À chaque règle corrigée ou plaque trouvée : `python tests/offline/check_db.py` (écrit `data/check.json`), puis `node scripts/coverage.mjs`, puis commit des deux fichiers.
+
+### Étape 1 : capture des pays manquants (branche `refactor/dev-tab`)
+
+- **Prêt** : le build dev capture maintenant les 96 pays du site (page d'ajout puis page de recherche, bouton *Capture everything missing*). Une page sans menu de type (`#ctype`) est notée « pas de page » ; une erreur serveur ou une limite de débit ne l'est pas : le pays reste dans la file et on clique *Continue*.
+- **À faire par vous** : lancer la capture dans votre navigateur (session connectée), puis *Write to folder* vers `reference/real/countries`.
+- **Ensuite** : analyse des pages (script qui lit sans deviner), mise à jour de `data/` et de `docs/COUVERTURE.md`, puis ajouter les nouveaux codes à `TEST_COUNTRIES` (`src/dev/30-capture.js`) pour que les tests de plaques les parcourent.
+- **Tiroir développeur** : boîte *Status* (pages gardées, plaques en base, requêtes, pause du site), boutons du test de plaques rangés par portée (ce pays / tous les pays / résultats). Fichiers `src/dev/` renumérotés : `00-store`, `10-status`, `20-save-page`, `30-capture`, `40-plate-test/`, `50-database`.
+- **Vérification du code** : revue ciblée des écritures HTML (`innerHTML`, `setStatus`) : les données de l'utilisateur passent par `esc()`, le reste est du texte du script ; rien à corriger. La revue automatique n'a trouvé qu'un vrai défaut (une erreur passagère du site comptée comme « pas de page »), corrigé. Les recherches sur ce qui est possible sont dans `docs/POSSIBILITES.md`.

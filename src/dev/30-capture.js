@@ -101,10 +101,18 @@
     const m = location.pathname.match(kind === 'search' ? /^\/([a-z]{2})\/search\/?$/i : /^\/([a-z]{2})\/add\/?$/i);
     await new Promise(r => setTimeout(r, CAPTURE_LOAD_MS));
     if (!capRunning()) { capSay('Stopped.'); return; }
-    if (m && m[1].toLowerCase() === code) {
+    // A server error or a rate limit is not "no such page": keep the country in the run and wait for the user
+    const status = (performance.getEntriesByType('navigation')[0] || {}).responseStatus || 0;
+    if (status === 429 || status >= 500 || /error 1015|rate limit|temporarily unavailable|service unavailable/i.test(document.title)) {
+      capSay(`The site answered with an error (${status || document.title}). Wait a little, then click Continue: ${code} is tried again.`);
+      $('capGo').hidden = false;
+      return;
+    }
+    // a real page has the plate type menu (#ctype); an error page at the same address does not
+    if (m && m[1].toLowerCase() === code && document.getElementById('ctype')) {
       await capPut(k.page(code), '<!-- ' + location.href + ' -->\n' + document.documentElement.outerHTML);
     } else {
-      await capPut(k.skip(code), location.href);                  // no such page for this country
+      await capPut(k.skip(code), location.href + ' | ' + status + ' | ' + document.title);   // no such page for this country
     }
     const rest = left.slice(1);
     sessionStorage.setItem(CAPTURE_RUN, JSON.stringify(rest));
