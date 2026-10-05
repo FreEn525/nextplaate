@@ -4,8 +4,8 @@
   //   a count from the last 24 hours is reused instead of asking the site again
   const DB_FRESH_MS = 24 * 60 * 60 * 1000;
   async function dbLoad(cc) {
-    const all = await capAll();
-    return Object.keys(all).filter(k => k.startsWith('db:')).map(k => all[k]).filter(r => r.country === cc);
+    const all = await capAll('db:');
+    return Object.values(all).filter(r => r.country === cc);
   }
   function dbCount(rows, read) {
     const hit = rows.find(r => ptNorm(r.read) === ptNorm(read) && Date.now() - new Date(r.date).getTime() < DB_FRESH_MS);

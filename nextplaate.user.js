@@ -546,10 +546,9 @@
     const digits = shownVal('digit');
     const written = shownVal('let') || shownVal('bfixed').replace(/\./g, '');
     if (written) return joinParts([written + menu('b1'), digits]);                               // private trailers: the T written by the site, then the letter
-    // cars and most types: the single letter (b1), then the two-letter code, although the page lists the code menu first:
-    // IAZ = I + AZ (the code menu has no IA, and IAZ 6038 was checked by hand on the site). Trucks: the code, then the letter (EK + B,
-    // their code menu holds only EK, IA and NX)
-    return joinParts([ctype === '4' ? menu('region') + menu('b1') : menu('b1') + menu('region'), digits]);
+    // the two-letter code, then the letter, as the page lists them: KZ + T = KZT (a car), IA + Z = IAZ (a truck: its code menu holds
+    // only EK, IA and NX). The taxi is the other way round: the letter T, then the code (T + AE = TAE)
+    return joinParts([ctype === '7' ? menu('b1') + menu('region') : menu('region') + menu('b1'), digits]);
   };
   // Croatia: ZG 8899-JB; vanity (5) is region + the letter boxes shown: ZG ZMAJ. Dealer and oldtimers: OS PP-178, KR PV-081
   // (the letters PP, PV are written by the site in a disabled field); export transit and military: RH 199-BE, HV 236-MP (the
@@ -2050,8 +2049,12 @@
     ctx.putImageData(data, 0, 0);
     return c;                                   // a canvas can be drawn like a bitmap
   }
+  // The preview of a card: 720 px wide. Once decoded a picture takes width x height x 4 bytes in memory, and the whole grid is on screen:
+  // 1400 px previews (6 MB each) made the browser run out of memory with a few hundred photos; 720 px takes four times less.
+  // The photo shown while hovering is the original file, not this preview (except for HEIC).
+  const THUMB_W = 720;
   async function bitmapOf(file) {
-    try { return await createImageBitmap(file, { resizeWidth: 1400, resizeQuality: 'high' }); } catch (e) {}   // fast path: decoded straight at preview size
+    try { return await createImageBitmap(file, { resizeWidth: THUMB_W, resizeQuality: 'high' }); } catch (e) {}   // fast path: decoded straight at preview size
     try { return await createImageBitmap(file); } catch (e) {}                                                // other formats the browser can read
     if (isHeic(file)) return heicViaLibheif(file);
     throw new Error('this browser cannot read this format');
@@ -2073,7 +2076,7 @@
   async function makeThumb(file) {
     try {
       const bmp = await bitmapOf(file);
-      const c = downscale(bmp, 1400);
+      const c = downscale(bmp, THUMB_W);
       if (bmp.close) bmp.close();
       return c.toDataURL('image/jpeg', 0.85);
     } catch (e) {
@@ -2091,7 +2094,7 @@
     c.insertBefore(thumbNode(it), c.firstChild);
   }
   function thumbNode(it) {
-    if (it.thumb) { const im = document.createElement('img'); im.src = it.thumb; im.alt = ''; return im; }
+    if (it.thumb) { const im = document.createElement('img'); im.decoding = 'async'; im.src = it.thumb; im.alt = ''; return im; }
     const ph = document.createElement('div'); ph.className = 'noprev';
     ph.textContent = (!it.why && it.blob && thumbBusy.has(it.id)) ? 'Loading preview…'
       : ((it.name.match(/\.(\w+)$/) || [])[1] || 'photo').toUpperCase() + ' · no preview' + (it.why ? ' — ' + it.why : '');

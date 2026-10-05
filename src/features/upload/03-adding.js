@@ -14,8 +14,12 @@
     ctx.putImageData(data, 0, 0);
     return c;                                   // a canvas can be drawn like a bitmap
   }
+  // The preview of a card: 720 px wide. Once decoded a picture takes width x height x 4 bytes in memory, and the whole grid is on screen:
+  // 1400 px previews (6 MB each) made the browser run out of memory with a few hundred photos; 720 px takes four times less.
+  // The photo shown while hovering is the original file, not this preview (except for HEIC).
+  const THUMB_W = 720;
   async function bitmapOf(file) {
-    try { return await createImageBitmap(file, { resizeWidth: 1400, resizeQuality: 'high' }); } catch (e) {}   // fast path: decoded straight at preview size
+    try { return await createImageBitmap(file, { resizeWidth: THUMB_W, resizeQuality: 'high' }); } catch (e) {}   // fast path: decoded straight at preview size
     try { return await createImageBitmap(file); } catch (e) {}                                                // other formats the browser can read
     if (isHeic(file)) return heicViaLibheif(file);
     throw new Error('this browser cannot read this format');
@@ -37,7 +41,7 @@
   async function makeThumb(file) {
     try {
       const bmp = await bitmapOf(file);
-      const c = downscale(bmp, 1400);
+      const c = downscale(bmp, THUMB_W);
       if (bmp.close) bmp.close();
       return c.toDataURL('image/jpeg', 0.85);
     } catch (e) {
@@ -55,7 +59,7 @@
     c.insertBefore(thumbNode(it), c.firstChild);
   }
   function thumbNode(it) {
-    if (it.thumb) { const im = document.createElement('img'); im.src = it.thumb; im.alt = ''; return im; }
+    if (it.thumb) { const im = document.createElement('img'); im.decoding = 'async'; im.src = it.thumb; im.alt = ''; return im; }
     const ph = document.createElement('div'); ph.className = 'noprev';
     ph.textContent = (!it.why && it.blob && thumbBusy.has(it.id)) ? 'Loading preview…'
       : ((it.name.match(/\.(\w+)$/) || [])[1] || 'photo').toUpperCase() + ' · no preview' + (it.why ? ' — ' + it.why : '');

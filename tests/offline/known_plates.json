@@ -6,7 +6,12 @@
   "uk": "RO62OUK",
   "ro": "CJ 54 HAI",
   "uz": "40 H 944 MB",
-  "hr": "VŽ 111-SU",
+  "hr": [
+    {
+      "plate": "KR PV-081",
+      "category": "Oldtimers"
+    }
+  ],
   "tr": "50 SB 095",
   "tj": "7717XZ 07",
   "ru": "A 001 AA 77",
@@ -19,7 +24,20 @@
       "category": "Sportcars"
     }
   ],
-  "gr": "IAZ 6038",
+  "gr": [
+    {
+      "plate": "IAZ 6038",
+      "category": "Trucks"
+    },
+    {
+      "plate": "KZT 7722",
+      "category": "Cars"
+    },
+    {
+      "plate": "ITI-9245",
+      "category": "Cars"
+    }
+  ],
   "ma": "70144 د 8",
   "vn": {
     "plate": "47A 271.12",

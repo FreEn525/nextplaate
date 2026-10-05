@@ -25,13 +25,12 @@
 
   // What is kept, what is missing, what has no such page, for one kind
   async function capSummary(kind) {
-    const all = await capAll();
+    const have = new Set(await capList());
     const k = capKeys(kind);
     return {
-      all,
-      saved: SITE_CODES.filter(c => all[k.page(c)]),
-      skipped: SITE_CODES.filter(c => all[k.skip(c)]),
-      missing: SITE_CODES.filter(c => !all[k.page(c)] && !all[k.skip(c)])
+      saved: SITE_CODES.filter(c => have.has(k.page(c))),
+      skipped: SITE_CODES.filter(c => have.has(k.skip(c))),
+      missing: SITE_CODES.filter(c => !have.has(k.page(c)) && !have.has(k.skip(c)))
     };
   }
 
@@ -49,8 +48,8 @@
   async function capWrite() {
     const up = await capSummary('add'), se = await capSummary('search');
     const files = [
-      ...up.saved.map(c => ({ name: c + '.html', html: up.all['page:' + c] })),
-      ...se.saved.map(c => ({ name: 'search-' + c + '.html', html: se.all['search:' + c] }))
+      ...up.saved.map(c => ({ name: c + '.html', key: 'page:' + c })),
+      ...se.saved.map(c => ({ name: 'search-' + c + '.html', key: 'search:' + c }))
     ];
     if (!files.length) { capSay('Nothing captured yet.'); return; }
     const dir = await window.showDirectoryPicker({ mode: 'readwrite' });
@@ -59,15 +58,15 @@
       try {
         const file = await dir.getFileHandle(f.name, { create: true });
         const w = await file.createWritable();
-        await w.write(f.html);
+        await w.write(await capGet(f.key));                       // one page in memory at a time
         await w.close();
       } catch (e) { failed.push(f.name + ' (' + e.name + ')'); }
     }
     if (failed.length) { capSay('Not written: ' + failed.join(', ') + '. Click "Write to folder" again.'); return; }
     const index = {
       date: new Date().toISOString(),
-      upload: { saved: up.saved, skipped: up.skipped, missing: up.missing, why: Object.fromEntries(up.skipped.map(c => [c, up.all['skip:' + c]])) },
-      search: { saved: se.saved, skipped: se.skipped, missing: se.missing, why: Object.fromEntries(se.skipped.map(c => [c, se.all['skipsearch:' + c]])) }
+      upload: { saved: up.saved, skipped: up.skipped, missing: up.missing, why: Object.fromEntries(await Promise.all(up.skipped.map(async c => [c, await capGet('skip:' + c)]))) },
+      search: { saved: se.saved, skipped: se.skipped, missing: se.missing, why: Object.fromEntries(await Promise.all(se.skipped.map(async c => [c, await capGet('skipsearch:' + c)]))) }
     };
     const idx = await dir.getFileHandle('index.json', { create: true });
     const w = await idx.createWritable();
@@ -127,7 +126,7 @@
 
   async function capStart(kind, then) {
     const s = await capSummary(kind), k = capKeys(kind);
-    const left = SITE_CODES.filter(c => !s.all[k.page(c)] && !s.all[k.skip(c)]);
+    const left = s.missing;
     if (!left.length) {
       if (then) return capStart(then);                              // nothing left of this kind: the next kind
       capSay(`Every ${kind} page is already kept. Click "Write to folder".`); return;
@@ -162,7 +161,7 @@
       $('capStop').onclick = () => { sessionStorage.removeItem(CAPTURE_RUN); $('capStop').hidden = true; capSay('Stopped. Start again to resume, or "Check".'); };
       $('capCheck').onclick = () => capCheck();
       $('capRetry').onclick = async () => {
-        const keys = Object.keys(await capAll()).filter(k => k.startsWith('skip:') || k.startsWith('skipsearch:'));
+        const keys = (await capList()).filter(k => k.startsWith('skip:') || k.startsWith('skipsearch:'));
         for (const k of keys) await capDel(k);
         capStart('add', 'search');
       };

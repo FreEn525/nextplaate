@@ -8,8 +8,7 @@
     const digits = shownVal('digit');
     const written = shownVal('let') || shownVal('bfixed').replace(/\./g, '');
     if (written) return joinParts([written + menu('b1'), digits]);                               // private trailers: the T written by the site, then the letter
-    // cars and most types: the single letter (b1), then the two-letter code, although the page lists the code menu first:
-    // IAZ = I + AZ (the code menu has no IA, and IAZ 6038 was checked by hand on the site). Trucks: the code, then the letter (EK + B,
-    // their code menu holds only EK, IA and NX)
-    return joinParts([ctype === '4' ? menu('region') + menu('b1') : menu('b1') + menu('region'), digits]);
+    // the two-letter code, then the letter, as the page lists them: KZ + T = KZT (a car), IA + Z = IAZ (a truck: its code menu holds
+    // only EK, IA and NX). The taxi is the other way round: the letter T, then the code (T + AE = TAE)
+    return joinParts([ctype === '7' ? menu('b1') + menu('region') : menu('region') + menu('b1'), digits]);
   };

@@ -3,8 +3,7 @@
    *    Reads what is kept in the browser (nextplaate-dev) and the state of the request queue.
    * ===================================================================== */
   async function devStatus() {
-    const all = await capAll();
-    const keys = Object.keys(all);
+    const keys = await capList();   // the keys only: the pages are never read here
     const count = prefix => keys.filter(k => k.startsWith(prefix)).length;
     const total = SITE_CODES.length;
     const blocked = siteBlockedUntil() > Date.now();

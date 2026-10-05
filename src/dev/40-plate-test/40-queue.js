@@ -1,7 +1,6 @@
   // Fills the missing plates of every country, one after the other (same pauses and resume as the other runs)
   // The categories of a country from the search page kept by the capture (no request to the site); null if not kept, [] if it has none
-  function ptTypesKept(cc, all) {
-    const html = all['search:' + cc];
+  function ptTypesKept(cc, html) {   // html: the saved search page of the country (capGet('search:' + cc))
     if (!html) return null;
     const doc = new DOMParser().parseFromString(html, 'text/html');
     const sel = doc.querySelector('select[name="ctype"]');
@@ -12,12 +11,12 @@
   // Only the countries that still have a category without a confirmed plate go in the run.
   // The check reads the search page of each country (one request each), so the upload pages are not opened for nothing.
   async function ptStartFill() {
-    const all = await capAll();
-    const dbAll = Object.keys(all).filter(k => k.startsWith('db:')).map(k => all[k]);
+    const skip = await capAll('plates-skip:');
+    const dbAll = Object.values(await capAll('db:'));
     const todo = [];
     for (const cc of TEST_COUNTRIES) {
-      if (all['plates-skip:' + cc]) continue;                    // no upload page for this country
-      const types = ptTypesKept(cc, all);
+      if (skip['plates-skip:' + cc]) continue;                   // no upload page for this country
+      const types = ptTypesKept(cc, await capGet('search:' + cc));   // one saved page at a time
       if (!types) { todo.push(cc); continue; }                   // no saved search page: it stays in the run
       const confirmed = new Set(dbAll.filter(r => r.country === cc && (r.count > 0 || r.source === 'gallery')).map(r => r.category));
       if (types.some(t => !confirmed.has(t.label))) todo.push(cc);
@@ -35,7 +34,7 @@
   // Every country again: the earlier results are replaced, and the database saves the searches already made
   // Only the countries that still have a failure in the last saved run (or were never tested)
   async function ptStartTypes() {
-    const kept = await capAll();
+    const kept = await capAll('types:', 'plates-skip:');
     const failing = c => {
       const t = kept['types:' + c];
       if (!t) return true;
@@ -50,7 +49,7 @@
 
   async function ptStart(all) {
     sessionStorage.setItem(PT_MODE, 'regular');
-    const kept = await capAll();
+    const kept = await capAll('plates:', 'plates-skip:');
     const d = await capDb();
     const drop = Object.keys(kept).filter(k => k.startsWith('plates:') || k.startsWith('plates-skip:'))
       .filter(k => all || !(k.startsWith('plates:') && kept[k].passed === kept[k].total && kept[k].total > 0));

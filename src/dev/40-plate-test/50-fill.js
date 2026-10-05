@@ -5,7 +5,7 @@
     const cc = here.country;
     const log = [];
     const row = (category, shown, read, status, detail) => log.push({ category, shown: shown || '', read: read || '', status, detail: detail || '' });
-    const types = ptTypesKept(cc, await capAll()) || await ptSearchTypes(cc);
+    const types = ptTypesKept(cc, await capGet('search:' + cc)) || await ptSearchTypes(cc);
     const known = await dbLoad(cc);
     const confirmed = new Set(known.filter(r => r.count > 0 || r.source === 'gallery').map(r => r.category));
     const missing = types.filter(t => !confirmed.has(t.label));

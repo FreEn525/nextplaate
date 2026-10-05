@@ -17,7 +17,7 @@
 
   // Exports the database and the request log, in the folder you choose
   async function dbExport() {
-    const all = await capAll();
+    const all = await capAll('db:', 'log:', 'empty:');
     const plates = Object.keys(all).filter(k => k.startsWith('db:')).map(k => all[k]);
     const log = Object.keys(all).filter(k => k.startsWith('log:')).sort().map(k => all[k]);
     const empty = Object.keys(all).filter(k => k.startsWith('empty:')).sort().map(k => all[k]);   // categories whose gallery has no plate
@@ -34,7 +34,7 @@
   // Loads plates-db.json (and empty-categories.json) back into this browser, for a browser whose database is empty or
   // behind the files. An entry already here is kept (it may be newer): only the missing ones are added.
   async function dbImport(files) {
-    const known = new Set(Object.keys(await capAll()));
+    const known = new Set(await capList());
     let added = 0, kept = 0;
     for (const file of files) {
       const rows = JSON.parse(await file.text());
@@ -53,7 +53,7 @@
   }
 
   async function dbCounts() {
-    const keys = Object.keys(await capAll());
+    const keys = await capList();
     return `${keys.filter(k => k.startsWith('db:')).length} plates, ${keys.filter(k => k.startsWith('empty:')).length} empty categories`;
   }
 

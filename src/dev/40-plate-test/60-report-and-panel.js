@@ -1,6 +1,6 @@
   // Report: a JSON with every row, and a Markdown table, written in the folder you choose
   async function ptWrite() {
-    const all = await capAll();
+    const all = await capAll('plates:', 'plates-skip:', 'types:');
     const report = { date: new Date().toISOString(), countries: {}, skipped: [], untested: [] };
     for (const c of TEST_COUNTRIES) {
       if (all['plates:' + c]) report.countries[c] = all['plates:' + c];

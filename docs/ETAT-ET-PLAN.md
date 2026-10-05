@@ -184,3 +184,8 @@ Chaque page d'ajout et de recherche a été lue pays par pays : `data/countries/
 - **5.5 préparée** : `@version` 5.5, `CHANGELOG.md`, build public vérifié. Pas encore poussée (en attente de votre accord). Garde-fou : `check_known` (16 plaques tapées à la main) doit rester à 0 échec : il a détecté une erreur d'ordre en Grèce (`IAZ`) que le contrôle complet ne voyait pas ; corrigée.
 - **Registre de réglages** (étape 1 du plan) : `src/core/15-settings.js`, tiroir *Settings*, un interrupteur par fonction, dépendances (`requires`), fonctions verrouillées (`locked`). 36 tests (chaque fonction coupée, sur galerie, photo, édition et ajout, touches pressées : aucune erreur).
 - **Reste de l'étape 1** : migrer les clés libres du stockage (`autoCheck`, `delay`, `qDelay`, `pages`...) vers `settings.define`.
+
+### Mémoire et Grèce (branche `fix/memory-and-greece`)
+
+- **« Out of Memory »** : deux causes trouvées. (1) Le build dev lisait **toutes** les pages sauvegardées (96 + 96 pages de 3 Mo, environ 600 Mo) à chaque chargement de page, pour compter ce qui est gardé : `capAll()` sans filtre. Maintenant `capList()` (clés seulement), `capGet(clé)` (une valeur) et `capAll(préfixes)` (seulement les petites entrées) ; `capAll()` sans préfixe refuse de s'exécuter. Un test charge 90 Mo de fausses pages et vérifie que le panneau reste sous 60 Mo. (2) Le gestionnaire d'envoi gardait des aperçus de 1400 px (6 Mo décodés chacun, toute la grille affichée) : 720 px maintenant.
+- **Grèce** : `KZT 7722` (voiture) et `IAZ 6038` (camion, pas voiture) : le code à deux lettres puis la lettre ; le taxi est l'inverse (`TAE`). Les plaques vérifiées à la main sont maintenant rangées par catégorie : 21 sur 21.
