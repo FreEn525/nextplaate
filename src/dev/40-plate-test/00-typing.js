@@ -8,6 +8,8 @@
   const PT_QUEUE = 'nextplaate-plates-run';        // the countries left in the run (sessionStorage)
   const PT_MODE = 'nextplaate-plates-mode';        // 'regular' (standard plates) or 'types' (every plate type)
   const PT_PAUSE_MS = 5000;                        // between two countries (the site limits fast request bursts)
+  // Russian menus use the Latin look-alikes (A B E K M H O P C T Y X) while the gallery writes the Cyrillic letters: both compare equal
+  const ptCanon = s => String(s || '').toUpperCase().replace(/[АВЕКМНОРСТУХ]/g, c => 'ABEKMHOPCTYX'['АВЕКМНОРСТУХ'.indexOf(c)]);
   const ptNorm = s => (s || '').replace(/[\s-]+/g, '').toUpperCase();
 
   // Plates shown in the country's gallery: the text of their photos (the alt of the "inf" image)
@@ -25,6 +27,7 @@
   // Types one plate into the visible plate fields, in order; the form's other fields are left alone
   // first the usual split; if the plate does not fit, a second try cuts the mixed tokens (8AP -> 8 AP)
   let ptOrder = null;   // field ids in the order the plate is read, or null: the order of the page
+  let ptDrop = null;    // tokens that the form already has (see 05-hints.js)
   function ptType(text) {
     return ptTypeOnce(text, false) || ptTypeOnce(text, true);
   }
@@ -44,22 +47,23 @@
     const tokenFields = ptOrder ? ptOrder.map(id => fields.find(el => el.id === id)).filter(Boolean) : fields.filter(el => !FIXED.includes(el.id));
     // a token that is the value the site already set (the T of a transit plate) is not typed again
     const fixedVals = fields.filter(el => FIXED.includes(el.id) && el.value).map(el => el.value.toUpperCase());
-    tokens = tokens.filter(t => !fixedVals.includes(t.toUpperCase()));
+    tokens = tokens.filter(t => !fixedVals.includes(ptCanon(t)));
+    if (ptDrop) tokens = tokens.filter(t => !ptDrop.includes(ptCanon(t)));
     // one single plate text field (France, Belgium...): the whole plate goes in it, dashes included;
     // the menus of the page (department, region) are set only when one of the tokens matches them
     const texts = fields.filter(el => el.tagName === 'INPUT');
-    const menuTakes = fields.some(el => el.tagName === 'SELECT' && tokens.some(t => [...el.options].some(o => o.value && (o.text.trim().toUpperCase() === t.toUpperCase() || o.value.toUpperCase() === t.toUpperCase()))));
-    if (texts.length === 1 && !menuTakes && /^nomer/.test(texts[0].id || texts[0].name)) {
+    const menuTakes = fields.some(el => el.tagName === 'SELECT' && tokens.some(t => [...el.options].some(o => o.value && (ptCanon(o.text.trim()) === ptCanon(t) || ptCanon(o.value) === ptCanon(t)))));
+    if (texts.length === 1 && !menuTakes && (/^nomer/.test(texts[0].id || texts[0].name) || texts[0].maxLength < 0 || texts[0].maxLength >= text.length)) {
       texts[0].value = text;
       texts[0].dispatchEvent(new Event('input', { bubbles: true }));
       for (const el of fields.filter(el => el.tagName === 'SELECT')) {
-        const hit = tokens.map(t => t.toUpperCase()).find(t => [...el.options].some(o => o.value && (o.value.toUpperCase() === t || o.text.trim().toUpperCase().startsWith(t))));
-        const opt = hit && [...el.options].find(o => o.value && (o.value.toUpperCase() === hit || o.text.trim().toUpperCase().startsWith(hit)));
+        const hit = tokens.map(t => ptCanon(t)).find(t => [...el.options].some(o => o.value && (ptCanon(o.value) === t || ptCanon(o.text.trim()).startsWith(t))));
+        const opt = hit && [...el.options].find(o => o.value && (ptCanon(o.value) === hit || ptCanon(o.text.trim()).startsWith(hit)));
         if (opt) { el.value = opt.value; el.dispatchEvent(new Event('change', { bubbles: true })); }
       }
       return true;
     }
-    let i = 0;
+    let i = 0, lastInput = null;
     // two passes: a menu that comes before its letters in the page gets them on the second pass
     for (let pass = 0; pass < 2 && i < tokens.length; pass++) for (const el of tokenFields) {
       if (i >= tokens.length) break;
@@ -68,16 +72,33 @@
         // on the first pass a digits field only takes a piece that has digits: letters wait for their menu
         if (pass === 0 && !/\d/.test(tokens[i]) && !/let|letter/i.test(el.id || el.name || '')) continue;
         el.value = tokens[i++];
+        lastInput = el;
         el.dataset.ptUsed = '1';
         el.dispatchEvent(new Event('input', { bubbles: true }));
       } else {
-        const want = tokens[i].toUpperCase();
-        const opt = [...el.options].find(o => o.value && (o.text.trim().toUpperCase() === want || o.value.toUpperCase() === want))
-          || [...el.options].find(o => o.value && o.text.trim().toUpperCase().startsWith(want));   // exact label first: A before AM
+        const want = ptCanon(tokens[i]);
+        const opt = [...el.options].find(o => o.value && (ptCanon(o.text.trim()) === want || ptCanon(o.value) === want))
+          || [...el.options].find(o => o.value && ptCanon(o.text.trim()).startsWith(want));   // exact label first: A before AM
         if (opt) { el.value = opt.value; el.dataset.ptSet = '1'; el.dataset.ptUsed = '1'; el.dispatchEvent(new Event('change', { bubbles: true })); i++; continue; }
         // "TT" over two one-letter menus: the first letter goes in this menu, the rest carries on to the next one
-        const one = [...el.options].find(o => o.value && o.text.trim().toUpperCase() === want[0]);
-        if (want.length > 1 && one) { el.value = one.value; el.dataset.ptSet = '1'; el.dataset.ptUsed = '1'; el.dispatchEvent(new Event('change', { bubbles: true })); tokens[i] = tokens[i].slice(1); }
+        const one = [...el.options].find(o => o.value && ptCanon(o.text.trim()) === want[0]);
+        if (want.length > 1 && one) { el.value = one.value; el.dataset.ptSet = '1'; el.dataset.ptUsed = '1'; el.dispatchEvent(new Event('change', { bubbles: true })); tokens[i] = tokens[i].slice(1); continue; }
+        // a later piece of the plate that is exactly one of this menu's choices (the 06 of "003 BS 06" for a region menu)
+        const ahead = tokens.findIndex((t, k) => k > i && [...el.options].some(o => o.value && (ptCanon(o.text.trim()) === ptCanon(t) || ptCanon(o.value) === ptCanon(t))));
+        if (ahead > i) {
+          const hit = [...el.options].find(o => o.value && (ptCanon(o.text.trim()) === ptCanon(tokens[ahead]) || ptCanon(o.value) === ptCanon(tokens[ahead])));
+          el.value = hit.value; el.dataset.ptSet = '1'; el.dataset.ptUsed = '1'; el.dispatchEvent(new Event('change', { bubbles: true }));
+          tokens.splice(ahead, 1);
+        }
+      }
+    }
+    // pieces left over go on the last text field that was typed (a free field takes "FR-917" after the menu took "GO")
+    if (i < tokens.length && lastInput) {
+      const joined = [lastInput.value, ...tokens.slice(i)].join(' ');
+      if (lastInput.maxLength < 0 || lastInput.maxLength >= joined.length) {
+        lastInput.value = joined;
+        lastInput.dispatchEvent(new Event('input', { bubbles: true }));
+        i = tokens.length;
       }
     }
     fields.forEach(el => { delete el.dataset.ptUsed; });

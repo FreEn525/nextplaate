@@ -38,12 +38,18 @@
 
   // For the offline check of the saved pages: types a text, returns what the script reads back
   window.nextplaateDev = {
-    // opts.field: the whole text goes into this one field (how a user types a single-field plate), no token split
+    type: (text, cc, category) => { const h = ptHint(cc, category); ptOrder = h.order || null; ptDrop = h.drop || null; const fits = ptType(text); ptOrder = ptDrop = null; return fits; },   // types a plate and leaves the fields as they are (tools/diag_typing.py)
+    read: () => plateForForm() || '',
+    // opts.country and opts.category pick the typing hints (05-hints.js): the whole text in one field, the reading order,
+    // the tokens the form already has. opts.settle: how long to wait after typing.
     testText: async (text, opts) => {
       let fits = true;
-      ptOrder = opts && opts.order || null;
-      if (opts && opts.field) {
-        const el = document.getElementById(opts.field);
+      const hint = ptHint(opts && opts.country, opts && opts.category);
+      const field = hint.field;
+      ptOrder = hint.order || null;
+      ptDrop = hint.drop || null;
+      if (field) {
+        const el = document.getElementById(field);
         if (el) { el.value = text; el.dispatchEvent(new Event('input', { bubbles: true })); }
         else fits = false;
       } else {
@@ -51,9 +57,9 @@
       }
       await new Promise(r => setTimeout(r, opts && opts.settle != null ? opts.settle : 350));   // the real site needs its scripts to settle; the saved pages need almost nothing
       const read = plateForForm() || '';
-      if (opts && opts.field) { const el = document.getElementById(opts.field); if (el) { el.value = ''; el.dispatchEvent(new Event('input', { bubbles: true })); } }
+      if (field) { const el = document.getElementById(field); if (el) { el.value = ''; el.dispatchEvent(new Event('input', { bubbles: true })); } }
       else ptType('');
-      ptOrder = null;
+      ptOrder = ptDrop = null;
       return { fits, read };
     }
   };
