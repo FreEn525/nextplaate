@@ -314,6 +314,7 @@
     '12': { letters: ['b3', 'b4'], region: 'region1', digit: 'digit2', lettersFirst: false },  // Transit plates (2004)
     '13': { letters: ['b3', 'b4'], region: 'region3', digit: 'digit1', lettersFirst: false },  // Cars (2000)
     '20': { letters: [], region: 'region6', digit: 'digit1', lettersFirst: false },             // Police
+    '3': { letters: ['dip'], region: 'region5', digit: 'digit1', lettersFirst: true },        // Diplomatic: CC 9605-1
     '14': { letters: [], region: 'region4', digit: 'digit1', lettersFirst: false },            // Cars (1992)
     '15': { letters: [], region: 'region4', digit: 'digit2', lettersFirst: false },            // Trucks and buses (1992)
     '16': { letters: [], region: '', digit: 'digit1', lettersFirst: false },                   // Trailers (1992)
@@ -327,6 +328,7 @@
       case 'fr': return plateFR();
       case 'de': {                                                  // Germany: only the fields shown for this type (a hidden menu keeps HD or H)
         const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };
+        if (fieldVal('ctype') === '4') return joinParts([selText('dipf'), selText('regiondip') + '-' + fieldVal('digit')]);   // diplomatic: 0 111-111 (dipf shows 0)
         return joinParts([menu('region'), menu('b1'), shownVal('digit'), menu('b2')]);
       }
       case 'gg': return fieldVal('digit');
@@ -344,7 +346,10 @@
         return r && !n.endsWith(r) ? n + r : n;
       }
       case 'ua': return joinParts([selText('region1'), fieldVal('digit1'), fieldVal('b1') + fieldVal('b2')]);   // Ukraine: AA 0001 AA
-      case 'lv': return joinParts([selText('b1') + selText('b2'), fieldVal('digit')]);   // Latvia: AB 1234
+      case 'lv': {                                                  // Latvia: AB 1234; vanity (6) and diplomatic (9) are typed in one field: C-4307, PENNY
+        if (['6', '9'].includes(fieldVal('ctype'))) return fieldVal('nomer').toUpperCase();
+        return joinParts([selText('b1') + selText('b2'), fieldVal('digit')]);
+      }
       case 'li': return joinParts(['FL', fieldVal('digit').replace(/^FL\s*/i, '')]);   // Liechtenstein: FL 12345 (the FL is fixed; the digit field may already hold it)
       case 'ru': {                                                  // Russia: А 001 АА 77. Only the menus shown for this type (the site's disru20 function)
         const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };
@@ -362,7 +367,11 @@
         return joinParts([menu('b1') + menu('region'), shownVal('digit')]);
       }
       case 'by': {                                                  // Belarus: the fields shown depend on the type (taken from the site's own switch function)
-        const row = BY_TYPES[fieldVal('ctype')];
+        const ctype = fieldVal('ctype');
+        // trailers 2004: A 1057 K-1 (letter, digits, letter, dash region); special machinery: IH-4 3152 (letters, dash region, digits)
+        if (ctype === '5') return joinParts([fieldVal('b1'), fieldVal('digit1'), fieldVal('b3')]) + '-' + selText('region5');
+        if (ctype === '7') return joinParts([selText('b1') + selText('b2') + (selText('region1') ? '-' + selText('region1') : ''), fieldVal('digit1')]);
+        const row = BY_TYPES[ctype];
         if (!row) return genericPlate();
         const letters = row.letters.map(selText).join(''), digits = fieldVal(row.digit), region = selText(row.region);
         const core = row.lettersFirst ? joinParts([letters, digits]) : joinParts([digits, letters]);   // trucks AP 9665, cars 6383 EC
