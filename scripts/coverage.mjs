@@ -63,7 +63,7 @@ out.push('# Couverture des règles de plaque', '',
   `| **À corriger** | **${bad}** | ${pct(bad, cats)} |`,
   `| **À trouver** (aucune plaque connue) | **${none}** | ${pct(none, cats)} |`,
   `| Galerie vide sur le site (aucune plaque n'existe) | ${noPlate} | ${pct(noPlate, cats)} |`,
-  `| Non testables par le formulaire (pas de menu de type, catégorie absente du menu, ou aucun champ de plaque) | ${noForm} | ${pct(noForm, cats)} |`, '');
+  `| Non prouvables par catégorie (pas de menu de type, catégorie absente du menu, ou aucun champ de plaque) | ${noForm} | ${pct(noForm, cats)} |`, '');
 
 out.push('## À corriger', '');
 if (!failing.length) out.push('Aucune.', '');
@@ -89,13 +89,19 @@ out.push('## Galerie vide sur le site', '', "Aucune photo dans la galerie de ces
 for (const code of Object.keys(emptyGal).sort()) out.push(`- **${code}** : ${emptyGal[code].join(', ')}`);
 out.push('');
 
-out.push('## Non testables par le formulaire', '', "Ces catégories existent dans la recherche du site mais le formulaire d'ajout ne permet pas de les choisir : leur règle ne peut pas être prouvée par ce moyen.", '');
+out.push('## Non prouvables par catégorie', '', "Ces catégories existent dans la recherche du site mais le formulaire d'ajout ne permet pas de les choisir : leur règle ne peut pas être prouvée hors ligne **par catégorie**. La vérification de plaque, elle, cherche le texte de la plaque et marche quand même (vérifié à la main pour les Pays-Bas).", '');
 for (const code of Object.keys(untestable).sort()) {
   const byWhy = {};
   for (const x of untestable[code]) (byWhy[x.why] ??= []).push(x.label);
   out.push(`- **${code}** : ` + Object.entries(byWhy).map(([why, l]) => `${why} (${l.length})` + (l.length <= 4 ? ' : ' + l.join(', ') : '')).join(' ; '));
 }
 out.push('');
+
+// what was checked by hand on the real site (tests/offline/known_plates.json): the proof the offline check cannot give
+const known = JSON.parse(readFileSync(join(root, 'tests/offline/known_plates.json'), 'utf8'));
+const knownList = Object.entries(known).flatMap(([cc, v]) => (Array.isArray(v) ? v : [v]).map(x => (typeof x === 'string' ? x : x.plate + (x.category ? ' (' + x.category + ')' : '')) + ' [' + cc + ']'));
+out.push('## Vérifiées à la main sur le vrai site', '', `${knownList.length} plaques tapées dans le formulaire du site, que la vérification a trouvées : ${knownList.join(' · ')}.`, '',
+  'La vérification de plaque cherche le **texte de la plaque** sur le site, sans la catégorie : pour un formulaire sans menu de type (Pays-Bas, Mexique, Singapour...) elle fonctionne donc, même si la catégorie ne peut pas être prouvée hors ligne.', '');
 
 out.push('## Pays non capturés', '', 'Aucune page sauvegardée : ni catégories, ni règle. Capturer avec le build dev (tiroir *Dev*, `Capture`).', '',
   notCaptured.map(c => `${c.code} ${c.name}`).join(' · '), '');

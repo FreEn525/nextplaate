@@ -17,7 +17,7 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | **À corriger** | **37** | 4 % |
 | **À trouver** (aucune plaque connue) | **0** | 0 % |
 | Galerie vide sur le site (aucune plaque n'existe) | 21 | 3 % |
-| Non testables par le formulaire (pas de menu de type, catégorie absente du menu, ou aucun champ de plaque) | 86 | 10 % |
+| Non prouvables par catégorie (pas de menu de type, catégorie absente du menu, ou aucun champ de plaque) | 86 | 10 % |
 
 ## À corriger
 
@@ -242,9 +242,9 @@ Aucune photo dans la galerie de ces catégories : il n'y a pas de plaque à util
 - **sk** : Sportcars (S(A) 123AB), Agricultural vehicles (F(A) 123AB)
 - **va** : Dealer (PROVA SCV)
 
-## Non testables par le formulaire
+## Non prouvables par catégorie
 
-Ces catégories existent dans la recherche du site mais le formulaire d'ajout ne permet pas de les choisir : leur règle ne peut pas être prouvée par ce moyen.
+Ces catégories existent dans la recherche du site mais le formulaire d'ajout ne permet pas de les choisir : leur règle ne peut pas être prouvée hors ligne **par catégorie**. La vérification de plaque, elle, cherche le texte de la plaque et marche quand même (vérifié à la main pour les Pays-Bas).
 
 - **az** : absente du menu du formulaire (1) : Foreign citizens and enterprises
 - **ba** : le formulaire n'a aucun champ de plaque pour ce type (1) : Diplomatic
@@ -261,6 +261,12 @@ Ces catégories existent dans la recherche du site mais le formulaire d'ajout ne
 - **pt** : le formulaire n'a aucun champ de plaque pour ce type (1) : Diplomatic
 - **ru** : absente du menu du formulaire (2) : High authorities, Diplomatic (Ambassador, chief of diplomatic mission)
 - **sg** : pas de menu de type (13)
+
+## Vérifiées à la main sur le vrai site
+
+22 plaques tapées dans le formulaire du site, que la vérification a trouvées : MZ MZ 78 [de] · 1-CVX-965 [be] · 2649 HSM [es] · 94-PV-55 [nl] · KX-484-N [nl] · RO62OUK [uk] · CJ 54 HAI [ro] · 40 H 944 MB [uz] · KR PV-081 (Oldtimers) [hr] · 50 SB 095 [tr] · 7717XZ 07 [tj] · A 001 AA 77 [ru] · BMR 001 [md] · GU 213 JX [at] · CNA 32756 [pl] · K0 069U (Sportcars) [pl] · IAZ 6038 (Trucks) [gr] · KZT 7722 (Cars) [gr] · ITI-9245 (Cars) [gr] · 70144 د 8 [ma] · 47A 271.12 (Cars) [vn] · OO-442 VR (Trailers) [rs].
+
+La vérification de plaque cherche le **texte de la plaque** sur le site, sans la catégorie : pour un formulaire sans menu de type (Pays-Bas, Mexique, Singapour...) elle fonctionne donc, même si la catégorie ne peut pas être prouvée hors ligne.
 
 ## Pays non capturés
 
