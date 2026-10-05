@@ -7,6 +7,7 @@
     { id: 'pair', icon: 'photos', title: 'Photo pair', keys: 'S · F' },
     { id: 'gallery', icon: 'gallery', title: 'Gallery', keys: 'L · ◀ ▶' },
     { id: 'plate', icon: 'car', title: 'Plate check', keys: '' },
+    { id: 'lens', icon: 'photos', title: 'Google Lens', keys: '' },
     { id: 'upload', icon: 'upload', title: 'Batch upload', keys: 'U · N' },
     { id: 'keys', icon: 'keyboard', title: 'Shortcuts', keys: 'Esc' },
     { id: 'dev', icon: 'wrench', title: 'Developer', keys: '' }        // shown only when the dev tools are built in
