@@ -82,6 +82,7 @@
     switch (here.country) {
       case 'fr': return plateFR();
       case 'de': {                                                  // Germany: only the fields shown for this type (a hidden menu keeps HD or H)
+        if (fieldVal('ctype') === '17') return joinParts([shownVal('digit'), shownVal('inslet')]);   // insurance plates: 380 LSI
         const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };
         if (fieldVal('ctype') === '4') return joinParts([selText('dipf'), selText('regiondip') + '-' + fieldVal('digit')]);   // diplomatic: 0 111-111 (dipf shows 0)
         return joinParts([menu('region'), menu('b1'), shownVal('digit'), menu('b2')]);
@@ -132,6 +133,11 @@
       }
       case 'ua': {                                                  // Ukraine: AA 0001 AA. Only the fields shown for the type (a hidden menu keeps BH, HA, OM)
         const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };
+        const ctype = fieldVal('ctype');
+        if (ctype === '16') return joinParts([shownVal('digit1'), menu('b1') + menu('b2') + menu('b3')]);     // motorcycles 1995: 0708 CKA
+        if (ctype === '14') return joinParts([shownVal('digit1'), menu('region4')]);                          // special machinery 1995: 00828 AC
+        if (ctype === '15') return joinParts([menu('region4'), shownVal('digit4')]);                          // trailers for special vehicles: AB 07067
+        if (ctype === '17') return joinParts([shownVal('dlet1'), shownVal('digit2'), shownVal('digit4')]);   // diplomatic: DP 201 191
         const region = menu('region1') || menu('region2') || menu('region3');
         const digit = ['digit1', 'digit2', 'digit3', 'digit4'].map(shownVal).find(Boolean) || '';
         return joinParts([region, digit, menu('b1') + menu('b2')]);
@@ -145,8 +151,10 @@
         const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };
         return joinParts([menu('b1') + menu('b2'), shownVal('digit'), menu('b3') + menu('b4'), menu('region')]);
       }
-      case 'uz': {                                                  // Uzbekistan: PP A 123 AA (cars); motorcycles, trailers, special machinery: 010 LA 50 (digits, letters, region)
-        if (['5', '6', '7', '8'].includes(fieldVal('ctype'))) return joinParts([fieldVal('dig3'), fieldVal('b4'), selText('region')]);
+      case 'uz': {                                                  // Uzbekistan: PP A 123 AA (cars); motorcycles, trailers, special machinery: 010 LA 50; high authorities: PAA 252
+        const ctype = fieldVal('ctype');
+        if (ctype === '9') return joinParts([selText('b3'), fieldVal('dig1')]);
+        if (['5', '6', '7', '8'].includes(ctype)) return joinParts([fieldVal('dig3'), fieldVal('b4'), selText('region')]);
         return joinParts([selText('region'), fieldVal('b1'), fieldVal('dig1'), fieldVal('b2')]);
       }
       case 'gr': {                                                  // Greece: IAZ 6038 (cars). 1972 system (9): IN-4662; mopeds (12): ZHE 3860. Only the shown fields
@@ -160,6 +168,7 @@
         const ctype = fieldVal('ctype');
         // trailers 2004: A 1057 K-1 (letter, digits, letter, dash region); special machinery: IH-4 3152 (letters, dash region, digits)
         if (ctype === '5') return joinParts([fieldVal('b1'), fieldVal('digit1'), fieldVal('b3')]) + '-' + selText('region5');
+        if (ctype === '16') return joinParts([fieldVal('digit1'), selText('b3') + selText('b1')]);   // trailers 1992: 0222 KA (b3 then b1)
         if (ctype === '7') return joinParts([selText('b1') + selText('b2') + (selText('region1') ? '-' + selText('region1') : ''), fieldVal('digit1')]);
         const row = BY_TYPES[ctype];
         if (!row) return genericPlate();
