@@ -14,14 +14,19 @@
   "at": "GU 213 JX",
   "pl": [
     "CNA 32756",
-    "K0 069U"
+    {
+      "plate": "K0 069U",
+      "category": "Sportcars"
+    }
   ],
   "gr": "IAZ 6038",
   "ma": "70144 د 8",
-  "vn": [
-    "47A 271.12"
-  ],
-  "rs": [
-    "OO-442 VR"
-  ]
+  "vn": {
+    "plate": "47A 271.12",
+    "category": "Cars"
+  },
+  "rs": {
+    "plate": "OO-442 VR",
+    "category": "Trailers"
+  }
 }
