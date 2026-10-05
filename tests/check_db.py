@@ -38,7 +38,7 @@ def load_cases(country=None):
     rows = json.loads(DB.read_text(encoding="utf-8"))
     seen, cases = set(), []
     for r in rows:
-        if r.get("count", 0) <= 0:
+        if r.get("count") is not None and r["count"] <= 0:   # gallery-collected plates have no count: kept
             continue
         if country and r["country"] != country:
             continue

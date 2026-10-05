@@ -289,7 +289,7 @@
       if (all['plates-skip:' + cc]) continue;                    // no upload page for this country
       const types = ptTypesKept(cc, all);
       if (!types) { todo.push(cc); continue; }                   // no saved search page: it stays in the run
-      const confirmed = new Set(dbAll.filter(r => r.country === cc && r.count > 0).map(r => r.category));
+      const confirmed = new Set(dbAll.filter(r => r.country === cc && (r.count > 0 || r.source === 'gallery')).map(r => r.category));
       if (types.some(t => !confirmed.has(t.label))) todo.push(cc);
     }
     ptMsg(`${todo.length} countries have a category without a confirmed plate (of ${CAPTURE_COUNTRIES.length}).`);
@@ -345,7 +345,7 @@
     const row = (category, shown, read, status, detail) => log.push({ category, shown: shown || '', read: read || '', status, detail: detail || '' });
     const types = ptTypesKept(cc, await capAll()) || await ptSearchTypes(cc);
     const known = await dbLoad(cc);
-    const confirmed = new Set(known.filter(r => r.count > 0).map(r => r.category));
+    const confirmed = new Set(known.filter(r => r.count > 0 || r.source === 'gallery').map(r => r.category));
     const missing = types.filter(t => !confirmed.has(t.label));
     ptMsg(`${cc}: ${missing.length} categories without a confirmed plate (of ${types.length}).`);
     for (const t of missing) {
@@ -363,14 +363,12 @@
       }
       if (!texts.length) { row(t.label, '', '', 'no-plates-on-site', 'the gallery of this category is empty'); continue; }
       for (const text of texts) {
+        // collected from the gallery: the site already shows the plate, so no extra request. Typed here (no request) to keep what the script reads.
         if (!ptType(text)) { row(t.label, text, '', 'does-not-fit-form', 'the form does not take this plate'); continue; }
         await new Promise(r => setTimeout(r, 350));
         const read = plateForForm() || '';
-        let found;
-        try { found = await countPlate(read); }
-        catch (e) { row(t.label, text, read, 'count-error', e.message); if (/asked to wait|rate limit/.test(e.message)) break; continue; }
-        if (found > 0) { dbAddPlate(cc, t.label, text, read, found); row(t.label, text, read, 'ok', found + ' on the site'); }
-        else row(t.label, text, read, 'read-not-found', 'the site finds no photo for what the script reads');
+        dbAddPlate(cc, t.label, text, read, null, 'gallery');
+        row(t.label, text, read, 'collected', 'from the gallery');
       }
       ptType('');
     }

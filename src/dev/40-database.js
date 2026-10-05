@@ -5,9 +5,9 @@
    *    Only the plate, the country, the category, the count and the date are kept: no names, no photos.
    * ===================================================================== */
   // One entry per plate per country and category; the last count seen wins
-  function dbAddPlate(cc, category, shown, read, count) {
+  function dbAddPlate(cc, category, shown, read, count, source) {
     const key = 'db:' + cc + '|' + category + '|' + ptNorm(shown);
-    capPut(key, { country: cc, category, plate: shown, read, count, date: new Date().toISOString() }).catch(() => {});
+    capPut(key, { country: cc, category, plate: shown, read, count, source: source || 'search', date: new Date().toISOString() }).catch(() => {});
   }
 
   // Every request to the site, kept one by one (called by the shared request queue)
