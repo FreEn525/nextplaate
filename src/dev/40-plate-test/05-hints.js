@@ -13,6 +13,7 @@
     'lv|Vanity Plates': { field: 'nomer' },
     'rs|Trailers': { order: ['b1', 'b2', 'digit2', 'region2'] },
     'li|*': { drop: ['FL'] },
+    'li|Dealer (with "U")': { drop: ['FL', 'U'] },
     'jp|*': { right: true },
     'rs|Diplomatic': { order: ['region1', 'dip'] },
     'tj|Trailers (2009)': { order: ['region2', 'nomer'] },

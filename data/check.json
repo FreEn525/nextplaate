@@ -2920,25 +2920,9 @@
    "failed": []
   },
   "Dealer (with \"U\")": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "FL 116-U",
-     "read": "FL 116",
-     "status": "wrong"
-    },
-    {
-     "plate": "FL 125-U",
-     "read": "FL 125",
-     "status": "wrong"
-    },
-    {
-     "plate": "FL 213-U",
-     "read": "FL 213",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Exceptional vehicles": {
    "ok": 3,
@@ -3047,25 +3031,9 @@
  },
  "lv": {
   "Dealer": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "B 1122-6",
-     "read": "BA 1122",
-     "status": "wrong"
-    },
-    {
-     "plate": "B 340-7",
-     "read": "BA 340",
-     "status": "wrong"
-    },
-    {
-     "plate": "B 452-7",
-     "read": "BA 452",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Diplomatic": {
    "ok": 3,
@@ -3093,25 +3061,9 @@
    "failed": []
   },
   "Trailers": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "B-362Y",
-     "read": "BQ 362Y",
-     "status": "wrong"
-    },
-    {
-     "plate": "B-389E",
-     "read": "BQ 389E",
-     "status": "wrong"
-    },
-    {
-     "plate": "B-906J",
-     "read": "BQ 906J",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Transit plates": {
    "ok": 3,
@@ -3254,17 +3206,17 @@
    "failed": [
     {
      "plate": "P PG273",
-     "read": "Single-row plate TZG273",
+     "read": "P TZG273",
      "status": "wrong"
     },
     {
      "plate": "P PG288",
-     "read": "Single-row plate GSG288",
+     "read": "P GSG288",
      "status": "wrong"
     },
     {
      "plate": "P PG607",
-     "read": "Single-row plate GSG607",
+     "read": "P GSG607",
      "status": "wrong"
     }
    ]
