@@ -257,25 +257,9 @@
    "failed": []
   },
   "Diplomatic": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "11-A-683",
-     "read": "",
-     "status": "no-field"
-    },
-    {
-     "plate": "29-A-308",
-     "read": "",
-     "status": "no-field"
-    },
-    {
-     "plate": "56-A-040",
-     "read": "",
-     "status": "no-field"
-    }
-   ]
+   "failed": []
   },
   "Provisional": {
    "ok": 3,
@@ -1622,25 +1606,9 @@
    "failed": []
   },
   "Police": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "170-344",
-     "read": "",
-     "status": "no-field"
-    },
-    {
-     "plate": "190-452",
-     "read": "",
-     "status": "no-field"
-    },
-    {
-     "plate": "190-487",
-     "read": "",
-     "status": "no-field"
-    }
-   ]
+   "failed": []
   },
   "Regular plates": {
    "ok": 3,
@@ -2108,18 +2076,18 @@
    "failed": [
     {
      "plate": "00 P 1FLYG",
-     "read": "",
-     "status": "no-field"
+     "read": "00 P P",
+     "status": "not-fit"
     },
     {
      "plate": "BM P 10569",
-     "read": "",
-     "status": "no-field"
+     "read": "BM P P",
+     "status": "not-fit"
     },
     {
      "plate": "LN P GAVT0",
-     "read": "",
-     "status": "no-field"
+     "read": "LN P P",
+     "status": "not-fit"
     }
    ]
   },
@@ -2129,25 +2097,9 @@
    "failed": []
   },
   "Mopeds": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "5N JGK",
-     "read": "",
-     "status": "no-field"
-    },
-    {
-     "plate": "X9D XGL",
-     "read": "",
-     "status": "no-field"
-    },
-    {
-     "plate": "XBB V9B",
-     "read": "",
-     "status": "no-field"
-    }
-   ]
+   "failed": []
   },
   "Motorcycles (1927 year series)": {
    "ok": 2,
@@ -2165,25 +2117,9 @@
    "failed": []
   },
   "Road machinery": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "AKF 511",
-     "read": "PE AKF 511",
-     "status": "wrong"
-    },
-    {
-     "plate": "ANL 084",
-     "read": "PE ANL 084",
-     "status": "wrong"
-    },
-    {
-     "plate": "ANY 257",
-     "read": "PE ANY 257",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Specialty plates": {
    "ok": 1,
@@ -3330,25 +3266,9 @@
  },
  "pt": {
   "Diplomatic": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "007-CC453",
-     "read": "",
-     "status": "no-field"
-    },
-    {
-     "plate": "038-CD414",
-     "read": "",
-     "status": "no-field"
-    },
-    {
-     "plate": "119-CD209",
-     "read": "",
-     "status": "no-field"
-    }
-   ]
+   "failed": []
   },
   "National Republican Guard": {
    "ok": 1,

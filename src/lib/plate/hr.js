@@ -4,6 +4,7 @@
   PLATE_RULES.hr = () => {
     const ctype = fieldVal('ctype');
     if (ctype === '5') return joinParts([menu('region'), ['b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7'].map(menu).join('')]);
+    if (ctype === '10') return [shownVal('pol1'), shownVal('pol2')].filter(Boolean).join('-');   // police: 170-344 (two number fields)
     if (ctype === '11') return [fieldVal('dipcode'), menu('dipletter').charAt(0), shownVal('digit')].filter(Boolean).join('-');
     const digit = shownVal('digit') || shownVal('digit1'), letters = menu('b1') + menu('b2');
     const core = digit && letters ? `${digit}-${letters}` : digit || letters;

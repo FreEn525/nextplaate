@@ -11,13 +11,13 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | Pays du site | 96 | |
 | Pays capturés (pages sauvegardées) | 96 | 100 % |
 | **Pays non capturés** | **0** | |
-| Pays avec une règle propre | 40 sur 96 | |
+| Pays avec une règle propre | 42 sur 96 | |
 | Catégories (pays capturés) | 829 | |
-| Vérifiées | 700 | 84 % |
+| Vérifiées | 705 | 85 % |
 | **À corriger** | **39** | 5 % |
 | **À trouver** (aucune plaque connue) | **64** | 8 % |
 | Galerie vide sur le site (aucune plaque n'existe) | 21 | 3 % |
-| Sans champ de plaque dans le formulaire ou sans page d'ajout | 5 | 1 % |
+| Sans champ de plaque dans le formulaire ou sans page d'ajout | 0 | 0 % |
 
 ## À corriger
 
@@ -55,9 +55,9 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | ir | Disabled | 0/3 | `۱۱ژ۴۷۳ ۴۳` | `۱۱♿۴۲۲ ۲۵` |
 | ir | Disabled | 0/3 | `۱۷ژ۹۵۷ ۱۱` | `۱۷♿۴۲۲ ۲۵` |
 | ir | Disabled | 0/3 | `۵۲ژ۵۱۶ ۱۱` | `۵۲♿۴۲۲ ۲۵` |
-| it | Road machinery | 0/3 | `AKF 511` | `PE AKF 511` |
-| it | Road machinery | 0/3 | `ANL 084` | `PE ANL 084` |
-| it | Road machinery | 0/3 | `ANY 257` | `PE ANY 257` |
+| it | Dealer | 0/3 | `00 P 1FLYG` | `00 P P` |
+| it | Dealer | 0/3 | `BM P 10569` | `BM P P` |
+| it | Dealer | 0/3 | `LN P GAVT0` | `LN P P` |
 | kg | Diplomatic | 0/3 | `D 09 003` | `WHITE D 09 003` |
 | kg | Diplomatic | 0/3 | `D 26 004` | `WHITE D 26` |
 | kg | Diplomatic | 0/3 | `D 52 100` | `WHITE D 52` |
@@ -153,7 +153,7 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | dk Denmark | own | 8 | 7 | 1 |  |  |  | oui |
 | gi Gibraltar (UK) | generic | 4 | 3 | 1 |  |  |  | oui |
 | ir Iran | own | 16 | 15 | 1 |  |  |  | oui |
-| it Italy | generic | 14 | 11 | 1 |  |  | 2 | oui |
+| it Italy | own | 14 | 13 | 1 |  |  |  | oui |
 | kg Kyrgyzstan | own | 12 | 11 | 1 |  |  |  | oui |
 | ma Morocco | generic | 2 | 1 | 1 |  |  |  | oui |
 | mc Monaco | generic | 4 | 3 | 1 |  |  |  | oui |
@@ -168,7 +168,7 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | ar Argentina | generic | 6 | 6 |  |  |  |  | oui |
 | at Austria | generic | 9 | 9 |  |  |  |  | oui |
 | au Australia | generic | 0 | 0 |  |  |  |  | oui |
-| ba Bosnia and Herzegovina | own | 5 | 4 |  |  |  | 1 | oui |
+| ba Bosnia and Herzegovina | own | 5 | 5 |  |  |  |  | oui |
 | be Belgium | generic | 5 | 5 |  |  |  |  | oui |
 | bg Bulgaria | generic | 7 | 7 |  |  |  |  | oui |
 | bh Bahrain | generic | 7 | 7 |  |  |  |  | oui |
@@ -189,7 +189,7 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | gr Greece | own | 16 | 16 |  |  |  |  | oui |
 | gu Guam (USA) | generic | 9 | 5 |  |  | 4 |  | oui |
 | hk Hong Kong (CN) | generic | 2 | 2 |  |  |  |  | oui |
-| hr Croatia | own | 11 | 10 |  |  |  | 1 | oui |
+| hr Croatia | own | 11 | 11 |  |  |  |  | oui |
 | hu Hungary | generic | 23 | 23 |  |  |  |  | oui |
 | id Indonesia | generic | 7 | 7 |  |  |  |  | oui |
 | ie Ireland | generic | 3 | 3 |  |  |  |  | oui |
@@ -212,7 +212,7 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | no Norway | generic | 12 | 12 |  |  |  |  | oui |
 | nz New Zealand | generic | 5 | 5 |  |  |  |  | oui |
 | pl Poland | own | 12 | 12 |  |  |  |  | oui |
-| pt Portugal | generic | 4 | 3 |  |  |  | 1 | oui |
+| pt Portugal | own | 4 | 4 |  |  |  |  | oui |
 | qa Qatar | generic | 6 | 6 |  |  |  |  | oui |
 | ro Romania | generic | 5 | 5 |  |  |  |  | oui |
 | rs Serbia | own | 10 | 10 |  |  |  |  | oui |
@@ -332,14 +332,10 @@ Aucune photo dans la galerie de ces catégories : il n'y a pas de plaque à util
 - **sk** : Sportcars (S(A) 123AB), Agricultural vehicles (F(A) 123AB)
 - **va** : Dealer (PROVA SCV)
 
-## Impossibles à écrire dans le formulaire
+## Sans champ de plaque dans le formulaire
 
-Le formulaire d'ajout n'a aucun champ pour ces catégories (Bosnie « Diplomatic », Croatie « Police », Italie, Portugal) : la plaque ne peut pas y être tapée, donc ni la règle ni la vérification de plaque ne les concernent hors ligne. Les catégories qui ne sont pas dans le menu du formulaire (Chili, Géorgie...) ou les formulaires sans menu (Pays-Bas...) sont testés quand même : la plaque est tapée dans un autre type du formulaire, ou telle quelle.
+Catégories dont le formulaire n'affiche aucun champ où taper la plaque. Il y en a eu cinq (Bosnie, Croatie, Italie 2, Portugal), qui avaient en fait des champs que l'outil ne connaissait pas (pol1, num1, mb1, mnum1...) : ils sont maintenant lus.
 
-- **ba** : le formulaire n'a aucun champ de plaque pour ce type (1) : Diplomatic
-- **hr** : le formulaire n'a aucun champ de plaque pour ce type (1) : Police
-- **it** : le formulaire n'a aucun champ de plaque pour ce type (2) : Mopeds, Dealer
-- **pt** : le formulaire n'a aucun champ de plaque pour ce type (1) : Diplomatic
 
 ## Vérifiées à la main sur le vrai site
 

@@ -89,7 +89,7 @@ out.push('## Galerie vide sur le site', '', "Aucune photo dans la galerie de ces
 for (const code of Object.keys(emptyGal).sort()) out.push(`- **${code}** : ${emptyGal[code].join(', ')}`);
 out.push('');
 
-out.push('## Impossibles à écrire dans le formulaire', '', "Le formulaire d'ajout n'a aucun champ pour ces catégories (Bosnie « Diplomatic », Croatie « Police », Italie, Portugal) : la plaque ne peut pas y être tapée, donc ni la règle ni la vérification de plaque ne les concernent hors ligne. Les catégories qui ne sont pas dans le menu du formulaire (Chili, Géorgie...) ou les formulaires sans menu (Pays-Bas...) sont testés quand même : la plaque est tapée dans un autre type du formulaire, ou telle quelle.", '');
+out.push('## Sans champ de plaque dans le formulaire', '', "Catégories dont le formulaire n'affiche aucun champ où taper la plaque. Il y en a eu cinq (Bosnie, Croatie, Italie 2, Portugal), qui avaient en fait des champs que l'outil ne connaissait pas (pol1, num1, mb1, mnum1...) : ils sont maintenant lus.", '');
 for (const code of Object.keys(untestable).sort()) {
   const byWhy = {};
   for (const x of untestable[code]) (byWhy[x.why] ??= []).push(x.label);

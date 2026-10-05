@@ -428,7 +428,7 @@
   // Åland: ÅL 12345, ÅLA 1234, ÅS 1234, ÅF 1234: the first letters are written by the site in disabled menus (b1, b2), a third letter is a menu (b3)
   PLATE_RULES.ax = () => joinParts([menu('b1') + menu('b2') + menu('b3'), shownVal('digit')]);
   // Bosnia: A12-E-345, parts joined by dashes; b1 only when it is shown (a hidden menu keeps a value)
-  PLATE_RULES.ba = () =>
+  PLATE_RULES.ba = () => shownVal('num1') || shownVal('num2') ? [shownVal('num1'), menu('ltype'), shownVal('num2')].filter(Boolean).join('-') :   // diplomatic: 11-A-683
     [fieldVal('let1'), shownVal('b1'), fieldVal('let2') || fieldVal('digit')].filter(Boolean).join('-');
   // Belarus: for each type, the visible letter menus, the region menu and the digit field (site's disby1 function, run on each type)
   const BY_TYPES = {
@@ -556,6 +556,7 @@
   PLATE_RULES.hr = () => {
     const ctype = fieldVal('ctype');
     if (ctype === '5') return joinParts([menu('region'), ['b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7'].map(menu).join('')]);
+    if (ctype === '10') return [shownVal('pol1'), shownVal('pol2')].filter(Boolean).join('-');   // police: 170-344 (two number fields)
     if (ctype === '11') return [fieldVal('dipcode'), menu('dipletter').charAt(0), shownVal('digit')].filter(Boolean).join('-');
     const digit = shownVal('digit') || shownVal('digit1'), letters = menu('b1') + menu('b2');
     const core = digit && letters ? `${digit}-${letters}` : digit || letters;
@@ -578,6 +579,13 @@
   // Iceland: vanity plates are six boxes, one character each (LYNGAR)
   PLATE_RULES.is = () => {
     if (fieldVal('ctype') === '8') return ['b1', 'b2', 'b3', 'b4', 'b5', 'b6'].map(shownVal).join('').toUpperCase();
+    return genericPlate();
+  };
+  // Italy: mopeds and dealers type their text in mb1 / mb2 (5N JGK; 00 P 1FLYG, the P being written by the site); road machinery is nomerpl1
+  // alone (AKF 511: the province menu is not in the plate text); the other types are read from their fields
+  PLATE_RULES.it = () => {
+    if (shownVal('mb1') || shownVal('mb2')) return joinParts([shownVal('mb1'), shownVal('dealp'), shownVal('mb2')]);
+    if (fieldVal('ctype') === '14') return shownVal('nomerpl1');
     return genericPlate();
   };
   // Japan: 世田谷 310 あ 7410 = the place (the menu reads "Setagaya - 世田谷": the part after the dash), the class number, the hiragana,
@@ -623,6 +631,8 @@
   };
   // Palestine: 4-7752-94 = a one-digit menu (reg1), the digits, then two characters
   PLATE_RULES.ps = () => joinParts([menu('reg1'), shownVal('digit1'), shownVal('digit2')]);
+  // Portugal: diplomatic plates are 007-CC453 = a number, the kind (CD, CC, FM, OI), a number; the other types are read from their fields
+  PLATE_RULES.pt = () => shownVal('mnum1') || shownVal('mnum2') ? shownVal('mnum1') + '-' + menu('mtype') + shownVal('mnum2') : genericPlate();
   // Serbia: BG 123-AB; trailers (2): OO-442 VR (two letters, digits, then the region menu); vanity (4): region then the letter boxes;
   // diplomatic (6), military (10), oldtimers (8), special machinery (9) put their text in "dip" after the region; police (5) has a
   // letter written by the site (П 009-299)
