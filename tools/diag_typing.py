@@ -30,7 +30,7 @@ def main():
         print("harness:", c.open_country(page, cc))
         print("category set:", c.set_category(page, category))
         page.wait_for_timeout(300)
-        print("before:", [f for f in page.evaluate(DUMP) if f["shown"]])
+        print("before:", [(f["id"], f["value"]) for f in page.evaluate(DUMP) if f["shown"] or f["value"]])
         fits = page.evaluate("([t, cc, cat]) => window.nextplaateDev.type(t, cc, cat)", [plate, cc, category])
         page.wait_for_timeout(200)
         print("fits:", fits, "| the script reads:", repr(page.evaluate("() => window.nextplaateDev.read()")))

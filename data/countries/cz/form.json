@@ -9,123 +9,123 @@
     {
       "id": "1",
       "label": "Cars (2001)",
-      "visible": ["region", "b1", "b2", "digit1", "fon", "regionfed1"]
+      "visible": ["region", "b1", "b2", "digit1", "fon"]
     },
     {
       "id": "2",
       "label": "Motorcycles (2001)",
-      "visible": ["region", "b1", "digit1", "fon", "regionfed1"]
+      "visible": ["region", "b1", "digit1", "fon"]
     },
     {
       "id": "4",
       "label": "Dealer (2001)",
       "class": "white-degreen-select",
-      "visible": ["region", "b2", "digit1", "fon", "regionfed1"]
+      "visible": ["region", "b2", "digit1", "fon"]
     },
     {
       "id": "5",
       "label": "Sportcars (2001)",
       "class": "white-degreen-select",
-      "visible": ["region", "digit1", "fon", "regionfed1"]
+      "visible": ["region", "digit1", "fon"]
     },
     {
       "id": "6",
       "label": "Oldtimers (2001)",
       "class": "white-degreen-select",
-      "visible": ["region", "digit1", "fon", "regionfed1"]
+      "visible": ["region", "digit1", "fon"]
     },
     {
       "id": "7",
       "label": "Cars (1960)",
-      "visible": ["region", "b2", "digit2", "fon", "regionfed1"]
+      "visible": ["region", "b2", "digit2", "fon"]
     },
     {
       "id": "8",
       "label": "Motorcycles (1960)",
-      "visible": ["region", "b2", "digit2", "fon", "regionfed1"]
+      "visible": ["region", "b2", "digit2", "fon"]
     },
     {
       "id": "9",
       "label": "Commercial vehicles (1960)",
       "class": "yellow-black-select",
-      "visible": ["region", "b2", "digit2", "fon", "regionfed1"]
+      "visible": ["region", "b2", "digit2", "fon"]
     },
     {
       "id": "10",
       "label": "Foreign citizens and enterprises (1977)",
       "class": "blue-yellow-select",
-      "visible": ["region", "b2", "digit2", "fon", "regionfed1"]
+      "visible": ["region", "b2", "digit2", "fon"]
     },
     {
       "id": "11",
       "label": "Vanity Plates",
-      "visible": ["nomer", "fon", "regionfed1"]
+      "visible": ["nomer", "fon"]
     },
     {
       "id": "12",
       "label": "Electric vehicles",
-      "visible": ["digit3", "fon", "regionfed1"]
+      "visible": ["digit3", "fon"]
     },
     {
       "id": "13",
       "label": "Diplomatic (2004)",
       "class": "whiteblue",
-      "visible": ["digit1", "digit3", "fon", "regionfed1"]
+      "visible": ["digit1", "digit3", "fon"]
     },
     {
       "id": "3",
       "label": "Export transit plates",
-      "visible": ["nomer", "fon", "regionfed1"]
+      "visible": ["nomer", "fon"]
     },
     {
       "id": "14",
       "label": "Agricultural vehicles (1960)",
       "class": "yellow-black-select",
-      "visible": ["region", "b2", "digit2", "fon", "regionfed1"]
+      "visible": ["region", "b2", "digit2", "fon"]
     },
     {
       "id": "15",
       "label": "Trailers (1977)",
-      "visible": ["region", "b2", "el", "digit1", "fon", "regionfed1"]
+      "visible": ["region", "b2", "el", "digit1", "fon"]
     },
     {
       "id": "16",
       "label": "Military (1960)",
-      "visible": ["digit1", "digit2", "fon", "regionfed1"]
+      "visible": ["digit1", "digit2", "fon"]
     },
     {
       "id": "17",
       "label": "Special machinery (2001)",
       "class": "yellow-black-select",
-      "visible": ["region", "digit1", "digit3", "fon", "regionfed1"]
+      "visible": ["region", "digit1", "digit3", "fon"]
     },
     {
       "id": "18",
       "label": "Paper transit plates (2001)",
       "class": "whitegreen",
-      "visible": ["region", "digit3", "fon", "regionfed1"]
+      "visible": ["region", "digit3", "fon"]
     },
     {
       "id": "19",
       "label": "Mopeds (2001)",
-      "visible": ["nomer", "fon", "regionfed1"]
+      "visible": ["nomer", "fon"]
     },
     {
       "id": "20",
       "label": "Diplomatic (2025)",
       "class": "whiteblue",
-      "visible": ["digit1", "digit3", "fon", "regionfed1"]
+      "visible": ["digit1", "digit3", "fon"]
     },
     {
       "id": "21",
       "label": "Diplomatic (2001)",
       "class": "blueyellow",
-      "visible": ["digit1", "digit3", "fon", "regionfed1"]
+      "visible": ["digit1", "digit3", "fon"]
     },
     {
       "id": "22",
       "label": "Mopeds (1956)",
-      "visible": ["region", "digit3", "fon", "regionfed1"]
+      "visible": ["region", "digit3", "fon"]
     }
   ],
   "hooks": ["disczn"],

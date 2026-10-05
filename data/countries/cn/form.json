@@ -10,37 +10,37 @@
       "id": "1",
       "label": "Cars",
       "class": "tip1",
-      "visible": ["region", "region2", "nomerpl", "regionfed1"]
+      "visible": ["region", "region2", "nomerpl"]
     },
     {
       "id": "2",
       "label": "Trucks and buses",
       "class": "tip2",
-      "visible": ["fon", "region", "region2", "nomerpl", "regionfed1"]
+      "visible": ["fon", "region", "region2", "nomerpl"]
     },
     {
       "id": "3",
       "label": "Foreign citizens and enterprises",
       "class": "tip3",
-      "visible": ["region", "region2", "nomerpl", "regionfed1"]
+      "visible": ["region", "region2", "nomerpl"]
     },
     {
       "id": "4",
       "label": "Trailers",
       "class": "tip2",
-      "visible": ["region", "region2", "nomerpl", "regionfed1"]
+      "visible": ["region", "region2", "nomerpl"]
     },
     {
       "id": "5",
       "label": "Electric vehicles",
       "class": "tip5",
-      "visible": ["fon1", "region", "region2", "nomerpl", "regionfed1"]
+      "visible": ["fon1", "region", "region2", "nomerpl"]
     },
     {
       "id": "6",
       "label": "Motorcycles",
       "class": "tip2",
-      "visible": ["region", "region2", "nomerpl", "regionfed1"]
+      "visible": ["region", "region2", "nomerpl"]
     }
   ],
   "hooks": ["discn"],

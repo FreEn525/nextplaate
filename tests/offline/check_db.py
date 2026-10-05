@@ -76,6 +76,12 @@ def set_category(page, label):
     }""", label)
 
 
+# true when the form shows at least one field to type the plate in (the look of the plate, "fon"/"font", does not count)
+SHOWN_FIELDS_JS = r"""() => [...document.querySelectorAll('input, select')].some(el =>
+  /nomer|let|digit|region|^b\d|dip|drop|^dig|trl|letter|^el$|^tx$|^trz$|^nonr$/i.test(el.id || el.name || '') &&
+  !/^(ctype|drop_2)$/.test(el.id) && el.offsetParent !== null && !el.disabled)"""
+
+
 def open_country(page, code):
     """Loads the saved upload page of one country in the shared page. False if the dev script did not start."""
     html = (REF / f"{code}.html").read_text(encoding="utf-8", errors="ignore")
@@ -100,7 +106,10 @@ def check_country(page, code, cases):
         return [{**c, "status": "no-harness"} for c in cases]          # the dev script did not start on this page
     for c in cases:
         if not set_category(page, c["category"]):
-            results.append({**c, "status": "no-type"})
+            results.append({**c, "status": "no-type"})          # the search category is not in the upload form's menu
+            continue
+        if not page.evaluate(SHOWN_FIELDS_JS):
+            results.append({**c, "status": "no-field"})         # the form shows no field to type a plate of this type
             continue
         res = page.evaluate("([t, o]) => window.nextplaateDev.testText(t, o)", [c["plate"], {"settle": SETTLE_MS, "country": c["country"], "category": c["category"]}])
         ok = bool(res["fits"]) and norm(res["read"]) == norm(c["plate"])

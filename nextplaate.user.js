@@ -381,6 +381,7 @@
     const ctype = fieldVal('ctype');
     if (ctype === '1') return joinParts([fieldVal('let1'), fieldVal('digit'), fieldVal('let2')]);
     if (ctype === '4') return joinParts([selText('region'), fieldVal('digit'), fieldVal('let2')]);
+    if (ctype === '3') return joinParts([fieldVal('let1'), fieldVal('trl'), fieldVal('digit')]);   // trailers 2011: AG R 547 (the R is written by the site)
     return joinParts([fieldVal('let1'), fieldVal('digit')]);
   };
   // Bosnia: A12-E-345, parts joined by dashes; b1 only when it is shown (a hidden menu keeps a value)
@@ -415,10 +416,10 @@
     // trailers 2004: A 1057 K-1 (letter, digits, letter, dash region); special machinery: IH-4 3152 (letters, dash region, digits)
     if (ctype === '5') return joinParts([fieldVal('b1'), fieldVal('digit1'), fieldVal('b3')]) + '-' + selText('region5');
     if (ctype === '16') return joinParts([fieldVal('digit1'), selText('b3') + selText('b1')]);   // trailers 1992: 0222 KA (b3 then b1)
-    if (ctype === '13') return joinParts([fieldVal('digit1'), selText('b3') + selText('b4') + selText('region3')]);   // cars 2000: 3897 MBI (digits, then the three letters)
+    if (ctype === '13') return joinParts([fieldVal('digit1'), selText('region3') + selText('b3') + selText('b4')]);   // cars 2000: 3897 MBI (digits, then the three letters)
     if (ctype === '15') return joinParts([selText('region4'), fieldVal('digit2')]);   // trucks 1992: AC 9877 (letters, then digits)
     // transit 2004: 8AP T 6938 (digit, letters, T set by the site, digits); taxi: 1 TAX 7359; provisional: MK BP 8462; foreign: P 91179
-    if (ctype === '12') return joinParts([shownVal('digit1'), shownVal('b3') + shownVal('b4'), shownVal('trz'), shownVal('digit2')]);
+    if (ctype === '12') return joinParts([menu('region1') + shownVal('b3') + shownVal('b4'), shownVal('trz'), shownVal('digit2')]);
     if (ctype === '17') return joinParts([selText('region1'), shownVal('tx') + selText('b3') + selText('b4'), shownVal('digit2')]);   // taxi: 1 TAX 7359 (region menu, T from tx + the two letters, digits)
     if (ctype === '18') return joinParts([shownVal('b3') + shownVal('b4'), shownVal('trz'), shownVal('digit2')]);
     if (ctype === '19') return joinParts([selText('nonr'), shownVal('digit2')]);
@@ -487,12 +488,17 @@
 
   PLATE_RULES.fr = () => plateFR();
   PLATE_RULES.gg = () => fieldVal('digit');
-  // Greece: IAZ 6038 (cars). 1972 system (9): IN-4662; mopeds (12): ZHE 3860. Only the shown fields
+  // Greece: IAZ 6038 (cars). 1972 system (9): IN-4662; mopeds (12): ZHE 3860. Only the fields shown for the type: some
+  // letters are written by the site itself in a disabled field that is still shown (ΞΑ of the administrative staff, AM of the
+  // agricultural vehicles, E.A. of the police, ΛΣ of the Coast Guard), and menus can be shown but fixed (the P of a trailer)
   PLATE_RULES.gr = () => {
     const ctype = fieldVal('ctype');
     if (ctype === '9') return shownVal('let') + '-' + shownVal('digit');
     if (ctype === '12') return joinParts([shownVal('let'), shownVal('digit')]);
-    return joinParts([menu('b1') + menu('region'), shownVal('digit')]);
+    const digits = shownVal('digit');
+    const written = shownVal('let') || shownVal('bfixed').replace(/\./g, '');
+    if (written) return joinParts([written + menu('b1'), digits]);                               // private trailers: the T written by the site, then the letter
+    return joinParts([menu('region') + menu('b1'), digits]);                                     // the two-letter code, then the letter: IA Z
   };
   // Croatia: ZG 8899-JB; vanity (5) is region + the letter boxes shown: ZG ZMAJ
   PLATE_RULES.hr = () => {

@@ -9,32 +9,32 @@
     {
       "id": "1",
       "label": "Ordinary (2000)",
-      "visible": ["let", "digit1", "fon", "regionfed1"]
+      "visible": ["let", "digit1", "fon"]
     },
     {
       "id": "3",
       "label": "Specialty plates",
-      "visible": ["let", "digit1", "region", "fon", "regionfed1"]
+      "visible": ["let", "digit1", "region", "fon"]
     },
     {
       "id": "4",
       "label": "Official and military plates",
-      "visible": ["let", "digit2", "region", "fon", "regionfed1"]
+      "visible": ["let", "digit2", "region", "fon"]
     },
     {
       "id": "5",
       "label": "1971 year series",
-      "visible": ["let", "digit1", "region", "fon", "regionfed1"]
+      "visible": ["let", "digit1", "region", "fon"]
     },
     {
       "id": "7",
       "label": "1900 year series",
-      "visible": ["digit2", "region", "fon", "regionfed1"]
+      "visible": ["digit2", "region", "fon"]
     },
     {
       "id": "2",
       "label": "Diplomatic",
-      "visible": ["digit1", "region", "dip", "fon", "regionfed1"]
+      "visible": ["digit1", "region", "dip", "fon"]
     }
   ],
   "hooks": ["dises1"],

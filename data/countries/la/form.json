@@ -9,47 +9,47 @@
     {
       "id": "1",
       "label": "Private owners",
-      "visible": ["region", "b2", "b1", "digit", "regionfed1"]
+      "visible": ["region", "b2", "b1", "digit"]
     },
     {
       "id": "2",
       "label": "Organizations",
-      "visible": ["region", "b2", "b1", "digit", "regionfed1"]
+      "visible": ["region", "b2", "b1", "digit"]
     },
     {
       "id": "3",
       "label": "Foreign citizens and enterprises",
-      "visible": ["region", "b2", "b1", "digit", "regionfed1"]
+      "visible": ["region", "b2", "b1", "digit"]
     },
     {
       "id": "4",
       "label": "Сompany (1% paid tax)",
-      "visible": ["region", "b2", "b1", "digit", "regionfed1"]
+      "visible": ["region", "b2", "b1", "digit"]
     },
     {
       "id": "5",
       "label": "Authorities",
-      "visible": ["region", "b2", "b1", "digit", "regionfed1"]
+      "visible": ["region", "b2", "b1", "digit"]
     },
     {
       "id": "6",
       "label": "Diplomatic",
-      "visible": ["dip", "fon", "digit", "regionfed1"]
+      "visible": ["dip", "fon", "digit"]
     },
     {
       "id": "7",
       "label": "Military",
-      "visible": ["fon", "digit", "regionfed1"]
+      "visible": ["fon", "digit"]
     },
     {
       "id": "9",
       "label": "Police",
-      "visible": ["fon", "digit", "regionfed1"]
+      "visible": ["fon", "digit"]
     },
     {
       "id": "8",
       "label": "Temporary",
-      "visible": ["digit", "regionfed1"]
+      "visible": ["digit"]
     }
   ],
   "hooks": ["disla"],

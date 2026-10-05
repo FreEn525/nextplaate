@@ -9,82 +9,82 @@
     {
       "id": "1",
       "label": "Private owners",
-      "visible": ["b1", "region1", "region3", "fon1"]
+      "visible": ["b1", "region1", "fon1"]
     },
     {
       "id": "2",
       "label": "Disabled",
-      "visible": ["region1", "region3", "fon1"]
+      "visible": ["region1", "fon1"]
     },
     {
       "id": "3",
       "label": "Taxi",
-      "visible": ["region1", "region3", "fon2"]
+      "visible": ["region1", "fon2"]
     },
     {
       "id": "4",
       "label": "Commercial vehicles",
-      "visible": ["region1", "region3", "fon2"]
+      "visible": ["region1", "fon2"]
     },
     {
       "id": "5",
       "label": "Agricultural vehicles",
-      "visible": ["region1", "region3", "fon2"]
+      "visible": ["region1", "fon2"]
     },
     {
       "id": "6",
       "label": "Police",
-      "visible": ["region1", "region3", "fon3"]
+      "visible": ["region1", "fon3"]
     },
     {
       "id": "7",
       "label": "Islamic Revolutionary Guard Corps",
-      "visible": ["region1", "region3", "fon3"]
+      "visible": ["region1", "fon3"]
     },
     {
       "id": "8",
       "label": "Military",
-      "visible": ["region1", "region3", "fon4"]
+      "visible": ["region1", "fon4"]
     },
     {
       "id": "9",
       "label": "Ministry of Defense",
-      "visible": ["region1", "region3", "fon5"]
+      "visible": ["region1", "fon5"]
     },
     {
       "id": "10",
       "label": "General Staff",
-      "visible": ["region1", "region3", "fon5"]
+      "visible": ["region1", "fon5"]
     },
     {
       "id": "11",
       "label": "Authorities",
-      "visible": ["region1", "region3", "fon6"]
+      "visible": ["region1", "fon6"]
     },
     {
       "id": "12",
       "label": "Motorcycles",
-      "visible": ["region3", "fon7"]
+      "visible": ["fon7"]
     },
     {
       "id": "13",
       "label": "Oldtimers",
-      "visible": ["region3", "fon8"]
+      "visible": ["fon8"]
     },
     {
       "id": "14",
       "label": "Free trade zones",
-      "visible": ["region3", "fon9"]
+      "visible": ["fon9"]
     },
     {
       "id": "15",
       "label": "License plates for driving abroad (2010)",
-      "visible": ["region2", "region3", "nomer", "fon10"]
+      "visible": ["region2", "nomer", "fon10"]
     },
     {
       "id": "16",
       "label": "License plates for driving abroad (2015)",
-      "visible": ["region3", "nomer", "fon11"]
+      "visible": ["nomer", "fon11"]
     }
   ],
   "hooks": ["disir"],

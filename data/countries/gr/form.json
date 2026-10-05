@@ -9,91 +9,91 @@
     {
       "id": "1",
       "label": "Cars",
-      "visible": ["b1", "region", "fon", "digit", "regionfed1"]
+      "visible": ["b1", "region", "fon", "digit"]
     },
     {
       "id": "2",
       "label": "Tax-exempt vehicles",
       "class": "white-red-select",
-      "visible": ["b1", "region", "fon", "digit", "regionfed1"]
+      "visible": ["b1", "region", "fon", "digit"]
     },
     {
       "id": "3",
       "label": "Government and public administrations",
       "class": "rdb",
-      "visible": ["b1", "region", "fon", "digit", "regionfed1"]
+      "visible": ["b1", "region", "fon", "digit"]
     },
     {
       "id": "4",
       "label": "Trucks",
       "class": "yeb",
-      "visible": ["b1", "region", "fon", "digit", "regionfed1"]
+      "visible": ["b1", "region", "fon", "digit"]
     },
     {
       "id": "5",
       "label": "Trailers",
-      "visible": ["fon", "digit", "regionfed1"]
+      "visible": ["fon", "digit"]
     },
     {
       "id": "6",
       "label": "Motorcycles",
-      "visible": ["b1", "region", "fon", "digit", "regionfed1"]
+      "visible": ["b1", "region", "fon", "digit"]
     },
     {
       "id": "7",
       "label": "Taxi",
       "class": "yeb",
-      "visible": ["b1", "region", "fon", "digit", "regionfed1"]
+      "visible": ["b1", "region", "fon", "digit"]
     },
     {
       "id": "8",
       "label": "Oldtimers",
       "class": "blue",
-      "visible": ["fon", "digit", "regionfed1"]
+      "visible": ["fon", "digit"]
     },
     {
       "id": "9",
       "label": "1972 year system",
-      "visible": ["region", "let", "fon", "digit", "regionfed1"]
+      "visible": ["region", "let", "fon", "digit"]
     },
     {
       "id": "10",
       "label": "Diplomatic corps",
       "class": "dipd",
-      "visible": ["fon", "digit", "regionfed1"]
+      "visible": ["fon", "digit"]
     },
     {
       "id": "11",
       "label": "Administrative and technical staff",
       "class": "dipt",
-      "visible": ["fon", "digit", "regionfed1"]
+      "visible": ["fon", "digit"]
     },
     {
       "id": "12",
       "label": "Mopeds",
-      "visible": ["let", "fon", "digit", "regionfed1"]
+      "visible": ["let", "fon", "digit"]
     },
     {
       "id": "13",
       "label": "Agricultural vehicles",
-      "visible": ["region", "fon", "digit", "regionfed1"]
+      "visible": ["region", "fon", "digit"]
     },
     {
       "id": "14",
       "label": "Private trailers",
-      "visible": ["b1", "fon", "digit", "regionfed1"]
+      "visible": ["b1", "fon", "digit"]
     },
     {
       "id": "15",
       "label": "Police",
       "class": "blue",
-      "visible": ["fon", "digit", "regionfed1"]
+      "visible": ["fon", "digit"]
     },
     {
       "id": "16",
       "label": "Coast Guard",
       "class": "blue",
-      "visible": ["fon", "digit", "regionfed1"]
+      "visible": ["fon", "digit"]
     }
   ],
   "hooks": ["disgr"],

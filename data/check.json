@@ -43,25 +43,9 @@
    "failed": []
   },
   "Trailers (2011)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "AG R 547",
-     "read": "AG R",
-     "status": "not-fit"
-    },
-    {
-     "plate": "AH R 476",
-     "read": "AH R",
-     "status": "not-fit"
-    },
-    {
-     "plate": "AM R 189",
-     "read": "AM R",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   }
  },
  "am": {
@@ -208,18 +192,18 @@
    "failed": [
     {
      "plate": "ÅL 10500",
-     "read": "ÅL",
-     "status": "not-fit"
+     "read": "10500",
+     "status": "wrong"
     },
     {
      "plate": "ÅL 12968",
-     "read": "ÅL",
-     "status": "not-fit"
+     "read": "12968",
+     "status": "wrong"
     },
     {
      "plate": "ÅL 16319",
-     "read": "ÅL",
-     "status": "not-fit"
+     "read": "16319",
+     "status": "wrong"
     }
    ]
   },
@@ -229,17 +213,17 @@
    "failed": [
     {
      "plate": "ÅLA 4642",
-     "read": "Å LA",
+     "read": "L A",
      "status": "not-fit"
     },
     {
      "plate": "ÅLA 5168",
-     "read": "Å LA",
+     "read": "L A",
      "status": "not-fit"
     },
     {
      "plate": "ÅLA 7020",
-     "read": "Å LA",
+     "read": "L A",
      "status": "not-fit"
     }
    ]
@@ -250,18 +234,18 @@
    "failed": [
     {
      "plate": "ÅF 6841",
-     "read": "ÅF",
-     "status": "not-fit"
+     "read": "6841",
+     "status": "wrong"
     },
     {
      "plate": "ÅF 6962",
-     "read": "ÅF",
-     "status": "not-fit"
+     "read": "6962",
+     "status": "wrong"
     },
     {
      "plate": "ÅF 6993",
-     "read": "ÅF",
-     "status": "not-fit"
+     "read": "6993",
+     "status": "wrong"
     }
    ]
   },
@@ -271,18 +255,18 @@
    "failed": [
     {
      "plate": "ÅS 10959",
-     "read": "ÅS",
-     "status": "not-fit"
+     "read": "10959",
+     "status": "wrong"
     },
     {
      "plate": "ÅS 2704",
-     "read": "ÅS",
-     "status": "not-fit"
+     "read": "2704",
+     "status": "wrong"
     },
     {
      "plate": "ÅS 8594",
-     "read": "ÅS",
-     "status": "not-fit"
+     "read": "8594",
+     "status": "wrong"
     }
    ]
   },
@@ -348,17 +332,17 @@
     {
      "plate": "11-A-683",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     },
     {
      "plate": "29-A-308",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     },
     {
      "plate": "56-A-040",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     }
    ]
   },
@@ -373,25 +357,9 @@
    "failed": []
   },
   "Taxi": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "TA-044771",
-     "read": "TA-TA",
-     "status": "not-fit"
-    },
-    {
-     "plate": "TA-048706",
-     "read": "TA-TA",
-     "status": "not-fit"
-    },
-    {
-     "plate": "TA-341779",
-     "read": "TA-TA",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   }
  },
  "be": {
@@ -606,25 +574,9 @@
    "failed": []
   },
   "Cars (2000)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "3897 MBI",
-     "read": "3897 BIM",
-     "status": "wrong"
-    },
-    {
-     "plate": "5897 TAB",
-     "read": "5897 ABT",
-     "status": "wrong"
-    },
-    {
-     "plate": "6234 BAB",
-     "read": "6234 ABB",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Cars (2004)": {
    "ok": 3,
@@ -652,25 +604,9 @@
    "failed": []
   },
   "Foreign citizens and enterprises": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "P 40418",
-     "read": "P P",
-     "status": "not-fit"
-    },
-    {
-     "plate": "P 90010",
-     "read": "P P",
-     "status": "not-fit"
-    },
-    {
-     "plate": "P 91179",
-     "read": "P P",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Motorcycles (2004)": {
    "ok": 3,
@@ -683,25 +619,9 @@
    "failed": []
   },
   "Provisional": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "KP BP 6804",
-     "read": "KP BP BP",
-     "status": "not-fit"
-    },
-    {
-     "plate": "MK BP 8462",
-     "read": "MK BP BP",
-     "status": "not-fit"
-    },
-    {
-     "plate": "MT BP 8913",
-     "read": "MT BP BP",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Special machinery (2004)": {
    "ok": 3,
@@ -709,25 +629,9 @@
    "failed": []
   },
   "Taxi": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "1 TAX 7359",
-     "read": "1 TTA X",
-     "status": "not-fit"
-    },
-    {
-     "plate": "3 TAX 1184",
-     "read": "3 TTA X",
-     "status": "not-fit"
-    },
-    {
-     "plate": "3 TAX 4222",
-     "read": "3 TTA X",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Trailers (1992)": {
    "ok": 3,
@@ -740,25 +644,9 @@
    "failed": []
   },
   "Transit plates (2004)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "6IB T 2754",
-     "read": "IB T T",
-     "status": "not-fit"
-    },
-    {
-     "plate": "6IB T 3399",
-     "read": "IB T T",
-     "status": "not-fit"
-    },
-    {
-     "plate": "8AP T 6938",
-     "read": "AP T T",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Trucks and buses (1992)": {
    "ok": 3,
@@ -783,9 +671,25 @@
    "failed": []
   },
   "Dealer (with \"U\")": {
-   "ok": 3,
+   "ok": 0,
    "total": 3,
-   "failed": []
+   "failed": [
+    {
+     "plate": "VD 1171 U",
+     "read": "VD 1171",
+     "status": "wrong"
+    },
+    {
+     "plate": "VD 479 U",
+     "read": "VD 479",
+     "status": "wrong"
+    },
+    {
+     "plate": "VD 941 U",
+     "read": "VD 941",
+     "status": "wrong"
+    }
+   ]
   },
   "Diplomatic": {
    "ok": 3,
@@ -818,9 +722,25 @@
    "failed": []
   },
   "Vehicles w/o paid duty (with \"Z\")": {
-   "ok": 3,
+   "ok": 0,
    "total": 3,
-   "failed": []
+   "failed": [
+    {
+     "plate": "GE 1892 Z",
+     "read": "GE 1892",
+     "status": "wrong"
+    },
+    {
+     "plate": "VS 549 Z",
+     "read": "VS 549",
+     "status": "wrong"
+    },
+    {
+     "plate": "ZH 1257 Z",
+     "read": "VS H 1257",
+     "status": "wrong"
+    }
+   ]
   },
   "Work and fire vehicles (blue)": {
    "ok": 3,
@@ -1089,13 +1009,13 @@
     },
     {
      "plate": "P 04878",
-     "read": "P",
-     "status": "not-fit"
+     "read": "04878",
+     "status": "wrong"
     },
     {
      "plate": "P 08038",
-     "read": "P",
-     "status": "not-fit"
+     "read": "08038",
+     "status": "wrong"
     }
    ]
   }
@@ -1107,25 +1027,9 @@
    "failed": []
   },
   "Cars (1960)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ABJ 45-96",
-     "read": "A BJ",
-     "status": "not-fit"
-    },
-    {
-     "plate": "AHC 50-49",
-     "read": "A HC",
-     "status": "not-fit"
-    },
-    {
-     "plate": "HOK 68-32",
-     "read": "H OK",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Cars (2001)": {
    "ok": 3,
@@ -1133,20 +1037,9 @@
    "failed": []
   },
   "Commercial vehicles (1960)": {
-   "ok": 1,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ALC 17-07",
-     "read": "A LC",
-     "status": "not-fit"
-    },
-    {
-     "plate": "KMA 17-57",
-     "read": "K MA",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Dealer (2001)": {
    "ok": 1,
@@ -1226,15 +1119,9 @@
    "failed": []
   },
   "Motorcycles (1960)": {
-   "ok": 2,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "OVA 32-50",
-     "read": "O VA",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Motorcycles (2001)": {
    "ok": 3,
@@ -1242,25 +1129,9 @@
    "failed": []
   },
   "Oldtimers (2001)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "01V 6727",
-     "read": "01V V",
-     "status": "not-fit"
-    },
-    {
-     "plate": "01V 7673",
-     "read": "01V V",
-     "status": "not-fit"
-    },
-    {
-     "plate": "08V 0580",
-     "read": "08V V",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Paper transit plates (2001)": {
    "ok": 3,
@@ -1273,25 +1144,9 @@
    "failed": []
   },
   "Sportcars (2001)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "01R 0580",
-     "read": "01R R",
-     "status": "not-fit"
-    },
-    {
-     "plate": "03R 0138",
-     "read": "03R R",
-     "status": "not-fit"
-    },
-    {
-     "plate": "11R 0470",
-     "read": "11R R",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Trailers (1977)": {
    "ok": 0,
@@ -1299,7 +1154,7 @@
    "failed": [
     {
      "plate": "24 DOA-99",
-     "read": "2 4",
+     "read": "DO2 4",
      "status": "not-fit"
     },
     {
@@ -1332,25 +1187,9 @@
    "failed": []
   },
   "Electric vehicles": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "A T 6800 E",
-     "read": "A T 6800 E E",
-     "status": "wrong"
-    },
-    {
-     "plate": "D QX 2361 E",
-     "read": "D QX 2361 E E",
-     "status": "wrong"
-    },
-    {
-     "plate": "GG H 1339 E",
-     "read": "GG H 1339 E E",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Export transit plates": {
    "ok": 3,
@@ -1394,22 +1233,17 @@
    "failed": []
   },
   "Plates for oldtimers (type \"H\")": {
-   "ok": 0,
+   "ok": 1,
    "total": 3,
    "failed": [
     {
      "plate": "HEI Z 924 H",
-     "read": "HEI Z 924 H H",
+     "read": "EI Z 924 H",
      "status": "wrong"
     },
     {
      "plate": "HH CW 311 H",
-     "read": "HH CW 311 H H",
-     "status": "wrong"
-    },
-    {
-     "plate": "KH L 1967 H",
-     "read": "KH L 1967 H H",
+     "read": "CW 311 H",
      "status": "wrong"
     }
    ]
@@ -1477,7 +1311,7 @@
     },
     {
      "plate": "H NG 382H (04/10)",
-     "read": "H NG 382 H",
+     "read": "N G 382 H",
      "status": "not-fit"
     },
     {
@@ -1978,18 +1812,18 @@
    "failed": [
     {
      "plate": "AY 1573",
-     "read": "AY",
-     "status": "not-fit"
+     "read": "1573",
+     "status": "wrong"
     },
     {
      "plate": "AY 2057",
-     "read": "AY",
-     "status": "not-fit"
+     "read": "2057",
+     "status": "wrong"
     },
     {
      "plate": "AY 2185",
-     "read": "AY",
-     "status": "not-fit"
+     "read": "2185",
+     "status": "wrong"
     }
    ]
   },
@@ -2033,46 +1867,14 @@
    "failed": []
   },
   "Administrative and technical staff": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ΞΑ-21040",
-     "read": "ΞΑ",
-     "status": "not-fit"
-    },
-    {
-     "plate": "ΞΑ-21089",
-     "read": "ΞΑ",
-     "status": "not-fit"
-    },
-    {
-     "plate": "ΞΑ-2401",
-     "read": "ΞΑ",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Agricultural vehicles": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "AM 56394",
-     "read": "AM",
-     "status": "not-fit"
-    },
-    {
-     "plate": "AM 58921",
-     "read": "AM",
-     "status": "not-fit"
-    },
-    {
-     "plate": "AM 66363",
-     "read": "AM",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Cars": {
    "ok": 3,
@@ -2080,67 +1882,19 @@
    "failed": []
   },
   "Coast Guard": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ΛΣ-3001",
-     "read": "ΛΣ",
-     "status": "not-fit"
-    },
-    {
-     "plate": "ΛΣ-3458",
-     "read": "ΛΣ",
-     "status": "not-fit"
-    },
-    {
-     "plate": "ΛΣ-3528",
-     "read": "ΛΣ",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Diplomatic corps": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ΔΣ 10-69",
-     "read": "ΔΣ",
-     "status": "not-fit"
-    },
-    {
-     "plate": "ΔΣ 101-4",
-     "read": "ΔΣ",
-     "status": "not-fit"
-    },
-    {
-     "plate": "ΔΣ 89-13",
-     "read": "ΔΣ",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Government and public administrations": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "KHH-4282",
-     "read": "K HH",
-     "status": "not-fit"
-    },
-    {
-     "plate": "KHY-4940",
-     "read": "K HY",
-     "status": "not-fit"
-    },
-    {
-     "plate": "KTY-5145",
-     "read": "K TY",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Mopeds": {
    "ok": 3,
@@ -2153,67 +1907,19 @@
    "failed": []
   },
   "Oldtimers": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "IO-26283",
-     "read": "IO",
-     "status": "not-fit"
-    },
-    {
-     "plate": "IO-27906",
-     "read": "IO",
-     "status": "not-fit"
-    },
-    {
-     "plate": "IO-29025",
-     "read": "IO",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Police": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "EA-21706",
-     "read": "EA",
-     "status": "not-fit"
-    },
-    {
-     "plate": "EA-25939",
-     "read": "EA",
-     "status": "not-fit"
-    },
-    {
-     "plate": "EA-29360",
-     "read": "EA",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Private trailers": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "TB-26090",
-     "read": "T B",
-     "status": "not-fit"
-    },
-    {
-     "plate": "TB-66423",
-     "read": "T B",
-     "status": "not-fit"
-    },
-    {
-     "plate": "TE-11777",
-     "read": "T E",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Tax-exempt vehicles": {
    "ok": 1,
@@ -2221,67 +1927,19 @@
    "failed": []
   },
   "Taxi": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "TAE-1009",
-     "read": "T AE",
-     "status": "not-fit"
-    },
-    {
-     "plate": "TAE-1015",
-     "read": "T AE",
-     "status": "not-fit"
-    },
-    {
-     "plate": "TAE-1577",
-     "read": "T AE",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Trailers": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "P-41876",
-     "read": "P P",
-     "status": "not-fit"
-    },
-    {
-     "plate": "P-62450",
-     "read": "P P",
-     "status": "not-fit"
-    },
-    {
-     "plate": "P-69721",
-     "read": "P P",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Trucks": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "EKB-8477",
-     "read": "E KB",
-     "status": "not-fit"
-    },
-    {
-     "plate": "IAB-1921",
-     "read": "I AB",
-     "status": "not-fit"
-    },
-    {
-     "plate": "IAZ-6038",
-     "read": "I AZ",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   }
  },
  "gu": {
@@ -2450,18 +2108,18 @@
    "failed": [
     {
      "plate": "170-344",
-     "read": "ZG C",
-     "status": "not-fit"
+     "read": "",
+     "status": "no-field"
     },
     {
      "plate": "190-452",
-     "read": "ZG C",
-     "status": "not-fit"
+     "read": "",
+     "status": "no-field"
     },
     {
      "plate": "190-487",
-     "read": "ZG C",
-     "status": "not-fit"
+     "read": "",
+     "status": "no-field"
     }
    ]
   },
@@ -2637,18 +2295,18 @@
    "failed": [
     {
      "plate": "ZV 12656",
-     "read": "ZV",
-     "status": "not-fit"
+     "read": "12656",
+     "status": "wrong"
     },
     {
      "plate": "ZV 37603",
-     "read": "ZV",
-     "status": "not-fit"
+     "read": "37603",
+     "status": "wrong"
     },
     {
      "plate": "ZV 89253",
-     "read": "ZV",
-     "status": "not-fit"
+     "read": "89253",
+     "status": "wrong"
     }
    ]
   },
@@ -2814,7 +2472,7 @@
    "failed": [
     {
      "plate": "۱۱ک۴۷۹ ۸۴",
-     "read": "۸۴",
+     "read": "۱۱",
      "status": "not-fit"
     }
    ]
@@ -2825,17 +2483,17 @@
    "failed": [
     {
      "plate": "۱۶الف۵۴۴ ۴۶",
-     "read": "۴۶",
+     "read": "۱۶",
      "status": "not-fit"
     },
     {
      "plate": "۱۸الف۵۲۴ ۱۱",
-     "read": "۱۱",
+     "read": "۱۸",
      "status": "not-fit"
     },
     {
      "plate": "۲۵الف۲۶۳ ۱۱",
-     "read": "۱۱",
+     "read": "۲۵",
      "status": "not-fit"
     }
    ]
@@ -2846,17 +2504,17 @@
    "failed": [
     {
      "plate": "۵۳ع۴۴۴ ۴۳",
-     "read": "۴۳",
+     "read": "۵۳",
      "status": "not-fit"
     },
     {
      "plate": "۶۱ع۵۹۳ ۴۸",
-     "read": "۴۸",
+     "read": "۶۱",
      "status": "not-fit"
     },
     {
      "plate": "۷۱ع۴۲۲ ۲۵",
-     "read": "۲۵",
+     "read": "۷۱",
      "status": "not-fit"
     }
    ]
@@ -2867,17 +2525,17 @@
    "failed": [
     {
      "plate": "۱۱ژ۴۷۳ ۴۳",
-     "read": "۴۳",
+     "read": "۱۱",
      "status": "not-fit"
     },
     {
      "plate": "۱۷ژ۹۵۷ ۱۱",
-     "read": "۱۱",
+     "read": "۱۷",
      "status": "not-fit"
     },
     {
      "plate": "۵۲ژ۵۱۶ ۱۱",
-     "read": "۱۱",
+     "read": "۵۲",
      "status": "not-fit"
     }
    ]
@@ -2889,17 +2547,17 @@
     {
      "plate": "۱۱۳۷۶",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     },
     {
      "plate": "۱۳۸۱۴",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     },
     {
      "plate": "۳۵۴۵۴",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     }
    ]
   },
@@ -2920,17 +2578,17 @@
    "failed": [
     {
      "plate": "۳۶ث۲۳۲ ۱۱",
-     "read": "۱۱",
+     "read": "۳۶",
      "status": "not-fit"
     },
     {
      "plate": "۵۱ث۲۳۳ ۱۱",
-     "read": "۱۱",
+     "read": "۵۱",
      "status": "not-fit"
     },
     {
      "plate": "۵۴ث۱۶۴ ۱۱",
-     "read": "۱۱",
+     "read": "۵۴",
      "status": "not-fit"
     }
    ]
@@ -2951,17 +2609,17 @@
    "failed": [
     {
      "plate": "۱۶ش۴۱۱ ۱۱",
-     "read": "۱۱",
+     "read": "۱۶",
      "status": "not-fit"
     },
     {
      "plate": "۱۶ش۹۲۸ ۱۱",
-     "read": "۱۱",
+     "read": "۱۶",
      "status": "not-fit"
     },
     {
      "plate": "۳۲ش۶۷۱ ۱۱",
-     "read": "۱۱",
+     "read": "۳۲",
      "status": "not-fit"
     }
    ]
@@ -2972,12 +2630,12 @@
    "failed": [
     {
      "plate": "۱۷ز۸۹۸ ۱۱",
-     "read": "۱۱",
+     "read": "۱۷",
      "status": "not-fit"
     },
     {
      "plate": "۱۸ز۹۱۴ ۱۱",
-     "read": "۱۱",
+     "read": "۱۸",
      "status": "not-fit"
     }
    ]
@@ -2989,17 +2647,17 @@
     {
      "plate": "۷۷۴ ۷۷۷۸۹",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     },
     {
      "plate": "۸۲۸ ۵۸۶۱۲",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     },
     {
      "plate": "۸۵۹ ۵۸۹۸۸",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     }
    ]
   },
@@ -3010,12 +2668,12 @@
     {
      "plate": "۱۱۱۶۳",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     },
     {
      "plate": "۱۱۲۲۹",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     }
    ]
   },
@@ -3025,17 +2683,17 @@
    "failed": [
     {
      "plate": "۱۶پ۴۲۹ ۲۲",
-     "read": "۲۲",
+     "read": "۱۶",
      "status": "not-fit"
     },
     {
      "plate": "۵۵پ۴۶۴ ۱۱",
-     "read": "۱۱",
+     "read": "۵۵",
      "status": "not-fit"
     },
     {
      "plate": "۸۱پ۲۲۹ ۱۱",
-     "read": "۱۱",
+     "read": "۸۱",
      "status": "not-fit"
     }
    ]
@@ -3046,17 +2704,17 @@
    "failed": [
     {
      "plate": "۱۵ص۱۷۵ ۴۸",
-     "read": "B ۴۸",
+     "read": "C ۱۵",
      "status": "not-fit"
     },
     {
      "plate": "۲۹س۸۴۶ ۴۸",
-     "read": "B ۴۸",
+     "read": "S ۲۹",
      "status": "not-fit"
     },
     {
      "plate": "۸۱د۱۲۷ ۴۸",
-     "read": "B ۴۸",
+     "read": "D ۸۱",
      "status": "not-fit"
     }
    ]
@@ -3067,17 +2725,17 @@
    "failed": [
     {
      "plate": "۵۱ت۱۶۵ ۲۲",
-     "read": "۲۲",
+     "read": "۵۱",
      "status": "not-fit"
     },
     {
      "plate": "۶۷ت۲۹۲ ۲۲",
-     "read": "۲۲",
+     "read": "۶۷",
      "status": "not-fit"
     },
     {
      "plate": "۸۲ت۱۳۴ ۲۲",
-     "read": "۲۲",
+     "read": "۸۲",
      "status": "not-fit"
     }
    ]
@@ -3164,17 +2822,17 @@
     {
      "plate": "00 P 1FLYG",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     },
     {
      "plate": "BM P 10569",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     },
     {
      "plate": "LN P GAVT0",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     }
    ]
   },
@@ -3190,17 +2848,17 @@
     {
      "plate": "5N JGK",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     },
     {
      "plate": "X9D XGL",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     },
     {
      "plate": "XBB V9B",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     }
    ]
   },
@@ -3908,7 +3566,7 @@
     },
     {
      "plate": "ສທ23-78",
-     "read": "2 2378",
+     "read": "1 2378",
      "status": "wrong"
     }
    ]
@@ -4009,9 +3667,25 @@
    "failed": []
   },
   "Dealer (with \"U\")": {
-   "ok": 3,
+   "ok": 0,
    "total": 3,
-   "failed": []
+   "failed": [
+    {
+     "plate": "FL 116-U",
+     "read": "FL 116",
+     "status": "wrong"
+    },
+    {
+     "plate": "FL 125-U",
+     "read": "FL 125",
+     "status": "wrong"
+    },
+    {
+     "plate": "FL 213-U",
+     "read": "FL 213",
+     "status": "wrong"
+    }
+   ]
   },
   "Exceptional vehicles": {
    "ok": 3,
@@ -4600,17 +4274,17 @@
    "failed": [
     {
      "plate": "ROK 8992",
-     "read": "BA 8992",
+     "read": "RO 8992",
      "status": "wrong"
     },
     {
      "plate": "WGW 823N",
-     "read": "BA 823N",
+     "read": "WG 823N",
      "status": "wrong"
     },
     {
      "plate": "WIC 8729",
-     "read": "BA 8729",
+     "read": "WI 8729",
      "status": "wrong"
     }
    ]
@@ -4855,17 +4529,17 @@
     {
      "plate": "007-CC453",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     },
     {
      "plate": "038-CD414",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     },
     {
      "plate": "119-CD209",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     }
    ]
   },
@@ -4934,18 +4608,18 @@
    "failed": [
     {
      "plate": "MAI 27273",
-     "read": "MAI",
-     "status": "not-fit"
+     "read": "27273",
+     "status": "wrong"
     },
     {
      "plate": "MAI 50112",
-     "read": "MAI",
-     "status": "not-fit"
+     "read": "50112",
+     "status": "wrong"
     },
     {
      "plate": "MAI 62117",
-     "read": "MAI",
-     "status": "not-fit"
+     "read": "62117",
+     "status": "wrong"
     }
    ]
   },
@@ -5141,12 +4815,12 @@
    "failed": [
     {
      "plate": "032 D 345 77",
-     "read": "032 77",
+     "read": "032 34",
      "status": "not-fit"
     },
     {
      "plate": "145 D 256 77",
-     "read": "145 77",
+     "read": "145 25",
      "status": "not-fit"
     },
     {
@@ -5670,18 +5344,18 @@
    "failed": [
     {
      "plate": "P-00040",
-     "read": "P",
-     "status": "not-fit"
+     "read": "",
+     "status": "no-field"
     },
     {
      "plate": "P-00502",
-     "read": "P",
-     "status": "not-fit"
+     "read": "",
+     "status": "no-field"
     },
     {
      "plate": "P-00540",
-     "read": "P",
-     "status": "not-fit"
+     "read": "",
+     "status": "no-field"
     }
    ]
   },
@@ -5816,46 +5490,14 @@
    "failed": []
   },
   "Motorcycles (1977)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "0658 РВД",
-     "read": "0658 ВД Р",
-     "status": "wrong"
-    },
-    {
-     "plate": "0721 ССВ",
-     "read": "0721 СВ С",
-     "status": "wrong"
-    },
-    {
-     "plate": "5279 АХК",
-     "read": "5279 ХК А",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Motorcycles and mopeds (1958)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "6156 ВИР",
-     "read": "6156 ИР В",
-     "status": "wrong"
-    },
-    {
-     "plate": "6716 ТОЖ",
-     "read": "6716 ИР Т",
-     "status": "not-fit"
-    },
-    {
-     "plate": "8952 ОДН",
-     "read": "8952 ДН О",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Private-owned cars (1977)": {
    "ok": 3,
@@ -5863,25 +5505,9 @@
    "failed": []
   },
   "Special cars (1977)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "КШС 1888",
-     "read": "ОК К ШС",
-     "status": "not-fit"
-    },
-    {
-     "plate": "ЯКЯ 2832",
-     "read": "КЯ Я 2832",
-     "status": "wrong"
-    },
-    {
-     "plate": "ЯКЯ 2968",
-     "read": "КЯ Я 2968",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Special vehicles (1965)": {
    "ok": 3,
@@ -5894,25 +5520,9 @@
    "failed": []
   },
   "State-owned cars (1977)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "1220 ВНН",
-     "read": "1220 КЯ В",
-     "status": "not-fit"
-    },
-    {
-     "plate": "5758 ИРУ",
-     "read": "5758 КЯ И",
-     "status": "not-fit"
-    },
-    {
-     "plate": "5814 КАА",
-     "read": "5814 АА К",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Trailers (1958)": {
    "ok": 3,
@@ -5935,25 +5545,9 @@
    "failed": []
   },
   "Сars (1958)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "5686 МКЛ",
-     "read": "5686 КЛ М",
-     "status": "wrong"
-    },
-    {
-     "plate": "6792 ГСН",
-     "read": "6792 СН Г",
-     "status": "wrong"
-    },
-    {
-     "plate": "8822 КРМ",
-     "read": "8822 СН К",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   }
  },
  "th": {
@@ -6416,9 +6010,25 @@
    ]
   },
   "Work vehicles (1995)": {
-   "ok": 3,
+   "ok": 0,
    "total": 3,
-   "failed": []
+   "failed": [
+    {
+     "plate": "Т0625 РВ",
+     "read": "0625 РВ",
+     "status": "wrong"
+    },
+    {
+     "plate": "Т1668 МК",
+     "read": "1668 МК",
+     "status": "wrong"
+    },
+    {
+     "plate": "Т2966 ЗС",
+     "read": "2966 ЗС",
+     "status": "wrong"
+    }
+   ]
   },
   "Work vehicles (2004)": {
    "ok": 0,
@@ -6502,17 +6112,17 @@
     {
      "plate": "01 H 010229",
      "read": "01 H",
-     "status": "not-fit"
+     "status": "wrong"
     },
     {
      "plate": "01 H 012673",
      "read": "01 H",
-     "status": "not-fit"
+     "status": "wrong"
     },
     {
      "plate": "01 H 015022",
      "read": "01 H",
-     "status": "not-fit"
+     "status": "wrong"
     }
    ]
   },
@@ -6528,17 +6138,17 @@
     {
      "plate": "01 M 000081",
      "read": "01 M",
-     "status": "not-fit"
+     "status": "wrong"
     },
     {
      "plate": "01 M 024863",
      "read": "01 M",
-     "status": "not-fit"
+     "status": "wrong"
     },
     {
      "plate": "10 M 002031",
      "read": "10 M",
-     "status": "not-fit"
+     "status": "wrong"
     }
    ]
   },
@@ -6661,17 +6271,17 @@
     {
      "plate": "41-671-NG-01",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     },
     {
      "plate": "80-441-NG-93",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     },
     {
      "plate": "80-442-NG-49",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     }
    ]
   },
@@ -6740,17 +6350,17 @@
     {
      "plate": "47-K1 270.77",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     },
     {
      "plate": "79-N2 936.29",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     },
     {
      "plate": "79-N6 9877",
      "read": "",
-     "status": "not-fit"
+     "status": "no-field"
     }
    ]
   },

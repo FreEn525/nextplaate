@@ -9,74 +9,74 @@
     {
       "id": "1",
       "label": "Regular car plates",
-      "visible": ["nomerpl", "region", "fon", "regionfed1"]
+      "visible": ["nomerpl", "region", "fon"]
     },
     {
       "id": "2",
       "label": "Special vehicles and motorcycles",
-      "visible": ["nomerpl", "region", "fon", "regionfed1"]
+      "visible": ["nomerpl", "region", "fon"]
     },
     {
       "id": "3",
       "label": "Oldtimers",
       "class": "yellow-black-select",
-      "visible": ["nomerpl", "region", "fon", "regionfed1"]
+      "visible": ["nomerpl", "region", "fon"]
     },
     {
       "id": "4",
       "label": "Authorities",
-      "visible": ["nomerpl", "region", "fon", "regionfed1"]
+      "visible": ["nomerpl", "region", "fon"]
     },
     {
       "id": "5",
       "label": "Military",
-      "visible": ["nomerpl", "region", "fon", "regionfed1"]
+      "visible": ["nomerpl", "region", "fon"]
     },
     {
       "id": "6",
       "label": "Provisional and testing",
       "class": "white-red-select",
-      "visible": ["b1", "nomerpl", "region", "fon", "regionfed1"]
+      "visible": ["b1", "nomerpl", "region", "fon"]
     },
     {
       "id": "8",
       "label": "Vanity Plates",
-      "visible": ["b1", "nomerpl", "region", "fon", "regionfed1"]
+      "visible": ["b1", "nomerpl", "region", "fon"]
     },
     {
       "id": "7",
       "label": "1976 year system",
       "class": "black-white-select",
-      "visible": ["b1", "nomerpl", "region", "fon", "regionfed1"]
+      "visible": ["b1", "nomerpl", "region", "fon"]
     },
     {
       "id": "9",
       "label": "Small-size",
-      "visible": ["nomerpl", "region", "fon", "regionfed1"]
+      "visible": ["nomerpl", "region", "fon"]
     },
     {
       "id": "10",
       "label": "Professional plates",
       "class": "green10",
-      "visible": ["nomerpl", "region", "fon", "regionfed1"]
+      "visible": ["nomerpl", "region", "fon"]
     },
     {
       "id": "11",
       "label": "Electric vehicles",
       "class": "green11",
-      "visible": ["nomerpl", "region", "fon", "regionfed1"]
+      "visible": ["nomerpl", "region", "fon"]
     },
     {
       "id": "12",
       "label": "Diplomatic",
       "class": "dip-pl",
-      "visible": ["digit", "region", "fon", "regionfed1"]
+      "visible": ["digit", "region", "fon"]
     },
     {
       "id": "13",
       "label": "Sportcars",
       "class": "sportauto",
-      "visible": ["b1", "nomerpl", "region", "fon", "regionfed1"]
+      "visible": ["b1", "nomerpl", "region", "fon"]
     }
   ],
   "hooks": ["displ1"],

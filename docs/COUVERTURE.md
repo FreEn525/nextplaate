@@ -13,125 +13,57 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | **Pays non capturés** | **0** | |
 | Pays avec une règle propre | 27 sur 96 | |
 | Catégories (pays capturés) | 829 | |
-| Vérifiées | 556 | 67 % |
-| **À corriger** | **188** | 23 % |
+| Vérifiées | 581 | 70 % |
+| **À corriger** | **135** | 16 % |
 | **À trouver** (aucune plaque connue) | **0** | 0 % |
 | Galerie vide sur le site (aucune plaque n'existe) | 21 | 3 % |
-| Non testables par le formulaire (pas de page d'ajout ni de menu de type) | 64 | 8 % |
+| Non testables par le formulaire (pas de menu de type, catégorie absente du menu, ou aucun champ de plaque) | 92 | 11 % |
 
 ## À corriger
 
 | Pays | Catégorie | OK | Plaque attendue | Lue |
 |---|---|---|---|---|
-| al | Trailers (2011) | 0/3 | `AG R 547` | `AG R` |
-| al | Trailers (2011) | 0/3 | `AH R 476` | `AH R` |
-| al | Trailers (2011) | 0/3 | `AM R 189` | `AM R` |
 | am | High officials | 0/3 | `ARM 025` | `ARM` |
 | am | High officials | 0/3 | `ARM 035` | `ARM` |
 | am | High officials | 0/3 | `ARM 160` | `ARM` |
-| ax | Cars (ÅL 12345) | 0/3 | `ÅL 10500` | `ÅL` |
-| ax | Cars (ÅL 12345) | 0/3 | `ÅL 12968` | `ÅL` |
-| ax | Cars (ÅL 12345) | 0/3 | `ÅL 16319` | `ÅL` |
-| ax | Cars (ÅLA 1234) | 0/3 | `ÅLA 4642` | `Å LA` |
-| ax | Cars (ÅLA 1234) | 0/3 | `ÅLA 5168` | `Å LA` |
-| ax | Cars (ÅLA 1234) | 0/3 | `ÅLA 7020` | `Å LA` |
-| ax | Trailers (ÅS 1234) | 0/3 | `ÅS 10959` | `ÅS` |
-| ax | Trailers (ÅS 1234) | 0/3 | `ÅS 2704` | `ÅS` |
-| ax | Trailers (ÅS 1234) | 0/3 | `ÅS 8594` | `ÅS` |
-| ax | Provisional (ÅF 1234) | 0/3 | `ÅF 6841` | `ÅF` |
-| ax | Provisional (ÅF 1234) | 0/3 | `ÅF 6962` | `ÅF` |
-| ax | Provisional (ÅF 1234) | 0/3 | `ÅF 6993` | `ÅF` |
-| az | Foreign citizens and enterprises | 0/3 | `H 014401` | `` |
-| az | Foreign citizens and enterprises | 0/3 | `H 027803` | `` |
-| az | Foreign citizens and enterprises | 0/3 | `H 029505` | `` |
-| ba | Taxi | 0/3 | `TA-044771` | `TA-TA` |
-| ba | Taxi | 0/3 | `TA-048706` | `TA-TA` |
-| ba | Taxi | 0/3 | `TA-341779` | `TA-TA` |
-| ba | Diplomatic | 0/3 | `11-A-683` | `` |
-| ba | Diplomatic | 0/3 | `29-A-308` | `` |
-| ba | Diplomatic | 0/3 | `56-A-040` | `` |
-| by | Transit plates (2004) | 0/3 | `6IB T 2754` | `IB T T` |
-| by | Transit plates (2004) | 0/3 | `6IB T 3399` | `IB T T` |
-| by | Transit plates (2004) | 0/3 | `8AP T 6938` | `AP T T` |
-| by | Cars (2000) | 0/3 | `3897 MBI` | `3897 BIM` |
-| by | Cars (2000) | 0/3 | `5897 TAB` | `5897 ABT` |
-| by | Cars (2000) | 0/3 | `6234 BAB` | `6234 ABB` |
-| by | Taxi | 0/3 | `1 TAX 7359` | `1 TTA X` |
-| by | Taxi | 0/3 | `3 TAX 1184` | `3 TTA X` |
-| by | Taxi | 0/3 | `3 TAX 4222` | `3 TTA X` |
-| by | Provisional | 0/3 | `KP BP 6804` | `KP BP BP` |
-| by | Provisional | 0/3 | `MK BP 8462` | `MK BP BP` |
-| by | Provisional | 0/3 | `MT BP 8913` | `MT BP BP` |
-| by | Foreign citizens and enterprises | 0/3 | `P 40418` | `P P` |
-| by | Foreign citizens and enterprises | 0/3 | `P 90010` | `P P` |
-| by | Foreign citizens and enterprises | 0/3 | `P 91179` | `P P` |
-| cl | Cars (AB-CD-12) | 0/3 | `JD-CJ-59` | `` |
-| cl | Cars (AB-CD-12) | 0/3 | `RB-LS-27` | `` |
-| cl | Cars (AB-CD-12) | 0/3 | `TV-TF-56` | `` |
-| cl | Taxi (AB-CD-12) | 0/3 | `FK-RH-71` | `` |
-| cl | Taxi (AB-CD-12) | 0/3 | `KD-BS-87` | `` |
-| cl | Taxi (AB-CD-12) | 0/3 | `TV-WK-46` | `` |
-| cl | Shared taxis (AB-CD-12) | 0/2 | `FD-WD-63` | `` |
-| cl | Shared taxis (AB-CD-12) | 0/2 | `TS-ZX-99` | `` |
-| cl | Special airport taxis and tourist vehicles (AB-CD-12) | 0/1 | `SL-SW-92` | `` |
-| cl | Free economic zones (AB-CD-12) | 0/3 | `GP-FS-13` | `` |
-| cl | Free economic zones (AB-CD-12) | 0/3 | `RZ-PV-23` | `` |
-| cl | Free economic zones (AB-CD-12) | 0/3 | `SG-JZ-35` | `` |
-| cl | Buses (AB-CD-12) | 0/3 | `BB-JZ-70` | `` |
-| cl | Buses (AB-CD-12) | 0/3 | `CJ-RS-57` | `` |
-| cl | Buses (AB-CD-12) | 0/3 | `GC-BC-87` | `` |
-| cl | Cars (AB-12-34) | 0/3 | `BJ-14-65` | `` |
-| cl | Cars (AB-12-34) | 0/3 | `RD-69-57` | `` |
-| cl | Cars (AB-12-34) | 0/3 | `YE-88-81` | `` |
-| cl | Taxi (AB-12-34) | 0/1 | `UE-15-72` | `` |
-| cl | Free economic zones (AB-12-34) | 0/3 | `DD-64-33` | `` |
-| cl | Free economic zones (AB-12-34) | 0/3 | `ZF-68-17` | `` |
-| cl | Free economic zones (AB-12-34) | 0/3 | `ZF-83-12` | `` |
-| cy | Commercial vehicles | 0/3 | `PKT 686` | `` |
-| cy | Commercial vehicles | 0/3 | `PXK 975` | `` |
-| cy | Commercial vehicles | 0/3 | `TNB 161` | `` |
+| ax | Cars (ÅL 12345) | 0/3 | `ÅL 10500` | `10500` |
+| ax | Cars (ÅL 12345) | 0/3 | `ÅL 12968` | `12968` |
+| ax | Cars (ÅL 12345) | 0/3 | `ÅL 16319` | `16319` |
+| ax | Cars (ÅLA 1234) | 0/3 | `ÅLA 4642` | `L A` |
+| ax | Cars (ÅLA 1234) | 0/3 | `ÅLA 5168` | `L A` |
+| ax | Cars (ÅLA 1234) | 0/3 | `ÅLA 7020` | `L A` |
+| ax | Trailers (ÅS 1234) | 0/3 | `ÅS 10959` | `10959` |
+| ax | Trailers (ÅS 1234) | 0/3 | `ÅS 2704` | `2704` |
+| ax | Trailers (ÅS 1234) | 0/3 | `ÅS 8594` | `8594` |
+| ax | Provisional (ÅF 1234) | 0/3 | `ÅF 6841` | `6841` |
+| ax | Provisional (ÅF 1234) | 0/3 | `ÅF 6962` | `6962` |
+| ax | Provisional (ÅF 1234) | 0/3 | `ÅF 6993` | `6993` |
+| ch | Vehicles w/o paid duty (with "Z") | 0/3 | `GE 1892 Z` | `GE 1892` |
+| ch | Vehicles w/o paid duty (with "Z") | 0/3 | `VS 549 Z` | `VS 549` |
+| ch | Vehicles w/o paid duty (with "Z") | 0/3 | `ZH 1257 Z` | `VS H 1257` |
+| ch | Dealer (with "U") | 0/3 | `VD 1171 U` | `VD 1171` |
+| ch | Dealer (with "U") | 0/3 | `VD 479 U` | `VD 479` |
+| ch | Dealer (with "U") | 0/3 | `VD 941 U` | `VD 941` |
 | cy | Trailers | 0/3 | `14001 CT` | `14001` |
-| cy | Trailers | 0/3 | `P 04878` | `P` |
-| cy | Trailers | 0/3 | `P 08038` | `P` |
-| cz | Sportcars (2001) | 0/3 | `01R 0580` | `01R R` |
-| cz | Sportcars (2001) | 0/3 | `03R 0138` | `03R R` |
-| cz | Sportcars (2001) | 0/3 | `11R 0470` | `11R R` |
-| cz | Oldtimers (2001) | 0/3 | `01V 6727` | `01V V` |
-| cz | Oldtimers (2001) | 0/3 | `01V 7673` | `01V V` |
-| cz | Oldtimers (2001) | 0/3 | `08V 0580` | `08V V` |
-| cz | Cars (1960) | 0/3 | `ABJ 45-96` | `A BJ` |
-| cz | Cars (1960) | 0/3 | `AHC 50-49` | `A HC` |
-| cz | Cars (1960) | 0/3 | `HOK 68-32` | `H OK` |
-| cz | Motorcycles (1960) | 2/3 | `OVA 32-50` | `O VA` |
-| cz | Commercial vehicles (1960) | 1/3 | `ALC 17-07` | `A LC` |
-| cz | Commercial vehicles (1960) | 1/3 | `KMA 17-57` | `K MA` |
-| cz | Foreign citizens and enterprises (1960) | 0/3 | `FMA 06-82` | `` |
-| cz | Foreign citizens and enterprises (1960) | 0/3 | `KMA 01-42` | `` |
-| cz | Foreign citizens and enterprises (1960) | 0/3 | `SUJ 22-45` | `` |
+| cy | Trailers | 0/3 | `P 04878` | `04878` |
+| cy | Trailers | 0/3 | `P 08038` | `08038` |
 | cz | Electric vehicles | 0/3 | `EL5 57CP` | `EL` |
 | cz | Electric vehicles | 0/3 | `EL6 41FT` | `EL` |
 | cz | Electric vehicles | 0/3 | `EL8 39AE` | `EL` |
-| cz | Trailers (1977) | 0/3 | `24 DOA-99` | `2 4` |
+| cz | Trailers (1977) | 0/3 | `24 DOA-99` | `DO2 4` |
 | cz | Trailers (1977) | 0/3 | `40-AH-85` | `AH4 0` |
 | cz | Trailers (1977) | 0/3 | `44-AI-59` | `AI4 4` |
-| de | Plates for oldtimers (type "H") | 0/3 | `HEI Z 924 H` | `HEI Z 924 H H` |
-| de | Plates for oldtimers (type "H") | 0/3 | `HH CW 311 H` | `HH CW 311 H H` |
-| de | Plates for oldtimers (type "H") | 0/3 | `KH L 1967 H` | `KH L 1967 H H` |
+| de | Plates for oldtimers (type "H") | 1/3 | `HEI Z 924 H` | `EI Z 924 H` |
+| de | Plates for oldtimers (type "H") | 1/3 | `HH CW 311 H` | `CW 311 H` |
 | de | Seasonal plates | 0/3 | `AC W 2005 (04/10)` | `AC W 2005` |
 | de | Seasonal plates | 0/3 | `EI KK 88 (04/10)` | `EI KK 88` |
 | de | Seasonal plates | 0/3 | `ILL Z 300 (03/10)` | `ILL Z 300` |
-| de | Electric vehicles | 0/3 | `A T 6800 E` | `A T 6800 E E` |
-| de | Electric vehicles | 0/3 | `D QX 2361 E` | `D QX 2361 E E` |
-| de | Electric vehicles | 0/3 | `GG H 1339 E` | `GG H 1339 E E` |
 | de | Seasonal plates (Oldtimers) | 0/3 | `GS KV 72H (05/10)` | `GS KV 72 H` |
-| de | Seasonal plates (Oldtimers) | 0/3 | `H NG 382H (04/10)` | `H NG 382 H` |
+| de | Seasonal plates (Oldtimers) | 0/3 | `H NG 382H (04/10)` | `N G 382 H` |
 | de | Seasonal plates (Oldtimers) | 0/3 | `NU SW 57H (04/10)` | `NU SW 57 H` |
 | de | Regional authorities | 0/3 | `BBL 4 7675` | `4 7675` |
 | de | Regional authorities | 0/3 | `NRW 3-58E` | `3 58E` |
 | de | Regional authorities | 0/3 | `RPL 4 8731` | `4 8731` |
-| de | NATO | 0/3 | `X 1193` | `` |
-| de | NATO | 0/3 | `X 2218` | `` |
-| de | NATO | 0/3 | `X 4500` | `` |
 | dk | Vanity Plates | 1/3 | `777` | `777AAAA` |
 | dk | Vanity Plates | 1/3 | `USANO1` | `USANO1J` |
 | eg | Cars (2008) | 0/3 | `٣٦٢١ جىر` | `أ` |
@@ -146,48 +78,9 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | eg | Cars (1999) | 0/3 | `١٠٧١٤` | `ALX` |
 | eg | Cars (1999) | 0/3 | `١١١٠٤` | `ALX` |
 | eg | Cars (1999) | 0/3 | `١٣١٣` | `ALX` |
-| ge | Cars (2024) | 0/3 | `BB-220-SS` | `` |
-| ge | Cars (2024) | 0/3 | `GG-385-GD` | `` |
-| ge | Cars (2024) | 0/3 | `II-227-PP` | `` |
-| ge | Trailers and special equipment (2024) | 0/3 | `BB-028-U` | `` |
-| ge | Trailers and special equipment (2024) | 0/3 | `NN-655-L` | `` |
-| ge | Trailers and special equipment (2024) | 0/3 | `SN-333-T` | `` |
-| gg | Alderney | 0/3 | `AY 1573` | `AY` |
-| gg | Alderney | 0/3 | `AY 2057` | `AY` |
-| gg | Alderney | 0/3 | `AY 2185` | `AY` |
-| gr | Government and public administrations | 0/3 | `KHH-4282` | `K HH` |
-| gr | Government and public administrations | 0/3 | `KHY-4940` | `K HY` |
-| gr | Government and public administrations | 0/3 | `KTY-5145` | `K TY` |
-| gr | Trucks | 0/3 | `EKB-8477` | `E KB` |
-| gr | Trucks | 0/3 | `IAB-1921` | `I AB` |
-| gr | Trucks | 0/3 | `IAZ-6038` | `I AZ` |
-| gr | Trailers | 0/3 | `P-41876` | `P P` |
-| gr | Trailers | 0/3 | `P-62450` | `P P` |
-| gr | Trailers | 0/3 | `P-69721` | `P P` |
-| gr | Taxi | 0/3 | `TAE-1009` | `T AE` |
-| gr | Taxi | 0/3 | `TAE-1015` | `T AE` |
-| gr | Taxi | 0/3 | `TAE-1577` | `T AE` |
-| gr | Oldtimers | 0/3 | `IO-26283` | `IO` |
-| gr | Oldtimers | 0/3 | `IO-27906` | `IO` |
-| gr | Oldtimers | 0/3 | `IO-29025` | `IO` |
-| gr | Diplomatic corps | 0/3 | `ΔΣ 10-69` | `ΔΣ` |
-| gr | Diplomatic corps | 0/3 | `ΔΣ 101-4` | `ΔΣ` |
-| gr | Diplomatic corps | 0/3 | `ΔΣ 89-13` | `ΔΣ` |
-| gr | Administrative and technical staff | 0/3 | `ΞΑ-21040` | `ΞΑ` |
-| gr | Administrative and technical staff | 0/3 | `ΞΑ-21089` | `ΞΑ` |
-| gr | Administrative and technical staff | 0/3 | `ΞΑ-2401` | `ΞΑ` |
-| gr | Agricultural vehicles | 0/3 | `AM 56394` | `AM` |
-| gr | Agricultural vehicles | 0/3 | `AM 58921` | `AM` |
-| gr | Agricultural vehicles | 0/3 | `AM 66363` | `AM` |
-| gr | Private trailers | 0/3 | `TB-26090` | `T B` |
-| gr | Private trailers | 0/3 | `TB-66423` | `T B` |
-| gr | Private trailers | 0/3 | `TE-11777` | `T E` |
-| gr | Police | 0/3 | `EA-21706` | `EA` |
-| gr | Police | 0/3 | `EA-25939` | `EA` |
-| gr | Police | 0/3 | `EA-29360` | `EA` |
-| gr | Coast Guard | 0/3 | `ΛΣ-3001` | `ΛΣ` |
-| gr | Coast Guard | 0/3 | `ΛΣ-3458` | `ΛΣ` |
-| gr | Coast Guard | 0/3 | `ΛΣ-3528` | `ΛΣ` |
+| gg | Alderney | 0/3 | `AY 1573` | `1573` |
+| gg | Alderney | 0/3 | `AY 2057` | `2057` |
+| gg | Alderney | 0/3 | `AY 2185` | `2185` |
 | hr | Dealer | 0/3 | `OS PP-178` | `OS PP-AA` |
 | hr | Dealer | 0/3 | `OS PP-274` | `OS PP-AA` |
 | hr | Dealer | 0/3 | `ZG PP-1442` | `ZG PP-AA` |
@@ -200,15 +93,12 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | hr | Export transit plates | 0/3 | `RH 199-BE` | `ZG 199-RH` |
 | hr | Export transit plates | 0/3 | `RH 290-AP` | `ZG 290-RH` |
 | hr | Export transit plates | 0/3 | `RH 718-BA` | `ZG 718-RH` |
-| hr | Police | 0/3 | `170-344` | `ZG C` |
-| hr | Police | 0/3 | `190-452` | `ZG C` |
-| hr | Police | 0/3 | `190-487` | `ZG C` |
 | hr | Diplomatic | 0/3 | `025-A-020` | `ZG 020-AA` |
 | hr | Diplomatic | 0/3 | `053-A-024` | `ZG 024-AA` |
 | hr | Diplomatic | 0/3 | `097-A-001` | `ZG 001-AA` |
-| ie | Oldtimers | 0/3 | `ZV 12656` | `ZV` |
-| ie | Oldtimers | 0/3 | `ZV 37603` | `ZV` |
-| ie | Oldtimers | 0/3 | `ZV 89253` | `ZV` |
+| ie | Oldtimers | 0/3 | `ZV 12656` | `12656` |
+| ie | Oldtimers | 0/3 | `ZV 37603` | `37603` |
+| ie | Oldtimers | 0/3 | `ZV 89253` | `89253` |
 | il | Diplomatic | 0/3 | `33-232-21` | `0 33-232-21` |
 | il | Diplomatic | 0/3 | `58-077-21` | `0 58-077-21` |
 | il | Diplomatic | 0/3 | `94-081-22` | `0 94-081-22` |
@@ -224,49 +114,35 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | iq | 1988 year system | 0/3 | `١٠٣٧٠٤` | `AN` |
 | iq | 1988 year system | 0/3 | `٣٧٥٧٥` | `AN` |
 | iq | 1988 year system | 0/3 | `٦٢٢٠٣٠` | `AN` |
-| ir | Private owners | 0/3 | `۱۵ص۱۷۵ ۴۸` | `B ۴۸` |
-| ir | Private owners | 0/3 | `۲۹س۸۴۶ ۴۸` | `B ۴۸` |
-| ir | Private owners | 0/3 | `۸۱د۱۲۷ ۴۸` | `B ۴۸` |
-| ir | Disabled | 0/3 | `۱۱ژ۴۷۳ ۴۳` | `۴۳` |
-| ir | Disabled | 0/3 | `۱۷ژ۹۵۷ ۱۱` | `۱۱` |
-| ir | Disabled | 0/3 | `۵۲ژ۵۱۶ ۱۱` | `۱۱` |
-| ir | Taxi | 0/3 | `۵۱ت۱۶۵ ۲۲` | `۲۲` |
-| ir | Taxi | 0/3 | `۶۷ت۲۹۲ ۲۲` | `۲۲` |
-| ir | Taxi | 0/3 | `۸۲ت۱۳۴ ۲۲` | `۲۲` |
-| ir | Commercial vehicles | 0/3 | `۵۳ع۴۴۴ ۴۳` | `۴۳` |
-| ir | Commercial vehicles | 0/3 | `۶۱ع۵۹۳ ۴۸` | `۴۸` |
-| ir | Commercial vehicles | 0/3 | `۷۱ع۴۲۲ ۲۵` | `۲۵` |
-| ir | Agricultural vehicles | 0/1 | `۱۱ک۴۷۹ ۸۴` | `۸۴` |
-| ir | Police | 0/3 | `۱۶پ۴۲۹ ۲۲` | `۲۲` |
-| ir | Police | 0/3 | `۵۵پ۴۶۴ ۱۱` | `۱۱` |
-| ir | Police | 0/3 | `۸۱پ۲۲۹ ۱۱` | `۱۱` |
-| ir | Islamic Revolutionary Guard Corps | 0/3 | `۳۶ث۲۳۲ ۱۱` | `۱۱` |
-| ir | Islamic Revolutionary Guard Corps | 0/3 | `۵۱ث۲۳۳ ۱۱` | `۱۱` |
-| ir | Islamic Revolutionary Guard Corps | 0/3 | `۵۴ث۱۶۴ ۱۱` | `۱۱` |
-| ir | Military | 0/3 | `۱۶ش۴۱۱ ۱۱` | `۱۱` |
-| ir | Military | 0/3 | `۱۶ش۹۲۸ ۱۱` | `۱۱` |
-| ir | Military | 0/3 | `۳۲ش۶۷۱ ۱۱` | `۱۱` |
-| ir | Ministry of Defense | 0/2 | `۱۷ز۸۹۸ ۱۱` | `۱۱` |
-| ir | Ministry of Defense | 0/2 | `۱۸ز۹۱۴ ۱۱` | `۱۱` |
+| ir | Private owners | 0/3 | `۱۵ص۱۷۵ ۴۸` | `C ۱۵` |
+| ir | Private owners | 0/3 | `۲۹س۸۴۶ ۴۸` | `S ۲۹` |
+| ir | Private owners | 0/3 | `۸۱د۱۲۷ ۴۸` | `D ۸۱` |
+| ir | Disabled | 0/3 | `۱۱ژ۴۷۳ ۴۳` | `۱۱` |
+| ir | Disabled | 0/3 | `۱۷ژ۹۵۷ ۱۱` | `۱۷` |
+| ir | Disabled | 0/3 | `۵۲ژ۵۱۶ ۱۱` | `۵۲` |
+| ir | Taxi | 0/3 | `۵۱ت۱۶۵ ۲۲` | `۵۱` |
+| ir | Taxi | 0/3 | `۶۷ت۲۹۲ ۲۲` | `۶۷` |
+| ir | Taxi | 0/3 | `۸۲ت۱۳۴ ۲۲` | `۸۲` |
+| ir | Commercial vehicles | 0/3 | `۵۳ع۴۴۴ ۴۳` | `۵۳` |
+| ir | Commercial vehicles | 0/3 | `۶۱ع۵۹۳ ۴۸` | `۶۱` |
+| ir | Commercial vehicles | 0/3 | `۷۱ع۴۲۲ ۲۵` | `۷۱` |
+| ir | Agricultural vehicles | 0/1 | `۱۱ک۴۷۹ ۸۴` | `۱۱` |
+| ir | Police | 0/3 | `۱۶پ۴۲۹ ۲۲` | `۱۶` |
+| ir | Police | 0/3 | `۵۵پ۴۶۴ ۱۱` | `۵۵` |
+| ir | Police | 0/3 | `۸۱پ۲۲۹ ۱۱` | `۸۱` |
+| ir | Islamic Revolutionary Guard Corps | 0/3 | `۳۶ث۲۳۲ ۱۱` | `۳۶` |
+| ir | Islamic Revolutionary Guard Corps | 0/3 | `۵۱ث۲۳۳ ۱۱` | `۵۱` |
+| ir | Islamic Revolutionary Guard Corps | 0/3 | `۵۴ث۱۶۴ ۱۱` | `۵۴` |
+| ir | Military | 0/3 | `۱۶ش۴۱۱ ۱۱` | `۱۶` |
+| ir | Military | 0/3 | `۱۶ش۹۲۸ ۱۱` | `۱۶` |
+| ir | Military | 0/3 | `۳۲ش۶۷۱ ۱۱` | `۳۲` |
+| ir | Ministry of Defense | 0/2 | `۱۷ز۸۹۸ ۱۱` | `۱۷` |
+| ir | Ministry of Defense | 0/2 | `۱۸ز۹۱۴ ۱۱` | `۱۸` |
 | ir | General Staff | 0/1 | `۱۱ف۱۳۴ ۱۱` | `۱۱` |
-| ir | Authorities | 0/3 | `۱۶الف۵۴۴ ۴۶` | `۴۶` |
-| ir | Authorities | 0/3 | `۱۸الف۵۲۴ ۱۱` | `۱۱` |
-| ir | Authorities | 0/3 | `۲۵الف۲۶۳ ۱۱` | `۱۱` |
-| ir | Motorcycles | 0/3 | `۷۷۴ ۷۷۷۸۹` | `` |
-| ir | Motorcycles | 0/3 | `۸۲۸ ۵۸۶۱۲` | `` |
-| ir | Motorcycles | 0/3 | `۸۵۹ ۵۸۹۸۸` | `` |
-| ir | Oldtimers | 0/2 | `۱۱۱۶۳` | `` |
-| ir | Oldtimers | 0/2 | `۱۱۲۲۹` | `` |
-| ir | Free trade zones | 0/3 | `۱۱۳۷۶` | `` |
-| ir | Free trade zones | 0/3 | `۱۳۸۱۴` | `` |
-| ir | Free trade zones | 0/3 | `۳۵۴۵۴` | `` |
+| ir | Authorities | 0/3 | `۱۶الف۵۴۴ ۴۶` | `۱۶` |
+| ir | Authorities | 0/3 | `۱۸الف۵۲۴ ۱۱` | `۱۸` |
+| ir | Authorities | 0/3 | `۲۵الف۲۶۳ ۱۱` | `۲۵` |
 | is | Vanity Plates | 2/3 | `T BÍRD` | `TBÍRDN` |
-| it | Mopeds | 0/3 | `5N JGK` | `` |
-| it | Mopeds | 0/3 | `X9D XGL` | `` |
-| it | Mopeds | 0/3 | `XBB V9B` | `` |
-| it | Dealer | 0/3 | `00 P 1FLYG` | `` |
-| it | Dealer | 0/3 | `BM P 10569` | `` |
-| it | Dealer | 0/3 | `LN P GAVT0` | `` |
 | it | Road machinery | 0/3 | `AKF 511` | `PE AKF 511` |
 | it | Road machinery | 0/3 | `ANL 084` | `PE ANL 084` |
 | it | Road machinery | 0/3 | `ANY 257` | `PE ANY 257` |
@@ -329,7 +205,7 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | kz | Military (1993) | 0/3 | `8906 АВ` | `8906` |
 | la | Diplomatic | 0/3 | `ຂຕ-1192` | `2 1192` |
 | la | Diplomatic | 0/3 | `ຂຕ-1777` | `2 1777` |
-| la | Diplomatic | 0/3 | `ສທ23-78` | `2 2378` |
+| la | Diplomatic | 0/3 | `ສທ23-78` | `1 2378` |
 | la | Military | 0/3 | `ກທ 5868` | `5868` |
 | la | Military | 0/3 | `ກທ/1 0040` | `` |
 | la | Military | 0/3 | `ກທ/116 0043` | `` |
@@ -339,6 +215,9 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | la | Temporary | 0/3 | `ຂຄ3-541` | `3541` |
 | la | Temporary | 0/3 | `ຂຄ3-659` | `3659` |
 | la | Temporary | 0/3 | `ຂຄ3-730` | `3730` |
+| li | Dealer (with "U") | 0/3 | `FL 116-U` | `FL 116` |
+| li | Dealer (with "U") | 0/3 | `FL 125-U` | `FL 125` |
+| li | Dealer (with "U") | 0/3 | `FL 213-U` | `FL 213` |
 | lv | Trailers | 0/3 | `B-362Y` | `BQ 362Y` |
 | lv | Trailers | 0/3 | `B-389E` | `BQ 389E` |
 | lv | Trailers | 0/3 | `B-906J` | `BQ 906J` |
@@ -369,9 +248,9 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | pl | Vanity Plates | 0/3 | `G0 ARTY` | `G ARTY` |
 | pl | Vanity Plates | 0/3 | `P3 KOTEK` | `P KOTEK` |
 | pl | Vanity Plates | 0/3 | `P5 ATS` | `P ATS` |
-| pl | 1976 year system | 0/3 | `ROK 8992` | `BA 8992` |
-| pl | 1976 year system | 0/3 | `WGW 823N` | `BA 823N` |
-| pl | 1976 year system | 0/3 | `WIC 8729` | `BA 8729` |
+| pl | 1976 year system | 0/3 | `ROK 8992` | `RO 8992` |
+| pl | 1976 year system | 0/3 | `WGW 823N` | `WG 823N` |
+| pl | 1976 year system | 0/3 | `WIC 8729` | `WI 8729` |
 | pl | Diplomatic | 0/3 | `W 016600` | `001` |
 | pl | Diplomatic | 0/3 | `W 028011` | `001` |
 | pl | Diplomatic | 0/3 | `W 110500` | `001` |
@@ -393,12 +272,9 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | ps | Dealer | 0/3 | `62-100-76` | `62 100` |
 | ps | Dealer | 0/3 | `64-074-76` | `64 074` |
 | ps | Dealer | 0/3 | `65-067-76` | `65 067` |
-| pt | Diplomatic | 0/3 | `007-CC453` | `` |
-| pt | Diplomatic | 0/3 | `038-CD414` | `` |
-| pt | Diplomatic | 0/3 | `119-CD209` | `` |
-| ro | Ministry of Interior | 0/3 | `MAI 27273` | `MAI` |
-| ro | Ministry of Interior | 0/3 | `MAI 50112` | `MAI` |
-| ro | Ministry of Interior | 0/3 | `MAI 62117` | `MAI` |
+| ro | Ministry of Interior | 0/3 | `MAI 27273` | `27273` |
+| ro | Ministry of Interior | 0/3 | `MAI 50112` | `50112` |
+| ro | Ministry of Interior | 0/3 | `MAI 62117` | `62117` |
 | rs | Motorcycles | 0/3 | `BG 64-565` | `BG 64 565-BM` |
 | rs | Motorcycles | 0/3 | `BG 66-711` | `BG 66 711-BM` |
 | rs | Motorcycles | 0/3 | `BG 70-493` | `BG 70 493-BM` |
@@ -420,14 +296,8 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | rs | Military | 0/3 | `K-5605` | `BG BM` |
 | rs | Military | 0/3 | `P-1864` | `BG BM` |
 | rs | Military | 0/3 | `P-2019` | `BG BM` |
-| ru | High authorities | 0/3 | `в 347 аа` | `` |
-| ru | High authorities | 0/3 | `р 054 аа` | `` |
-| ru | High authorities | 0/3 | `р 157 аа` | `` |
-| ru | Diplomatic (Ambassador, chief of diplomatic mission) | 0/3 | `011 CD 1 77` | `` |
-| ru | Diplomatic (Ambassador, chief of diplomatic mission) | 0/3 | `086 CD 1 77` | `` |
-| ru | Diplomatic (Ambassador, chief of diplomatic mission) | 0/3 | `127 CD 1 77` | `` |
-| ru | Diplomatic | 0/3 | `032 D 345 77` | `032 77` |
-| ru | Diplomatic | 0/3 | `145 D 256 77` | `145 77` |
+| ru | Diplomatic | 0/3 | `032 D 345 77` | `032 34` |
+| ru | Diplomatic | 0/3 | `145 D 256 77` | `145 25` |
 | ru | Diplomatic | 0/3 | `900 D 006 86` | `900 86` |
 | ru | Diplomatic motorcycles | 0/3 | `D 017 02 77` | `017 02` |
 | ru | Diplomatic motorcycles | 0/3 | `T 559 01 50` | `559 01` |
@@ -459,30 +329,12 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | sk | Sportcars (AB S(A)123) | 0/3 | `AA S 009` | `SA AA 009` |
 | sk | Sportcars (AB S(A)123) | 0/3 | `AA S 010` | `SA AA 010` |
 | sk | Sportcars (AB S(A)123) | 0/3 | `AA S 359` | `SA AA 359` |
-| sk | Police | 0/3 | `P-00040` | `P` |
-| sk | Police | 0/3 | `P-00502` | `P` |
-| sk | Police | 0/3 | `P-00540` | `P` |
 | sk | Military | 0/3 | `67-38966` | `-67` |
 | sk | Military | 0/3 | `71-00089` | `-71` |
 | sk | Military | 0/3 | `72-56208` | `-72` |
 | sk | Diplomatic | 0/3 | `EE 10228` | `1` |
 | sk | Diplomatic | 0/3 | `ZZ 44238` | `2` |
 | sk | Diplomatic | 0/3 | `ZZ 72047` | `2` |
-| su | State-owned cars (1977) | 0/3 | `1220 ВНН` | `1220 КЯ В` |
-| su | State-owned cars (1977) | 0/3 | `5758 ИРУ` | `5758 КЯ И` |
-| su | State-owned cars (1977) | 0/3 | `5814 КАА` | `5814 АА К` |
-| su | Motorcycles (1977) | 0/3 | `0658 РВД` | `0658 ВД Р` |
-| su | Motorcycles (1977) | 0/3 | `0721 ССВ` | `0721 СВ С` |
-| su | Motorcycles (1977) | 0/3 | `5279 АХК` | `5279 ХК А` |
-| su | Special cars (1977) | 0/3 | `КШС 1888` | `ОК К ШС` |
-| su | Special cars (1977) | 0/3 | `ЯКЯ 2832` | `КЯ Я 2832` |
-| su | Special cars (1977) | 0/3 | `ЯКЯ 2968` | `КЯ Я 2968` |
-| su | Сars (1958) | 0/3 | `5686 МКЛ` | `5686 КЛ М` |
-| su | Сars (1958) | 0/3 | `6792 ГСН` | `6792 СН Г` |
-| su | Сars (1958) | 0/3 | `8822 КРМ` | `8822 СН К` |
-| su | Motorcycles and mopeds (1958) | 0/3 | `6156 ВИР` | `6156 ИР В` |
-| su | Motorcycles and mopeds (1958) | 0/3 | `6716 ТОЖ` | `6716 ИР Т` |
-| su | Motorcycles and mopeds (1958) | 0/3 | `8952 ОДН` | `8952 ДН О` |
 | th | Private owners | 2/3 | `4ฒฆ 5147` | `4 ฆ ฒ 5147` |
 | th | Taxi | 1/3 | `ทห 7776` | `1 ท ห 7776` |
 | th | Taxi | 1/3 | `ทฬ 1493` | `1 ท ฬ 1493` |
@@ -531,6 +383,9 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | ua | Vanity Plates | 0/3 | `11 SOPRANOS` | `11` |
 | ua | Vanity Plates | 0/3 | `16 STORM` | `16` |
 | ua | Vanity Plates | 0/3 | `16 VRSNSMV` | `16` |
+| ua | Work vehicles (1995) | 0/3 | `Т0625 РВ` | `0625 РВ` |
+| ua | Work vehicles (1995) | 0/3 | `Т1668 МК` | `1668 МК` |
+| ua | Work vehicles (1995) | 0/3 | `Т2966 ЗС` | `2966 ЗС` |
 | uz | Organizations | 0/3 | `10 023 XBA` | `10 M 023 XBA` |
 | uz | Organizations | 0/3 | `10 363 PSP` | `10 M 363 PSP` |
 | uz | Organizations | 0/3 | `10 400 VSG` | `10 M 400 VSG` |
@@ -542,9 +397,6 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | uz | Joint ventures and foreign enterprises | 0/3 | `10 M 002031` | `10 M` |
 | vn | Cars | 1/3 | `47A-271.12` | `47 A` |
 | vn | Cars | 1/3 | `51N-096.00` | `51 N` |
-| vn | Motorcycles | 0/3 | `47-K1 270.77` | `` |
-| vn | Motorcycles | 0/3 | `79-N2 936.29` | `` |
-| vn | Motorcycles | 0/3 | `79-N6 9877` | `` |
 | vn | Specialty plates | 0/3 | `15CD-015.02` | `15 CD` |
 | vn | Specialty plates | 0/3 | `34LA-1010` | `34 LA` |
 | vn | Specialty plates | 0/3 | `79LD-002.51` | `79 LD` |
@@ -559,9 +411,6 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | vn | Commercial vehicles | 0/3 | `47C-144.72` | `47 C` |
 | vn | Commercial vehicles | 0/3 | `47F-001.48` | `47 F` |
 | vn | Commercial vehicles | 0/3 | `47H-046.91` | `47 H` |
-| vn | Diplomatic | 0/3 | `41-671-NG-01` | `` |
-| vn | Diplomatic | 0/3 | `80-441-NG-93` | `` |
-| vn | Diplomatic | 0/3 | `80-442-NG-49` | `` |
 
 ## Par pays
 
@@ -569,74 +418,73 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 
 | Pays | Règle | Catégories | Vérifiées | À corriger | À trouver | Galerie vide | Non testables | Page d'ajout |
 |---|---|---|---|---|---|---|---|---|
-| ir Iran | generic | 16 | 2 | 14 |  |  |  | oui |
-| gr Greece | own | 16 | 5 | 11 |  |  |  | oui |
-| cl Chile | generic | 15 | 3 | 9 |  | 3 |  | oui |
-| cz Czech Republic | own | 22 | 13 | 8 |  | 1 |  | oui |
-| ua Ukraine | own | 19 | 11 | 8 |  |  |  | oui |
-| vn Vietnam | generic | 8 | 0 | 8 |  |  |  | oui |
+| ir Iran | generic | 16 | 2 | 11 |  |  | 3 | oui |
+| ua Ukraine | own | 19 | 10 | 9 |  |  |  | oui |
 | kg Kyrgyzstan | generic | 12 | 5 | 7 |  |  |  | oui |
 | rs Serbia | own | 10 | 3 | 7 |  |  |  | oui |
-| de Germany | own | 16 | 10 | 6 |  |  |  | oui |
-| hr Croatia | own | 11 | 5 | 6 |  |  |  | oui |
 | sa Saudi Arabia | generic | 6 | 0 | 6 |  |  |  | oui |
-| by Belarus | own | 18 | 13 | 5 |  |  |  | oui |
+| vn Vietnam | generic | 8 | 0 | 6 |  |  | 2 | oui |
+| hr Croatia | own | 11 | 5 | 5 |  |  | 1 | oui |
 | pl Poland | own | 12 | 7 | 5 |  |  |  | oui |
 | ps Palestinian Authority | generic | 6 | 1 | 5 |  |  |  | oui |
-| su USSR | generic | 15 | 10 | 5 |  |  |  | oui |
 | th Thailand | generic | 9 | 4 | 5 |  |  |  | oui |
 | tj Tajikistan | own | 10 | 5 | 5 |  |  |  | oui |
 | ax Åland (FI) | generic | 5 | 1 | 4 |  |  |  | oui |
+| de Germany | own | 16 | 11 | 4 |  |  | 1 | oui |
 | eg Egypt | generic | 4 | 0 | 4 |  |  |  | oui |
 | iq Iraq | generic | 4 | 0 | 4 |  |  |  | oui |
 | jp Japan | generic | 4 | 0 | 4 |  |  |  | oui |
 | la Laos | generic | 9 | 5 | 4 |  |  |  | oui |
-| ru Russia | own | 23 | 19 | 4 |  |  |  | oui |
-| sk Slovakia | own | 21 | 15 | 4 |  | 2 |  | oui |
-| it Italy | generic | 14 | 11 | 3 |  |  |  | oui |
 | kr South Korea | generic | 3 | 0 | 3 |  |  |  | oui |
 | kz Kazakhstan | generic | 18 | 15 | 3 |  |  |  | oui |
 | mn Mongolia | generic | 4 | 1 | 3 |  |  |  | oui |
+| sk Slovakia | own | 21 | 15 | 3 |  | 2 | 1 | oui |
 | uz Uzbekistan | own | 9 | 6 | 3 |  |  |  | oui |
-| ba Bosnia and Herzegovina | own | 5 | 3 | 2 |  |  |  | oui |
-| cy Cyprus | generic | 5 | 3 | 2 |  |  |  | oui |
-| ge Georgia | generic | 12 | 10 | 2 |  |  |  | oui |
+| ch Switzerland | generic | 11 | 9 | 2 |  |  |  | oui |
+| cz Czech Republic | own | 22 | 18 | 2 |  | 1 | 1 | oui |
 | kh Cambodia | generic | 7 | 4 | 2 |  | 1 |  | oui |
 | lv Latvia | own | 9 | 7 | 2 |  |  |  | oui |
-| al Albania | own | 4 | 3 | 1 |  |  |  | oui |
+| ru Russia | own | 23 | 19 | 2 |  |  | 2 | oui |
 | am Armenia | generic | 8 | 7 | 1 |  |  |  | oui |
-| az Azerbaijan | generic | 5 | 4 | 1 |  |  |  | oui |
+| cy Cyprus | generic | 5 | 3 | 1 |  |  | 1 | oui |
 | dk Denmark | own | 8 | 7 | 1 |  |  |  | oui |
 | gg Guernsey (UK) | own | 3 | 2 | 1 |  |  |  | oui |
 | ie Ireland | generic | 3 | 2 | 1 |  |  |  | oui |
 | il Israel | generic | 8 | 7 | 1 |  |  |  | oui |
 | is Iceland | own | 10 | 9 | 1 |  |  |  | oui |
+| it Italy | generic | 14 | 11 | 1 |  |  | 2 | oui |
+| li Liechtenstein | own | 9 | 8 | 1 |  |  |  | oui |
 | ma Morocco | generic | 2 | 1 | 1 |  |  |  | oui |
 | mc Monaco | generic | 4 | 3 | 1 |  |  |  | oui |
 | me Montenegro | own | 6 | 5 | 1 |  |  |  | oui |
-| pt Portugal | generic | 4 | 3 | 1 |  |  |  | oui |
 | ro Romania | generic | 5 | 4 | 1 |  |  |  | oui |
 | sc Seychelles | generic | 9 | 7 | 1 |  | 1 |  | oui |
 | si Slovenia | own | 4 | 3 | 1 |  |  |  | oui |
 | ad Andorra | generic | 5 | 5 |  |  |  |  | oui |
 | ae UAE | generic | 0 | 0 |  |  |  |  | oui |
+| al Albania | own | 4 | 4 |  |  |  |  | oui |
 | ar Argentina | generic | 6 | 6 |  |  |  |  | oui |
 | at Austria | generic | 9 | 9 |  |  |  |  | oui |
 | au Australia | generic | 0 | 0 |  |  |  |  | oui |
+| az Azerbaijan | generic | 5 | 4 |  |  |  | 1 | oui |
+| ba Bosnia and Herzegovina | own | 5 | 4 |  |  |  | 1 | oui |
 | be Belgium | generic | 5 | 5 |  |  |  |  | oui |
 | bg Bulgaria | generic | 7 | 7 |  |  |  |  | oui |
 | bh Bahrain | generic | 7 | 7 |  |  |  |  | oui |
 | br Brazil | generic | 13 | 13 |  |  |  |  | oui |
 | bs Bahamas | generic | 7 | 7 |  |  |  |  | oui |
+| by Belarus | own | 18 | 18 |  |  |  |  | oui |
 | ca Canada | generic | 0 | 0 |  |  |  |  | oui |
-| ch Switzerland | generic | 11 | 11 |  |  |  |  | oui |
+| cl Chile | generic | 15 | 3 |  |  | 3 | 9 | oui |
 | cn China | generic | 6 | 6 |  |  |  |  | oui |
 | dz Algeria | own | 7 | 4 |  |  | 3 |  | oui |
 | ee Estonia | own | 10 | 10 |  |  |  |  | oui |
 | es Spain | own | 6 | 6 |  |  |  |  | oui |
 | fi Finland | generic | 9 | 9 |  |  |  |  | oui |
 | fr France | own | 17 | 17 |  |  |  |  | oui |
+| ge Georgia | generic | 12 | 10 |  |  |  | 2 | oui |
 | gi Gibraltar (UK) | generic | 4 | 4 |  |  |  |  | oui |
+| gr Greece | own | 16 | 16 |  |  |  |  | oui |
 | gu Guam (USA) | generic | 9 | 5 |  |  | 4 |  | oui |
 | hk Hong Kong (CN) | generic | 2 | 2 |  |  |  |  | oui |
 | hu Hungary | generic | 23 | 23 |  |  |  |  | oui |
@@ -644,7 +492,6 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | je Jersey (UK) | generic | 2 | 2 |  |  |  |  | oui |
 | ke Kenya | generic | 12 | 12 |  |  |  |  | oui |
 | kw Kuwait | generic | 4 | 4 |  |  |  |  | oui |
-| li Liechtenstein | own | 9 | 9 |  |  |  |  | oui |
 | lt Lithuania | generic | 9 | 9 |  |  |  |  | oui |
 | lu Luxembourg | generic | 5 | 5 |  |  |  |  | oui |
 | md Moldova | own | 8 | 8 |  |  |  |  | oui |
@@ -656,10 +503,12 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | nl Netherlands | generic | 27 | 0 |  |  |  | 27 | oui |
 | no Norway | generic | 12 | 12 |  |  |  |  | oui |
 | nz New Zealand | generic | 5 | 5 |  |  |  |  | oui |
+| pt Portugal | generic | 4 | 3 |  |  |  | 1 | oui |
 | qa Qatar | generic | 6 | 6 |  |  |  |  | oui |
 | se Sweden | generic | 8 | 8 |  |  |  |  | oui |
 | sg Singapore | generic | 13 | 0 |  |  |  | 13 | oui |
 | sm San Marino | generic | 13 | 13 |  |  |  |  | oui |
+| su USSR | generic | 15 | 15 |  |  |  |  | oui |
 | tr Turkey | own | 6 | 6 |  |  |  |  | oui |
 | uk United Kingdom | generic | 10 | 10 |  |  |  |  | oui |
 | us USA | generic | 0 | 0 |  |  |  |  | oui |
@@ -689,10 +538,24 @@ Aucune photo dans la galerie de ces catégories : il n'y a pas de plaque à util
 
 Ces catégories existent dans la recherche du site mais le formulaire d'ajout ne permet pas de les choisir : leur règle ne peut pas être prouvée par ce moyen.
 
-- **mx** (pas de menu de type) : 20 catégorie(s)
-- **my** (pas de menu de type) : 4 catégorie(s)
-- **nl** (pas de menu de type) : 27 catégorie(s)
-- **sg** (pas de menu de type) : 13 catégorie(s)
+- **az** : absente du menu du formulaire (1) : Foreign citizens and enterprises
+- **ba** : le formulaire n'a aucun champ de plaque pour ce type (1) : Diplomatic
+- **cl** : absente du menu du formulaire (9)
+- **cy** : absente du menu du formulaire (1) : Commercial vehicles
+- **cz** : absente du menu du formulaire (1) : Foreign citizens and enterprises (1960)
+- **de** : absente du menu du formulaire (1) : NATO
+- **ge** : absente du menu du formulaire (2) : Cars (2024), Trailers and special equipment (2024)
+- **hr** : le formulaire n'a aucun champ de plaque pour ce type (1) : Police
+- **ir** : le formulaire n'a aucun champ de plaque pour ce type (3) : Motorcycles, Oldtimers, Free trade zones
+- **it** : le formulaire n'a aucun champ de plaque pour ce type (2) : Mopeds, Dealer
+- **mx** : pas de menu de type (20)
+- **my** : pas de menu de type (4) : A(BC) 1(234), AB(C) 1(234) D, Taxi (HAB 1(234)), Military (Z(A) 1(234))
+- **nl** : pas de menu de type (27)
+- **pt** : le formulaire n'a aucun champ de plaque pour ce type (1) : Diplomatic
+- **ru** : absente du menu du formulaire (2) : High authorities, Diplomatic (Ambassador, chief of diplomatic mission)
+- **sg** : pas de menu de type (13)
+- **sk** : le formulaire n'a aucun champ de plaque pour ce type (1) : Police
+- **vn** : le formulaire n'a aucun champ de plaque pour ce type (2) : Motorcycles, Diplomatic
 
 ## Pays non capturés
 

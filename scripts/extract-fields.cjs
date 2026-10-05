@@ -110,6 +110,7 @@ const out = {};
 for (const f of fs.readdirSync(dir).filter(f => /^[a-z]{2}\.html$/.test(f))) {
   const cc = f.slice(0, 2), s = fs.readFileSync(path.join(dir, f), 'utf8');
   const types = typeList(s), fns = visibilityFunctions(s);
+  const pageIds = new Set([...s.matchAll(/\sid="([^"]+)"/g)].map(m => m[1]));   // every id of the page (a ">" in an attribute would break a tag-by-tag match)
   const entry = { functions: fns, types: {} };
   if (!types.length) { entry.note = 'no type menu'; out[cc] = entry; continue; }
   for (const [v, label] of types) {
@@ -121,6 +122,7 @@ for (const f of fs.readdirSync(dir).filter(f => /^[a-z]{2}\.html$/.test(f))) {
       for (const [id, el] of Object.entries(r.els)) {
         if (id === 'ctype' || !PLATE_ID.test(id)) continue;
         // a field the function never hides is visible by default (the page shows it)
+        if (!pageIds.has(id)) continue;             // a function may name an element the page does not have: not a field
         seen[id] = el.style.visibility !== 'hidden' && !el.disabled && el.style.display !== 'none';
       }
     }

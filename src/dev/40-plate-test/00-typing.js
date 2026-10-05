@@ -28,16 +28,18 @@
   // first the usual split; if the plate does not fit, a second try cuts the mixed tokens (8AP -> 8 AP)
   let ptOrder = null;   // field ids in the order the plate is read, or null: the order of the page
   let ptDrop = null;    // tokens that the form already has (see 05-hints.js)
+  let ptPrefix = null;  // text the site writes itself in front of the plate (ÅL of an Åland plate)
   function ptType(text) {
     return ptTypeOnce(text, false) || ptTypeOnce(text, true);
   }
 
   function ptTypeOnce(text, split) {
+    if (ptPrefix && ptCanon(text).startsWith(ptCanon(ptPrefix))) text = text.slice(ptPrefix.length).trim();
     let tokens = text.split(/[\s-]+/).filter(Boolean).flatMap(t => split ? (t.match(/\d+|[^\d]+/g) || []) : [t]);
     const fields = [...document.querySelectorAll('input, select')]
-      .filter(el => isPlateField(el) && el.offsetParent !== null && !el.disabled && el.id !== 'ctype' && el.id !== 'drop_2');   // the type menus are not typed into
+      .filter(el => (isPlateField(el) || /^(nonr|trz|tx)$/.test(el.id)) && el.offsetParent !== null && !el.disabled && el.id !== 'ctype' && el.id !== 'drop_2');   // the type menus are not typed into
     // fixed fields are set by the site for a type (T, TAX, BP, P): they keep their value and no token goes in them
-    const FIXED = ['trz', 'tx', 'nonr'];
+    const FIXED = ['trz', 'tx'];   // inputs the site fills itself (T, TAX, BP)
     fields.forEach(el => {
       if (el.tagName !== 'INPUT') return;
       if (FIXED.includes(el.id)) { if (el.value) el.dataset.pmgFixed = el.value; if (el.dataset.pmgFixed) el.value = el.dataset.pmgFixed; return; }
@@ -46,9 +48,21 @@
     // a country whose page order is not the reading order of its plate can give the order of the fields (offline check)
     const tokenFields = ptOrder ? ptOrder.map(id => fields.find(el => el.id === id)).filter(Boolean) : fields.filter(el => !FIXED.includes(el.id));
     // a token that is the value the site already set (the T of a transit plate) is not typed again
-    const fixedVals = fields.filter(el => FIXED.includes(el.id) && el.value).map(el => el.value.toUpperCase());
+    const fixedVals = [...document.querySelectorAll('#trz, #tx')].filter(el => el.value && el.offsetParent !== null).map(el => ptCanon(el.value));   // only the ones this type shows
+    // the site's fixed start of a piece (the T of TAX): taken off before typing
+    tokens = tokens.map(t => { const f = fixedVals.find(v => v.length === 1 && ptCanon(t).length > 1 && ptCanon(t).startsWith(v) && /^[A-Z]+$/.test(ptCanon(t)) && document.getElementById('tx')); return f ? t.slice(1) : t; });
     tokens = tokens.filter(t => !fixedVals.includes(ptCanon(t)));
     if (ptDrop) tokens = tokens.filter(t => !ptDrop.includes(ptCanon(t)));
+    // a plate field that is not shown but holds a text was filled by the site for this type (the TA of a Bosnian taxi): not typed
+    const filled = el => ptCanon(el.tagName === 'SELECT' ? ((el.options[el.selectedIndex] || {}).value ? el.options[el.selectedIndex].text : '') : el.value).replace(/\./g, '');   // E.A. of a Greek police plate is EA
+    const siteFilled = [...document.querySelectorAll('input, select')]
+      .filter(el => /^(trz|tx)$|nomer|let|digit|trl|^dig|fixed|^b\d/i.test(el.id || el.name || '') && (el.tagName === 'SELECT' ? el.disabled && el.offsetParent !== null : el.offsetParent === null || el.disabled) && el.id !== 'ctype' && el.id !== 'drop_2')   // a menu counts only when it is shown and fixed (the P of a trailer)
+      .map(filled).filter(Boolean);
+    // a first piece that starts with what the site wrote (the T of TB, written in a hidden field): that start is not typed
+    const shownFilled = [...document.querySelectorAll('input, select')].filter(el => el.disabled && el.offsetParent !== null && el.id !== 'ctype').map(filled).filter(Boolean);
+    const start = [...shownFilled].sort((a, b) => b.length - a.length).find(v => tokens[0] && ptCanon(tokens[0]).length > v.length && ptCanon(tokens[0]).startsWith(v));
+    if (start) tokens[0] = tokens[0].slice(start.length);
+    tokens = tokens.filter(t => !siteFilled.includes(ptCanon(t)));
     // one single plate text field (France, Belgium...): the whole plate goes in it, dashes included;
     // the menus of the page (department, region) are set only when one of the tokens matches them
     const texts = fields.filter(el => el.tagName === 'INPUT');
@@ -80,9 +94,11 @@
         const opt = [...el.options].find(o => o.value && (ptCanon(o.text.trim()) === want || ptCanon(o.value) === want))
           || [...el.options].find(o => o.value && ptCanon(o.text.trim()).startsWith(want));   // exact label first: A before AM
         if (opt) { el.value = opt.value; el.dataset.ptSet = '1'; el.dataset.ptUsed = '1'; el.dispatchEvent(new Event('change', { bubbles: true })); i++; continue; }
-        // "TT" over two one-letter menus: the first letter goes in this menu, the rest carries on to the next one
-        const one = [...el.options].find(o => o.value && ptCanon(o.text.trim()) === want[0]);
-        if (want.length > 1 && one) { el.value = one.value; el.dataset.ptSet = '1'; el.dataset.ptUsed = '1'; el.dispatchEvent(new Event('change', { bubbles: true })); tokens[i] = tokens[i].slice(1); continue; }
+        // "TT" over two one-letter menus, "EKB" over a menu of "EK" and one of "B": this menu takes the longest of its choices
+        // that starts the piece, the rest carries on to the next field
+        const starts = [...el.options].filter(o => o.value && ptCanon(o.text.trim()) && want.startsWith(ptCanon(o.text.trim())) && ptCanon(o.text.trim()).length < want.length)
+          .sort((a, b) => b.text.trim().length - a.text.trim().length)[0];
+        if (starts) { el.value = starts.value; el.dataset.ptSet = '1'; el.dataset.ptUsed = '1'; el.dispatchEvent(new Event('change', { bubbles: true })); tokens[i] = tokens[i].slice(ptCanon(starts.text.trim()).length); continue; }
         // a later piece of the plate that is exactly one of this menu's choices (the 06 of "003 BS 06" for a region menu)
         const ahead = tokens.findIndex((t, k) => k > i && [...el.options].some(o => o.value && (ptCanon(o.text.trim()) === ptCanon(t) || ptCanon(o.value) === ptCanon(t))));
         if (ahead > i) {

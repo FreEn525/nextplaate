@@ -32,10 +32,13 @@ for (const c of index) {
   const why = !form ? "pas de page d'ajout" : !form.typeMenu ? 'pas de menu de type' : null;
   for (const label of list) {
     const r = res[label];
-    if (!r && why) { u++; (untestable[c.code] ??= { why, labels: [] }).labels.push(label); continue; }
+    if (!r && why) { u++; (untestable[c.code] ??= []).push({ label, why }); continue; }
     if (!r && empties.has(label)) { e++; (emptyGal[c.code] ??= []).push(label); continue; }
     if (!r) { n++; (unknown[c.code] ??= []).push(label); continue; }
     if (r.ok === r.total) o++;
+    // every failed plate says the form cannot take this category at all: not a rule to fix
+    else if (r.ok === 0 && r.failed.every(f => f.status === 'no-type')) { u++; (untestable[c.code] ??= []).push({ label, why: 'absente du menu du formulaire' }); }
+    else if (r.ok === 0 && r.failed.every(f => f.status === 'no-field')) { u++; (untestable[c.code] ??= []).push({ label, why: "le formulaire n'a aucun champ de plaque pour ce type" }); }
     else { b++; failing.push({ code: c.code, label, r }); }
   }
   cats += list.length; ok += o; bad += b; none += n; noForm += u; noPlate += e;
@@ -60,7 +63,7 @@ out.push('# Couverture des règles de plaque', '',
   `| **À corriger** | **${bad}** | ${pct(bad, cats)} |`,
   `| **À trouver** (aucune plaque connue) | **${none}** | ${pct(none, cats)} |`,
   `| Galerie vide sur le site (aucune plaque n'existe) | ${noPlate} | ${pct(noPlate, cats)} |`,
-  `| Non testables par le formulaire (pas de page d'ajout ni de menu de type) | ${noForm} | ${pct(noForm, cats)} |`, '');
+  `| Non testables par le formulaire (pas de menu de type, catégorie absente du menu, ou aucun champ de plaque) | ${noForm} | ${pct(noForm, cats)} |`, '');
 
 out.push('## À corriger', '');
 if (!failing.length) out.push('Aucune.', '');
@@ -87,7 +90,11 @@ for (const code of Object.keys(emptyGal).sort()) out.push(`- **${code}** : ${emp
 out.push('');
 
 out.push('## Non testables par le formulaire', '', "Ces catégories existent dans la recherche du site mais le formulaire d'ajout ne permet pas de les choisir : leur règle ne peut pas être prouvée par ce moyen.", '');
-for (const code of Object.keys(untestable).sort()) out.push(`- **${code}** (${untestable[code].why}) : ${untestable[code].labels.length} catégorie(s)`);
+for (const code of Object.keys(untestable).sort()) {
+  const byWhy = {};
+  for (const x of untestable[code]) (byWhy[x.why] ??= []).push(x.label);
+  out.push(`- **${code}** : ` + Object.entries(byWhy).map(([why, l]) => `${why} (${l.length})` + (l.length <= 4 ? ' : ' + l.join(', ') : '')).join(' ; '));
+}
 out.push('');
 
 out.push('## Pays non capturés', '', 'Aucune page sauvegardée : ni catégories, ni règle. Capturer avec le build dev (tiroir *Dev*, `Capture`).', '',

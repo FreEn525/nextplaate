@@ -9,47 +9,47 @@
     {
       "id": "1",
       "label": "Private owners",
-      "visible": ["fon", "drop_1", "region", "b1", "b1mt", "b1c", "b1p", "b1v", "b1com", "b1txc", "b1dop", "b2", "b3", "b4", "digit1", "digit", "digit5", "regionfed1"]
+      "visible": ["fon", "drop_1", "region", "b1", "b1mt", "b1c", "b1p", "b1v", "b1com", "b1txc", "b1dop", "b2", "b3", "b4", "digit1", "digit", "digit5"]
     },
     {
       "id": "2",
       "label": "Taxi",
-      "visible": ["fon", "drop_1", "region", "b1", "b1mt", "b1c", "b1p", "b1v", "b1com", "b1txc", "b1dop", "b2", "b3", "b4", "digit1", "digit", "digit5", "regionfed1"]
+      "visible": ["fon", "drop_1", "region", "b1", "b1mt", "b1c", "b1p", "b1v", "b1com", "b1txc", "b1dop", "b2", "b3", "b4", "digit1", "digit", "digit5"]
     },
     {
       "id": "3",
       "label": "Dealer",
-      "visible": ["fon", "drop_1", "region", "b1", "b1mt", "b1c", "b1p", "b1v", "b1com", "b1txc", "b1dop", "b2", "b3", "b4", "digit1", "digit", "digit5", "regionfed1"]
+      "visible": ["fon", "drop_1", "region", "b1", "b1mt", "b1c", "b1p", "b1v", "b1com", "b1txc", "b1dop", "b2", "b3", "b4", "digit1", "digit", "digit5"]
     },
     {
       "id": "4",
       "label": "Vanity Plates",
-      "visible": ["fon", "drop_1", "region", "b1", "b1mt", "b1c", "b1p", "b1v", "b1com", "b1txc", "b1dop", "b2", "b3", "b4", "digit1", "digit", "digit5", "regionfed1"]
+      "visible": ["fon", "drop_1", "region", "b1", "b1mt", "b1c", "b1p", "b1v", "b1com", "b1txc", "b1dop", "b2", "b3", "b4", "digit1", "digit", "digit5"]
     },
     {
       "id": "5",
       "label": "Commercial",
-      "visible": ["fon", "drop_1", "region", "b1", "b1mt", "b1c", "b1p", "b1v", "b1com", "b1txc", "b1dop", "b2", "b3", "b4", "digit1", "digit", "digit5", "regionfed1"]
+      "visible": ["fon", "drop_1", "region", "b1", "b1mt", "b1c", "b1p", "b1v", "b1com", "b1txc", "b1dop", "b2", "b3", "b4", "digit1", "digit", "digit5"]
     },
     {
       "id": "6",
       "label": "Trucks and buses",
-      "visible": ["fon", "drop_1", "region", "b1", "b1mt", "b1c", "b1p", "b1v", "b1com", "b1txc", "b1dop", "b2", "b3", "b4", "digit1", "digit", "digit5", "regionfed1"]
+      "visible": ["fon", "drop_1", "region", "b1", "b1mt", "b1c", "b1p", "b1v", "b1com", "b1txc", "b1dop", "b2", "b3", "b4", "digit1", "digit", "digit5"]
     },
     {
       "id": "7",
       "label": "Motorcycles",
-      "visible": ["fon", "drop_1", "region", "regioni", "b1", "b1mt", "b1c", "b1p", "b1v", "b1i", "b2i", "b1com", "b1txc", "b1dop", "b2", "b3", "b4", "digit1", "digit", "digit5", "regionfed1"]
+      "visible": ["fon", "drop_1", "region", "regioni", "b1", "b1mt", "b1c", "b1p", "b1v", "b1i", "b2i", "b1com", "b1txc", "b1dop", "b2", "b3", "b4", "digit1", "digit", "digit5"]
     },
     {
       "id": "8",
       "label": "Cars (1970)",
-      "visible": ["fon", "drop_1", "region", "regioni", "b1", "b1mt", "b1c", "b1p", "b1v", "b1i", "b2i", "b1com", "b1txc", "b1dop", "b2", "b3", "b4", "digit1", "digit", "digit5", "regionfed1"]
+      "visible": ["fon", "drop_1", "region", "regioni", "b1", "b1mt", "b1c", "b1p", "b1v", "b1i", "b2i", "b1com", "b1txc", "b1dop", "b2", "b3", "b4", "digit1", "digit", "digit5"]
     },
     {
       "id": "9",
       "label": "Police",
-      "visible": ["fon", "drop_1", "region", "regioni", "b1", "b1mt", "b1c", "b1p", "b1v", "b1i", "b2i", "b1com", "b1txc", "b1dop", "b2", "b3", "b4", "digit1", "digit", "digit5", "regionfed1"]
+      "visible": ["fon", "drop_1", "region", "regioni", "b1", "b1mt", "b1c", "b1p", "b1v", "b1i", "b2i", "b1com", "b1txc", "b1dop", "b2", "b3", "b4", "digit1", "digit", "digit5"]
     }
   ],
   "hooks": ["OnSelect1", "disth1", "disth"],

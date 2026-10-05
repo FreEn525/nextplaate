@@ -9,115 +9,115 @@
     {
       "id": "1",
       "label": "Cars",
-      "visible": ["digit", "let2", "region", "fon", "regionfed1"]
+      "visible": ["digit", "let2", "region", "fon"]
     },
     {
       "id": "2",
       "label": "Motorcycles",
-      "visible": ["digit", "let2", "region", "fon", "regionfed1"]
+      "visible": ["digit", "let2", "region", "fon"]
     },
     {
       "id": "3",
       "label": "Export transit plates (AB V(A)123)",
       "class": "yellow-black-select",
-      "visible": ["digit", "let1", "region", "fon", "regionfed1"]
+      "visible": ["digit", "let1", "region", "fon"]
     },
     {
       "id": "14",
       "label": "Export transit plates (V(A) 123AB)",
-      "visible": ["digit11", "let11", "let2", "fon", "regionfed1"]
+      "visible": ["digit11", "let11", "let2", "fon"]
     },
     {
       "id": "4",
       "label": "Provincial governments, university rectors",
-      "visible": ["digit", "let1", "region", "fon", "regionfed1"]
+      "visible": ["digit", "let1", "region", "fon"]
     },
     {
       "id": "5",
       "label": "Dealer (AB M(A)123)",
       "class": "white-red-select",
-      "visible": ["digit", "let1", "region", "fon", "regionfed1"]
+      "visible": ["digit", "let1", "region", "fon"]
     },
     {
       "id": "15",
       "label": "Dealer (M(A) 123AB)",
-      "visible": ["digit11", "let11", "let2", "fon", "regionfed1"]
+      "visible": ["digit11", "let11", "let2", "fon"]
     },
     {
       "id": "6",
       "label": "Oldtimers (AB H(A)123)",
       "class": "yelred",
-      "visible": ["digit", "let1", "region", "fon", "regionfed1"]
+      "visible": ["digit", "let1", "region", "fon"]
     },
     {
       "id": "16",
       "label": "Oldtimers (H(A) 123AB)",
-      "visible": ["digit11", "let11", "let2", "fon", "regionfed1"]
+      "visible": ["digit11", "let11", "let2", "fon"]
     },
     {
       "id": "7",
       "label": "Sportcars (AB S(A)123)",
-      "visible": ["digit", "let1", "region", "fon", "regionfed1"]
+      "visible": ["digit", "let1", "region", "fon"]
     },
     {
       "id": "17",
       "label": "Sportcars (S(A) 123AB)",
-      "visible": ["digit11", "let11", "let2", "fon", "regionfed1"]
+      "visible": ["digit11", "let11", "let2", "fon"]
     },
     {
       "id": "8",
       "label": "Special machinery",
       "class": "lgreenblck",
-      "visible": ["digit", "let1", "region", "fon", "regionfed1"]
+      "visible": ["digit", "let1", "region", "fon"]
     },
     {
       "id": "9",
       "label": "Vanity Plates",
-      "visible": ["let2", "nomerpl", "fon", "regionfed1"]
+      "visible": ["let2", "nomerpl", "fon"]
     },
     {
       "id": "10",
       "label": "Police",
-      "visible": ["fon", "regionfed1"]
+      "visible": ["fon"]
     },
     {
       "id": "11",
       "label": "Military",
-      "visible": ["digit", "fon", "regionfed1"]
+      "visible": ["digit", "fon"]
     },
     {
       "id": "12",
       "label": "Electric vehicles",
       "class": "lgreenblck",
-      "visible": ["digit", "let2", "region", "fon", "regionfed1"]
+      "visible": ["digit", "let2", "region", "fon"]
     },
     {
       "id": "13",
       "label": "Diplomatic",
       "class": "dipcolor",
-      "visible": ["dip", "fon", "regionfed1"]
+      "visible": ["dip", "fon"]
     },
     {
       "id": "18",
       "label": "Agricultural vehicles (F(A) 123AB)",
-      "visible": ["digit11", "let11", "let2", "fon", "regionfed1"]
+      "visible": ["digit11", "let11", "let2", "fon"]
     },
     {
       "id": "19",
       "label": "Agricultural vehicles (AB F(A)123)",
       "class": "whitegreen",
-      "visible": ["digit", "let1", "region", "fon", "regionfed1"]
+      "visible": ["digit", "let1", "region", "fon"]
     },
     {
       "id": "20",
       "label": "Provisional (C(A) 12345)",
       "class": "whitegreen",
-      "visible": ["let2", "nomerpl", "fon", "regionfed1"]
+      "visible": ["let2", "nomerpl", "fon"]
     },
     {
       "id": "21",
       "label": "Provisional (C 123AB)",
-      "visible": ["digit11", "let11", "let2", "fon", "regionfed1"]
+      "visible": ["digit11", "let11", "let2", "fon"]
     }
   ],
   "hooks": ["dissk"],

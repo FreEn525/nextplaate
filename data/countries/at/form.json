@@ -9,51 +9,51 @@
     {
       "id": "1",
       "label": "Regular plates",
-      "visible": ["digit1", "fon", "region", "letter", "regionfed1"]
+      "visible": ["digit1", "fon", "region", "letter"]
     },
     {
       "id": "2",
       "label": "Vanity Plates",
-      "visible": ["digit2", "fon", "region", "letter", "regionfed1"]
+      "visible": ["digit2", "fon", "region", "letter"]
     },
     {
       "id": "3",
       "label": "Official services and consulates",
-      "visible": ["digit1", "fon", "region", "regionfed1"]
+      "visible": ["digit1", "fon", "region"]
     },
     {
       "id": "4",
       "label": "Export transit plates",
       "class": "grn",
-      "visible": ["digit1", "fon", "region", "letter", "regionfed1"]
+      "visible": ["digit1", "fon", "region", "letter"]
     },
     {
       "id": "5",
       "label": "Provisional",
       "class": "blu",
-      "visible": ["digit1", "fon", "region", "letter", "regionfed1"]
+      "visible": ["digit1", "fon", "region", "letter"]
     },
     {
       "id": "6",
       "label": "1947 year system",
-      "visible": ["nomerpl", "fon", "region", "regionfed1"]
+      "visible": ["nomerpl", "fon", "region"]
     },
     {
       "id": "7",
       "label": "Dealer",
       "class": "blu",
-      "visible": ["nomerpl", "fon", "region", "regionfed1"]
+      "visible": ["nomerpl", "fon", "region"]
     },
     {
       "id": "9",
       "label": "Dealer (1947)",
       "class": "blu",
-      "visible": ["nomerpl", "fon", "region", "regionfed1"]
+      "visible": ["nomerpl", "fon", "region"]
     },
     {
       "id": "10",
       "label": "Diplomatic",
-      "visible": ["digit1", "fon", "region", "regionfed1"]
+      "visible": ["digit1", "fon", "region"]
     }
   ],
   "hooks": ["disat"],
