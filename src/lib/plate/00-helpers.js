@@ -11,6 +11,10 @@
   const selText = id => { const el = document.getElementById(id); if (!el) return ''; if (el.tagName === 'SELECT') { const o = el.options[el.selectedIndex]; return o && o.value ? o.text.trim() : ''; } return el.value.trim(); };
 
   const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };   // a menu's label, only when the menu is shown (a hidden one keeps an old value)
+  // Forms with one menu per character (Iran, Egypt, Saudi Arabia, Iraq): the label of a shown menu in one script ("١ / 1" keeps the
+  // part before the slash, or after it), and a run of such menus joined
+  const menuPart = (id, side) => { const t = menu(id); if (!t) return ''; const p = t.split('/'); return (side === 'after' ? p[p.length - 1] : p[0]).trim(); };
+  const charsOf = (ids, side) => ids.map(id => menuPart(id, side)).filter(t => t && t !== '•' && t !== '-').join('');
   // The menu that chooses the plate type: #ctype on most upload pages, #drop_2 in Andorra and Malta, none in the Netherlands
   const typeMenuEl = () => document.getElementById('ctype') || document.getElementById('drop_2');
   const PLATE_RULES = {};   // country code -> function that reads the plate from the upload form; one file per country, in this folder

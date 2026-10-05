@@ -4,10 +4,21 @@
   //   order: the field ids in the order the plate is read      field: one field takes the whole text
   //   drop:  tokens that the form already has (written by the site, or fixed): they are not typed
   //   prefix: text the site writes in front of the plate (ÅL, ÅS): removed from the plate before it is typed
+  //   chars: 'before' | 'after': one menu per character (Arabic-script forms), see ptTypeChars in 00-typing.js
   const PT_HINTS = {
     'lv|Diplomatic': { field: 'nomer' },
     'lv|Vanity Plates': { field: 'nomer' },
     'rs|Trailers': { order: ['b1', 'b2', 'digit2', 'region2'] },
-    'li|*': { drop: ['FL'] }
+    'li|*': { drop: ['FL'] },
+    'ir|*': { chars: 'before' },
+    'ir|License plates for driving abroad (2010)': { chars: null },
+    'ir|License plates for driving abroad (2015)': { chars: null },
+    'eg|*': { chars: 'before' },
+    'sa|*': { chars: 'after' },
+    'sa|1996 year system': { chars: 'before' },
+    'iq|1988 year system': { chars: 'before' },
+    'iq|2001 year system': { chars: 'before' },
+    'iq|2008 year system': { chars: 'after' },
+    'iq|2022 year system': { chars: 'after' }
   };
   const ptHint = (cc, category) => ({ ...(PT_HINTS[cc + '|*'] || {}), ...(PT_HINTS[cc + '|' + category] || {}) });

@@ -29,8 +29,54 @@
   let ptOrder = null;   // field ids in the order the plate is read, or null: the order of the page
   let ptDrop = null;    // tokens that the form already has (see 05-hints.js)
   let ptPrefix = null;  // text the site writes itself in front of the plate (ÅL of an Åland plate)
+  let ptChars = null;   // 'before' or 'after': the forms with one menu per character (see ptTypeChars)
   function ptType(text) {
+    if (ptChars) return ptTypeChars(text, ptChars);
     return ptTypeOnce(text, false) || ptTypeOnce(text, true);
+  }
+
+  // Forms made of one menu per character (Iran, Egypt, Saudi Arabia, Iraq): each character of the plate goes in the next shown
+  // menu (d1, d2... digits, b1... letters), the last piece goes in the region menu. A label such as "١ / 1" has two scripts: side
+  // 'before' compares with the part before the slash, 'after' with the part after it. A letter that the site wrote itself in a
+  // disabled field (the taxi letter of Iran) is not typed.
+  function ptTypeChars(text, side) {
+    const headOf = (t, s) => { const p = String(t).split('/'); return ptCanon((s === 'after' ? p[p.length - 1] : p[0]).trim()); };
+    const head = t => headOf(t, side);
+    const parts = text.split(/\s+/).filter(Boolean);
+    const all = [...document.querySelectorAll('#frm select')].filter(el => el.offsetParent !== null && !el.disabled && el.id !== 'ctype' && el.id !== 'drop_2');
+    const regionMenu = all.find(el => /^region\d?$/.test(el.id));
+    const menus = all.filter(el => /^(d\d|p\d|b\d|b1l)$/.test(el.id));
+    let main = parts.join(''), regionText = '';
+    // the last piece goes in the region menu when that menu has it (a plate such as "E 74525" has no region part)
+    const inRegion = t => [...regionMenu.options].some(o => headOf(o.text, 'before') === ptCanon(t));   // a region label is "21 / name": its code is before the slash
+    if (regionMenu && parts.length > 1 && inRegion(parts[parts.length - 1])) { regionText = parts[parts.length - 1]; main = parts.slice(0, -1).join(''); }
+    else if (regionMenu && parts.length > 1 && inRegion(parts[0])) { regionText = parts[0]; main = parts.slice(1).join(''); }   // the region first (Iraq 2022: 21 O 17000)
+    for (const el of document.querySelectorAll('#frm input')) {
+      if (el.disabled && el.offsetParent !== null && el.value && /let|nomer/.test(el.id)) main = main.replace(el.value, '');
+    }
+    const chars = [...main];
+    const pick = (el, want, s = side) => {
+      const opt = [...el.options].find(o => headOf(o.text, s) === ptCanon(want));
+      if (!opt) return false;
+      el.value = opt.value;
+      el.dispatchEvent(new Event('change', { bubbles: true }));
+      return true;
+    };
+    // each character goes in the first menu that has it and is still free: digits fill the digit menus, letters the letter menus
+    const free = [...menus];
+    for (const c of chars) {
+      const el = free.find(m => [...m.options].some(o => head(o.text) === ptCanon(c)));
+      if (!el || !pick(el, c)) return false;
+      free.splice(free.indexOf(el), 1);
+    }
+    chars.length = 0;
+    // the menus the plate does not use go back to their blank choice (a shorter plate)
+    for (const el of free) {
+      const blank = [...el.options].find(o => !head(o.text) || o.value === '' || ['-', '•'].includes(o.text.trim()));
+      if (blank) { el.value = blank.value; el.dispatchEvent(new Event('change', { bubbles: true })); }
+    }
+    if (regionMenu) { if (regionText && !pick(regionMenu, regionText, 'before')) return false; }
+    return chars.length === 0;
   }
 
   function ptTypeOnce(text, split) {

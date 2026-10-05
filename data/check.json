@@ -1377,88 +1377,24 @@
  },
  "eg": {
   "Cars (1999)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "١٠٧١٤",
-     "read": "ALX",
-     "status": "not-fit"
-    },
-    {
-     "plate": "١١١٠٤",
-     "read": "ALX",
-     "status": "not-fit"
-    },
-    {
-     "plate": "١٣١٣",
-     "read": "ALX",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Cars (2008)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "٣٦٢١ جىر",
-     "read": "أ",
-     "status": "not-fit"
-    },
-    {
-     "plate": "٤٢٥ جھس",
-     "read": "أ",
-     "status": "not-fit"
-    },
-    {
-     "plate": "٦٣٢٨ قفج",
-     "read": "أ",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Motorcycles": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "٣٩١٦ دنب",
-     "read": "أ",
-     "status": "not-fit"
-    },
-    {
-     "plate": "٦٣٢٣ سقط",
-     "read": "أ",
-     "status": "not-fit"
-    },
-    {
-     "plate": "٦٧١٣ طدن",
-     "read": "أ",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Police": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "٢٥٤٦ ١عب",
-     "read": "",
-     "status": "not-fit"
-    },
-    {
-     "plate": "٨١١٢ ١٢ب",
-     "read": "",
-     "status": "not-fit"
-    },
-    {
-     "plate": "٨١١٧ ١٢ب",
-     "read": "",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   }
  },
  "es": {
@@ -2228,143 +2164,41 @@
  },
  "iq": {
   "1988 year system": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "١٠٣٧٠٤",
-     "read": "AN",
-     "status": "not-fit"
-    },
-    {
-     "plate": "٣٧٥٧٥",
-     "read": "AN",
-     "status": "not-fit"
-    },
-    {
-     "plate": "٦٢٢٠٣٠",
-     "read": "AN",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "2001 year system": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "١٠٦٩٧",
-     "read": "AN",
-     "status": "not-fit"
-    },
-    {
-     "plate": "٢٤٠٤٠٩",
-     "read": "AN",
-     "status": "not-fit"
-    },
-    {
-     "plate": "٢٨٧٤١٩",
-     "read": "AN",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "2008 year system": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "E 74525",
-     "read": "AN E",
-     "status": "not-fit"
-    },
-    {
-     "plate": "F 12528",
-     "read": "AN F",
-     "status": "not-fit"
-    },
-    {
-     "plate": "F 49260",
-     "read": "AN F",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "2022 year system": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "21 O 17000",
-     "read": "21 O",
-     "status": "not-fit"
-    },
-    {
-     "plate": "22 H 6661",
-     "read": "22 H",
-     "status": "not-fit"
-    },
-    {
-     "plate": "22 H 96641",
-     "read": "22 H",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   }
  },
  "ir": {
   "Agricultural vehicles": {
-   "ok": 0,
+   "ok": 1,
    "total": 1,
-   "failed": [
-    {
-     "plate": "۱۱ک۴۷۹ ۸۴",
-     "read": "ک ۱۱",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Authorities": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "۱۶الف۵۴۴ ۴۶",
-     "read": "الف ۱۶",
-     "status": "not-fit"
-    },
-    {
-     "plate": "۱۸الف۵۲۴ ۱۱",
-     "read": "الف ۱۸",
-     "status": "not-fit"
-    },
-    {
-     "plate": "۲۵الف۲۶۳ ۱۱",
-     "read": "الف ۲۵",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Commercial vehicles": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "۵۳ع۴۴۴ ۴۳",
-     "read": "ع ۵۳",
-     "status": "not-fit"
-    },
-    {
-     "plate": "۶۱ع۵۹۳ ۴۸",
-     "read": "ع ۶۱",
-     "status": "not-fit"
-    },
-    {
-     "plate": "۷۱ع۴۲۲ ۲۵",
-     "read": "ع ۷۱",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Disabled": {
    "ok": 0,
@@ -2372,73 +2206,35 @@
    "failed": [
     {
      "plate": "۱۱ژ۴۷۳ ۴۳",
-     "read": "♿ ۱۱",
+     "read": "۱۱♿۴۲۲ ۲۵",
      "status": "not-fit"
     },
     {
      "plate": "۱۷ژ۹۵۷ ۱۱",
-     "read": "♿ ۱۷",
+     "read": "۱۷♿۴۲۲ ۲۵",
      "status": "not-fit"
     },
     {
      "plate": "۵۲ژ۵۱۶ ۱۱",
-     "read": "♿ ۵۲",
+     "read": "۵۲♿۴۲۲ ۲۵",
      "status": "not-fit"
     }
    ]
   },
   "Free trade zones": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "۱۱۳۷۶",
-     "read": "",
-     "status": "no-field"
-    },
-    {
-     "plate": "۱۳۸۱۴",
-     "read": "",
-     "status": "no-field"
-    },
-    {
-     "plate": "۳۵۴۵۴",
-     "read": "",
-     "status": "no-field"
-    }
-   ]
+   "failed": []
   },
   "General Staff": {
-   "ok": 0,
+   "ok": 1,
    "total": 1,
-   "failed": [
-    {
-     "plate": "۱۱ف۱۳۴ ۱۱",
-     "read": "ف ۱۱",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Islamic Revolutionary Guard Corps": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "۳۶ث۲۳۲ ۱۱",
-     "read": "ث ۳۶",
-     "status": "not-fit"
-    },
-    {
-     "plate": "۵۱ث۲۳۳ ۱۱",
-     "read": "ث ۵۱",
-     "status": "not-fit"
-    },
-    {
-     "plate": "۵۴ث۱۶۴ ۱۱",
-     "read": "ث ۵۴",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "License plates for driving abroad (2010)": {
    "ok": 3,
@@ -2451,141 +2247,39 @@
    "failed": []
   },
   "Military": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "۱۶ش۴۱۱ ۱۱",
-     "read": "ش ۱۶",
-     "status": "not-fit"
-    },
-    {
-     "plate": "۱۶ش۹۲۸ ۱۱",
-     "read": "ش ۱۶",
-     "status": "not-fit"
-    },
-    {
-     "plate": "۳۲ش۶۷۱ ۱۱",
-     "read": "ش ۳۲",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Ministry of Defense": {
-   "ok": 0,
+   "ok": 2,
    "total": 2,
-   "failed": [
-    {
-     "plate": "۱۷ز۸۹۸ ۱۱",
-     "read": "ز ۱۷",
-     "status": "not-fit"
-    },
-    {
-     "plate": "۱۸ز۹۱۴ ۱۱",
-     "read": "ز ۱۸",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Motorcycles": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "۷۷۴ ۷۷۷۸۹",
-     "read": "",
-     "status": "no-field"
-    },
-    {
-     "plate": "۸۲۸ ۵۸۶۱۲",
-     "read": "",
-     "status": "no-field"
-    },
-    {
-     "plate": "۸۵۹ ۵۸۹۸۸",
-     "read": "",
-     "status": "no-field"
-    }
-   ]
+   "failed": []
   },
   "Oldtimers": {
-   "ok": 0,
+   "ok": 2,
    "total": 2,
-   "failed": [
-    {
-     "plate": "۱۱۱۶۳",
-     "read": "",
-     "status": "no-field"
-    },
-    {
-     "plate": "۱۱۲۲۹",
-     "read": "",
-     "status": "no-field"
-    }
-   ]
+   "failed": []
   },
   "Police": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "۱۶پ۴۲۹ ۲۲",
-     "read": "پ ۱۶",
-     "status": "not-fit"
-    },
-    {
-     "plate": "۵۵پ۴۶۴ ۱۱",
-     "read": "پ ۵۵",
-     "status": "not-fit"
-    },
-    {
-     "plate": "۸۱پ۲۲۹ ۱۱",
-     "read": "پ ۸۱",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Private owners": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "۱۵ص۱۷۵ ۴۸",
-     "read": "C ۱۵",
-     "status": "not-fit"
-    },
-    {
-     "plate": "۲۹س۸۴۶ ۴۸",
-     "read": "S ۲۹",
-     "status": "not-fit"
-    },
-    {
-     "plate": "۸۱د۱۲۷ ۴۸",
-     "read": "D ۸۱",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Taxi": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "۵۱ت۱۶۵ ۲۲",
-     "read": "ت ۵۱",
-     "status": "not-fit"
-    },
-    {
-     "plate": "۶۷ت۲۹۲ ۲۲",
-     "read": "ت ۶۷",
-     "status": "not-fit"
-    },
-    {
-     "plate": "۸۲ت۱۳۴ ۲۲",
-     "read": "ت ۸۲",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   }
  },
  "is": {
@@ -4796,130 +4490,34 @@
  },
  "sa": {
   "1996 year system": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "١ لكأ",
-     "read": "A A A",
-     "status": "not-fit"
-    },
-    {
-     "plate": "٦٦٦ نحل",
-     "read": "A A A",
-     "status": "not-fit"
-    },
-    {
-     "plate": "٩٩٦ ردب",
-     "read": "A A A",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Cars": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "3273 JRS",
-     "read": "A A A",
-     "status": "not-fit"
-    },
-    {
-     "plate": "6982 ETR",
-     "read": "A A A",
-     "status": "not-fit"
-    },
-    {
-     "plate": "7 HSN",
-     "read": "A A A",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Commercial vehicles": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "3747 JXA",
-     "read": "A A A",
-     "status": "not-fit"
-    },
-    {
-     "plate": "444 JUB",
-     "read": "A A A",
-     "status": "not-fit"
-    },
-    {
-     "plate": "4642 DUA",
-     "read": "A A A",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Diplomatic": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "100 BZD",
-     "read": "A A A",
-     "status": "not-fit"
-    },
-    {
-     "plate": "15 JBD",
-     "read": "A A A",
-     "status": "not-fit"
-    },
-    {
-     "plate": "6000 JGA",
-     "read": "A A A",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Provisional": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "6478 BXA",
-     "read": "A A A",
-     "status": "not-fit"
-    },
-    {
-     "plate": "8144 JXA",
-     "read": "A A A",
-     "status": "not-fit"
-    },
-    {
-     "plate": "8289 JXA",
-     "read": "A A A",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Public transport": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "1889 HSA",
-     "read": "A A A",
-     "status": "not-fit"
-    },
-    {
-     "plate": "6113 VJA",
-     "read": "A A A",
-     "status": "not-fit"
-    },
-    {
-     "plate": "7817 SSA",
-     "read": "A A A",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   }
  },
  "sc": {
