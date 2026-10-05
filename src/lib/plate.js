@@ -95,9 +95,20 @@
         const digit = fieldVal('digit') || fieldVal('digit1'), letters = fieldVal('b1') + fieldVal('b2');
         return joinParts([selText('region') || selText('region1'), digit && letters ? `${digit}-${letters}` : digit || letters]);
       }
-      case 'rs': {                                                  // Serbia: BG 123-AB
+      case 'rs': {                                                  // Serbia: BG 123-AB; trailers (2): AC-334 LE (no region); vanity (4): region then the letter boxes
+        const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };
+        const ctype = fieldVal('ctype');
+        if (ctype === '2') return joinParts([shownVal('b1') + '-' + shownVal('digit2'), shownVal('b2')]);
+        if (ctype === '4') return joinParts([menu('region1'), ['b1', 'b2', 'b3', 'b4', 'b5'].map(menu).join('')]);
         const digit = fieldVal('digit') || fieldVal('digit1'), letters = fieldVal('b1') + fieldVal('b2');
         return joinParts([selText('region') || selText('region1'), digit && letters ? `${digit}-${letters}` : digit || letters]);
+      }
+      case 'me': {                                                  // Montenegro: vanity = region then the letter boxes (BD CMM02); police = fon, then region+digits (P PG273)
+        const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };
+        const ctype = fieldVal('ctype');
+        if (ctype === '5') return joinParts([menu('region'), ['b1', 'b2', 'b3', 'b4', 'b5'].map(menu).join('')]);
+        if (ctype === '6') return joinParts([selText('fon'), selText('region') + shownVal('digit')]);
+        return genericPlate();
       }
       case 'si': {                                                  // Slovenia: LJ 123-AB (the region code, then the plate)
         const region = (document.getElementById('drop_1') || { value: '' }).value.trim();
