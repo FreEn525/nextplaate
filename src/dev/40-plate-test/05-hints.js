@@ -16,7 +16,7 @@
     'li|*': { drop: ['FL'] },
     'li|Dealer (with "U")': { drop: ['FL', 'U'] },
     'gr|*': { order: ['region', 'b1', 'let', 'digit'] },
-    'gr|Taxi': { order: ['b1', 'region', 'digit'] },
+    'gr|Agricultural vehicles': { order: ['let', 'digit'] },   // its region menu (prefectures) is not part of the plate text
     'mn|*': { order: ['region', 'b1', 'b2', 'digit'] },
     'jp|*': { right: true },
     'rs|Diplomatic': { order: ['region1', 'dip'] },

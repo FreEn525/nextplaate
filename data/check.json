@@ -1455,25 +1455,9 @@
    "failed": []
   },
   "Agricultural vehicles": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "AM 56394",
-     "read": "AM 6394",
-     "status": "wrong"
-    },
-    {
-     "plate": "AM 58921",
-     "read": "AM 8921",
-     "status": "wrong"
-    },
-    {
-     "plate": "AM 66363",
-     "read": "AM 6363",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Cars": {
    "ok": 3,

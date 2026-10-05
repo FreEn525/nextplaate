@@ -13,8 +13,8 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | **Pays non capturés** | **0** | |
 | Pays avec une règle propre | 45 sur 96 | |
 | Catégories (pays capturés) | 829 | |
-| Vérifiées | 771 | 93 % |
-| **À corriger** | **36** | 4 % |
+| Vérifiées | 772 | 93 % |
+| **À corriger** | **35** | 4 % |
 | **À trouver** (aucune plaque connue) | **0** | 0 % |
 | Galerie vide sur le site (aucune plaque n'existe) | 22 | 3 % |
 | Sans champ de plaque dans le formulaire ou sans page d'ajout | 0 | 0 % |
@@ -43,9 +43,6 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | dk | Vanity Plates | 1/3 | `USANO1` | `USANO1J` |
 | gi | Regular car plates (G 1234 A) | 1/3 | `G 1267 G` | `G 1267` |
 | gi | Regular car plates (G 1234 A) | 1/3 | `G 4684 G` | `G 4684` |
-| gr | Agricultural vehicles | 0/3 | `AM 56394` | `AM 6394` |
-| gr | Agricultural vehicles | 0/3 | `AM 58921` | `AM 8921` |
-| gr | Agricultural vehicles | 0/3 | `AM 66363` | `AM 6363` |
 | il | Diplomatic | 0/3 | `33-232-21` | `0 33-232-21` |
 | il | Diplomatic | 0/3 | `58-077-21` | `0 58-077-21` |
 | il | Diplomatic | 0/3 | `94-081-22` | `0 94-081-22` |
@@ -136,7 +133,6 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | cy Cyprus | generic | 5 | 4 | 1 |  |  |  | oui |
 | dk Denmark | own | 8 | 7 | 1 |  |  |  | oui |
 | gi Gibraltar (UK) | generic | 4 | 3 | 1 |  |  |  | oui |
-| gr Greece | own | 16 | 15 | 1 |  |  |  | oui |
 | ir Iran | own | 16 | 15 | 1 |  |  |  | oui |
 | it Italy | own | 14 | 13 | 1 |  |  |  | oui |
 | kg Kyrgyzstan | own | 12 | 11 | 1 |  |  |  | oui |
@@ -172,6 +168,7 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | fr France | own | 17 | 17 |  |  |  |  | oui |
 | ge Georgia | generic | 12 | 12 |  |  |  |  | oui |
 | gg Guernsey (UK) | own | 3 | 3 |  |  |  |  | oui |
+| gr Greece | own | 16 | 16 |  |  |  |  | oui |
 | gu Guam (USA) | generic | 9 | 5 |  |  | 4 |  | oui |
 | hk Hong Kong (CN) | generic | 2 | 2 |  |  |  |  | oui |
 | hr Croatia | own | 11 | 11 |  |  |  |  | oui |

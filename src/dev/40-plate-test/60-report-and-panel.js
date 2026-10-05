@@ -38,7 +38,14 @@
 
   // For the offline check of the saved pages: types a text, returns what the script reads back
   window.nextplaateDev = {
-    type: (text, cc, category) => { const h = ptHint(cc, category); ptOrder = h.order || null; ptDrop = h.drop || null; ptPrefix = h.prefix || null; ptChars = h.chars || null; ptRight = !!h.right; ptExtra = h.extra || null; ptKeepDigits = !!h.keepDigits; const fits = ptType(text); ptOrder = ptDrop = ptPrefix = ptChars = ptExtra = null; ptRight = ptKeepDigits = false; return fits; },   // types a plate and leaves the fields as they are (tools/diag_typing.py)
+    type: (text, cc, category) => {   // types a plate and leaves the fields as they are (tools/diag_typing.py, tools/hand_check.py); tries both cuts like testText
+      const h = ptHint(cc, category);
+      ptOrder = h.order || null; ptDrop = h.drop || null; ptPrefix = h.prefix || null; ptChars = h.chars || null; ptRight = !!h.right; ptExtra = h.extra || null; ptKeepDigits = !!h.keepDigits;
+      let fits = ptChars ? ptType(text) : ptTypeOnce(text, false);
+      if (!ptChars && ptNorm(plateForForm() || '') !== ptNorm(text)) { const alt = ptTypeOnce(text, true); if (ptNorm(plateForForm() || '') === ptNorm(text)) fits = alt; }
+      ptOrder = ptDrop = ptPrefix = ptChars = ptExtra = null; ptRight = ptKeepDigits = false;
+      return fits;
+    },
     read: () => plateForForm() || '',
     // opts.country and opts.category pick the typing hints (05-hints.js): the whole text in one field, the reading order,
     // the tokens the form already has. opts.settle: how long to wait after typing.
@@ -70,7 +77,8 @@
         const again = plateForForm() || '';
         if (ptNorm(again) === ptNorm(text)) { fits = alt; read = again; }
       }
-      if (field) { const el = document.getElementById(field); if (el) { el.value = ''; el.dispatchEvent(new Event('input', { bubbles: true })); } }
+      if (opts && opts.keep) { /* the fields stay filled (tools/hand_check.py shows them) */ }
+      else if (field) { const el = document.getElementById(field); if (el) { el.value = ''; el.dispatchEvent(new Event('input', { bubbles: true })); } }
       else ptType('');
       ptOrder = ptDrop = ptPrefix = ptChars = ptExtra = null;
       ptRight = ptKeepDigits = false;

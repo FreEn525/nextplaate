@@ -9,6 +9,6 @@
     const written = shownVal('let') || shownVal('bfixed').replace(/\./g, '');
     if (written) return joinParts([written + menu('b1'), digits]);                               // private trailers: the T written by the site, then the letter
     // the two-letter code, then the letter, as the page lists them: KZ + T = KZT (a car), IA + Z = IAZ (a truck: its code menu holds
-    // only EK, IA and NX). The taxi is the other way round: the letter T, then the code (T + AE = TAE)
-    return joinParts([ctype === '7' ? menu('b1') + menu('region') : menu('region') + menu('b1'), digits]);
+    // only EK, IA and NX), TA + E = TAE (a taxi: its code menu holds only TA)
+    return joinParts([menu('region') + menu('b1'), digits]);
   };
