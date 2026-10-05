@@ -85,7 +85,7 @@
   function ptTypeOnce(text, split) {
     if (ptPrefix && ptCanon(text).startsWith(ptCanon(ptPrefix))) text = text.slice(ptPrefix.length).trim();
     // the months of a seasonal plate are typed without their brackets: (04/10) goes in as 04/10
-    let tokens = text.split(/[\s-]+/).filter(Boolean).map(t => t.replace(/^\((.*)\)$/, '$1')).flatMap(t => split ? (t.match(/\d+|[^\d]+/g) || []) : [t]);
+    let tokens = text.split(/[\s|-]+/).filter(Boolean).map(t => t.replace(/^\((.*)\)$/, '$1')).flatMap(t => split ? (t.match(/\d+|[^\d]+/g) || []) : [t]);
     const fields = [...document.querySelectorAll('input, select')]
       .filter(el => (isPlateField(el) || (ptExtra && ptExtra.includes(el.id)) || /^(nonr|trz|tx|hiragana|code|mm|moto|spec|gov|tt95|police|dop1|el|checksum|pol[12]|num[12]|ltype|mb[12]|dealp|mnum[12]|mtype|mil_b\d|d\d)$/.test(el.id)) && el.offsetParent !== null && !el.disabled && el.id !== 'ctype' && el.id !== 'drop_2');   // the type menus are not typed into
     // fixed fields are set by the site for a type (T, TAX, BP, P): they keep their value and no token goes in them
@@ -168,7 +168,7 @@
       } else {
         const want = ptCanon(tokens[i]);
         const opt = [...el.options].find(o => o.value && (ptCanon(o.text.trim()) === want || ptCanon(o.value) === want))
-          || [...el.options].find(o => o.value && o.text.split(/ - | \(/).some(part => ptCanon(part.replace(/\)$/, '').trim()) === want))   // "Setagaya - 世田谷", "경기 (Gyeonggi Province)"
+          || [...el.options].find(o => o.value && o.text.split(/ - | \(|\//).some(part => ptCanon(part.replace(/\)$/, '').trim()) === want))   // "Setagaya - 世田谷", "경기 (Gyeonggi Province)"
           || [...el.options].find(o => o.value && ptCanon(o.text.trim()).startsWith(want));   // exact label first: A before AM
         if (opt) { el.value = opt.value; el.dataset.ptSet = '1'; el.dataset.ptUsed = '1'; el.dispatchEvent(new Event('change', { bubbles: true })); i++; continue; }
         // "TT" over two one-letter menus, "EKB" over a menu of "EK" and one of "B": this menu takes the longest of its choices

@@ -21,7 +21,7 @@ KNOWN = json.loads((ROOT / "tests" / "offline" / "known_plates.json").read_text(
 
 
 def norm(s):
-    return re.sub(r"[\s-]+", "", s or "").upper().translate(check_db.CYR)
+    return re.sub(r"[\s|-]+", "", s or "").upper().translate(check_db.CYR)
 
 
 def cases():

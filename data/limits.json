@@ -1,0 +1,9 @@
+{
+  "ua|Government agencies": "IM (2 plaques sur 3 passent) : le code IM de la plaque 'IM 113 G' n'est pas dans le menu de région du formulaire.",
+  "ua|Cars and trucks (1995)": "La plaque a trois groupes de chiffres (14 296-45 TA) ; le formulaire n'a que deux champs de chiffres.",
+  "ua|Public transport (1995)": "Même cause : trois groupes de chiffres (04 000-06 AA), deux champs dans le formulaire.",
+  "gi|Regular car plates (G 1234 A)": "Le champ de la plaque n'accepte pas la lettre finale (G 1267 G) : le site la retire à la saisie.",
+  "sc|Ambassador, chief of diplomatic mission": "Le texte de galerie (S 16958) ne contient pas les lettres que le formulaire ajoute (CD).",
+  "sc|Government": "Le texte de galerie (S 13069) ne contient pas les lettres que le formulaire ajoute (GS).",
+  "ir|Disabled": "Le texte de galerie écrit une lettre (ژ) là où le formulaire met le symbole du fauteuil roulant."
+}

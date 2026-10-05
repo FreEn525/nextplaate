@@ -39,7 +39,7 @@ CYR = str.maketrans("АВЕКМНОРСТУХ", "ABEKMHOPCTYX")   # Cyrillic let
 
 
 def norm(s):
-    return re.sub(r"[\s-]+", "", s or "").upper().translate(CYR)
+    return re.sub(r"[\s|-]+", "", s or "").upper().translate(CYR)
 
 
 def load_cases(country=None):

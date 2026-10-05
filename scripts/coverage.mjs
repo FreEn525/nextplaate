@@ -18,9 +18,11 @@ if (!check) throw new Error('data/check.json is missing: run python tests/offlin
 const siteCountries = [...readFileSync(join(root, 'src/lib/countries.js'), 'utf8').matchAll(/\{ code: '([a-z]{2})', name: '([^']*)' \}/g)].map(m => ({ code: m[1], name: m[2] }));
 const ownRule = new Set(readdirSync(join(root, 'src/lib/plate')).filter(f => /^[a-z]{2}\.js$/.test(f)).map(f => f.slice(0, 2)));
 const index = json('data/index.json');
+const limits = existsSync(join(root, 'data/limits.json')) ? json('data/limits.json') : {};   // known limits of the site's own form, with the reason
 
 const rows = [], failing = [], unknown = {}, untestable = {}, emptyGal = {};
-let cats = 0, ok = 0, bad = 0, none = 0, noForm = 0, noPlate = 0;
+let cats = 0, ok = 0, bad = 0, none = 0, noForm = 0, noPlate = 0, lim = 0;
+const limited = [];
 for (const c of index) {
   const list = json(`data/countries/${c.code}/search.json`).categories.map(x => x.label);
   const res = check[c.code] ?? {};
@@ -37,6 +39,7 @@ for (const c of index) {
     if (!r) { n++; (unknown[c.code] ??= []).push(label); continue; }
     if (r.ok === r.total) o++;
     // every failed plate says the form cannot take this category at all: not a rule to fix
+    else if (limits[c.code + '|' + label]) { lim++; limited.push({ code: c.code, label, reason: limits[c.code + '|' + label], r }); }
     else if (r.ok === 0 && r.failed.every(f => f.status === 'no-type')) { u++; (untestable[c.code] ??= []).push({ label, why: 'absente du menu du formulaire' }); }
     else if (r.ok === 0 && r.failed.every(f => f.status === 'no-field')) { u++; (untestable[c.code] ??= []).push({ label, why: "le formulaire n'a aucun champ de plaque pour ce type" }); }
     else { b++; failing.push({ code: c.code, label, r }); }
@@ -62,6 +65,7 @@ out.push('# Couverture des règles de plaque', '',
   `| Vérifiées | ${ok} | ${pct(ok, cats)} |`,
   `| **À corriger** | **${bad}** | ${pct(bad, cats)} |`,
   `| **À trouver** (aucune plaque connue) | **${none}** | ${pct(none, cats)} |`,
+  `| Limite connue du formulaire du site (voir plus bas) | ${lim} | ${pct(lim, cats)} |`,
   `| Galerie vide sur le site (aucune plaque n'existe) | ${noPlate} | ${pct(noPlate, cats)} |`,
   `| Sans champ de plaque dans le formulaire ou sans page d'ajout | ${noForm} | ${pct(noForm, cats)} |`, '');
 
@@ -84,6 +88,10 @@ out.push('## Catégories à trouver (par pays)', '', 'Pour chacune : trouver une
 for (const code of Object.keys(unknown).sort()) {
   out.push(`<details><summary><b>${code}</b> : ${unknown[code].length}</summary>`, '', ...unknown[code].map(l => `- ${l}`), '', '</details>', '');
 }
+
+out.push('## Limites connues du formulaire', '', "Plaques de galerie que le formulaire d'ajout du site ne peut pas écrire exactement, avec la cause. Ce n'est pas une règle à corriger.", '');
+for (const l of limited) out.push(`- **${l.code}** ${l.label} (${l.r.ok}/${l.r.total}) : ${l.reason}`);
+out.push('');
 
 out.push('## Galerie vide sur le site', '', "Aucune photo dans la galerie de ces catégories : il n'y a pas de plaque à utiliser. À revérifier de temps en temps.", '');
 for (const code of Object.keys(emptyGal).sort()) out.push(`- **${code}** : ${emptyGal[code].join(', ')}`);

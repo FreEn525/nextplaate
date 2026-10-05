@@ -2674,25 +2674,9 @@
  },
  "ma": {
   "Regular plates": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "3385|د|40",
-     "read": "3385|د|40 أ",
-     "status": "wrong"
-    },
-    {
-     "plate": "66555|د|1",
-     "read": "66555|د|1 أ",
-     "status": "wrong"
-    },
-    {
-     "plate": "70144|د|8",
-     "read": "70144|د|8 أ",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Trailers": {
    "ok": 3,
