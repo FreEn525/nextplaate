@@ -54,21 +54,32 @@
     tokens = tokens.filter(t => !fixedVals.includes(ptCanon(t)));
     if (ptDrop) tokens = tokens.filter(t => !ptDrop.includes(ptCanon(t)));
     // a plate field that is not shown but holds a text was filled by the site for this type (the TA of a Bosnian taxi): not typed
-    const filled = el => ptCanon(el.tagName === 'SELECT' ? ((el.options[el.selectedIndex] || {}).value ? el.options[el.selectedIndex].text : '') : el.value).replace(/\./g, '');   // E.A. of a Greek police plate is EA
+    const filled = el => ptCanon(el.tagName === 'SELECT' ? ((el.options[el.selectedIndex] || {}).text || '').trim() : el.value).replace(/\./g, '');   // E.A. of a Greek police plate is EA
+    // what the site wrote itself: a menu or a field that is shown but disabled (any plate field), or a hidden field of the known kinds
     const siteFilled = [...document.querySelectorAll('input, select')]
-      .filter(el => /^(trz|tx)$|nomer|let|digit|trl|^dig|fixed|^b\d/i.test(el.id || el.name || '') && (el.tagName === 'SELECT' ? el.disabled && el.offsetParent !== null : el.offsetParent === null || el.disabled) && el.id !== 'ctype' && el.id !== 'drop_2')   // a menu counts only when it is shown and fixed (the P of a trailer)
+      .filter(el => el.id !== 'ctype' && el.id !== 'drop_2' && (el.disabled && el.offsetParent !== null
+        ? isPlateField(el) || /^(trz|tx)$|nomer|fixed|special/i.test(el.id || el.name || '')
+        : el.tagName !== 'SELECT' && el.offsetParent === null && /^(trz|tx)$|nomer|let|digit|trl|^dig|fixed|special|^b\d/i.test(el.id || el.name || '')))
       .map(filled).filter(Boolean);
+    // the plate starts with what the site wrote (the G of "G 1267 G"): that first piece is not typed; a later equal piece is
+    if (tokens.length > 1 && siteFilled.includes(ptCanon(tokens[0]))) tokens.shift();
     // a first piece that starts with what the site wrote (the T of TB, written in a hidden field): that start is not typed
     const shownFilled = [...document.querySelectorAll('input, select')].filter(el => el.disabled && el.offsetParent !== null && el.id !== 'ctype').map(filled).filter(Boolean);
     const start = [...shownFilled].sort((a, b) => b.length - a.length).find(v => tokens[0] && ptCanon(tokens[0]).length > v.length && ptCanon(tokens[0]).startsWith(v));
     if (start) tokens[0] = tokens[0].slice(start.length);
+    // the same at the end (the 挂 of a Chinese trailer plate, written by the site after the text)
+    const last = tokens.length - 1;
+    const end = [...shownFilled].sort((a, b) => b.length - a.length).find(v => last >= 0 && ptCanon(tokens[last]).length > v.length && ptCanon(tokens[last]).endsWith(v));
+    if (end) tokens[last] = tokens[last].slice(0, tokens[last].length - end.length);
     tokens = tokens.filter(t => !siteFilled.includes(ptCanon(t)));
     // one single plate text field (France, Belgium...): the whole plate goes in it, dashes included;
     // the menus of the page (department, region) are set only when one of the tokens matches them
     const texts = fields.filter(el => el.tagName === 'INPUT');
     const menuTakes = fields.some(el => el.tagName === 'SELECT' && tokens.some(t => [...el.options].some(o => o.value && (ptCanon(o.text.trim()) === ptCanon(t) || ptCanon(o.value) === ptCanon(t)))));
     if (texts.length === 1 && !menuTakes && (/^nomer/.test(texts[0].id || texts[0].name) || texts[0].maxLength < 0 || texts[0].maxLength >= text.length)) {
-      texts[0].value = text;
+      // the whole plate, less what the site wrote itself (the G of Gibraltar, in a disabled field)
+      const typed = tokens.join(' '), whole = text.split(/[\s-]+/).filter(Boolean).join(' ');
+      texts[0].value = typed === whole ? text : typed;
       texts[0].dispatchEvent(new Event('input', { bubbles: true }));
       for (const el of fields.filter(el => el.tagName === 'SELECT')) {
         const hit = tokens.map(t => ptCanon(t)).find(t => [...el.options].some(o => o.value && (ptCanon(o.value) === t || ptCanon(o.text.trim()).startsWith(t))));

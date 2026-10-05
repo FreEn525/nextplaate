@@ -366,7 +366,8 @@
     const parts = [];
     for (const el of document.querySelectorAll('input, select')) {
       const key = el.id || el.name || '';
-      if (!PLATE_FIELD.test(key) || el.offsetParent === null || el.disabled || key === 'drop_2') continue;   // drop_2 is the plate-type menu of Andorra and Malta
+      // a disabled field that is shown holds letters the site wrote itself (ZV of an Irish oldtimer): they are part of the plate
+      if (!PLATE_FIELD.test(key) || el.offsetParent === null || getComputedStyle(el).visibility === 'hidden' || key === 'drop_2') continue;   // drop_2 is the plate-type menu of Andorra and Malta
       if (el.tagName === 'SELECT') {
         const opt = el.options[el.selectedIndex];
         if (opt && opt.value) parts.push(opt.value.length > 3 ? opt.text.trim() : opt.value.trim());
@@ -487,7 +488,8 @@
 
 
   PLATE_RULES.fr = () => plateFR();
-  PLATE_RULES.gg = () => fieldVal('digit');
+  // Guernsey: 12345; Alderney AY 1573 and dealers V145 have letters written by the site in a disabled field
+  PLATE_RULES.gg = () => joinParts([shownVal('let'), fieldVal('digit')]);
   // Greece: IAZ 6038 (cars). 1972 system (9): IN-4662; mopeds (12): ZHE 3860. Only the fields shown for the type: some
   // letters are written by the site itself in a disabled field that is still shown (ΞΑ of the administrative staff, AM of the
   // agricultural vehicles, E.A. of the police, ΛΣ of the Coast Guard), and menus can be shown but fixed (the P of a trailer)
@@ -500,13 +502,18 @@
     if (written) return joinParts([written + menu('b1'), digits]);                               // private trailers: the T written by the site, then the letter
     return joinParts([menu('region') + menu('b1'), digits]);                                     // the two-letter code, then the letter: IA Z
   };
-  // Croatia: ZG 8899-JB; vanity (5) is region + the letter boxes shown: ZG ZMAJ
+  // Croatia: ZG 8899-JB; vanity (5) is region + the letter boxes shown: ZG ZMAJ. Dealer and oldtimers: OS PP-178, KR PV-081
+  // (the letters PP, PV are written by the site in a disabled field); export transit and military: RH 199-BE, HV 236-MP (the
+  // site writes RH, HV, and there is no region); diplomatic (11): 025-A-020 (code, the letter of the corps, digits)
   PLATE_RULES.hr = () => {
-    if (fieldVal('ctype') === '5') {
-      return joinParts([selText('region'), ['b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7'].map(menu).join('')]);
-    }
-    const digit = fieldVal('digit') || fieldVal('digit1'), letters = fieldVal('b1') + fieldVal('b2');
-    return joinParts([selText('region') || selText('region1'), digit && letters ? `${digit}-${letters}` : digit || letters]);
+    const ctype = fieldVal('ctype');
+    if (ctype === '5') return joinParts([menu('region'), ['b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7'].map(menu).join('')]);
+    if (ctype === '11') return [fieldVal('dipcode'), menu('dipletter').charAt(0), shownVal('digit')].filter(Boolean).join('-');
+    const digit = shownVal('digit') || shownVal('digit1'), letters = menu('b1') + menu('b2');
+    const core = digit && letters ? `${digit}-${letters}` : digit || letters;
+    const written = shownVal('special'), region = menu('region') || menu('region1');
+    if (written) return joinParts([region, region ? written + '-' + core : written + ' ' + core]);
+    return joinParts([region, core]);
   };
   // Iceland: vanity plates are six boxes, one character each (LYNGAR)
   PLATE_RULES.is = () => {

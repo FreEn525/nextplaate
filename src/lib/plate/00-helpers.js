@@ -23,7 +23,8 @@
     const parts = [];
     for (const el of document.querySelectorAll('input, select')) {
       const key = el.id || el.name || '';
-      if (!PLATE_FIELD.test(key) || el.offsetParent === null || el.disabled || key === 'drop_2') continue;   // drop_2 is the plate-type menu of Andorra and Malta
+      // a disabled field that is shown holds letters the site wrote itself (ZV of an Irish oldtimer): they are part of the plate
+      if (!PLATE_FIELD.test(key) || el.offsetParent === null || getComputedStyle(el).visibility === 'hidden' || key === 'drop_2') continue;   // drop_2 is the plate-type menu of Andorra and Malta
       if (el.tagName === 'SELECT') {
         const opt = el.options[el.selectedIndex];
         if (opt && opt.value) parts.push(opt.value.length > 3 ? opt.text.trim() : opt.value.trim());

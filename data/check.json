@@ -187,25 +187,9 @@
  },
  "ax": {
   "Cars (ÅL 12345)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ÅL 10500",
-     "read": "10500",
-     "status": "wrong"
-    },
-    {
-     "plate": "ÅL 12968",
-     "read": "12968",
-     "status": "wrong"
-    },
-    {
-     "plate": "ÅL 16319",
-     "read": "16319",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Cars (ÅLA 1234)": {
    "ok": 0,
@@ -213,62 +197,30 @@
    "failed": [
     {
      "plate": "ÅLA 4642",
-     "read": "L A",
+     "read": "Å L L A",
      "status": "not-fit"
     },
     {
      "plate": "ÅLA 5168",
-     "read": "L A",
+     "read": "Å L L A",
      "status": "not-fit"
     },
     {
      "plate": "ÅLA 7020",
-     "read": "L A",
+     "read": "Å L L A",
      "status": "not-fit"
     }
    ]
   },
   "Provisional (ÅF 1234)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ÅF 6841",
-     "read": "6841",
-     "status": "wrong"
-    },
-    {
-     "plate": "ÅF 6962",
-     "read": "6962",
-     "status": "wrong"
-    },
-    {
-     "plate": "ÅF 6993",
-     "read": "6993",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Trailers (ÅS 1234)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ÅS 10959",
-     "read": "10959",
-     "status": "wrong"
-    },
-    {
-     "plate": "ÅS 2704",
-     "read": "2704",
-     "status": "wrong"
-    },
-    {
-     "plate": "ÅS 8594",
-     "read": "8594",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Vanity Plates": {
    "ok": 3,
@@ -671,25 +623,9 @@
    "failed": []
   },
   "Dealer (with \"U\")": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "VD 1171 U",
-     "read": "VD 1171",
-     "status": "wrong"
-    },
-    {
-     "plate": "VD 479 U",
-     "read": "VD 479",
-     "status": "wrong"
-    },
-    {
-     "plate": "VD 941 U",
-     "read": "VD 941",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Diplomatic": {
    "ok": 3,
@@ -722,22 +658,12 @@
    "failed": []
   },
   "Vehicles w/o paid duty (with \"Z\")": {
-   "ok": 0,
+   "ok": 2,
    "total": 3,
    "failed": [
     {
-     "plate": "GE 1892 Z",
-     "read": "GE 1892",
-     "status": "wrong"
-    },
-    {
-     "plate": "VS 549 Z",
-     "read": "VS 549",
-     "status": "wrong"
-    },
-    {
      "plate": "ZH 1257 Z",
-     "read": "VS H 1257",
+     "read": "VS H 1257 Z",
      "status": "wrong"
     }
    ]
@@ -999,23 +925,13 @@
    "failed": []
   },
   "Trailers": {
-   "ok": 0,
+   "ok": 2,
    "total": 3,
    "failed": [
     {
      "plate": "14001 CT",
-     "read": "14001",
+     "read": "P 14001",
      "status": "not-fit"
-    },
-    {
-     "plate": "P 04878",
-     "read": "04878",
-     "status": "wrong"
-    },
-    {
-     "plate": "P 08038",
-     "read": "08038",
-     "status": "wrong"
     }
    ]
   }
@@ -1807,25 +1723,9 @@
  },
  "gg": {
   "Alderney": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "AY 1573",
-     "read": "1573",
-     "status": "wrong"
-    },
-    {
-     "plate": "AY 2057",
-     "read": "2057",
-     "status": "wrong"
-    },
-    {
-     "plate": "AY 2185",
-     "read": "2185",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Dealer": {
    "ok": 3,
@@ -1840,9 +1740,20 @@
  },
  "gi": {
   "Regular car plates (G 1234 A)": {
-   "ok": 3,
+   "ok": 1,
    "total": 3,
-   "failed": []
+   "failed": [
+    {
+     "plate": "G 1267 G",
+     "read": "G 1267",
+     "status": "wrong"
+    },
+    {
+     "plate": "G 4684 G",
+     "read": "G 4684",
+     "status": "wrong"
+    }
+   ]
   },
   "Regular car plates (G 12345)": {
    "ok": 3,
@@ -1983,46 +1894,14 @@
  },
  "hr": {
   "Dealer": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "OS PP-178",
-     "read": "OS PP-AA",
-     "status": "not-fit"
-    },
-    {
-     "plate": "OS PP-274",
-     "read": "OS PP-AA",
-     "status": "not-fit"
-    },
-    {
-     "plate": "ZG PP-1442",
-     "read": "ZG PP-AA",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Diplomatic": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "025-A-020",
-     "read": "ZG 020-AA",
-     "status": "wrong"
-    },
-    {
-     "plate": "053-A-024",
-     "read": "ZG 024-AA",
-     "status": "wrong"
-    },
-    {
-     "plate": "097-A-001",
-     "read": "ZG 001-AA",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Exceptional vehicles": {
    "ok": 3,
@@ -2030,25 +1909,9 @@
    "failed": []
   },
   "Export transit plates": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "RH 199-BE",
-     "read": "ZG 199-RH",
-     "status": "not-fit"
-    },
-    {
-     "plate": "RH 290-AP",
-     "read": "ZG 290-RH",
-     "status": "not-fit"
-    },
-    {
-     "plate": "RH 718-BA",
-     "read": "ZG 718-RH",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Foreign citizens and enterprises": {
    "ok": 3,
@@ -2056,25 +1919,9 @@
    "failed": []
   },
   "Military": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "HV 236-MP",
-     "read": "ZG 236-HV",
-     "status": "not-fit"
-    },
-    {
-     "plate": "HV 271-LV",
-     "read": "ZG 271-HV",
-     "status": "not-fit"
-    },
-    {
-     "plate": "HV 420-LZ",
-     "read": "ZG 420-HV",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Motorcycles": {
    "ok": 3,
@@ -2082,25 +1929,9 @@
    "failed": []
   },
   "Oldtimers": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "KR PV-081",
-     "read": "KR PV-C",
-     "status": "not-fit"
-    },
-    {
-     "plate": "ZG PV-0470",
-     "read": "ZG PV-C",
-     "status": "not-fit"
-    },
-    {
-     "plate": "ZG PV-4004",
-     "read": "ZG PV-C",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Police": {
    "ok": 0,
@@ -2290,25 +2121,9 @@
  },
  "ie": {
   "Oldtimers": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ZV 12656",
-     "read": "12656",
-     "status": "wrong"
-    },
-    {
-     "plate": "ZV 37603",
-     "read": "37603",
-     "status": "wrong"
-    },
-    {
-     "plate": "ZV 89253",
-     "read": "89253",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Regular plates": {
    "ok": 3,
@@ -2354,9 +2169,25 @@
    "failed": []
   },
   "Military Police": {
-   "ok": 3,
+   "ok": 0,
    "total": 3,
-   "failed": []
+   "failed": [
+    {
+     "plate": "222-מ.צ",
+     "read": "222-מ.צ מ.צ",
+     "status": "wrong"
+    },
+    {
+     "plate": "224-מ.צ",
+     "read": "224-מ.צ מ.צ",
+     "status": "wrong"
+    },
+    {
+     "plate": "260-מ.צ",
+     "read": "260-מ.צ מ.צ",
+     "status": "wrong"
+    }
+   ]
   },
   "Police": {
    "ok": 3,
@@ -2374,9 +2205,25 @@
    "failed": []
   },
   "Sportcars": {
-   "ok": 3,
+   "ok": 0,
    "total": 3,
-   "failed": []
+   "failed": [
+    {
+     "plate": "S-100 294",
+     "read": "S- S-100 294",
+     "status": "wrong"
+    },
+    {
+     "plate": "S-102 440",
+     "read": "S- S-102 440",
+     "status": "wrong"
+    },
+    {
+     "plate": "S-108 069",
+     "read": "S- S-108 069",
+     "status": "wrong"
+    }
+   ]
   }
  },
  "iq": {
@@ -2472,7 +2319,7 @@
    "failed": [
     {
      "plate": "۱۱ک۴۷۹ ۸۴",
-     "read": "۱۱",
+     "read": "ک ۱۱",
      "status": "not-fit"
     }
    ]
@@ -2483,17 +2330,17 @@
    "failed": [
     {
      "plate": "۱۶الف۵۴۴ ۴۶",
-     "read": "۱۶",
+     "read": "الف ۱۶",
      "status": "not-fit"
     },
     {
      "plate": "۱۸الف۵۲۴ ۱۱",
-     "read": "۱۸",
+     "read": "الف ۱۸",
      "status": "not-fit"
     },
     {
      "plate": "۲۵الف۲۶۳ ۱۱",
-     "read": "۲۵",
+     "read": "الف ۲۵",
      "status": "not-fit"
     }
    ]
@@ -2504,17 +2351,17 @@
    "failed": [
     {
      "plate": "۵۳ع۴۴۴ ۴۳",
-     "read": "۵۳",
+     "read": "ع ۵۳",
      "status": "not-fit"
     },
     {
      "plate": "۶۱ع۵۹۳ ۴۸",
-     "read": "۶۱",
+     "read": "ع ۶۱",
      "status": "not-fit"
     },
     {
      "plate": "۷۱ع۴۲۲ ۲۵",
-     "read": "۷۱",
+     "read": "ع ۷۱",
      "status": "not-fit"
     }
    ]
@@ -2525,17 +2372,17 @@
    "failed": [
     {
      "plate": "۱۱ژ۴۷۳ ۴۳",
-     "read": "۱۱",
+     "read": "♿ ۱۱",
      "status": "not-fit"
     },
     {
      "plate": "۱۷ژ۹۵۷ ۱۱",
-     "read": "۱۷",
+     "read": "♿ ۱۷",
      "status": "not-fit"
     },
     {
      "plate": "۵۲ژ۵۱۶ ۱۱",
-     "read": "۵۲",
+     "read": "♿ ۵۲",
      "status": "not-fit"
     }
    ]
@@ -2567,7 +2414,7 @@
    "failed": [
     {
      "plate": "۱۱ف۱۳۴ ۱۱",
-     "read": "۱۱",
+     "read": "ف ۱۱",
      "status": "not-fit"
     }
    ]
@@ -2578,17 +2425,17 @@
    "failed": [
     {
      "plate": "۳۶ث۲۳۲ ۱۱",
-     "read": "۳۶",
+     "read": "ث ۳۶",
      "status": "not-fit"
     },
     {
      "plate": "۵۱ث۲۳۳ ۱۱",
-     "read": "۵۱",
+     "read": "ث ۵۱",
      "status": "not-fit"
     },
     {
      "plate": "۵۴ث۱۶۴ ۱۱",
-     "read": "۵۴",
+     "read": "ث ۵۴",
      "status": "not-fit"
     }
    ]
@@ -2609,17 +2456,17 @@
    "failed": [
     {
      "plate": "۱۶ش۴۱۱ ۱۱",
-     "read": "۱۶",
+     "read": "ش ۱۶",
      "status": "not-fit"
     },
     {
      "plate": "۱۶ش۹۲۸ ۱۱",
-     "read": "۱۶",
+     "read": "ش ۱۶",
      "status": "not-fit"
     },
     {
      "plate": "۳۲ش۶۷۱ ۱۱",
-     "read": "۳۲",
+     "read": "ش ۳۲",
      "status": "not-fit"
     }
    ]
@@ -2630,12 +2477,12 @@
    "failed": [
     {
      "plate": "۱۷ز۸۹۸ ۱۱",
-     "read": "۱۷",
+     "read": "ز ۱۷",
      "status": "not-fit"
     },
     {
      "plate": "۱۸ز۹۱۴ ۱۱",
-     "read": "۱۸",
+     "read": "ز ۱۸",
      "status": "not-fit"
     }
    ]
@@ -2683,17 +2530,17 @@
    "failed": [
     {
      "plate": "۱۶پ۴۲۹ ۲۲",
-     "read": "۱۶",
+     "read": "پ ۱۶",
      "status": "not-fit"
     },
     {
      "plate": "۵۵پ۴۶۴ ۱۱",
-     "read": "۵۵",
+     "read": "پ ۵۵",
      "status": "not-fit"
     },
     {
      "plate": "۸۱پ۲۲۹ ۱۱",
-     "read": "۸۱",
+     "read": "پ ۸۱",
      "status": "not-fit"
     }
    ]
@@ -2725,17 +2572,17 @@
    "failed": [
     {
      "plate": "۵۱ت۱۶۵ ۲۲",
-     "read": "۵۱",
+     "read": "ت ۵۱",
      "status": "not-fit"
     },
     {
      "plate": "۶۷ت۲۹۲ ۲۲",
-     "read": "۶۷",
+     "read": "ت ۶۷",
      "status": "not-fit"
     },
     {
      "plate": "۸۲ت۱۳۴ ۲۲",
-     "read": "۸۲",
+     "read": "ت ۸۲",
      "status": "not-fit"
     }
    ]
@@ -3488,25 +3335,9 @@
    "failed": []
   },
   "Police (1993)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "A 117 KP",
-     "read": "A 117",
-     "status": "not-fit"
-    },
-    {
-     "plate": "F 345 KP",
-     "read": "F 345",
-     "status": "not-fit"
-    },
-    {
-     "plate": "M 669 KP",
-     "read": "M 669",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Police (2012)": {
    "ok": 3,
@@ -4300,18 +4131,18 @@
    "failed": [
     {
      "plate": "W 016600",
-     "read": "001",
-     "status": "not-fit"
+     "read": "016",
+     "status": "wrong"
     },
     {
      "plate": "W 028011",
-     "read": "001",
-     "status": "not-fit"
+     "read": "028",
+     "status": "wrong"
     },
     {
      "plate": "W 110500",
-     "read": "001",
-     "status": "not-fit"
+     "read": "110",
+     "status": "wrong"
     }
    ]
   },
@@ -4603,25 +4434,9 @@
    "failed": []
   },
   "Ministry of Interior": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "MAI 27273",
-     "read": "27273",
-     "status": "wrong"
-    },
-    {
-     "plate": "MAI 50112",
-     "read": "50112",
-     "status": "wrong"
-    },
-    {
-     "plate": "MAI 62117",
-     "read": "62117",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Provisional": {
    "ok": 3,
@@ -5145,9 +4960,25 @@
    "failed": []
   },
   "Government": {
-   "ok": 3,
+   "ok": 0,
    "total": 3,
-   "failed": []
+   "failed": [
+    {
+     "plate": "S 13069",
+     "read": "GS S 13069",
+     "status": "wrong"
+    },
+    {
+     "plate": "S 18512",
+     "read": "GS S 18512",
+     "status": "wrong"
+    },
+    {
+     "plate": "S 32867",
+     "read": "GS S 32867",
+     "status": "wrong"
+    }
+   ]
   },
   "Parastatal": {
    "ok": 3,
