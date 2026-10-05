@@ -40,7 +40,7 @@
 
   registerFeature({
     groups: [{
-      drawer: 'lens', title: 'Google Lens', pages: ['add', 'edit', 'gallery'],
+      drawer: 'search', title: 'Google Lens', pages: ['add', 'edit', 'gallery'],
       build: () => [
         h('p', { class: 'presult', text: '1. Copy the prompt. 2. Open Google Lens and send the photo. 3. Paste the answer below.' }),
         h('pre', { class: 'lens-prompt', text: LENS_PROMPT }),

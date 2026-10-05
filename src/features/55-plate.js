@@ -78,7 +78,7 @@
 
   registerFeature({
     groups: [{
-      drawer: 'plate', title: 'Plate check', pages: ['add'],
+      drawer: 'search', title: 'Plate check', pages: ['add'],
       build: () => [
         h('div', { class: 'row' }, h('span', { class: 'lbl', text: 'Plate' }), h('b', { id: 'plateNow', text: '—' })),
         h('p', { id: 'plateResult', class: 'presult', text: 'Type the plate in the form to check it.' }),
