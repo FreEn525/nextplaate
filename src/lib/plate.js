@@ -103,9 +103,13 @@
         const region = (document.getElementById('drop_1') || { value: '' }).value.trim();
         return joinParts([region, fieldVal('nomer')]);
       }
-      case 'tj': {                                                  // Tajikistan: 7717XZ07, the plate then the region label (once)
-        const n = squash(fieldVal('nomer')), r = selText('region2');
-        return r && !n.endsWith(r) ? n + r : n;
+      case 'tj': {                                                  // Tajikistan: 7717XZ07 = the number, then the region code (once). A number that already ends with a region code is kept as it is
+        const el = document.getElementById('region2'), shown = el && el.offsetParent !== null;
+        const n = squash(fieldVal('nomer'));
+        const codes = shown ? [...el.options].map(o => o.text.trim()).filter(Boolean) : [];
+        if (codes.some(c => n.endsWith(c))) return n;
+        const r = shown ? selText('region2') : '';
+        return r ? n + r : n;
       }
       case 'ua': {                                                  // Ukraine: AA 0001 AA. Only the fields shown for the type (a hidden menu keeps BH, HA, OM)
         const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };
