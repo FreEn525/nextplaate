@@ -1,5 +1,16 @@
 # Changelog
 
+## 5.6
+
+**Plate check**
+- Rules for the forms that mix several kinds of fields: Mexico, Australia, Canada, UAE and USA (the state menu is no longer read as part of the plate), Singapore (the check letter), Netherlands and Malaysia (free text), Mongolia, Cambodia, Russia (diplomatic plates), Czechia (electric vehicles, 1977 trailers), Slovenia, Åland, Denmark, Montenegro, Monaco, Kazakhstan, Morocco, Croatia (police), Bosnia, Italy, Portugal.
+- Greece: the two-letter code, then the letter (KZT, TAE, IAZ).
+- Plates that exist in a category the upload form does not offer (Chile, Georgia, Cyprus...) are now read in the closest type of the form.
+- 785 of the 829 categories of the site are checked offline on real plates (2320 of 2373 read back exactly); 22 plates were also checked by hand on the site. `docs/COUVERTURE.md` lists what is left and the known limits of the site's own form.
+
+**Under the hood**
+- `docs/REGLES.md` explains how to fix a rule; tools in `tools/`.
+
 ## 5.5
 
 **Settings**
