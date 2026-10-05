@@ -23,11 +23,26 @@
   }
 
   // Types one plate into the visible plate fields, in order; the form's other fields are left alone
+  // first the usual split; if the plate does not fit, a second try cuts the mixed tokens (8AP -> 8 AP)
   function ptType(text) {
-    const tokens = text.split(/[\s-]+/).filter(Boolean);
+    return ptTypeOnce(text, false) || ptTypeOnce(text, true);
+  }
+
+  function ptTypeOnce(text, split) {
+    let tokens = text.split(/[\s-]+/).filter(Boolean).flatMap(t => split ? (t.match(/\d+|[^\d]+/g) || []) : [t]);
     const fields = [...document.querySelectorAll('input, select')]
       .filter(el => isPlateField(el) && el.offsetParent !== null && !el.disabled && el.id !== 'ctype');
-    fields.forEach(el => { if (el.tagName === 'INPUT') el.value = ''; });
+    // fixed fields are set by the site for a type (T, TAX, BP, P): they keep their value and no token goes in them
+    const FIXED = ['trz', 'tx', 'nonr'];
+    fields.forEach(el => {
+      if (el.tagName !== 'INPUT') return;
+      if (FIXED.includes(el.id)) { if (el.value) el.dataset.pmgFixed = el.value; if (el.dataset.pmgFixed) el.value = el.dataset.pmgFixed; return; }
+      el.value = '';
+    });
+    const tokenFields = fields.filter(el => !FIXED.includes(el.id));
+    // a token that is the value the site already set (the T of a transit plate) is not typed again
+    const fixedVals = fields.filter(el => FIXED.includes(el.id) && el.value).map(el => el.value.toUpperCase());
+    tokens = tokens.filter(t => !fixedVals.includes(t.toUpperCase()));
     // one single plate text field (France, Belgium...): the whole plate goes in it, dashes included;
     // the menus of the page (department, region) are set only when one of the tokens matches them
     const texts = fields.filter(el => el.tagName === 'INPUT');
@@ -44,7 +59,7 @@
     }
     let i = 0;
     // two passes: a menu that comes before its letters in the page gets them on the second pass
-    for (let pass = 0; pass < 2 && i < tokens.length; pass++) for (const el of fields) {
+    for (let pass = 0; pass < 2 && i < tokens.length; pass++) for (const el of tokenFields) {
       if (i >= tokens.length) break;
       if (el.dataset.ptUsed) continue;
       if (el.tagName === 'INPUT') {
