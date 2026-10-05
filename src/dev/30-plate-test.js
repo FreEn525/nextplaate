@@ -303,6 +303,53 @@
     location.href = '/' + left[0] + '/add';
   }
 
+  // Fills the database for the categories of this country that have no plate confirmed by the site yet.
+  // Up to 3 plates per category, taken from the gallery of that category, typed on the form of that category,
+  // counted on the site. Every step is logged with its reason, and the log is kept (fill:xx) and shown in the console.
+  async function ptFillMissing() {
+    const cc = here.country;
+    const log = [];
+    const row = (category, shown, read, status, detail) => log.push({ category, shown: shown || '', read: read || '', status, detail: detail || '' });
+    const types = await ptSearchTypes(cc);
+    const known = await dbLoad(cc);
+    const confirmed = new Set(known.filter(r => r.count > 0).map(r => r.category));
+    const missing = types.filter(t => !confirmed.has(t.label));
+    ptMsg(`${cc}: ${missing.length} categories without a confirmed plate (of ${types.length}).`);
+    for (const t of missing) {
+      const formValue = ptFormType(t.label, t.code);
+      if (!formValue) { row(t.label, '', '', 'no-form-type', 'no matching type on the form'); continue; }
+      const sel = document.getElementById('ctype');
+      sel.value = formValue; sel.dispatchEvent(new Event('change', { bubbles: true }));
+      await new Promise(r => setTimeout(r, 700));
+      let texts;
+      try { texts = await ptGalleryType(cc, t.code); }
+      catch (e) {
+        row(t.label, '', '', 'gallery-error', e.message);
+        if (/asked to wait|rate limit/.test(e.message)) break;     // the site asked to stop: keep what is logged
+        continue;
+      }
+      if (!texts.length) { row(t.label, '', '', 'no-plates-on-site', 'the gallery of this category is empty'); continue; }
+      for (const text of texts) {
+        if (!ptType(text)) { row(t.label, text, '', 'does-not-fit-form', 'the form does not take this plate'); continue; }
+        await new Promise(r => setTimeout(r, 350));
+        const read = plateForForm() || '';
+        let found;
+        try { found = await countPlate(read); }
+        catch (e) { row(t.label, text, read, 'count-error', e.message); if (/asked to wait|rate limit/.test(e.message)) break; continue; }
+        if (found > 0) { dbAddPlate(cc, t.label, text, read, found); row(t.label, text, read, 'ok', found + ' on the site'); }
+        else row(t.label, text, read, 'read-not-found', 'the site finds no photo for what the script reads');
+      }
+      ptType('');
+    }
+    const counts = {};
+    for (const r of log) counts[r.status] = (counts[r.status] || 0) + 1;
+    await capPut('fill:' + cc, { date: new Date().toISOString(), counts, rows: log });
+    console.log('[NextPlaate] fill ' + cc, counts);
+    console.table(log);
+    ptMsg(`${cc} filled: ${Object.entries(counts).map(([k, v]) => k + ' ' + v).join(', ')}. Details in the console (F12).`);
+    return counts;
+  }
+
   // Report: a JSON with every row, and a Markdown table, written in the folder you choose
   async function ptWrite() {
     const all = await capAll();
@@ -369,6 +416,7 @@
         h('button', { id: 'ptRun', class: 'btn ghost', text: 'Test this country' }),
         h('button', { id: 'ptTypes', class: 'btn ghost', text: 'Test every plate type (this country)' }),
         h('button', { id: 'ptTypesAll', class: 'btn ghost', text: 'Test the countries with failures' }),
+        h('button', { id: 'ptFill', class: 'btn ghost', text: 'Fill missing plates (this country)' }),
         h('button', { id: 'ptAll', class: 'btn ghost', text: 'Test the countries not yet passing' }),
         h('button', { id: 'ptAgain', class: 'btn ghost', text: 'Test everything again' }),
         h('button', { id: 'ptWrite', class: 'btn ghost', text: 'Write report to folder' })
@@ -383,6 +431,7 @@
         ptMsg(Object.entries(r).map(([k, v]) => (v.note ? k + ': ' + v.note : k + ': ' + v.passed + '/' + v.tested)).join(' | '));
       };
       $('ptTypesAll').onclick = () => ptStartTypes().catch(e => ptMsg('Could not start: ' + e.message));
+      $('ptFill').onclick = () => { if (!here.add) { ptMsg('Open an upload page first.'); return; } ptMsg('Filling…'); ptFillMissing().catch(e => ptMsg('Fill stopped: ' + e.message)); };
       $('ptAll').onclick = () => ptStart(false).catch(e => ptMsg('Could not start: ' + e.message));
       $('ptAgain').onclick = () => ptStart(true).catch(e => ptMsg('Could not start: ' + e.message));
       $('ptWrite').onclick = () => ptWrite().catch(e => ptMsg('Could not write: ' + e.message));
