@@ -1,6 +1,6 @@
-# NextPlaate
+# PlatesMania - NextPlaate
 
-Tampermonkey userscript that speeds up posting and uploading photos on [PlatesMania](https://platesmania.com).
+Tampermonkey userscript (**NextPlaate**) that speeds up posting and uploading photos on [PlatesMania](https://platesmania.com).
 
 ## Features
 
