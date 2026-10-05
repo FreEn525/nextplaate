@@ -2,13 +2,13 @@
   async function ptWrite() {
     const all = await capAll();
     const report = { date: new Date().toISOString(), countries: {}, skipped: [], untested: [] };
-    for (const c of CAPTURE_COUNTRIES) {
+    for (const c of TEST_COUNTRIES) {
       if (all['plates:' + c]) report.countries[c] = all['plates:' + c];
       else if (all['plates-skip:' + c]) report.skipped.push(c);
       else report.untested.push(c);
     }
     report.types = {};
-    for (const c of CAPTURE_COUNTRIES) if (all['types:' + c]) report.types[c] = all['types:' + c];
+    for (const c of TEST_COUNTRIES) if (all['types:' + c]) report.types[c] = all['types:' + c];
     const typeLines = ['', '## Every plate type', '', '| country | type | passed | tested | other | failed (read / site) |', '|---|---|---|---|---|---|'];
     for (const [c, d] of Object.entries(report.types)) {
       for (const [label, r] of Object.entries(d.types)) {
@@ -60,14 +60,18 @@
     groups: [{
       drawer: 'dev', title: 'Plate test',
       build: () => [
-        h('p', { id: 'ptMsg', class: 'presult', text: 'Tests the plates of a country on its upload page, without uploading anything.' }),
-        h('button', { id: 'ptRun', class: 'btn ghost', text: 'Test this country' }),
-        h('button', { id: 'ptTypes', class: 'btn ghost', text: 'Test every plate type (this country)' }),
-        h('button', { id: 'ptTypesAll', class: 'btn ghost', text: 'Test the countries with failures' }),
-        h('button', { id: 'ptFill', class: 'btn ghost', text: 'Fill missing plates (this country)' }),
-        h('button', { id: 'ptFillAll', class: 'btn ghost', text: 'Fill missing plates (every country)' }),
+        h('p', { id: 'ptMsg', class: 'presult', text: 'Types the plates of the site into the upload form of each category and checks what the script reads back. Nothing is uploaded.' }),
+        h('div', { class: 'sub', text: 'This country (open its upload page)' }),
+        h('div', { class: 'btnrow' },
+          h('button', { id: 'ptRun', class: 'btn ghost', text: 'Test plates' }),
+          h('button', { id: 'ptTypes', class: 'btn ghost', text: 'Test every type' })),
+        h('button', { id: 'ptFill', class: 'btn ghost', text: 'Fill missing plates' }),
+        h('div', { class: 'sub', text: 'Every country' }),
         h('button', { id: 'ptAll', class: 'btn ghost', text: 'Test the countries not yet passing' }),
-        h('button', { id: 'ptAgain', class: 'btn ghost', text: 'Test everything again' }),
+        h('button', { id: 'ptTypesAll', class: 'btn ghost', text: 'Test the countries with failures' }),
+        h('button', { id: 'ptFillAll', class: 'btn ghost', text: 'Fill missing plates' }),
+        h('button', { id: 'ptAgain', class: 'btn danger', text: 'Test everything again' }),
+        h('div', { class: 'sub', text: 'Results' }),
         h('button', { id: 'ptWrite', class: 'btn ghost', text: 'Write report to folder' })
       ]
     }],

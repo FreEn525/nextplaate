@@ -3,24 +3,18 @@
    *    Opens /xx/add (or /xx/search) for each country, one after the other, keeps each page in the browser
    *    (IndexedDB), and writes them to a folder you choose. Read-only: no form, no plate typed.
    * ===================================================================== */
-  const CAPTURE_COUNTRIES = ['ad', 'al', 'at', 'ba', 'be', 'bg', 'by', 'ch', 'cz', 'de', 'dk', 'dz', 'ee', 'es', 'fi', 'fr',
+  // Countries with a captured upload page: the plate tests run on these. Add a code here once its page is kept.
+  const TEST_COUNTRIES = ['ad', 'al', 'at', 'ba', 'be', 'bg', 'by', 'ch', 'cz', 'de', 'dk', 'dz', 'ee', 'es', 'fi', 'fr',
     'gg', 'gr', 'hr', 'hu', 'ie', 'is', 'it', 'lt', 'li', 'lu', 'lv', 'ma', 'md', 'me', 'mk', 'mt', 'nl', 'no', 'pl',
     'pt', 'ro', 'rs', 'ru', 'se', 'si', 'sk', 'tj', 'tr', 'ua', 'uk', 'uz'];
+  // Every country of the site: the capture tries each one and records the ones that have no such page (skip:xx)
+  const SITE_CODES = COUNTRIES.map(c => c.code);
   const CAPTURE_PAUSE_MS = 4000;     // between two countries
   const CAPTURE_LOAD_MS = 1500;      // let a page finish before keeping it
   const CAPTURE_RUN = 'nextplaate-capture';        // the countries left in the run (sessionStorage)
   const CAPTURE_KIND = 'nextplaate-capture-kind';  // 'add' (upload pages) or 'search' (search pages)
   const CHALLENGE = /just a moment|attention required|checking your browser/i;
 
-  // Same database name as the earlier capture script: the pages already kept stay available
-  const capDb = () => new Promise((res, rej) => {
-    const r = indexedDB.open('nextplaate-dev', 1);
-    r.onupgradeneeded = () => r.result.createObjectStore('kv');
-    r.onsuccess = () => res(r.result);
-    r.onerror = () => rej(r.error);
-  });
-  const capPut = async (k, v) => { const d = await capDb(); return new Promise((res, rej) => { const t = d.transaction('kv', 'readwrite'); t.objectStore('kv').put(v, k); t.oncomplete = res; t.onerror = () => rej(t.error); }); };
-  const capAll = async () => { const d = await capDb(); return new Promise(res => { const out = {}; const c = d.transaction('kv').objectStore('kv').openCursor(); c.onsuccess = () => { const cur = c.result; if (cur) { out[cur.key] = cur.value; cur.continue(); } else res(out); }; }); };
   const capRunning = () => sessionStorage.getItem(CAPTURE_RUN) !== null;
   const capKind = () => (sessionStorage.getItem(CAPTURE_KIND) === 'search' ? 'search' : 'add');
   const capSay = t => { const el = $('capMsg'); if (el) el.textContent = t; };
@@ -37,18 +31,18 @@
     const k = capKeys(kind);
     return {
       all,
-      saved: CAPTURE_COUNTRIES.filter(c => all[k.page(c)]),
-      skipped: CAPTURE_COUNTRIES.filter(c => all[k.skip(c)]),
-      missing: CAPTURE_COUNTRIES.filter(c => !all[k.page(c)] && !all[k.skip(c)])
+      saved: SITE_CODES.filter(c => all[k.page(c)]),
+      skipped: SITE_CODES.filter(c => all[k.skip(c)]),
+      missing: SITE_CODES.filter(c => !all[k.page(c)] && !all[k.skip(c)])
     };
   }
 
   async function capCheck() {
     const up = await capSummary('add'), se = await capSummary('search');
-    capSay(`Upload pages kept: ${up.saved.length}/${CAPTURE_COUNTRIES.length}` +
+    capSay(`Upload pages kept: ${up.saved.length}/${SITE_CODES.length}` +
       (up.missing.length ? `  (missing: ${up.missing.join(' ')})` : '') +
       (up.skipped.length ? `\nNo upload page: ${up.skipped.join(' ')}` : '') +
-      `\nSearch pages kept: ${se.saved.length}/${CAPTURE_COUNTRIES.length}` +
+      `\nSearch pages kept: ${se.saved.length}/${SITE_CODES.length}` +
       (se.missing.length ? `  (missing: ${se.missing.join(' ')})` : '') +
       (se.skipped.length ? `\nNo search page: ${se.skipped.join(' ')}` : ''));
   }
@@ -84,11 +78,20 @@
     capSay(`Written ${files.length} file(s) and index.json to the folder.`);
   }
 
+  // End of a run: the next kind if "Capture everything" asked for it, else the summary
+  async function capFinish() {
+    sessionStorage.removeItem(CAPTURE_RUN);
+    const then = sessionStorage.getItem(CAPTURE_THEN);
+    sessionStorage.removeItem(CAPTURE_THEN);
+    if (then) { await capStart(then); return; }
+    await capCheck();
+  }
+
   // One step: keep this page if it is the current country, then go to the next one
   async function capStep() {
     const left = JSON.parse(sessionStorage.getItem(CAPTURE_RUN) || 'null');
     if (!left) return;
-    if (!left.length) { sessionStorage.removeItem(CAPTURE_RUN); await capCheck(); return; }
+    if (!left.length) { await capFinish(); return; }
     if (CHALLENGE.test(document.title)) {
       capSay('Cloudflare check: solve it in this tab, then click Continue.');
       $('capGo').hidden = false;
@@ -107,17 +110,23 @@
     sessionStorage.setItem(CAPTURE_RUN, JSON.stringify(rest));
     $('capStop').hidden = false;
     capSay(`${kind} ${code} kept. ${rest.length} left. Next in ${CAPTURE_PAUSE_MS / 1000} s…`);
-    if (!rest.length) { sessionStorage.removeItem(CAPTURE_RUN); await capCheck(); return; }
+    if (!rest.length) { await capFinish(); return; }
     setTimeout(() => {
       if (!capRunning()) { capSay('Stopped.'); return; }          // Stop was clicked during the pause
       location.href = capPath(kind, rest[0]);
     }, CAPTURE_PAUSE_MS);
   }
 
-  async function capStart(kind) {
+  const CAPTURE_THEN = 'nextplaate-capture-then';   // 'search': once the upload pages are kept, go on with the search pages
+
+  async function capStart(kind, then) {
     const s = await capSummary(kind), k = capKeys(kind);
-    const left = CAPTURE_COUNTRIES.filter(c => !s.all[k.page(c)] && !s.all[k.skip(c)]);
-    if (!left.length) { capSay(`Every ${kind} page is already kept. Click "Write to folder".`); return; }
+    const left = SITE_CODES.filter(c => !s.all[k.page(c)] && !s.all[k.skip(c)]);
+    if (!left.length) {
+      if (then) return capStart(then);                              // nothing left of this kind: the next kind
+      capSay(`Every ${kind} page is already kept. Click "Write to folder".`); return;
+    }
+    if (then) sessionStorage.setItem(CAPTURE_THEN, then); else sessionStorage.removeItem(CAPTURE_THEN);
     sessionStorage.setItem(CAPTURE_KIND, kind);
     sessionStorage.setItem(CAPTURE_RUN, JSON.stringify(left));
     location.href = capPath(kind, left[0]);
@@ -127,9 +136,11 @@
     groups: [{
       drawer: 'dev', title: 'Capture',
       build: () => [
-        h('p', { id: 'capMsg', class: 'presult', text: 'Keeps the upload and search pages of every country.' }),
-        h('button', { id: 'capStart', class: 'btn ghost', text: 'Capture upload pages' }),
-        h('button', { id: 'capStartSearch', class: 'btn ghost', text: 'Capture search pages' }),
+        h('p', { id: 'capMsg', class: 'presult', text: 'Keeps the upload and search pages of every country of the site (one request every few seconds). Then write them to a folder.' }),
+        h('button', { id: 'capAll', class: 'btn', text: 'Capture everything missing' }),
+        h('div', { class: 'btnrow' },
+          h('button', { id: 'capStart', class: 'btn ghost', text: 'Upload pages' }),
+          h('button', { id: 'capStartSearch', class: 'btn ghost', text: 'Search pages' })),
         h('div', { class: 'btnrow' },
           h('button', { id: 'capStop', class: 'btn ghost', hidden: true, text: 'Stop' }),
           h('button', { id: 'capCheck', class: 'btn ghost', text: 'Check' })),
@@ -138,6 +149,7 @@
       ]
     }],
     init: () => {
+      $('capAll').onclick = () => capStart('add', 'search');
       $('capStart').onclick = () => capStart('add');
       $('capStartSearch').onclick = () => capStart('search');
       $('capStop').onclick = () => { sessionStorage.removeItem(CAPTURE_RUN); $('capStop').hidden = true; capSay('Stopped. Start again to resume, or "Check".'); };

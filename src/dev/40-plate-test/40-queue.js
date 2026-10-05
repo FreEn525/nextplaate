@@ -15,14 +15,14 @@
     const all = await capAll();
     const dbAll = Object.keys(all).filter(k => k.startsWith('db:')).map(k => all[k]);
     const todo = [];
-    for (const cc of CAPTURE_COUNTRIES) {
+    for (const cc of TEST_COUNTRIES) {
       if (all['plates-skip:' + cc]) continue;                    // no upload page for this country
       const types = ptTypesKept(cc, all);
       if (!types) { todo.push(cc); continue; }                   // no saved search page: it stays in the run
       const confirmed = new Set(dbAll.filter(r => r.country === cc && (r.count > 0 || r.source === 'gallery')).map(r => r.category));
       if (types.some(t => !confirmed.has(t.label))) todo.push(cc);
     }
-    ptMsg(`${todo.length} countries have a category without a confirmed plate (of ${CAPTURE_COUNTRIES.length}).`);
+    ptMsg(`${todo.length} countries have a category without a confirmed plate (of ${TEST_COUNTRIES.length}).`);
     if (!todo.length) { ptMsg('Every category of every country has a confirmed plate. Nothing to fill.'); return; }
     sessionStorage.setItem(PT_MODE, 'fill');
     sessionStorage.setItem(PT_QUEUE, JSON.stringify(todo));
@@ -41,7 +41,7 @@
       if (!t) return true;
       return Object.values(t.types || {}).some(x => x.error || (x.rows || []).some(r => r.fits && !r.ok));
     };
-    const left = CAPTURE_COUNTRIES.filter(c => failing(c) && !kept['plates-skip:' + c]);
+    const left = TEST_COUNTRIES.filter(c => failing(c) && !kept['plates-skip:' + c]);
     if (!left.length) { ptMsg('No country has a failure in the last run. Nothing to test.'); return; }
     sessionStorage.setItem(PT_MODE, 'types');
     sessionStorage.setItem(PT_QUEUE, JSON.stringify(left));
@@ -60,7 +60,7 @@
       t.oncomplete = res;
     });
     const done = new Set(Object.keys(kept).filter(k => k.startsWith('plates:') && !drop.includes(k)).map(k => k.slice(7)));
-    const left = CAPTURE_COUNTRIES.filter(c => !done.has(c) && !(kept['plates-skip:' + c] && !all));
+    const left = TEST_COUNTRIES.filter(c => !done.has(c) && !(kept['plates-skip:' + c] && !all));
     if (!left.length) { ptMsg('Every country already passes. Click "Write report to folder".'); return; }
     sessionStorage.setItem(PT_QUEUE, JSON.stringify(left));
     location.href = '/' + left[0] + '/add';

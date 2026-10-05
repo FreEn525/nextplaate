@@ -15,7 +15,7 @@
 
   registerFeature({
     groups: [{
-      drawer: 'dev', title: 'Save',
+      drawer: 'dev', title: 'Save the page',
       build: () => [h('button', { id: 'savePage', class: 'btn ghost', text: 'Save this page (HTML)' })]
     }],
     init: () => { $('savePage').onclick = savePage; }
