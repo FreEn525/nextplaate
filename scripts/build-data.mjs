@@ -25,8 +25,7 @@ const byText = (a, b) => String(a).localeCompare(String(b), 'en', { numeric: tru
 
 // country names: the list the script itself uses
 const countriesSrc = readFileSync(join(root, 'src/lib/countries.js'), 'utf8');
-const names = Object.fromEntries((countriesSrc.match(/COUNTRIES = \('(.*)'\)\s*\.split/)?.[1] ?? '')
-  .split('|').map(s => [s.slice(0, s.indexOf(':')), s.slice(s.indexOf(':') + 1)]));
+const names = Object.fromEntries([...countriesSrc.matchAll(/\{ code: '([a-z]{2})', name: '([^']*)' \}/g)].map(m => [m[1], m[2]]));
 
 // the type menu (ctype) of a saved page: [{ id, label }]
 function ctypeOptions(file) {

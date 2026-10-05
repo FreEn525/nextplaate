@@ -32,13 +32,16 @@ src/meta/        userscript header (name, version, grants)
 src/core/        wrapper, storage, page detection, feature registry, keyboard
 src/lib/         helpers: photo detection, description code, countries
 src/ui/          design tokens, DOM helper, the docked ribbon
+src/lib/plate/   one file per country: how its plate is read from the upload form
 src/features/    one file per feature (upload/ holds the batch upload)
+data/            what was collected on the site, one folder per country (see data/README.md)
+tests/           e2e/ (pytest, simulated site) and offline/ (saved pages)
 src/boot/        start-up sequence
 ```
 
 A feature is one file that calls `registerFeature({...})`: its ribbon groups, its keys and its Esc behaviour. Copy an existing one (for example `src/features/20-details.js`) as a starting point.
 
-Build locally with `node scripts/build.mjs`. Test with `python -m pytest tests -q` (needs `pip install playwright pytest` and `playwright install chromium`). The tests run the script against a simulated PlatesMania.
+Build locally with `node scripts/build.mjs`. Test with `python -m pytest -q` (needs `pip install playwright pytest pytest-xdist` and `playwright install chromium`). The tests run in parallel against a simulated PlatesMania (about 8 s). `python tests/offline/check_db.py` replays every known plate on the saved pages (about 20 s); `node scripts/build-data.mjs` rebuilds `data/` from them.
 
 A GitHub Action rebuilds the file on every push that touches `src/`, and Greasy Fork picks up the new version from the repository.
 

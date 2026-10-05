@@ -167,8 +167,105 @@
   }
 
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const COUNTRIES = ('al:Albania|dz:Algeria|ad:Andorra|ar:Argentina|am:Armenia|au:Australia|at:Austria|az:Azerbaijan|bs:Bahamas|bh:Bahrain|by:Belarus|be:Belgium|ba:Bosnia and Herzegovina|br:Brazil|bg:Bulgaria|kh:Cambodia|ca:Canada|cl:Chile|cn:China|hr:Croatia|cy:Cyprus|cz:Czech Republic|dk:Denmark|eg:Egypt|ee:Estonia|fi:Finland|fr:France|ge:Georgia|de:Germany|gi:Gibraltar (UK)|gr:Greece|gu:Guam (USA)|gg:Guernsey (UK)|hk:Hong Kong (CN)|hu:Hungary|is:Iceland|id:Indonesia|ir:Iran|iq:Iraq|ie:Ireland|il:Israel|it:Italy|jp:Japan|je:Jersey (UK)|kz:Kazakhstan|ke:Kenya|kw:Kuwait|kg:Kyrgyzstan|la:Laos|lv:Latvia|li:Liechtenstein|lt:Lithuania|lu:Luxembourg|my:Malaysia|mt:Malta|mx:Mexico|md:Moldova|mc:Monaco|mn:Mongolia|me:Montenegro|ma:Morocco|nl:Netherlands|nz:New Zealand|mk:North Macedonia|mp:Northern Mariana Islands (USA)|no:Norway|ps:Palestinian Authority|pl:Poland|pt:Portugal|qa:Qatar|ro:Romania|ru:Russia|sm:San Marino|sa:Saudi Arabia|rs:Serbia|sc:Seychelles|sg:Singapore|sk:Slovakia|si:Slovenia|kr:South Korea|es:Spain|se:Sweden|ch:Switzerland|tj:Tajikistan|th:Thailand|tr:Turkey|ae:UAE|us:USA|su:USSR|ua:Ukraine|uk:United Kingdom|uz:Uzbekistan|va:Vatican|vn:Vietnam|ax:Åland (FI)|xx:Non-recognized and partially recognized states')
-    .split('|').map(s => { const i = s.indexOf(':'); return { code: s.slice(0, i), name: s.slice(i + 1) }; });
+  // The countries of the site: the code in its address (/fr/...) and its name. One per line.
+  const COUNTRIES = [
+    { code: 'al', name: 'Albania' },
+    { code: 'dz', name: 'Algeria' },
+    { code: 'ad', name: 'Andorra' },
+    { code: 'ar', name: 'Argentina' },
+    { code: 'am', name: 'Armenia' },
+    { code: 'au', name: 'Australia' },
+    { code: 'at', name: 'Austria' },
+    { code: 'az', name: 'Azerbaijan' },
+    { code: 'bs', name: 'Bahamas' },
+    { code: 'bh', name: 'Bahrain' },
+    { code: 'by', name: 'Belarus' },
+    { code: 'be', name: 'Belgium' },
+    { code: 'ba', name: 'Bosnia and Herzegovina' },
+    { code: 'br', name: 'Brazil' },
+    { code: 'bg', name: 'Bulgaria' },
+    { code: 'kh', name: 'Cambodia' },
+    { code: 'ca', name: 'Canada' },
+    { code: 'cl', name: 'Chile' },
+    { code: 'cn', name: 'China' },
+    { code: 'hr', name: 'Croatia' },
+    { code: 'cy', name: 'Cyprus' },
+    { code: 'cz', name: 'Czech Republic' },
+    { code: 'dk', name: 'Denmark' },
+    { code: 'eg', name: 'Egypt' },
+    { code: 'ee', name: 'Estonia' },
+    { code: 'fi', name: 'Finland' },
+    { code: 'fr', name: 'France' },
+    { code: 'ge', name: 'Georgia' },
+    { code: 'de', name: 'Germany' },
+    { code: 'gi', name: 'Gibraltar (UK)' },
+    { code: 'gr', name: 'Greece' },
+    { code: 'gu', name: 'Guam (USA)' },
+    { code: 'gg', name: 'Guernsey (UK)' },
+    { code: 'hk', name: 'Hong Kong (CN)' },
+    { code: 'hu', name: 'Hungary' },
+    { code: 'is', name: 'Iceland' },
+    { code: 'id', name: 'Indonesia' },
+    { code: 'ir', name: 'Iran' },
+    { code: 'iq', name: 'Iraq' },
+    { code: 'ie', name: 'Ireland' },
+    { code: 'il', name: 'Israel' },
+    { code: 'it', name: 'Italy' },
+    { code: 'jp', name: 'Japan' },
+    { code: 'je', name: 'Jersey (UK)' },
+    { code: 'kz', name: 'Kazakhstan' },
+    { code: 'ke', name: 'Kenya' },
+    { code: 'kw', name: 'Kuwait' },
+    { code: 'kg', name: 'Kyrgyzstan' },
+    { code: 'la', name: 'Laos' },
+    { code: 'lv', name: 'Latvia' },
+    { code: 'li', name: 'Liechtenstein' },
+    { code: 'lt', name: 'Lithuania' },
+    { code: 'lu', name: 'Luxembourg' },
+    { code: 'my', name: 'Malaysia' },
+    { code: 'mt', name: 'Malta' },
+    { code: 'mx', name: 'Mexico' },
+    { code: 'md', name: 'Moldova' },
+    { code: 'mc', name: 'Monaco' },
+    { code: 'mn', name: 'Mongolia' },
+    { code: 'me', name: 'Montenegro' },
+    { code: 'ma', name: 'Morocco' },
+    { code: 'nl', name: 'Netherlands' },
+    { code: 'nz', name: 'New Zealand' },
+    { code: 'mk', name: 'North Macedonia' },
+    { code: 'mp', name: 'Northern Mariana Islands (USA)' },
+    { code: 'no', name: 'Norway' },
+    { code: 'ps', name: 'Palestinian Authority' },
+    { code: 'pl', name: 'Poland' },
+    { code: 'pt', name: 'Portugal' },
+    { code: 'qa', name: 'Qatar' },
+    { code: 'ro', name: 'Romania' },
+    { code: 'ru', name: 'Russia' },
+    { code: 'sm', name: 'San Marino' },
+    { code: 'sa', name: 'Saudi Arabia' },
+    { code: 'rs', name: 'Serbia' },
+    { code: 'sc', name: 'Seychelles' },
+    { code: 'sg', name: 'Singapore' },
+    { code: 'sk', name: 'Slovakia' },
+    { code: 'si', name: 'Slovenia' },
+    { code: 'kr', name: 'South Korea' },
+    { code: 'es', name: 'Spain' },
+    { code: 'se', name: 'Sweden' },
+    { code: 'ch', name: 'Switzerland' },
+    { code: 'tj', name: 'Tajikistan' },
+    { code: 'th', name: 'Thailand' },
+    { code: 'tr', name: 'Turkey' },
+    { code: 'ae', name: 'UAE' },
+    { code: 'us', name: 'USA' },
+    { code: 'su', name: 'USSR' },
+    { code: 'ua', name: 'Ukraine' },
+    { code: 'uk', name: 'United Kingdom' },
+    { code: 'uz', name: 'Uzbekistan' },
+    { code: 'va', name: 'Vatican' },
+    { code: 'vn', name: 'Vietnam' },
+    { code: 'ax', name: 'Åland (FI)' },
+    { code: 'xx', name: 'Non-recognized and partially recognized states' }
+  ];
   const cName = code => { const c = COUNTRIES.find(x => x.code === code); return c ? c.name : String(code).toUpperCase(); };
   const uid = () => (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : Date.now() + '-' + Math.random().toString(36).slice(2);
   /* =====================================================================
@@ -256,6 +353,107 @@
   // a select shows its label (BJ, VZ...), which is what the site expects; its value is an internal code
   const selText = id => { const el = document.getElementById(id); if (!el) return ''; if (el.tagName === 'SELECT') { const o = el.options[el.selectedIndex]; return o && o.value ? o.text.trim() : ''; } return el.value.trim(); };
 
+  const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };   // a menu's label, only when the menu is shown (a hidden one keeps an old value)
+  const PLATE_RULES = {};   // country code -> function that reads the plate from the upload form; one file per country, in this folder
+
+  // Any other country: the visible plate fields, read in the order of the page (region, letters, digits...).
+  // A field that is not shown (another plate type) is left out. A field with no value is left out.
+  const PLATE_FIELD = /nomer|let|digit|region|^b\d|dip|drop|^dig|trl|letter/i;
+  const isPlateField = el => PLATE_FIELD.test(el.id || el.name || '');
+  function genericPlate() {
+    const parts = [];
+    for (const el of document.querySelectorAll('input, select')) {
+      const key = el.id || el.name || '';
+      if (!PLATE_FIELD.test(key) || el.offsetParent === null || el.disabled || key === 'drop_2') continue;   // drop_2 is the plate-type menu of Andorra and Malta
+      if (el.tagName === 'SELECT') {
+        const opt = el.options[el.selectedIndex];
+        if (opt && opt.value) parts.push(opt.value.length > 3 ? opt.text.trim() : opt.value.trim());
+      } else if (el.value.trim()) {
+        parts.push(el.value.trim());
+      }
+    }
+    return joinParts(parts).toUpperCase();
+  }
+  // Albania, by type: cars 2011 AA 896 TH; cars 1993 LE 0075 B (region, digits, letter); others: letter, digits
+  PLATE_RULES.al = () => {
+    const ctype = fieldVal('ctype');
+    if (ctype === '1') return joinParts([fieldVal('let1'), fieldVal('digit'), fieldVal('let2')]);
+    if (ctype === '4') return joinParts([selText('region'), fieldVal('digit'), fieldVal('let2')]);
+    return joinParts([fieldVal('let1'), fieldVal('digit')]);
+  };
+  // Bosnia: A12-E-345, parts joined by dashes; b1 only when it is shown (a hidden menu keeps a value)
+  PLATE_RULES.ba = () =>
+    [fieldVal('let1'), shownVal('b1'), fieldVal('let2') || fieldVal('digit')].filter(Boolean).join('-');
+  // Belarus: for each type, the visible letter menus, the region menu and the digit field (site's disby1 function, run on each type)
+  const BY_TYPES = {
+    '1': { letters: ['b3', 'b4'], region: 'region5', digit: 'digit1', lettersFirst: false },   // Cars (2004)
+    '2': { letters: ['b1', 'b2'], region: 'region5', digit: 'digit1', lettersFirst: true },    // Trucks and buses (2004)
+    '4': { letters: ['b3', 'b4'], region: 'region5', digit: 'digit1', lettersFirst: false },   // Electric vehicles (cars)
+    '5': { letters: ['b1', 'b3'], region: 'region5', digit: 'digit1', lettersFirst: true },    // Trailers and semitrailers (2004)
+    '6': { letters: ['b3', 'b4'], region: 'region5', digit: 'digit1', lettersFirst: false },   // Motorcycles (2004)
+    '7': { letters: ['b1', 'b2'], region: 'region1', digit: 'digit1', lettersFirst: true },    // Special machinery (2004)
+    '8': { letters: ['b1', 'b2'], region: 'region5', digit: 'digit1', lettersFirst: true },    // Electric vehicles (trucks and buses)
+    '9': { letters: ['b3', 'b4'], region: 'region5', digit: 'digit1', lettersFirst: false },   // Electric vehicles (motorcycles)
+    '12': { letters: ['b3', 'b4'], region: 'region1', digit: 'digit2', lettersFirst: false },  // Transit plates (2004)
+    '13': { letters: ['b3', 'b4'], region: 'region3', digit: 'digit1', lettersFirst: false },  // Cars (2000)
+    '20': { letters: [], region: 'region6', digit: 'digit1', lettersFirst: false },             // Police
+    '3': { letters: ['dip'], region: 'region5', digit: 'digit1', lettersFirst: true },        // Diplomatic: CC 9605-1
+    '14': { letters: [], region: 'region4', digit: 'digit1', lettersFirst: false },            // Cars (1992)
+    '15': { letters: [], region: 'region4', digit: 'digit2', lettersFirst: false },            // Trucks and buses (1992)
+    '16': { letters: [], region: '', digit: 'digit1', lettersFirst: false },                   // Trailers (1992)
+    '17': { letters: ['b3', 'b4'], region: 'region1', digit: 'digit2', lettersFirst: false },  // Taxi
+    '18': { letters: ['b3', 'b4'], region: '', digit: 'digit2', lettersFirst: false },         // Provisional (the T/BP mark is typed by the site)
+    '19': { letters: [], region: '', digit: 'digit2', lettersFirst: false }                    // Foreign citizens and enterprises
+  };
+
+
+  // Belarus: the fields shown depend on the type (taken from the site's own switch function)
+  PLATE_RULES.by = () => {
+    const ctype = fieldVal('ctype');
+    // trailers 2004: A 1057 K-1 (letter, digits, letter, dash region); special machinery: IH-4 3152 (letters, dash region, digits)
+    if (ctype === '5') return joinParts([fieldVal('b1'), fieldVal('digit1'), fieldVal('b3')]) + '-' + selText('region5');
+    if (ctype === '16') return joinParts([fieldVal('digit1'), selText('b3') + selText('b1')]);   // trailers 1992: 0222 KA (b3 then b1)
+    if (ctype === '13') return joinParts([fieldVal('digit1'), selText('b3') + selText('b4') + selText('region3')]);   // cars 2000: 3897 MBI (digits, then the three letters)
+    if (ctype === '15') return joinParts([selText('region4'), fieldVal('digit2')]);   // trucks 1992: AC 9877 (letters, then digits)
+    // transit 2004: 8AP T 6938 (digit, letters, T set by the site, digits); taxi: 1 TAX 7359; provisional: MK BP 8462; foreign: P 91179
+    if (ctype === '12') return joinParts([shownVal('digit1'), shownVal('b3') + shownVal('b4'), shownVal('trz'), shownVal('digit2')]);
+    if (ctype === '17') return joinParts([selText('region1'), shownVal('tx') + selText('b3') + selText('b4'), shownVal('digit2')]);   // taxi: 1 TAX 7359 (region menu, T from tx + the two letters, digits)
+    if (ctype === '18') return joinParts([shownVal('b3') + shownVal('b4'), shownVal('trz'), shownVal('digit2')]);
+    if (ctype === '19') return joinParts([selText('nonr'), shownVal('digit2')]);
+    if (ctype === '7') return joinParts([selText('b1') + selText('b2') + (selText('region1') ? '-' + selText('region1') : ''), fieldVal('digit1')]);
+    const row = BY_TYPES[ctype];
+    if (!row) return genericPlate();
+    const letters = row.letters.map(selText).join(''), digits = fieldVal(row.digit), region = selText(row.region);
+    const core = row.lettersFirst ? joinParts([letters, digits]) : joinParts([digits, letters]);   // trucks AP 9665, cars 6383 EC
+    return core + (region ? '-' + region : '');                    // the region follows a dash: AP 9665-1, 6383 EC-6
+  };
+  // Czechia: 1CA 8407. Only the fields shown for this type (the site's disczn function); a hidden menu keeps a value
+  PLATE_RULES.cz = () => {
+    if (shownVal('nomer')) return fieldVal('nomer');            // vanity, export transit, mopeds: one field
+    const letters = menu('b1') + menu('region') + menu('b2');
+    const digits = ['digit1', 'digit2', 'digit3'].map(shownVal).filter(Boolean).join('');
+    return joinParts([letters, digits]);
+  };
+  // Germany: only the fields shown for this type (a hidden menu keeps HD or H)
+  PLATE_RULES.de = () => {
+    if (fieldVal('ctype') === '17') return joinParts([shownVal('digit'), shownVal('inslet')]);   // insurance plates: 380 LSI
+    if (fieldVal('ctype') === '4') return joinParts([selText('dipf'), selText('regiondip') + '-' + fieldVal('digit')]);   // diplomatic: 0 111-111 (dipf shows 0)
+    return joinParts([menu('region'), menu('b1'), shownVal('digit'), menu('b2')]);
+  };
+  // Denmark: vanity plates are seven boxes, one character each (MARIAKJ)
+  PLATE_RULES.dk = () => {
+    if (fieldVal('ctype') === '4') return ['b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7'].map(shownVal).join('').toUpperCase();
+    return genericPlate();
+  };
+  PLATE_RULES.dz = () => fieldVal('nomer').replace(/\s+/g, ' ');     // Algeria: the groups are typed as the site shows them (271201 00 16)
+  // Estonia: motorcycles (ctype 3) are ABC 123; the other types are read from their fields
+  PLATE_RULES.ee = () =>
+    fieldVal('ctype') === '3' ? joinParts([fieldVal('let'), fieldVal('dig1')]) : genericPlate();
+  // Spain: diplomatic CD 32 022 (the dip menu shows its label CD, its value is a code)
+  PLATE_RULES.es = () => {
+    if (fieldVal('ctype') === '2') return joinParts([selText('dip'), selText('region'), shownVal('digit1')]);
+    return genericPlate();
+  };
   // France: the format depends on the plate type chosen in the form (#ctype)
   function plateFR() {
     const type = fieldVal('ctype');
@@ -283,200 +481,112 @@
     return m ? `${m[1]}-${m[2]}-${m[3]}` : raw.toUpperCase().replace(/\s+/g, '-').trim();
   }
 
-  // Any other country: the visible plate fields, read in the order of the page (region, letters, digits...).
-  // A field that is not shown (another plate type) is left out. A field with no value is left out.
-  const PLATE_FIELD = /nomer|let|digit|region|^b\d|dip|drop|^dig|trl|letter/i;
-  const isPlateField = el => PLATE_FIELD.test(el.id || el.name || '');
-  function genericPlate() {
-    const parts = [];
-    for (const el of document.querySelectorAll('input, select')) {
-      const key = el.id || el.name || '';
-      if (!PLATE_FIELD.test(key) || el.offsetParent === null || el.disabled || key === 'drop_2') continue;   // drop_2 is the plate-type menu of Andorra and Malta
-      if (el.tagName === 'SELECT') {
-        const opt = el.options[el.selectedIndex];
-        if (opt && opt.value) parts.push(opt.value.length > 3 ? opt.text.trim() : opt.value.trim());
-      } else if (el.value.trim()) {
-        parts.push(el.value.trim());
-      }
-    }
-    return joinParts(parts).toUpperCase();
-  }
 
-  // Belarus: for each type, the visible letter menus, the region menu and the digit field (site's disby1 function, run on each type)
-  const BY_TYPES = {
-    '1': { letters: ['b3', 'b4'], region: 'region5', digit: 'digit1', lettersFirst: false },   // Cars (2004)
-    '2': { letters: ['b1', 'b2'], region: 'region5', digit: 'digit1', lettersFirst: true },    // Trucks and buses (2004)
-    '4': { letters: ['b3', 'b4'], region: 'region5', digit: 'digit1', lettersFirst: false },   // Electric vehicles (cars)
-    '5': { letters: ['b1', 'b3'], region: 'region5', digit: 'digit1', lettersFirst: true },    // Trailers and semitrailers (2004)
-    '6': { letters: ['b3', 'b4'], region: 'region5', digit: 'digit1', lettersFirst: false },   // Motorcycles (2004)
-    '7': { letters: ['b1', 'b2'], region: 'region1', digit: 'digit1', lettersFirst: true },    // Special machinery (2004)
-    '8': { letters: ['b1', 'b2'], region: 'region5', digit: 'digit1', lettersFirst: true },    // Electric vehicles (trucks and buses)
-    '9': { letters: ['b3', 'b4'], region: 'region5', digit: 'digit1', lettersFirst: false },   // Electric vehicles (motorcycles)
-    '12': { letters: ['b3', 'b4'], region: 'region1', digit: 'digit2', lettersFirst: false },  // Transit plates (2004)
-    '13': { letters: ['b3', 'b4'], region: 'region3', digit: 'digit1', lettersFirst: false },  // Cars (2000)
-    '20': { letters: [], region: 'region6', digit: 'digit1', lettersFirst: false },             // Police
-    '3': { letters: ['dip'], region: 'region5', digit: 'digit1', lettersFirst: true },        // Diplomatic: CC 9605-1
-    '14': { letters: [], region: 'region4', digit: 'digit1', lettersFirst: false },            // Cars (1992)
-    '15': { letters: [], region: 'region4', digit: 'digit2', lettersFirst: false },            // Trucks and buses (1992)
-    '16': { letters: [], region: '', digit: 'digit1', lettersFirst: false },                   // Trailers (1992)
-    '17': { letters: ['b3', 'b4'], region: 'region1', digit: 'digit2', lettersFirst: false },  // Taxi
-    '18': { letters: ['b3', 'b4'], region: '', digit: 'digit2', lettersFirst: false },         // Provisional (the T/BP mark is typed by the site)
-    '19': { letters: [], region: '', digit: 'digit2', lettersFirst: false }                    // Foreign citizens and enterprises
+  PLATE_RULES.fr = () => plateFR();
+  PLATE_RULES.gg = () => fieldVal('digit');
+  // Greece: IAZ 6038 (cars). 1972 system (9): IN-4662; mopeds (12): ZHE 3860. Only the shown fields
+  PLATE_RULES.gr = () => {
+    const ctype = fieldVal('ctype');
+    if (ctype === '9') return shownVal('let') + '-' + shownVal('digit');
+    if (ctype === '12') return joinParts([shownVal('let'), shownVal('digit')]);
+    return joinParts([menu('b1') + menu('region'), shownVal('digit')]);
   };
-
-  function plateForForm() {
-    switch (here.country) {
-      case 'fr': return plateFR();
-      case 'de': {                                                  // Germany: only the fields shown for this type (a hidden menu keeps HD or H)
-        if (fieldVal('ctype') === '17') return joinParts([shownVal('digit'), shownVal('inslet')]);   // insurance plates: 380 LSI
-        const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };
-        if (fieldVal('ctype') === '4') return joinParts([selText('dipf'), selText('regiondip') + '-' + fieldVal('digit')]);   // diplomatic: 0 111-111 (dipf shows 0)
-        return joinParts([menu('region'), menu('b1'), shownVal('digit'), menu('b2')]);
-      }
-      case 'gg': return fieldVal('digit');
-      case 'hr': {                                                  // Croatia: ZG 8899-JB; vanity (5) is region + the letter boxes shown: ZG ZMAJ
-        if (fieldVal('ctype') === '5') {
-          const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };
-          return joinParts([selText('region'), ['b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7'].map(menu).join('')]);
-        }
-        const digit = fieldVal('digit') || fieldVal('digit1'), letters = fieldVal('b1') + fieldVal('b2');
-        return joinParts([selText('region') || selText('region1'), digit && letters ? `${digit}-${letters}` : digit || letters]);
-      }
-      case 'rs': {                                                  // Serbia: BG 123-AB; trailers (2): AC-334 LE (no region); vanity (4): region then the letter boxes
-        const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };
-        const ctype = fieldVal('ctype');
-        if (ctype === '2') return joinParts([shownVal('b1') + '-' + shownVal('digit2'), shownVal('b2')]);
-        if (ctype === '4') return joinParts([menu('region1'), ['b1', 'b2', 'b3', 'b4', 'b5'].map(menu).join('')]);
-        const digit = fieldVal('digit') || fieldVal('digit1'), letters = fieldVal('b1') + fieldVal('b2');
-        return joinParts([selText('region') || selText('region1'), digit && letters ? `${digit}-${letters}` : digit || letters]);
-      }
-      case 'me': {                                                  // Montenegro: vanity = region then the letter boxes (BD CMM02); police = fon, then region+digits (P PG273)
-        const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };
-        const ctype = fieldVal('ctype');
-        if (ctype === '5') return joinParts([menu('region'), ['b1', 'b2', 'b3', 'b4', 'b5'].map(menu).join('')]);
-        if (ctype === '6') return joinParts([selText('fon'), selText('region') + shownVal('digit')]);
-        return genericPlate();
-      }
-      case 'is': {                                                  // Iceland: vanity plates are six boxes, one character each (LYNGAR)
-        if (fieldVal('ctype') === '8') return ['b1', 'b2', 'b3', 'b4', 'b5', 'b6'].map(shownVal).join('').toUpperCase();
-        return genericPlate();
-      }
-      case 'md': {                                                  // Moldova: trailers of 1992: region code, digits, letters
-        if (fieldVal('ctype') === '3') return joinParts([fieldVal('region1'), fieldVal('digit'), fieldVal('let2')]);   // FL 070 RA (region code, digits, letters: the site has it)
-        return genericPlate();
-      }
-      case 'si': {                                                  // Slovenia: LJ 123-AB (the region code, then the plate)
-        const region = (document.getElementById('drop_1') || { value: '' }).value.trim();
-        return joinParts([region, fieldVal('nomer')]);
-      }
-      case 'tj': {                                                  // Tajikistan: 7717XZ07 = the number, then the region code (once). A number that already ends with a region code is kept as it is
-        const el = document.getElementById('region2'), shown = el && el.offsetParent !== null;
-        const n = squash(fieldVal('nomer'));
-        const codes = shown ? [...el.options].map(o => o.text.trim()).filter(Boolean) : [];
-        if (codes.some(c => n.endsWith(c))) return n;
-        const r = shown ? selText('region2') : '';
-        return r ? n + r : n;
-      }
-      case 'ua': {                                                  // Ukraine: AA 0001 AA. Only the fields shown for the type (a hidden menu keeps BH, HA, OM)
-        const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };
-        const ctype = fieldVal('ctype');
-        if (ctype === '16') return joinParts([shownVal('digit1'), menu('b1') + menu('b2') + menu('b3')]);     // motorcycles 1995: 0708 CKA
-        if (ctype === '14') return joinParts([shownVal('digit1'), menu('region4')]);                          // special machinery 1995: 00828 AC
-        if (ctype === '15') return joinParts([menu('region4'), shownVal('digit4')]);                          // trailers for special vehicles: AB 07067
-        if (ctype === '17') return joinParts([shownVal('dlet1'), shownVal('digit2'), shownVal('digit4')]);   // diplomatic: DP 201 191
-        const region = menu('region1') || menu('region2') || menu('region3');
-        const digit = ['digit1', 'digit2', 'digit3', 'digit4'].map(shownVal).find(Boolean) || '';
-        return joinParts([region, digit, menu('b1') + menu('b2')]);
-      }
-      case 'lv': {                                                  // Latvia: AB 1234; vanity (6) and diplomatic (9) are typed in one field: C-4307, PENNY
-        if (['6', '9'].includes(fieldVal('ctype'))) return fieldVal('nomer').toUpperCase();
-        return joinParts([selText('b1') + selText('b2'), fieldVal('digit')]);
-      }
-      case 'li': return joinParts(['FL', fieldVal('digit').replace(/^FL\s*/i, '')]);   // Liechtenstein: FL 12345 (the FL is fixed; the digit field may already hold it)
-      case 'ru': {                                                  // Russia: А 001 АА 77. Only the menus shown for this type (the site's disru20 function)
-        const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };
-        return joinParts([menu('b1') + menu('b2'), shownVal('digit'), menu('b3') + menu('b4'), menu('region')]);
-      }
-      case 'uz': {                                                  // Uzbekistan: PP A 123 AA (cars); motorcycles, trailers, special machinery: 010 LA 50; high authorities: PAA 252
-        const ctype = fieldVal('ctype');
-        if (ctype === '9') return joinParts([selText('b3'), fieldVal('dig1')]);
-        if (['5', '6', '7', '8'].includes(ctype)) return joinParts([fieldVal('dig3'), fieldVal('b4'), selText('region')]);
-        return joinParts([selText('region'), fieldVal('b1'), fieldVal('dig1'), fieldVal('b2')]);
-      }
-      case 'gr': {                                                  // Greece: IAZ 6038 (cars). 1972 system (9): IN-4662; mopeds (12): ZHE 3860. Only the shown fields
-        const ctype = fieldVal('ctype');
-        if (ctype === '9') return shownVal('let') + '-' + shownVal('digit');
-        if (ctype === '12') return joinParts([shownVal('let'), shownVal('digit')]);
-        const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };
-        return joinParts([menu('b1') + menu('region'), shownVal('digit')]);
-      }
-      case 'by': {                                                  // Belarus: the fields shown depend on the type (taken from the site's own switch function)
-        const ctype = fieldVal('ctype');
-        // trailers 2004: A 1057 K-1 (letter, digits, letter, dash region); special machinery: IH-4 3152 (letters, dash region, digits)
-        if (ctype === '5') return joinParts([fieldVal('b1'), fieldVal('digit1'), fieldVal('b3')]) + '-' + selText('region5');
-        if (ctype === '16') return joinParts([fieldVal('digit1'), selText('b3') + selText('b1')]);   // trailers 1992: 0222 KA (b3 then b1)
-        if (ctype === '13') return joinParts([fieldVal('digit1'), selText('b3') + selText('b4') + selText('region3')]);   // cars 2000: 3897 MBI (digits, then the three letters)
-        if (ctype === '15') return joinParts([selText('region4'), fieldVal('digit2')]);   // trucks 1992: AC 9877 (letters, then digits)
-        // transit 2004: 8AP T 6938 (digit, letters, T set by the site, digits); taxi: 1 TAX 7359; provisional: MK BP 8462; foreign: P 91179
-        if (ctype === '12') return joinParts([shownVal('digit1'), shownVal('b3') + shownVal('b4'), shownVal('trz'), shownVal('digit2')]);
-        if (ctype === '17') return joinParts([selText('region1'), shownVal('tx') + selText('b3') + selText('b4'), shownVal('digit2')]);   // taxi: 1 TAX 7359 (region menu, T from tx + the two letters, digits)
-        if (ctype === '18') return joinParts([shownVal('b3') + shownVal('b4'), shownVal('trz'), shownVal('digit2')]);
-        if (ctype === '19') return joinParts([selText('nonr'), shownVal('digit2')]);
-        if (ctype === '7') return joinParts([selText('b1') + selText('b2') + (selText('region1') ? '-' + selText('region1') : ''), fieldVal('digit1')]);
-        const row = BY_TYPES[ctype];
-        if (!row) return genericPlate();
-        const letters = row.letters.map(selText).join(''), digits = fieldVal(row.digit), region = selText(row.region);
-        const core = row.lettersFirst ? joinParts([letters, digits]) : joinParts([digits, letters]);   // trucks AP 9665, cars 6383 EC
-        return core + (region ? '-' + region : '');                    // the region follows a dash: AP 9665-1, 6383 EC-6
-      }
-      case 'cz': {                                                  // Czechia: 1CA 8407. Only the fields shown for this type (the site's disczn function); a hidden menu keeps a value
-        if (shownVal('nomer')) return fieldVal('nomer');            // vanity, export transit, mopeds: one field
-        const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };
-        const letters = menu('b1') + menu('region') + menu('b2');
-        const digits = ['digit1', 'digit2', 'digit3'].map(shownVal).filter(Boolean).join('');
-        return joinParts([letters, digits]);
-      }
-      case 'sk': {                                                  // Slovakia: BA 427RF; the types with a middle letter (dealer, oldtimers...) read it: PO M 704
-        const region = selText('region');
-        if (shownVal('let1')) return joinParts([region, shownVal('let1'), fieldVal('digit')]);
-        if (!fieldVal('digit')) return genericPlate();                // vanity and provisional types have no digit field: read the shown fields
-        return region + '-' + fieldVal('digit') + fieldVal('let2');   // a space is refused by the site
-      }
-      case 'ee':                                                    // Estonia: motorcycles (ctype 3) are ABC 123; the other types are read from their fields
-        return fieldVal('ctype') === '3' ? joinParts([fieldVal('let'), fieldVal('dig1')]) : genericPlate();
-      case 'al': {                                                  // Albania, by type: cars 2011 AA 896 TH; cars 1993 LE 0075 B (region, digits, letter); others: letter, digits
-        const ctype = fieldVal('ctype');
-        if (ctype === '1') return joinParts([fieldVal('let1'), fieldVal('digit'), fieldVal('let2')]);
-        if (ctype === '4') return joinParts([selText('region'), fieldVal('digit'), fieldVal('let2')]);
-        return joinParts([fieldVal('let1'), fieldVal('digit')]);
-      }
-      case 'ba':                                                    // Bosnia: A12-E-345, parts joined by dashes; b1 only when it is shown (a hidden menu keeps a value)
-        return [fieldVal('let1'), shownVal('b1'), fieldVal('let2') || fieldVal('digit')].filter(Boolean).join('-');
-      case 'tr': {
-        const sel = document.querySelector('select[name="region"]');
-        // the option value is an internal code (40001); the label starts with the plate number ("50 - Nevsehir")
-        const label = sel && sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].text : '';
-        const region = label.match(/^\s*(\d{2})/);
-        return joinParts([region && region[1], fieldVal('let'), fieldVal('digit')]);
-      }
-      case 'es': {                                                  // Spain: diplomatic CD 32 022 (the dip menu shows its label CD, its value is a code)
-        if (fieldVal('ctype') === '2') return joinParts([selText('dip'), selText('region'), shownVal('digit1')]);
-        return genericPlate();
-      }
-      case 'dk': {                                                  // Denmark: vanity plates are seven boxes, one character each (MARIAKJ)
-        if (fieldVal('ctype') === '4') return ['b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7'].map(shownVal).join('').toUpperCase();
-        return genericPlate();
-      }
-      case 'pl': {                                                  // Poland: CNA 32756 = region menu (only when shown) + nomerpl
-        const el = document.getElementById('region');
-        const region = el && el.offsetParent !== null ? selText('region') : '';
-        return joinParts([region, fieldVal('nomerpl').toUpperCase()]);
-      }
-      case 'dz': return fieldVal('nomer').replace(/\s+/g, ' ');     // Algeria: the groups are typed as the site shows them (271201 00 16)
-      default:
-        return genericPlate();
+  // Croatia: ZG 8899-JB; vanity (5) is region + the letter boxes shown: ZG ZMAJ
+  PLATE_RULES.hr = () => {
+    if (fieldVal('ctype') === '5') {
+      return joinParts([selText('region'), ['b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7'].map(menu).join('')]);
     }
-  }
+    const digit = fieldVal('digit') || fieldVal('digit1'), letters = fieldVal('b1') + fieldVal('b2');
+    return joinParts([selText('region') || selText('region1'), digit && letters ? `${digit}-${letters}` : digit || letters]);
+  };
+  // Iceland: vanity plates are six boxes, one character each (LYNGAR)
+  PLATE_RULES.is = () => {
+    if (fieldVal('ctype') === '8') return ['b1', 'b2', 'b3', 'b4', 'b5', 'b6'].map(shownVal).join('').toUpperCase();
+    return genericPlate();
+  };
+  PLATE_RULES.li = () => joinParts(['FL', fieldVal('digit').replace(/^FL\s*/i, '')]);   // Liechtenstein: FL 12345 (the FL is fixed; the digit field may already hold it)
+  // Latvia: AB 1234; vanity (6) and diplomatic (9) are typed in one field: C-4307, PENNY
+  PLATE_RULES.lv = () => {
+    if (['6', '9'].includes(fieldVal('ctype'))) return fieldVal('nomer').toUpperCase();
+    return joinParts([selText('b1') + selText('b2'), fieldVal('digit')]);
+  };
+  // Moldova: trailers of 1992: region code, digits, letters
+  PLATE_RULES.md = () => {
+    if (fieldVal('ctype') === '3') return joinParts([fieldVal('region1'), fieldVal('digit'), fieldVal('let2')]);   // FL 070 RA (region code, digits, letters: the site has it)
+    return genericPlate();
+  };
+  // Montenegro: vanity = region then the letter boxes (BD CMM02); police = fon, then region+digits (P PG273)
+  PLATE_RULES.me = () => {
+    const ctype = fieldVal('ctype');
+    if (ctype === '5') return joinParts([menu('region'), ['b1', 'b2', 'b3', 'b4', 'b5'].map(menu).join('')]);
+    if (ctype === '6') return joinParts([selText('fon'), selText('region') + shownVal('digit')]);
+    return genericPlate();
+  };
+  // Poland: CNA 32756 = region menu (only when shown) + nomerpl
+  PLATE_RULES.pl = () => {
+    const el = document.getElementById('region');
+    const region = el && el.offsetParent !== null ? selText('region') : '';
+    return joinParts([region, fieldVal('nomerpl').toUpperCase()]);
+  };
+  // Serbia: BG 123-AB; trailers (2): AC-334 LE (no region); vanity (4): region then the letter boxes
+  PLATE_RULES.rs = () => {
+    const ctype = fieldVal('ctype');
+    if (ctype === '2') return joinParts([shownVal('b1') + '-' + shownVal('digit2'), shownVal('b2')]);
+    if (ctype === '4') return joinParts([menu('region1'), ['b1', 'b2', 'b3', 'b4', 'b5'].map(menu).join('')]);
+    const digit = fieldVal('digit') || fieldVal('digit1'), letters = fieldVal('b1') + fieldVal('b2');
+    return joinParts([selText('region') || selText('region1'), digit && letters ? `${digit}-${letters}` : digit || letters]);
+  };
+  // Russia: А 001 АА 77. Only the menus shown for this type (the site's disru20 function)
+  PLATE_RULES.ru = () => {
+    return joinParts([menu('b1') + menu('b2'), shownVal('digit'), menu('b3') + menu('b4'), menu('region')]);
+  };
+  // Slovenia: LJ 123-AB (the region code, then the plate)
+  PLATE_RULES.si = () => {
+    const region = (document.getElementById('drop_1') || { value: '' }).value.trim();
+    return joinParts([region, fieldVal('nomer')]);
+  };
+  // Slovakia: BA 427RF; the types with a middle letter (dealer, oldtimers...) read it: PO M 704
+  PLATE_RULES.sk = () => {
+    const region = selText('region');
+    if (shownVal('let1')) return joinParts([region, shownVal('let1'), fieldVal('digit')]);
+    if (!fieldVal('digit')) return genericPlate();                // vanity and provisional types have no digit field: read the shown fields
+    return region + '-' + fieldVal('digit') + fieldVal('let2');   // a space is refused by the site
+  };
+  // Tajikistan: 7717XZ07 = the number, then the region code (once). A number that already ends with a region code is kept as it is
+  PLATE_RULES.tj = () => {
+    const el = document.getElementById('region2'), shown = el && el.offsetParent !== null;
+    const n = squash(fieldVal('nomer'));
+    const codes = shown ? [...el.options].map(o => o.text.trim()).filter(Boolean) : [];
+    if (codes.some(c => n.endsWith(c))) return n;
+    const r = shown ? selText('region2') : '';
+    return r ? n + r : n;
+  };
+  PLATE_RULES.tr = () => {
+    const sel = document.querySelector('select[name="region"]');
+    // the option value is an internal code (40001); the label starts with the plate number ("50 - Nevsehir")
+    const label = sel && sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].text : '';
+    const region = label.match(/^\s*(\d{2})/);
+    return joinParts([region && region[1], fieldVal('let'), fieldVal('digit')]);
+  };
+  // Ukraine: AA 0001 AA. Only the fields shown for the type (a hidden menu keeps BH, HA, OM)
+  PLATE_RULES.ua = () => {
+    const ctype = fieldVal('ctype');
+    if (ctype === '16') return joinParts([shownVal('digit1'), menu('b1') + menu('b2') + menu('b3')]);     // motorcycles 1995: 0708 CKA
+    if (ctype === '14') return joinParts([shownVal('digit1'), menu('region4')]);                          // special machinery 1995: 00828 AC
+    if (ctype === '15') return joinParts([menu('region4'), shownVal('digit4')]);                          // trailers for special vehicles: AB 07067
+    if (ctype === '17') return joinParts([shownVal('dlet1'), shownVal('digit2'), shownVal('digit4')]);   // diplomatic: DP 201 191
+    const region = menu('region1') || menu('region2') || menu('region3');
+    const digit = ['digit1', 'digit2', 'digit3', 'digit4'].map(shownVal).find(Boolean) || '';
+    return joinParts([region, digit, menu('b1') + menu('b2')]);
+  };
+  // Uzbekistan: PP A 123 AA (cars); motorcycles, trailers, special machinery: 010 LA 50; high authorities: PAA 252
+  PLATE_RULES.uz = () => {
+    const ctype = fieldVal('ctype');
+    if (ctype === '9') return joinParts([selText('b3'), fieldVal('dig1')]);
+    if (['5', '6', '7', '8'].includes(ctype)) return joinParts([fieldVal('dig3'), fieldVal('b4'), selText('region')]);
+    return joinParts([selText('region'), fieldVal('b1'), fieldVal('dig1'), fieldVal('b2')]);
+  };
+  const plateForForm = () => (PLATE_RULES[here.country] || genericPlate)();   // a country without a rule uses the plain visible fields
   /* =====================================================================
    *  ICONS  (Lucide, ISC licence, https://lucide.dev: see THIRD_PARTY.md)
    * ===================================================================== */
@@ -554,19 +664,6 @@
     + '.pmg-busy, .pmg-busy * {user-select:none!important;-webkit-user-select:none!important}';
   document.head.appendChild(pageStyle);
 
-  /* =====================================================================
-   *  RIBBON  (the NextPlaate panel: a vertical bar of icons on the right edge of the page;
-   *           an icon opens its drawer, which slides over the page)
-   * ===================================================================== */
-  // The drawers, in bar order. A feature joins one of them with groups: [{ drawer: 'pair', title, build }].
-  const DRAWERS = [
-    { id: 'pair', icon: 'photos', title: 'Photo pair', keys: 'S · F' },
-    { id: 'gallery', icon: 'gallery', title: 'Gallery', keys: 'L · ◀ ▶' },
-    { id: 'search', icon: 'search', title: 'Search', keys: '' },        // the plate check and Google Lens, one tab
-    { id: 'upload', icon: 'upload', title: 'Batch upload', keys: 'U · N' },
-    { id: 'keys', icon: 'keyboard', title: 'Shortcuts', keys: 'Esc' },
-    { id: 'dev', icon: 'wrench', title: 'Developer', keys: '' }        // shown only when the dev tools are built in
-  ];
   const RIBBON_CSS = `
     .side{display:flex;justify-content:flex-end;height:100%;align-items:stretch;pointer-events:none}
     .side>*{pointer-events:auto}
@@ -627,6 +724,20 @@
     .kbreset.off{visibility:hidden}
     @media (max-width:520px){ .drawer{width:calc(100vw - 56px)} .rail{width:48px} }
   `;
+
+  /* =====================================================================
+   *  RIBBON  (the NextPlaate panel: a vertical bar of icons on the right edge of the page;
+   *           an icon opens its drawer, which slides over the page)
+   * ===================================================================== */
+  // The drawers, in bar order. A feature joins one of them with groups: [{ drawer: 'pair', title, build }].
+  const DRAWERS = [
+    { id: 'pair', icon: 'photos', title: 'Photo pair', keys: 'S · F' },
+    { id: 'gallery', icon: 'gallery', title: 'Gallery', keys: 'L · ◀ ▶' },
+    { id: 'search', icon: 'search', title: 'Search', keys: '' },        // the plate check and Google Lens, one tab
+    { id: 'upload', icon: 'upload', title: 'Batch upload', keys: 'U · N' },
+    { id: 'keys', icon: 'keyboard', title: 'Shortcuts', keys: 'Esc' },
+    { id: 'dev', icon: 'wrench', title: 'Developer', keys: '' }        // shown only when the dev tools are built in
+  ];
 
   const host = document.createElement('div');
   host.id = 'pmg-host';

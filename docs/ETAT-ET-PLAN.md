@@ -117,3 +117,10 @@ Chaque étape : une branche courte, tests verts, un commit clair.
 - **Fait** : `data/` (47 pays, 974 plaques, 481 catégories de recherche, un dossier par pays, généré par `scripts/build-data.mjs`, schéma dans `data/README.md`) ; `.gitignore` versionne `data/`, `docs/`, le logo ; `tests/` rangé en `e2e/` (pytest) et `offline/` (contrôles sur pages sauvegardées), diagnostics dans `tools/`. Les 37 tests e2e et `check_known` (16/16) passent après le déplacement.
 - **À corriger** : `check_db` donne 864/871. Les 7 échecs sont des plaques ukrainiennes « Work vehicles (1995) » (ex. `Т1668 МК` lu `Т1668`) : une règle à reprendre dans `lib/plate`.
 - **Suite** : étape 1 (registre de réglages), puis étape 2 (découper `plate.js` par pays, un fichier par pays à côté de ses données).
+
+### Découpage et vitesse (branche `refactor/split-and-speed`)
+
+- **Fusion** : `main` contient tout (`refactor/ribbon` et `refactor/data-structure` fusionnées, supprimées).
+- **Découpage** : `lib/plate.js` (233 lignes) devient `lib/plate/` : `00-helpers.js`, `zz-entry.js` et 27 fichiers pays (`PLATE_RULES.<cc>`) ; `dev/30-plate-test.js` (473) devient 7 fichiers ; `upload/02-manager.js` (303) devient 3 ; le CSS du ruban a son fichier ; `countries.js` a une ligne par pays. Comportement identique (même résultat sur `check_db`).
+- **Vitesse** : `check_db` 110 s → 19 s (le test attendait 350 ms par plaque pour rien sur des pages sauvegardées ; 8 navigateurs au lieu de 4). Tests e2e 26 s → 8 s (exécution parallèle avec pytest-xdist, et horloge simulée Playwright à la place d'une attente de 12 s).
+- **Bug trouvé** : sur une copie Windows (fins de ligne CRLF), le build dev gardait le nom `NextPlaate` au lieu de `NextPlaate (dev)` : il aurait remplacé le script publié dans Tampermonkey. Corrigé dans `scripts/build.mjs`.

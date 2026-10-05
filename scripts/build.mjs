@@ -30,7 +30,8 @@ if (orphans.length) throw new Error('Not in a build group: ' + orphans.join(', '
 const ordered = GROUPS.flatMap(g =>
   files.filter(p => p.startsWith(g + '/')).sort((a, b) => a.localeCompare(b, 'en', { numeric: true })));
 
-let out = ordered.map(p => readFileSync(join(root, 'src', p), 'utf8')).join('');
+let out = ordered.map(p => readFileSync(join(root, 'src', p), 'utf8')).join('')
+  .replace(/\r\n/g, '\n');   // same output on Windows (CRLF checkout) and in the CI
 const target = DEV ? 'nextplaate.dev.user.js' : 'nextplaate.user.js';
 out = out.replace("'__DEBUG__'", DEV ? "'1'" : "'0'");   // logs: on in the dev build, off in the public one
 if (DEV) {

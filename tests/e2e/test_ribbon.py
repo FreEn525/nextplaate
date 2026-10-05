@@ -4,7 +4,7 @@ Run from the project root:  python -m pytest tests -q
 """
 import pytest
 
-from fake_site import route_site
+from fake_site import SCRIPT, route_site
 
 GALLERY = "https://platesmania.com/fr/gallery.php"
 EDIT_101 = "https://platesmania.com/fr/edit_dopol.php?id=101"
@@ -92,7 +92,8 @@ def test_panel_is_docked_on_the_right_edge(page):
 
 def test_bar_has_one_icon_per_drawer_in_order(page):
     open_at(page, GALLERY)
-    assert icon_drawers(page) == ["pair", "gallery", "search", "upload", "keys"]
+    # the dev build adds its own drawer at the end
+    assert icon_drawers(page) == ["pair", "gallery", "search", "upload", "keys"] + (["dev"] if "(dev)" in SCRIPT[:300] else [])
 
 
 def test_icon_opens_its_drawer_and_a_second_click_closes_it(page):

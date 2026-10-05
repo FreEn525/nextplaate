@@ -182,6 +182,7 @@ def _png_files(tmp_path, names):
 
 
 def test_batch_upload_opens_one_tab_per_photo(page, ctx, tmp_path, errors):
+    page.clock.install()   # fake timers: the delay between two tabs passes at once
     open_at(page, GALLERY)
     set_storage(page, {"qDelay": "5"})
     page.keyboard.press("KeyU")
@@ -201,8 +202,13 @@ def test_batch_upload_opens_one_tab_per_photo(page, ctx, tmp_path, errors):
     opened = []
     ctx.on("page", lambda p: opened.append(p.url))
     page.keyboard.press("KeyN")
-    # the second tab opens after the delay (5 s here, with jitter)
-    page.wait_for_timeout(12000)
+    # the second tab opens after the delay (5 s here, with jitter): move the clock past it
+    page.clock.run_for(12000)
+    page.wait_for_function("() => true")
+    for _ in range(50):
+        if len(opened) >= 2:
+            break
+        page.wait_for_timeout(50)
     urls = " ".join(opened)
     assert "/fr/add#pmg=" in urls
     assert "/de/add#pmg=" in urls

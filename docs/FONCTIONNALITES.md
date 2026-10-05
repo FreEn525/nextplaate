@@ -58,7 +58,7 @@ NextPlaate est un script Tampermonkey (userscript) pour [PlatesMania](https://pl
 - `src/meta` : en-tête Tampermonkey.
 - `src/core` : point d'entrée, stockage (`store`), détection de la page (`here`), registre des fonctions, raccourcis clavier.
 - `src/ui` : icônes, styles, barre et tiroirs.
-- `src/lib` : format des plaques (`plate.js`), file de requêtes vers le site (`http.js`), pays (`countries.js`).
+- `src/lib` : format des plaques (`plate/` : `00-helpers.js` puis un fichier par pays, `PLATE_RULES.<cc>`), file de requêtes vers le site (`http.js`), pays (`countries.js`).
 - `src/features` : une fonction par fichier (pair, details, description, likes, pages, plate, shortcuts), et `upload/` pour les envois par lots.
 - `src/boot` : démarrage.
 - `src/dev` : outils de développement (seulement dans le build dev).
@@ -73,7 +73,7 @@ Chaque fonction s'enregistre avec `registerFeature({ groups, keys, onEscape, ini
 - Au premier signe de blocage (erreur 1015, 429, page de vérification Cloudflare), **toutes** les requêtes s'arrêtent 15 minutes. L'arrêt est gardé dans le navigateur, donc les autres pages le savent aussi.
 - Les comptages sont mis en cache pour la page en cours.
 
-### Règles de plaque (`src/lib/plate.js`)
+### Règles de plaque (`src/lib/plate/`)
 - Une règle par pays, et souvent une règle par catégorie : seuls les champs **visibles** pour la catégorie sont lus (les champs cachés gardent une ancienne valeur, source d'erreurs).
 - Les menus affichent un libellé, mais leur valeur est un code interne : on lit le libellé.
 - Un pays sans règle utilise la lecture générale : les champs visibles, dans l'ordre de la page.

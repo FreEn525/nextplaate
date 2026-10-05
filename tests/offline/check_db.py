@@ -11,6 +11,7 @@ the plate check reads it, and the result must be the plate itself. Nothing is se
 Uses the dev build (nextplaate.dev.user.js). Exit code 1 when a plate fails, so it can run before a release.
 """
 import argparse
+import os
 import json
 import re
 import sys
@@ -27,6 +28,9 @@ REF = ROOT / "reference" / "real" / "countries"
 DB = REF / "plates-db.json"
 DEV = (ROOT / "nextplaate.dev.user.js").read_text(encoding="utf-8")
 
+
+# wait after typing (the real run waits 350 ms for the site's scripts; the saved pages settle at once)
+SETTLE_MS = 20
 
 # (country, category) -> the one field the whole plate is typed in
 CATEGORY_FIELD = {('lv', 'Diplomatic'): 'nomer', ('lv', 'Vanity Plates'): 'nomer'}
@@ -98,7 +102,7 @@ def check_country(page, code, cases):
             continue
         # countries whose form takes the whole plate in one field (CATEGORY_FIELD); the others are split as the plate test does
         field = CATEGORY_FIELD.get((c["country"], c["category"]))
-        res = page.evaluate("([t, o]) => window.nextplaateDev.testText(t, o)", [c["plate"], {"field": field} if field else None])
+        res = page.evaluate("([t, o]) => window.nextplaateDev.testText(t, o)", [c["plate"], {"settle": SETTLE_MS, **({"field": field} if field else {})}])
         ok = bool(res["fits"]) and norm(res["read"]) == norm(c["plate"])
         results.append({**c, "status": "ok" if ok else ("not-fit" if not res["fits"] else "wrong"),
                         "read": res["read"], "fits": res["fits"]})
@@ -127,7 +131,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--country")
     ap.add_argument("--report")
-    ap.add_argument("--workers", type=int, default=4)
+    ap.add_argument("--workers", type=int, default=min(8, os.cpu_count() or 4))
     args = ap.parse_args()
 
     cases = load_cases(args.country)
