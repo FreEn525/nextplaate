@@ -13,8 +13,8 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | **Pays non capturés** | **0** | |
 | Pays avec une règle propre | 40 sur 96 | |
 | Catégories (pays capturés) | 829 | |
-| Vérifiées | 682 | 82 % |
-| **À corriger** | **40** | 5 % |
+| Vérifiées | 685 | 83 % |
+| **À corriger** | **37** | 4 % |
 | **À trouver** (aucune plaque connue) | **0** | 0 % |
 | Galerie vide sur le site (aucune plaque n'existe) | 21 | 3 % |
 | Non testables par le formulaire (pas de menu de type, catégorie absente du menu, ou aucun champ de plaque) | 86 | 10 % |
@@ -38,15 +38,6 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | de | Seasonal plates (Oldtimers) | 2/3 | `H NG 382H (04/10)` | `N G 382H H (04/10)` |
 | dk | Vanity Plates | 1/3 | `777` | `777AAAA` |
 | dk | Vanity Plates | 1/3 | `USANO1` | `USANO1J` |
-| fr | SIV (temporary) | 0/3 | `WW-254-DW` | `WW` |
-| fr | SIV (temporary) | 0/3 | `WW-295-BD` | `WW` |
-| fr | SIV (temporary) | 0/3 | `WW-518-JF` | `WW` |
-| fr | SIV (transit plates) | 0/3 | `HL-670-GQ` | `HL` |
-| fr | SIV (transit plates) | 0/3 | `HM-235-JD` | `HM` |
-| fr | SIV (transit plates) | 0/3 | `HM-624-XX` | `HM` |
-| fr | FNI (transit) | 0/3 | `644 TJW 92` | `644` |
-| fr | FNI (transit) | 0/3 | `733 TXH 75` | `733` |
-| fr | FNI (transit) | 0/3 | `791 TNE 92` | `791` |
 | gi | Regular car plates (G 1234 A) | 1/3 | `G 1267 G` | `G 1267` |
 | gi | Regular car plates (G 1234 A) | 1/3 | `G 4684 G` | `G 4684` |
 | il | Diplomatic | 0/3 | `33-232-21` | `0 33-232-21` |
@@ -135,7 +126,6 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 
 | Pays | Règle | Catégories | Vérifiées | À corriger | À trouver | Galerie vide | Non testables | Page d'ajout |
 |---|---|---|---|---|---|---|---|---|
-| fr France | own | 17 | 14 | 3 |  |  |  | oui |
 | il Israel | generic | 8 | 5 | 3 |  |  |  | oui |
 | mn Mongolia | generic | 4 | 1 | 3 |  |  |  | oui |
 | ua Ukraine | own | 19 | 16 | 3 |  |  |  | oui |
@@ -183,6 +173,7 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | eg Egypt | own | 4 | 4 |  |  |  |  | oui |
 | es Spain | own | 6 | 6 |  |  |  |  | oui |
 | fi Finland | generic | 9 | 9 |  |  |  |  | oui |
+| fr France | own | 17 | 17 |  |  |  |  | oui |
 | ge Georgia | generic | 12 | 10 |  |  |  | 2 | oui |
 | gg Guernsey (UK) | own | 3 | 3 |  |  |  |  | oui |
 | gr Greece | own | 16 | 16 |  |  |  |  | oui |

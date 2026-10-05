@@ -1440,25 +1440,9 @@
    "failed": []
   },
   "FNI (transit)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "644 TJW 92",
-     "read": "644",
-     "status": "wrong"
-    },
-    {
-     "plate": "733 TXH 75",
-     "read": "733",
-     "status": "wrong"
-    },
-    {
-     "plate": "791 TNE 92",
-     "read": "791",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "French military in Germany": {
    "ok": 3,
@@ -1506,46 +1490,14 @@
    "failed": []
   },
   "SIV (temporary)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "WW-254-DW",
-     "read": "WW",
-     "status": "wrong"
-    },
-    {
-     "plate": "WW-295-BD",
-     "read": "WW",
-     "status": "wrong"
-    },
-    {
-     "plate": "WW-518-JF",
-     "read": "WW",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "SIV (transit plates)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "HL-670-GQ",
-     "read": "HL",
-     "status": "wrong"
-    },
-    {
-     "plate": "HM-235-JD",
-     "read": "HM",
-     "status": "wrong"
-    },
-    {
-     "plate": "HM-624-XX",
-     "read": "HM",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   }
  },
  "ge": {

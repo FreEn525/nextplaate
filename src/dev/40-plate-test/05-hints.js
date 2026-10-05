@@ -19,6 +19,7 @@
     'rs|Diplomatic': { order: ['region1', 'dip'] },
     'tj|Trailers (2009)': { order: ['region2', 'nomer'] },
     'th|*': { keepDigits: true },
+    'de|*': { extra: ['season'] },
     'ps|*': { extra: ['reg1'] },
     'kg|*': { order: ['region', 'nomerpl'] },
     'kg|Diplomatic': { order: null },
