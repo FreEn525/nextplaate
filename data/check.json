@@ -2474,88 +2474,24 @@
  },
  "jp": {
   "Commercial vehicles": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "世田谷 310 あ 7410",
-     "read": "",
-     "status": "not-fit"
-    },
-    {
-     "plate": "大宮 830 い 1122",
-     "read": "",
-     "status": "not-fit"
-    },
-    {
-     "plate": "奈良 100 あ 9832",
-     "read": "",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Commercial vehicles (Kei car)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "袖ヶ浦 480 り 7690",
-     "read": "",
-     "status": "not-fit"
-    },
-    {
-     "plate": "豊橋 480 り 3995",
-     "read": "",
-     "status": "not-fit"
-    },
-    {
-     "plate": "金沢 580 り 33",
-     "read": "",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Private owners": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "多摩 300 Y 8223",
-     "read": "",
-     "status": "not-fit"
-    },
-    {
-     "plate": "山梨 301 せ 6028",
-     "read": "",
-     "status": "not-fit"
-    },
-    {
-     "plate": "山梨 336 な 718",
-     "read": "",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Private owners (Kei car)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "なにわ 480 と 1145",
-     "read": "",
-     "status": "not-fit"
-    },
-    {
-     "plate": "横浜 581 ち 882",
-     "read": "",
-     "status": "not-fit"
-    },
-    {
-     "plate": "横浜 583 と 1714",
-     "read": "",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   }
  },
  "ke": {
@@ -4324,18 +4260,18 @@
    "failed": [
     {
      "plate": "032 D 345 77",
-     "read": "032 34",
-     "status": "not-fit"
+     "read": "345 77",
+     "status": "wrong"
     },
     {
      "plate": "145 D 256 77",
-     "read": "145 25",
-     "status": "not-fit"
+     "read": "256 77",
+     "status": "wrong"
     },
     {
      "plate": "900 D 006 86",
-     "read": "900 86",
-     "status": "not-fit"
+     "read": "006 86",
+     "status": "wrong"
     }
    ]
   },
@@ -4366,18 +4302,18 @@
    "failed": [
     {
      "plate": "D 017 02 77",
-     "read": "017 02",
-     "status": "not-fit"
+     "read": "02 77",
+     "status": "wrong"
     },
     {
      "plate": "T 559 01 50",
-     "read": "559 01",
-     "status": "not-fit"
+     "read": "01 50",
+     "status": "wrong"
     },
     {
      "plate": "T 559 06 50",
-     "read": "559 06",
-     "status": "not-fit"
+     "read": "06 50",
+     "status": "wrong"
     }
    ]
   },

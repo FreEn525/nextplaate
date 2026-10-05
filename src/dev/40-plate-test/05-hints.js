@@ -4,12 +4,14 @@
   //   order: the field ids in the order the plate is read      field: one field takes the whole text
   //   drop:  tokens that the form already has (written by the site, or fixed): they are not typed
   //   prefix: text the site writes in front of the plate (ÅL, ÅS): removed from the plate before it is typed
+  //   right: the last piece is a number written one digit per menu (d1..d4), from the right
   //   chars: 'before' | 'after': one menu per character (Arabic-script forms), see ptTypeChars in 00-typing.js
   const PT_HINTS = {
     'lv|Diplomatic': { field: 'nomer' },
     'lv|Vanity Plates': { field: 'nomer' },
     'rs|Trailers': { order: ['b1', 'b2', 'digit2', 'region2'] },
     'li|*': { drop: ['FL'] },
+    'jp|*': { right: true },
     'ir|*': { chars: 'before' },
     'ir|License plates for driving abroad (2010)': { chars: null },
     'ir|License plates for driving abroad (2015)': { chars: null },

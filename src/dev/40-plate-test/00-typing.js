@@ -29,6 +29,7 @@
   let ptOrder = null;   // field ids in the order the plate is read, or null: the order of the page
   let ptDrop = null;    // tokens that the form already has (see 05-hints.js)
   let ptPrefix = null;  // text the site writes itself in front of the plate (ÅL of an Åland plate)
+  let ptRight = false;  // the last piece is a number written one digit per menu, from the right (Japan: 7410, 718)
   let ptChars = null;   // 'before' or 'after': the forms with one menu per character (see ptTypeChars)
   function ptType(text) {
     if (ptChars) return ptTypeChars(text, ptChars);
@@ -83,7 +84,7 @@
     if (ptPrefix && ptCanon(text).startsWith(ptCanon(ptPrefix))) text = text.slice(ptPrefix.length).trim();
     let tokens = text.split(/[\s-]+/).filter(Boolean).flatMap(t => split ? (t.match(/\d+|[^\d]+/g) || []) : [t]);
     const fields = [...document.querySelectorAll('input, select')]
-      .filter(el => (isPlateField(el) || /^(nonr|trz|tx)$/.test(el.id)) && el.offsetParent !== null && !el.disabled && el.id !== 'ctype' && el.id !== 'drop_2');   // the type menus are not typed into
+      .filter(el => (isPlateField(el) || /^(nonr|trz|tx|hiragana|code|d\d)$/.test(el.id)) && el.offsetParent !== null && !el.disabled && el.id !== 'ctype' && el.id !== 'drop_2');   // the type menus are not typed into
     // fixed fields are set by the site for a type (T, TAX, BP, P): they keep their value and no token goes in them
     const FIXED = ['trz', 'tx'];   // inputs the site fills itself (T, TAX, BP)
     fields.forEach(el => {
@@ -92,7 +93,21 @@
       el.value = '';
     });
     // a country whose page order is not the reading order of its plate can give the order of the fields (offline check)
+    // a last piece written one digit per menu, from the right (7410 over d1..d4; 718 leaves d1 blank)
+    let rightMenus = [];
+    if (ptRight && tokens.length) {
+      rightMenus = fields.filter(el => el.tagName === 'SELECT' && /^d\d$/.test(el.id));
+      const digits = [...tokens.pop()];
+      for (let k = rightMenus.length - 1; k >= 0; k--) {
+        const el = rightMenus[k], c = digits.pop();
+        const opt = [...el.options].find(o => (c ? o.text.trim() === c : ['•', '-'].includes(o.text.trim()) || o.value === ''));
+        if (c && !opt) return false;
+        if (opt) { el.value = opt.value; el.dataset.ptSet = '1'; el.dispatchEvent(new Event('change', { bubbles: true })); }
+      }
+      if (digits.length) return false;
+    }
     const tokenFields = ptOrder ? ptOrder.map(id => fields.find(el => el.id === id)).filter(Boolean) : fields.filter(el => !FIXED.includes(el.id));
+    if (rightMenus.length) for (const m of rightMenus) { const k = tokenFields.indexOf(m); if (k >= 0) tokenFields.splice(k, 1); }
     // a token that is the value the site already set (the T of a transit plate) is not typed again
     const fixedVals = [...document.querySelectorAll('#trz, #tx')].filter(el => el.value && el.offsetParent !== null).map(el => ptCanon(el.value));   // only the ones this type shows
     // the site's fixed start of a piece (the T of TAX): taken off before typing
@@ -149,6 +164,7 @@
       } else {
         const want = ptCanon(tokens[i]);
         const opt = [...el.options].find(o => o.value && (ptCanon(o.text.trim()) === want || ptCanon(o.value) === want))
+          || [...el.options].find(o => o.value && o.text.split(' - ').some(part => ptCanon(part.trim()) === want))   // "Setagaya - 世田谷"
           || [...el.options].find(o => o.value && ptCanon(o.text.trim()).startsWith(want));   // exact label first: A before AM
         if (opt) { el.value = opt.value; el.dataset.ptSet = '1'; el.dataset.ptUsed = '1'; el.dispatchEvent(new Event('change', { bubbles: true })); i++; continue; }
         // "TT" over two one-letter menus, "EKB" over a menu of "EK" and one of "B": this menu takes the longest of its choices
