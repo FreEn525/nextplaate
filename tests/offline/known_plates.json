@@ -8,16 +8,32 @@
   ],
   "uk": "RO62OUK",
   "ro": "CJ 54 HAI",
-  "uz": "40 H 944 MB",
+  "uz": [
+    "40 H 944 MB",
+    {
+      "plate": "01 H 010229",
+      "category": "Foreign citizens"
+    }
+  ],
   "hr": [
     {
       "plate": "KR PV-081",
       "category": "Oldtimers"
+    },
+    {
+      "plate": "OS PP-178",
+      "category": "Dealer"
     }
   ],
   "tr": "50 SB 095",
   "tj": "7717XZ 07",
-  "ru": "A 001 AA 77",
+  "ru": [
+    "A 001 AA 77",
+    {
+      "plate": "у 007 ут 198",
+      "category": "Cars"
+    }
+  ],
   "md": "BMR 001",
   "at": "GU 213 JX",
   "pl": [
@@ -25,6 +41,10 @@
     {
       "plate": "K0 069U",
       "category": "Sportcars"
+    },
+    {
+      "plate": "W 016600",
+      "category": "Diplomatic"
     }
   ],
   "gr": [
@@ -39,15 +59,69 @@
     {
       "plate": "ITI-9245",
       "category": "Cars"
+    },
+    {
+      "plate": "TAE 1009",
+      "category": "Taxi"
     }
   ],
   "ma": "70144 د 8",
-  "vn": {
-    "plate": "47A 271.12",
-    "category": "Cars"
-  },
+  "vn": [
+    {
+      "plate": "47A 271.12",
+      "category": "Cars"
+    },
+    {
+      "plate": "80A-039.27",
+      "category": "Government and public administrations"
+    }
+  ],
   "rs": {
     "plate": "OO-442 VR",
     "category": "Trailers"
+  },
+  "jp": {
+    "plate": "山梨 336 な 718",
+    "category": "Private owners"
+  },
+  "ua": {
+    "plate": "1133 Ф4",
+    "category": "Military (2004)"
+  },
+  "th": {
+    "plate": "ทห 7776",
+    "category": "Taxi"
+  },
+  "ir": {
+    "plate": "۵۱ت۱۶۵ ۲۲",
+    "category": "Taxi"
+  },
+  "kr": {
+    "plate": "경기50바 4521",
+    "category": "Commercial vehicles"
+  },
+  "la": {
+    "plate": "ກທ 5868",
+    "category": "Military"
+  },
+  "mn": {
+    "plate": "7073 УН",
+    "category": "Special machinery"
+  },
+  "sg": {
+    "plate": "PC 9090 A",
+    "category": "Buses"
+  },
+  "mx": {
+    "plate": "MBG-133-A",
+    "category": "Cars (AAA-000-A)"
+  },
+  "sa": {
+    "plate": "3273 JRS",
+    "category": "Cars"
+  },
+  "eg": {
+    "plate": "١٤٦٩ رقج",
+    "category": "Cars (2008)"
   }
 }

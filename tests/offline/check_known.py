@@ -44,7 +44,7 @@ def main():
                 bad += 1
                 print(f"{code:4} FAIL the dev script did not start on the page")
                 continue
-            if category and not check_db.set_category(page, category):
+            if category and page.evaluate(check_db.HAS_MENU_JS) and not check_db.set_category(page, category):   # a form without a type menu takes the plate as it is
                 bad += 1
                 print(f"{code:4} FAIL category not in the form: {category}")
                 continue
