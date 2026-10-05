@@ -376,8 +376,12 @@
       case 'sk': return joinParts([selText('region') + '-' + fieldVal('digit') + fieldVal('let2')]);   // Slovakia: BA-427RF (a space is refused by the site)
       case 'ee':                                                    // Estonia: motorcycles (ctype 3) are ABC 123; the other types are read from their fields
         return fieldVal('ctype') === '3' ? joinParts([fieldVal('let'), fieldVal('dig1')]) : genericPlate();
-      case 'al':                                                    // Albania: AG R 547 (letters, letter, digits; the page order is letters, digits, letter)
-        return joinParts([fieldVal('let1'), fieldVal('let2'), fieldVal('digit')]);
+      case 'al': {                                                  // Albania, by type: cars 2011 AA 896 TH; cars 1993 LE 0075 B (region, digits, letter); others: letter, digits
+        const ctype = fieldVal('ctype');
+        if (ctype === '1') return joinParts([fieldVal('let1'), fieldVal('digit'), fieldVal('let2')]);
+        if (ctype === '4') return joinParts([selText('region'), fieldVal('digit'), fieldVal('let2')]);
+        return joinParts([fieldVal('let1'), fieldVal('digit')]);
+      }
       case 'ba':                                                    // Bosnia: A12-E-345, parts joined by dashes; b1 only when it is shown (a hidden menu keeps a value)
         return [fieldVal('let1'), shownVal('b1'), fieldVal('let2') || fieldVal('digit')].filter(Boolean).join('-');
       case 'tr': {
