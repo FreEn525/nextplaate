@@ -15,6 +15,7 @@ import json
 import re
 import sys
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor
 
 from playwright.sync_api import sync_playwright
 from fake_site import ROOT, route_site
@@ -92,11 +93,29 @@ def check_country(page, code, cases):
     return results
 
 
+def run_group(codes, by_country):
+    """One browser for a group of countries (one Playwright per thread)."""
+    out = []
+    with sync_playwright() as p:
+        browser = p.chromium.launch()
+        ctx = browser.new_context()
+        route_site(ctx)
+        page = ctx.new_page()
+        for code in codes:
+            if not (REF / f"{code}.html").exists():
+                print(f"{code}: no saved upload page, skipped")
+                continue
+            out += check_country(page, code, by_country[code])
+        browser.close()
+    return out
+
+
 def main():
     sys.stdout.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser()
     ap.add_argument("--country")
     ap.add_argument("--report")
+    ap.add_argument("--workers", type=int, default=4)
     args = ap.parse_args()
 
     cases = load_cases(args.country)
@@ -104,18 +123,12 @@ def main():
     for c in cases:
         by_country[c["country"]].append(c)
 
+    # the countries are split in groups, one browser per group, run side by side (everything is local)
+    groups = [list(by_country)[i::args.workers] for i in range(args.workers)]
     all_results = []
-    with sync_playwright() as p:
-        browser = p.chromium.launch()
-        ctx = browser.new_context()
-        route_site(ctx)
-        page = ctx.new_page()
-        for code in sorted(by_country):
-            if not (REF / f"{code}.html").exists():
-                print(f"{code}: no saved upload page, skipped")
-                continue
-            all_results += check_country(page, code, by_country[code])
-        browser.close()
+    with ThreadPoolExecutor(max_workers=args.workers) as pool:
+        for res in pool.map(lambda g: run_group(g, by_country), groups):
+            all_results += res
 
     # summary per country and category
     cats = defaultdict(lambda: defaultdict(lambda: {"ok": 0, "total": 0}))
