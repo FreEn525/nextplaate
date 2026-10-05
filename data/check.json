@@ -2584,25 +2584,9 @@
    "failed": []
   },
   "Foreign citizens and enterprises (2016)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "01 1366 H",
-     "read": "01 1366 H 01",
-     "status": "wrong"
-    },
-    {
-     "plate": "01 9236 M",
-     "read": "01 9236 M 01",
-     "status": "wrong"
-    },
-    {
-     "plate": "01 9451 M",
-     "read": "01 9451 M 01",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Government agency": {
    "ok": 3,
@@ -2615,25 +2599,9 @@
    "failed": []
   },
   "Organizations (2016)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "01 058 ES",
-     "read": "01 058 ES 01",
-     "status": "wrong"
-    },
-    {
-     "plate": "01 237 DA",
-     "read": "01 237 DA 01",
-     "status": "wrong"
-    },
-    {
-     "plate": "01 604 BP",
-     "read": "01 604 BP 01",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Private owners (1994)": {
    "ok": 3,
@@ -2641,25 +2609,9 @@
    "failed": []
   },
   "Private owners (2016)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "02 002 NDR",
-     "read": "02 002 NDR 01",
-     "status": "wrong"
-    },
-    {
-     "plate": "02 940 AHD",
-     "read": "02 940 AHD 01",
-     "status": "wrong"
-    },
-    {
-     "plate": "08 222 AIA",
-     "read": "08 222 AIA 01",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Trailers and motorcycles (1994)": {
    "ok": 3,
@@ -2667,67 +2619,19 @@
    "failed": []
   },
   "Trailers, motorcycles, special vehicles (2016)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "03 814 PB",
-     "read": "03 814 PB 01",
-     "status": "wrong"
-    },
-    {
-     "plate": "08 888 PQ",
-     "read": "08 888 PQ 01",
-     "status": "wrong"
-    },
-    {
-     "plate": "09 042 PG",
-     "read": "09 042 PG 01",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Transit plates (2023)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "01 A932K",
-     "read": "01 A932K 01",
-     "status": "wrong"
-    },
-    {
-     "plate": "08 A159G",
-     "read": "08 A159G 01",
-     "status": "wrong"
-    },
-    {
-     "plate": "08 A295H",
-     "read": "08 A295H 01",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Vanity Plates": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "01 DAAVAT",
-     "read": "01 DAAVAT 01",
-     "status": "wrong"
-    },
-    {
-     "plate": "01 KAO",
-     "read": "01 KAO 01",
-     "status": "wrong"
-    },
-    {
-     "plate": "01 KG OI",
-     "read": "01 KG OI 01",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   }
  },
  "kh": {
@@ -5199,25 +5103,9 @@
    ]
   },
   "Dealer (2004)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "T4 TE 2773",
-     "read": "T4 2773 TE",
-     "status": "wrong"
-    },
-    {
-     "plate": "T4 TP 4881",
-     "read": "T4 4881 TP",
-     "status": "wrong"
-    },
-    {
-     "plate": "T5 BI 7208",
-     "read": "T5 7208 BI",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Diplomatic": {
    "ok": 3,
@@ -5225,46 +5113,20 @@
    "failed": []
   },
   "Government agencies": {
-   "ok": 0,
+   "ok": 2,
    "total": 3,
    "failed": [
     {
-     "plate": "AE 103 E",
-     "read": "AE 103",
-     "status": "not-fit"
-    },
-    {
-     "plate": "HA 121 G",
-     "read": "HA 121",
-     "status": "not-fit"
-    },
-    {
      "plate": "IM 113 G",
-     "read": "HA IM",
+     "read": "HA IM G",
      "status": "not-fit"
     }
    ]
   },
   "Military (2004)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "1133 Ф4",
-     "read": "1133",
-     "status": "not-fit"
-    },
-    {
-     "plate": "1175 Ф4",
-     "read": "1175",
-     "status": "not-fit"
-    },
-    {
-     "plate": "6437 Т5",
-     "read": "6437",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Mopeds (2004)": {
    "ok": 3,
@@ -5333,88 +5195,24 @@
    "failed": []
   },
   "Transit plates (2004)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "05 CH 8725",
-     "read": "05 8725 CH",
-     "status": "wrong"
-    },
-    {
-     "plate": "16 BP 3159",
-     "read": "16 3159 BP",
-     "status": "wrong"
-    },
-    {
-     "plate": "21 BA 0640",
-     "read": "21 0640 BA",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Vanity Plates": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "11 SOPRANOS",
-     "read": "11",
-     "status": "wrong"
-    },
-    {
-     "plate": "16 STORM",
-     "read": "16",
-     "status": "wrong"
-    },
-    {
-     "plate": "16 VRSNSMV",
-     "read": "16",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Work vehicles (1995)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "Т0625 РВ",
-     "read": "0625 РВ",
-     "status": "wrong"
-    },
-    {
-     "plate": "Т1668 МК",
-     "read": "1668 МК",
-     "status": "wrong"
-    },
-    {
-     "plate": "Т2966 ЗС",
-     "read": "2966 ЗС",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Work vehicles (2004)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "02058 T AX",
-     "read": "AX 02058",
-     "status": "wrong"
-    },
-    {
-     "plate": "03213 T AI",
-     "read": "AI 03213",
-     "status": "wrong"
-    },
-    {
-     "plate": "10696 T AE",
-     "read": "AE 10696",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   }
  },
  "uk": {

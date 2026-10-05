@@ -12,6 +12,8 @@
     'rs|Trailers': { order: ['b1', 'b2', 'digit2', 'region2'] },
     'li|*': { drop: ['FL'] },
     'jp|*': { right: true },
+    'kg|*': { order: ['region', 'nomerpl'] },
+    'kg|Diplomatic': { order: null },
     'ir|*': { chars: 'before' },
     'ir|License plates for driving abroad (2010)': { chars: null },
     'ir|License plates for driving abroad (2015)': { chars: null },
