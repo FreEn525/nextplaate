@@ -114,8 +114,8 @@
         if (fieldVal('ctype') === '8') return ['b1', 'b2', 'b3', 'b4', 'b5', 'b6'].map(shownVal).join('').toUpperCase();
         return genericPlate();
       }
-      case 'md': {                                                  // Moldova: trailers of 1992 are written C-AV 703 (region letter, letters, digits)
-        if (fieldVal('ctype') === '3') return joinParts([selText('region1') + '-' + fieldVal('let2'), fieldVal('digit')]);
+      case 'md': {                                                  // Moldova: trailers of 1992: region code, digits, letters
+        if (fieldVal('ctype') === '3') return joinParts([fieldVal('region1'), fieldVal('digit'), fieldVal('let2')]);   // FL 070 RA (region code, digits, letters: the site has it)
         return genericPlate();
       }
       case 'si': {                                                  // Slovenia: LJ 123-AB (the region code, then the plate)
