@@ -80,7 +80,7 @@ def test_collect_takes_the_gallery_plates_of_missing_categories_only(browser):
     c, page = _dev_page(browser)
     search = '<select name="ctype"><option value="1">Cars</option><option value="2">Mopeds</option></select>'
     page.evaluate(SEED_JS, ["search:fr", search])
-    page.evaluate(SEED_JS, ["page:fr", '<select id="ctype"></select>'])
+    page.evaluate(SEED_JS, ["page:fr", '<form id="frm"><select id="ctype"></select></form>'])
     page.evaluate(SEED_JS, ["db:fr|Cars|AA-111-AA", {"country": "fr", "category": "Cars", "plate": "AA-111-AA", "read": "AA-111-AA", "count": 3, "date": "2026-10-05T00:00:00Z"}])
     asked = []
 

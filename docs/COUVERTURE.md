@@ -13,11 +13,11 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | **Pays non capturés** | **0** | |
 | Pays avec une règle propre | 40 sur 96 | |
 | Catégories (pays capturés) | 829 | |
-| Vérifiées | 685 | 83 % |
-| **À corriger** | **37** | 4 % |
-| **À trouver** (aucune plaque connue) | **0** | 0 % |
+| Vérifiées | 700 | 84 % |
+| **À corriger** | **39** | 5 % |
+| **À trouver** (aucune plaque connue) | **64** | 8 % |
 | Galerie vide sur le site (aucune plaque n'existe) | 21 | 3 % |
-| Non prouvables par catégorie (pas de menu de type, catégorie absente du menu, ou aucun champ de plaque) | 86 | 10 % |
+| Sans champ de plaque dans le formulaire ou sans page d'ajout | 5 | 1 % |
 
 ## À corriger
 
@@ -25,6 +25,9 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 |---|---|---|---|---|
 | ax | Vanity Plates | 1/3 | `BOMAN2` | `BOM` |
 | ax | Vanity Plates | 1/3 | `ÅLAND 2` | `ÅLA` |
+| az | Foreign citizens and enterprises | 0/3 | `H 014401` | `99 H 014401` |
+| az | Foreign citizens and enterprises | 0/3 | `H 027803` | `99 H 027803` |
+| az | Foreign citizens and enterprises | 0/3 | `H 029505` | `99 H 029505` |
 | ch | Vehicles w/o paid duty (with "Z") | 2/3 | `ZH 1257 Z` | `VS H 1257 Z` |
 | cy | Trailers | 2/3 | `14001 CT` | `P 14001` |
 | cz | Electric vehicles | 0/3 | `EL5 57CP` | `557CP` |
@@ -91,6 +94,9 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | ps | Dealer | 0/3 | `62-100-76` | `6 2 100` |
 | ps | Dealer | 0/3 | `64-074-76` | `6 4 074` |
 | ps | Dealer | 0/3 | `65-067-76` | `6 5 067` |
+| ru | Diplomatic (Ambassador, chief of diplomatic mission) | 0/3 | `011 CD 1 77` | `1 77` |
+| ru | Diplomatic (Ambassador, chief of diplomatic mission) | 0/3 | `086 CD 1 77` | `1 77` |
+| ru | Diplomatic (Ambassador, chief of diplomatic mission) | 0/3 | `127 CD 1 77` | `1 77` |
 | ru | Diplomatic | 0/3 | `032 D 345 77` | `345 77` |
 | ru | Diplomatic | 0/3 | `145 D 256 77` | `256 77` |
 | ru | Diplomatic | 0/3 | `900 D 006 86` | `006 86` |
@@ -126,19 +132,24 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 
 | Pays | Règle | Catégories | Vérifiées | À corriger | À trouver | Galerie vide | Non testables | Page d'ajout |
 |---|---|---|---|---|---|---|---|---|
+| nl Netherlands | generic | 27 | 0 |  | 27 |  |  | oui |
+| mx Mexico | generic | 20 | 0 |  | 20 |  |  | oui |
+| sg Singapore | generic | 13 | 0 |  | 13 |  |  | oui |
+| my Malaysia | generic | 4 | 0 |  | 4 |  |  | oui |
 | il Israel | generic | 8 | 5 | 3 |  |  |  | oui |
 | mn Mongolia | generic | 4 | 1 | 3 |  |  |  | oui |
+| ru Russia | own | 23 | 20 | 3 |  |  |  | oui |
 | ua Ukraine | own | 19 | 16 | 3 |  |  |  | oui |
-| cz Czech Republic | own | 22 | 18 | 2 |  | 1 | 1 | oui |
-| de Germany | own | 16 | 13 | 2 |  |  | 1 | oui |
+| cz Czech Republic | own | 22 | 19 | 2 |  | 1 |  | oui |
+| de Germany | own | 16 | 14 | 2 |  |  |  | oui |
 | kh Cambodia | generic | 7 | 4 | 2 |  | 1 |  | oui |
 | kz Kazakhstan | generic | 18 | 16 | 2 |  |  |  | oui |
-| ru Russia | own | 23 | 19 | 2 |  |  | 2 | oui |
 | sc Seychelles | generic | 9 | 6 | 2 |  | 1 |  | oui |
 | th Thailand | own | 9 | 7 | 2 |  |  |  | oui |
 | ax Åland (FI) | own | 5 | 4 | 1 |  |  |  | oui |
+| az Azerbaijan | generic | 5 | 4 | 1 |  |  |  | oui |
 | ch Switzerland | generic | 11 | 10 | 1 |  |  |  | oui |
-| cy Cyprus | generic | 5 | 3 | 1 |  |  | 1 | oui |
+| cy Cyprus | generic | 5 | 4 | 1 |  |  |  | oui |
 | dk Denmark | own | 8 | 7 | 1 |  |  |  | oui |
 | gi Gibraltar (UK) | generic | 4 | 3 | 1 |  |  |  | oui |
 | ir Iran | own | 16 | 15 | 1 |  |  |  | oui |
@@ -157,7 +168,6 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | ar Argentina | generic | 6 | 6 |  |  |  |  | oui |
 | at Austria | generic | 9 | 9 |  |  |  |  | oui |
 | au Australia | generic | 0 | 0 |  |  |  |  | oui |
-| az Azerbaijan | generic | 5 | 4 |  |  |  | 1 | oui |
 | ba Bosnia and Herzegovina | own | 5 | 4 |  |  |  | 1 | oui |
 | be Belgium | generic | 5 | 5 |  |  |  |  | oui |
 | bg Bulgaria | generic | 7 | 7 |  |  |  |  | oui |
@@ -166,7 +176,7 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | bs Bahamas | generic | 7 | 7 |  |  |  |  | oui |
 | by Belarus | own | 18 | 18 |  |  |  |  | oui |
 | ca Canada | generic | 0 | 0 |  |  |  |  | oui |
-| cl Chile | generic | 15 | 3 |  |  | 3 | 9 | oui |
+| cl Chile | generic | 15 | 12 |  |  | 3 |  | oui |
 | cn China | generic | 6 | 6 |  |  |  |  | oui |
 | dz Algeria | own | 7 | 4 |  |  | 3 |  | oui |
 | ee Estonia | own | 10 | 10 |  |  |  |  | oui |
@@ -174,7 +184,7 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | es Spain | own | 6 | 6 |  |  |  |  | oui |
 | fi Finland | generic | 9 | 9 |  |  |  |  | oui |
 | fr France | own | 17 | 17 |  |  |  |  | oui |
-| ge Georgia | generic | 12 | 10 |  |  |  | 2 | oui |
+| ge Georgia | generic | 12 | 12 |  |  |  |  | oui |
 | gg Guernsey (UK) | own | 3 | 3 |  |  |  |  | oui |
 | gr Greece | own | 16 | 16 |  |  |  |  | oui |
 | gu Guam (USA) | generic | 9 | 5 |  |  | 4 |  | oui |
@@ -199,9 +209,6 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | mk North Macedonia | generic | 8 | 7 |  |  | 1 |  | oui |
 | mp Northern Mariana Islands (USA) | generic | 6 | 2 |  |  | 4 |  | oui |
 | mt Malta | generic | 6 | 6 |  |  |  |  | oui |
-| mx Mexico | generic | 20 | 0 |  |  |  | 20 | oui |
-| my Malaysia | generic | 4 | 0 |  |  |  | 4 | oui |
-| nl Netherlands | generic | 27 | 0 |  |  |  | 27 | oui |
 | no Norway | generic | 12 | 12 |  |  |  |  | oui |
 | nz New Zealand | generic | 5 | 5 |  |  |  |  | oui |
 | pl Poland | own | 12 | 12 |  |  |  |  | oui |
@@ -211,7 +218,6 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | rs Serbia | own | 10 | 10 |  |  |  |  | oui |
 | sa Saudi Arabia | own | 6 | 6 |  |  |  |  | oui |
 | se Sweden | generic | 8 | 8 |  |  |  |  | oui |
-| sg Singapore | generic | 13 | 0 |  |  |  | 13 | oui |
 | sm San Marino | generic | 13 | 13 |  |  |  |  | oui |
 | su USSR | generic | 15 | 15 |  |  |  |  | oui |
 | tj Tajikistan | own | 10 | 10 |  |  |  |  | oui |
@@ -226,6 +232,90 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 ## Catégories à trouver (par pays)
 
 Pour chacune : trouver une plaque réelle sur le site, la saisir, puis relancer le contrôle. Le remplissage du build dev (`Fill missing plates`) le fait.
+
+<details><summary><b>mx</b> : 20</summary>
+
+- Cars (AAA-00-00)
+- Cars (AAA-000-A)
+- Cars (000-AAA)
+- Cars (A00-AAA)
+- Trucks (AA-0000-A)
+- Trucks (AA-00-000)
+- Trucks (00-00-AA)
+- Trucks (A-000-AA)
+- Trailers (0-AA-0000)
+- Trailers (0AA-000-A)
+- Trailers (A-00-00)
+- Border zone (A00-AAA-0)
+- Border zone (000-AAA-0)
+- Federal (00-AA-0A)
+- Federal (00-00-AA)
+- Federal (000-AA-0)
+- Motorcycles (00AAA0)
+- Motorcycles (AAA0A)
+- Oldtimers (0AA-00)
+- Dealer (0-AA-00)
+
+</details>
+
+<details><summary><b>my</b> : 4</summary>
+
+- A(BC) 1(234)
+- AB(C) 1(234) D
+- Taxi (HAB 1(234))
+- Military (Z(A) 1(234))
+
+</details>
+
+<details><summary><b>nl</b> : 27</summary>
+
+- Cars
+- Motorcycles
+- Taxi
+- Diplomatic
+- Trailers
+- Commercial vehicles
+- Dealer
+- Agricultural vehicles
+- Except vehicles / Oldtimers
+- Military
+- Allied Joint Force Command Brunssum
+- Imported youngtimers / oldtimers
+- Mopeds
+- Heavy Commercial Vehicles (1994 system)
+- Light Commercial Vehicles (1994 system)
+- Semi-trailers
+- Agricultural trailers (2021 system)
+- Border Traffic (1953-2021 system)
+- Dealer (Agricultural)
+- Dealer (Trailers)
+- Dealer (Scooters)
+- Imported oldtimers (motorcycles)
+- Imported oldtimers (commercial vehicles)
+- Royal Household
+- Light electric vehicles and special mopeds
+- Diplomatic Justice Corps (CDJ)
+- One-day registration plate
+
+</details>
+
+<details><summary><b>sg</b> : 13</summary>
+
+- Private owners
+- Commercial vehicles
+- Taxi / Rentals
+- Motorcycles
+- Buses
+- Trucks
+- Exceptional vehicles
+- Trailers
+- Police
+- Restricted Use
+- For research and development
+- Special machinery
+- Authorities
+
+</details>
 
 ## Galerie vide sur le site
 
@@ -242,25 +332,14 @@ Aucune photo dans la galerie de ces catégories : il n'y a pas de plaque à util
 - **sk** : Sportcars (S(A) 123AB), Agricultural vehicles (F(A) 123AB)
 - **va** : Dealer (PROVA SCV)
 
-## Non prouvables par catégorie
+## Impossibles à écrire dans le formulaire
 
-Ces catégories existent dans la recherche du site mais le formulaire d'ajout ne permet pas de les choisir : leur règle ne peut pas être prouvée hors ligne **par catégorie**. La vérification de plaque, elle, cherche le texte de la plaque et marche quand même (vérifié à la main pour les Pays-Bas).
+Le formulaire d'ajout n'a aucun champ pour ces catégories (Bosnie « Diplomatic », Croatie « Police », Italie, Portugal) : la plaque ne peut pas y être tapée, donc ni la règle ni la vérification de plaque ne les concernent hors ligne. Les catégories qui ne sont pas dans le menu du formulaire (Chili, Géorgie...) ou les formulaires sans menu (Pays-Bas...) sont testés quand même : la plaque est tapée dans un autre type du formulaire, ou telle quelle.
 
-- **az** : absente du menu du formulaire (1) : Foreign citizens and enterprises
 - **ba** : le formulaire n'a aucun champ de plaque pour ce type (1) : Diplomatic
-- **cl** : absente du menu du formulaire (9)
-- **cy** : absente du menu du formulaire (1) : Commercial vehicles
-- **cz** : absente du menu du formulaire (1) : Foreign citizens and enterprises (1960)
-- **de** : absente du menu du formulaire (1) : NATO
-- **ge** : absente du menu du formulaire (2) : Cars (2024), Trailers and special equipment (2024)
 - **hr** : le formulaire n'a aucun champ de plaque pour ce type (1) : Police
 - **it** : le formulaire n'a aucun champ de plaque pour ce type (2) : Mopeds, Dealer
-- **mx** : pas de menu de type (20)
-- **my** : pas de menu de type (4) : A(BC) 1(234), AB(C) 1(234) D, Taxi (HAB 1(234)), Military (Z(A) 1(234))
-- **nl** : pas de menu de type (27)
 - **pt** : le formulaire n'a aucun champ de plaque pour ce type (1) : Diplomatic
-- **ru** : absente du menu du formulaire (2) : High authorities, Diplomatic (Ambassador, chief of diplomatic mission)
-- **sg** : pas de menu de type (13)
 
 ## Vérifiées à la main sur le vrai site
 

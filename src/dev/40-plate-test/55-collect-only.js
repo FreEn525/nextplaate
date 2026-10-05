@@ -11,8 +11,9 @@
     const todo = [];
     for (const cc of TEST_COUNTRIES) {
       const types = ptTypesKept(cc, await capGet('search:' + cc));   // one saved page at a time
-      // a category can only be proved on a form that has a type menu, and the search page must be kept
-      if (!types || !types.length || !/id="(ctype|drop_2)"/.test(await capGet('page:' + cc) || '')) continue;
+      // the search page must be kept and the upload page must have its form; a form without a type menu (Netherlands, Mexico...) is
+      // fine: the plate is typed as it is and read back, whatever the category
+      if (!types || !types.length || !/id="frm"/.test(await capGet('page:' + cc) || '')) continue;
       const confirmed = new Set(dbAll.filter(r => r.country === cc && (r.count > 0 || r.source === 'gallery')).map(r => r.category));
       for (const t of types) if (!confirmed.has(t.label) && !small['empty:' + cc + '|' + t.label]) todo.push({ cc, ...t });
     }

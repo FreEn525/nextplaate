@@ -219,18 +219,18 @@
    "failed": [
     {
      "plate": "H 014401",
-     "read": "",
-     "status": "no-type"
+     "read": "99 H 014401",
+     "status": "wrong"
     },
     {
      "plate": "H 027803",
-     "read": "",
-     "status": "no-type"
+     "read": "99 H 027803",
+     "status": "wrong"
     },
     {
      "plate": "H 029505",
-     "read": "",
-     "status": "no-type"
+     "read": "99 H 029505",
+     "status": "wrong"
     }
    ]
   },
@@ -655,67 +655,22 @@
  },
  "cl": {
   "Buses (AB-CD-12)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "BB-JZ-70",
-     "read": "",
-     "status": "no-type"
-    },
-    {
-     "plate": "CJ-RS-57",
-     "read": "",
-     "status": "no-type"
-    },
-    {
-     "plate": "GC-BC-87",
-     "read": "",
-     "status": "no-type"
-    }
-   ]
+   "failed": [],
+   "via": "other-type"
   },
   "Cars (AB-12-34)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "BJ-14-65",
-     "read": "",
-     "status": "no-type"
-    },
-    {
-     "plate": "RD-69-57",
-     "read": "",
-     "status": "no-type"
-    },
-    {
-     "plate": "YE-88-81",
-     "read": "",
-     "status": "no-type"
-    }
-   ]
+   "failed": [],
+   "via": "other-type"
   },
   "Cars (AB-CD-12)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "JD-CJ-59",
-     "read": "",
-     "status": "no-type"
-    },
-    {
-     "plate": "RB-LS-27",
-     "read": "",
-     "status": "no-type"
-    },
-    {
-     "plate": "TV-TF-56",
-     "read": "",
-     "status": "no-type"
-    }
-   ]
+   "failed": [],
+   "via": "other-type"
   },
   "Diplomatic": {
    "ok": 3,
@@ -723,46 +678,16 @@
    "failed": []
   },
   "Free economic zones (AB-12-34)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "DD-64-33",
-     "read": "",
-     "status": "no-type"
-    },
-    {
-     "plate": "ZF-68-17",
-     "read": "",
-     "status": "no-type"
-    },
-    {
-     "plate": "ZF-83-12",
-     "read": "",
-     "status": "no-type"
-    }
-   ]
+   "failed": [],
+   "via": "other-type"
   },
   "Free economic zones (AB-CD-12)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "GP-FS-13",
-     "read": "",
-     "status": "no-type"
-    },
-    {
-     "plate": "RZ-PV-23",
-     "read": "",
-     "status": "no-type"
-    },
-    {
-     "plate": "SG-JZ-35",
-     "read": "",
-     "status": "no-type"
-    }
-   ]
+   "failed": [],
+   "via": "other-type"
   },
   "Motorcycles (AB-123)": {
    "ok": 3,
@@ -775,63 +700,28 @@
    "failed": []
   },
   "Shared taxis (AB-CD-12)": {
-   "ok": 0,
+   "ok": 2,
    "total": 2,
-   "failed": [
-    {
-     "plate": "FD-WD-63",
-     "read": "",
-     "status": "no-type"
-    },
-    {
-     "plate": "TS-ZX-99",
-     "read": "",
-     "status": "no-type"
-    }
-   ]
+   "failed": [],
+   "via": "other-type"
   },
   "Special airport taxis and tourist vehicles (AB-CD-12)": {
-   "ok": 0,
+   "ok": 1,
    "total": 1,
-   "failed": [
-    {
-     "plate": "SL-SW-92",
-     "read": "",
-     "status": "no-type"
-    }
-   ]
+   "failed": [],
+   "via": "other-type"
   },
   "Taxi (AB-12-34)": {
-   "ok": 0,
+   "ok": 1,
    "total": 1,
-   "failed": [
-    {
-     "plate": "UE-15-72",
-     "read": "",
-     "status": "no-type"
-    }
-   ]
+   "failed": [],
+   "via": "other-type"
   },
   "Taxi (AB-CD-12)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "FK-RH-71",
-     "read": "",
-     "status": "no-type"
-    },
-    {
-     "plate": "KD-BS-87",
-     "read": "",
-     "status": "no-type"
-    },
-    {
-     "plate": "TV-WK-46",
-     "read": "",
-     "status": "no-type"
-    }
-   ]
+   "failed": [],
+   "via": "other-type"
   }
  },
  "cn": {
@@ -873,25 +763,10 @@
    "failed": []
   },
   "Commercial vehicles": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "PKT 686",
-     "read": "",
-     "status": "no-type"
-    },
-    {
-     "plate": "PXK 975",
-     "read": "",
-     "status": "no-type"
-    },
-    {
-     "plate": "TNB 161",
-     "read": "",
-     "status": "no-type"
-    }
-   ]
+   "failed": [],
+   "via": "other-type"
   },
   "Regular plates": {
    "ok": 3,
@@ -978,25 +853,10 @@
    "failed": []
   },
   "Foreign citizens and enterprises (1960)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "FMA 06-82",
-     "read": "",
-     "status": "no-type"
-    },
-    {
-     "plate": "KMA 01-42",
-     "read": "",
-     "status": "no-type"
-    },
-    {
-     "plate": "SUJ 22-45",
-     "read": "",
-     "status": "no-type"
-    }
-   ]
+   "failed": [],
+   "via": "other-type"
   },
   "Military (1960)": {
    "ok": 3,
@@ -1102,25 +962,10 @@
    "failed": []
   },
   "NATO": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "X 1193",
-     "read": "",
-     "status": "no-type"
-    },
-    {
-     "plate": "X 2218",
-     "read": "",
-     "status": "no-type"
-    },
-    {
-     "plate": "X 4500",
-     "read": "",
-     "status": "no-type"
-    }
-   ]
+   "failed": [],
+   "via": "other-type"
   },
   "Official services and consulates": {
    "ok": 3,
@@ -1507,25 +1352,10 @@
    "failed": []
   },
   "Cars (2024)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "BB-220-SS",
-     "read": "",
-     "status": "no-type"
-    },
-    {
-     "plate": "GG-385-GD",
-     "read": "",
-     "status": "no-type"
-    },
-    {
-     "plate": "II-227-PP",
-     "read": "",
-     "status": "no-type"
-    }
-   ]
+   "failed": [],
+   "via": "other-type"
   },
   "Diplomatic": {
    "ok": 3,
@@ -1558,25 +1388,10 @@
    "failed": []
   },
   "Trailers and special equipment (2024)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "BB-028-U",
-     "read": "",
-     "status": "no-type"
-    },
-    {
-     "plate": "NN-655-L",
-     "read": "",
-     "status": "no-type"
-    },
-    {
-     "plate": "SN-333-T",
-     "read": "",
-     "status": "no-type"
-    }
-   ]
+   "failed": [],
+   "via": "other-type"
   },
   "Transit plates (123 ABC)": {
    "ok": 3,
@@ -3700,18 +3515,18 @@
    "failed": [
     {
      "plate": "011 CD 1 77",
-     "read": "",
-     "status": "no-type"
+     "read": "1 77",
+     "status": "wrong"
     },
     {
      "plate": "086 CD 1 77",
-     "read": "",
-     "status": "no-type"
+     "read": "1 77",
+     "status": "wrong"
     },
     {
      "plate": "127 CD 1 77",
-     "read": "",
-     "status": "no-type"
+     "read": "1 77",
+     "status": "wrong"
     }
    ]
   },
@@ -3747,25 +3562,10 @@
    "failed": []
   },
   "High authorities": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "в 347 аа",
-     "read": "",
-     "status": "no-type"
-    },
-    {
-     "plate": "р 054 аа",
-     "read": "",
-     "status": "no-type"
-    },
-    {
-     "plate": "р 157 аа",
-     "read": "",
-     "status": "no-type"
-    }
-   ]
+   "failed": [],
+   "via": "other-type"
   },
   "Military Transits": {
    "ok": 3,

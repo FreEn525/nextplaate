@@ -99,22 +99,59 @@ def open_country(page, code):
         return False
 
 
+HAS_MENU_JS = "() => !!(document.getElementById('ctype') || document.getElementById('drop_2'))"
+
+
+def type_candidates(page, label):
+    """The form types to try for a search category that is not in the form's menu, the most alike first:
+    the pattern in brackets ("Cars (AB-CD-12)" is the form type "AB-CD-12"), the same words without the year (2024 / 2014),
+    the same first word; then all the others. The plate is accepted if it reads back in one of them."""
+    return page.evaluate(r"""(label) => {
+        const sel = document.getElementById('ctype') || document.getElementById('drop_2');
+        if (!sel) return [];
+        const opts = [...sel.options].filter(o => o.value).map(o => ({ value: o.value, text: o.text.trim().toLowerCase() }));
+        const lab = label.toLowerCase(), plain = s => s.replace(/\b(19|20)\d\d\b/g, '').replace(/\s+/g, ' ').trim();
+        const inBrackets = (lab.match(/\(([^)]+)\)/) || [])[1];
+        const score = o => (inBrackets && (o.text === inBrackets || o.text.includes(inBrackets)) ? 0
+          : plain(o.text) === plain(lab) ? 1 : plain(o.text).split(' ')[0] === plain(lab).split(' ')[0] ? 2 : 3);
+        return opts.map((o, i) => ({ ...o, i, score: score(o) })).sort((x, y) => x.score - y.score || x.i - y.i).map(o => o.value);
+    }""", label)
+
+
+def run_case(page, c, how):
+    """Types the plate in the form as it stands (the category is already chosen) and reads it back."""
+    if not page.evaluate(SHOWN_FIELDS_JS):
+        return {**c, "status": "no-field"}                            # the form shows no field to type a plate of this type
+    res = page.evaluate("([t, o]) => window.nextplaateDev.testText(t, o)", [c["plate"], {"settle": SETTLE_MS, "country": c["country"], "category": c["category"]}])
+    ok = bool(res["fits"]) and norm(res["read"]) == norm(c["plate"])
+    return {**c, "status": "ok" if ok else ("not-fit" if not res["fits"] else "wrong"), "read": res["read"], "fits": res["fits"], "how": how}
+
+
 def check_country(page, code, cases):
-    """Tests every case of one country on its saved upload page."""
+    """Tests every case of one country on its saved upload page.
+    how: "exact" = the category is in the form's menu; "other-type" = it is not, and the plate reads back in another type of the form;
+    "no-menu" = the form has no type menu (Netherlands, Mexico...): the plate is typed as it is."""
     results = []
     if not open_country(page, code):
         return [{**c, "status": "no-harness"} for c in cases]          # the dev script did not start on this page
+    menu = page.evaluate(HAS_MENU_JS)
     for c in cases:
-        if not set_category(page, c["category"]):
-            results.append({**c, "status": "no-type"})          # the search category is not in the upload form's menu
-            continue
-        if not page.evaluate(SHOWN_FIELDS_JS):
-            results.append({**c, "status": "no-field"})         # the form shows no field to type a plate of this type
-            continue
-        res = page.evaluate("([t, o]) => window.nextplaateDev.testText(t, o)", [c["plate"], {"settle": SETTLE_MS, "country": c["country"], "category": c["category"]}])
-        ok = bool(res["fits"]) and norm(res["read"]) == norm(c["plate"])
-        results.append({**c, "status": "ok" if ok else ("not-fit" if not res["fits"] else "wrong"),
-                        "read": res["read"], "fits": res["fits"]})
+        if not menu:
+            results.append(run_case(page, c, "no-menu"))
+        elif set_category(page, c["category"]):
+            results.append(run_case(page, c, "exact"))
+        else:
+            tried = []
+            for value in type_candidates(page, c["category"]):
+                page.evaluate("""(v) => { const sel = document.getElementById('ctype') || document.getElementById('drop_2'); sel.value = v; sel.dispatchEvent(new Event('change', { bubbles: true })); }""", value)
+                r = run_case(page, c, "other-type")
+                if r["status"] == "ok":
+                    tried = [r]
+                    break
+                tried.append(r)
+            results.append(tried[0] if tried else {**c, "status": "no-type"})   # the first (most alike) failure is the one reported
+            if tried and tried[0]["status"] != "ok" and len(tried) > 1 and any(t["status"] == "ok" for t in tried):
+                results[-1] = next(t for t in tried if t["status"] == "ok")
     return results
 
 
@@ -182,6 +219,8 @@ def main():
             cell["total"] += 1
             if r["status"] == "ok":
                 cell["ok"] += 1
+                if r.get("how") != "exact":
+                    cell["via"] = r["how"]                          # not in the menu of the form: read in another type, or no menu
             else:
                 cell["failed"].append({"plate": r["plate"], "read": r.get("read", ""), "status": r["status"]})
         (ROOT / "data" / "check.json").write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")

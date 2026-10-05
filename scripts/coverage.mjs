@@ -29,7 +29,7 @@ for (const c of index) {
   let o = 0, b = 0, n = 0, u = 0, e = 0;
   // a category can be tried only through the upload form's type menu: no upload page, or no menu (the Netherlands), means it cannot
   const form = existsSync(join(root, `data/countries/${c.code}/form.json`)) ? json(`data/countries/${c.code}/form.json`) : null;
-  const why = !form ? "pas de page d'ajout" : !form.typeMenu ? 'pas de menu de type' : null;
+  const why = !form ? "pas de page d'ajout" : null;   // a form without a type menu is tested too: the plate is typed as it is
   for (const label of list) {
     const r = res[label];
     if (!r && why) { u++; (untestable[c.code] ??= []).push({ label, why }); continue; }
@@ -63,7 +63,7 @@ out.push('# Couverture des règles de plaque', '',
   `| **À corriger** | **${bad}** | ${pct(bad, cats)} |`,
   `| **À trouver** (aucune plaque connue) | **${none}** | ${pct(none, cats)} |`,
   `| Galerie vide sur le site (aucune plaque n'existe) | ${noPlate} | ${pct(noPlate, cats)} |`,
-  `| Non prouvables par catégorie (pas de menu de type, catégorie absente du menu, ou aucun champ de plaque) | ${noForm} | ${pct(noForm, cats)} |`, '');
+  `| Sans champ de plaque dans le formulaire ou sans page d'ajout | ${noForm} | ${pct(noForm, cats)} |`, '');
 
 out.push('## À corriger', '');
 if (!failing.length) out.push('Aucune.', '');
@@ -89,7 +89,7 @@ out.push('## Galerie vide sur le site', '', "Aucune photo dans la galerie de ces
 for (const code of Object.keys(emptyGal).sort()) out.push(`- **${code}** : ${emptyGal[code].join(', ')}`);
 out.push('');
 
-out.push('## Non prouvables par catégorie', '', "Ces catégories existent dans la recherche du site mais le formulaire d'ajout ne permet pas de les choisir : leur règle ne peut pas être prouvée hors ligne **par catégorie**. La vérification de plaque, elle, cherche le texte de la plaque et marche quand même (vérifié à la main pour les Pays-Bas).", '');
+out.push('## Impossibles à écrire dans le formulaire', '', "Le formulaire d'ajout n'a aucun champ pour ces catégories (Bosnie « Diplomatic », Croatie « Police », Italie, Portugal) : la plaque ne peut pas y être tapée, donc ni la règle ni la vérification de plaque ne les concernent hors ligne. Les catégories qui ne sont pas dans le menu du formulaire (Chili, Géorgie...) ou les formulaires sans menu (Pays-Bas...) sont testés quand même : la plaque est tapée dans un autre type du formulaire, ou telle quelle.", '');
 for (const code of Object.keys(untestable).sort()) {
   const byWhy = {};
   for (const x of untestable[code]) (byWhy[x.why] ??= []).push(x.label);
