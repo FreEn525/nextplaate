@@ -9,6 +9,15 @@
     "categoriesWithPlate": 0
   },
   {
+    "code": "ae",
+    "name": "UAE",
+    "upload": false,
+    "uploadTypes": 0,
+    "searchCategories": 0,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
     "code": "al",
     "name": "Albania",
     "upload": true,
@@ -18,6 +27,24 @@
     "categoriesWithPlate": 3
   },
   {
+    "code": "am",
+    "name": "Armenia",
+    "upload": true,
+    "uploadTypes": 8,
+    "searchCategories": 8,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "ar",
+    "name": "Argentina",
+    "upload": true,
+    "uploadTypes": 6,
+    "searchCategories": 6,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
     "code": "at",
     "name": "Austria",
     "upload": true,
@@ -25,6 +52,33 @@
     "searchCategories": 9,
     "plates": 24,
     "categoriesWithPlate": 8
+  },
+  {
+    "code": "au",
+    "name": "Australia",
+    "upload": false,
+    "uploadTypes": 0,
+    "searchCategories": 0,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "ax",
+    "name": "Åland (FI)",
+    "upload": true,
+    "uploadTypes": 5,
+    "searchCategories": 5,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "az",
+    "name": "Azerbaijan",
+    "upload": true,
+    "uploadTypes": 4,
+    "searchCategories": 5,
+    "plates": 0,
+    "categoriesWithPlate": 0
   },
   {
     "code": "ba",
@@ -54,6 +108,33 @@
     "categoriesWithPlate": 7
   },
   {
+    "code": "bh",
+    "name": "Bahrain",
+    "upload": true,
+    "uploadTypes": 7,
+    "searchCategories": 7,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "br",
+    "name": "Brazil",
+    "upload": true,
+    "uploadTypes": 13,
+    "searchCategories": 13,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "bs",
+    "name": "Bahamas",
+    "upload": true,
+    "uploadTypes": 7,
+    "searchCategories": 7,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
     "code": "by",
     "name": "Belarus",
     "upload": true,
@@ -63,6 +144,15 @@
     "categoriesWithPlate": 14
   },
   {
+    "code": "ca",
+    "name": "Canada",
+    "upload": false,
+    "uploadTypes": 0,
+    "searchCategories": 0,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
     "code": "ch",
     "name": "Switzerland",
     "upload": true,
@@ -70,6 +160,33 @@
     "searchCategories": 11,
     "plates": 21,
     "categoriesWithPlate": 7
+  },
+  {
+    "code": "cl",
+    "name": "Chile",
+    "upload": true,
+    "uploadTypes": 5,
+    "searchCategories": 15,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "cn",
+    "name": "China",
+    "upload": true,
+    "uploadTypes": 6,
+    "searchCategories": 6,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "cy",
+    "name": "Cyprus",
+    "upload": true,
+    "uploadTypes": 5,
+    "searchCategories": 5,
+    "plates": 0,
+    "categoriesWithPlate": 0
   },
   {
     "code": "cz",
@@ -117,6 +234,15 @@
     "categoriesWithPlate": 10
   },
   {
+    "code": "eg",
+    "name": "Egypt",
+    "upload": true,
+    "uploadTypes": 4,
+    "searchCategories": 4,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
     "code": "es",
     "name": "Spain",
     "upload": true,
@@ -144,6 +270,15 @@
     "categoriesWithPlate": 17
   },
   {
+    "code": "ge",
+    "name": "Georgia",
+    "upload": true,
+    "uploadTypes": 12,
+    "searchCategories": 12,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
     "code": "gg",
     "name": "Guernsey (UK)",
     "upload": true,
@@ -153,6 +288,15 @@
     "categoriesWithPlate": 2
   },
   {
+    "code": "gi",
+    "name": "Gibraltar (UK)",
+    "upload": true,
+    "uploadTypes": 4,
+    "searchCategories": 4,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
     "code": "gr",
     "name": "Greece",
     "upload": true,
@@ -160,6 +304,24 @@
     "searchCategories": 16,
     "plates": 13,
     "categoriesWithPlate": 5
+  },
+  {
+    "code": "gu",
+    "name": "Guam (USA)",
+    "upload": true,
+    "uploadTypes": 9,
+    "searchCategories": 9,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "hk",
+    "name": "Hong Kong (CN)",
+    "upload": true,
+    "uploadTypes": 2,
+    "searchCategories": 2,
+    "plates": 0,
+    "categoriesWithPlate": 0
   },
   {
     "code": "hr",
@@ -180,6 +342,15 @@
     "categoriesWithPlate": 23
   },
   {
+    "code": "id",
+    "name": "Indonesia",
+    "upload": true,
+    "uploadTypes": 7,
+    "searchCategories": 7,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
     "code": "ie",
     "name": "Ireland",
     "upload": true,
@@ -187,6 +358,33 @@
     "searchCategories": 3,
     "plates": 6,
     "categoriesWithPlate": 2
+  },
+  {
+    "code": "il",
+    "name": "Israel",
+    "upload": true,
+    "uploadTypes": 9,
+    "searchCategories": 8,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "iq",
+    "name": "Iraq",
+    "upload": true,
+    "uploadTypes": 4,
+    "searchCategories": 4,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "ir",
+    "name": "Iran",
+    "upload": true,
+    "uploadTypes": 16,
+    "searchCategories": 16,
+    "plates": 0,
+    "categoriesWithPlate": 0
   },
   {
     "code": "is",
@@ -205,6 +403,87 @@
     "searchCategories": 14,
     "plates": 33,
     "categoriesWithPlate": 12
+  },
+  {
+    "code": "je",
+    "name": "Jersey (UK)",
+    "upload": true,
+    "uploadTypes": 2,
+    "searchCategories": 2,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "jp",
+    "name": "Japan",
+    "upload": true,
+    "uploadTypes": 4,
+    "searchCategories": 4,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "ke",
+    "name": "Kenya",
+    "upload": true,
+    "uploadTypes": 12,
+    "searchCategories": 12,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "kg",
+    "name": "Kyrgyzstan",
+    "upload": true,
+    "uploadTypes": 12,
+    "searchCategories": 12,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "kh",
+    "name": "Cambodia",
+    "upload": true,
+    "uploadTypes": 7,
+    "searchCategories": 7,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "kr",
+    "name": "South Korea",
+    "upload": true,
+    "uploadTypes": 3,
+    "searchCategories": 3,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "kw",
+    "name": "Kuwait",
+    "upload": true,
+    "uploadTypes": 4,
+    "searchCategories": 4,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "kz",
+    "name": "Kazakhstan",
+    "upload": true,
+    "uploadTypes": 18,
+    "searchCategories": 18,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "la",
+    "name": "Laos",
+    "upload": true,
+    "uploadTypes": 9,
+    "searchCategories": 9,
+    "plates": 0,
+    "categoriesWithPlate": 0
   },
   {
     "code": "li",
@@ -252,6 +531,15 @@
     "categoriesWithPlate": 2
   },
   {
+    "code": "mc",
+    "name": "Monaco",
+    "upload": true,
+    "uploadTypes": 4,
+    "searchCategories": 4,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
     "code": "md",
     "name": "Moldova",
     "upload": true,
@@ -279,11 +567,47 @@
     "categoriesWithPlate": 6
   },
   {
+    "code": "mn",
+    "name": "Mongolia",
+    "upload": true,
+    "uploadTypes": 4,
+    "searchCategories": 4,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "mp",
+    "name": "Northern Mariana Islands (USA)",
+    "upload": true,
+    "uploadTypes": 6,
+    "searchCategories": 6,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
     "code": "mt",
     "name": "Malta",
     "upload": true,
     "uploadTypes": 6,
     "searchCategories": 6,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "mx",
+    "name": "Mexico",
+    "upload": false,
+    "uploadTypes": 0,
+    "searchCategories": 20,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "my",
+    "name": "Malaysia",
+    "upload": false,
+    "uploadTypes": 0,
+    "searchCategories": 4,
     "plates": 0,
     "categoriesWithPlate": 0
   },
@@ -306,6 +630,15 @@
     "categoriesWithPlate": 12
   },
   {
+    "code": "nz",
+    "name": "New Zealand",
+    "upload": false,
+    "uploadTypes": 0,
+    "searchCategories": 5,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
     "code": "pl",
     "name": "Poland",
     "upload": true,
@@ -315,6 +648,15 @@
     "categoriesWithPlate": 11
   },
   {
+    "code": "ps",
+    "name": "Palestinian Authority",
+    "upload": false,
+    "uploadTypes": 0,
+    "searchCategories": 6,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
     "code": "pt",
     "name": "Portugal",
     "upload": true,
@@ -322,6 +664,15 @@
     "searchCategories": 4,
     "plates": 9,
     "categoriesWithPlate": 3
+  },
+  {
+    "code": "qa",
+    "name": "Qatar",
+    "upload": true,
+    "uploadTypes": 6,
+    "searchCategories": 6,
+    "plates": 0,
+    "categoriesWithPlate": 0
   },
   {
     "code": "ro",
@@ -351,6 +702,24 @@
     "categoriesWithPlate": 0
   },
   {
+    "code": "sa",
+    "name": "Saudi Arabia",
+    "upload": true,
+    "uploadTypes": 6,
+    "searchCategories": 6,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "sc",
+    "name": "Seychelles",
+    "upload": true,
+    "uploadTypes": 9,
+    "searchCategories": 9,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
     "code": "se",
     "name": "Sweden",
     "upload": true,
@@ -358,6 +727,15 @@
     "searchCategories": 8,
     "plates": 24,
     "categoriesWithPlate": 8
+  },
+  {
+    "code": "sg",
+    "name": "Singapore",
+    "upload": false,
+    "uploadTypes": 0,
+    "searchCategories": 13,
+    "plates": 0,
+    "categoriesWithPlate": 0
   },
   {
     "code": "si",
@@ -376,6 +754,33 @@
     "searchCategories": 21,
     "plates": 48,
     "categoriesWithPlate": 16
+  },
+  {
+    "code": "sm",
+    "name": "San Marino",
+    "upload": false,
+    "uploadTypes": 0,
+    "searchCategories": 13,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "su",
+    "name": "USSR",
+    "upload": true,
+    "uploadTypes": 15,
+    "searchCategories": 15,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "th",
+    "name": "Thailand",
+    "upload": true,
+    "uploadTypes": 9,
+    "searchCategories": 9,
+    "plates": 0,
+    "categoriesWithPlate": 0
   },
   {
     "code": "tj",
@@ -414,6 +819,15 @@
     "categoriesWithPlate": 10
   },
   {
+    "code": "us",
+    "name": "USA",
+    "upload": false,
+    "uploadTypes": 0,
+    "searchCategories": 0,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
     "code": "uz",
     "name": "Uzbekistan",
     "upload": true,
@@ -421,5 +835,32 @@
     "searchCategories": 9,
     "plates": 21,
     "categoriesWithPlate": 7
+  },
+  {
+    "code": "va",
+    "name": "Vatican",
+    "upload": false,
+    "uploadTypes": 0,
+    "searchCategories": 6,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "vn",
+    "name": "Vietnam",
+    "upload": true,
+    "uploadTypes": 8,
+    "searchCategories": 8,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "xx",
+    "name": "Non-recognized and partially recognized states",
+    "upload": false,
+    "uploadTypes": 0,
+    "searchCategories": 0,
+    "plates": 0,
+    "categoriesWithPlate": 0
   }
 ]

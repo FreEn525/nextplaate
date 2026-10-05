@@ -1,0 +1,618 @@
+{
+  "code": "cn",
+  "title": "Upload new license plate, China",
+  "action": "add",
+  "typeMenu": "ctype",
+  "visibleFrom": "site-script",
+  "types": [
+    {
+      "id": "1",
+      "label": "Cars",
+      "class": "tip1",
+      "visible": ["region", "region2", "nomerpl", "regionfed1"]
+    },
+    {
+      "id": "2",
+      "label": "Trucks and buses",
+      "class": "tip2",
+      "visible": ["fon", "region", "region2", "nomerpl", "regionfed1"]
+    },
+    {
+      "id": "3",
+      "label": "Foreign citizens and enterprises",
+      "class": "tip3",
+      "visible": ["region", "region2", "nomerpl", "regionfed1"]
+    },
+    {
+      "id": "4",
+      "label": "Trailers",
+      "class": "tip2",
+      "visible": ["region", "region2", "nomerpl", "regionfed1"]
+    },
+    {
+      "id": "5",
+      "label": "Electric vehicles",
+      "class": "tip5",
+      "visible": ["fon1", "region", "region2", "nomerpl", "regionfed1"]
+    },
+    {
+      "id": "6",
+      "label": "Motorcycles",
+      "class": "tip2",
+      "visible": ["region", "region2", "nomerpl", "regionfed1"]
+    }
+  ],
+  "hooks": ["discn"],
+  "plateFields": [
+    {
+      "tag": "select",
+      "id": "fon",
+      "name": "fon",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "1",
+          "label": "Single-row plate"
+        },
+        {
+          "value": "2",
+          "label": "Two-row plate"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "fon1",
+      "name": "fon1",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "3",
+          "label": "Cars"
+        },
+        {
+          "value": "4",
+          "label": "Buses"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "region",
+      "name": "region",
+      "options": [
+        {
+          "value": "",
+          "label": "Select region"
+        },
+        {
+          "value": "4001",
+          "label": "京 - Beijing Municipality"
+        },
+        {
+          "value": "4002",
+          "label": "津 - Tianjin Municipality"
+        },
+        {
+          "value": "4003",
+          "label": "冀 - Hebei Province"
+        },
+        {
+          "value": "4004",
+          "label": "晋 - Shanxi Province"
+        },
+        {
+          "value": "4005",
+          "label": "蒙 - Inner Mongolia Autonomous Region"
+        },
+        {
+          "value": "4006",
+          "label": "辽 - Liaoning Province"
+        },
+        {
+          "value": "4007",
+          "label": "吉 - Jilin Province"
+        },
+        {
+          "value": "4008",
+          "label": "黑 - Heilongjiang Province"
+        },
+        {
+          "value": "4009",
+          "label": "沪 - Shanghai Municipality"
+        },
+        {
+          "value": "4010",
+          "label": "苏 - Jiangsu Province"
+        },
+        {
+          "value": "4011",
+          "label": "浙 - Zhejiang Province"
+        },
+        {
+          "value": "4012",
+          "label": "皖 - Anhui Province"
+        },
+        {
+          "value": "4013",
+          "label": "闽 - Fujian Province"
+        },
+        {
+          "value": "4014",
+          "label": "赣 - Jiangxi Province"
+        },
+        {
+          "value": "4015",
+          "label": "鲁 - Shandong Province"
+        },
+        {
+          "value": "4016",
+          "label": "豫 - Henan Province"
+        },
+        {
+          "value": "4017",
+          "label": "鄂 - Hubei Province"
+        },
+        {
+          "value": "4018",
+          "label": "湘 - Hunan Province"
+        },
+        {
+          "value": "4019",
+          "label": "粤 - Guangdong Province"
+        },
+        {
+          "value": "4020",
+          "label": "桂 - Guangxi Zhuang Autonomous Region"
+        },
+        {
+          "value": "4021",
+          "label": "琼 - Hainan Province"
+        },
+        {
+          "value": "4022",
+          "label": "渝 - Chongqing Municipality"
+        },
+        {
+          "value": "4023",
+          "label": "川 - Sichuan Province"
+        },
+        {
+          "value": "4024",
+          "label": "贵 - Guizhou Province"
+        },
+        {
+          "value": "4025",
+          "label": "云 - Yunnan Province"
+        },
+        {
+          "value": "4026",
+          "label": "藏 - Tibet Autonomous Region"
+        },
+        {
+          "value": "4027",
+          "label": "陕 - Shaanxi Province"
+        },
+        {
+          "value": "4028",
+          "label": "甘 - Gansu Province"
+        },
+        {
+          "value": "4029",
+          "label": "青 - Qinghai Province"
+        },
+        {
+          "value": "4030",
+          "label": "宁 - Ningxia Hui Autonomous Region"
+        },
+        {
+          "value": "4031",
+          "label": "新 - Xinjiang Uyghur Autonomous Region"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "region2",
+      "name": "region2",
+      "options": []
+    },
+    {
+      "tag": "input",
+      "id": "nomerpl",
+      "name": "nomerpl",
+      "type": "text",
+      "maxlength": 6
+    },
+    {
+      "tag": "input",
+      "id": "trl",
+      "name": "trl",
+      "type": "text",
+      "maxlength": 1,
+      "hiddenAtLoad": true
+    },
+    {
+      "tag": "select",
+      "id": "hkmo",
+      "name": "hkmo",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "0",
+          "label": "-"
+        },
+        {
+          "value": "hk",
+          "label": "港"
+        },
+        {
+          "value": "mo",
+          "label": "澳"
+        }
+      ]
+    }
+  ],
+  "otherFields": [
+    {
+      "tag": "select",
+      "id": null,
+      "name": "markaavto",
+      "options": 3949
+    },
+    {
+      "tag": "select",
+      "id": "model",
+      "name": "model",
+      "options": 0
+    },
+    {
+      "tag": "select",
+      "id": "modgen",
+      "name": "modgen",
+      "options": 0
+    },
+    {
+      "tag": "input",
+      "id": "markamodtype",
+      "name": null,
+      "type": "text"
+    },
+    {
+      "tag": "textarea",
+      "id": null,
+      "name": "dop"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": null,
+      "type": "search"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox13",
+      "name": "CheckBox[13]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox50",
+      "name": "CheckBox[50]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox25",
+      "name": "CheckBox[25]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox26",
+      "name": "CheckBox[26]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox43",
+      "name": "CheckBox[43]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox59",
+      "name": "CheckBox[59]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox68",
+      "name": "CheckBox[68]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox60",
+      "name": "CheckBox[60]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox21",
+      "name": "CheckBox[21]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox8",
+      "name": "CheckBox[8]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox58",
+      "name": "CheckBox[58]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox9",
+      "name": "CheckBox[9]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox57",
+      "name": "CheckBox[57]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox46",
+      "name": "CheckBox[46]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox62",
+      "name": "CheckBox[62]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox33",
+      "name": "CheckBox[33]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox61",
+      "name": "CheckBox[61]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox22",
+      "name": "CheckBox[22]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox47",
+      "name": "CheckBox[47]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox38",
+      "name": "CheckBox[38]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox53",
+      "name": "CheckBox[53]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox40",
+      "name": "CheckBox[40]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox63",
+      "name": "CheckBox[63]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox64",
+      "name": "CheckBox[64]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox42",
+      "name": "CheckBox[42]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox65",
+      "name": "CheckBox[65]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox39",
+      "name": "CheckBox[39]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox49",
+      "name": "CheckBox[49]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox41",
+      "name": "CheckBox[41]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox37",
+      "name": "CheckBox[37]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox67",
+      "name": "CheckBox[67]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox18",
+      "name": "CheckBox[18]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox20",
+      "name": "CheckBox[20]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox15",
+      "name": "CheckBox[15]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox23",
+      "name": "CheckBox[23]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox69",
+      "name": "CheckBox[69]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox24",
+      "name": "CheckBox[24]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox19",
+      "name": "CheckBox[19]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox48",
+      "name": "CheckBox[48]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox4",
+      "name": "CheckBox[4]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox5",
+      "name": "CheckBox[5]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox16",
+      "name": "CheckBox[16]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox14",
+      "name": "CheckBox[14]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox66",
+      "name": "CheckBox[66]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox45",
+      "name": "CheckBox[45]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox6",
+      "name": "CheckBox[6]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox44",
+      "name": "CheckBox[44]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox52",
+      "name": "CheckBox[52]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox27",
+      "name": "CheckBox[27]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox1",
+      "name": "CheckBox[1]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox56",
+      "name": "CheckBox[56]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox2",
+      "name": "CheckBox[2]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "hide",
+      "name": "hidefoto",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "enablesave",
+      "name": "enablesave",
+      "type": "checkbox"
+    }
+  ],
+  "notes": []
+}

@@ -1,0 +1,9 @@
+{
+  "code": "je",
+  "name": "Jersey (UK)",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

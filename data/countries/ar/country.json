@@ -1,0 +1,9 @@
+{
+  "code": "ar",
+  "name": "Argentina",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

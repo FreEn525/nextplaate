@@ -1,0 +1,9 @@
+{
+  "code": "gu",
+  "name": "Guam (USA)",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

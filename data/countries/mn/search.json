@@ -1,0 +1,850 @@
+{
+  "code": "mn",
+  "title": "Lookup License plates of Mongolia",
+  "categories": [
+    {
+      "id": "1",
+      "label": "Cars"
+    },
+    {
+      "id": "2",
+      "label": "Trailers"
+    },
+    {
+      "id": "3",
+      "label": "Special machinery"
+    },
+    {
+      "id": "4",
+      "label": "Motorcycles"
+    }
+  ],
+  "fields": [
+    {
+      "tag": "input",
+      "id": "nomer",
+      "name": "nomer",
+      "type": "text",
+      "maxlength": 9,
+      "example": "1234 ABC"
+    },
+    {
+      "tag": "select",
+      "id": "format",
+      "name": "format",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "1",
+          "label": "RR 1234"
+        },
+        {
+          "value": "2",
+          "label": "RRA 1234"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "region",
+      "name": "aregions[]",
+      "options": [
+        {
+          "value": "4329",
+          "label": "- Diplomatic missions"
+        },
+        {
+          "value": "41101",
+          "label": "АР - Arkhangai Province"
+        },
+        {
+          "value": "41102",
+          "label": "БН - Bayankhongor Province"
+        },
+        {
+          "value": "41103",
+          "label": "БӨ - Bayan-Ölgii Province"
+        },
+        {
+          "value": "41104",
+          "label": "БР - Ulan Bator City (Baganuur District)"
+        },
+        {
+          "value": "41105",
+          "label": "БУ - Bulgan Province"
+        },
+        {
+          "value": "41106",
+          "label": "ГА - Govi-Altai Province"
+        },
+        {
+          "value": "41107",
+          "label": "ГС - Govisümber Province"
+        },
+        {
+          "value": "41108",
+          "label": "ДА - Darkhan-Uul Province"
+        },
+        {
+          "value": "41109",
+          "label": "ДГ - Dornogovi Province"
+        },
+        {
+          "value": "41110",
+          "label": "ДО - Dornod Province"
+        },
+        {
+          "value": "41111",
+          "label": "ДУ - Dundgovi Province"
+        },
+        {
+          "value": "41112",
+          "label": "ЗА - Zavkhan Province"
+        },
+        {
+          "value": "41113",
+          "label": "НА - Ulan Bator City (Nalaikh District)"
+        },
+        {
+          "value": "41114",
+          "label": "ОР - Orkhon Province"
+        },
+        {
+          "value": "41115",
+          "label": "ӨВ - Övörkhangai Province"
+        },
+        {
+          "value": "41116",
+          "label": "ӨМ - Ömnögovi Province"
+        },
+        {
+          "value": "41117",
+          "label": "СБ - Sükhbaatar City"
+        },
+        {
+          "value": "41118",
+          "label": "СҮ - Sükhbaatar Province"
+        },
+        {
+          "value": "41119",
+          "label": "СЭ - Selenge Province"
+        },
+        {
+          "value": "41120",
+          "label": "ТӨ - Töv Province"
+        },
+        {
+          "value": "41121",
+          "label": "УА - Ulan Bator City"
+        },
+        {
+          "value": "41122",
+          "label": "УБ - Ulan Bator City"
+        },
+        {
+          "value": "41123",
+          "label": "УВ - Uvs Province"
+        },
+        {
+          "value": "41124",
+          "label": "УН - Ulan Bator City"
+        },
+        {
+          "value": "41125",
+          "label": "ХО - Khovd Province"
+        },
+        {
+          "value": "41126",
+          "label": "ХӨ - Khövsgöl Province"
+        },
+        {
+          "value": "41127",
+          "label": "ХЦ - Borderguard service"
+        },
+        {
+          "value": "41128",
+          "label": "ХЭ - Khentii Province"
+        },
+        {
+          "value": "41129",
+          "label": "ЦА - Ministry of Defence"
+        },
+        {
+          "value": "41130",
+          "label": "ЧО - Choibalsan City"
+        },
+        {
+          "value": "41131",
+          "label": "ЭТ - Erdenet City"
+        },
+        {
+          "value": "41132",
+          "label": "БА - Bayan-Ölgii Province"
+        },
+        {
+          "value": "41133",
+          "label": "УЕ - Ulan Bator City"
+        },
+        {
+          "value": "41134",
+          "label": "УК - Ulan Bator City"
+        },
+        {
+          "value": "41135",
+          "label": "УР - Ulan Bator City"
+        },
+        {
+          "value": "41136",
+          "label": "ЗЦ - Traffic police"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "fon",
+      "name": "fon",
+      "options": [
+        {
+          "value": "",
+          "label": "-"
+        },
+        {
+          "value": "1",
+          "label": "Single-row plate"
+        },
+        {
+          "value": "2",
+          "label": "Single-row plate, +red soyombo, +oval"
+        },
+        {
+          "value": "3",
+          "label": "Single-row plate, +oval"
+        },
+        {
+          "value": "4",
+          "label": "Two-row plate"
+        },
+        {
+          "value": "5",
+          "label": "Two-row plate, +red soyombo, +oval"
+        },
+        {
+          "value": "6",
+          "label": "Two-row plate, +oval"
+        },
+        {
+          "value": "10",
+          "label": "Single-row plate, +MGL (new)"
+        },
+        {
+          "value": "11",
+          "label": "Single-row plate (Black background), +MGL (new)"
+        },
+        {
+          "value": "12",
+          "label": "Single-row plate (green background), +MGL (new)"
+        },
+        {
+          "value": "13",
+          "label": "Single-row plate (yellow), +MGL (new)"
+        },
+        {
+          "value": "14",
+          "label": "Two-row plate, +MGL (new)"
+        },
+        {
+          "value": "15",
+          "label": "Two-row plate (Black background), +MGL (new)"
+        },
+        {
+          "value": "16",
+          "label": "Two-row plate (green background), +MGL (new)"
+        },
+        {
+          "value": "17",
+          "label": "Two-row plate (yellow), +MGL (new)"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": null,
+      "name": "markaavto",
+      "options": {
+        "count": 3950,
+        "first": [
+          {
+            "value": "",
+            "label": "-"
+          },
+          {
+            "value": "200",
+            "label": "I don`t know..."
+          },
+          {
+            "value": "2955",
+            "label": "212"
+          },
+          {
+            "value": "3693",
+            "label": "2Twenty"
+          },
+          {
+            "value": "3746",
+            "label": "3-2 (Bahai)"
+          }
+        ]
+      }
+    },
+    {
+      "tag": "select",
+      "id": "model",
+      "name": "model",
+      "options": []
+    },
+    {
+      "tag": "select",
+      "id": "modgen",
+      "name": "modgen",
+      "options": []
+    },
+    {
+      "tag": "input",
+      "id": "markamodtype",
+      "name": null,
+      "type": "text"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "date1",
+      "type": "text",
+      "example": "From date"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "date2",
+      "type": "text",
+      "example": "To date"
+    },
+    {
+      "tag": "input",
+      "id": "dop",
+      "name": "dop",
+      "type": "text",
+      "maxlength": 100,
+      "example": "Extra information"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": null,
+      "type": "search",
+      "example": "Tags"
+    },
+    {
+      "tag": "select",
+      "id": null,
+      "name": "tags[]",
+      "options": [
+        {
+          "value": "4",
+          "label": "abandoned vehicle"
+        },
+        {
+          "value": "67",
+          "label": "ADR"
+        },
+        {
+          "value": "47",
+          "label": "aerial device truck"
+        },
+        {
+          "value": "5",
+          "label": "aerography"
+        },
+        {
+          "value": "18",
+          "label": "ambulance"
+        },
+        {
+          "value": "52",
+          "label": "archive photo"
+        },
+        {
+          "value": "16",
+          "label": "armored"
+        },
+        {
+          "value": "60",
+          "label": "ATV"
+        },
+        {
+          "value": "21",
+          "label": "bus"
+        },
+        {
+          "value": "8",
+          "label": "cabriolet"
+        },
+        {
+          "value": "20",
+          "label": "cash-in-transit vehicle"
+        },
+        {
+          "value": "38",
+          "label": "concrete mixer"
+        },
+        {
+          "value": "14",
+          "label": "damaged"
+        },
+        {
+          "value": "26",
+          "label": "deliberately changed license plate"
+        },
+        {
+          "value": "53",
+          "label": "drilling rig"
+        },
+        {
+          "value": "40",
+          "label": "dumper"
+        },
+        {
+          "value": "63",
+          "label": "excavator"
+        },
+        {
+          "value": "15",
+          "label": "fire appliance"
+        },
+        {
+          "value": "64",
+          "label": "food truck"
+        },
+        {
+          "value": "42",
+          "label": "garbage truck"
+        },
+        {
+          "value": "58",
+          "label": "hearse"
+        },
+        {
+          "value": "27",
+          "label": "improper parking"
+        },
+        {
+          "value": "9",
+          "label": "limousine"
+        },
+        {
+          "value": "57",
+          "label": "motorcycle"
+        },
+        {
+          "value": "46",
+          "label": "motorhome"
+        },
+        {
+          "value": "13",
+          "label": "new letter combination"
+        },
+        {
+          "value": "43",
+          "label": "non-standard plate"
+        },
+        {
+          "value": "10",
+          "label": "oldtimer"
+        },
+        {
+          "value": "50",
+          "label": "plate for brand or model of vehicle"
+        },
+        {
+          "value": "23",
+          "label": "police"
+        },
+        {
+          "value": "59",
+          "label": "remade plate"
+        },
+        {
+          "value": "69",
+          "label": "rental"
+        },
+        {
+          "value": "68",
+          "label": "repeater"
+        },
+        {
+          "value": "1",
+          "label": "road accident"
+        },
+        {
+          "value": "65",
+          "label": "road roller"
+        },
+        {
+          "value": "66",
+          "label": "roof box"
+        },
+        {
+          "value": "56",
+          "label": "spyspot"
+        },
+        {
+          "value": "39",
+          "label": "tanker"
+        },
+        {
+          "value": "24",
+          "label": "taxicab"
+        },
+        {
+          "value": "45",
+          "label": "test drive"
+        },
+        {
+          "value": "49",
+          "label": "tow truck"
+        },
+        {
+          "value": "62",
+          "label": "tractor"
+        },
+        {
+          "value": "41",
+          "label": "tractor unit"
+        },
+        {
+          "value": "2",
+          "label": "traffic code violation"
+        },
+        {
+          "value": "33",
+          "label": "trailer"
+        },
+        {
+          "value": "19",
+          "label": "training vehicle"
+        },
+        {
+          "value": "25",
+          "label": "transferred/reissued plate"
+        },
+        {
+          "value": "61",
+          "label": "trike"
+        },
+        {
+          "value": "22",
+          "label": "truck"
+        },
+        {
+          "value": "37",
+          "label": "truck-mounted crane"
+        },
+        {
+          "value": "28",
+          "label": "tuning"
+        },
+        {
+          "value": "6",
+          "label": "unmarked with emergency lights"
+        },
+        {
+          "value": "44",
+          "label": "vinyl wrapping"
+        },
+        {
+          "value": "48",
+          "label": "wedding car"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": null,
+      "type": "search",
+      "example": "Tags"
+    },
+    {
+      "tag": "select",
+      "id": null,
+      "name": "tagsno[]",
+      "options": [
+        {
+          "value": "4",
+          "label": "abandoned vehicle"
+        },
+        {
+          "value": "67",
+          "label": "ADR"
+        },
+        {
+          "value": "47",
+          "label": "aerial device truck"
+        },
+        {
+          "value": "5",
+          "label": "aerography"
+        },
+        {
+          "value": "18",
+          "label": "ambulance"
+        },
+        {
+          "value": "52",
+          "label": "archive photo"
+        },
+        {
+          "value": "16",
+          "label": "armored"
+        },
+        {
+          "value": "60",
+          "label": "ATV"
+        },
+        {
+          "value": "21",
+          "label": "bus"
+        },
+        {
+          "value": "8",
+          "label": "cabriolet"
+        },
+        {
+          "value": "20",
+          "label": "cash-in-transit vehicle"
+        },
+        {
+          "value": "38",
+          "label": "concrete mixer"
+        },
+        {
+          "value": "14",
+          "label": "damaged"
+        },
+        {
+          "value": "26",
+          "label": "deliberately changed license plate"
+        },
+        {
+          "value": "53",
+          "label": "drilling rig"
+        },
+        {
+          "value": "40",
+          "label": "dumper"
+        },
+        {
+          "value": "63",
+          "label": "excavator"
+        },
+        {
+          "value": "15",
+          "label": "fire appliance"
+        },
+        {
+          "value": "64",
+          "label": "food truck"
+        },
+        {
+          "value": "42",
+          "label": "garbage truck"
+        },
+        {
+          "value": "58",
+          "label": "hearse"
+        },
+        {
+          "value": "27",
+          "label": "improper parking"
+        },
+        {
+          "value": "9",
+          "label": "limousine"
+        },
+        {
+          "value": "57",
+          "label": "motorcycle"
+        },
+        {
+          "value": "46",
+          "label": "motorhome"
+        },
+        {
+          "value": "13",
+          "label": "new letter combination"
+        },
+        {
+          "value": "43",
+          "label": "non-standard plate"
+        },
+        {
+          "value": "10",
+          "label": "oldtimer"
+        },
+        {
+          "value": "50",
+          "label": "plate for brand or model of vehicle"
+        },
+        {
+          "value": "23",
+          "label": "police"
+        },
+        {
+          "value": "59",
+          "label": "remade plate"
+        },
+        {
+          "value": "69",
+          "label": "rental"
+        },
+        {
+          "value": "68",
+          "label": "repeater"
+        },
+        {
+          "value": "1",
+          "label": "road accident"
+        },
+        {
+          "value": "65",
+          "label": "road roller"
+        },
+        {
+          "value": "66",
+          "label": "roof box"
+        },
+        {
+          "value": "56",
+          "label": "spyspot"
+        },
+        {
+          "value": "39",
+          "label": "tanker"
+        },
+        {
+          "value": "24",
+          "label": "taxicab"
+        },
+        {
+          "value": "45",
+          "label": "test drive"
+        },
+        {
+          "value": "49",
+          "label": "tow truck"
+        },
+        {
+          "value": "62",
+          "label": "tractor"
+        },
+        {
+          "value": "41",
+          "label": "tractor unit"
+        },
+        {
+          "value": "2",
+          "label": "traffic code violation"
+        },
+        {
+          "value": "33",
+          "label": "trailer"
+        },
+        {
+          "value": "19",
+          "label": "training vehicle"
+        },
+        {
+          "value": "25",
+          "label": "transferred/reissued plate"
+        },
+        {
+          "value": "61",
+          "label": "trike"
+        },
+        {
+          "value": "22",
+          "label": "truck"
+        },
+        {
+          "value": "37",
+          "label": "truck-mounted crane"
+        },
+        {
+          "value": "28",
+          "label": "tuning"
+        },
+        {
+          "value": "6",
+          "label": "unmarked with emergency lights"
+        },
+        {
+          "value": "44",
+          "label": "vinyl wrapping"
+        },
+        {
+          "value": "48",
+          "label": "wedding car"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "usr",
+      "type": "text",
+      "example": "User ID"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "com",
+      "type": "text",
+      "example": "&gt;"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "vote",
+      "type": "text",
+      "example": "&gt;"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "few",
+      "type": "radio",
+      "value": "0"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "few",
+      "type": "radio",
+      "value": "2"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "few",
+      "type": "radio",
+      "value": "1"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "hide",
+      "type": "checkbox",
+      "value": "1"
+    }
+  ],
+  "notes": []
+}

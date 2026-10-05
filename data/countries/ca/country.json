@@ -1,0 +1,9 @@
+{
+  "code": "ca",
+  "name": "Canada",
+  "pages": {
+    "upload": false,
+    "search": true
+  },
+  "typeMenu": null
+}

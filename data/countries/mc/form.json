@@ -1,0 +1,461 @@
+{
+  "code": "mc",
+  "title": "Upload new license plate, Monaco",
+  "action": "add",
+  "typeMenu": "ctype",
+  "visibleFrom": "site-script",
+  "types": [
+    {
+      "id": "1",
+      "label": "Cars",
+      "visible": ["fon", "nomerpl", "drop_1"]
+    },
+    {
+      "id": "2",
+      "label": "Motorcycles",
+      "visible": ["fon", "nomerpl", "drop_1"]
+    },
+    {
+      "id": "3",
+      "label": "Royal family",
+      "visible": ["fon", "nomerpl", "drop_1"]
+    },
+    {
+      "id": "4",
+      "label": "Provisional",
+      "visible": ["nomerpl", "drop_1"]
+    }
+  ],
+  "hooks": ["OnSelect1"],
+  "plateFields": [
+    {
+      "tag": "input",
+      "id": "nomerpl",
+      "name": "nomerpl",
+      "type": "text",
+      "maxlength": 4
+    },
+    {
+      "tag": "select",
+      "id": "fon",
+      "name": "fon",
+      "options": [
+        {
+          "value": "1",
+          "label": "front"
+        },
+        {
+          "value": "2",
+          "label": "back"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "drop_1",
+      "name": "drop_1",
+      "options": [
+        {
+          "value": "WW",
+          "label": "WW"
+        },
+        {
+          "value": "WW2",
+          "label": "WW2"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": "day",
+      "name": "day",
+      "type": "text",
+      "maxlength": 2,
+      "example": "__"
+    },
+    {
+      "tag": "input",
+      "id": "month",
+      "name": "month",
+      "type": "text",
+      "maxlength": 2,
+      "example": "__"
+    },
+    {
+      "tag": "input",
+      "id": "year",
+      "name": "year",
+      "type": "text",
+      "maxlength": 4,
+      "example": "____"
+    }
+  ],
+  "otherFields": [
+    {
+      "tag": "select",
+      "id": null,
+      "name": "markaavto",
+      "options": 3949
+    },
+    {
+      "tag": "select",
+      "id": "model",
+      "name": "model",
+      "options": 0
+    },
+    {
+      "tag": "select",
+      "id": "modgen",
+      "name": "modgen",
+      "options": 0
+    },
+    {
+      "tag": "input",
+      "id": "markamodtype",
+      "name": null,
+      "type": "text"
+    },
+    {
+      "tag": "textarea",
+      "id": null,
+      "name": "dop"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": null,
+      "type": "search"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox13",
+      "name": "CheckBox[13]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox50",
+      "name": "CheckBox[50]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox25",
+      "name": "CheckBox[25]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox26",
+      "name": "CheckBox[26]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox43",
+      "name": "CheckBox[43]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox59",
+      "name": "CheckBox[59]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox68",
+      "name": "CheckBox[68]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox60",
+      "name": "CheckBox[60]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox21",
+      "name": "CheckBox[21]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox8",
+      "name": "CheckBox[8]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox58",
+      "name": "CheckBox[58]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox9",
+      "name": "CheckBox[9]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox57",
+      "name": "CheckBox[57]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox46",
+      "name": "CheckBox[46]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox62",
+      "name": "CheckBox[62]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox33",
+      "name": "CheckBox[33]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox61",
+      "name": "CheckBox[61]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox22",
+      "name": "CheckBox[22]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox47",
+      "name": "CheckBox[47]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox38",
+      "name": "CheckBox[38]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox53",
+      "name": "CheckBox[53]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox40",
+      "name": "CheckBox[40]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox63",
+      "name": "CheckBox[63]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox64",
+      "name": "CheckBox[64]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox42",
+      "name": "CheckBox[42]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox65",
+      "name": "CheckBox[65]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox39",
+      "name": "CheckBox[39]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox49",
+      "name": "CheckBox[49]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox41",
+      "name": "CheckBox[41]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox37",
+      "name": "CheckBox[37]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox67",
+      "name": "CheckBox[67]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox18",
+      "name": "CheckBox[18]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox20",
+      "name": "CheckBox[20]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox15",
+      "name": "CheckBox[15]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox23",
+      "name": "CheckBox[23]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox69",
+      "name": "CheckBox[69]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox24",
+      "name": "CheckBox[24]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox19",
+      "name": "CheckBox[19]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox48",
+      "name": "CheckBox[48]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox4",
+      "name": "CheckBox[4]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox5",
+      "name": "CheckBox[5]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox16",
+      "name": "CheckBox[16]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox14",
+      "name": "CheckBox[14]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox66",
+      "name": "CheckBox[66]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox45",
+      "name": "CheckBox[45]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox6",
+      "name": "CheckBox[6]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox44",
+      "name": "CheckBox[44]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox52",
+      "name": "CheckBox[52]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox27",
+      "name": "CheckBox[27]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox1",
+      "name": "CheckBox[1]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox56",
+      "name": "CheckBox[56]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox2",
+      "name": "CheckBox[2]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "hide",
+      "name": "hidefoto",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "enablesave",
+      "name": "enablesave",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "patternenable",
+      "name": "patternenable",
+      "type": "checkbox"
+    }
+  ],
+  "notes": []
+}

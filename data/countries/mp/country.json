@@ -1,0 +1,9 @@
+{
+  "code": "mp",
+  "name": "Northern Mariana Islands (USA)",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

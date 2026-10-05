@@ -1,0 +1,9 @@
+{
+  "code": "ir",
+  "name": "Iran",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

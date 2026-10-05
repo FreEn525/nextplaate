@@ -1,0 +1,9 @@
+{
+  "code": "cy",
+  "name": "Cyprus",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

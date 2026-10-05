@@ -1,0 +1,819 @@
+{
+  "code": "mx",
+  "title": "Lookup License plates of Mexico",
+  "categories": [
+    {
+      "id": "1",
+      "label": "Cars (AAA-00-00)"
+    },
+    {
+      "id": "2",
+      "label": "Cars (AAA-000-A)"
+    },
+    {
+      "id": "3",
+      "label": "Cars (000-AAA)"
+    },
+    {
+      "id": "4",
+      "label": "Cars (A00-AAA)"
+    },
+    {
+      "id": "5",
+      "label": "Trucks (AA-0000-A)"
+    },
+    {
+      "id": "6",
+      "label": "Trucks (AA-00-000)"
+    },
+    {
+      "id": "7",
+      "label": "Trucks (00-00-AA)"
+    },
+    {
+      "id": "8",
+      "label": "Trucks (A-000-AA)"
+    },
+    {
+      "id": "9",
+      "label": "Trailers (0-AA-0000)"
+    },
+    {
+      "id": "10",
+      "label": "Trailers (0AA-000-A)"
+    },
+    {
+      "id": "11",
+      "label": "Trailers (A-00-00)"
+    },
+    {
+      "id": "12",
+      "label": "Border zone (A00-AAA-0)"
+    },
+    {
+      "id": "13",
+      "label": "Border zone (000-AAA-0)"
+    },
+    {
+      "id": "14",
+      "label": "Federal (00-AA-0A)"
+    },
+    {
+      "id": "15",
+      "label": "Federal (00-00-AA)"
+    },
+    {
+      "id": "16",
+      "label": "Federal (000-AA-0)"
+    },
+    {
+      "id": "17",
+      "label": "Motorcycles (00AAA0)"
+    },
+    {
+      "id": "18",
+      "label": "Motorcycles (AAA0A)"
+    },
+    {
+      "id": "19",
+      "label": "Oldtimers (0AA-00)"
+    },
+    {
+      "id": "20",
+      "label": "Dealer (0-AA-00)"
+    }
+  ],
+  "fields": [
+    {
+      "tag": "input",
+      "id": "nomer",
+      "name": "nomer",
+      "type": "text",
+      "maxlength": 9,
+      "example": "AAA-00-00"
+    },
+    {
+      "tag": "select",
+      "id": null,
+      "name": "region",
+      "options": [
+        {
+          "value": "",
+          "label": "Select region"
+        },
+        {
+          "value": "7601",
+          "label": "Aguascalientes"
+        },
+        {
+          "value": "7602",
+          "label": "Baja California"
+        },
+        {
+          "value": "7603",
+          "label": "Baja California Sur"
+        },
+        {
+          "value": "7604",
+          "label": "Campeche"
+        },
+        {
+          "value": "7605",
+          "label": "Coahuila"
+        },
+        {
+          "value": "7606",
+          "label": "Colima"
+        },
+        {
+          "value": "7607",
+          "label": "Chiapas"
+        },
+        {
+          "value": "7608",
+          "label": "Chihuahua"
+        },
+        {
+          "value": "7609",
+          "label": "Ciudad de México (DF)"
+        },
+        {
+          "value": "7610",
+          "label": "Durango"
+        },
+        {
+          "value": "7611",
+          "label": "Guanajuato"
+        },
+        {
+          "value": "7612",
+          "label": "Guerrero"
+        },
+        {
+          "value": "7613",
+          "label": "Hidalgo"
+        },
+        {
+          "value": "7614",
+          "label": "Jalisco"
+        },
+        {
+          "value": "7615",
+          "label": "México"
+        },
+        {
+          "value": "7616",
+          "label": "Michoacán"
+        },
+        {
+          "value": "7617",
+          "label": "Morelos"
+        },
+        {
+          "value": "7618",
+          "label": "Nayarit"
+        },
+        {
+          "value": "7619",
+          "label": "Nuevo León"
+        },
+        {
+          "value": "7620",
+          "label": "Oaxaca"
+        },
+        {
+          "value": "7621",
+          "label": "Puebla"
+        },
+        {
+          "value": "7622",
+          "label": "Querétaro"
+        },
+        {
+          "value": "7623",
+          "label": "Quintana Roo"
+        },
+        {
+          "value": "7624",
+          "label": "San Luis Potosí"
+        },
+        {
+          "value": "7625",
+          "label": "Sinaloa"
+        },
+        {
+          "value": "7626",
+          "label": "Sonora"
+        },
+        {
+          "value": "7627",
+          "label": "Tabasco"
+        },
+        {
+          "value": "7628",
+          "label": "Tamaulipas"
+        },
+        {
+          "value": "7629",
+          "label": "Tlaxcala"
+        },
+        {
+          "value": "7630",
+          "label": "Veracruz"
+        },
+        {
+          "value": "7631",
+          "label": "Yucatán"
+        },
+        {
+          "value": "7632",
+          "label": "Zacatecas"
+        },
+        {
+          "value": "7633",
+          "label": "Autotransporte Federal"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": null,
+      "name": "markaavto",
+      "options": {
+        "count": 3950,
+        "first": [
+          {
+            "value": "",
+            "label": "-"
+          },
+          {
+            "value": "200",
+            "label": "I don`t know..."
+          },
+          {
+            "value": "2955",
+            "label": "212"
+          },
+          {
+            "value": "3693",
+            "label": "2Twenty"
+          },
+          {
+            "value": "3746",
+            "label": "3-2 (Bahai)"
+          }
+        ]
+      }
+    },
+    {
+      "tag": "select",
+      "id": "model",
+      "name": "model",
+      "options": []
+    },
+    {
+      "tag": "select",
+      "id": "modgen",
+      "name": "modgen",
+      "options": []
+    },
+    {
+      "tag": "input",
+      "id": "markamodtype",
+      "name": null,
+      "type": "text"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "date1",
+      "type": "text",
+      "example": "From date"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "date2",
+      "type": "text",
+      "example": "To date"
+    },
+    {
+      "tag": "input",
+      "id": "dop",
+      "name": "dop",
+      "type": "text",
+      "maxlength": 100,
+      "example": "Extra information"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": null,
+      "type": "search",
+      "example": "Tags"
+    },
+    {
+      "tag": "select",
+      "id": null,
+      "name": "tags[]",
+      "options": [
+        {
+          "value": "4",
+          "label": "abandoned vehicle"
+        },
+        {
+          "value": "67",
+          "label": "ADR"
+        },
+        {
+          "value": "47",
+          "label": "aerial device truck"
+        },
+        {
+          "value": "5",
+          "label": "aerography"
+        },
+        {
+          "value": "18",
+          "label": "ambulance"
+        },
+        {
+          "value": "52",
+          "label": "archive photo"
+        },
+        {
+          "value": "16",
+          "label": "armored"
+        },
+        {
+          "value": "60",
+          "label": "ATV"
+        },
+        {
+          "value": "21",
+          "label": "bus"
+        },
+        {
+          "value": "8",
+          "label": "cabriolet"
+        },
+        {
+          "value": "20",
+          "label": "cash-in-transit vehicle"
+        },
+        {
+          "value": "38",
+          "label": "concrete mixer"
+        },
+        {
+          "value": "14",
+          "label": "damaged"
+        },
+        {
+          "value": "26",
+          "label": "deliberately changed license plate"
+        },
+        {
+          "value": "53",
+          "label": "drilling rig"
+        },
+        {
+          "value": "40",
+          "label": "dumper"
+        },
+        {
+          "value": "63",
+          "label": "excavator"
+        },
+        {
+          "value": "15",
+          "label": "fire appliance"
+        },
+        {
+          "value": "64",
+          "label": "food truck"
+        },
+        {
+          "value": "42",
+          "label": "garbage truck"
+        },
+        {
+          "value": "58",
+          "label": "hearse"
+        },
+        {
+          "value": "27",
+          "label": "improper parking"
+        },
+        {
+          "value": "9",
+          "label": "limousine"
+        },
+        {
+          "value": "57",
+          "label": "motorcycle"
+        },
+        {
+          "value": "46",
+          "label": "motorhome"
+        },
+        {
+          "value": "13",
+          "label": "new letter combination"
+        },
+        {
+          "value": "43",
+          "label": "non-standard plate"
+        },
+        {
+          "value": "10",
+          "label": "oldtimer"
+        },
+        {
+          "value": "50",
+          "label": "plate for brand or model of vehicle"
+        },
+        {
+          "value": "23",
+          "label": "police"
+        },
+        {
+          "value": "59",
+          "label": "remade plate"
+        },
+        {
+          "value": "69",
+          "label": "rental"
+        },
+        {
+          "value": "68",
+          "label": "repeater"
+        },
+        {
+          "value": "1",
+          "label": "road accident"
+        },
+        {
+          "value": "65",
+          "label": "road roller"
+        },
+        {
+          "value": "66",
+          "label": "roof box"
+        },
+        {
+          "value": "56",
+          "label": "spyspot"
+        },
+        {
+          "value": "39",
+          "label": "tanker"
+        },
+        {
+          "value": "24",
+          "label": "taxicab"
+        },
+        {
+          "value": "45",
+          "label": "test drive"
+        },
+        {
+          "value": "49",
+          "label": "tow truck"
+        },
+        {
+          "value": "62",
+          "label": "tractor"
+        },
+        {
+          "value": "41",
+          "label": "tractor unit"
+        },
+        {
+          "value": "2",
+          "label": "traffic code violation"
+        },
+        {
+          "value": "33",
+          "label": "trailer"
+        },
+        {
+          "value": "19",
+          "label": "training vehicle"
+        },
+        {
+          "value": "25",
+          "label": "transferred/reissued plate"
+        },
+        {
+          "value": "61",
+          "label": "trike"
+        },
+        {
+          "value": "22",
+          "label": "truck"
+        },
+        {
+          "value": "37",
+          "label": "truck-mounted crane"
+        },
+        {
+          "value": "28",
+          "label": "tuning"
+        },
+        {
+          "value": "6",
+          "label": "unmarked with emergency lights"
+        },
+        {
+          "value": "44",
+          "label": "vinyl wrapping"
+        },
+        {
+          "value": "48",
+          "label": "wedding car"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": null,
+      "type": "search",
+      "example": "Tags"
+    },
+    {
+      "tag": "select",
+      "id": null,
+      "name": "tagsno[]",
+      "options": [
+        {
+          "value": "4",
+          "label": "abandoned vehicle"
+        },
+        {
+          "value": "67",
+          "label": "ADR"
+        },
+        {
+          "value": "47",
+          "label": "aerial device truck"
+        },
+        {
+          "value": "5",
+          "label": "aerography"
+        },
+        {
+          "value": "18",
+          "label": "ambulance"
+        },
+        {
+          "value": "52",
+          "label": "archive photo"
+        },
+        {
+          "value": "16",
+          "label": "armored"
+        },
+        {
+          "value": "60",
+          "label": "ATV"
+        },
+        {
+          "value": "21",
+          "label": "bus"
+        },
+        {
+          "value": "8",
+          "label": "cabriolet"
+        },
+        {
+          "value": "20",
+          "label": "cash-in-transit vehicle"
+        },
+        {
+          "value": "38",
+          "label": "concrete mixer"
+        },
+        {
+          "value": "14",
+          "label": "damaged"
+        },
+        {
+          "value": "26",
+          "label": "deliberately changed license plate"
+        },
+        {
+          "value": "53",
+          "label": "drilling rig"
+        },
+        {
+          "value": "40",
+          "label": "dumper"
+        },
+        {
+          "value": "63",
+          "label": "excavator"
+        },
+        {
+          "value": "15",
+          "label": "fire appliance"
+        },
+        {
+          "value": "64",
+          "label": "food truck"
+        },
+        {
+          "value": "42",
+          "label": "garbage truck"
+        },
+        {
+          "value": "58",
+          "label": "hearse"
+        },
+        {
+          "value": "27",
+          "label": "improper parking"
+        },
+        {
+          "value": "9",
+          "label": "limousine"
+        },
+        {
+          "value": "57",
+          "label": "motorcycle"
+        },
+        {
+          "value": "46",
+          "label": "motorhome"
+        },
+        {
+          "value": "13",
+          "label": "new letter combination"
+        },
+        {
+          "value": "43",
+          "label": "non-standard plate"
+        },
+        {
+          "value": "10",
+          "label": "oldtimer"
+        },
+        {
+          "value": "50",
+          "label": "plate for brand or model of vehicle"
+        },
+        {
+          "value": "23",
+          "label": "police"
+        },
+        {
+          "value": "59",
+          "label": "remade plate"
+        },
+        {
+          "value": "69",
+          "label": "rental"
+        },
+        {
+          "value": "68",
+          "label": "repeater"
+        },
+        {
+          "value": "1",
+          "label": "road accident"
+        },
+        {
+          "value": "65",
+          "label": "road roller"
+        },
+        {
+          "value": "66",
+          "label": "roof box"
+        },
+        {
+          "value": "56",
+          "label": "spyspot"
+        },
+        {
+          "value": "39",
+          "label": "tanker"
+        },
+        {
+          "value": "24",
+          "label": "taxicab"
+        },
+        {
+          "value": "45",
+          "label": "test drive"
+        },
+        {
+          "value": "49",
+          "label": "tow truck"
+        },
+        {
+          "value": "62",
+          "label": "tractor"
+        },
+        {
+          "value": "41",
+          "label": "tractor unit"
+        },
+        {
+          "value": "2",
+          "label": "traffic code violation"
+        },
+        {
+          "value": "33",
+          "label": "trailer"
+        },
+        {
+          "value": "19",
+          "label": "training vehicle"
+        },
+        {
+          "value": "25",
+          "label": "transferred/reissued plate"
+        },
+        {
+          "value": "61",
+          "label": "trike"
+        },
+        {
+          "value": "22",
+          "label": "truck"
+        },
+        {
+          "value": "37",
+          "label": "truck-mounted crane"
+        },
+        {
+          "value": "28",
+          "label": "tuning"
+        },
+        {
+          "value": "6",
+          "label": "unmarked with emergency lights"
+        },
+        {
+          "value": "44",
+          "label": "vinyl wrapping"
+        },
+        {
+          "value": "48",
+          "label": "wedding car"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "usr",
+      "type": "text",
+      "example": "User ID"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "com",
+      "type": "text",
+      "example": "&gt;"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "vote",
+      "type": "text",
+      "example": "&gt;"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "few",
+      "type": "radio",
+      "value": "0"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "few",
+      "type": "radio",
+      "value": "2"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "few",
+      "type": "radio",
+      "value": "1"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "hide",
+      "type": "checkbox",
+      "value": "1"
+    }
+  ],
+  "notes": []
+}

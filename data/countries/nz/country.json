@@ -1,0 +1,9 @@
+{
+  "code": "nz",
+  "name": "New Zealand",
+  "pages": {
+    "upload": false,
+    "search": true
+  },
+  "typeMenu": null
+}

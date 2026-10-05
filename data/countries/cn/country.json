@@ -1,0 +1,9 @@
+{
+  "code": "cn",
+  "name": "China",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

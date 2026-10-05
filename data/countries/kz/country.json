@@ -1,0 +1,9 @@
+{
+  "code": "kz",
+  "name": "Kazakhstan",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

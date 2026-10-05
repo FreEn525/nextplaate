@@ -1,0 +1,4653 @@
+{
+  "code": "su",
+  "title": "Upload new license plate, USSR",
+  "action": "add",
+  "typeMenu": "ctype",
+  "visibleFrom": "site-script",
+  "types": [
+    {
+      "id": "2",
+      "label": "Private-owned cars (1977)",
+      "visible": ["b1", "region2", "fon", "digit"]
+    },
+    {
+      "id": "3",
+      "label": "State-owned cars (1977)",
+      "visible": ["b2", "region2", "fon", "digit"]
+    },
+    {
+      "id": "4",
+      "label": "Motorcycles (1977)",
+      "visible": ["b2", "region2", "fon", "digit"]
+    },
+    {
+      "id": "6",
+      "label": "Special cars (1977)",
+      "visible": ["b2", "region2", "fon", "digit2"]
+    },
+    {
+      "id": "11",
+      "label": "Trailers (1977)",
+      "visible": ["region4", "digit"]
+    },
+    {
+      "id": "12",
+      "label": "Special vehicles (1977)",
+      "visible": ["b2", "b3", "digit"]
+    },
+    {
+      "id": "13",
+      "label": "Trailers for special vehicles (1977)",
+      "visible": ["b2", "b3", "digit2"]
+    },
+    {
+      "id": "1",
+      "label": "Сars (1958)",
+      "class": "black-white-select",
+      "visible": ["b2", "region1", "fon", "digit"]
+    },
+    {
+      "id": "5",
+      "label": "Motorcycles and mopeds (1958)",
+      "class": "black-white-select",
+      "visible": ["b2", "region1", "fon", "digit"]
+    },
+    {
+      "id": "15",
+      "label": "Trailers (1958)",
+      "class": "black-white-select",
+      "visible": ["region3", "digit"]
+    },
+    {
+      "id": "14",
+      "label": "Military",
+      "class": "black-white-select",
+      "visible": ["b2", "b3", "fon", "digit"]
+    },
+    {
+      "id": "18",
+      "label": "1946 year license plates",
+      "class": "yellow-black-select",
+      "visible": ["b2", "b3", "fon", "digit2"]
+    },
+    {
+      "id": "16",
+      "label": "Special vehicles (1965)",
+      "class": "yellow-black-select",
+      "visible": ["b2", "b3", "digit"]
+    },
+    {
+      "id": "17",
+      "label": "Trailers for special vehicles (1965)",
+      "class": "yellow-black-select",
+      "visible": ["b2", "b3", "digit"]
+    },
+    {
+      "id": "7",
+      "label": "Foreign citizens and enterprises",
+      "class": "yellow-black-select",
+      "visible": ["b4", "digit3"]
+    }
+  ],
+  "hooks": ["dissunew"],
+  "plateFields": [
+    {
+      "tag": "select",
+      "id": "b1",
+      "name": "b1",
+      "options": [
+        {
+          "value": "а",
+          "label": "а"
+        },
+        {
+          "value": "б",
+          "label": "б"
+        },
+        {
+          "value": "в",
+          "label": "в"
+        },
+        {
+          "value": "г",
+          "label": "г"
+        },
+        {
+          "value": "д",
+          "label": "д"
+        },
+        {
+          "value": "е",
+          "label": "е"
+        },
+        {
+          "value": "ж",
+          "label": "ж"
+        },
+        {
+          "value": "з",
+          "label": "з"
+        },
+        {
+          "value": "и",
+          "label": "и"
+        },
+        {
+          "value": "к",
+          "label": "к"
+        },
+        {
+          "value": "л",
+          "label": "л"
+        },
+        {
+          "value": "м",
+          "label": "м"
+        },
+        {
+          "value": "н",
+          "label": "н"
+        },
+        {
+          "value": "о",
+          "label": "о"
+        },
+        {
+          "value": "п",
+          "label": "п"
+        },
+        {
+          "value": "р",
+          "label": "р"
+        },
+        {
+          "value": "с",
+          "label": "с"
+        },
+        {
+          "value": "т",
+          "label": "т"
+        },
+        {
+          "value": "у",
+          "label": "у"
+        },
+        {
+          "value": "ф",
+          "label": "ф"
+        },
+        {
+          "value": "х",
+          "label": "х"
+        },
+        {
+          "value": "ц",
+          "label": "ц"
+        },
+        {
+          "value": "ч",
+          "label": "ч"
+        },
+        {
+          "value": "ш",
+          "label": "ш"
+        },
+        {
+          "value": "щ",
+          "label": "щ"
+        },
+        {
+          "value": "э",
+          "label": "э"
+        },
+        {
+          "value": "ю",
+          "label": "ю"
+        },
+        {
+          "value": "я",
+          "label": "я"
+        },
+        {
+          "value": "i",
+          "label": "i"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": "digit",
+      "name": "digit",
+      "type": "text",
+      "maxlength": 4,
+      "digitsOnly": true
+    },
+    {
+      "tag": "select",
+      "id": "region1",
+      "name": "region1",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "12261",
+          "label": "АА"
+        },
+        {
+          "value": "12262",
+          "label": "АБ"
+        },
+        {
+          "value": "12263",
+          "label": "АВ"
+        },
+        {
+          "value": "12264",
+          "label": "АГ"
+        },
+        {
+          "value": "12265",
+          "label": "АД"
+        },
+        {
+          "value": "12266",
+          "label": "АЕ"
+        },
+        {
+          "value": "12267",
+          "label": "АЖ"
+        },
+        {
+          "value": "12268",
+          "label": "АЗ"
+        },
+        {
+          "value": "12269",
+          "label": "АК"
+        },
+        {
+          "value": "12270",
+          "label": "АЛ"
+        },
+        {
+          "value": "12271",
+          "label": "АМ"
+        },
+        {
+          "value": "12272",
+          "label": "АН"
+        },
+        {
+          "value": "12273",
+          "label": "АО"
+        },
+        {
+          "value": "12274",
+          "label": "АП"
+        },
+        {
+          "value": "12275",
+          "label": "АР"
+        },
+        {
+          "value": "12276",
+          "label": "АС"
+        },
+        {
+          "value": "12277",
+          "label": "АТ"
+        },
+        {
+          "value": "12278",
+          "label": "АХ"
+        },
+        {
+          "value": "12279",
+          "label": "АШ"
+        },
+        {
+          "value": "12280",
+          "label": "АЮ"
+        },
+        {
+          "value": "12281",
+          "label": "БА"
+        },
+        {
+          "value": "12282",
+          "label": "БЕ"
+        },
+        {
+          "value": "12283",
+          "label": "БЛ"
+        },
+        {
+          "value": "12284",
+          "label": "БН"
+        },
+        {
+          "value": "12285",
+          "label": "БР"
+        },
+        {
+          "value": "12286",
+          "label": "БУ"
+        },
+        {
+          "value": "12287",
+          "label": "БХ"
+        },
+        {
+          "value": "12288",
+          "label": "БШ"
+        },
+        {
+          "value": "12289",
+          "label": "ВВ"
+        },
+        {
+          "value": "12290",
+          "label": "ВГ"
+        },
+        {
+          "value": "12291",
+          "label": "ВД"
+        },
+        {
+          "value": "12292",
+          "label": "ВЕ"
+        },
+        {
+          "value": "12293",
+          "label": "ВЖ"
+        },
+        {
+          "value": "12294",
+          "label": "ВИ"
+        },
+        {
+          "value": "12295",
+          "label": "ВК"
+        },
+        {
+          "value": "12296",
+          "label": "ВЛ"
+        },
+        {
+          "value": "12297",
+          "label": "ВМ"
+        },
+        {
+          "value": "12298",
+          "label": "ВН"
+        },
+        {
+          "value": "12299",
+          "label": "ВО"
+        },
+        {
+          "value": "12300",
+          "label": "ВР"
+        },
+        {
+          "value": "12301",
+          "label": "ВС"
+        },
+        {
+          "value": "12302",
+          "label": "ВТ"
+        },
+        {
+          "value": "12303",
+          "label": "ГА"
+        },
+        {
+          "value": "12304",
+          "label": "ГБ"
+        },
+        {
+          "value": "12305",
+          "label": "ГВ"
+        },
+        {
+          "value": "12306",
+          "label": "ГГ"
+        },
+        {
+          "value": "12307",
+          "label": "ГК"
+        },
+        {
+          "value": "12308",
+          "label": "ГО"
+        },
+        {
+          "value": "12309",
+          "label": "ГР"
+        },
+        {
+          "value": "12310",
+          "label": "ГС"
+        },
+        {
+          "value": "12311",
+          "label": "ГУ"
+        },
+        {
+          "value": "12312",
+          "label": "ДА"
+        },
+        {
+          "value": "12313",
+          "label": "ДБ"
+        },
+        {
+          "value": "12314",
+          "label": "ДД"
+        },
+        {
+          "value": "12315",
+          "label": "ДЖ"
+        },
+        {
+          "value": "12316",
+          "label": "ДК"
+        },
+        {
+          "value": "12317",
+          "label": "ДН"
+        },
+        {
+          "value": "12318",
+          "label": "ДО"
+        },
+        {
+          "value": "12319",
+          "label": "ДП"
+        },
+        {
+          "value": "12320",
+          "label": "ДР"
+        },
+        {
+          "value": "12321",
+          "label": "ДЦ"
+        },
+        {
+          "value": "12322",
+          "label": "ЕА"
+        },
+        {
+          "value": "12323",
+          "label": "ЕЕ"
+        },
+        {
+          "value": "12324",
+          "label": "ЖИ"
+        },
+        {
+          "value": "12325",
+          "label": "ЗА"
+        },
+        {
+          "value": "12326",
+          "label": "ЗК"
+        },
+        {
+          "value": "12327",
+          "label": "ЗП"
+        },
+        {
+          "value": "12328",
+          "label": "ЗР"
+        },
+        {
+          "value": "12329",
+          "label": "ИВ"
+        },
+        {
+          "value": "12330",
+          "label": "ИК"
+        },
+        {
+          "value": "12331",
+          "label": "ИР"
+        },
+        {
+          "value": "12332",
+          "label": "ИС"
+        },
+        {
+          "value": "12333",
+          "label": "ИФ"
+        },
+        {
+          "value": "12334",
+          "label": "КА"
+        },
+        {
+          "value": "12335",
+          "label": "КБ"
+        },
+        {
+          "value": "12336",
+          "label": "КВ"
+        },
+        {
+          "value": "12337",
+          "label": "КГ"
+        },
+        {
+          "value": "12338",
+          "label": "КД"
+        },
+        {
+          "value": "12339",
+          "label": "КЕ"
+        },
+        {
+          "value": "12340",
+          "label": "КЖ"
+        },
+        {
+          "value": "12341",
+          "label": "КЗ"
+        },
+        {
+          "value": "12342",
+          "label": "КИ"
+        },
+        {
+          "value": "12343",
+          "label": "КК"
+        },
+        {
+          "value": "12344",
+          "label": "КЛ"
+        },
+        {
+          "value": "12345",
+          "label": "КМ"
+        },
+        {
+          "value": "12346",
+          "label": "КН"
+        },
+        {
+          "value": "12347",
+          "label": "КО"
+        },
+        {
+          "value": "12348",
+          "label": "КП"
+        },
+        {
+          "value": "12349",
+          "label": "КР"
+        },
+        {
+          "value": "12350",
+          "label": "КС"
+        },
+        {
+          "value": "12351",
+          "label": "КТ"
+        },
+        {
+          "value": "12352",
+          "label": "КУ"
+        },
+        {
+          "value": "12353",
+          "label": "КФ"
+        },
+        {
+          "value": "12354",
+          "label": "КХ"
+        },
+        {
+          "value": "12355",
+          "label": "КЦ"
+        },
+        {
+          "value": "12356",
+          "label": "КЧ"
+        },
+        {
+          "value": "12357",
+          "label": "КШ"
+        },
+        {
+          "value": "12358",
+          "label": "КЩ"
+        },
+        {
+          "value": "12359",
+          "label": "КЭ"
+        },
+        {
+          "value": "12360",
+          "label": "КЮ"
+        },
+        {
+          "value": "12361",
+          "label": "КЯ"
+        },
+        {
+          "value": "12362",
+          "label": "ЛА"
+        },
+        {
+          "value": "12363",
+          "label": "ЛБ"
+        },
+        {
+          "value": "12364",
+          "label": "ЛВ"
+        },
+        {
+          "value": "12365",
+          "label": "ЛД"
+        },
+        {
+          "value": "12366",
+          "label": "ЛЕ"
+        },
+        {
+          "value": "12367",
+          "label": "ЛИ"
+        },
+        {
+          "value": "12368",
+          "label": "ЛК"
+        },
+        {
+          "value": "12369",
+          "label": "ЛЛ"
+        },
+        {
+          "value": "12370",
+          "label": "ЛО"
+        },
+        {
+          "value": "12371",
+          "label": "ЛП"
+        },
+        {
+          "value": "12372",
+          "label": "ЛТ"
+        },
+        {
+          "value": "12373",
+          "label": "ЛУ"
+        },
+        {
+          "value": "12374",
+          "label": "МА"
+        },
+        {
+          "value": "12375",
+          "label": "МБ"
+        },
+        {
+          "value": "12376",
+          "label": "МВ"
+        },
+        {
+          "value": "12377",
+          "label": "МГ"
+        },
+        {
+          "value": "12378",
+          "label": "МД"
+        },
+        {
+          "value": "12379",
+          "label": "МЕ"
+        },
+        {
+          "value": "12380",
+          "label": "МИ"
+        },
+        {
+          "value": "12381",
+          "label": "МК"
+        },
+        {
+          "value": "12382",
+          "label": "МЛ"
+        },
+        {
+          "value": "12383",
+          "label": "ММ"
+        },
+        {
+          "value": "12384",
+          "label": "МН"
+        },
+        {
+          "value": "12385",
+          "label": "МО"
+        },
+        {
+          "value": "12386",
+          "label": "МР"
+        },
+        {
+          "value": "12387",
+          "label": "МС"
+        },
+        {
+          "value": "12388",
+          "label": "МТ"
+        },
+        {
+          "value": "12389",
+          "label": "МУ"
+        },
+        {
+          "value": "12390",
+          "label": "МХ"
+        },
+        {
+          "value": "12391",
+          "label": "МШ"
+        },
+        {
+          "value": "12392",
+          "label": "НА"
+        },
+        {
+          "value": "12393",
+          "label": "НБ"
+        },
+        {
+          "value": "12394",
+          "label": "НИ"
+        },
+        {
+          "value": "12395",
+          "label": "НН"
+        },
+        {
+          "value": "12396",
+          "label": "НО"
+        },
+        {
+          "value": "12397",
+          "label": "НР"
+        },
+        {
+          "value": "12398",
+          "label": "НС"
+        },
+        {
+          "value": "12399",
+          "label": "НТ"
+        },
+        {
+          "value": "12400",
+          "label": "ОБ"
+        },
+        {
+          "value": "12401",
+          "label": "ОГ"
+        },
+        {
+          "value": "12402",
+          "label": "ОД"
+        },
+        {
+          "value": "12403",
+          "label": "ОЕ"
+        },
+        {
+          "value": "12404",
+          "label": "ОМ"
+        },
+        {
+          "value": "12405",
+          "label": "ОО"
+        },
+        {
+          "value": "12406",
+          "label": "ОР"
+        },
+        {
+          "value": "12407",
+          "label": "ОТ"
+        },
+        {
+          "value": "12408",
+          "label": "ОШ"
+        },
+        {
+          "value": "12409",
+          "label": "ПА"
+        },
+        {
+          "value": "12410",
+          "label": "ПЕ"
+        },
+        {
+          "value": "12411",
+          "label": "ПК"
+        },
+        {
+          "value": "12412",
+          "label": "ПМ"
+        },
+        {
+          "value": "12413",
+          "label": "ПО"
+        },
+        {
+          "value": "12414",
+          "label": "ПР"
+        },
+        {
+          "value": "12415",
+          "label": "ПС"
+        },
+        {
+          "value": "12416",
+          "label": "ПТ"
+        },
+        {
+          "value": "12417",
+          "label": "РА"
+        },
+        {
+          "value": "12418",
+          "label": "РВ"
+        },
+        {
+          "value": "12419",
+          "label": "РД"
+        },
+        {
+          "value": "12420",
+          "label": "РО"
+        },
+        {
+          "value": "12421",
+          "label": "РП"
+        },
+        {
+          "value": "12422",
+          "label": "РР"
+        },
+        {
+          "value": "12423",
+          "label": "РТ"
+        },
+        {
+          "value": "12424",
+          "label": "РЯ"
+        },
+        {
+          "value": "12425",
+          "label": "СА"
+        },
+        {
+          "value": "12426",
+          "label": "СБ"
+        },
+        {
+          "value": "12427",
+          "label": "СВ"
+        },
+        {
+          "value": "12428",
+          "label": "СГ"
+        },
+        {
+          "value": "12429",
+          "label": "СД"
+        },
+        {
+          "value": "12430",
+          "label": "СЕ"
+        },
+        {
+          "value": "12431",
+          "label": "СЖ"
+        },
+        {
+          "value": "12432",
+          "label": "СИ"
+        },
+        {
+          "value": "12433",
+          "label": "СК"
+        },
+        {
+          "value": "12434",
+          "label": "СЛ"
+        },
+        {
+          "value": "12435",
+          "label": "СМ"
+        },
+        {
+          "value": "12436",
+          "label": "СН"
+        },
+        {
+          "value": "12437",
+          "label": "СО"
+        },
+        {
+          "value": "12438",
+          "label": "СП"
+        },
+        {
+          "value": "12439",
+          "label": "СР"
+        },
+        {
+          "value": "12440",
+          "label": "СС"
+        },
+        {
+          "value": "12441",
+          "label": "СТ"
+        },
+        {
+          "value": "12442",
+          "label": "СУ"
+        },
+        {
+          "value": "12443",
+          "label": "СФ"
+        },
+        {
+          "value": "12444",
+          "label": "СХ"
+        },
+        {
+          "value": "12445",
+          "label": "СЯ"
+        },
+        {
+          "value": "12446",
+          "label": "ТА"
+        },
+        {
+          "value": "12447",
+          "label": "ТБ"
+        },
+        {
+          "value": "12448",
+          "label": "ТВ"
+        },
+        {
+          "value": "12449",
+          "label": "ТГ"
+        },
+        {
+          "value": "12450",
+          "label": "ТД"
+        },
+        {
+          "value": "12451",
+          "label": "ТЕ"
+        },
+        {
+          "value": "12452",
+          "label": "ТЗ"
+        },
+        {
+          "value": "12453",
+          "label": "ТК"
+        },
+        {
+          "value": "12454",
+          "label": "ТЛ"
+        },
+        {
+          "value": "12455",
+          "label": "ТМ"
+        },
+        {
+          "value": "12456",
+          "label": "ТН"
+        },
+        {
+          "value": "12457",
+          "label": "ТО"
+        },
+        {
+          "value": "12458",
+          "label": "ТР"
+        },
+        {
+          "value": "12459",
+          "label": "ТС"
+        },
+        {
+          "value": "12460",
+          "label": "ТТ"
+        },
+        {
+          "value": "12461",
+          "label": "ТУ"
+        },
+        {
+          "value": "12462",
+          "label": "ТШ"
+        },
+        {
+          "value": "12463",
+          "label": "ТЮ"
+        },
+        {
+          "value": "12464",
+          "label": "ТЯ"
+        },
+        {
+          "value": "12465",
+          "label": "УД"
+        },
+        {
+          "value": "12466",
+          "label": "УК"
+        },
+        {
+          "value": "12467",
+          "label": "УЛ"
+        },
+        {
+          "value": "12468",
+          "label": "ФЕ"
+        },
+        {
+          "value": "12469",
+          "label": "ФИ"
+        },
+        {
+          "value": "12470",
+          "label": "ХА"
+        },
+        {
+          "value": "12471",
+          "label": "ХБ"
+        },
+        {
+          "value": "12472",
+          "label": "ХЗ"
+        },
+        {
+          "value": "12473",
+          "label": "ХК"
+        },
+        {
+          "value": "12474",
+          "label": "ХМ"
+        },
+        {
+          "value": "12475",
+          "label": "ХО"
+        },
+        {
+          "value": "12476",
+          "label": "ХТ"
+        },
+        {
+          "value": "12477",
+          "label": "ЦВ"
+        },
+        {
+          "value": "12478",
+          "label": "ЦП"
+        },
+        {
+          "value": "12479",
+          "label": "ЦС"
+        },
+        {
+          "value": "12480",
+          "label": "ЦХ"
+        },
+        {
+          "value": "12481",
+          "label": "ЧБ"
+        },
+        {
+          "value": "12482",
+          "label": "ЧВ"
+        },
+        {
+          "value": "12483",
+          "label": "ЧЕ"
+        },
+        {
+          "value": "12484",
+          "label": "ЧИ"
+        },
+        {
+          "value": "12485",
+          "label": "ЧК"
+        },
+        {
+          "value": "12486",
+          "label": "ЧН"
+        },
+        {
+          "value": "12487",
+          "label": "ЧР"
+        },
+        {
+          "value": "12488",
+          "label": "ЧТ"
+        },
+        {
+          "value": "12489",
+          "label": "ЧУ"
+        },
+        {
+          "value": "12490",
+          "label": "ЭС"
+        },
+        {
+          "value": "12491",
+          "label": "ЮА"
+        },
+        {
+          "value": "12492",
+          "label": "ЮБ"
+        },
+        {
+          "value": "12493",
+          "label": "ЮВ"
+        },
+        {
+          "value": "12494",
+          "label": "ЮГ"
+        },
+        {
+          "value": "12495",
+          "label": "ЮК"
+        },
+        {
+          "value": "12496",
+          "label": "ЮМ"
+        },
+        {
+          "value": "12497",
+          "label": "ЯК"
+        },
+        {
+          "value": "12498",
+          "label": "ЯР"
+        },
+        {
+          "value": "12499",
+          "label": "ГД"
+        },
+        {
+          "value": "12500",
+          "label": "БО"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "region2",
+      "name": "region2",
+      "options": [
+        {
+          "value": "12001",
+          "label": "АА"
+        },
+        {
+          "value": "12002",
+          "label": "АБ"
+        },
+        {
+          "value": "12003",
+          "label": "АВ"
+        },
+        {
+          "value": "12004",
+          "label": "АГ"
+        },
+        {
+          "value": "12005",
+          "label": "АД"
+        },
+        {
+          "value": "12006",
+          "label": "АЕ"
+        },
+        {
+          "value": "12007",
+          "label": "АЖ"
+        },
+        {
+          "value": "12008",
+          "label": "АЗ"
+        },
+        {
+          "value": "12009",
+          "label": "АИ"
+        },
+        {
+          "value": "12010",
+          "label": "АК"
+        },
+        {
+          "value": "12011",
+          "label": "АЛ"
+        },
+        {
+          "value": "12012",
+          "label": "АМ"
+        },
+        {
+          "value": "12013",
+          "label": "АН"
+        },
+        {
+          "value": "12014",
+          "label": "АО"
+        },
+        {
+          "value": "12015",
+          "label": "АП"
+        },
+        {
+          "value": "12016",
+          "label": "АР"
+        },
+        {
+          "value": "12017",
+          "label": "АС"
+        },
+        {
+          "value": "12018",
+          "label": "АТ"
+        },
+        {
+          "value": "12019",
+          "label": "АФ"
+        },
+        {
+          "value": "12020",
+          "label": "АХ"
+        },
+        {
+          "value": "12021",
+          "label": "АШ"
+        },
+        {
+          "value": "12022",
+          "label": "АЮ"
+        },
+        {
+          "value": "12023",
+          "label": "БА"
+        },
+        {
+          "value": "12024",
+          "label": "ББ"
+        },
+        {
+          "value": "12025",
+          "label": "БЕ"
+        },
+        {
+          "value": "12026",
+          "label": "БИ"
+        },
+        {
+          "value": "12027",
+          "label": "БЛ"
+        },
+        {
+          "value": "12028",
+          "label": "БН"
+        },
+        {
+          "value": "12029",
+          "label": "БР"
+        },
+        {
+          "value": "12030",
+          "label": "БУ"
+        },
+        {
+          "value": "12031",
+          "label": "БХ"
+        },
+        {
+          "value": "12032",
+          "label": "БШ"
+        },
+        {
+          "value": "12033",
+          "label": "ВА"
+        },
+        {
+          "value": "12034",
+          "label": "ВВ"
+        },
+        {
+          "value": "12035",
+          "label": "ВГ"
+        },
+        {
+          "value": "12036",
+          "label": "ВД"
+        },
+        {
+          "value": "12037",
+          "label": "ВЕ"
+        },
+        {
+          "value": "12038",
+          "label": "ВИ"
+        },
+        {
+          "value": "12039",
+          "label": "ВК"
+        },
+        {
+          "value": "12040",
+          "label": "ВЛ"
+        },
+        {
+          "value": "12041",
+          "label": "ВМ"
+        },
+        {
+          "value": "12042",
+          "label": "ВН"
+        },
+        {
+          "value": "12043",
+          "label": "ВО"
+        },
+        {
+          "value": "12044",
+          "label": "ВР"
+        },
+        {
+          "value": "12045",
+          "label": "ВС"
+        },
+        {
+          "value": "12046",
+          "label": "ВТ"
+        },
+        {
+          "value": "12047",
+          "label": "ВХ"
+        },
+        {
+          "value": "12048",
+          "label": "ГА"
+        },
+        {
+          "value": "12049",
+          "label": "ГБ"
+        },
+        {
+          "value": "12050",
+          "label": "ГГ"
+        },
+        {
+          "value": "12051",
+          "label": "ГК"
+        },
+        {
+          "value": "12052",
+          "label": "ГЛ"
+        },
+        {
+          "value": "12053",
+          "label": "ГО"
+        },
+        {
+          "value": "12054",
+          "label": "ГР"
+        },
+        {
+          "value": "12055",
+          "label": "ГС"
+        },
+        {
+          "value": "12056",
+          "label": "ГТ"
+        },
+        {
+          "value": "12057",
+          "label": "ГЯ"
+        },
+        {
+          "value": "12058",
+          "label": "ДА"
+        },
+        {
+          "value": "12059",
+          "label": "ДБ"
+        },
+        {
+          "value": "12060",
+          "label": "ДД"
+        },
+        {
+          "value": "12061",
+          "label": "ДЖ"
+        },
+        {
+          "value": "12062",
+          "label": "ДК"
+        },
+        {
+          "value": "12063",
+          "label": "ДН"
+        },
+        {
+          "value": "12064",
+          "label": "ДО"
+        },
+        {
+          "value": "12065",
+          "label": "ДП"
+        },
+        {
+          "value": "12066",
+          "label": "ДЦ"
+        },
+        {
+          "value": "12067",
+          "label": "ЕА"
+        },
+        {
+          "value": "12068",
+          "label": "ЕЕ"
+        },
+        {
+          "value": "12069",
+          "label": "ЕН"
+        },
+        {
+          "value": "12070",
+          "label": "ЕС"
+        },
+        {
+          "value": "12071",
+          "label": "ЕЯ"
+        },
+        {
+          "value": "12072",
+          "label": "ЖА"
+        },
+        {
+          "value": "12073",
+          "label": "ЖБ"
+        },
+        {
+          "value": "12074",
+          "label": "ЖЖ"
+        },
+        {
+          "value": "12075",
+          "label": "ЖИ"
+        },
+        {
+          "value": "12076",
+          "label": "ЗА"
+        },
+        {
+          "value": "12077",
+          "label": "ЗН"
+        },
+        {
+          "value": "12078",
+          "label": "ЗП"
+        },
+        {
+          "value": "12079",
+          "label": "ИВ"
+        },
+        {
+          "value": "12080",
+          "label": "ИК"
+        },
+        {
+          "value": "12081",
+          "label": "ИР"
+        },
+        {
+          "value": "12082",
+          "label": "ИФ"
+        },
+        {
+          "value": "12083",
+          "label": "КА"
+        },
+        {
+          "value": "12084",
+          "label": "КБ"
+        },
+        {
+          "value": "12085",
+          "label": "КВ"
+        },
+        {
+          "value": "12086",
+          "label": "КГ"
+        },
+        {
+          "value": "12087",
+          "label": "КД"
+        },
+        {
+          "value": "12088",
+          "label": "КЕ"
+        },
+        {
+          "value": "12089",
+          "label": "КЖ"
+        },
+        {
+          "value": "12090",
+          "label": "КЗ"
+        },
+        {
+          "value": "12091",
+          "label": "КИ"
+        },
+        {
+          "value": "12092",
+          "label": "КК"
+        },
+        {
+          "value": "12093",
+          "label": "КЛ"
+        },
+        {
+          "value": "12094",
+          "label": "КМ"
+        },
+        {
+          "value": "12095",
+          "label": "КН"
+        },
+        {
+          "value": "12096",
+          "label": "КО"
+        },
+        {
+          "value": "12097",
+          "label": "КП"
+        },
+        {
+          "value": "12098",
+          "label": "КР"
+        },
+        {
+          "value": "12099",
+          "label": "КС"
+        },
+        {
+          "value": "12100",
+          "label": "КТ"
+        },
+        {
+          "value": "12101",
+          "label": "КУ"
+        },
+        {
+          "value": "12102",
+          "label": "КФ"
+        },
+        {
+          "value": "12103",
+          "label": "КХ"
+        },
+        {
+          "value": "12104",
+          "label": "КЦ"
+        },
+        {
+          "value": "12105",
+          "label": "КЧ"
+        },
+        {
+          "value": "12106",
+          "label": "КШ"
+        },
+        {
+          "value": "12107",
+          "label": "КЭ"
+        },
+        {
+          "value": "12108",
+          "label": "КЮ"
+        },
+        {
+          "value": "12109",
+          "label": "КЯ"
+        },
+        {
+          "value": "12110",
+          "label": "ЛА"
+        },
+        {
+          "value": "12111",
+          "label": "ЛБ"
+        },
+        {
+          "value": "12112",
+          "label": "ЛВ"
+        },
+        {
+          "value": "12113",
+          "label": "ЛГ"
+        },
+        {
+          "value": "12114",
+          "label": "ЛД"
+        },
+        {
+          "value": "12115",
+          "label": "ЛЕ"
+        },
+        {
+          "value": "12116",
+          "label": "ЛИ"
+        },
+        {
+          "value": "12117",
+          "label": "ЛК"
+        },
+        {
+          "value": "12118",
+          "label": "ЛО"
+        },
+        {
+          "value": "12119",
+          "label": "ЛП"
+        },
+        {
+          "value": "12120",
+          "label": "ЛТ"
+        },
+        {
+          "value": "12121",
+          "label": "МА"
+        },
+        {
+          "value": "12122",
+          "label": "МБ"
+        },
+        {
+          "value": "12123",
+          "label": "МВ"
+        },
+        {
+          "value": "12124",
+          "label": "МГ"
+        },
+        {
+          "value": "12125",
+          "label": "МД"
+        },
+        {
+          "value": "12126",
+          "label": "МЕ"
+        },
+        {
+          "value": "12127",
+          "label": "МЖ"
+        },
+        {
+          "value": "12128",
+          "label": "МЗ"
+        },
+        {
+          "value": "12129",
+          "label": "МИ"
+        },
+        {
+          "value": "12130",
+          "label": "МК"
+        },
+        {
+          "value": "12131",
+          "label": "МЛ"
+        },
+        {
+          "value": "12132",
+          "label": "ММ"
+        },
+        {
+          "value": "12133",
+          "label": "МН"
+        },
+        {
+          "value": "12134",
+          "label": "МО"
+        },
+        {
+          "value": "12135",
+          "label": "МП"
+        },
+        {
+          "value": "12136",
+          "label": "МР"
+        },
+        {
+          "value": "12137",
+          "label": "МС"
+        },
+        {
+          "value": "12138",
+          "label": "МТ"
+        },
+        {
+          "value": "12139",
+          "label": "МУ"
+        },
+        {
+          "value": "12140",
+          "label": "МХ"
+        },
+        {
+          "value": "12141",
+          "label": "МШ"
+        },
+        {
+          "value": "12142",
+          "label": "НА"
+        },
+        {
+          "value": "12143",
+          "label": "НБ"
+        },
+        {
+          "value": "12144",
+          "label": "НВ"
+        },
+        {
+          "value": "12145",
+          "label": "НЕ"
+        },
+        {
+          "value": "12146",
+          "label": "НЖ"
+        },
+        {
+          "value": "12147",
+          "label": "НИ"
+        },
+        {
+          "value": "12148",
+          "label": "НК"
+        },
+        {
+          "value": "12149",
+          "label": "НО"
+        },
+        {
+          "value": "12150",
+          "label": "НР"
+        },
+        {
+          "value": "12151",
+          "label": "НС"
+        },
+        {
+          "value": "12152",
+          "label": "НТ"
+        },
+        {
+          "value": "12153",
+          "label": "НХ"
+        },
+        {
+          "value": "12154",
+          "label": "ОА"
+        },
+        {
+          "value": "12155",
+          "label": "ОБ"
+        },
+        {
+          "value": "12156",
+          "label": "ОД"
+        },
+        {
+          "value": "12157",
+          "label": "ОК"
+        },
+        {
+          "value": "12158",
+          "label": "ОЛ"
+        },
+        {
+          "value": "12159",
+          "label": "ОМ"
+        },
+        {
+          "value": "12160",
+          "label": "ОН"
+        },
+        {
+          "value": "12161",
+          "label": "ОР"
+        },
+        {
+          "value": "12162",
+          "label": "ОС"
+        },
+        {
+          "value": "12163",
+          "label": "ОТ"
+        },
+        {
+          "value": "12164",
+          "label": "ОХ"
+        },
+        {
+          "value": "12165",
+          "label": "ОШ"
+        },
+        {
+          "value": "12166",
+          "label": "ПА"
+        },
+        {
+          "value": "12167",
+          "label": "ПЕ"
+        },
+        {
+          "value": "12168",
+          "label": "ПК"
+        },
+        {
+          "value": "12169",
+          "label": "ПМ"
+        },
+        {
+          "value": "12170",
+          "label": "ПО"
+        },
+        {
+          "value": "12171",
+          "label": "ПР"
+        },
+        {
+          "value": "12172",
+          "label": "ПС"
+        },
+        {
+          "value": "12173",
+          "label": "РА"
+        },
+        {
+          "value": "12174",
+          "label": "РВ"
+        },
+        {
+          "value": "12175",
+          "label": "РД"
+        },
+        {
+          "value": "12176",
+          "label": "РО"
+        },
+        {
+          "value": "12177",
+          "label": "РП"
+        },
+        {
+          "value": "12178",
+          "label": "РР"
+        },
+        {
+          "value": "12179",
+          "label": "РТ"
+        },
+        {
+          "value": "12180",
+          "label": "РЯ"
+        },
+        {
+          "value": "12181",
+          "label": "СА"
+        },
+        {
+          "value": "12182",
+          "label": "СВ"
+        },
+        {
+          "value": "12183",
+          "label": "СД"
+        },
+        {
+          "value": "12184",
+          "label": "СЕ"
+        },
+        {
+          "value": "12185",
+          "label": "СЖ"
+        },
+        {
+          "value": "12186",
+          "label": "СИ"
+        },
+        {
+          "value": "12187",
+          "label": "СК"
+        },
+        {
+          "value": "12188",
+          "label": "СМ"
+        },
+        {
+          "value": "12189",
+          "label": "СН"
+        },
+        {
+          "value": "12190",
+          "label": "СО"
+        },
+        {
+          "value": "12191",
+          "label": "СП"
+        },
+        {
+          "value": "12192",
+          "label": "СР"
+        },
+        {
+          "value": "12193",
+          "label": "СС"
+        },
+        {
+          "value": "12194",
+          "label": "СТ"
+        },
+        {
+          "value": "12195",
+          "label": "СУ"
+        },
+        {
+          "value": "12196",
+          "label": "СФ"
+        },
+        {
+          "value": "12197",
+          "label": "СХ"
+        },
+        {
+          "value": "12198",
+          "label": "ТА"
+        },
+        {
+          "value": "12199",
+          "label": "ТБ"
+        },
+        {
+          "value": "12200",
+          "label": "ТВ"
+        },
+        {
+          "value": "12201",
+          "label": "ТГ"
+        },
+        {
+          "value": "12202",
+          "label": "ТД"
+        },
+        {
+          "value": "12203",
+          "label": "ТЕ"
+        },
+        {
+          "value": "12204",
+          "label": "ТЗ"
+        },
+        {
+          "value": "12205",
+          "label": "ТК"
+        },
+        {
+          "value": "12206",
+          "label": "ТЛ"
+        },
+        {
+          "value": "12207",
+          "label": "ТМ"
+        },
+        {
+          "value": "12208",
+          "label": "ТН"
+        },
+        {
+          "value": "12209",
+          "label": "ТО"
+        },
+        {
+          "value": "12210",
+          "label": "ТС"
+        },
+        {
+          "value": "12211",
+          "label": "ТТ"
+        },
+        {
+          "value": "12212",
+          "label": "ТУ"
+        },
+        {
+          "value": "12213",
+          "label": "ТФ"
+        },
+        {
+          "value": "12214",
+          "label": "ТХ"
+        },
+        {
+          "value": "12215",
+          "label": "ТШ"
+        },
+        {
+          "value": "12216",
+          "label": "ТЮ"
+        },
+        {
+          "value": "12217",
+          "label": "УД"
+        },
+        {
+          "value": "12218",
+          "label": "УК"
+        },
+        {
+          "value": "12219",
+          "label": "УЛ"
+        },
+        {
+          "value": "12220",
+          "label": "УТ"
+        },
+        {
+          "value": "12221",
+          "label": "ФЕ"
+        },
+        {
+          "value": "12222",
+          "label": "ФИ"
+        },
+        {
+          "value": "12223",
+          "label": "ХА"
+        },
+        {
+          "value": "12224",
+          "label": "ХБ"
+        },
+        {
+          "value": "12225",
+          "label": "ХГ"
+        },
+        {
+          "value": "12226",
+          "label": "ХЗ"
+        },
+        {
+          "value": "12227",
+          "label": "ХК"
+        },
+        {
+          "value": "12228",
+          "label": "ХМ"
+        },
+        {
+          "value": "12229",
+          "label": "ХО"
+        },
+        {
+          "value": "12230",
+          "label": "ХС"
+        },
+        {
+          "value": "12231",
+          "label": "ХТ"
+        },
+        {
+          "value": "12232",
+          "label": "ЦВ"
+        },
+        {
+          "value": "12233",
+          "label": "ЦЛ"
+        },
+        {
+          "value": "12234",
+          "label": "ЦП"
+        },
+        {
+          "value": "12235",
+          "label": "ЦХ"
+        },
+        {
+          "value": "12236",
+          "label": "ЧА"
+        },
+        {
+          "value": "12237",
+          "label": "ЧБ"
+        },
+        {
+          "value": "12238",
+          "label": "ЧВ"
+        },
+        {
+          "value": "12239",
+          "label": "ЧД"
+        },
+        {
+          "value": "12240",
+          "label": "ЧЕ"
+        },
+        {
+          "value": "12241",
+          "label": "ЧИ"
+        },
+        {
+          "value": "12242",
+          "label": "ЧК"
+        },
+        {
+          "value": "12243",
+          "label": "ЧМ"
+        },
+        {
+          "value": "12244",
+          "label": "ЧН"
+        },
+        {
+          "value": "12245",
+          "label": "ЧР"
+        },
+        {
+          "value": "12246",
+          "label": "ЧС"
+        },
+        {
+          "value": "12247",
+          "label": "ЧТ"
+        },
+        {
+          "value": "12248",
+          "label": "ЧУ"
+        },
+        {
+          "value": "12249",
+          "label": "ЭС"
+        },
+        {
+          "value": "12250",
+          "label": "ЮО"
+        },
+        {
+          "value": "12251",
+          "label": "ЯК"
+        },
+        {
+          "value": "12252",
+          "label": "ЯР"
+        },
+        {
+          "value": "12253",
+          "label": "ЕА"
+        },
+        {
+          "value": "12260",
+          "label": "ИН"
+        },
+        {
+          "value": "12809",
+          "label": "АІ"
+        },
+        {
+          "value": "12810",
+          "label": "ВІ"
+        },
+        {
+          "value": "12812",
+          "label": "ВЯ"
+        },
+        {
+          "value": "12813",
+          "label": "ЕІ"
+        },
+        {
+          "value": "12814",
+          "label": "ІВ"
+        },
+        {
+          "value": "12815",
+          "label": "ІК"
+        },
+        {
+          "value": "12816",
+          "label": "ІН"
+        },
+        {
+          "value": "12817",
+          "label": "ІО"
+        },
+        {
+          "value": "12818",
+          "label": "ІС"
+        },
+        {
+          "value": "12819",
+          "label": "ІХ"
+        },
+        {
+          "value": "12820",
+          "label": "КІ"
+        },
+        {
+          "value": "12821",
+          "label": "МІ"
+        },
+        {
+          "value": "12822",
+          "label": "МЯ"
+        },
+        {
+          "value": "12823",
+          "label": "НІ"
+        },
+        {
+          "value": "12824",
+          "label": "ОІ"
+        },
+        {
+          "value": "12825",
+          "label": "ОЯ"
+        },
+        {
+          "value": "12826",
+          "label": "РК"
+        },
+        {
+          "value": "12827",
+          "label": "РМ"
+        },
+        {
+          "value": "12828",
+          "label": "РС"
+        },
+        {
+          "value": "12829",
+          "label": "СІ"
+        },
+        {
+          "value": "12830",
+          "label": "ТІ"
+        },
+        {
+          "value": "12831",
+          "label": "ТЯ"
+        },
+        {
+          "value": "12832",
+          "label": "ХІ"
+        },
+        {
+          "value": "12833",
+          "label": "ЯА"
+        },
+        {
+          "value": "12834",
+          "label": "ЯН"
+        },
+        {
+          "value": "12835",
+          "label": "ЯТ"
+        },
+        {
+          "value": "12836",
+          "label": "АЕ"
+        },
+        {
+          "value": "12837",
+          "label": "ВН"
+        },
+        {
+          "value": "12838",
+          "label": "КХ"
+        },
+        {
+          "value": "12839",
+          "label": "РВ"
+        },
+        {
+          "value": "12840",
+          "label": "ХМ"
+        },
+        {
+          "value": "12841",
+          "label": "ХО"
+        },
+        {
+          "value": "12843",
+          "label": "ТИ"
+        },
+        {
+          "value": "12844",
+          "label": "СГ"
+        },
+        {
+          "value": "100913",
+          "label": "ША"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "b2",
+      "name": "b2",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "А",
+          "label": "А"
+        },
+        {
+          "value": "Б",
+          "label": "Б"
+        },
+        {
+          "value": "В",
+          "label": "В"
+        },
+        {
+          "value": "Г",
+          "label": "Г"
+        },
+        {
+          "value": "Д",
+          "label": "Д"
+        },
+        {
+          "value": "Е",
+          "label": "Е"
+        },
+        {
+          "value": "Ж",
+          "label": "Ж"
+        },
+        {
+          "value": "З",
+          "label": "З"
+        },
+        {
+          "value": "И",
+          "label": "И"
+        },
+        {
+          "value": "К",
+          "label": "К"
+        },
+        {
+          "value": "Л",
+          "label": "Л"
+        },
+        {
+          "value": "М",
+          "label": "М"
+        },
+        {
+          "value": "Н",
+          "label": "Н"
+        },
+        {
+          "value": "О",
+          "label": "О"
+        },
+        {
+          "value": "П",
+          "label": "П"
+        },
+        {
+          "value": "Р",
+          "label": "Р"
+        },
+        {
+          "value": "С",
+          "label": "С"
+        },
+        {
+          "value": "Т",
+          "label": "Т"
+        },
+        {
+          "value": "У",
+          "label": "У"
+        },
+        {
+          "value": "Ф",
+          "label": "Ф"
+        },
+        {
+          "value": "Х",
+          "label": "Х"
+        },
+        {
+          "value": "Ц",
+          "label": "Ц"
+        },
+        {
+          "value": "Ч",
+          "label": "Ч"
+        },
+        {
+          "value": "Ш",
+          "label": "Ш"
+        },
+        {
+          "value": "Щ",
+          "label": "Щ"
+        },
+        {
+          "value": "Э",
+          "label": "Э"
+        },
+        {
+          "value": "Ю",
+          "label": "Ю"
+        },
+        {
+          "value": "Я",
+          "label": "Я"
+        },
+        {
+          "value": "I",
+          "label": "I"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "b3",
+      "name": "b3",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "А",
+          "label": "А"
+        },
+        {
+          "value": "Б",
+          "label": "Б"
+        },
+        {
+          "value": "В",
+          "label": "В"
+        },
+        {
+          "value": "Г",
+          "label": "Г"
+        },
+        {
+          "value": "Д",
+          "label": "Д"
+        },
+        {
+          "value": "Е",
+          "label": "Е"
+        },
+        {
+          "value": "Ж",
+          "label": "Ж"
+        },
+        {
+          "value": "З",
+          "label": "З"
+        },
+        {
+          "value": "И",
+          "label": "И"
+        },
+        {
+          "value": "К",
+          "label": "К"
+        },
+        {
+          "value": "Л",
+          "label": "Л"
+        },
+        {
+          "value": "М",
+          "label": "М"
+        },
+        {
+          "value": "Н",
+          "label": "Н"
+        },
+        {
+          "value": "О",
+          "label": "О"
+        },
+        {
+          "value": "П",
+          "label": "П"
+        },
+        {
+          "value": "Р",
+          "label": "Р"
+        },
+        {
+          "value": "С",
+          "label": "С"
+        },
+        {
+          "value": "Т",
+          "label": "Т"
+        },
+        {
+          "value": "У",
+          "label": "У"
+        },
+        {
+          "value": "Ф",
+          "label": "Ф"
+        },
+        {
+          "value": "Х",
+          "label": "Х"
+        },
+        {
+          "value": "Ц",
+          "label": "Ц"
+        },
+        {
+          "value": "Ч",
+          "label": "Ч"
+        },
+        {
+          "value": "Ш",
+          "label": "Ш"
+        },
+        {
+          "value": "Щ",
+          "label": "Щ"
+        },
+        {
+          "value": "Э",
+          "label": "Э"
+        },
+        {
+          "value": "Ю",
+          "label": "Ю"
+        },
+        {
+          "value": "Я",
+          "label": "Я"
+        },
+        {
+          "value": "I",
+          "label": "I"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": "digit2",
+      "name": "digit2",
+      "type": "text",
+      "maxlength": 4,
+      "hiddenAtLoad": true,
+      "digitsOnly": true
+    },
+    {
+      "tag": "select",
+      "id": "b4",
+      "name": "b4",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "H",
+          "label": "H"
+        },
+        {
+          "value": "P",
+          "label": "P"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": "digit3",
+      "name": "digit3",
+      "type": "text",
+      "maxlength": 6,
+      "hiddenAtLoad": true,
+      "digitsOnly": true
+    },
+    {
+      "tag": "select",
+      "id": "region3",
+      "name": "region3",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "13600",
+          "label": "АА"
+        },
+        {
+          "value": "13601",
+          "label": "АБ"
+        },
+        {
+          "value": "13602",
+          "label": "АВ"
+        },
+        {
+          "value": "13603",
+          "label": "АД"
+        },
+        {
+          "value": "13604",
+          "label": "АЕ"
+        },
+        {
+          "value": "13605",
+          "label": "АЖ"
+        },
+        {
+          "value": "13606",
+          "label": "АЗ"
+        },
+        {
+          "value": "13607",
+          "label": "АИ"
+        },
+        {
+          "value": "13608",
+          "label": "АК"
+        },
+        {
+          "value": "13609",
+          "label": "АЛ"
+        },
+        {
+          "value": "13610",
+          "label": "АМ"
+        },
+        {
+          "value": "13611",
+          "label": "АН"
+        },
+        {
+          "value": "13612",
+          "label": "АО"
+        },
+        {
+          "value": "13613",
+          "label": "АП"
+        },
+        {
+          "value": "13614",
+          "label": "АР"
+        },
+        {
+          "value": "13615",
+          "label": "АС"
+        },
+        {
+          "value": "13616",
+          "label": "АТ"
+        },
+        {
+          "value": "13617",
+          "label": "АУ"
+        },
+        {
+          "value": "13618",
+          "label": "АФ"
+        },
+        {
+          "value": "13619",
+          "label": "АХ"
+        },
+        {
+          "value": "13620",
+          "label": "АЦ"
+        },
+        {
+          "value": "13621",
+          "label": "АШ"
+        },
+        {
+          "value": "13622",
+          "label": "АЮ"
+        },
+        {
+          "value": "13623",
+          "label": "АЯ"
+        },
+        {
+          "value": "13624",
+          "label": "БА"
+        },
+        {
+          "value": "13625",
+          "label": "БВ"
+        },
+        {
+          "value": "13626",
+          "label": "БЕ"
+        },
+        {
+          "value": "13627",
+          "label": "БК"
+        },
+        {
+          "value": "13628",
+          "label": "БН"
+        },
+        {
+          "value": "13629",
+          "label": "БО"
+        },
+        {
+          "value": "13630",
+          "label": "БР"
+        },
+        {
+          "value": "13631",
+          "label": "БС"
+        },
+        {
+          "value": "13632",
+          "label": "БТ"
+        },
+        {
+          "value": "13633",
+          "label": "БУ"
+        },
+        {
+          "value": "13634",
+          "label": "БХ"
+        },
+        {
+          "value": "13635",
+          "label": "БЦ"
+        },
+        {
+          "value": "13636",
+          "label": "ВА"
+        },
+        {
+          "value": "13637",
+          "label": "ВБ"
+        },
+        {
+          "value": "13638",
+          "label": "ВВ"
+        },
+        {
+          "value": "13639",
+          "label": "ВГ"
+        },
+        {
+          "value": "13640",
+          "label": "ВД"
+        },
+        {
+          "value": "13641",
+          "label": "ВЕ"
+        },
+        {
+          "value": "13642",
+          "label": "ВЖ"
+        },
+        {
+          "value": "13643",
+          "label": "ВИ"
+        },
+        {
+          "value": "13644",
+          "label": "ВК"
+        },
+        {
+          "value": "13645",
+          "label": "ВЛ"
+        },
+        {
+          "value": "13646",
+          "label": "ВМ"
+        },
+        {
+          "value": "13647",
+          "label": "ВН"
+        },
+        {
+          "value": "13648",
+          "label": "ВО"
+        },
+        {
+          "value": "13649",
+          "label": "ВП"
+        },
+        {
+          "value": "13650",
+          "label": "ВР"
+        },
+        {
+          "value": "13651",
+          "label": "ВС"
+        },
+        {
+          "value": "13652",
+          "label": "ВТ"
+        },
+        {
+          "value": "13653",
+          "label": "ВУ"
+        },
+        {
+          "value": "13654",
+          "label": "ВХ"
+        },
+        {
+          "value": "13655",
+          "label": "ВЦ"
+        },
+        {
+          "value": "13656",
+          "label": "ВЯ"
+        },
+        {
+          "value": "13657",
+          "label": "ГА"
+        },
+        {
+          "value": "13658",
+          "label": "ГБ"
+        },
+        {
+          "value": "13659",
+          "label": "ГВ"
+        },
+        {
+          "value": "13660",
+          "label": "ГГ"
+        },
+        {
+          "value": "13661",
+          "label": "ГД"
+        },
+        {
+          "value": "13662",
+          "label": "ГЕ"
+        },
+        {
+          "value": "13663",
+          "label": "ГК"
+        },
+        {
+          "value": "13664",
+          "label": "ГЛ"
+        },
+        {
+          "value": "13665",
+          "label": "ГМ"
+        },
+        {
+          "value": "13666",
+          "label": "ГН"
+        },
+        {
+          "value": "13667",
+          "label": "ГО"
+        },
+        {
+          "value": "13668",
+          "label": "ГП"
+        },
+        {
+          "value": "13669",
+          "label": "ГР"
+        },
+        {
+          "value": "13670",
+          "label": "ГС"
+        },
+        {
+          "value": "13671",
+          "label": "ГТ"
+        },
+        {
+          "value": "13672",
+          "label": "ГУ"
+        },
+        {
+          "value": "13673",
+          "label": "ДА"
+        },
+        {
+          "value": "13674",
+          "label": "ДБ"
+        },
+        {
+          "value": "13675",
+          "label": "ДВ"
+        },
+        {
+          "value": "13676",
+          "label": "ДГ"
+        },
+        {
+          "value": "13677",
+          "label": "ДД"
+        },
+        {
+          "value": "13678",
+          "label": "ДЕ"
+        },
+        {
+          "value": "13679",
+          "label": "ДЖ"
+        },
+        {
+          "value": "13680",
+          "label": "ДЗ"
+        },
+        {
+          "value": "13681",
+          "label": "ДИ"
+        },
+        {
+          "value": "13682",
+          "label": "ДК"
+        },
+        {
+          "value": "13683",
+          "label": "ДН"
+        },
+        {
+          "value": "13684",
+          "label": "ДО"
+        },
+        {
+          "value": "13685",
+          "label": "ДП"
+        },
+        {
+          "value": "13686",
+          "label": "ДР"
+        },
+        {
+          "value": "13687",
+          "label": "ДС"
+        },
+        {
+          "value": "13688",
+          "label": "ДТ"
+        },
+        {
+          "value": "13689",
+          "label": "ДЦ"
+        },
+        {
+          "value": "13690",
+          "label": "ДЧ"
+        },
+        {
+          "value": "13691",
+          "label": "ЕА"
+        },
+        {
+          "value": "13692",
+          "label": "ЕВ"
+        },
+        {
+          "value": "13693",
+          "label": "ЕГ"
+        },
+        {
+          "value": "13694",
+          "label": "ЕЕ"
+        },
+        {
+          "value": "13695",
+          "label": "ЕЖ"
+        },
+        {
+          "value": "13696",
+          "label": "ЕИ"
+        },
+        {
+          "value": "13697",
+          "label": "ЕК"
+        },
+        {
+          "value": "13698",
+          "label": "ЕМ"
+        },
+        {
+          "value": "13699",
+          "label": "ЕН"
+        },
+        {
+          "value": "13700",
+          "label": "ЕТ"
+        },
+        {
+          "value": "13701",
+          "label": "ЕФ"
+        },
+        {
+          "value": "13702",
+          "label": "ЕХ"
+        },
+        {
+          "value": "13703",
+          "label": "ЖА"
+        },
+        {
+          "value": "13704",
+          "label": "ЖЕ"
+        },
+        {
+          "value": "13705",
+          "label": "ЖЖ"
+        },
+        {
+          "value": "13706",
+          "label": "ЖИ"
+        },
+        {
+          "value": "13707",
+          "label": "ЖК"
+        },
+        {
+          "value": "13708",
+          "label": "ЗА"
+        },
+        {
+          "value": "13709",
+          "label": "ЗК"
+        },
+        {
+          "value": "13710",
+          "label": "ЗН"
+        },
+        {
+          "value": "13711",
+          "label": "ЗП"
+        },
+        {
+          "value": "13712",
+          "label": "ЗР"
+        },
+        {
+          "value": "13713",
+          "label": "ЗТ"
+        },
+        {
+          "value": "13714",
+          "label": "ЗУ"
+        },
+        {
+          "value": "13715",
+          "label": "ЗФ"
+        },
+        {
+          "value": "13716",
+          "label": "ЗЧ"
+        },
+        {
+          "value": "13717",
+          "label": "ИА"
+        },
+        {
+          "value": "13718",
+          "label": "ИВ"
+        },
+        {
+          "value": "13719",
+          "label": "ИГ"
+        },
+        {
+          "value": "13720",
+          "label": "ИД"
+        },
+        {
+          "value": "13721",
+          "label": "ИЗ"
+        },
+        {
+          "value": "13722",
+          "label": "ИИ"
+        },
+        {
+          "value": "13723",
+          "label": "ИК"
+        },
+        {
+          "value": "13724",
+          "label": "ИЛ"
+        },
+        {
+          "value": "13725",
+          "label": "ИМ"
+        },
+        {
+          "value": "13726",
+          "label": "ИН"
+        },
+        {
+          "value": "13727",
+          "label": "ИО"
+        },
+        {
+          "value": "13728",
+          "label": "ИР"
+        },
+        {
+          "value": "13729",
+          "label": "ИС"
+        },
+        {
+          "value": "13730",
+          "label": "ИТ"
+        },
+        {
+          "value": "13731",
+          "label": "ИУ"
+        },
+        {
+          "value": "13732",
+          "label": "ИФ"
+        },
+        {
+          "value": "13733",
+          "label": "КА"
+        },
+        {
+          "value": "13734",
+          "label": "КБ"
+        },
+        {
+          "value": "13735",
+          "label": "КВ"
+        },
+        {
+          "value": "13736",
+          "label": "КГ"
+        },
+        {
+          "value": "13737",
+          "label": "КД"
+        },
+        {
+          "value": "13738",
+          "label": "КЕ"
+        },
+        {
+          "value": "13739",
+          "label": "КЖ"
+        },
+        {
+          "value": "13740",
+          "label": "КЗ"
+        },
+        {
+          "value": "13741",
+          "label": "КИ"
+        },
+        {
+          "value": "13742",
+          "label": "КК"
+        },
+        {
+          "value": "13743",
+          "label": "КЛ"
+        },
+        {
+          "value": "13744",
+          "label": "КМ"
+        },
+        {
+          "value": "13745",
+          "label": "КН"
+        },
+        {
+          "value": "13746",
+          "label": "КО"
+        },
+        {
+          "value": "13747",
+          "label": "КП"
+        },
+        {
+          "value": "13748",
+          "label": "КР"
+        },
+        {
+          "value": "13749",
+          "label": "КС"
+        },
+        {
+          "value": "13750",
+          "label": "КТ"
+        },
+        {
+          "value": "13751",
+          "label": "КУ"
+        },
+        {
+          "value": "13752",
+          "label": "КФ"
+        },
+        {
+          "value": "13753",
+          "label": "КХ"
+        },
+        {
+          "value": "13754",
+          "label": "КЦ"
+        },
+        {
+          "value": "13755",
+          "label": "КЧ"
+        },
+        {
+          "value": "13756",
+          "label": "КШ"
+        },
+        {
+          "value": "13757",
+          "label": "КЩ"
+        },
+        {
+          "value": "13758",
+          "label": "КЭ"
+        },
+        {
+          "value": "13759",
+          "label": "КЮ"
+        },
+        {
+          "value": "13760",
+          "label": "КЯ"
+        },
+        {
+          "value": "13761",
+          "label": "ЛА"
+        },
+        {
+          "value": "13762",
+          "label": "ЛБ"
+        },
+        {
+          "value": "13763",
+          "label": "ЛВ"
+        },
+        {
+          "value": "13764",
+          "label": "ЛГ"
+        },
+        {
+          "value": "13765",
+          "label": "ЛД"
+        },
+        {
+          "value": "13766",
+          "label": "ЛЕ"
+        },
+        {
+          "value": "13767",
+          "label": "ЛЖ"
+        },
+        {
+          "value": "13768",
+          "label": "ЛЗ"
+        },
+        {
+          "value": "13769",
+          "label": "ЛИ"
+        },
+        {
+          "value": "13770",
+          "label": "ЛК"
+        },
+        {
+          "value": "13771",
+          "label": "ЛЛ"
+        },
+        {
+          "value": "13772",
+          "label": "ЛМ"
+        },
+        {
+          "value": "13773",
+          "label": "ЛН"
+        },
+        {
+          "value": "13774",
+          "label": "ЛО"
+        },
+        {
+          "value": "13775",
+          "label": "ЛП"
+        },
+        {
+          "value": "13776",
+          "label": "ЛР"
+        },
+        {
+          "value": "13777",
+          "label": "ЛС"
+        },
+        {
+          "value": "13778",
+          "label": "ЛТ"
+        },
+        {
+          "value": "13779",
+          "label": "ЛУ"
+        },
+        {
+          "value": "13780",
+          "label": "ЛФ"
+        },
+        {
+          "value": "13781",
+          "label": "ЛХ"
+        },
+        {
+          "value": "13782",
+          "label": "ЛЦ"
+        },
+        {
+          "value": "13783",
+          "label": "ЛЧ"
+        },
+        {
+          "value": "13784",
+          "label": "ЛШ"
+        },
+        {
+          "value": "13785",
+          "label": "ЛЮ"
+        },
+        {
+          "value": "13786",
+          "label": "ЛЯ"
+        },
+        {
+          "value": "13787",
+          "label": "МА"
+        },
+        {
+          "value": "13788",
+          "label": "МБ"
+        },
+        {
+          "value": "13789",
+          "label": "МВ"
+        },
+        {
+          "value": "13790",
+          "label": "МГ"
+        },
+        {
+          "value": "13791",
+          "label": "МД"
+        },
+        {
+          "value": "13792",
+          "label": "МЕ"
+        },
+        {
+          "value": "13793",
+          "label": "МЖ"
+        },
+        {
+          "value": "13794",
+          "label": "МЗ"
+        },
+        {
+          "value": "13795",
+          "label": "МИ"
+        },
+        {
+          "value": "13796",
+          "label": "МК"
+        },
+        {
+          "value": "13797",
+          "label": "МЛ"
+        },
+        {
+          "value": "13798",
+          "label": "ММ"
+        },
+        {
+          "value": "13799",
+          "label": "МН"
+        },
+        {
+          "value": "13800",
+          "label": "МО"
+        },
+        {
+          "value": "13801",
+          "label": "МП"
+        },
+        {
+          "value": "13802",
+          "label": "МР"
+        },
+        {
+          "value": "13803",
+          "label": "МС"
+        },
+        {
+          "value": "13804",
+          "label": "МТ"
+        },
+        {
+          "value": "13805",
+          "label": "МУ"
+        },
+        {
+          "value": "13806",
+          "label": "МФ"
+        },
+        {
+          "value": "13807",
+          "label": "МХ"
+        },
+        {
+          "value": "13808",
+          "label": "МЦ"
+        },
+        {
+          "value": "13809",
+          "label": "МЧ"
+        },
+        {
+          "value": "13810",
+          "label": "МШ"
+        },
+        {
+          "value": "13811",
+          "label": "МЩ"
+        },
+        {
+          "value": "13812",
+          "label": "МЭ"
+        },
+        {
+          "value": "13813",
+          "label": "МЮ"
+        },
+        {
+          "value": "13814",
+          "label": "МЯ"
+        },
+        {
+          "value": "13815",
+          "label": "НА"
+        },
+        {
+          "value": "13816",
+          "label": "НБ"
+        },
+        {
+          "value": "13817",
+          "label": "НВ"
+        },
+        {
+          "value": "13818",
+          "label": "НГ"
+        },
+        {
+          "value": "13819",
+          "label": "НД"
+        },
+        {
+          "value": "13820",
+          "label": "НИ"
+        },
+        {
+          "value": "13821",
+          "label": "НК"
+        },
+        {
+          "value": "13822",
+          "label": "НН"
+        },
+        {
+          "value": "13823",
+          "label": "НО"
+        },
+        {
+          "value": "13824",
+          "label": "НП"
+        },
+        {
+          "value": "13825",
+          "label": "НР"
+        },
+        {
+          "value": "13826",
+          "label": "НС"
+        },
+        {
+          "value": "13827",
+          "label": "НТ"
+        },
+        {
+          "value": "13828",
+          "label": "НШ"
+        },
+        {
+          "value": "13829",
+          "label": "ОА"
+        },
+        {
+          "value": "13830",
+          "label": "ОБ"
+        },
+        {
+          "value": "13831",
+          "label": "ОВ"
+        },
+        {
+          "value": "13832",
+          "label": "ОГ"
+        },
+        {
+          "value": "13833",
+          "label": "ОД"
+        },
+        {
+          "value": "13834",
+          "label": "ОЕ"
+        },
+        {
+          "value": "13835",
+          "label": "ОЗ"
+        },
+        {
+          "value": "13836",
+          "label": "ОК"
+        },
+        {
+          "value": "13837",
+          "label": "ОЛ"
+        },
+        {
+          "value": "13838",
+          "label": "ОМ"
+        },
+        {
+          "value": "13839",
+          "label": "ОР"
+        },
+        {
+          "value": "13840",
+          "label": "ОС"
+        },
+        {
+          "value": "13841",
+          "label": "ОШ"
+        },
+        {
+          "value": "13842",
+          "label": "ПА"
+        },
+        {
+          "value": "13843",
+          "label": "ПВ"
+        },
+        {
+          "value": "13844",
+          "label": "ПЕ"
+        },
+        {
+          "value": "13845",
+          "label": "ПК"
+        },
+        {
+          "value": "13846",
+          "label": "ПЛ"
+        },
+        {
+          "value": "13847",
+          "label": "ПМ"
+        },
+        {
+          "value": "13848",
+          "label": "ПН"
+        },
+        {
+          "value": "13849",
+          "label": "ПО"
+        },
+        {
+          "value": "13850",
+          "label": "ПР"
+        },
+        {
+          "value": "13851",
+          "label": "ПС"
+        },
+        {
+          "value": "13852",
+          "label": "ПТ"
+        },
+        {
+          "value": "13853",
+          "label": "ПХ"
+        },
+        {
+          "value": "13854",
+          "label": "ПЮ"
+        },
+        {
+          "value": "13855",
+          "label": "ПЯ"
+        },
+        {
+          "value": "13856",
+          "label": "РА"
+        },
+        {
+          "value": "13857",
+          "label": "РВ"
+        },
+        {
+          "value": "13858",
+          "label": "РГ"
+        },
+        {
+          "value": "13859",
+          "label": "РД"
+        },
+        {
+          "value": "13860",
+          "label": "РЕ"
+        },
+        {
+          "value": "13861",
+          "label": "РЗ"
+        },
+        {
+          "value": "13862",
+          "label": "РК"
+        },
+        {
+          "value": "13863",
+          "label": "РН"
+        },
+        {
+          "value": "13864",
+          "label": "РО"
+        },
+        {
+          "value": "13865",
+          "label": "РР"
+        },
+        {
+          "value": "13866",
+          "label": "РС"
+        },
+        {
+          "value": "13867",
+          "label": "РЯ"
+        },
+        {
+          "value": "13868",
+          "label": "СА"
+        },
+        {
+          "value": "13869",
+          "label": "СБ"
+        },
+        {
+          "value": "13870",
+          "label": "СВ"
+        },
+        {
+          "value": "13871",
+          "label": "СГ"
+        },
+        {
+          "value": "13872",
+          "label": "СД"
+        },
+        {
+          "value": "13873",
+          "label": "СЕ"
+        },
+        {
+          "value": "13874",
+          "label": "СЖ"
+        },
+        {
+          "value": "13875",
+          "label": "СЗ"
+        },
+        {
+          "value": "13876",
+          "label": "СИ"
+        },
+        {
+          "value": "13877",
+          "label": "СК"
+        },
+        {
+          "value": "13878",
+          "label": "СЛ"
+        },
+        {
+          "value": "13879",
+          "label": "СМ"
+        },
+        {
+          "value": "13880",
+          "label": "СН"
+        },
+        {
+          "value": "13881",
+          "label": "СО"
+        },
+        {
+          "value": "13882",
+          "label": "СП"
+        },
+        {
+          "value": "13883",
+          "label": "СР"
+        },
+        {
+          "value": "13884",
+          "label": "СС"
+        },
+        {
+          "value": "13885",
+          "label": "СТ"
+        },
+        {
+          "value": "13886",
+          "label": "СУ"
+        },
+        {
+          "value": "13887",
+          "label": "СФ"
+        },
+        {
+          "value": "13888",
+          "label": "СХ"
+        },
+        {
+          "value": "13889",
+          "label": "СЦ"
+        },
+        {
+          "value": "13890",
+          "label": "СЧ"
+        },
+        {
+          "value": "13891",
+          "label": "СШ"
+        },
+        {
+          "value": "13892",
+          "label": "СЩ"
+        },
+        {
+          "value": "13893",
+          "label": "СЭ"
+        },
+        {
+          "value": "13894",
+          "label": "СЮ"
+        },
+        {
+          "value": "13895",
+          "label": "СЯ"
+        },
+        {
+          "value": "13896",
+          "label": "ТА"
+        },
+        {
+          "value": "13897",
+          "label": "ТБ"
+        },
+        {
+          "value": "13898",
+          "label": "ТВ"
+        },
+        {
+          "value": "13899",
+          "label": "ТГ"
+        },
+        {
+          "value": "13900",
+          "label": "ТД"
+        },
+        {
+          "value": "13901",
+          "label": "ТЕ"
+        },
+        {
+          "value": "13902",
+          "label": "ТЖ"
+        },
+        {
+          "value": "13903",
+          "label": "ТЗ"
+        },
+        {
+          "value": "13904",
+          "label": "ТИ"
+        },
+        {
+          "value": "13905",
+          "label": "ТК"
+        },
+        {
+          "value": "13906",
+          "label": "ТЛ"
+        },
+        {
+          "value": "13907",
+          "label": "ТМ"
+        },
+        {
+          "value": "13908",
+          "label": "ТН"
+        },
+        {
+          "value": "13909",
+          "label": "ТО"
+        },
+        {
+          "value": "13910",
+          "label": "ТП"
+        },
+        {
+          "value": "13911",
+          "label": "ТР"
+        },
+        {
+          "value": "13912",
+          "label": "ТС"
+        },
+        {
+          "value": "13913",
+          "label": "ТТ"
+        },
+        {
+          "value": "13914",
+          "label": "ТУ"
+        },
+        {
+          "value": "13915",
+          "label": "ТФ"
+        },
+        {
+          "value": "13916",
+          "label": "ТХ"
+        },
+        {
+          "value": "13917",
+          "label": "ТЦ"
+        },
+        {
+          "value": "13918",
+          "label": "ТШ"
+        },
+        {
+          "value": "13919",
+          "label": "ТЭ"
+        },
+        {
+          "value": "13920",
+          "label": "ТЮ"
+        },
+        {
+          "value": "13921",
+          "label": "ТЯ"
+        },
+        {
+          "value": "13922",
+          "label": "УД"
+        },
+        {
+          "value": "13923",
+          "label": "УЛ"
+        },
+        {
+          "value": "13924",
+          "label": "УМ"
+        },
+        {
+          "value": "13925",
+          "label": "УН"
+        },
+        {
+          "value": "13926",
+          "label": "УС"
+        },
+        {
+          "value": "13927",
+          "label": "УЧ"
+        },
+        {
+          "value": "13928",
+          "label": "УШ"
+        },
+        {
+          "value": "13929",
+          "label": "ФА"
+        },
+        {
+          "value": "13930",
+          "label": "ФГ"
+        },
+        {
+          "value": "13931",
+          "label": "ФЕ"
+        },
+        {
+          "value": "13932",
+          "label": "ФЗ"
+        },
+        {
+          "value": "13933",
+          "label": "ФИ"
+        },
+        {
+          "value": "13934",
+          "label": "ФН"
+        },
+        {
+          "value": "13935",
+          "label": "ХА"
+        },
+        {
+          "value": "13936",
+          "label": "ХБ"
+        },
+        {
+          "value": "13937",
+          "label": "ХВ"
+        },
+        {
+          "value": "13938",
+          "label": "ХГ"
+        },
+        {
+          "value": "13939",
+          "label": "ХЗ"
+        },
+        {
+          "value": "13940",
+          "label": "ХК"
+        },
+        {
+          "value": "13941",
+          "label": "ХЛ"
+        },
+        {
+          "value": "13942",
+          "label": "ХМ"
+        },
+        {
+          "value": "13943",
+          "label": "ХН"
+        },
+        {
+          "value": "13944",
+          "label": "ХО"
+        },
+        {
+          "value": "13945",
+          "label": "ХП"
+        },
+        {
+          "value": "13946",
+          "label": "ХС"
+        },
+        {
+          "value": "13947",
+          "label": "ХЧ"
+        },
+        {
+          "value": "13948",
+          "label": "ЦВ"
+        },
+        {
+          "value": "13949",
+          "label": "ЦК"
+        },
+        {
+          "value": "13950",
+          "label": "ЦН"
+        },
+        {
+          "value": "13951",
+          "label": "ЦО"
+        },
+        {
+          "value": "13952",
+          "label": "ЦП"
+        },
+        {
+          "value": "13953",
+          "label": "ЦР"
+        },
+        {
+          "value": "13954",
+          "label": "ЦС"
+        },
+        {
+          "value": "13955",
+          "label": "ЦХ"
+        },
+        {
+          "value": "13956",
+          "label": "ЦЦ"
+        },
+        {
+          "value": "13957",
+          "label": "ЧА"
+        },
+        {
+          "value": "13958",
+          "label": "ЧБ"
+        },
+        {
+          "value": "13959",
+          "label": "ЧВ"
+        },
+        {
+          "value": "13960",
+          "label": "ЧГ"
+        },
+        {
+          "value": "13961",
+          "label": "ЧД"
+        },
+        {
+          "value": "13962",
+          "label": "ЧЕ"
+        },
+        {
+          "value": "13963",
+          "label": "ЧЗ"
+        },
+        {
+          "value": "13964",
+          "label": "ЧИ"
+        },
+        {
+          "value": "13965",
+          "label": "ЧК"
+        },
+        {
+          "value": "13966",
+          "label": "ЧН"
+        },
+        {
+          "value": "13967",
+          "label": "ЧО"
+        },
+        {
+          "value": "13968",
+          "label": "ЧР"
+        },
+        {
+          "value": "13969",
+          "label": "ЧС"
+        },
+        {
+          "value": "13970",
+          "label": "ЧТ"
+        },
+        {
+          "value": "13971",
+          "label": "ЧУ"
+        },
+        {
+          "value": "13972",
+          "label": "ЧФ"
+        },
+        {
+          "value": "13973",
+          "label": "ЧХ"
+        },
+        {
+          "value": "13974",
+          "label": "ЧЦ"
+        },
+        {
+          "value": "13975",
+          "label": "ЧЭ"
+        },
+        {
+          "value": "13976",
+          "label": "ШН"
+        },
+        {
+          "value": "13977",
+          "label": "ШО"
+        },
+        {
+          "value": "13978",
+          "label": "ШФ"
+        },
+        {
+          "value": "13979",
+          "label": "ШЧ"
+        },
+        {
+          "value": "13980",
+          "label": "ЭС"
+        },
+        {
+          "value": "13981",
+          "label": "ЭТ"
+        },
+        {
+          "value": "13982",
+          "label": "ЮА"
+        },
+        {
+          "value": "13983",
+          "label": "ЮБ"
+        },
+        {
+          "value": "13984",
+          "label": "ЮВ"
+        },
+        {
+          "value": "13985",
+          "label": "ЮГ"
+        },
+        {
+          "value": "13986",
+          "label": "ЮД"
+        },
+        {
+          "value": "13987",
+          "label": "ЮЕ"
+        },
+        {
+          "value": "13988",
+          "label": "ЮЖ"
+        },
+        {
+          "value": "13989",
+          "label": "ЮЗ"
+        },
+        {
+          "value": "13990",
+          "label": "ЮК"
+        },
+        {
+          "value": "13991",
+          "label": "ЮН"
+        },
+        {
+          "value": "13992",
+          "label": "ЯА"
+        },
+        {
+          "value": "13993",
+          "label": "ЯК"
+        },
+        {
+          "value": "13994",
+          "label": "ЯО"
+        },
+        {
+          "value": "13995",
+          "label": "ЯР"
+        },
+        {
+          "value": "13996",
+          "label": "ЯТ"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "region4",
+      "name": "region4",
+      "hiddenAtLoad": true,
+      "options": {
+        "count": 576,
+        "first": [
+          {
+            "value": "13000",
+            "label": "АI"
+          },
+          {
+            "value": "13001",
+            "label": "ВI"
+          },
+          {
+            "value": "13002",
+            "label": "ЕI"
+          },
+          {
+            "value": "13003",
+            "label": "ЕЯ"
+          },
+          {
+            "value": "13004",
+            "label": "IА"
+          }
+        ]
+      }
+    },
+    {
+      "tag": "select",
+      "id": "fon",
+      "name": "fon",
+      "options": [
+        {
+          "value": "1",
+          "label": "Single-row plate"
+        },
+        {
+          "value": "2",
+          "label": "Two-row plate"
+        },
+        {
+          "value": "3",
+          "label": "Single-row plate with flag UA '92"
+        }
+      ]
+    }
+  ],
+  "otherFields": [
+    {
+      "tag": "select",
+      "id": null,
+      "name": "markaavto",
+      "options": 3949
+    },
+    {
+      "tag": "select",
+      "id": "model",
+      "name": "model",
+      "options": 0
+    },
+    {
+      "tag": "select",
+      "id": "modgen",
+      "name": "modgen",
+      "options": 0
+    },
+    {
+      "tag": "input",
+      "id": "markamodtype",
+      "name": null,
+      "type": "text"
+    },
+    {
+      "tag": "textarea",
+      "id": null,
+      "name": "dop"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": null,
+      "type": "search"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox13",
+      "name": "CheckBox[13]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox50",
+      "name": "CheckBox[50]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox25",
+      "name": "CheckBox[25]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox26",
+      "name": "CheckBox[26]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox43",
+      "name": "CheckBox[43]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox59",
+      "name": "CheckBox[59]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox68",
+      "name": "CheckBox[68]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox60",
+      "name": "CheckBox[60]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox21",
+      "name": "CheckBox[21]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox8",
+      "name": "CheckBox[8]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox58",
+      "name": "CheckBox[58]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox9",
+      "name": "CheckBox[9]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox57",
+      "name": "CheckBox[57]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox46",
+      "name": "CheckBox[46]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox62",
+      "name": "CheckBox[62]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox33",
+      "name": "CheckBox[33]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox61",
+      "name": "CheckBox[61]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox22",
+      "name": "CheckBox[22]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox47",
+      "name": "CheckBox[47]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox38",
+      "name": "CheckBox[38]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox53",
+      "name": "CheckBox[53]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox40",
+      "name": "CheckBox[40]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox63",
+      "name": "CheckBox[63]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox64",
+      "name": "CheckBox[64]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox42",
+      "name": "CheckBox[42]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox65",
+      "name": "CheckBox[65]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox39",
+      "name": "CheckBox[39]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox49",
+      "name": "CheckBox[49]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox41",
+      "name": "CheckBox[41]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox37",
+      "name": "CheckBox[37]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox67",
+      "name": "CheckBox[67]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox18",
+      "name": "CheckBox[18]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox20",
+      "name": "CheckBox[20]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox15",
+      "name": "CheckBox[15]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox23",
+      "name": "CheckBox[23]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox69",
+      "name": "CheckBox[69]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox24",
+      "name": "CheckBox[24]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox19",
+      "name": "CheckBox[19]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox48",
+      "name": "CheckBox[48]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox4",
+      "name": "CheckBox[4]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox5",
+      "name": "CheckBox[5]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox16",
+      "name": "CheckBox[16]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox14",
+      "name": "CheckBox[14]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox66",
+      "name": "CheckBox[66]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox45",
+      "name": "CheckBox[45]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox6",
+      "name": "CheckBox[6]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox44",
+      "name": "CheckBox[44]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox52",
+      "name": "CheckBox[52]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox27",
+      "name": "CheckBox[27]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox1",
+      "name": "CheckBox[1]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox56",
+      "name": "CheckBox[56]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox2",
+      "name": "CheckBox[2]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "hide",
+      "name": "hidefoto",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "enablesave",
+      "name": "enablesave",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "patternenable",
+      "name": "patternenable",
+      "type": "checkbox"
+    }
+  ],
+  "notes": []
+}

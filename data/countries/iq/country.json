@@ -1,0 +1,9 @@
+{
+  "code": "iq",
+  "name": "Iraq",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

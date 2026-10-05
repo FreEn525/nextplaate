@@ -1,0 +1,9 @@
+{
+  "code": "au",
+  "name": "Australia",
+  "pages": {
+    "upload": false,
+    "search": true
+  },
+  "typeMenu": null
+}

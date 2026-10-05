@@ -1,0 +1,9 @@
+{
+  "code": "sa",
+  "name": "Saudi Arabia",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

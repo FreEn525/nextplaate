@@ -1,0 +1,1368 @@
+{
+  "code": "eg",
+  "title": "Upload new license plate, Egypt",
+  "action": "add",
+  "typeMenu": "ctype",
+  "visibleFrom": "site-script",
+  "types": [
+    {
+      "id": "1",
+      "label": "Cars (2008)",
+      "visible": ["b1", "b2", "b3", "fon"]
+    },
+    {
+      "id": "2",
+      "label": "Motorcycles",
+      "visible": ["b1", "b2", "b3"]
+    },
+    {
+      "id": "3",
+      "label": "Police",
+      "visible": ["b3"]
+    },
+    {
+      "id": "4",
+      "label": "Cars (1999)",
+      "visible": ["region", "fon"]
+    }
+  ],
+  "hooks": ["diseg"],
+  "plateFields": [
+    {
+      "tag": "select",
+      "id": "fon",
+      "name": "fon",
+      "options": [
+        {
+          "value": "1",
+          "label": "Blue"
+        },
+        {
+          "value": "2",
+          "label": "Red"
+        },
+        {
+          "value": "3",
+          "label": "Orange"
+        },
+        {
+          "value": "4",
+          "label": "Gray"
+        },
+        {
+          "value": "5",
+          "label": "Beige"
+        },
+        {
+          "value": "17",
+          "label": "Yellow"
+        },
+        {
+          "value": "18",
+          "label": "Black"
+        },
+        {
+          "value": "101",
+          "label": "Blue (+latin)"
+        },
+        {
+          "value": "102",
+          "label": "Red (+latin)"
+        },
+        {
+          "value": "103",
+          "label": "Orange (+latin)"
+        },
+        {
+          "value": "104",
+          "label": "Gray (+latin)"
+        },
+        {
+          "value": "105",
+          "label": "Beige (+latin)"
+        },
+        {
+          "value": "117",
+          "label": "Yellow (+latin)"
+        },
+        {
+          "value": "118",
+          "label": "Black (+latin)"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "region",
+      "name": "region",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "ALX",
+          "label": "ALX (الإسكندرية‎)"
+        },
+        {
+          "value": "AR",
+          "label": "AR (شمال سيناء‎)"
+        },
+        {
+          "value": "ASN",
+          "label": "ASN (أسوان)"
+        },
+        {
+          "value": "AST",
+          "label": "AST (أسيوط‎)"
+        },
+        {
+          "value": "BH",
+          "label": "BH (البحيرة‎)"
+        },
+        {
+          "value": "BNS",
+          "label": "BNS (بني سويف‎)"
+        },
+        {
+          "value": "C",
+          "label": "C (القاهرة)"
+        },
+        {
+          "value": "DK",
+          "label": "DK (الدقهلية‎)"
+        },
+        {
+          "value": "DT",
+          "label": "DT (دمياط)"
+        },
+        {
+          "value": "FYM",
+          "label": "FYM (الفيوم‎)"
+        },
+        {
+          "value": "GHR",
+          "label": "GHR (الغربية)"
+        },
+        {
+          "value": "GZ",
+          "label": "GZ (الجيزة)"
+        },
+        {
+          "value": "IS",
+          "label": "IS (الإسماعيلية)"
+        },
+        {
+          "value": "KB",
+          "label": "KB (القليوبية)"
+        },
+        {
+          "value": "KFS",
+          "label": "KFS (كفر الشيخ)"
+        },
+        {
+          "value": "KN",
+          "label": "KN (قنا)"
+        },
+        {
+          "value": "LUX",
+          "label": "LUX (الأقصر‎)"
+        },
+        {
+          "value": "MN",
+          "label": "MN (المنيا‎)"
+        },
+        {
+          "value": "MNF",
+          "label": "MNF (المنوفية‎)"
+        },
+        {
+          "value": "MT",
+          "label": "MT (مطروح)"
+        },
+        {
+          "value": "NWE",
+          "label": "NWE (نويبع‎)"
+        },
+        {
+          "value": "PTS",
+          "label": "PTS (بورسعيد)"
+        },
+        {
+          "value": "RS",
+          "label": "RS (البحر الأحمر)"
+        },
+        {
+          "value": "SAG",
+          "label": "SAG (سوهاج)"
+        },
+        {
+          "value": "SHR",
+          "label": "SHR (الشرقية)"
+        },
+        {
+          "value": "SINS",
+          "label": "SINS (جنوب سيناء)"
+        },
+        {
+          "value": "SUZ",
+          "label": "SUZ (السويس‎)"
+        },
+        {
+          "value": "TAB",
+          "label": "TAB (طابا)"
+        },
+        {
+          "value": "WAD",
+          "label": "WAD (الوادي الجديد)"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "d1",
+      "name": "d1",
+      "options": [
+        {
+          "value": "١",
+          "label": "١"
+        },
+        {
+          "value": "٢",
+          "label": "٢"
+        },
+        {
+          "value": "٣",
+          "label": "٣"
+        },
+        {
+          "value": "٤",
+          "label": "٤"
+        },
+        {
+          "value": "٥",
+          "label": "٥"
+        },
+        {
+          "value": "٦",
+          "label": "٦"
+        },
+        {
+          "value": "٧",
+          "label": "٧"
+        },
+        {
+          "value": "٨",
+          "label": "٨"
+        },
+        {
+          "value": "٩",
+          "label": "٩"
+        },
+        {
+          "value": "٠",
+          "label": "٠"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "d2",
+      "name": "d2",
+      "options": [
+        {
+          "value": "١",
+          "label": "١"
+        },
+        {
+          "value": "٢",
+          "label": "٢"
+        },
+        {
+          "value": "٣",
+          "label": "٣"
+        },
+        {
+          "value": "٤",
+          "label": "٤"
+        },
+        {
+          "value": "٥",
+          "label": "٥"
+        },
+        {
+          "value": "٦",
+          "label": "٦"
+        },
+        {
+          "value": "٧",
+          "label": "٧"
+        },
+        {
+          "value": "٨",
+          "label": "٨"
+        },
+        {
+          "value": "٩",
+          "label": "٩"
+        },
+        {
+          "value": "٠",
+          "label": "٠"
+        },
+        {
+          "value": "",
+          "label": "-"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "d3",
+      "name": "d3",
+      "options": [
+        {
+          "value": "١",
+          "label": "١"
+        },
+        {
+          "value": "٢",
+          "label": "٢"
+        },
+        {
+          "value": "٣",
+          "label": "٣"
+        },
+        {
+          "value": "٤",
+          "label": "٤"
+        },
+        {
+          "value": "٥",
+          "label": "٥"
+        },
+        {
+          "value": "٦",
+          "label": "٦"
+        },
+        {
+          "value": "٧",
+          "label": "٧"
+        },
+        {
+          "value": "٨",
+          "label": "٨"
+        },
+        {
+          "value": "٩",
+          "label": "٩"
+        },
+        {
+          "value": "٠",
+          "label": "٠"
+        },
+        {
+          "value": "",
+          "label": "-"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "d4",
+      "name": "d4",
+      "options": [
+        {
+          "value": "١",
+          "label": "١"
+        },
+        {
+          "value": "٢",
+          "label": "٢"
+        },
+        {
+          "value": "٣",
+          "label": "٣"
+        },
+        {
+          "value": "٤",
+          "label": "٤"
+        },
+        {
+          "value": "٥",
+          "label": "٥"
+        },
+        {
+          "value": "٦",
+          "label": "٦"
+        },
+        {
+          "value": "٧",
+          "label": "٧"
+        },
+        {
+          "value": "٨",
+          "label": "٨"
+        },
+        {
+          "value": "٩",
+          "label": "٩"
+        },
+        {
+          "value": "٠",
+          "label": "٠"
+        },
+        {
+          "value": "",
+          "label": "-"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "d5",
+      "name": "d5",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "١",
+          "label": "١"
+        },
+        {
+          "value": "٢",
+          "label": "٢"
+        },
+        {
+          "value": "٣",
+          "label": "٣"
+        },
+        {
+          "value": "٤",
+          "label": "٤"
+        },
+        {
+          "value": "٥",
+          "label": "٥"
+        },
+        {
+          "value": "٦",
+          "label": "٦"
+        },
+        {
+          "value": "٧",
+          "label": "٧"
+        },
+        {
+          "value": "٨",
+          "label": "٨"
+        },
+        {
+          "value": "٩",
+          "label": "٩"
+        },
+        {
+          "value": "٠",
+          "label": "٠"
+        },
+        {
+          "value": "",
+          "label": "-"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "d6",
+      "name": "d6",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "١",
+          "label": "١"
+        },
+        {
+          "value": "٢",
+          "label": "٢"
+        },
+        {
+          "value": "٣",
+          "label": "٣"
+        },
+        {
+          "value": "٤",
+          "label": "٤"
+        },
+        {
+          "value": "٥",
+          "label": "٥"
+        },
+        {
+          "value": "٦",
+          "label": "٦"
+        },
+        {
+          "value": "٧",
+          "label": "٧"
+        },
+        {
+          "value": "٨",
+          "label": "٨"
+        },
+        {
+          "value": "٩",
+          "label": "٩"
+        },
+        {
+          "value": "٠",
+          "label": "٠"
+        },
+        {
+          "value": "",
+          "label": "-"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "b1",
+      "name": "b1",
+      "options": [
+        {
+          "value": "أ",
+          "label": "أ"
+        },
+        {
+          "value": "ب",
+          "label": "ب"
+        },
+        {
+          "value": "ج",
+          "label": "ج"
+        },
+        {
+          "value": "د",
+          "label": "د"
+        },
+        {
+          "value": "ر",
+          "label": "ر"
+        },
+        {
+          "value": "س",
+          "label": "س"
+        },
+        {
+          "value": "ص",
+          "label": "ص"
+        },
+        {
+          "value": "ط",
+          "label": "ط"
+        },
+        {
+          "value": "ع",
+          "label": "ع"
+        },
+        {
+          "value": "ف",
+          "label": "ف"
+        },
+        {
+          "value": "ق",
+          "label": "ق"
+        },
+        {
+          "value": "ل",
+          "label": "ل"
+        },
+        {
+          "value": "م",
+          "label": "م"
+        },
+        {
+          "value": "ن",
+          "label": "ن"
+        },
+        {
+          "value": "ھ",
+          "label": "ھ"
+        },
+        {
+          "value": "و",
+          "label": "و"
+        },
+        {
+          "value": "ى",
+          "label": "ى"
+        },
+        {
+          "value": "ك",
+          "label": "ك"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "b2",
+      "name": "b2",
+      "options": [
+        {
+          "value": "أ",
+          "label": "أ"
+        },
+        {
+          "value": "ب",
+          "label": "ب"
+        },
+        {
+          "value": "ج",
+          "label": "ج"
+        },
+        {
+          "value": "د",
+          "label": "د"
+        },
+        {
+          "value": "ر",
+          "label": "ر"
+        },
+        {
+          "value": "س",
+          "label": "س"
+        },
+        {
+          "value": "ص",
+          "label": "ص"
+        },
+        {
+          "value": "ط",
+          "label": "ط"
+        },
+        {
+          "value": "ع",
+          "label": "ع"
+        },
+        {
+          "value": "ف",
+          "label": "ف"
+        },
+        {
+          "value": "ق",
+          "label": "ق"
+        },
+        {
+          "value": "ل",
+          "label": "ل"
+        },
+        {
+          "value": "م",
+          "label": "م"
+        },
+        {
+          "value": "ن",
+          "label": "ن"
+        },
+        {
+          "value": "ھ",
+          "label": "ھ"
+        },
+        {
+          "value": "و",
+          "label": "و"
+        },
+        {
+          "value": "ى",
+          "label": "ى"
+        },
+        {
+          "value": "ك",
+          "label": "ك"
+        },
+        {
+          "value": "",
+          "label": "-"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "p1",
+      "name": "p1",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "١",
+          "label": "١"
+        },
+        {
+          "value": "٢",
+          "label": "٢"
+        },
+        {
+          "value": "٣",
+          "label": "٣"
+        },
+        {
+          "value": "٤",
+          "label": "٤"
+        },
+        {
+          "value": "٥",
+          "label": "٥"
+        },
+        {
+          "value": "٦",
+          "label": "٦"
+        },
+        {
+          "value": "٧",
+          "label": "٧"
+        },
+        {
+          "value": "٨",
+          "label": "٨"
+        },
+        {
+          "value": "٩",
+          "label": "٩"
+        },
+        {
+          "value": "أ",
+          "label": "أ"
+        },
+        {
+          "value": "ب",
+          "label": "ب"
+        },
+        {
+          "value": "ج",
+          "label": "ج"
+        },
+        {
+          "value": "د",
+          "label": "د"
+        },
+        {
+          "value": "ر",
+          "label": "ر"
+        },
+        {
+          "value": "س",
+          "label": "س"
+        },
+        {
+          "value": "ص",
+          "label": "ص"
+        },
+        {
+          "value": "ط",
+          "label": "ط"
+        },
+        {
+          "value": "ع",
+          "label": "ع"
+        },
+        {
+          "value": "ف",
+          "label": "ف"
+        },
+        {
+          "value": "ق",
+          "label": "ق"
+        },
+        {
+          "value": "ل",
+          "label": "ل"
+        },
+        {
+          "value": "م",
+          "label": "م"
+        },
+        {
+          "value": "ن",
+          "label": "ن"
+        },
+        {
+          "value": "ھ",
+          "label": "ھ"
+        },
+        {
+          "value": "و",
+          "label": "و"
+        },
+        {
+          "value": "ى",
+          "label": "ى"
+        },
+        {
+          "value": "ك",
+          "label": "ك"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "p2",
+      "name": "p2",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "١",
+          "label": "١"
+        },
+        {
+          "value": "٢",
+          "label": "٢"
+        },
+        {
+          "value": "٣",
+          "label": "٣"
+        },
+        {
+          "value": "٤",
+          "label": "٤"
+        },
+        {
+          "value": "٥",
+          "label": "٥"
+        },
+        {
+          "value": "٦",
+          "label": "٦"
+        },
+        {
+          "value": "٧",
+          "label": "٧"
+        },
+        {
+          "value": "٨",
+          "label": "٨"
+        },
+        {
+          "value": "٩",
+          "label": "٩"
+        },
+        {
+          "value": "أ",
+          "label": "أ"
+        },
+        {
+          "value": "ب",
+          "label": "ب"
+        },
+        {
+          "value": "ج",
+          "label": "ج"
+        },
+        {
+          "value": "د",
+          "label": "د"
+        },
+        {
+          "value": "ر",
+          "label": "ر"
+        },
+        {
+          "value": "س",
+          "label": "س"
+        },
+        {
+          "value": "ص",
+          "label": "ص"
+        },
+        {
+          "value": "ط",
+          "label": "ط"
+        },
+        {
+          "value": "ع",
+          "label": "ع"
+        },
+        {
+          "value": "ف",
+          "label": "ف"
+        },
+        {
+          "value": "ق",
+          "label": "ق"
+        },
+        {
+          "value": "ل",
+          "label": "ل"
+        },
+        {
+          "value": "م",
+          "label": "م"
+        },
+        {
+          "value": "ن",
+          "label": "ن"
+        },
+        {
+          "value": "ھ",
+          "label": "ھ"
+        },
+        {
+          "value": "و",
+          "label": "و"
+        },
+        {
+          "value": "ى",
+          "label": "ى"
+        },
+        {
+          "value": "ك",
+          "label": "ك"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "b3",
+      "name": "b3",
+      "options": [
+        {
+          "value": "أ",
+          "label": "أ"
+        },
+        {
+          "value": "ب",
+          "label": "ب"
+        },
+        {
+          "value": "ج",
+          "label": "ج"
+        },
+        {
+          "value": "د",
+          "label": "د"
+        },
+        {
+          "value": "ر",
+          "label": "ر"
+        },
+        {
+          "value": "س",
+          "label": "س"
+        },
+        {
+          "value": "ص",
+          "label": "ص"
+        },
+        {
+          "value": "ط",
+          "label": "ط"
+        },
+        {
+          "value": "ع",
+          "label": "ع"
+        },
+        {
+          "value": "ف",
+          "label": "ف"
+        },
+        {
+          "value": "ق",
+          "label": "ق"
+        },
+        {
+          "value": "ل",
+          "label": "ل"
+        },
+        {
+          "value": "م",
+          "label": "م"
+        },
+        {
+          "value": "ن",
+          "label": "ن"
+        },
+        {
+          "value": "ھ",
+          "label": "ھ"
+        },
+        {
+          "value": "و",
+          "label": "و"
+        },
+        {
+          "value": "ى",
+          "label": "ى"
+        },
+        {
+          "value": "ك",
+          "label": "ك"
+        },
+        {
+          "value": "",
+          "label": "-"
+        }
+      ]
+    }
+  ],
+  "otherFields": [
+    {
+      "tag": "select",
+      "id": null,
+      "name": "markaavto",
+      "options": 3949
+    },
+    {
+      "tag": "select",
+      "id": "model",
+      "name": "model",
+      "options": 0
+    },
+    {
+      "tag": "select",
+      "id": "modgen",
+      "name": "modgen",
+      "options": 0
+    },
+    {
+      "tag": "input",
+      "id": "markamodtype",
+      "name": null,
+      "type": "text"
+    },
+    {
+      "tag": "textarea",
+      "id": null,
+      "name": "dop"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": null,
+      "type": "search"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox13",
+      "name": "CheckBox[13]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox50",
+      "name": "CheckBox[50]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox25",
+      "name": "CheckBox[25]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox26",
+      "name": "CheckBox[26]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox43",
+      "name": "CheckBox[43]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox59",
+      "name": "CheckBox[59]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox68",
+      "name": "CheckBox[68]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox60",
+      "name": "CheckBox[60]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox21",
+      "name": "CheckBox[21]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox8",
+      "name": "CheckBox[8]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox58",
+      "name": "CheckBox[58]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox9",
+      "name": "CheckBox[9]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox57",
+      "name": "CheckBox[57]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox46",
+      "name": "CheckBox[46]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox62",
+      "name": "CheckBox[62]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox33",
+      "name": "CheckBox[33]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox61",
+      "name": "CheckBox[61]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox22",
+      "name": "CheckBox[22]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox47",
+      "name": "CheckBox[47]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox38",
+      "name": "CheckBox[38]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox53",
+      "name": "CheckBox[53]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox40",
+      "name": "CheckBox[40]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox63",
+      "name": "CheckBox[63]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox64",
+      "name": "CheckBox[64]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox42",
+      "name": "CheckBox[42]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox65",
+      "name": "CheckBox[65]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox39",
+      "name": "CheckBox[39]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox49",
+      "name": "CheckBox[49]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox41",
+      "name": "CheckBox[41]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox37",
+      "name": "CheckBox[37]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox67",
+      "name": "CheckBox[67]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox18",
+      "name": "CheckBox[18]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox20",
+      "name": "CheckBox[20]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox15",
+      "name": "CheckBox[15]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox23",
+      "name": "CheckBox[23]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox69",
+      "name": "CheckBox[69]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox24",
+      "name": "CheckBox[24]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox19",
+      "name": "CheckBox[19]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox48",
+      "name": "CheckBox[48]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox4",
+      "name": "CheckBox[4]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox5",
+      "name": "CheckBox[5]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox16",
+      "name": "CheckBox[16]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox14",
+      "name": "CheckBox[14]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox66",
+      "name": "CheckBox[66]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox45",
+      "name": "CheckBox[45]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox6",
+      "name": "CheckBox[6]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox44",
+      "name": "CheckBox[44]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox52",
+      "name": "CheckBox[52]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox27",
+      "name": "CheckBox[27]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox1",
+      "name": "CheckBox[1]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox56",
+      "name": "CheckBox[56]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox2",
+      "name": "CheckBox[2]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "hide",
+      "name": "hidefoto",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "enablesave",
+      "name": "enablesave",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "patternenable",
+      "name": "patternenable",
+      "type": "checkbox"
+    }
+  ],
+  "notes": []
+}

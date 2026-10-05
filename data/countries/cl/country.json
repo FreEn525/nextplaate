@@ -1,0 +1,9 @@
+{
+  "code": "cl",
+  "name": "Chile",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

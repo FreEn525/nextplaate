@@ -1,0 +1,9 @@
+{
+  "code": "ge",
+  "name": "Georgia",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

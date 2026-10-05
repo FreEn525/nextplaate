@@ -25,7 +25,7 @@ data/
 
 | Champ | Sens |
 |---|---|
-| `typeMenu` | `ctype` (44 pays), `drop_2` (Andorre, Malte) ou `null` (Pays-Bas : la catégorie ne se choisit pas dans le formulaire) |
+| `typeMenu` | `ctype` (presque tous), `drop_2` (Andorre, Malte) ou `null` (Pays-Bas : la catégorie ne se choisit pas dans le formulaire) |
 | `types[]` | `id`, `label`, `class` (couleur de la plaque), `visible` : champs affichés pour ce type |
 | `visibleFrom` | `site-script` : calculé en exécutant la fonction d'affichage du site ; `page-at-load` : le pays n'en a pas, on lit ce que la page affiche au chargement |
 | `plateFields[]` | champs avant la photo, dans l'ordre : `id`, `name`, `tag`, `type`, `maxlength`, `example`, `digitsOnly`, `options` (menus) |

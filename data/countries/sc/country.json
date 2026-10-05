@@ -1,0 +1,9 @@
+{
+  "code": "sc",
+  "name": "Seychelles",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

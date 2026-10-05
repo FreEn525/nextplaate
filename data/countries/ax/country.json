@@ -1,0 +1,9 @@
+{
+  "code": "ax",
+  "name": "Åland (FI)",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

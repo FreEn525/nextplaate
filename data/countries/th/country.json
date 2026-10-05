@@ -1,0 +1,9 @@
+{
+  "code": "th",
+  "name": "Thailand",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

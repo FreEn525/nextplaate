@@ -1,0 +1,9 @@
+{
+  "code": "vn",
+  "name": "Vietnam",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

@@ -1,0 +1,9 @@
+{
+  "code": "ke",
+  "name": "Kenya",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

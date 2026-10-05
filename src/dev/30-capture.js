@@ -68,8 +68,8 @@
     if (failed.length) { capSay('Not written: ' + failed.join(', ') + '. Click "Write to folder" again.'); return; }
     const index = {
       date: new Date().toISOString(),
-      upload: { saved: up.saved, skipped: up.skipped, missing: up.missing },
-      search: { saved: se.saved, skipped: se.skipped, missing: se.missing }
+      upload: { saved: up.saved, skipped: up.skipped, missing: up.missing, why: Object.fromEntries(up.skipped.map(c => [c, up.all['skip:' + c]])) },
+      search: { saved: se.saved, skipped: se.skipped, missing: se.missing, why: Object.fromEntries(se.skipped.map(c => [c, se.all['skipsearch:' + c]])) }
     };
     const idx = await dir.getFileHandle('index.json', { create: true });
     const w = await idx.createWritable();
@@ -108,8 +108,8 @@
       $('capGo').hidden = false;
       return;
     }
-    // a real page has the plate type menu (#ctype); an error page at the same address does not
-    if (m && m[1].toLowerCase() === code && document.getElementById('ctype')) {
+    // a real page has the plate type menu (#ctype) or, for an upload page, the upload form (#frm: the Netherlands has no type menu)
+    if (m && m[1].toLowerCase() === code && (document.getElementById('ctype') || (kind === 'add' && document.getElementById('frm')))) {
       await capPut(k.page(code), '<!-- ' + location.href + ' -->\n' + document.documentElement.outerHTML);
     } else {
       await capPut(k.skip(code), location.href + ' | ' + status + ' | ' + document.title);   // no such page for this country
@@ -153,6 +153,7 @@
           h('button', { id: 'capStop', class: 'btn ghost', hidden: true, text: 'Stop' }),
           h('button', { id: 'capCheck', class: 'btn ghost', text: 'Check' })),
         h('button', { id: 'capWrite', class: 'btn ghost', text: 'Write to folder' }),
+        h('button', { id: 'capRetry', class: 'btn ghost', text: 'Forget the "no page" marks and capture again' }),
         h('button', { id: 'capGo', class: 'btn ghost', hidden: true, text: 'Continue' })
       ]
     }],
@@ -162,6 +163,11 @@
       $('capStartSearch').onclick = () => capStart('search');
       $('capStop').onclick = () => { sessionStorage.removeItem(CAPTURE_RUN); $('capStop').hidden = true; capSay('Stopped. Start again to resume, or "Check".'); };
       $('capCheck').onclick = () => capCheck();
+      $('capRetry').onclick = async () => {
+        const keys = Object.keys(await capAll()).filter(k => k.startsWith('skip:') || k.startsWith('skipsearch:'));
+        for (const k of keys) await capDel(k);
+        capStart('add', 'search');
+      };
       $('capWrite').onclick = () => capWrite().catch(e => capSay('Could not write: ' + e.message));
       $('capGo').onclick = () => { $('capGo').hidden = true; capStep(); };
       $('capStop').hidden = !capRunning();

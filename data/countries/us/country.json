@@ -1,0 +1,9 @@
+{
+  "code": "us",
+  "name": "USA",
+  "pages": {
+    "upload": false,
+    "search": true
+  },
+  "typeMenu": null
+}

@@ -1,0 +1,1224 @@
+{
+  "code": "kz",
+  "title": "Lookup License plates of Kazakhstan",
+  "categories": [
+    {
+      "id": "5",
+      "label": "Private owners (2012)"
+    },
+    {
+      "id": "6",
+      "label": "Organizations (2012)"
+    },
+    {
+      "id": "7",
+      "label": "Trailers (2012)"
+    },
+    {
+      "id": "8",
+      "label": "Motorcycles (2012)"
+    },
+    {
+      "id": "15",
+      "label": "Foreigners (2012)",
+      "class": "yellow-black-select"
+    },
+    {
+      "id": "11",
+      "label": "Police (2012)",
+      "class": "blue-white-select"
+    },
+    {
+      "id": "18",
+      "label": "Military (2012)"
+    },
+    {
+      "id": "2",
+      "label": "Private owners (1993)"
+    },
+    {
+      "id": "1",
+      "label": "Organizations (1993)"
+    },
+    {
+      "id": "3",
+      "label": "Trailers (1993)"
+    },
+    {
+      "id": "4",
+      "label": "Motorcycles (1993)"
+    },
+    {
+      "id": "10",
+      "label": "Police (1993)",
+      "class": "blue-white-select"
+    },
+    {
+      "id": "9",
+      "label": "Military (1993)"
+    },
+    {
+      "id": "14",
+      "label": "Foreigners",
+      "class": "yellow-black-select"
+    },
+    {
+      "id": "12",
+      "label": "High authorities"
+    },
+    {
+      "id": "13",
+      "label": "Transit plates"
+    },
+    {
+      "id": "17",
+      "label": "Special machinery"
+    },
+    {
+      "id": "16",
+      "label": "Diplomatic"
+    }
+  ],
+  "fields": [
+    {
+      "tag": "select",
+      "id": "tractorfrm",
+      "name": "format",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "10",
+          "label": "R 123 ABC (синий фон)",
+          "class": "kz-tractor-blue-select"
+        },
+        {
+          "value": "11",
+          "label": "ABC R 123 (синий фон)",
+          "class": "kz-tractor-blue-select"
+        },
+        {
+          "value": "12",
+          "label": "123 R ABC (синий фон)",
+          "class": "kz-tractor-blue-select"
+        },
+        {
+          "value": "13",
+          "label": "ABC 123 R (синий фон)",
+          "class": "kz-tractor-blue-select"
+        },
+        {
+          "value": "4",
+          "label": "123 T RAB (белый фон)"
+        },
+        {
+          "value": "6",
+          "label": "RAB T 123 (белый фон)"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "foreignfrm",
+      "name": "format",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "",
+          "label": "All license plates"
+        },
+        {
+          "value": "1",
+          "label": "Cars (A 1234)"
+        },
+        {
+          "value": "2",
+          "label": "Trailers (A 123)"
+        },
+        {
+          "value": "3",
+          "label": "Motorcycles (A 12)"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "mil2012frm",
+      "name": "format",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "",
+          "label": "All license plates"
+        },
+        {
+          "value": "1",
+          "label": "Military cars (123 AB)"
+        },
+        {
+          "value": "2",
+          "label": "Military trailers (12 AB)"
+        },
+        {
+          "value": "3",
+          "label": "Military motorcycles (AB 12)"
+        },
+        {
+          "value": "4",
+          "label": "Special military vehicles (12 T AB)"
+        },
+        {
+          "value": "5",
+          "label": "Military Police / Cars (123 MP)"
+        },
+        {
+          "value": "6",
+          "label": "Military Police / Trailers (12 MP)"
+        },
+        {
+          "value": "7",
+          "label": "Military Police / Motorcycles (MP 12)"
+        },
+        {
+          "value": "8",
+          "label": "Military Police / Special machinery (12 T MP)"
+        },
+        {
+          "value": "9",
+          "label": "National Guard / Cars (123 UU)"
+        },
+        {
+          "value": "10",
+          "label": "National Guard / Trailers (12 UU)"
+        },
+        {
+          "value": "11",
+          "label": "National Guard / Motorcycles (UU 12)"
+        },
+        {
+          "value": "12",
+          "label": "National Guard / Special machinery (12 T UU)"
+        },
+        {
+          "value": "13",
+          "label": "State Border Guard Service (2014) / Cars (123 BS)"
+        },
+        {
+          "value": "14",
+          "label": "State Border Guard Service (2014) / Trailers (12 BS)"
+        },
+        {
+          "value": "15",
+          "label": "State Border Guard Service (2024) / Cars (BS 123)"
+        },
+        {
+          "value": "16",
+          "label": "State Border Guard Service (2024) / Trailers (BS 12)"
+        },
+        {
+          "value": "17",
+          "label": "State Border Guard Service (2024) / Special machinery (BS 12 T)"
+        },
+        {
+          "value": "18",
+          "label": "Air Force / Cars (AQ 123)"
+        },
+        {
+          "value": "19",
+          "label": "Air Force / Trailers (AQ 12)"
+        },
+        {
+          "value": "20",
+          "label": "Air Force / Special machinery (AQ 12 T)"
+        },
+        {
+          "value": "21",
+          "label": "Military Police / National Security Committee of the Republic of Kazakhstan (AP 123)"
+        },
+        {
+          "value": "22",
+          "label": "Ministry of Defense (123 KM)"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "policefrm",
+      "name": "format",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "",
+          "label": "All license plates"
+        },
+        {
+          "value": "1",
+          "label": "Police / Cars (123 KP)"
+        },
+        {
+          "value": "2",
+          "label": "Police / Motorcycles (12 KP)"
+        },
+        {
+          "value": "3",
+          "label": "Police / Cars (1234)"
+        },
+        {
+          "value": "4",
+          "label": "Police / Trailers (12 AA)"
+        },
+        {
+          "value": "5",
+          "label": "Police / Motorcycles (123)"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "milfrm",
+      "name": "format",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "",
+          "label": "All license plates"
+        },
+        {
+          "value": "1",
+          "label": "Military cars (1234 АБ)"
+        },
+        {
+          "value": "2",
+          "label": "Military trailers (1234 АБ)"
+        },
+        {
+          "value": "3",
+          "label": "Military Police (1234 ВП)"
+        },
+        {
+          "value": "4",
+          "label": "Special military vehicles (123 Т АБ)"
+        },
+        {
+          "value": "5",
+          "label": "Military Transits (123 AB)"
+        },
+        {
+          "value": "6",
+          "label": "Ministry of Defense (123 КМ)"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "transitfrm",
+      "name": "format",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "",
+          "label": "-"
+        },
+        {
+          "value": "1",
+          "label": "1234 AB"
+        },
+        {
+          "value": "2",
+          "label": "1234 A"
+        },
+        {
+          "value": "3",
+          "label": "1234 56"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "foreign14frm",
+      "name": "format",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "",
+          "label": "All license plates"
+        },
+        {
+          "value": "1",
+          "label": "Foreign citizens (H 123 456)"
+        },
+        {
+          "value": "2",
+          "label": "Foreign companies (M 123 456)"
+        },
+        {
+          "value": "3",
+          "label": "Foreign mass-media (K 123 456)"
+        },
+        {
+          "value": "4",
+          "label": "Temporary (P 123 456)"
+        },
+        {
+          "value": "5",
+          "label": "Honorary consuls (HC 1234)"
+        },
+        {
+          "value": "6",
+          "label": "Foreigners / Trailers (1234 RX)"
+        },
+        {
+          "value": "7",
+          "label": "Foreigners / Motorcycles (1234 RZ)"
+        },
+        {
+          "value": "8",
+          "label": "Foreign companies / Trailers (M 456 123)"
+        },
+        {
+          "value": "9",
+          "label": "Foreign companies / Motorcycles (M 123 45)"
+        },
+        {
+          "value": "10",
+          "label": "Honorary consuls / Trailers (HC 45 123)"
+        },
+        {
+          "value": "11",
+          "label": "Honorary consuls / Motorcycles (HC 12)"
+        },
+        {
+          "value": "12",
+          "label": "Foreign-owned special machinery (123 RAB)"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "dipfrm",
+      "name": "format",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "",
+          "label": "All license plates"
+        },
+        {
+          "value": "1",
+          "label": "Diplomatic corps (D 123 456)"
+        },
+        {
+          "value": "2",
+          "label": "Administrative and technical staff (T 123 456)"
+        },
+        {
+          "value": "3",
+          "label": "Ambassador, chief of diplomatic mission (CMD 1234)"
+        },
+        {
+          "value": "4",
+          "label": "Diplomatic (United Nations) (UN 123)"
+        },
+        {
+          "value": "5",
+          "label": "Diplomatic corps / Trailers (D 45 123)"
+        },
+        {
+          "value": "6",
+          "label": "Administrative and technical staff / Trailers (T 45 123)"
+        },
+        {
+          "value": "7",
+          "label": "Diplomatic corps / Motorcycles (D 123 45)"
+        },
+        {
+          "value": "8",
+          "label": "Administrative and technical staff / Motorcycles (T 123 45)"
+        },
+        {
+          "value": "9",
+          "label": "Protocol plates (PROTOCOL)"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "region",
+      "name": "aregions[]",
+      "options": {
+        "count": 210,
+        "first": [
+          {
+            "value": "",
+            "label": "-------------2012--------------"
+          },
+          {
+            "value": "11701",
+            "label": "01 - Astana City"
+          },
+          {
+            "value": "11702",
+            "label": "02 - Almaty City"
+          },
+          {
+            "value": "11703",
+            "label": "03 - Akmola Province"
+          },
+          {
+            "value": "11704",
+            "label": "04 - Aktobe Province"
+          }
+        ]
+      }
+    },
+    {
+      "tag": "input",
+      "id": "nomer",
+      "name": "nomer",
+      "type": "text",
+      "maxlength": 12,
+      "example": "А 001 AAA"
+    },
+    {
+      "tag": "select",
+      "id": "fonselect",
+      "name": "fon",
+      "options": [
+        {
+          "value": "",
+          "label": "Select colour of background"
+        },
+        {
+          "value": "21",
+          "label": "Single-row plate (2020, small letters)"
+        },
+        {
+          "value": "22",
+          "label": "Two-row plate (2020, small letters)"
+        },
+        {
+          "value": "23",
+          "label": "Single-row plate (2020, large letters)"
+        },
+        {
+          "value": "24",
+          "label": "Two-row plate (2020, large letters)"
+        },
+        {
+          "value": "11",
+          "label": "Single-row plate (2012, small letters)"
+        },
+        {
+          "value": "12",
+          "label": "Two-row plate (2012, small letters)"
+        },
+        {
+          "value": "13",
+          "label": "Single-row plate (2012, large letters)"
+        },
+        {
+          "value": "14",
+          "label": "Two-row plate (2012, large letters)"
+        },
+        {
+          "value": "1",
+          "label": "Single-row plate (1993)"
+        },
+        {
+          "value": "2",
+          "label": "Two-row plate (1993)"
+        },
+        {
+          "value": "31",
+          "label": "Single-row plate (Transit plates)"
+        },
+        {
+          "value": "32",
+          "label": "Two-row plate (Transit plates)"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": "kzsearchvlastany",
+      "name": "fon",
+      "type": "radio"
+    },
+    {
+      "tag": "input",
+      "id": "kzsearchvlast29",
+      "name": "fon",
+      "type": "radio",
+      "value": "29"
+    },
+    {
+      "tag": "input",
+      "id": "kzsearchvlast27",
+      "name": "fon",
+      "type": "radio",
+      "value": "27"
+    },
+    {
+      "tag": "input",
+      "id": "kzsearchvlast25",
+      "name": "fon",
+      "type": "radio",
+      "value": "25"
+    },
+    {
+      "tag": "input",
+      "id": "kzsearchvlast17",
+      "name": "fon",
+      "type": "radio",
+      "value": "17"
+    },
+    {
+      "tag": "input",
+      "id": "kzsearchvlast15",
+      "name": "fon",
+      "type": "radio",
+      "value": "15"
+    },
+    {
+      "tag": "input",
+      "id": "kzsearchvlast9",
+      "name": "fon",
+      "type": "radio",
+      "value": "9"
+    },
+    {
+      "tag": "input",
+      "id": "kzsearchvlast7",
+      "name": "fon",
+      "type": "radio",
+      "value": "7"
+    },
+    {
+      "tag": "input",
+      "id": "kzsearchvlast5",
+      "name": "fon",
+      "type": "radio",
+      "value": "5"
+    },
+    {
+      "tag": "input",
+      "id": "kzsearchvlast3",
+      "name": "fon",
+      "type": "radio",
+      "value": "3"
+    },
+    {
+      "tag": "input",
+      "id": "kzsearchvlast1",
+      "name": "fon",
+      "type": "radio",
+      "value": "1"
+    },
+    {
+      "tag": "input",
+      "id": "kzsearchmilfonany",
+      "name": "fon",
+      "type": "radio"
+    },
+    {
+      "tag": "input",
+      "id": "kzsearchmilfon1",
+      "name": "fon",
+      "type": "radio",
+      "value": "1"
+    },
+    {
+      "tag": "input",
+      "id": "kzsearchmilfon43",
+      "name": "fon",
+      "type": "radio",
+      "value": "43"
+    },
+    {
+      "tag": "input",
+      "id": "kzsearchmilfon41",
+      "name": "fon",
+      "type": "radio",
+      "value": "41"
+    },
+    {
+      "tag": "select",
+      "id": null,
+      "name": "markaavto",
+      "options": {
+        "count": 3950,
+        "first": [
+          {
+            "value": "",
+            "label": "-"
+          },
+          {
+            "value": "200",
+            "label": "I don`t know..."
+          },
+          {
+            "value": "2955",
+            "label": "212"
+          },
+          {
+            "value": "3693",
+            "label": "2Twenty"
+          },
+          {
+            "value": "3746",
+            "label": "3-2 (Bahai)"
+          }
+        ]
+      }
+    },
+    {
+      "tag": "select",
+      "id": "model",
+      "name": "model",
+      "options": []
+    },
+    {
+      "tag": "select",
+      "id": "modgen",
+      "name": "modgen",
+      "options": []
+    },
+    {
+      "tag": "input",
+      "id": "markamodtype",
+      "name": null,
+      "type": "text"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "date1",
+      "type": "text",
+      "example": "From date"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "date2",
+      "type": "text",
+      "example": "To date"
+    },
+    {
+      "tag": "input",
+      "id": "dop",
+      "name": "dop",
+      "type": "text",
+      "maxlength": 100,
+      "example": "Extra information"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": null,
+      "type": "search",
+      "example": "Tags"
+    },
+    {
+      "tag": "select",
+      "id": null,
+      "name": "tags[]",
+      "options": [
+        {
+          "value": "4",
+          "label": "abandoned vehicle"
+        },
+        {
+          "value": "67",
+          "label": "ADR"
+        },
+        {
+          "value": "47",
+          "label": "aerial device truck"
+        },
+        {
+          "value": "5",
+          "label": "aerography"
+        },
+        {
+          "value": "18",
+          "label": "ambulance"
+        },
+        {
+          "value": "52",
+          "label": "archive photo"
+        },
+        {
+          "value": "16",
+          "label": "armored"
+        },
+        {
+          "value": "60",
+          "label": "ATV"
+        },
+        {
+          "value": "21",
+          "label": "bus"
+        },
+        {
+          "value": "8",
+          "label": "cabriolet"
+        },
+        {
+          "value": "20",
+          "label": "cash-in-transit vehicle"
+        },
+        {
+          "value": "38",
+          "label": "concrete mixer"
+        },
+        {
+          "value": "14",
+          "label": "damaged"
+        },
+        {
+          "value": "26",
+          "label": "deliberately changed license plate"
+        },
+        {
+          "value": "53",
+          "label": "drilling rig"
+        },
+        {
+          "value": "40",
+          "label": "dumper"
+        },
+        {
+          "value": "63",
+          "label": "excavator"
+        },
+        {
+          "value": "15",
+          "label": "fire appliance"
+        },
+        {
+          "value": "64",
+          "label": "food truck"
+        },
+        {
+          "value": "42",
+          "label": "garbage truck"
+        },
+        {
+          "value": "58",
+          "label": "hearse"
+        },
+        {
+          "value": "27",
+          "label": "improper parking"
+        },
+        {
+          "value": "9",
+          "label": "limousine"
+        },
+        {
+          "value": "57",
+          "label": "motorcycle"
+        },
+        {
+          "value": "46",
+          "label": "motorhome"
+        },
+        {
+          "value": "13",
+          "label": "new letter combination"
+        },
+        {
+          "value": "43",
+          "label": "non-standard plate"
+        },
+        {
+          "value": "10",
+          "label": "oldtimer"
+        },
+        {
+          "value": "50",
+          "label": "plate for brand or model of vehicle"
+        },
+        {
+          "value": "23",
+          "label": "police"
+        },
+        {
+          "value": "59",
+          "label": "remade plate"
+        },
+        {
+          "value": "69",
+          "label": "rental"
+        },
+        {
+          "value": "68",
+          "label": "repeater"
+        },
+        {
+          "value": "1",
+          "label": "road accident"
+        },
+        {
+          "value": "65",
+          "label": "road roller"
+        },
+        {
+          "value": "66",
+          "label": "roof box"
+        },
+        {
+          "value": "56",
+          "label": "spyspot"
+        },
+        {
+          "value": "39",
+          "label": "tanker"
+        },
+        {
+          "value": "24",
+          "label": "taxicab"
+        },
+        {
+          "value": "45",
+          "label": "test drive"
+        },
+        {
+          "value": "49",
+          "label": "tow truck"
+        },
+        {
+          "value": "62",
+          "label": "tractor"
+        },
+        {
+          "value": "41",
+          "label": "tractor unit"
+        },
+        {
+          "value": "2",
+          "label": "traffic code violation"
+        },
+        {
+          "value": "33",
+          "label": "trailer"
+        },
+        {
+          "value": "19",
+          "label": "training vehicle"
+        },
+        {
+          "value": "25",
+          "label": "transferred/reissued plate"
+        },
+        {
+          "value": "61",
+          "label": "trike"
+        },
+        {
+          "value": "22",
+          "label": "truck"
+        },
+        {
+          "value": "37",
+          "label": "truck-mounted crane"
+        },
+        {
+          "value": "28",
+          "label": "tuning"
+        },
+        {
+          "value": "6",
+          "label": "unmarked with emergency lights"
+        },
+        {
+          "value": "44",
+          "label": "vinyl wrapping"
+        },
+        {
+          "value": "48",
+          "label": "wedding car"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": null,
+      "type": "search",
+      "example": "Tags"
+    },
+    {
+      "tag": "select",
+      "id": null,
+      "name": "tagsno[]",
+      "options": [
+        {
+          "value": "4",
+          "label": "abandoned vehicle"
+        },
+        {
+          "value": "67",
+          "label": "ADR"
+        },
+        {
+          "value": "47",
+          "label": "aerial device truck"
+        },
+        {
+          "value": "5",
+          "label": "aerography"
+        },
+        {
+          "value": "18",
+          "label": "ambulance"
+        },
+        {
+          "value": "52",
+          "label": "archive photo"
+        },
+        {
+          "value": "16",
+          "label": "armored"
+        },
+        {
+          "value": "60",
+          "label": "ATV"
+        },
+        {
+          "value": "21",
+          "label": "bus"
+        },
+        {
+          "value": "8",
+          "label": "cabriolet"
+        },
+        {
+          "value": "20",
+          "label": "cash-in-transit vehicle"
+        },
+        {
+          "value": "38",
+          "label": "concrete mixer"
+        },
+        {
+          "value": "14",
+          "label": "damaged"
+        },
+        {
+          "value": "26",
+          "label": "deliberately changed license plate"
+        },
+        {
+          "value": "53",
+          "label": "drilling rig"
+        },
+        {
+          "value": "40",
+          "label": "dumper"
+        },
+        {
+          "value": "63",
+          "label": "excavator"
+        },
+        {
+          "value": "15",
+          "label": "fire appliance"
+        },
+        {
+          "value": "64",
+          "label": "food truck"
+        },
+        {
+          "value": "42",
+          "label": "garbage truck"
+        },
+        {
+          "value": "58",
+          "label": "hearse"
+        },
+        {
+          "value": "27",
+          "label": "improper parking"
+        },
+        {
+          "value": "9",
+          "label": "limousine"
+        },
+        {
+          "value": "57",
+          "label": "motorcycle"
+        },
+        {
+          "value": "46",
+          "label": "motorhome"
+        },
+        {
+          "value": "13",
+          "label": "new letter combination"
+        },
+        {
+          "value": "43",
+          "label": "non-standard plate"
+        },
+        {
+          "value": "10",
+          "label": "oldtimer"
+        },
+        {
+          "value": "50",
+          "label": "plate for brand or model of vehicle"
+        },
+        {
+          "value": "23",
+          "label": "police"
+        },
+        {
+          "value": "59",
+          "label": "remade plate"
+        },
+        {
+          "value": "69",
+          "label": "rental"
+        },
+        {
+          "value": "68",
+          "label": "repeater"
+        },
+        {
+          "value": "1",
+          "label": "road accident"
+        },
+        {
+          "value": "65",
+          "label": "road roller"
+        },
+        {
+          "value": "66",
+          "label": "roof box"
+        },
+        {
+          "value": "56",
+          "label": "spyspot"
+        },
+        {
+          "value": "39",
+          "label": "tanker"
+        },
+        {
+          "value": "24",
+          "label": "taxicab"
+        },
+        {
+          "value": "45",
+          "label": "test drive"
+        },
+        {
+          "value": "49",
+          "label": "tow truck"
+        },
+        {
+          "value": "62",
+          "label": "tractor"
+        },
+        {
+          "value": "41",
+          "label": "tractor unit"
+        },
+        {
+          "value": "2",
+          "label": "traffic code violation"
+        },
+        {
+          "value": "33",
+          "label": "trailer"
+        },
+        {
+          "value": "19",
+          "label": "training vehicle"
+        },
+        {
+          "value": "25",
+          "label": "transferred/reissued plate"
+        },
+        {
+          "value": "61",
+          "label": "trike"
+        },
+        {
+          "value": "22",
+          "label": "truck"
+        },
+        {
+          "value": "37",
+          "label": "truck-mounted crane"
+        },
+        {
+          "value": "28",
+          "label": "tuning"
+        },
+        {
+          "value": "6",
+          "label": "unmarked with emergency lights"
+        },
+        {
+          "value": "44",
+          "label": "vinyl wrapping"
+        },
+        {
+          "value": "48",
+          "label": "wedding car"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "usr",
+      "type": "text",
+      "example": "User ID"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "com",
+      "type": "text",
+      "example": "&gt;"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "vote",
+      "type": "text",
+      "example": "&gt;"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "few",
+      "type": "radio",
+      "value": "0"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "few",
+      "type": "radio",
+      "value": "2"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "few",
+      "type": "radio",
+      "value": "1"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "hide",
+      "type": "checkbox",
+      "value": "1"
+    }
+  ],
+  "notes": []
+}

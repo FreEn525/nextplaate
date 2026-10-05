@@ -1,0 +1,9 @@
+{
+  "code": "am",
+  "name": "Armenia",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

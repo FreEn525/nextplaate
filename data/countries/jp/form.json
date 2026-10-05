@@ -1,0 +1,1637 @@
+{
+  "code": "jp",
+  "title": "Upload new license plate, Japan",
+  "action": "add",
+  "typeMenu": "ctype",
+  "visibleFrom": "site-script",
+  "types": [
+    {
+      "id": "1",
+      "label": "Private owners",
+      "class": "tip1",
+      "visible": ["fon", "region"]
+    },
+    {
+      "id": "2",
+      "label": "Commercial vehicles",
+      "class": "tip2",
+      "visible": ["fon", "region"]
+    },
+    {
+      "id": "3",
+      "label": "Private owners (Kei car)",
+      "class": "tip3",
+      "visible": ["fon", "region"]
+    },
+    {
+      "id": "4",
+      "label": "Commercial vehicles (Kei car)",
+      "class": "tip4",
+      "visible": ["fon", "region"]
+    }
+  ],
+  "hooks": ["OnSelect1", "updateBorderTable", "createTableCell"],
+  "plateFields": [
+    {
+      "tag": "select",
+      "id": "region",
+      "name": "region",
+      "options": [
+        {
+          "value": "",
+          "label": "Select region"
+        },
+        {
+          "value": "41332",
+          "label": "Adachi - 足立"
+        },
+        {
+          "value": "41242",
+          "label": "Adachi - 足"
+        },
+        {
+          "value": "41316",
+          "label": "Aikawa (Sagami) - 相模"
+        },
+        {
+          "value": "41258",
+          "label": "Aizu - 会津"
+        },
+        {
+          "value": "41323",
+          "label": "Akita - 秋田"
+        },
+        {
+          "value": "41238",
+          "label": "Akita - 秋"
+        },
+        {
+          "value": "41274",
+          "label": "Amami - 奄美"
+        },
+        {
+          "value": "41342",
+          "label": "Aomori - 青森"
+        },
+        {
+          "value": "41245",
+          "label": "Aomori - 青"
+        },
+        {
+          "value": "41301",
+          "label": "Asahikawa - 旭川"
+        },
+        {
+          "value": "41227",
+          "label": "Asahikawa - 旭"
+        },
+        {
+          "value": "41361",
+          "label": "Asuka - 飛鳥"
+        },
+        {
+          "value": "41393",
+          "label": "Azumino - 安曇野"
+        },
+        {
+          "value": "41265",
+          "label": "Chiba - 千葉"
+        },
+        {
+          "value": "41206",
+          "label": "Chiba - 千"
+        },
+        {
+          "value": "41394",
+          "label": "Edogawa - 江户川"
+        },
+        {
+          "value": "41297",
+          "label": "Ehime - 愛媛"
+        },
+        {
+          "value": "41384",
+          "label": "Fujisan - 富士山"
+        },
+        {
+          "value": "41319",
+          "label": "Fukui - 福井"
+        },
+        {
+          "value": "41321",
+          "label": "Fukuoka - 福岡"
+        },
+        {
+          "value": "41237",
+          "label": "Fukuoka - 福"
+        },
+        {
+          "value": "41322",
+          "label": "Fukushima - 福島"
+        },
+        {
+          "value": "41320",
+          "label": "Fukuyama - 福山"
+        },
+        {
+          "value": "41359",
+          "label": "Funabashi - 船橋"
+        },
+        {
+          "value": "41284",
+          "label": "Gifu - 岐阜"
+        },
+        {
+          "value": "41218",
+          "label": "Gifu - 岐"
+        },
+        {
+          "value": "41326",
+          "label": "Gunma - 群馬"
+        },
+        {
+          "value": "41240",
+          "label": "Gunma - 群"
+        },
+        {
+          "value": "41261",
+          "label": "Hachinohe - 八戸"
+        },
+        {
+          "value": "41378",
+          "label": "Hachiōji - 八王子"
+        },
+        {
+          "value": "41262",
+          "label": "Hakodate - 函館"
+        },
+        {
+          "value": "41204",
+          "label": "Hakodate - 函"
+        },
+        {
+          "value": "41310",
+          "label": "Hamamatsu - 浜松"
+        },
+        {
+          "value": "41276",
+          "label": "Himeji - 姫路"
+        },
+        {
+          "value": "41293",
+          "label": "Hiraizumi - 平泉"
+        },
+        {
+          "value": "41311",
+          "label": "Hiratsuka (Shōnan) - 湘南"
+        },
+        {
+          "value": "41353",
+          "label": "Hirosaki - 弘前"
+        },
+        {
+          "value": "41294",
+          "label": "Hiroshima - 広島"
+        },
+        {
+          "value": "41223",
+          "label": "Hiroshima - 広"
+        },
+        {
+          "value": "41351",
+          "label": "Ichihara - 市原"
+        },
+        {
+          "value": "41352",
+          "label": "Ichikawa - 市川"
+        },
+        {
+          "value": "41251",
+          "label": "Ichinomiya - 一宮"
+        },
+        {
+          "value": "41324",
+          "label": "Iizuka (Chikuhō) - 筑豊"
+        },
+        {
+          "value": "41399",
+          "label": "Ise-Shima - 伊勢志摩"
+        },
+        {
+          "value": "41317",
+          "label": "Ishikawa - 石川"
+        },
+        {
+          "value": "41235",
+          "label": "Ishikawa - 石"
+        },
+        {
+          "value": "41355",
+          "label": "Itabashi - 板橋"
+        },
+        {
+          "value": "41371",
+          "label": "Iwaki - いわき"
+        },
+        {
+          "value": "41287",
+          "label": "Iwate - 岩手"
+        },
+        {
+          "value": "41220",
+          "label": "Iwate - 岩"
+        },
+        {
+          "value": "41257",
+          "label": "Izu - 伊豆"
+        },
+        {
+          "value": "41266",
+          "label": "Izumi - 和泉"
+        },
+        {
+          "value": "41232",
+          "label": "Izumi - 泉"
+        },
+        {
+          "value": "41350",
+          "label": "Izumo - 出雲"
+        },
+        {
+          "value": "41349",
+          "label": "Jōetsu - 上越"
+        },
+        {
+          "value": "41345",
+          "label": "Kagawa - 香川"
+        },
+        {
+          "value": "41247",
+          "label": "Kagawa - 香"
+        },
+        {
+          "value": "41389",
+          "label": "Kagoshima - 鹿児島"
+        },
+        {
+          "value": "41250",
+          "label": "Kagoshima - 鹿"
+        },
+        {
+          "value": "41336",
+          "label": "Kanazawa - 金沢"
+        },
+        {
+          "value": "41229",
+          "label": "Kashiwa - 柏"
+        },
+        {
+          "value": "41385",
+          "label": "Kasugai - 春日井"
+        },
+        {
+          "value": "41386",
+          "label": "Kasukabe - 春日部"
+        },
+        {
+          "value": "41360",
+          "label": "Katsushika - 葛飾"
+        },
+        {
+          "value": "41291",
+          "label": "Kawagoe - 川越"
+        },
+        {
+          "value": "41289",
+          "label": "Kawaguchi - 川口"
+        },
+        {
+          "value": "41290",
+          "label": "Kawasaki - 川崎"
+        },
+        {
+          "value": "41379",
+          "label": "Kitakyūshū - 北九州"
+        },
+        {
+          "value": "41264",
+          "label": "Kitami - 北見"
+        },
+        {
+          "value": "41205",
+          "label": "Kitami - 北"
+        },
+        {
+          "value": "41318",
+          "label": "Kōbe - 神戸"
+        },
+        {
+          "value": "41203",
+          "label": "Kōbe - 兵"
+        },
+        {
+          "value": "41347",
+          "label": "Kōchi - 高知"
+        },
+        {
+          "value": "41248",
+          "label": "Kōchi - 高"
+        },
+        {
+          "value": "41400",
+          "label": "Komaki (Owari) - 尾張小牧"
+        },
+        {
+          "value": "41334",
+          "label": "Kōriyama - 郡山"
+        },
+        {
+          "value": "41331",
+          "label": "Koshigaya - 越谷"
+        },
+        {
+          "value": "41356",
+          "label": "Kōtō - 江東"
+        },
+        {
+          "value": "41314",
+          "label": "Kumagaya - 熊谷"
+        },
+        {
+          "value": "41313",
+          "label": "Kumamoto - 熊本"
+        },
+        {
+          "value": "41234",
+          "label": "Kumamoto - 熊"
+        },
+        {
+          "value": "41260",
+          "label": "Kurashiki - 倉敷"
+        },
+        {
+          "value": "41376",
+          "label": "Kurume - 久留米"
+        },
+        {
+          "value": "41337",
+          "label": "Kushiro - 釧路"
+        },
+        {
+          "value": "41243",
+          "label": "Kushiro - 釧"
+        },
+        {
+          "value": "41255",
+          "label": "Kyoto - 京都"
+        },
+        {
+          "value": "41201",
+          "label": "Kyōto - 京"
+        },
+        {
+          "value": "41263",
+          "label": "Maebashi - 前橋"
+        },
+        {
+          "value": "41354",
+          "label": "Matsudo - 松戸"
+        },
+        {
+          "value": "41304",
+          "label": "Matsumoto - 松本"
+        },
+        {
+          "value": "41253",
+          "label": "Mie - 三重"
+        },
+        {
+          "value": "41200",
+          "label": "Mie - 三"
+        },
+        {
+          "value": "41295",
+          "label": "Mikawa (Shōnai) - 庄内"
+        },
+        {
+          "value": "41392",
+          "label": "Minami Shinshu - 南信州"
+        },
+        {
+          "value": "41327",
+          "label": "Mito - 茨城"
+        },
+        {
+          "value": "41307",
+          "label": "Mito - 水戸"
+        },
+        {
+          "value": "41241",
+          "label": "Mito - 茨"
+        },
+        {
+          "value": "41278",
+          "label": "Miyagi - 宮城"
+        },
+        {
+          "value": "41215",
+          "label": "Miyagi - 宮"
+        },
+        {
+          "value": "41279",
+          "label": "Miyazaki - 宮崎"
+        },
+        {
+          "value": "41315",
+          "label": "Morioka - 盛岡"
+        },
+        {
+          "value": "41277",
+          "label": "Muroran - 室蘭"
+        },
+        {
+          "value": "41214",
+          "label": "Muroran - 室"
+        },
+        {
+          "value": "41341",
+          "label": "Nagano - 長野"
+        },
+        {
+          "value": "41244",
+          "label": "Nagano - 長"
+        },
+        {
+          "value": "41339",
+          "label": "Nagaoka - 長岡"
+        },
+        {
+          "value": "41340",
+          "label": "Nagasaki - 長崎"
+        },
+        {
+          "value": "41380",
+          "label": "Nagoya - 名古屋"
+        },
+        {
+          "value": "41225",
+          "label": "Nagoya - 愛"
+        },
+        {
+          "value": "41275",
+          "label": "Nara - 奈良"
+        },
+        {
+          "value": "41213",
+          "label": "Nara - 奈"
+        },
+        {
+          "value": "41387",
+          "label": "Narashino - 習志野"
+        },
+        {
+          "value": "41298",
+          "label": "Narita - 成田"
+        },
+        {
+          "value": "41333",
+          "label": "Nasu - 那須"
+        },
+        {
+          "value": "41325",
+          "label": "Nerima - 練馬"
+        },
+        {
+          "value": "41239",
+          "label": "Nerima - 練"
+        },
+        {
+          "value": "41300",
+          "label": "Niigata - 新潟"
+        },
+        {
+          "value": "41226",
+          "label": "Niigata - 新"
+        },
+        {
+          "value": "41364",
+          "label": "Nikkō - 日光"
+        },
+        {
+          "value": "41335",
+          "label": "Noda - 野田"
+        },
+        {
+          "value": "41309",
+          "label": "Numazu - 沼津"
+        },
+        {
+          "value": "41292",
+          "label": "Obihiro - 帯広"
+        },
+        {
+          "value": "41222",
+          "label": "Obihiro - 帯"
+        },
+        {
+          "value": "41271",
+          "label": "Ōita - 大分"
+        },
+        {
+          "value": "41285",
+          "label": "Okayama - 岡山"
+        },
+        {
+          "value": "41219",
+          "label": "Okayama - 岡"
+        },
+        {
+          "value": "41286",
+          "label": "Okazaki - 岡崎"
+        },
+        {
+          "value": "41308",
+          "label": "Okinawa - 沖縄"
+        },
+        {
+          "value": "41231",
+          "label": "Okinawa - 沖"
+        },
+        {
+          "value": "41273",
+          "label": "Osaka - 大阪"
+        },
+        {
+          "value": "41212",
+          "label": "Osaka - 大"
+        },
+        {
+          "value": "41374",
+          "label": "Osaka (Naniwa) - なにわ"
+        },
+        {
+          "value": "41259",
+          "label": "Saga - 佐賀"
+        },
+        {
+          "value": "41202",
+          "label": "Saga - 佐"
+        },
+        {
+          "value": "41272",
+          "label": "Saitama (Ōmiya) - 大宮"
+        },
+        {
+          "value": "41269",
+          "label": "Saitama (Ōmiya) - 埼玉"
+        },
+        {
+          "value": "41209",
+          "label": "Saitama (Ōmiya) - 埼"
+        },
+        {
+          "value": "41210",
+          "label": "Sakai - 堺"
+        },
+        {
+          "value": "41373",
+          "label": "Sano - とちぎ"
+        },
+        {
+          "value": "41302",
+          "label": "Sapporo - 札幌"
+        },
+        {
+          "value": "41228",
+          "label": "Sapporo - 札"
+        },
+        {
+          "value": "41377",
+          "label": "Sasebo - 佐世保"
+        },
+        {
+          "value": "41256",
+          "label": "Sendai - 仙台"
+        },
+        {
+          "value": "41375",
+          "label": "Setagaya - 世田谷"
+        },
+        {
+          "value": "41312",
+          "label": "Shiga - 滋賀"
+        },
+        {
+          "value": "41233",
+          "label": "Shiga - 滋"
+        },
+        {
+          "value": "41288",
+          "label": "Shimane - 島根"
+        },
+        {
+          "value": "41221",
+          "label": "Shimane - 嶋"
+        },
+        {
+          "value": "41254",
+          "label": "Shimonoseki - 下関"
+        },
+        {
+          "value": "41267",
+          "label": "Shinagawa - 品川"
+        },
+        {
+          "value": "41208",
+          "label": "Shinagawa - 品"
+        },
+        {
+          "value": "41357",
+          "label": "Shirakawa - 白河"
+        },
+        {
+          "value": "41358",
+          "label": "Shiretoko - 知床"
+        },
+        {
+          "value": "41343",
+          "label": "Shizuoka - 静岡"
+        },
+        {
+          "value": "41246",
+          "label": "Shizuoka - 静"
+        },
+        {
+          "value": "41388",
+          "label": "Sodegaura - 袖ヶ浦"
+        },
+        {
+          "value": "41303",
+          "label": "Suginami - 杉並"
+        },
+        {
+          "value": "41328",
+          "label": "Suwa - 諏訪"
+        },
+        {
+          "value": "41338",
+          "label": "Suzuka - 鈴鹿"
+        },
+        {
+          "value": "41362",
+          "label": "Takamatsu - 高松"
+        },
+        {
+          "value": "41346",
+          "label": "Takasaki - 高崎"
+        },
+        {
+          "value": "41344",
+          "label": "Takayama (Hida) - 飛騨"
+        },
+        {
+          "value": "41270",
+          "label": "Tama - 多摩"
+        },
+        {
+          "value": "41211",
+          "label": "Tama - 多"
+        },
+        {
+          "value": "41363",
+          "label": "Tokachi - 十勝"
+        },
+        {
+          "value": "41299",
+          "label": "Tokorozawa - 所沢"
+        },
+        {
+          "value": "41296",
+          "label": "Tokushima - 徳島"
+        },
+        {
+          "value": "41224",
+          "label": "Tokushima - 徳"
+        },
+        {
+          "value": "41391",
+          "label": "Tomakomai - 苫小牧"
+        },
+        {
+          "value": "41348",
+          "label": "Tottori - 鳥取"
+        },
+        {
+          "value": "41249",
+          "label": "Tottori - 鳥"
+        },
+        {
+          "value": "41280",
+          "label": "Toyama - 富山"
+        },
+        {
+          "value": "41216",
+          "label": "Toyama - 富"
+        },
+        {
+          "value": "41329",
+          "label": "Toyohashi - 豊橋"
+        },
+        {
+          "value": "41330",
+          "label": "Toyota - 豊田"
+        },
+        {
+          "value": "41252",
+          "label": "Toyota (Mikawa) - 三河"
+        },
+        {
+          "value": "41268",
+          "label": "Tsuchiura - 土浦"
+        },
+        {
+          "value": "41372",
+          "label": "Tsukuba - つくば"
+        },
+        {
+          "value": "41382",
+          "label": "Utsunomiya - 宇都宮"
+        },
+        {
+          "value": "41305",
+          "label": "Utsunomiya - 栃木"
+        },
+        {
+          "value": "41230",
+          "label": "Utsunomiya - 栃"
+        },
+        {
+          "value": "41381",
+          "label": "Wakayama - 和歌山"
+        },
+        {
+          "value": "41207",
+          "label": "Wakayama - 和"
+        },
+        {
+          "value": "41281",
+          "label": "Yamagata - 山形"
+        },
+        {
+          "value": "41282",
+          "label": "Yamaguchi - 山口"
+        },
+        {
+          "value": "41217",
+          "label": "Yamaguchi - 山"
+        },
+        {
+          "value": "41283",
+          "label": "Yamanashi - 山梨"
+        },
+        {
+          "value": "41390",
+          "label": "Yokkaichi - 四日市"
+        },
+        {
+          "value": "41306",
+          "label": "Yokohama - 横浜"
+        },
+        {
+          "value": "41236",
+          "label": "Yokohama - 神"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": "code",
+      "name": "code",
+      "type": "text",
+      "maxlength": 3
+    },
+    {
+      "tag": "select",
+      "id": "hiragana",
+      "name": "hiragana",
+      "options": [
+        {
+          "value": "さ",
+          "label": "さ"
+        },
+        {
+          "value": "す",
+          "label": "す"
+        },
+        {
+          "value": "せ",
+          "label": "せ"
+        },
+        {
+          "value": "そ",
+          "label": "そ"
+        },
+        {
+          "value": "た",
+          "label": "た"
+        },
+        {
+          "value": "ち",
+          "label": "ち"
+        },
+        {
+          "value": "つ",
+          "label": "つ"
+        },
+        {
+          "value": "て",
+          "label": "て"
+        },
+        {
+          "value": "と",
+          "label": "と"
+        },
+        {
+          "value": "な",
+          "label": "な"
+        },
+        {
+          "value": "に",
+          "label": "に"
+        },
+        {
+          "value": "ぬ",
+          "label": "ぬ"
+        },
+        {
+          "value": "ね",
+          "label": "ね"
+        },
+        {
+          "value": "の",
+          "label": "の"
+        },
+        {
+          "value": "は",
+          "label": "は"
+        },
+        {
+          "value": "ひ",
+          "label": "ひ"
+        },
+        {
+          "value": "ふ",
+          "label": "ふ"
+        },
+        {
+          "value": "ほ",
+          "label": "ほ"
+        },
+        {
+          "value": "ま",
+          "label": "ま"
+        },
+        {
+          "value": "み",
+          "label": "み"
+        },
+        {
+          "value": "む",
+          "label": "む"
+        },
+        {
+          "value": "め",
+          "label": "め"
+        },
+        {
+          "value": "も",
+          "label": "も"
+        },
+        {
+          "value": "や",
+          "label": "や"
+        },
+        {
+          "value": "ゆ",
+          "label": "ゆ"
+        },
+        {
+          "value": "よ",
+          "label": "よ"
+        },
+        {
+          "value": "ら",
+          "label": "ら"
+        },
+        {
+          "value": "り",
+          "label": "り"
+        },
+        {
+          "value": "る",
+          "label": "る"
+        },
+        {
+          "value": "ろ",
+          "label": "ろ"
+        },
+        {
+          "value": "れ",
+          "label": "れ"
+        },
+        {
+          "value": "わ",
+          "label": "わ"
+        },
+        {
+          "value": "E",
+          "label": "E"
+        },
+        {
+          "value": "H",
+          "label": "H"
+        },
+        {
+          "value": "K",
+          "label": "K"
+        },
+        {
+          "value": "M",
+          "label": "M"
+        },
+        {
+          "value": "T",
+          "label": "T"
+        },
+        {
+          "value": "Y",
+          "label": "Y"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "d1",
+      "name": "d1",
+      "options": [
+        {
+          "value": "10",
+          "label": "•"
+        },
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        },
+        {
+          "value": "6",
+          "label": "6"
+        },
+        {
+          "value": "7",
+          "label": "7"
+        },
+        {
+          "value": "8",
+          "label": "8"
+        },
+        {
+          "value": "9",
+          "label": "9"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "d2",
+      "name": "d2",
+      "options": [
+        {
+          "value": "10",
+          "label": "•"
+        },
+        {
+          "value": "0",
+          "label": "0"
+        },
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        },
+        {
+          "value": "6",
+          "label": "6"
+        },
+        {
+          "value": "7",
+          "label": "7"
+        },
+        {
+          "value": "8",
+          "label": "8"
+        },
+        {
+          "value": "9",
+          "label": "9"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "d3",
+      "name": "d3",
+      "options": [
+        {
+          "value": "10",
+          "label": "•"
+        },
+        {
+          "value": "0",
+          "label": "0"
+        },
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        },
+        {
+          "value": "6",
+          "label": "6"
+        },
+        {
+          "value": "7",
+          "label": "7"
+        },
+        {
+          "value": "8",
+          "label": "8"
+        },
+        {
+          "value": "9",
+          "label": "9"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "d4",
+      "name": "d4",
+      "options": [
+        {
+          "value": "0",
+          "label": "0"
+        },
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        },
+        {
+          "value": "6",
+          "label": "6"
+        },
+        {
+          "value": "7",
+          "label": "7"
+        },
+        {
+          "value": "8",
+          "label": "8"
+        },
+        {
+          "value": "9",
+          "label": "9"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "fon",
+      "name": "fon",
+      "options": [
+        {
+          "value": "1",
+          "label": "Normal Size"
+        },
+        {
+          "value": "2",
+          "label": "Big Size"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": "base1",
+      "name": "base",
+      "type": "radio",
+      "value": "1"
+    },
+    {
+      "tag": "input",
+      "id": "base7",
+      "name": "base",
+      "type": "radio",
+      "value": "7"
+    },
+    {
+      "tag": "input",
+      "id": "base5",
+      "name": "base",
+      "type": "radio",
+      "value": "5"
+    },
+    {
+      "tag": "input",
+      "id": "base6",
+      "name": "base",
+      "type": "radio",
+      "value": "6"
+    },
+    {
+      "tag": "input",
+      "id": "base8",
+      "name": "base",
+      "type": "radio",
+      "value": "8"
+    },
+    {
+      "tag": "input",
+      "id": "base8g",
+      "name": "base",
+      "type": "radio",
+      "value": "8g"
+    },
+    {
+      "tag": "input",
+      "id": "base10",
+      "name": "base",
+      "type": "radio",
+      "value": "10"
+    },
+    {
+      "tag": "input",
+      "id": "base10g",
+      "name": "base",
+      "type": "radio",
+      "value": "10g"
+    },
+    {
+      "tag": "input",
+      "id": "base11",
+      "name": "base",
+      "type": "radio",
+      "value": "11"
+    },
+    {
+      "tag": "input",
+      "id": "base12",
+      "name": "base",
+      "type": "radio",
+      "value": "12"
+    },
+    {
+      "tag": "input",
+      "id": "base13",
+      "name": "base",
+      "type": "radio",
+      "value": "13"
+    },
+    {
+      "tag": "input",
+      "id": "base13g",
+      "name": "base",
+      "type": "radio",
+      "value": "13g"
+    },
+    {
+      "tag": "input",
+      "id": "base9",
+      "name": "base",
+      "type": "radio",
+      "value": "9"
+    }
+  ],
+  "otherFields": [
+    {
+      "tag": "select",
+      "id": null,
+      "name": "markaavto",
+      "options": 3949
+    },
+    {
+      "tag": "select",
+      "id": "model",
+      "name": "model",
+      "options": 0
+    },
+    {
+      "tag": "select",
+      "id": "modgen",
+      "name": "modgen",
+      "options": 0
+    },
+    {
+      "tag": "input",
+      "id": "markamodtype",
+      "name": null,
+      "type": "text"
+    },
+    {
+      "tag": "textarea",
+      "id": null,
+      "name": "dop"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": null,
+      "type": "search"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox13",
+      "name": "CheckBox[13]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox50",
+      "name": "CheckBox[50]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox25",
+      "name": "CheckBox[25]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox26",
+      "name": "CheckBox[26]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox43",
+      "name": "CheckBox[43]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox59",
+      "name": "CheckBox[59]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox68",
+      "name": "CheckBox[68]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox60",
+      "name": "CheckBox[60]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox21",
+      "name": "CheckBox[21]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox8",
+      "name": "CheckBox[8]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox58",
+      "name": "CheckBox[58]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox9",
+      "name": "CheckBox[9]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox57",
+      "name": "CheckBox[57]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox46",
+      "name": "CheckBox[46]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox62",
+      "name": "CheckBox[62]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox33",
+      "name": "CheckBox[33]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox61",
+      "name": "CheckBox[61]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox22",
+      "name": "CheckBox[22]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox47",
+      "name": "CheckBox[47]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox38",
+      "name": "CheckBox[38]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox53",
+      "name": "CheckBox[53]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox40",
+      "name": "CheckBox[40]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox63",
+      "name": "CheckBox[63]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox64",
+      "name": "CheckBox[64]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox42",
+      "name": "CheckBox[42]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox65",
+      "name": "CheckBox[65]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox39",
+      "name": "CheckBox[39]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox49",
+      "name": "CheckBox[49]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox41",
+      "name": "CheckBox[41]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox37",
+      "name": "CheckBox[37]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox67",
+      "name": "CheckBox[67]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox18",
+      "name": "CheckBox[18]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox20",
+      "name": "CheckBox[20]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox15",
+      "name": "CheckBox[15]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox23",
+      "name": "CheckBox[23]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox69",
+      "name": "CheckBox[69]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox24",
+      "name": "CheckBox[24]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox19",
+      "name": "CheckBox[19]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox48",
+      "name": "CheckBox[48]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox4",
+      "name": "CheckBox[4]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox5",
+      "name": "CheckBox[5]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox16",
+      "name": "CheckBox[16]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox14",
+      "name": "CheckBox[14]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox66",
+      "name": "CheckBox[66]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox45",
+      "name": "CheckBox[45]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox6",
+      "name": "CheckBox[6]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox44",
+      "name": "CheckBox[44]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox52",
+      "name": "CheckBox[52]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox27",
+      "name": "CheckBox[27]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox1",
+      "name": "CheckBox[1]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox56",
+      "name": "CheckBox[56]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox2",
+      "name": "CheckBox[2]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "hide",
+      "name": "hidefoto",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "enablesave",
+      "name": "enablesave",
+      "type": "checkbox"
+    }
+  ],
+  "notes": []
+}

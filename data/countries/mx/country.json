@@ -1,0 +1,9 @@
+{
+  "code": "mx",
+  "name": "Mexico",
+  "pages": {
+    "upload": false,
+    "search": true
+  },
+  "typeMenu": null
+}

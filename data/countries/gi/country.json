@@ -1,0 +1,9 @@
+{
+  "code": "gi",
+  "name": "Gibraltar (UK)",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

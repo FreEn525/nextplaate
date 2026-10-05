@@ -1,0 +1,9 @@
+{
+  "code": "jp",
+  "name": "Japan",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

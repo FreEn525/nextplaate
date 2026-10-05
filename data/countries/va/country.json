@@ -1,0 +1,9 @@
+{
+  "code": "va",
+  "name": "Vatican",
+  "pages": {
+    "upload": false,
+    "search": true
+  },
+  "typeMenu": null
+}

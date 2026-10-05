@@ -46,9 +46,28 @@ function idsUsed(src) {
   return [...new Set([...(src || '').matchAll(/getElementById\(\s*["']([^"']+)["']\s*\)/g)].map(m => m[1]))];
 }
 
+// "var NAME = [...]" or "NAME = {...}" in a page script: the statement, up to the closing bracket
+function definitionOf(s, name) {
+  const m = new RegExp('(?:^|[;\\n])\\s*(?:var\\s+|let\\s+|const\\s+)?' + name + '\\s*=\\s*([\\[{])').exec(s);
+  if (m) {
+    const open = m.index + m[0].length - 1, close = m[1] === '[' ? ']' : '}';
+    let d = 0, inStr = null;
+    for (let i = open; i < s.length; i++) {
+      const c = s[i];
+      if (inStr) { if (c === '\\') i++; else if (c === inStr) inStr = null; continue; }
+      if (c === '"' || c === "'") inStr = c;
+      else if (c === m[1]) d++;
+      else if (c === close && !--d) return 'var ' + name + ' = ' + s.slice(open, i + 1) + ';';
+    }
+  }
+  if (new RegExp('\\bid="' + name + '"').test(s)) return `var ${name} = document.getElementById('${name}');`;
+  return `var ${name} = {};`;
+}
+
 function run(s, fnName, typeValue) {
   const src = functionSource(s, fnName);
-  const mk = () => ({ style: {}, disabled: false, value: '', options: [{ text: '', value: '' }], selectedIndex: 0, checked: false, removeAttribute() {}, setAttribute() {}, appendChild() {}, addEventListener() {}, parentElement: { style: {}, removeAttribute() {}, setAttribute() {}, appendChild() {} } });
+  const parent = { style: {}, removeAttribute() {}, setAttribute() {}, appendChild() {}, insertBefore() {}, removeChild() {}, children: [], innerHTML: '' };
+  const mk = () => ({ style: {}, disabled: false, value: '', options: [{ text: '', value: '', style: {} }], selectedIndex: 0, checked: false, removeAttribute() {}, setAttribute() {}, getAttribute: () => null, appendChild() {}, insertBefore() {}, removeChild() {}, getElementsByTagName: () => [], querySelector: () => null, querySelectorAll: () => [], addEventListener() {}, focus() {}, click() {}, children: [], firstChild: null, innerHTML: '', dataset: {}, classList: { add() {}, remove() {}, contains: () => false, toggle() {} }, parentElement: parent, parentNode: parent });
   const els = {};
   for (const id of idsUsed(src)) els[id] = mk();
   // every plate field of the page, even the ones the function never mentions
@@ -71,16 +90,17 @@ function run(s, fnName, typeValue) {
   }
   // Germany's helpers use a global that the page sets elsewhere ("selectReg = document.getElementById('regionfed1')")
   let globals = /\bselectReg\b/.test(helpers + src) ? "var selectReg = document.getElementById('regionfed1');\n" : '';
-  // A page data table (bmObject1: authority -> codes) is not needed to know which fields show: an empty one is declared,
-  // and the run is tried again (at most 3 tables)
-  for (let attempt = 0; attempt < 4; attempt++) {
+  // A name the function needs but only the page defines (a data table such as bmObject1 or fonOptions56, a list of ids,
+  // an element kept in a variable): take its definition from the page, else the element of that id, else an empty
+  // object. The visible fields come from style and disabled on known elements, so these data do not change them.
+  for (let attempt = 0; attempt < 8; attempt++) {
     try {
       new Function('document', 'Option', 'window', globals + helpers + src + ';\n' + fnName + '();')(doc, Option, {});
       return { els };
     } catch (e) {
-      const missing = /^(bmObject\d*) is not defined$/.exec(e.message);
-      if (!missing || attempt === 3) return { error: e.message };
-      globals += `var ${missing[1]} = {};\n`;
+      const missing = /^(\w+) is not defined$/.exec(e.message);
+      if (!missing || attempt === 7) return { error: e.message };
+      globals += definitionOf(s, missing[1]) + '\n';
     }
   }
   return { els };

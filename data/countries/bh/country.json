@@ -1,0 +1,9 @@
+{
+  "code": "bh",
+  "name": "Bahrain",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

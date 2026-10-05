@@ -1,0 +1,680 @@
+{
+  "code": "kr",
+  "title": "Upload new license plate, South Korea",
+  "action": "add",
+  "typeMenu": "ctype",
+  "visibleFrom": "site-script",
+  "types": [
+    {
+      "id": "1",
+      "label": "Cars (2007)",
+      "visible": ["fon", "let1", "digit1", "digit"]
+    },
+    {
+      "id": "2",
+      "label": "Commercial vehicles",
+      "visible": ["fon", "let2", "region", "digit1", "digit"]
+    },
+    {
+      "id": "3",
+      "label": "Electric vehicles",
+      "visible": ["let1", "digit1", "digit"]
+    }
+  ],
+  "hooks": ["diskr"],
+  "plateFields": [
+    {
+      "tag": "select",
+      "id": "fon",
+      "name": "fon",
+      "options": [
+        {
+          "value": "1",
+          "label": "Single-row plate"
+        },
+        {
+          "value": "3",
+          "label": "Single-row plate (+blue stripe)"
+        },
+        {
+          "value": "5",
+          "label": "Single-row plate (US-size)"
+        },
+        {
+          "value": "7",
+          "label": "Single-row plate (Lime)",
+          "class": "lime"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "region",
+      "name": "region",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "4311",
+          "label": "강원 (Gangwon Province)"
+        },
+        {
+          "value": "4312",
+          "label": "경기 (Gyeonggi Province)"
+        },
+        {
+          "value": "4313",
+          "label": "경남 (South Gyeongsang Province)"
+        },
+        {
+          "value": "4314",
+          "label": "경북 (North Gyeongsang Province)"
+        },
+        {
+          "value": "4315",
+          "label": "광주 (Gwangju metropolitan city)"
+        },
+        {
+          "value": "4316",
+          "label": "대구 (Daegu metropolitan city)"
+        },
+        {
+          "value": "4317",
+          "label": "대전 (Daejeon metropolitan city)"
+        },
+        {
+          "value": "4318",
+          "label": "부산 (Busan metropolitan city)"
+        },
+        {
+          "value": "4319",
+          "label": "서울 (Seoul special city)"
+        },
+        {
+          "value": "4320",
+          "label": "세종 (Sejong special autonomous city)"
+        },
+        {
+          "value": "4321",
+          "label": "울산 (Ulsan metropolitan city)"
+        },
+        {
+          "value": "4322",
+          "label": "인천 (Incheon metropolitan city)"
+        },
+        {
+          "value": "4323",
+          "label": "전남 (South Jeolla Province)"
+        },
+        {
+          "value": "4324",
+          "label": "전북 (North Jeolla Province)"
+        },
+        {
+          "value": "4325",
+          "label": "제주 (Jeju special autonomous province)"
+        },
+        {
+          "value": "4326",
+          "label": "충남 (South Chungcheong Province)"
+        },
+        {
+          "value": "4327",
+          "label": "충북 (North Chungcheong Province)"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": "digit1",
+      "name": "digit1",
+      "type": "text",
+      "maxlength": 3,
+      "digitsOnly": true
+    },
+    {
+      "tag": "select",
+      "id": "let2",
+      "name": "let2",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "바",
+          "label": "바"
+        },
+        {
+          "value": "사",
+          "label": "사"
+        },
+        {
+          "value": "아",
+          "label": "아"
+        },
+        {
+          "value": "자",
+          "label": "자"
+        },
+        {
+          "value": "배",
+          "label": "배"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "let1",
+      "name": "let1",
+      "options": [
+        {
+          "value": "가",
+          "label": "가"
+        },
+        {
+          "value": "거",
+          "label": "거"
+        },
+        {
+          "value": "고",
+          "label": "고"
+        },
+        {
+          "value": "구",
+          "label": "구"
+        },
+        {
+          "value": "나",
+          "label": "나"
+        },
+        {
+          "value": "너",
+          "label": "너"
+        },
+        {
+          "value": "노",
+          "label": "노"
+        },
+        {
+          "value": "누",
+          "label": "누"
+        },
+        {
+          "value": "다",
+          "label": "다"
+        },
+        {
+          "value": "더",
+          "label": "더"
+        },
+        {
+          "value": "도",
+          "label": "도"
+        },
+        {
+          "value": "두",
+          "label": "두"
+        },
+        {
+          "value": "라",
+          "label": "라"
+        },
+        {
+          "value": "러",
+          "label": "러"
+        },
+        {
+          "value": "로",
+          "label": "로"
+        },
+        {
+          "value": "루",
+          "label": "루"
+        },
+        {
+          "value": "마",
+          "label": "마"
+        },
+        {
+          "value": "머",
+          "label": "머"
+        },
+        {
+          "value": "모",
+          "label": "모"
+        },
+        {
+          "value": "무",
+          "label": "무"
+        },
+        {
+          "value": "버",
+          "label": "버"
+        },
+        {
+          "value": "보",
+          "label": "보"
+        },
+        {
+          "value": "부",
+          "label": "부"
+        },
+        {
+          "value": "서",
+          "label": "서"
+        },
+        {
+          "value": "소",
+          "label": "소"
+        },
+        {
+          "value": "수",
+          "label": "수"
+        },
+        {
+          "value": "어",
+          "label": "어"
+        },
+        {
+          "value": "오",
+          "label": "오"
+        },
+        {
+          "value": "우",
+          "label": "우"
+        },
+        {
+          "value": "저",
+          "label": "저"
+        },
+        {
+          "value": "조",
+          "label": "조"
+        },
+        {
+          "value": "주",
+          "label": "주"
+        },
+        {
+          "value": "하",
+          "label": "하"
+        },
+        {
+          "value": "허",
+          "label": "허"
+        },
+        {
+          "value": "호",
+          "label": "호"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": "digit",
+      "name": "digit",
+      "type": "text",
+      "maxlength": 4,
+      "digitsOnly": true
+    }
+  ],
+  "otherFields": [
+    {
+      "tag": "select",
+      "id": null,
+      "name": "markaavto",
+      "options": 3949
+    },
+    {
+      "tag": "select",
+      "id": "model",
+      "name": "model",
+      "options": 0
+    },
+    {
+      "tag": "select",
+      "id": "modgen",
+      "name": "modgen",
+      "options": 0
+    },
+    {
+      "tag": "input",
+      "id": "markamodtype",
+      "name": null,
+      "type": "text"
+    },
+    {
+      "tag": "textarea",
+      "id": null,
+      "name": "dop"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": null,
+      "type": "search"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox13",
+      "name": "CheckBox[13]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox50",
+      "name": "CheckBox[50]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox25",
+      "name": "CheckBox[25]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox26",
+      "name": "CheckBox[26]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox43",
+      "name": "CheckBox[43]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox59",
+      "name": "CheckBox[59]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox68",
+      "name": "CheckBox[68]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox60",
+      "name": "CheckBox[60]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox21",
+      "name": "CheckBox[21]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox8",
+      "name": "CheckBox[8]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox58",
+      "name": "CheckBox[58]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox9",
+      "name": "CheckBox[9]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox57",
+      "name": "CheckBox[57]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox46",
+      "name": "CheckBox[46]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox62",
+      "name": "CheckBox[62]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox33",
+      "name": "CheckBox[33]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox61",
+      "name": "CheckBox[61]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox22",
+      "name": "CheckBox[22]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox47",
+      "name": "CheckBox[47]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox38",
+      "name": "CheckBox[38]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox53",
+      "name": "CheckBox[53]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox40",
+      "name": "CheckBox[40]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox63",
+      "name": "CheckBox[63]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox64",
+      "name": "CheckBox[64]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox42",
+      "name": "CheckBox[42]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox65",
+      "name": "CheckBox[65]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox39",
+      "name": "CheckBox[39]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox49",
+      "name": "CheckBox[49]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox41",
+      "name": "CheckBox[41]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox37",
+      "name": "CheckBox[37]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox67",
+      "name": "CheckBox[67]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox18",
+      "name": "CheckBox[18]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox20",
+      "name": "CheckBox[20]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox15",
+      "name": "CheckBox[15]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox23",
+      "name": "CheckBox[23]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox69",
+      "name": "CheckBox[69]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox24",
+      "name": "CheckBox[24]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox19",
+      "name": "CheckBox[19]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox48",
+      "name": "CheckBox[48]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox4",
+      "name": "CheckBox[4]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox5",
+      "name": "CheckBox[5]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox16",
+      "name": "CheckBox[16]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox14",
+      "name": "CheckBox[14]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox66",
+      "name": "CheckBox[66]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox45",
+      "name": "CheckBox[45]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox6",
+      "name": "CheckBox[6]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox44",
+      "name": "CheckBox[44]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox52",
+      "name": "CheckBox[52]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox27",
+      "name": "CheckBox[27]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox1",
+      "name": "CheckBox[1]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox56",
+      "name": "CheckBox[56]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox2",
+      "name": "CheckBox[2]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "hide",
+      "name": "hidefoto",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "enablesave",
+      "name": "enablesave",
+      "type": "checkbox"
+    }
+  ],
+  "notes": []
+}

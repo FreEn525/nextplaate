@@ -1,0 +1,9 @@
+{
+  "code": "sm",
+  "name": "San Marino",
+  "pages": {
+    "upload": false,
+    "search": true
+  },
+  "typeMenu": null
+}

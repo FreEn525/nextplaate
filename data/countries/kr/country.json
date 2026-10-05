@@ -1,0 +1,9 @@
+{
+  "code": "kr",
+  "name": "South Korea",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

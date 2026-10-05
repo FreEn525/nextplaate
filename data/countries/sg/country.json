@@ -1,0 +1,9 @@
+{
+  "code": "sg",
+  "name": "Singapore",
+  "pages": {
+    "upload": false,
+    "search": true
+  },
+  "typeMenu": null
+}

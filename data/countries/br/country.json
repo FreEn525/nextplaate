@@ -1,0 +1,9 @@
+{
+  "code": "br",
+  "name": "Brazil",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

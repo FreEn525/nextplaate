@@ -1,0 +1,744 @@
+{
+  "code": "kg",
+  "title": "Upload new license plate, Kyrgyzstan",
+  "action": "add",
+  "typeMenu": "ctype",
+  "visibleFrom": "site-script",
+  "types": [
+    {
+      "id": "5",
+      "label": "Private owners (2016)",
+      "visible": ["nomerpl", "fon", "region", "dip_second_row", "dip_third_row"]
+    },
+    {
+      "id": "6",
+      "label": "Organizations (2016)",
+      "visible": ["nomerpl", "fon", "region", "dip_second_row", "dip_third_row"]
+    },
+    {
+      "id": "7",
+      "label": "Trailers, motorcycles, special vehicles (2016)",
+      "visible": ["nomerpl", "fon", "region", "dip_second_row", "dip_third_row"]
+    },
+    {
+      "id": "9",
+      "label": "Foreign citizens and enterprises (2016)",
+      "visible": ["nomerpl", "fon", "region", "dip_second_row", "dip_third_row"]
+    },
+    {
+      "id": "11",
+      "label": "Transit plates (2023)",
+      "visible": ["nomerpl", "region", "dip_second_row", "dip_third_row"]
+    },
+    {
+      "id": "1",
+      "label": "Private owners (1994)",
+      "visible": ["nomerpl", "fon", "dip_second_row", "dip_third_row"]
+    },
+    {
+      "id": "2",
+      "label": "Organizations (1994)",
+      "visible": ["nomerpl", "fon", "dip_second_row", "dip_third_row"]
+    },
+    {
+      "id": "3",
+      "label": "Trailers and motorcycles (1994)",
+      "visible": ["nomerpl", "fon", "dip_second_row", "dip_third_row"]
+    },
+    {
+      "id": "8",
+      "label": "Foreign citizens and enterprises (1994)",
+      "visible": ["nomerpl", "fon", "dip_second_row", "dip_third_row"]
+    },
+    {
+      "id": "12",
+      "label": "Government agency",
+      "visible": ["nomerpl", "dip_second_row", "dip_third_row"]
+    },
+    {
+      "id": "13",
+      "label": "Vanity Plates",
+      "visible": ["nomerpl", "fon", "dip_second_row", "dip_third_row"]
+    },
+    {
+      "id": "10",
+      "label": "Diplomatic",
+      "visible": ["fon", "dip_system", "dip_kind", "dip_code", "nomerpl", "dip_month", "dip_year", "region", "digit", "let", "dipdate"],
+      "error": "Cannot set properties of undefined (setting 'backgroundColor')"
+    }
+  ],
+  "hooks": ["kgSetDiplomaticState", "kgSetHologramState", "kgSetReducedState", "kgSetVanityState", "OnSelect1"],
+  "plateFields": [
+    {
+      "tag": "select",
+      "id": "dip_system",
+      "name": "dip_system",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "2009",
+          "label": "White"
+        },
+        {
+          "value": "2003",
+          "label": "Black"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "dip_kind",
+      "name": "dip_kind",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "",
+          "label": ""
+        },
+        {
+          "value": "CNL",
+          "label": "CNL"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "dip_code",
+      "name": "dip_code",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "RUS",
+          "label": "RUS"
+        },
+        {
+          "value": "F",
+          "label": "F"
+        },
+        {
+          "value": "CH",
+          "label": "CH"
+        },
+        {
+          "value": "CDN",
+          "label": "CDN"
+        },
+        {
+          "value": "LAT",
+          "label": "LAT"
+        },
+        {
+          "value": "H",
+          "label": "H"
+        },
+        {
+          "value": "I",
+          "label": "I"
+        },
+        {
+          "value": "SVK",
+          "label": "SVK"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": "nomerpl",
+      "name": "nomerpl",
+      "type": "text",
+      "maxlength": 10,
+      "example": "123 ABC"
+    },
+    {
+      "tag": "select",
+      "id": "dip_month",
+      "name": "dip_month",
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "",
+          "label": ""
+        },
+        {
+          "value": "01",
+          "label": "01"
+        },
+        {
+          "value": "02",
+          "label": "02"
+        },
+        {
+          "value": "03",
+          "label": "03"
+        },
+        {
+          "value": "04",
+          "label": "04"
+        },
+        {
+          "value": "05",
+          "label": "05"
+        },
+        {
+          "value": "06",
+          "label": "06"
+        },
+        {
+          "value": "07",
+          "label": "07"
+        },
+        {
+          "value": "08",
+          "label": "08"
+        },
+        {
+          "value": "09",
+          "label": "09"
+        },
+        {
+          "value": "10",
+          "label": "10"
+        },
+        {
+          "value": "11",
+          "label": "11"
+        },
+        {
+          "value": "12",
+          "label": "12"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": "dip_year",
+      "name": "dip_year",
+      "type": "text",
+      "maxlength": 2,
+      "example": "26",
+      "hiddenAtLoad": true
+    },
+    {
+      "tag": "select",
+      "id": "transit_suffix",
+      "name": null,
+      "hiddenAtLoad": true,
+      "options": [
+        {
+          "value": "T",
+          "label": "T"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "id": "region",
+      "name": "region",
+      "options": [
+        {
+          "value": "01",
+          "label": "01 - Bishkek City"
+        },
+        {
+          "value": "02",
+          "label": "02 - Osh City"
+        },
+        {
+          "value": "03",
+          "label": "03 - Batken Province"
+        },
+        {
+          "value": "04",
+          "label": "04 - Jalal-Abad Province"
+        },
+        {
+          "value": "05",
+          "label": "05 - Naryn Province"
+        },
+        {
+          "value": "06",
+          "label": "06 - Osh Province"
+        },
+        {
+          "value": "07",
+          "label": "07 - Talas Province"
+        },
+        {
+          "value": "08",
+          "label": "08 - Chuy Province"
+        },
+        {
+          "value": "09",
+          "label": "09 - Issyk-Kul Province"
+        },
+        {
+          "value": "10",
+          "label": "10 - Common series"
+        },
+        {
+          "value": "11",
+          "label": "11 - Temporary registrations"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": "digit",
+      "name": "digit",
+      "type": "text",
+      "maxlength": 4,
+      "hiddenAtLoad": true,
+      "digitsOnly": true
+    },
+    {
+      "tag": "input",
+      "id": "let",
+      "name": "let",
+      "type": "text",
+      "maxlength": 3,
+      "hiddenAtLoad": true
+    },
+    {
+      "tag": "input",
+      "id": "dipdate",
+      "name": "dipdate",
+      "type": "text",
+      "maxlength": 5,
+      "example": "06/22",
+      "hiddenAtLoad": true,
+      "digitsOnly": true
+    },
+    {
+      "tag": "select",
+      "id": "fon",
+      "name": "fon",
+      "options": [
+        {
+          "value": "31",
+          "label": "Single-row plate"
+        },
+        {
+          "value": "32",
+          "label": "Two-row plate"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "id": "format1_input",
+      "name": "format1",
+      "type": "checkbox",
+      "value": "1"
+    },
+    {
+      "tag": "input",
+      "id": "kg_hologram",
+      "name": "kg_hologram",
+      "type": "checkbox",
+      "value": "1"
+    },
+    {
+      "tag": "input",
+      "id": "kg2016_reduced",
+      "name": "kg2016_reduced",
+      "type": "checkbox",
+      "value": "1"
+    },
+    {
+      "tag": "input",
+      "id": "kg2016_pos_bottom",
+      "name": "kg2016_pos",
+      "type": "radio",
+      "value": "bottom"
+    },
+    {
+      "tag": "input",
+      "id": "kg2016_pos_top",
+      "name": "kg2016_pos",
+      "type": "radio",
+      "value": "top"
+    },
+    {
+      "tag": "input",
+      "id": "kg2016_color_white",
+      "name": "kg2016_color",
+      "type": "radio",
+      "value": "white"
+    },
+    {
+      "tag": "input",
+      "id": "kg2016_color_yellow",
+      "name": "kg2016_color",
+      "type": "radio",
+      "value": "yellow"
+    }
+  ],
+  "otherFields": [
+    {
+      "tag": "select",
+      "id": null,
+      "name": "markaavto",
+      "options": 3949
+    },
+    {
+      "tag": "select",
+      "id": "model",
+      "name": "model",
+      "options": 0
+    },
+    {
+      "tag": "select",
+      "id": "modgen",
+      "name": "modgen",
+      "options": 0
+    },
+    {
+      "tag": "input",
+      "id": "markamodtype",
+      "name": null,
+      "type": "text"
+    },
+    {
+      "tag": "textarea",
+      "id": null,
+      "name": "dop"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": null,
+      "type": "search"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox13",
+      "name": "CheckBox[13]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox50",
+      "name": "CheckBox[50]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox25",
+      "name": "CheckBox[25]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox26",
+      "name": "CheckBox[26]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox43",
+      "name": "CheckBox[43]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox59",
+      "name": "CheckBox[59]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox68",
+      "name": "CheckBox[68]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox60",
+      "name": "CheckBox[60]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox21",
+      "name": "CheckBox[21]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox8",
+      "name": "CheckBox[8]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox58",
+      "name": "CheckBox[58]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox9",
+      "name": "CheckBox[9]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox57",
+      "name": "CheckBox[57]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox46",
+      "name": "CheckBox[46]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox62",
+      "name": "CheckBox[62]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox33",
+      "name": "CheckBox[33]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox61",
+      "name": "CheckBox[61]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox22",
+      "name": "CheckBox[22]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox47",
+      "name": "CheckBox[47]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox38",
+      "name": "CheckBox[38]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox53",
+      "name": "CheckBox[53]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox40",
+      "name": "CheckBox[40]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox63",
+      "name": "CheckBox[63]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox64",
+      "name": "CheckBox[64]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox42",
+      "name": "CheckBox[42]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox65",
+      "name": "CheckBox[65]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox39",
+      "name": "CheckBox[39]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox49",
+      "name": "CheckBox[49]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox41",
+      "name": "CheckBox[41]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox37",
+      "name": "CheckBox[37]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox67",
+      "name": "CheckBox[67]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox18",
+      "name": "CheckBox[18]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox20",
+      "name": "CheckBox[20]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox15",
+      "name": "CheckBox[15]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox23",
+      "name": "CheckBox[23]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox69",
+      "name": "CheckBox[69]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox24",
+      "name": "CheckBox[24]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox19",
+      "name": "CheckBox[19]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox48",
+      "name": "CheckBox[48]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox4",
+      "name": "CheckBox[4]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox5",
+      "name": "CheckBox[5]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox16",
+      "name": "CheckBox[16]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox14",
+      "name": "CheckBox[14]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox66",
+      "name": "CheckBox[66]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox45",
+      "name": "CheckBox[45]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox6",
+      "name": "CheckBox[6]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox44",
+      "name": "CheckBox[44]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox52",
+      "name": "CheckBox[52]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox27",
+      "name": "CheckBox[27]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox1",
+      "name": "CheckBox[1]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox56",
+      "name": "CheckBox[56]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "CheckBox2",
+      "name": "CheckBox[2]",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "hide",
+      "name": "hidefoto",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "enablesave",
+      "name": "enablesave",
+      "type": "checkbox"
+    },
+    {
+      "tag": "input",
+      "id": "patternenable",
+      "name": "patternenable",
+      "type": "checkbox"
+    }
+  ],
+  "notes": []
+}

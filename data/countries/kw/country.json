@@ -1,0 +1,9 @@
+{
+  "code": "kw",
+  "name": "Kuwait",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

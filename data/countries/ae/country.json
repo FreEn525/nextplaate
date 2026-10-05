@@ -1,0 +1,9 @@
+{
+  "code": "ae",
+  "name": "UAE",
+  "pages": {
+    "upload": false,
+    "search": true
+  },
+  "typeMenu": null
+}

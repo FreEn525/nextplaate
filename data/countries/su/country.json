@@ -1,0 +1,9 @@
+{
+  "code": "su",
+  "name": "USSR",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

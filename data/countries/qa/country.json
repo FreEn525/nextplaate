@@ -1,0 +1,9 @@
+{
+  "code": "qa",
+  "name": "Qatar",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

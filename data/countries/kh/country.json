@@ -1,0 +1,9 @@
+{
+  "code": "kh",
+  "name": "Cambodia",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

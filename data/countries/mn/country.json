@@ -1,0 +1,9 @@
+{
+  "code": "mn",
+  "name": "Mongolia",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

@@ -1,0 +1,9 @@
+{
+  "code": "id",
+  "name": "Indonesia",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}

@@ -1,0 +1,9 @@
+{
+  "code": "hk",
+  "name": "Hong Kong (CN)",
+  "pages": {
+    "upload": true,
+    "search": true
+  },
+  "typeMenu": "ctype"
+}
