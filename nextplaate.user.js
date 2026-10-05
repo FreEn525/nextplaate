@@ -354,6 +354,8 @@
   const selText = id => { const el = document.getElementById(id); if (!el) return ''; if (el.tagName === 'SELECT') { const o = el.options[el.selectedIndex]; return o && o.value ? o.text.trim() : ''; } return el.value.trim(); };
 
   const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };   // a menu's label, only when the menu is shown (a hidden one keeps an old value)
+  // The menu that chooses the plate type: #ctype on most upload pages, #drop_2 in Andorra and Malta, none in the Netherlands
+  const typeMenuEl = () => document.getElementById('ctype') || document.getElementById('drop_2');
   const PLATE_RULES = {};   // country code -> function that reads the plate from the upload form; one file per country, in this folder
 
   // Any other country: the visible plate fields, read in the order of the page (region, letters, digits...).
@@ -438,6 +440,7 @@
   PLATE_RULES.de = () => {
     if (fieldVal('ctype') === '17') return joinParts([shownVal('digit'), shownVal('inslet')]);   // insurance plates: 380 LSI
     if (fieldVal('ctype') === '4') return joinParts([selText('dipf'), selText('regiondip') + '-' + fieldVal('digit')]);   // diplomatic: 0 111-111 (dipf shows 0)
+    if (fieldVal('ctype') === '15') return joinParts([menu('regionfed'), menu('regionfed1'), shownVal('digit')]);   // authorities: BD 16 7004 (authority, its number, digits)
     return joinParts([menu('region'), menu('b1'), shownVal('digit'), menu('b2')]);
   };
   // Denmark: vanity plates are seven boxes, one character each (MARIAKJ)
@@ -528,10 +531,10 @@
     const region = el && el.offsetParent !== null ? selText('region') : '';
     return joinParts([region, fieldVal('nomerpl').toUpperCase()]);
   };
-  // Serbia: BG 123-AB; trailers (2): AC-334 LE (no region); vanity (4): region then the letter boxes
+  // Serbia: BG 123-AB; trailers (2): OO-442 VR; vanity (4): region then the letter boxes
   PLATE_RULES.rs = () => {
     const ctype = fieldVal('ctype');
-    if (ctype === '2') return joinParts([shownVal('b1') + '-' + shownVal('digit2'), shownVal('b2')]);
+    if (ctype === '2') return joinParts([menu('b1') + menu('b2') + '-' + shownVal('digit2'), menu('region2')]);   // trailers: OO-442 VR (two letters, digits, then the region menu)
     if (ctype === '4') return joinParts([menu('region1'), ['b1', 'b2', 'b3', 'b4', 'b5'].map(menu).join('')]);
     const digit = fieldVal('digit') || fieldVal('digit1'), letters = fieldVal('b1') + fieldVal('b2');
     return joinParts([selText('region') || selText('region1'), digit && letters ? `${digit}-${letters}` : digit || letters]);
@@ -574,6 +577,7 @@
     if (ctype === '16') return joinParts([shownVal('digit1'), menu('b1') + menu('b2') + menu('b3')]);     // motorcycles 1995: 0708 CKA
     if (ctype === '14') return joinParts([shownVal('digit1'), menu('region4')]);                          // special machinery 1995: 00828 AC
     if (ctype === '15') return joinParts([menu('region4'), shownVal('digit4')]);                          // trailers for special vehicles: AB 07067
+    if (ctype === '18') return joinParts([shownVal('digit1'), menu('region5')]);                          // work vehicles 1995: T0625 PB (number, then the letters menu)
     if (ctype === '17') return joinParts([shownVal('dlet1'), shownVal('digit2'), shownVal('digit4')]);   // diplomatic: DP 201 191
     const region = menu('region1') || menu('region2') || menu('region3');
     const digit = ['digit1', 'digit2', 'digit3', 'digit4'].map(shownVal).find(Boolean) || '';
@@ -1549,9 +1553,11 @@
     try {
       const res = await fetch('/' + code + '/add', { credentials: 'same-origin', signal: ctrl.signal });
       if (!res.ok) throw new Error('HTTP ' + res.status);
-      const sel = new DOMParser().parseFromString(await res.text(), 'text/html').querySelector('select[name="ctype"]');
-      if (!sel) throw new Error('no category list on the page (Cloudflare check?)');
-      catsCache[code] = [...sel.options].map(o => ({ v: o.value, l: o.textContent.trim() }));
+      const page = new DOMParser().parseFromString(await res.text(), 'text/html');
+      const sel = page.querySelector('select[name="ctype"], select[name="drop_2"]');   // Andorra and Malta call the menu drop_2
+      // the Netherlands has an upload form but no type menu: nothing to choose, which is not an error
+      if (!sel && !page.getElementById('frm')) throw new Error('no category list on the page (Cloudflare check?)');
+      catsCache[code] = sel ? [...sel.options].map(o => ({ v: o.value, l: o.textContent.trim() })) : [];
       store.set('cats_' + code, JSON.stringify(catsCache[code]));
     } catch (e) {
       delete catsCache[code]; catsFailedAt[code] = Date.now();
@@ -2127,7 +2133,7 @@
       if (!it.blob) { setStatus(`The photo <b>${esc(it.name)}</b> is no longer stored. Add it again (U).`); return; }
       const file = new File([it.blob], it.name, { type: it.type, lastModified: it.lastModified });
       { // plate category chosen in the manager (default = the page's first one); fires the site's own onchange
-        const sel = document.getElementById('ctype');
+        const sel = typeMenuEl();
         const want = it.ctype || (sel && sel.options[0] ? sel.options[0].value : '');
         if (sel && want && sel.value !== want) { sel.value = want; sel.dispatchEvent(new Event('change', { bubbles: true })); }
       }

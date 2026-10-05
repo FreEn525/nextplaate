@@ -11,6 +11,8 @@
   const selText = id => { const el = document.getElementById(id); if (!el) return ''; if (el.tagName === 'SELECT') { const o = el.options[el.selectedIndex]; return o && o.value ? o.text.trim() : ''; } return el.value.trim(); };
 
   const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };   // a menu's label, only when the menu is shown (a hidden one keeps an old value)
+  // The menu that chooses the plate type: #ctype on most upload pages, #drop_2 in Andorra and Malta, none in the Netherlands
+  const typeMenuEl = () => document.getElementById('ctype') || document.getElementById('drop_2');
   const PLATE_RULES = {};   // country code -> function that reads the plate from the upload form; one file per country, in this folder
 
   // Any other country: the visible plate fields, read in the order of the page (region, letters, digits...).

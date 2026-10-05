@@ -32,6 +32,9 @@ DEV = (ROOT / "nextplaate.dev.user.js").read_text(encoding="utf-8")
 # wait after typing (the real run waits 350 ms for the site's scripts; the saved pages settle at once)
 SETTLE_MS = 20
 
+# (country, category) -> the fields in the order the plate is read, when the page lists them in another order
+TYPING_ORDER = {('rs', 'Trailers'): ['b1', 'b2', 'digit2', 'region2']}
+
 # (country, category) -> the one field the whole plate is typed in
 CATEGORY_FIELD = {('lv', 'Diplomatic'): 'nomer', ('lv', 'Vanity Plates'): 'nomer'}
 
@@ -60,7 +63,7 @@ def load_cases(country=None):
 def set_category(page, label):
     """Selects the form type whose label is the category (same rule as the plate test). False if none."""
     return page.evaluate("""(label) => {
-        const sel = document.getElementById('ctype');
+        const sel = document.getElementById('ctype') || document.getElementById('drop_2');
         if (!sel) return false;
         const want = label.toLowerCase();
         const text = o => o.text.trim().toLowerCase();
@@ -102,7 +105,7 @@ def check_country(page, code, cases):
             continue
         # countries whose form takes the whole plate in one field (CATEGORY_FIELD); the others are split as the plate test does
         field = CATEGORY_FIELD.get((c["country"], c["category"]))
-        res = page.evaluate("([t, o]) => window.nextplaateDev.testText(t, o)", [c["plate"], {"settle": SETTLE_MS, **({"field": field} if field else {})}])
+        res = page.evaluate("([t, o]) => window.nextplaateDev.testText(t, o)", [c["plate"], {"settle": SETTLE_MS, **({"field": field} if field else {}), **({"order": TYPING_ORDER[(c["country"], c["category"])]} if (c["country"], c["category"]) in TYPING_ORDER else {})}])
         ok = bool(res["fits"]) and norm(res["read"]) == norm(c["plate"])
         results.append({**c, "status": "ok" if ok else ("not-fit" if not res["fits"] else "wrong"),
                         "read": res["read"], "fits": res["fits"]})

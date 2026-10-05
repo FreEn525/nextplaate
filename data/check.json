@@ -277,25 +277,9 @@
  },
  "de": {
   "Authorities and federal agencies": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "BD 16 7004",
-     "read": "7004",
-     "status": "wrong"
-    },
-    {
-     "plate": "BP 17-924",
-     "read": "924",
-     "status": "wrong"
-    },
-    {
-     "plate": "BW 7 590",
-     "read": "590",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Diplomatic": {
    "ok": 3,
@@ -1268,15 +1252,9 @@
    "failed": []
   },
   "Trailers": {
-   "ok": 0,
+   "ok": 1,
    "total": 1,
-   "failed": [
-    {
-     "plate": "OO-442 VR",
-     "read": "O-442 O",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   }
  },
  "se": {
@@ -1496,25 +1474,9 @@
    "failed": []
   },
   "Work vehicles (1995)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "Т0625 РВ",
-     "read": "Т0625",
-     "status": "wrong"
-    },
-    {
-     "plate": "Т1668 МК",
-     "read": "Т1668",
-     "status": "wrong"
-    },
-    {
-     "plate": "Т2966 ЗС",
-     "read": "Т2966",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   }
  },
  "uk": {

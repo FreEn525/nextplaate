@@ -13,7 +13,7 @@
     for (const t of missing) {
       const formValue = ptFormType(t.label, t.code);
       if (!formValue) { row(t.label, '', '', 'no-form-type', 'no matching type on the form'); continue; }
-      const sel = document.getElementById('ctype');
+      const sel = typeMenuEl();
       sel.value = formValue; sel.dispatchEvent(new Event('change', { bubbles: true }));
       await new Promise(r => setTimeout(r, 700));
       let texts;

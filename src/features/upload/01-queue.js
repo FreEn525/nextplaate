@@ -61,9 +61,11 @@
     try {
       const res = await fetch('/' + code + '/add', { credentials: 'same-origin', signal: ctrl.signal });
       if (!res.ok) throw new Error('HTTP ' + res.status);
-      const sel = new DOMParser().parseFromString(await res.text(), 'text/html').querySelector('select[name="ctype"]');
-      if (!sel) throw new Error('no category list on the page (Cloudflare check?)');
-      catsCache[code] = [...sel.options].map(o => ({ v: o.value, l: o.textContent.trim() }));
+      const page = new DOMParser().parseFromString(await res.text(), 'text/html');
+      const sel = page.querySelector('select[name="ctype"], select[name="drop_2"]');   // Andorra and Malta call the menu drop_2
+      // the Netherlands has an upload form but no type menu: nothing to choose, which is not an error
+      if (!sel && !page.getElementById('frm')) throw new Error('no category list on the page (Cloudflare check?)');
+      catsCache[code] = sel ? [...sel.options].map(o => ({ v: o.value, l: o.textContent.trim() })) : [];
       store.set('cats_' + code, JSON.stringify(catsCache[code]));
     } catch (e) {
       delete catsCache[code]; catsFailedAt[code] = Date.now();

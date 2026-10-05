@@ -18,7 +18,7 @@
     for (const t of types) {
       const formValue = ptFormType(t.label, t.code);
       if (!formValue) { out[t.label] = { note: 'no matching type on the form' }; continue; }
-      const sel = document.getElementById('ctype');
+      const sel = typeMenuEl();
       sel.value = formValue; sel.dispatchEvent(new Event('change', { bubbles: true }));
       await new Promise(r => setTimeout(r, 700));                   // the form shows the fields of this type
       // what this form shows for this type: the plate fields, their value and the label chosen (for the rules)

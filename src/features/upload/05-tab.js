@@ -56,7 +56,7 @@
       if (!it.blob) { setStatus(`The photo <b>${esc(it.name)}</b> is no longer stored. Add it again (U).`); return; }
       const file = new File([it.blob], it.name, { type: it.type, lastModified: it.lastModified });
       { // plate category chosen in the manager (default = the page's first one); fires the site's own onchange
-        const sel = document.getElementById('ctype');
+        const sel = typeMenuEl();
         const want = it.ctype || (sel && sel.options[0] ? sel.options[0].value : '');
         if (sel && want && sel.value !== want) { sel.value = want; sel.dispatchEvent(new Event('change', { bubbles: true })); }
       }

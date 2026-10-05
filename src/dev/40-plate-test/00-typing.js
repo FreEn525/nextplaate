@@ -24,6 +24,7 @@
 
   // Types one plate into the visible plate fields, in order; the form's other fields are left alone
   // first the usual split; if the plate does not fit, a second try cuts the mixed tokens (8AP -> 8 AP)
+  let ptOrder = null;   // field ids in the order the plate is read, or null: the order of the page
   function ptType(text) {
     return ptTypeOnce(text, false) || ptTypeOnce(text, true);
   }
@@ -31,7 +32,7 @@
   function ptTypeOnce(text, split) {
     let tokens = text.split(/[\s-]+/).filter(Boolean).flatMap(t => split ? (t.match(/\d+|[^\d]+/g) || []) : [t]);
     const fields = [...document.querySelectorAll('input, select')]
-      .filter(el => isPlateField(el) && el.offsetParent !== null && !el.disabled && el.id !== 'ctype');
+      .filter(el => isPlateField(el) && el.offsetParent !== null && !el.disabled && el.id !== 'ctype' && el.id !== 'drop_2');   // the type menus are not typed into
     // fixed fields are set by the site for a type (T, TAX, BP, P): they keep their value and no token goes in them
     const FIXED = ['trz', 'tx', 'nonr'];
     fields.forEach(el => {
@@ -39,7 +40,8 @@
       if (FIXED.includes(el.id)) { if (el.value) el.dataset.pmgFixed = el.value; if (el.dataset.pmgFixed) el.value = el.dataset.pmgFixed; return; }
       el.value = '';
     });
-    const tokenFields = fields.filter(el => !FIXED.includes(el.id));
+    // a country whose page order is not the reading order of its plate can give the order of the fields (offline check)
+    const tokenFields = ptOrder ? ptOrder.map(id => fields.find(el => el.id === id)).filter(Boolean) : fields.filter(el => !FIXED.includes(el.id));
     // a token that is the value the site already set (the T of a transit plate) is not typed again
     const fixedVals = fields.filter(el => FIXED.includes(el.id) && el.value).map(el => el.value.toUpperCase());
     tokens = tokens.filter(t => !fixedVals.includes(t.toUpperCase()));

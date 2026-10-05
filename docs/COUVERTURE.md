@@ -13,22 +13,14 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | **Pays non capturés** | **0** | |
 | Pays avec une règle propre | 27 sur 96 | |
 | Catégories (pays capturés) | 829 | |
-| Vérifiées | 294 | 35 % |
-| **À corriger** | **3** | 0 % |
+| Vérifiées | 297 | 36 % |
+| **À corriger** | **0** | 0 % |
 | **À trouver** (aucune plaque connue) | **438** | 53 % |
 | Non testables par le formulaire (pas de page d'ajout ni de menu de type) | 94 | 11 % |
 
 ## À corriger
 
-| Pays | Catégorie | OK | Plaque attendue | Lue |
-|---|---|---|---|---|
-| de | Authorities and federal agencies | 0/3 | `BD 16 7004` | `7004` |
-| de | Authorities and federal agencies | 0/3 | `BP 17-924` | `924` |
-| de | Authorities and federal agencies | 0/3 | `BW 7 590` | `590` |
-| rs | Trailers | 0/1 | `OO-442 VR` | `O-442 O` |
-| ua | Work vehicles (1995) | 0/3 | `Т0625 РВ` | `Т0625` |
-| ua | Work vehicles (1995) | 0/3 | `Т1668 МК` | `Т1668` |
-| ua | Work vehicles (1995) | 0/3 | `Т2966 ЗС` | `Т2966` |
+Aucune.
 
 ## Par pays
 
@@ -50,17 +42,17 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | gu Guam (USA) | generic | 9 | 0 |  | 9 |  | oui |
 | la Laos | generic | 9 | 0 |  | 9 |  | oui |
 | li Liechtenstein | own | 9 | 0 |  | 9 |  | oui |
-| rs Serbia | own | 10 | 1 | 1 | 8 |  | oui |
 | sc Seychelles | generic | 9 | 0 |  | 9 |  | oui |
 | th Thailand | generic | 9 | 0 |  | 9 |  | oui |
 | tj Tajikistan | own | 10 | 1 |  | 9 |  | oui |
-| ua Ukraine | own | 19 | 10 | 1 | 8 |  | oui |
 | am Armenia | generic | 8 | 0 |  | 8 |  | oui |
-| de Germany | own | 16 | 8 | 1 | 7 |  | oui |
 | il Israel | generic | 8 | 0 |  | 8 |  | oui |
+| rs Serbia | own | 10 | 2 |  | 8 |  | oui |
+| ua Ukraine | own | 19 | 11 |  | 8 |  | oui |
 | vn Vietnam | generic | 8 | 0 |  | 8 |  | oui |
 | bh Bahrain | generic | 7 | 0 |  | 7 |  | oui |
 | bs Bahamas | generic | 7 | 0 |  | 7 |  | oui |
+| de Germany | own | 16 | 9 |  | 7 |  | oui |
 | id Indonesia | generic | 7 | 0 |  | 7 |  | oui |
 | kh Cambodia | generic | 7 | 0 |  | 7 |  | oui |
 | ar Argentina | generic | 6 | 0 |  | 6 |  | oui |

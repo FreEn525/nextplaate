@@ -40,7 +40,7 @@
 
   // The form's option for a search type: the same label (case-insensitive), else the same code
   function ptFormType(label, code) {
-    const sel = document.getElementById('ctype');
+    const sel = typeMenuEl();
     if (!sel) return null;
     const want = label.toLowerCase();
     // exact label first; then the form label with its pattern: "2001 year system (AA11AAA)" for "2001 year system"

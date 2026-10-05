@@ -41,6 +41,7 @@
     // opts.field: the whole text goes into this one field (how a user types a single-field plate), no token split
     testText: async (text, opts) => {
       let fits = true;
+      ptOrder = opts && opts.order || null;
       if (opts && opts.field) {
         const el = document.getElementById(opts.field);
         if (el) { el.value = text; el.dispatchEvent(new Event('input', { bubbles: true })); }
@@ -52,6 +53,7 @@
       const read = plateForForm() || '';
       if (opts && opts.field) { const el = document.getElementById(opts.field); if (el) { el.value = ''; el.dispatchEvent(new Event('input', { bubbles: true })); } }
       else ptType('');
+      ptOrder = null;
       return { fits, read };
     }
   };
