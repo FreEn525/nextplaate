@@ -230,7 +230,9 @@
       await new Promise(r => setTimeout(r, 1000));
       sessionStorage.removeItem('nextplaate-plates-try');
       try {
-        if (sessionStorage.getItem(PT_MODE) === 'types') {
+        if (sessionStorage.getItem(PT_MODE) === 'fill') {
+          await ptFillMissing();                                     // logs its own result (fill:xx)
+        } else if (sessionStorage.getItem(PT_MODE) === 'types') {
           const types = await ptByType();
           await capPut('types:' + cc, { date: new Date().toISOString(), types });
           console.log('[NextPlaate] all types ' + cc, types);
@@ -264,6 +266,13 @@
       if (sessionStorage.getItem(PT_QUEUE) === null) { ptMsg('Stopped.'); return; }
       location.href = '/' + rest[0] + '/add';
     }, PT_PAUSE_MS);
+  }
+
+  // Fills the missing plates of every country, one after the other (same pauses and resume as the other runs)
+  async function ptStartFill() {
+    sessionStorage.setItem(PT_MODE, 'fill');
+    sessionStorage.setItem(PT_QUEUE, JSON.stringify(CAPTURE_COUNTRIES.slice()));
+    location.href = '/' + CAPTURE_COUNTRIES[0] + '/add';
   }
 
   // Runs the countries that still need a test. "onlyMissing": keep the countries that fully passed.
@@ -417,6 +426,7 @@
         h('button', { id: 'ptTypes', class: 'btn ghost', text: 'Test every plate type (this country)' }),
         h('button', { id: 'ptTypesAll', class: 'btn ghost', text: 'Test the countries with failures' }),
         h('button', { id: 'ptFill', class: 'btn ghost', text: 'Fill missing plates (this country)' }),
+        h('button', { id: 'ptFillAll', class: 'btn ghost', text: 'Fill missing plates (every country)' }),
         h('button', { id: 'ptAll', class: 'btn ghost', text: 'Test the countries not yet passing' }),
         h('button', { id: 'ptAgain', class: 'btn ghost', text: 'Test everything again' }),
         h('button', { id: 'ptWrite', class: 'btn ghost', text: 'Write report to folder' })
@@ -431,6 +441,7 @@
         ptMsg(Object.entries(r).map(([k, v]) => (v.note ? k + ': ' + v.note : k + ': ' + v.passed + '/' + v.tested)).join(' | '));
       };
       $('ptTypesAll').onclick = () => ptStartTypes().catch(e => ptMsg('Could not start: ' + e.message));
+      $('ptFillAll').onclick = () => ptStartFill().catch(e => ptMsg('Could not start: ' + e.message));
       $('ptFill').onclick = () => { if (!here.add) { ptMsg('Open an upload page first.'); return; } ptMsg('Filling…'); ptFillMissing().catch(e => ptMsg('Fill stopped: ' + e.message)); };
       $('ptAll').onclick = () => ptStart(false).catch(e => ptMsg('Could not start: ' + e.message));
       $('ptAgain').onclick = () => ptStart(true).catch(e => ptMsg('Could not start: ' + e.message));
