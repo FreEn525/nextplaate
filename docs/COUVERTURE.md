@@ -11,10 +11,10 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | Pays du site | 96 | |
 | Pays capturés (pages sauvegardées) | 96 | 100 % |
 | **Pays non capturés** | **0** | |
-| Pays avec une règle propre | 43 sur 96 | |
+| Pays avec une règle propre | 45 sur 96 | |
 | Catégories (pays capturés) | 829 | |
-| Vérifiées | 768 | 93 % |
-| **À corriger** | **39** | 5 % |
+| Vérifiées | 771 | 93 % |
+| **À corriger** | **36** | 4 % |
 | **À trouver** (aucune plaque connue) | **0** | 0 % |
 | Galerie vide sur le site (aucune plaque n'existe) | 22 | 3 % |
 | Sans champ de plaque dans le formulaire ou sans page d'ajout | 0 | 0 % |
@@ -43,6 +43,9 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | dk | Vanity Plates | 1/3 | `USANO1` | `USANO1J` |
 | gi | Regular car plates (G 1234 A) | 1/3 | `G 1267 G` | `G 1267` |
 | gi | Regular car plates (G 1234 A) | 1/3 | `G 4684 G` | `G 4684` |
+| gr | Agricultural vehicles | 0/3 | `AM 56394` | `AM 6394` |
+| gr | Agricultural vehicles | 0/3 | `AM 58921` | `AM 8921` |
+| gr | Agricultural vehicles | 0/3 | `AM 66363` | `AM 6363` |
 | il | Diplomatic | 0/3 | `33-232-21` | `0 33-232-21` |
 | il | Diplomatic | 0/3 | `58-077-21` | `0 58-077-21` |
 | il | Diplomatic | 0/3 | `94-081-22` | `0 94-081-22` |
@@ -61,12 +64,6 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | kg | Diplomatic | 0/3 | `D 09 003` | `WHITE D 09 003` |
 | kg | Diplomatic | 0/3 | `D 26 004` | `WHITE D 26` |
 | kg | Diplomatic | 0/3 | `D 52 100` | `WHITE D 52` |
-| kh | Authorities | 0/3 | `2-0459` | `20 2-0459` |
-| kh | Authorities | 0/3 | `2-0504` | `20 2-0504` |
-| kh | Authorities | 0/3 | `5-0024` | `50 5-0024` |
-| kh | Vehicles w/o paid duty | 0/3 | `1-7172` | `10 1-7172` |
-| kh | Vehicles w/o paid duty | 0/3 | `1-9945` | `10 1-9945` |
-| kh | Vehicles w/o paid duty | 0/3 | `2-0831` | `20 2-0831` |
 | kz | Foreigners (2012) | 0/3 | `C 463 02` | `463 02 C` |
 | kz | Foreigners (2012) | 0/3 | `H 194 10` | `194 10 H` |
 | kz | Foreigners (2012) | 0/3 | `H 476 05` | `476 05 H` |
@@ -82,15 +79,8 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | me | Police | 0/3 | `P PG273` | `P TZG273` |
 | me | Police | 0/3 | `P PG288` | `P GSG288` |
 | me | Police | 0/3 | `P PG607` | `P GSG607` |
-| mn | Cars | 0/3 | `2294 БӨН` | `2294 - DIPLOMATIC MISSIONS Б` |
-| mn | Cars | 0/3 | `4067 УЕН` | `4067 - DIPLOMATIC MISSIONS У` |
-| mn | Cars | 0/3 | `9393 УБЦ` | `9393 - DIPLOMATIC MISSIONS У` |
-| mn | Special machinery | 0/3 | `7073 УН` | `7073 УН - ULAN BATOR CITY` |
-| mn | Special machinery | 0/3 | `7743 УР` | `7743 УР - ULAN BATOR CITY` |
-| mn | Special machinery | 0/3 | `8188 УН` | `8188 УН - ULAN BATOR CITY` |
-| mn | Motorcycles | 0/3 | `БӨЗ 3510` | `БӨЗ - DIPLOMATIC MISSIONS` |
-| mn | Motorcycles | 0/3 | `БӨЗ 5517` | `БӨЗ - DIPLOMATIC MISSIONS` |
-| mn | Motorcycles | 0/3 | `УК 2368` | `2368 УК - ULAN BATOR CITY` |
+| mn | Motorcycles | 1/3 | `БӨЗ 3510` | `БӨ З` |
+| mn | Motorcycles | 1/3 | `БӨЗ 5517` | `БӨ З` |
 | ps | Dealer | 0/3 | `62-100-76` | `6 2 100` |
 | ps | Dealer | 0/3 | `64-074-76` | `6 4 074` |
 | ps | Dealer | 0/3 | `65-067-76` | `6 5 067` |
@@ -133,12 +123,10 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | Pays | Règle | Catégories | Vérifiées | À corriger | À trouver | Galerie vide | Non testables | Page d'ajout |
 |---|---|---|---|---|---|---|---|---|
 | il Israel | generic | 8 | 5 | 3 |  |  |  | oui |
-| mn Mongolia | generic | 4 | 1 | 3 |  |  |  | oui |
 | ru Russia | own | 23 | 20 | 3 |  |  |  | oui |
 | ua Ukraine | own | 19 | 16 | 3 |  |  |  | oui |
 | cz Czech Republic | own | 22 | 19 | 2 |  | 1 |  | oui |
 | de Germany | own | 16 | 14 | 2 |  |  |  | oui |
-| kh Cambodia | generic | 7 | 4 | 2 |  | 1 |  | oui |
 | kz Kazakhstan | generic | 18 | 16 | 2 |  |  |  | oui |
 | sc Seychelles | generic | 9 | 6 | 2 |  | 1 |  | oui |
 | th Thailand | own | 9 | 7 | 2 |  |  |  | oui |
@@ -148,12 +136,14 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | cy Cyprus | generic | 5 | 4 | 1 |  |  |  | oui |
 | dk Denmark | own | 8 | 7 | 1 |  |  |  | oui |
 | gi Gibraltar (UK) | generic | 4 | 3 | 1 |  |  |  | oui |
+| gr Greece | own | 16 | 15 | 1 |  |  |  | oui |
 | ir Iran | own | 16 | 15 | 1 |  |  |  | oui |
 | it Italy | own | 14 | 13 | 1 |  |  |  | oui |
 | kg Kyrgyzstan | own | 12 | 11 | 1 |  |  |  | oui |
 | ma Morocco | generic | 2 | 1 | 1 |  |  |  | oui |
 | mc Monaco | generic | 4 | 3 | 1 |  |  |  | oui |
 | me Montenegro | own | 6 | 5 | 1 |  |  |  | oui |
+| mn Mongolia | own | 4 | 3 | 1 |  |  |  | oui |
 | ps Palestinian Authority | own | 6 | 5 | 1 |  |  |  | oui |
 | si Slovenia | own | 4 | 3 | 1 |  |  |  | oui |
 | sk Slovakia | own | 21 | 18 | 1 |  | 2 |  | oui |
@@ -182,7 +172,6 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | fr France | own | 17 | 17 |  |  |  |  | oui |
 | ge Georgia | generic | 12 | 12 |  |  |  |  | oui |
 | gg Guernsey (UK) | own | 3 | 3 |  |  |  |  | oui |
-| gr Greece | own | 16 | 16 |  |  |  |  | oui |
 | gu Guam (USA) | generic | 9 | 5 |  |  | 4 |  | oui |
 | hk Hong Kong (CN) | generic | 2 | 2 |  |  |  |  | oui |
 | hr Croatia | own | 11 | 11 |  |  |  |  | oui |
@@ -194,6 +183,7 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | je Jersey (UK) | generic | 2 | 2 |  |  |  |  | oui |
 | jp Japan | own | 4 | 4 |  |  |  |  | oui |
 | ke Kenya | generic | 12 | 12 |  |  |  |  | oui |
+| kh Cambodia | own | 7 | 6 |  |  | 1 |  | oui |
 | kr South Korea | own | 3 | 3 |  |  |  |  | oui |
 | kw Kuwait | generic | 4 | 4 |  |  |  |  | oui |
 | la Laos | own | 9 | 9 |  |  |  |  | oui |

@@ -17,6 +17,7 @@
     'li|Dealer (with "U")': { drop: ['FL', 'U'] },
     'gr|*': { order: ['region', 'b1', 'let', 'digit'] },
     'gr|Taxi': { order: ['b1', 'region', 'digit'] },
+    'mn|*': { order: ['region', 'b1', 'b2', 'digit'] },
     'jp|*': { right: true },
     'rs|Diplomatic': { order: ['region1', 'dip'] },
     'tj|Trailers (2009)': { order: ['region2', 'nomer'] },

@@ -1455,9 +1455,25 @@
    "failed": []
   },
   "Agricultural vehicles": {
-   "ok": 3,
+   "ok": 0,
    "total": 3,
-   "failed": []
+   "failed": [
+    {
+     "plate": "AM 56394",
+     "read": "AM 6394",
+     "status": "wrong"
+    },
+    {
+     "plate": "AM 58921",
+     "read": "AM 8921",
+     "status": "wrong"
+    },
+    {
+     "plate": "AM 66363",
+     "read": "AM 6363",
+     "status": "wrong"
+    }
+   ]
   },
   "Cars": {
    "ok": 3,
@@ -2318,25 +2334,9 @@
  },
  "kh": {
   "Authorities": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "2-0459",
-     "read": "20 2-0459",
-     "status": "wrong"
-    },
-    {
-     "plate": "2-0504",
-     "read": "20 2-0504",
-     "status": "wrong"
-    },
-    {
-     "plate": "5-0024",
-     "read": "50 5-0024",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Military": {
    "ok": 3,
@@ -2359,25 +2359,9 @@
    "failed": []
   },
   "Vehicles w/o paid duty": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "1-7172",
-     "read": "10 1-7172",
-     "status": "wrong"
-    },
-    {
-     "plate": "1-9945",
-     "read": "10 1-9945",
-     "status": "wrong"
-    },
-    {
-     "plate": "2-0831",
-     "read": "20 2-0831",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   }
  },
  "kr": {
@@ -2953,67 +2937,30 @@
  },
  "mn": {
   "Cars": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "2294 БӨН",
-     "read": "2294 - DIPLOMATIC MISSIONS Б",
-     "status": "not-fit"
-    },
-    {
-     "plate": "4067 УЕН",
-     "read": "4067 - DIPLOMATIC MISSIONS У",
-     "status": "not-fit"
-    },
-    {
-     "plate": "9393 УБЦ",
-     "read": "9393 - DIPLOMATIC MISSIONS У",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Motorcycles": {
-   "ok": 0,
+   "ok": 1,
    "total": 3,
    "failed": [
     {
      "plate": "БӨЗ 3510",
-     "read": "БӨЗ - DIPLOMATIC MISSIONS",
+     "read": "БӨ З",
      "status": "not-fit"
     },
     {
      "plate": "БӨЗ 5517",
-     "read": "БӨЗ - DIPLOMATIC MISSIONS",
+     "read": "БӨ З",
      "status": "not-fit"
-    },
-    {
-     "plate": "УК 2368",
-     "read": "2368 УК - ULAN BATOR CITY",
-     "status": "wrong"
     }
    ]
   },
   "Special machinery": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "7073 УН",
-     "read": "7073 УН - ULAN BATOR CITY",
-     "status": "wrong"
-    },
-    {
-     "plate": "7743 УР",
-     "read": "7743 УР - ULAN BATOR CITY",
-     "status": "wrong"
-    },
-    {
-     "plate": "8188 УН",
-     "read": "8188 УН - ULAN BATOR CITY",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Trailers": {
    "ok": 3,

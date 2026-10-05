@@ -172,10 +172,12 @@
         if (opt) { el.value = opt.value; el.dataset.ptSet = '1'; el.dataset.ptUsed = '1'; el.dispatchEvent(new Event('change', { bubbles: true })); i++; continue; }
         // "TT" over two one-letter menus, "EKB" over a menu of "EK" and one of "B": this menu takes the longest of its choices
         // that starts the piece, the rest carries on to the next field
-        const starts = [...el.options].filter(o => o.value && ptCanon(o.text.trim()) && want.startsWith(ptCanon(o.text.trim())) && ptCanon(o.text.trim()).length < want.length)
-          .sort((a, b) => b.text.trim().length - a.text.trim().length)[0];
+        // the label of a menu can be "БӨ - Bayan-Ölgii Province": its code (before the dash) is what the plate shows
+        const codeOf = o => ptCanon(o.text.split(/ - | \(/)[0].trim()) || ptCanon(o.text.trim());
+        const starts = [...el.options].filter(o => o.value && codeOf(o) && want.startsWith(codeOf(o)) && codeOf(o).length < want.length)
+          .sort((a, b) => codeOf(b).length - codeOf(a).length)[0];
         if (starts && !(ptKeepDigits && /^\d+$/.test(want))) {   // Thailand: a piece that is only digits is not cut into menu choices (the 1 of 1024)
-           el.value = starts.value; el.dataset.ptSet = '1'; el.dataset.ptUsed = '1'; el.dispatchEvent(new Event('change', { bubbles: true })); tokens[i] = tokens[i].slice(ptCanon(starts.text.trim()).length); continue; }
+          el.value = starts.value; el.dataset.ptSet = '1'; el.dataset.ptUsed = '1'; el.dispatchEvent(new Event('change', { bubbles: true })); tokens[i] = tokens[i].slice(codeOf(starts).length); continue; }
         // a later piece of the plate that is exactly one of this menu's choices (the 06 of "003 BS 06" for a region menu)
         const ahead = tokens.findIndex((t, k) => k > i && [...el.options].some(o => o.value && (ptCanon(o.text.trim()) === ptCanon(t) || ptCanon(o.value) === ptCanon(t))));
         if (ahead > i) {

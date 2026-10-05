@@ -594,6 +594,9 @@
   // Kyrgyzstan (2016 and later types): the region code (the menu reads "01 - Bishkek City"), then the plate text typed as it is.
   // The diplomatic type has its own set of fields (dip_*) and is read as a generic plate.
   PLATE_RULES.kg = () => fieldVal('ctype') === '10' ? genericPlate() : joinParts([menu('region').split(' - ')[0].trim(), shownVal('nomerpl')]);
+  // Cambodia: the authorities (5) and the vehicles without paid duty (7) have a province menu (region5, region7) that is not part of the
+  // plate (2-0459, 1-7172); the other types are read from their fields
+  PLATE_RULES.kh = () => ['5', '7'].includes(fieldVal('ctype')) ? shownVal('nomer') : genericPlate();
   // Korea: 29무 3759 / 경기50바 4521 = the province (commercial vehicles: the menu reads "경기 (Gyeonggi Province)"), the two digits, the
   // letter (a menu), then the four digits
   PLATE_RULES.kr = () => joinParts([menu('region').split(' (')[0].trim() + shownVal('digit1') + menu('let1') + menu('let2'), shownVal('digit')]);
@@ -622,6 +625,16 @@
     if (ctype === '5') return joinParts([menu('region'), ['b1', 'b2', 'b3', 'b4', 'b5'].map(menu).join('')]);
     if (ctype === '6') return joinParts([shownVal('police'), menu('region') + shownVal('digit')]);   // police: the P is written by the site
     return genericPlate();
+  };
+  // Mongolia: 2294 БӨН (cars: digits, then the region code БӨ and the letter Н), БӨЗ 3510 (motorcycles), 7073 УН (special machinery).
+  // The region menu reads "БН - Bayankhongor Province": the code is the part before the dash (none for "- Diplomatic missions").
+  PLATE_RULES.mn = () => {
+    const ctype = fieldVal('ctype'), shown = menu('region'), digit = shownVal('digit');
+    const code = shown.startsWith('-') ? '' : shown.split(' - ')[0].trim();
+    if (ctype === '1') return joinParts([digit, code + menu('b1')]);
+    if (ctype === '2') return joinParts([digit, menu('b1') + menu('b2')]);        // trailers: 6079 ОЧ
+    if (ctype === '4') return joinParts([code + menu('b1'), digit]);
+    return joinParts([digit, code]);
   };
   // Poland: CNA 32756 = region menu (only when shown) + b1 (one more letter or digit: K0, ROK) + nomerpl; diplomatic (12): W 016600 = the W
   // written by the site, the code menu, then three digits
