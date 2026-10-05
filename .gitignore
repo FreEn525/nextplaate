@@ -18,6 +18,7 @@
 !docs/**
 !logo_nextplaate.svg
 !pytest.ini
+!CHANGELOG.md
 !.gitattributes
 __pycache__/
 *.pyc
