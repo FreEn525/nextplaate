@@ -7,7 +7,8 @@
     del(k) { try { localStorage.removeItem('pmg_' + k); } catch (e) {} }
   };
   // Console log of what the script sees (keys, window, drawers). Off with: localStorage.setItem('pmg_debug', '0')
-  const log = (...args) => { if (store.get('debug', '1') === '1') console.log('[NextPlaate]', ...args); };
+  // logs are on in the dev build only: scripts/build.mjs sets the default ('1' dev, '0' public)
+  const log = (...args) => { if (store.get('debug', '__DEBUG__') === '1') console.log('[NextPlaate]', ...args); };
   const loadPhoto = k => { try { return JSON.parse(store.get(k, 'null')); } catch (e) { return null; } };
 
   const state = {
