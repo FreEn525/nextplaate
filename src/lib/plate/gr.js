@@ -8,5 +8,6 @@
     const digits = shownVal('digit');
     const written = shownVal('let') || shownVal('bfixed').replace(/\./g, '');
     if (written) return joinParts([written + menu('b1'), digits]);                               // private trailers: the T written by the site, then the letter
-    return joinParts([menu('region') + menu('b1'), digits]);                                     // the two-letter code, then the letter: IA Z
+    // cars and most types: the letter, then the two-letter code (I AZ = IAZ, checked by hand on the site); trucks: the code, then the letter (EK B)
+    return joinParts([ctype === '4' ? menu('region') + menu('b1') : menu('b1') + menu('region'), digits]);
   };

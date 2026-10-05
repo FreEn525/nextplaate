@@ -512,7 +512,8 @@
     const digits = shownVal('digit');
     const written = shownVal('let') || shownVal('bfixed').replace(/\./g, '');
     if (written) return joinParts([written + menu('b1'), digits]);                               // private trailers: the T written by the site, then the letter
-    return joinParts([menu('region') + menu('b1'), digits]);                                     // the two-letter code, then the letter: IA Z
+    // cars and most types: the letter, then the two-letter code (I AZ = IAZ, checked by hand on the site); trucks: the code, then the letter (EK B)
+    return joinParts([ctype === '4' ? menu('region') + menu('b1') : menu('b1') + menu('region'), digits]);
   };
   // Croatia: ZG 8899-JB; vanity (5) is region + the letter boxes shown: ZG ZMAJ. Dealer and oldtimers: OS PP-178, KR PV-081
   // (the letters PP, PV are written by the site in a disabled field); export transit and military: RH 199-BE, HV 236-MP (the
