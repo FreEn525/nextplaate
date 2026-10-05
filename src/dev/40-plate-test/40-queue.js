@@ -1,11 +1,11 @@
   // Fills the missing plates of every country, one after the other (same pauses and resume as the other runs)
-  // The categories of a country from the search page kept by the capture (no request to the site); null if not kept
+  // The categories of a country from the search page kept by the capture (no request to the site); null if not kept, [] if it has none
   function ptTypesKept(cc, all) {
     const html = all['search:' + cc];
     if (!html) return null;
     const doc = new DOMParser().parseFromString(html, 'text/html');
     const sel = doc.querySelector('select[name="ctype"]');
-    if (!sel) return null;
+    if (!sel) return [];                                         // a search page without categories (a region filter only): nothing to fill
     return [...sel.options].filter(o => o.value).map(o => ({ code: o.value, label: o.textContent.trim() }));
   }
 

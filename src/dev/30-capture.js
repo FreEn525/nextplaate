@@ -3,12 +3,10 @@
    *    Opens /xx/add (or /xx/search) for each country, one after the other, keeps each page in the browser
    *    (IndexedDB), and writes them to a folder you choose. Read-only: no form, no plate typed.
    * ===================================================================== */
-  // Countries with a captured upload page: the plate tests run on these. Add a code here once its page is kept.
-  const TEST_COUNTRIES = ['ad', 'al', 'at', 'ba', 'be', 'bg', 'by', 'ch', 'cz', 'de', 'dk', 'dz', 'ee', 'es', 'fi', 'fr',
-    'gg', 'gr', 'hr', 'hu', 'ie', 'is', 'it', 'lt', 'li', 'lu', 'lv', 'ma', 'md', 'me', 'mk', 'mt', 'nl', 'no', 'pl',
-    'pt', 'ro', 'rs', 'ru', 'se', 'si', 'sk', 'tj', 'tr', 'ua', 'uk', 'uz'];
   // Every country of the site: the capture tries each one and records the ones that have no such page (skip:xx)
   const SITE_CODES = COUNTRIES.map(c => c.code);
+  // The countries the plate tests and the fill run go through: all of them have an upload page now (the 96 pages are kept)
+  const TEST_COUNTRIES = SITE_CODES;
   const CAPTURE_PAUSE_MS = 4000;     // between two countries
   const CAPTURE_LOAD_MS = 1500;      // let a page finish before keeping it
   const CAPTURE_RUN = 'nextplaate-capture';        // the countries left in the run (sessionStorage)
