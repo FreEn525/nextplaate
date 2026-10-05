@@ -1,0 +1,93 @@
+[
+  {
+    "category": "1972 year system",
+    "plate": "IN-3661",
+    "read": "IN-3661",
+    "count": 1,
+    "date": "2026-10-05T01:10:17.259Z"
+  },
+  {
+    "category": "1972 year system",
+    "plate": "IN-4662",
+    "read": "IN-4662",
+    "count": 1,
+    "date": "2026-10-05T01:10:20.260Z"
+  },
+  {
+    "category": "1972 year system",
+    "plate": "IN-5515",
+    "read": "IN-5515",
+    "count": 1,
+    "date": "2026-10-05T01:10:23.233Z"
+  },
+  {
+    "category": "Cars",
+    "plate": "ITI-9245",
+    "read": "ITI 9245",
+    "count": 1,
+    "date": "2026-10-05T01:09:40.319Z"
+  },
+  {
+    "category": "Cars",
+    "plate": "KOP-2292",
+    "read": "KOP 2292",
+    "count": 1,
+    "date": "2026-10-05T01:09:40.676Z"
+  },
+  {
+    "category": "Cars",
+    "plate": "XPI-2312",
+    "read": "XPI 2312",
+    "count": 1,
+    "date": "2026-10-05T01:09:41.035Z"
+  },
+  {
+    "category": "Mopeds",
+    "plate": "BAI 945",
+    "read": "BAI 945",
+    "count": 1,
+    "date": "2026-10-05T01:10:35.220Z"
+  },
+  {
+    "category": "Mopeds",
+    "plate": "ZHE 3130",
+    "read": "ZHE 3130",
+    "count": 1,
+    "date": "2026-10-05T01:10:38.233Z"
+  },
+  {
+    "category": "Mopeds",
+    "plate": "ZHE 3860",
+    "read": "ZHE 3860",
+    "count": 1,
+    "date": "2026-10-05T01:10:41.238Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "NIH-898",
+    "read": "NIH 898",
+    "count": 1,
+    "date": "2026-10-05T01:10:06.301Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "PKK-752",
+    "read": "PKK 752",
+    "count": 1,
+    "date": "2026-10-05T01:10:06.663Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "PNA-381",
+    "read": "PNA 381",
+    "count": 1,
+    "date": "2026-10-05T01:10:07.022Z"
+  },
+  {
+    "category": "Tax-exempt vehicles",
+    "plate": "EEE-5204",
+    "read": "EEE 5204",
+    "count": 1,
+    "date": "2026-10-05T01:09:47.619Z"
+  }
+]

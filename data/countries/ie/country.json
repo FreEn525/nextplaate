@@ -1,0 +1,41 @@
+{
+  "code": "ie",
+  "name": "Ireland",
+  "upload": {
+    "typeMenu": true,
+    "hooks": ["disie"],
+    "types": [
+      {
+        "id": "1",
+        "label": "Regular plates",
+        "visible": ["digit1", "region", "fon", "digit2"]
+      },
+      {
+        "id": "2",
+        "label": "Trailers",
+        "visible": ["let", "fon", "digit2"]
+      },
+      {
+        "id": "3",
+        "label": "Oldtimers",
+        "visible": ["fon", "digit2"]
+      }
+    ]
+  },
+  "search": {
+    "categories": [
+      {
+        "id": "1",
+        "label": "Regular plates"
+      },
+      {
+        "id": "2",
+        "label": "Trailers"
+      },
+      {
+        "id": "3",
+        "label": "Oldtimers"
+      }
+    ]
+  }
+}

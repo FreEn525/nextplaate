@@ -1,0 +1,176 @@
+{
+  "code": "by",
+  "name": "Belarus",
+  "upload": {
+    "typeMenu": true,
+    "hooks": ["disby1"],
+    "types": [
+      {
+        "id": "1",
+        "label": "Cars (2004)",
+        "visible": ["b3", "b4", "region5", "fon", "digit1"]
+      },
+      {
+        "id": "2",
+        "label": "Trucks and buses (2004)",
+        "visible": ["b1", "b2", "region5", "fon", "digit1"]
+      },
+      {
+        "id": "3",
+        "label": "Diplomatic",
+        "visible": ["region5", "fon", "digit1", "dip"]
+      },
+      {
+        "id": "4",
+        "label": "Electric vehicles (cars)",
+        "visible": ["b3", "b4", "region5", "fon", "digit1"]
+      },
+      {
+        "id": "5",
+        "label": "Trailers and semitrailers (2004)",
+        "visible": ["b1", "b3", "region5", "fon", "digit1"]
+      },
+      {
+        "id": "6",
+        "label": "Motorcycles (2004)",
+        "visible": ["b3", "b4", "region5", "fon2", "digit1"]
+      },
+      {
+        "id": "7",
+        "label": "Special machinery (2004)",
+        "visible": ["b1", "b2", "region1", "digit1"]
+      },
+      {
+        "id": "8",
+        "label": "Electric vehicles (trucks and buses)",
+        "visible": ["b1", "b2", "region5", "fon", "digit1"]
+      },
+      {
+        "id": "9",
+        "label": "Electric vehicles (motorcycles)",
+        "visible": ["b3", "b4", "region5", "digit1"]
+      },
+      {
+        "id": "12",
+        "label": "Transit plates (2004)",
+        "visible": ["b3", "b4", "region1", "trz", "digit2"]
+      },
+      {
+        "id": "13",
+        "label": "Cars (2000)",
+        "visible": ["b3", "b4", "region3", "fon", "digit1"]
+      },
+      {
+        "id": "14",
+        "label": "Cars (1992)",
+        "visible": ["region4", "fon", "digit1"]
+      },
+      {
+        "id": "15",
+        "label": "Trucks and buses (1992)",
+        "visible": ["region4", "fon", "digit2"]
+      },
+      {
+        "id": "16",
+        "label": "Trailers (1992)",
+        "visible": ["b1", "b3", "region4", "fon1", "digit1"]
+      },
+      {
+        "id": "17",
+        "label": "Taxi",
+        "visible": ["b3", "b4", "region1", "tx", "digit2"]
+      },
+      {
+        "id": "18",
+        "label": "Provisional",
+        "visible": ["b3", "b4", "trz", "digit2"]
+      },
+      {
+        "id": "19",
+        "label": "Foreign citizens and enterprises",
+        "visible": ["fon", "nonr", "digit2"]
+      },
+      {
+        "id": "20",
+        "label": "Police",
+        "visible": ["region6", "fon", "digit1"]
+      }
+    ]
+  },
+  "search": {
+    "categories": [
+      {
+        "id": "1",
+        "label": "Cars (2004)"
+      },
+      {
+        "id": "2",
+        "label": "Trucks and buses (2004)"
+      },
+      {
+        "id": "5",
+        "label": "Trailers and semitrailers (2004)"
+      },
+      {
+        "id": "6",
+        "label": "Motorcycles (2004)"
+      },
+      {
+        "id": "7",
+        "label": "Special machinery (2004)"
+      },
+      {
+        "id": "12",
+        "label": "Transit plates (2004)"
+      },
+      {
+        "id": "13",
+        "label": "Cars (2000)"
+      },
+      {
+        "id": "14",
+        "label": "Cars (1992)"
+      },
+      {
+        "id": "15",
+        "label": "Trucks and buses (1992)"
+      },
+      {
+        "id": "16",
+        "label": "Trailers (1992)"
+      },
+      {
+        "id": "17",
+        "label": "Taxi"
+      },
+      {
+        "id": "18",
+        "label": "Provisional"
+      },
+      {
+        "id": "19",
+        "label": "Foreign citizens and enterprises"
+      },
+      {
+        "id": "20",
+        "label": "Police"
+      },
+      {
+        "id": "3",
+        "label": "Diplomatic"
+      },
+      {
+        "id": "4",
+        "label": "Electric vehicles (cars)"
+      },
+      {
+        "id": "8",
+        "label": "Electric vehicles (trucks and buses)"
+      },
+      {
+        "id": "9",
+        "label": "Electric vehicles (motorcycles)"
+      }
+    ]
+  }
+}

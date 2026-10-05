@@ -1,0 +1,380 @@
+[
+  {
+    "category": "Diplomatic",
+    "plate": "60 K 858",
+    "read": "60 K 858",
+    "count": 2,
+    "date": "2026-10-05T01:09:15.234Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "431 K 12770",
+    "read": "431 K 12770",
+    "count": 1,
+    "date": "2026-10-05T01:09:14.875Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "U 294 CMD 1",
+    "read": "U 294 CMD 1",
+    "count": 2,
+    "date": "2026-10-05T01:09:15.595Z"
+  },
+  {
+    "category": "FNI (administration)",
+    "plate": "DZN 1390A",
+    "read": "DZN 1390A",
+    "count": 1,
+    "date": "2026-10-05T01:09:04.252Z"
+  },
+  {
+    "category": "FNI (administration)",
+    "plate": "DZN 1392A",
+    "read": "DZN 1392A",
+    "count": 1,
+    "date": "2026-10-05T01:09:04.607Z"
+  },
+  {
+    "category": "FNI (administration)",
+    "plate": "DZN 1393A",
+    "read": "DZN 1393A",
+    "count": 1,
+    "date": "2026-10-05T01:09:04.961Z"
+  },
+  {
+    "category": "FNI (agricultural machinery)",
+    "plate": "8365 65",
+    "read": "8365 65",
+    "count": 1,
+    "date": "2026-10-05T01:09:03.190Z"
+  },
+  {
+    "category": "FNI (agricultural machinery)",
+    "plate": "19805 62",
+    "read": "19805 62",
+    "count": 2,
+    "date": "2026-10-05T01:09:02.482Z"
+  },
+  {
+    "category": "FNI (agricultural machinery)",
+    "plate": "51231 60",
+    "read": "51231 60",
+    "count": 1,
+    "date": "2026-10-05T01:09:02.836Z"
+  },
+  {
+    "category": "FNI (free zones)",
+    "plate": "1845 TT 3W",
+    "read": "1845 TT 3W",
+    "count": 4,
+    "date": "2026-10-05T01:08:59.649Z"
+  },
+  {
+    "category": "FNI (free zones)",
+    "plate": "14897 TT W",
+    "read": "14897 TT W",
+    "count": 1,
+    "date": "2026-10-05T01:08:58.942Z"
+  },
+  {
+    "category": "FNI (free zones)",
+    "plate": "17821 TT W",
+    "read": "17821 TT W",
+    "count": 1,
+    "date": "2026-10-05T01:08:59.295Z"
+  },
+  {
+    "category": "FNI (regular)",
+    "plate": "333 LL 75",
+    "read": "333 LL 75",
+    "count": 1,
+    "date": "2026-10-05T01:08:57.175Z"
+  },
+  {
+    "category": "FNI (regular)",
+    "plate": "5059 YY 35",
+    "read": "5059 YY 35",
+    "count": 1,
+    "date": "2026-10-05T01:08:57.529Z"
+  },
+  {
+    "category": "FNI (regular)",
+    "plate": "9360 ZF 67",
+    "read": "9360 ZF 67",
+    "count": 1,
+    "date": "2026-10-05T01:08:57.882Z"
+  },
+  {
+    "category": "FNI (transit)",
+    "plate": "644 TJW 92",
+    "read": "644 TJW 92",
+    "count": 1,
+    "date": "2026-10-05T01:09:00.712Z"
+  },
+  {
+    "category": "FNI (transit)",
+    "plate": "733 TXH 75",
+    "read": "733 TXH 75",
+    "count": 1,
+    "date": "2026-10-05T01:09:01.066Z"
+  },
+  {
+    "category": "FNI (transit)",
+    "plate": "791 TNE 92",
+    "read": "791 TNE 92",
+    "count": 1,
+    "date": "2026-10-05T01:09:01.421Z"
+  },
+  {
+    "category": "French military in Germany",
+    "plate": "RF GG 2613",
+    "read": "RF-GG-2613",
+    "count": 1,
+    "date": "2026-10-05T01:09:09.562Z"
+  },
+  {
+    "category": "French military in Germany",
+    "plate": "RF TK 2518",
+    "read": "RF-TK-2518",
+    "count": 1,
+    "date": "2026-10-05T01:09:09.917Z"
+  },
+  {
+    "category": "French military in Germany",
+    "plate": "RF VD 2474",
+    "read": "RF-VD-2474",
+    "count": 1,
+    "date": "2026-10-05T01:09:10.271Z"
+  },
+  {
+    "category": "German military in France",
+    "plate": "DF 2511",
+    "read": "DF-2511",
+    "count": 1,
+    "date": "2026-10-05T01:09:07.793Z"
+  },
+  {
+    "category": "German military in France",
+    "plate": "DF 7075",
+    "read": "DF-7075",
+    "count": 1,
+    "date": "2026-10-05T01:09:08.147Z"
+  },
+  {
+    "category": "German military in France",
+    "plate": "DF 7266",
+    "read": "DF-7266",
+    "count": 1,
+    "date": "2026-10-05T01:09:08.500Z"
+  },
+  {
+    "category": "Military",
+    "plate": "2281133",
+    "read": "2281133",
+    "count": 1,
+    "date": "2026-10-05T01:09:06.025Z"
+  },
+  {
+    "category": "Military",
+    "plate": "6712819",
+    "read": "6712819",
+    "count": 4,
+    "date": "2026-10-05T01:09:06.732Z"
+  },
+  {
+    "category": "Military",
+    "plate": "61630288",
+    "read": "61630288",
+    "count": 1,
+    "date": "2026-10-05T01:09:06.378Z"
+  },
+  {
+    "category": "Mopeds",
+    "plate": "BB 908 W",
+    "read": "BB 908 W",
+    "count": 1,
+    "date": "2026-10-05T01:09:11.331Z"
+  },
+  {
+    "category": "Mopeds",
+    "plate": "BE 283 Z",
+    "read": "BE 283 Z",
+    "count": 1,
+    "date": "2026-10-05T01:09:11.684Z"
+  },
+  {
+    "category": "Mopeds",
+    "plate": "Y 379 G",
+    "read": "Y 379 G",
+    "count": 1,
+    "date": "2026-10-05T01:09:12.038Z"
+  },
+  {
+    "category": "Paris Fire Brigade",
+    "plate": "PS 26",
+    "read": "PS-26",
+    "count": 1,
+    "date": "2026-10-05T01:09:13.452Z"
+  },
+  {
+    "category": "Paris Fire Brigade",
+    "plate": "PS 225",
+    "read": "PS-225",
+    "count": 1,
+    "date": "2026-10-05T01:09:13.098Z"
+  },
+  {
+    "category": "Paris Fire Brigade",
+    "plate": "VPS 2",
+    "read": "VPS-2",
+    "count": 1,
+    "date": "2026-10-05T01:09:13.805Z"
+  },
+  {
+    "category": "SIV (free zones)",
+    "plate": "FG-257-TN",
+    "read": "FG-257-TN",
+    "count": 1,
+    "date": "2026-10-05T01:08:55.408Z"
+  },
+  {
+    "category": "SIV (free zones)",
+    "plate": "GE-865-ZD",
+    "read": "GE-865-ZD",
+    "count": 1,
+    "date": "2026-10-05T01:08:55.762Z"
+  },
+  {
+    "category": "SIV (free zones)",
+    "plate": "HM-503-NJ",
+    "read": "HM-503-NJ",
+    "count": 1,
+    "date": "2026-10-05T01:08:56.116Z"
+  },
+  {
+    "category": "SIV (garage)",
+    "plate": "W-046-NP",
+    "read": "W 046 NP",
+    "count": 3,
+    "date": "2026-10-05T01:08:53.638Z"
+  },
+  {
+    "category": "SIV (garage)",
+    "plate": "W-333-DE",
+    "read": "W 333 DE",
+    "count": 1,
+    "date": "2026-10-05T01:08:53.992Z"
+  },
+  {
+    "category": "SIV (garage)",
+    "plate": "W-813-EN",
+    "read": "W 813 EN",
+    "count": 1,
+    "date": "2026-10-05T01:08:54.345Z"
+  },
+  {
+    "category": "SIV (oldtimers)",
+    "plate": "CV-471-SF",
+    "read": "CV-471-SF",
+    "count": 1,
+    "date": "2026-10-05T01:08:51.867Z"
+  },
+  {
+    "category": "SIV (oldtimers)",
+    "plate": "ER-896-XA",
+    "read": "ER-896-XA",
+    "count": 1,
+    "date": "2026-10-05T01:08:52.222Z"
+  },
+  {
+    "category": "SIV (oldtimers)",
+    "plate": "HM-738-BN",
+    "read": "HM-738-BN",
+    "count": 1,
+    "date": "2026-10-05T01:08:52.575Z"
+  },
+  {
+    "category": "SIV (ordinary)",
+    "plate": "AB-257-VH",
+    "read": "AB-257-VH",
+    "count": 1,
+    "date": "2026-10-05T01:08:46.558Z"
+  },
+  {
+    "category": "SIV (ordinary)",
+    "plate": "EZ-631-HG",
+    "read": "EZ-631-HG",
+    "count": 1,
+    "date": "2026-10-05T01:08:46.914Z"
+  },
+  {
+    "category": "SIV (ordinary)",
+    "plate": "GA-470-HY",
+    "read": "GA-470-HY",
+    "count": 1,
+    "date": "2026-10-05T01:08:47.268Z"
+  },
+  {
+    "category": "SIV (ordinary)",
+    "plate": "GW-461-PM",
+    "read": "GW-461-PM",
+    "count": 1,
+    "date": "2026-10-04T23:36:07.251Z"
+  },
+  {
+    "category": "SIV (ordinary)",
+    "plate": "HB-383-JJ",
+    "read": "HB-383-JJ",
+    "count": 1,
+    "date": "2026-10-04T23:31:27.622Z"
+  },
+  {
+    "category": "SIV (ordinary)",
+    "plate": "HF-962-FM",
+    "read": "HF-962-FM",
+    "count": 1,
+    "date": "2026-10-04T23:31:30.617Z"
+  },
+  {
+    "category": "SIV (temporary)",
+    "plate": "WW-254-DW",
+    "read": "WW-254-DW",
+    "count": 1,
+    "date": "2026-10-05T01:08:48.329Z"
+  },
+  {
+    "category": "SIV (temporary)",
+    "plate": "WW-295-BD",
+    "read": "WW-295-BD",
+    "count": 1,
+    "date": "2026-10-05T01:08:48.683Z"
+  },
+  {
+    "category": "SIV (temporary)",
+    "plate": "WW-518-JF",
+    "read": "WW-518-JF",
+    "count": 1,
+    "date": "2026-10-05T01:08:49.037Z"
+  },
+  {
+    "category": "SIV (transit plates)",
+    "plate": "HL-670-GQ",
+    "read": "HL-670-GQ",
+    "count": 1,
+    "date": "2026-10-05T01:08:50.098Z"
+  },
+  {
+    "category": "SIV (transit plates)",
+    "plate": "HM-235-JD",
+    "read": "HM-235-JD",
+    "count": 1,
+    "date": "2026-10-05T01:08:50.452Z"
+  },
+  {
+    "category": "SIV (transit plates)",
+    "plate": "HM-624-XX",
+    "read": "HM-624-XX",
+    "count": 1,
+    "date": "2026-10-05T01:08:50.806Z"
+  }
+]

@@ -1,0 +1,86 @@
+{
+  "code": "md",
+  "name": "Moldova",
+  "upload": {
+    "typeMenu": true,
+    "hooks": ["dismdn"],
+    "types": [
+      {
+        "id": "1",
+        "label": "Cars (1992)",
+        "visible": ["let1", "region1", "fon", "digit"]
+      },
+      {
+        "id": "2",
+        "label": "Motorcycles (1992)",
+        "visible": ["let1", "region1", "fon", "digit"]
+      },
+      {
+        "id": "3",
+        "label": "Trailers (1992)",
+        "visible": ["let2", "region1", "fon", "digit"]
+      },
+      {
+        "id": "5",
+        "label": "Cars (2015)",
+        "visible": ["let3", "fon", "digit"]
+      },
+      {
+        "id": "6",
+        "label": "Motorcycles (2015)",
+        "visible": ["let4", "fon", "digit"]
+      },
+      {
+        "id": "7",
+        "label": "Trailers (2015)",
+        "visible": ["let2", "let3", "fon", "digit"]
+      },
+      {
+        "id": "8",
+        "label": "Public transport (1992)",
+        "visible": ["let1", "region1", "fon", "digit"]
+      },
+      {
+        "id": "9",
+        "label": "Public transport (2015)",
+        "visible": ["let3", "fon", "digit"]
+      }
+    ]
+  },
+  "search": {
+    "categories": [
+      {
+        "id": "1",
+        "label": "Cars (1992)"
+      },
+      {
+        "id": "2",
+        "label": "Motorcycles (1992)"
+      },
+      {
+        "id": "3",
+        "label": "Trailers (1992)"
+      },
+      {
+        "id": "5",
+        "label": "Cars (2015)"
+      },
+      {
+        "id": "6",
+        "label": "Motorcycles (2015)"
+      },
+      {
+        "id": "7",
+        "label": "Trailers (2015)"
+      },
+      {
+        "id": "8",
+        "label": "Public transport (1992)"
+      },
+      {
+        "id": "9",
+        "label": "Public transport (2015)"
+      }
+    ]
+  }
+}

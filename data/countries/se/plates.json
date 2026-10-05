@@ -1,0 +1,170 @@
+[
+  {
+    "category": "Dealer",
+    "plate": "FAJ 04A",
+    "read": "FAJ 04A",
+    "count": 1,
+    "date": "2026-10-05T01:24:57.665Z"
+  },
+  {
+    "category": "Dealer",
+    "plate": "PTY 493",
+    "read": "PTY 493",
+    "count": 2,
+    "date": "2026-10-05T01:24:58.019Z"
+  },
+  {
+    "category": "Dealer",
+    "plate": "XAC 710",
+    "read": "XAC 710",
+    "count": 1,
+    "date": "2026-10-05T01:24:58.376Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "AC007C",
+    "read": "AC007C",
+    "count": 1,
+    "date": "2026-10-05T01:25:04.755Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "BJ003B",
+    "read": "BJ003B",
+    "count": 1,
+    "date": "2026-10-05T01:25:05.109Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "BS002C",
+    "read": "BS002C",
+    "count": 2,
+    "date": "2026-10-05T01:25:05.464Z"
+  },
+  {
+    "category": "Military",
+    "plate": "10690",
+    "read": "10690",
+    "count": 2,
+    "date": "2026-10-05T01:25:03.340Z"
+  },
+  {
+    "category": "Military",
+    "plate": "66530",
+    "read": "66530",
+    "count": 1,
+    "date": "2026-10-05T01:25:03.695Z"
+  },
+  {
+    "category": "Military",
+    "plate": "103622",
+    "read": "103622",
+    "count": 1,
+    "date": "2026-10-05T01:25:02.986Z"
+  },
+  {
+    "category": "Regular plates",
+    "plate": "EWA 79W",
+    "read": "EWA 79W",
+    "count": 1,
+    "date": "2026-10-05T01:24:52.354Z"
+  },
+  {
+    "category": "Regular plates",
+    "plate": "HBC 930",
+    "read": "HBC 930",
+    "count": 2,
+    "date": "2026-10-05T01:24:52.709Z"
+  },
+  {
+    "category": "Regular plates",
+    "plate": "OZF 60G",
+    "read": "OZF 60G",
+    "count": 2,
+    "date": "2026-10-05T01:24:53.064Z"
+  },
+  {
+    "category": "Sportcars",
+    "plate": "ECZ 437",
+    "read": "ECZ 437",
+    "count": 1,
+    "date": "2026-10-05T01:25:01.213Z"
+  },
+  {
+    "category": "Sportcars",
+    "plate": "SKG 139",
+    "read": "SKG 139",
+    "count": 1,
+    "date": "2026-10-05T01:25:01.569Z"
+  },
+  {
+    "category": "Sportcars",
+    "plate": "XFC 098",
+    "read": "XFC 098",
+    "count": 1,
+    "date": "2026-10-05T01:25:01.926Z"
+  },
+  {
+    "category": "Taxi",
+    "plate": "ADJ 02L",
+    "read": "ADJ 02L",
+    "count": 1,
+    "date": "2026-10-05T01:24:55.893Z"
+  },
+  {
+    "category": "Taxi",
+    "plate": "STR 95F",
+    "read": "STR 95F",
+    "count": 2,
+    "date": "2026-10-05T01:24:56.250Z"
+  },
+  {
+    "category": "Taxi",
+    "plate": "ZGA 177",
+    "read": "ZGA 177",
+    "count": 1,
+    "date": "2026-10-05T01:24:56.604Z"
+  },
+  {
+    "category": "Transit plates",
+    "plate": "FTR 45F",
+    "read": "FTR 45F",
+    "count": 1,
+    "date": "2026-10-05T01:24:59.441Z"
+  },
+  {
+    "category": "Transit plates",
+    "plate": "GLD 56G",
+    "read": "GLD 56G",
+    "count": 2,
+    "date": "2026-10-05T01:24:59.796Z"
+  },
+  {
+    "category": "Transit plates",
+    "plate": "HDN 84T",
+    "read": "HDN 84T",
+    "count": 2,
+    "date": "2026-10-05T01:25:00.150Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "20832",
+    "read": "20832",
+    "count": 2,
+    "date": "2026-10-05T01:24:54.123Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "BLUM 3",
+    "read": "BLUM 3",
+    "count": 1,
+    "date": "2026-10-05T01:24:54.477Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "VIHÖRS",
+    "read": "VIHÖRS",
+    "count": 2,
+    "date": "2026-10-05T01:24:54.831Z"
+  }
+]

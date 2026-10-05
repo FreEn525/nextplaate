@@ -1,0 +1,233 @@
+[
+  {
+    "category": "Cars (2001)",
+    "plate": "1CA 8407",
+    "read": "1CA 8407",
+    "count": 1,
+    "date": "2026-10-05T01:45:18.737Z"
+  },
+  {
+    "category": "Cars (2001)",
+    "plate": "7H7 8909",
+    "read": "7H7 8909",
+    "count": 1,
+    "date": "2026-10-05T01:45:19.096Z"
+  },
+  {
+    "category": "Cars (2001)",
+    "plate": "9C2 1553",
+    "read": "9C2 1553",
+    "count": 2,
+    "date": "2026-10-05T01:45:19.455Z"
+  },
+  {
+    "category": "Dealer (2001)",
+    "plate": "E 3782",
+    "read": "E3 782",
+    "count": 0,
+    "date": "2026-10-05T01:45:22.297Z"
+  },
+  {
+    "category": "Dealer (2001)",
+    "plate": "F 6097",
+    "read": "F 6097",
+    "count": 1,
+    "date": "2026-10-05T01:45:22.654Z"
+  },
+  {
+    "category": "Dealer (2001)",
+    "plate": "T 4025",
+    "read": "T4 025",
+    "count": 0,
+    "date": "2026-10-05T01:45:23.012Z"
+  },
+  {
+    "category": "Diplomatic (2004)",
+    "plate": "011 HC08",
+    "read": "011HC08",
+    "count": 0,
+    "date": "2026-10-05T01:46:05.870Z"
+  },
+  {
+    "category": "Diplomatic (2004)",
+    "plate": "023 XX15",
+    "read": "023XX15",
+    "count": 0,
+    "date": "2026-10-05T01:46:06.224Z"
+  },
+  {
+    "category": "Diplomatic (2004)",
+    "plate": "061 CD23",
+    "read": "061CD23",
+    "count": 0,
+    "date": "2026-10-05T01:46:06.579Z"
+  },
+  {
+    "category": "Diplomatic (2025)",
+    "plate": "001 42CD",
+    "read": "00142CD",
+    "count": 0,
+    "date": "2026-10-05T01:46:24.575Z"
+  },
+  {
+    "category": "Diplomatic (2025)",
+    "plate": "002 28CD",
+    "read": "00228CD",
+    "count": 0,
+    "date": "2026-10-05T01:46:24.932Z"
+  },
+  {
+    "category": "Diplomatic (2025)",
+    "plate": "006 26CD",
+    "read": "00626CD",
+    "count": 0,
+    "date": "2026-10-05T01:46:25.286Z"
+  },
+  {
+    "category": "Export transit plates",
+    "plate": "4SJ E3E",
+    "read": "4SJ E3E",
+    "count": 1,
+    "date": "2026-10-05T01:46:07.637Z"
+  },
+  {
+    "category": "Export transit plates",
+    "plate": "8SK M6E",
+    "read": "8SK M6E",
+    "count": 1,
+    "date": "2026-10-05T01:46:07.990Z"
+  },
+  {
+    "category": "Export transit plates",
+    "plate": "AL6 LZE",
+    "read": "AL6 LZE",
+    "count": 3,
+    "date": "2026-10-05T01:46:08.343Z"
+  },
+  {
+    "category": "Mopeds (1956)",
+    "plate": "JC-3476",
+    "read": "JC 3476",
+    "count": 1,
+    "date": "2026-10-05T01:46:27.165Z"
+  },
+  {
+    "category": "Mopeds (1956)",
+    "plate": "PB-11855",
+    "read": "PB 11855",
+    "count": 1,
+    "date": "2026-10-05T01:46:27.520Z"
+  },
+  {
+    "category": "Mopeds (1956)",
+    "plate": "ŠUK-1491",
+    "read": "ŠUK 1491",
+    "count": 1,
+    "date": "2026-10-05T01:46:27.877Z"
+  },
+  {
+    "category": "Mopeds (2001)",
+    "plate": "B0 249",
+    "read": "B0 249",
+    "count": 1,
+    "date": "2026-10-05T01:46:22.805Z"
+  },
+  {
+    "category": "Mopeds (2001)",
+    "plate": "B1 037",
+    "read": "B1 037",
+    "count": 1,
+    "date": "2026-10-05T01:46:23.160Z"
+  },
+  {
+    "category": "Mopeds (2001)",
+    "plate": "B3 429",
+    "read": "B3 429",
+    "count": 1,
+    "date": "2026-10-05T01:46:23.514Z"
+  },
+  {
+    "category": "Motorcycles (2001)",
+    "plate": "2A B016",
+    "read": "2A B016",
+    "count": 1,
+    "date": "2026-10-05T01:45:20.518Z"
+  },
+  {
+    "category": "Motorcycles (2001)",
+    "plate": "9B 6531",
+    "read": "9B 6531",
+    "count": 1,
+    "date": "2026-10-05T01:45:20.875Z"
+  },
+  {
+    "category": "Motorcycles (2001)",
+    "plate": "9T 9851",
+    "read": "9T 9851",
+    "count": 1,
+    "date": "2026-10-05T01:45:21.234Z"
+  },
+  {
+    "category": "Paper transit plates (2001)",
+    "plate": "B 451925",
+    "read": "B 451925",
+    "count": 1,
+    "date": "2026-10-05T01:46:21.033Z"
+  },
+  {
+    "category": "Paper transit plates (2001)",
+    "plate": "M 207043",
+    "read": "M 207043",
+    "count": 1,
+    "date": "2026-10-05T01:46:21.389Z"
+  },
+  {
+    "category": "Paper transit plates (2001)",
+    "plate": "P 241823",
+    "read": "P 241823",
+    "count": 1,
+    "date": "2026-10-05T01:46:21.744Z"
+  },
+  {
+    "category": "Special machinery (2001)",
+    "plate": "A01 3505",
+    "read": "A 013505",
+    "count": 0,
+    "date": "2026-10-05T01:46:19.253Z"
+  },
+  {
+    "category": "Special machinery (2001)",
+    "plate": "A01 6597",
+    "read": "A 016597",
+    "count": 0,
+    "date": "2026-10-05T01:46:19.611Z"
+  },
+  {
+    "category": "Special machinery (2001)",
+    "plate": "K00 8685",
+    "read": "K 008685",
+    "count": 0,
+    "date": "2026-10-05T01:46:19.971Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "100 ZZZZZ",
+    "read": "100 ZZZZZ",
+    "count": 3,
+    "date": "2026-10-05T01:46:02.871Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "BED R0S18",
+    "read": "BED R0S18",
+    "count": 1,
+    "date": "2026-10-05T01:46:03.225Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "TNT 55555",
+    "read": "TNT 55555",
+    "count": 1,
+    "date": "2026-10-05T01:46:03.579Z"
+  }
+]

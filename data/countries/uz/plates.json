@@ -1,0 +1,149 @@
+[
+  {
+    "category": "High authorities",
+    "plate": "PAA 104",
+    "read": "01 M 104",
+    "count": 0,
+    "date": "2026-10-05T02:00:03.026Z"
+  },
+  {
+    "category": "High authorities",
+    "plate": "PAA 252",
+    "read": "01 M 252",
+    "count": 2,
+    "date": "2026-10-05T02:00:06.067Z"
+  },
+  {
+    "category": "High authorities",
+    "plate": "PAA 310",
+    "read": "01 M 310",
+    "count": 0,
+    "date": "2026-10-05T02:00:09.051Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "010 LA 50",
+    "read": "010 LA 50",
+    "count": 1,
+    "date": "2026-10-05T01:59:10.126Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "141 GA 01",
+    "read": "141 GA 01",
+    "count": 1,
+    "date": "2026-10-05T01:59:10.482Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "168 JA 01",
+    "read": "168 JA 01",
+    "count": 1,
+    "date": "2026-10-05T01:59:10.839Z"
+  },
+  {
+    "category": "Organizations",
+    "plate": "10 023 XBA",
+    "read": "10 023 XBA",
+    "count": 1,
+    "date": "2026-10-05T01:58:57.684Z"
+  },
+  {
+    "category": "Organizations",
+    "plate": "10 363 PSP",
+    "read": "10 363 PSP",
+    "count": 1,
+    "date": "2026-10-05T01:58:58.040Z"
+  },
+  {
+    "category": "Organizations",
+    "plate": "10 400 VSG",
+    "read": "10 400 VSG",
+    "count": 1,
+    "date": "2026-10-05T01:58:58.397Z"
+  },
+  {
+    "category": "Private owners",
+    "plate": "10 B 555 MW",
+    "read": "10 B 555 MW",
+    "count": 2,
+    "date": "2026-10-05T01:58:55.906Z"
+  },
+  {
+    "category": "Private owners",
+    "plate": "10 S 998 EA",
+    "read": "10 S 998 EA",
+    "count": 1,
+    "date": "2026-10-05T01:58:56.264Z"
+  },
+  {
+    "category": "Private owners",
+    "plate": "10 X 757 SS",
+    "read": "10 X 757 SS",
+    "count": 1,
+    "date": "2026-10-05T01:58:56.621Z"
+  },
+  {
+    "category": "Special machinery (Organizations)",
+    "plate": "078 CA 01",
+    "read": "078 CA 01",
+    "count": 1,
+    "date": "2026-10-05T01:59:13.675Z"
+  },
+  {
+    "category": "Special machinery (Organizations)",
+    "plate": "166 GA 10",
+    "read": "166 GA 10",
+    "count": 1,
+    "date": "2026-10-05T01:59:14.032Z"
+  },
+  {
+    "category": "Special machinery (Organizations)",
+    "plate": "429 NA 10",
+    "read": "429 NA 10",
+    "count": 1,
+    "date": "2026-10-05T01:59:14.390Z"
+  },
+  {
+    "category": "Special machinery (Private owners)",
+    "plate": "222 QA 75",
+    "read": "222 QA 75",
+    "count": 1,
+    "date": "2026-10-05T01:59:15.450Z"
+  },
+  {
+    "category": "Special machinery (Private owners)",
+    "plate": "345 NA 10",
+    "read": "345 NA 10",
+    "count": 1,
+    "date": "2026-10-05T01:59:15.805Z"
+  },
+  {
+    "category": "Special machinery (Private owners)",
+    "plate": "550 BA 01",
+    "read": "550 BA 01",
+    "count": 1,
+    "date": "2026-10-05T01:59:16.162Z"
+  },
+  {
+    "category": "Trailers",
+    "plate": "0821 CA 40",
+    "read": "0821 CA 40",
+    "count": 1,
+    "date": "2026-10-05T01:59:11.900Z"
+  },
+  {
+    "category": "Trailers",
+    "plate": "1091 CA 40",
+    "read": "1091 CA 40",
+    "count": 1,
+    "date": "2026-10-05T01:59:12.257Z"
+  },
+  {
+    "category": "Trailers",
+    "plate": "9075 AA 90",
+    "read": "9075 AA 90",
+    "count": 1,
+    "date": "2026-10-05T01:59:12.615Z"
+  }
+]

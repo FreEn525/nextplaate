@@ -1,0 +1,121 @@
+{
+  "code": "nl",
+  "name": "Netherlands",
+  "upload": {
+    "typeMenu": false,
+    "hooks": [],
+    "types": []
+  },
+  "search": {
+    "categories": [
+      {
+        "id": "1",
+        "label": "Cars"
+      },
+      {
+        "id": "2",
+        "label": "Motorcycles"
+      },
+      {
+        "id": "3",
+        "label": "Taxi"
+      },
+      {
+        "id": "4",
+        "label": "Diplomatic"
+      },
+      {
+        "id": "5",
+        "label": "Trailers"
+      },
+      {
+        "id": "6",
+        "label": "Commercial vehicles"
+      },
+      {
+        "id": "7",
+        "label": "Dealer"
+      },
+      {
+        "id": "8",
+        "label": "Agricultural vehicles"
+      },
+      {
+        "id": "9",
+        "label": "Except vehicles / Oldtimers"
+      },
+      {
+        "id": "10",
+        "label": "Military"
+      },
+      {
+        "id": "11",
+        "label": "Allied Joint Force Command Brunssum"
+      },
+      {
+        "id": "12",
+        "label": "Imported youngtimers / oldtimers"
+      },
+      {
+        "id": "14",
+        "label": "Mopeds"
+      },
+      {
+        "id": "15",
+        "label": "Heavy Commercial Vehicles (1994 system)"
+      },
+      {
+        "id": "16",
+        "label": "Light Commercial Vehicles (1994 system)"
+      },
+      {
+        "id": "17",
+        "label": "Semi-trailers"
+      },
+      {
+        "id": "18",
+        "label": "Agricultural trailers (2021 system)"
+      },
+      {
+        "id": "19",
+        "label": "Border Traffic (1953-2021 system)"
+      },
+      {
+        "id": "20",
+        "label": "Dealer (Agricultural)"
+      },
+      {
+        "id": "21",
+        "label": "Dealer (Trailers)"
+      },
+      {
+        "id": "22",
+        "label": "Dealer (Scooters)"
+      },
+      {
+        "id": "23",
+        "label": "Imported oldtimers (motorcycles)"
+      },
+      {
+        "id": "24",
+        "label": "Imported oldtimers (commercial vehicles)"
+      },
+      {
+        "id": "25",
+        "label": "Royal Household"
+      },
+      {
+        "id": "26",
+        "label": "Light electric vehicles and special mopeds"
+      },
+      {
+        "id": "28",
+        "label": "Diplomatic Justice Corps (CDJ)"
+      },
+      {
+        "id": "29",
+        "label": "One-day registration plate"
+      }
+    ]
+  }
+}

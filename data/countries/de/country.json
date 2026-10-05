@@ -1,0 +1,153 @@
+{
+  "code": "de",
+  "name": "Germany",
+  "upload": {
+    "typeMenu": true,
+    "hooks": ["deToggleNoSeals", "deShortplateForFon", "updateInsuranceUI", "disde2"],
+    "types": [
+      {
+        "id": "1",
+        "label": "Regular plates",
+        "visible": ["fon", "region", "b1", "digit"]
+      },
+      {
+        "id": "2",
+        "label": "Short-term transit plates",
+        "visible": ["fon", "region", "digit"]
+      },
+      {
+        "id": "3",
+        "label": "Export transit plates",
+        "visible": ["fon", "region", "digit", "b2"]
+      },
+      {
+        "id": "4",
+        "label": "Diplomatic",
+        "visible": ["fon", "dipf", "regiondip", "digit", "b2"]
+      },
+      {
+        "id": "6",
+        "label": "Plates for oldtimers (type \"H\")",
+        "visible": ["fon", "region", "b1", "digit"]
+      },
+      {
+        "id": "7",
+        "label": "Seasonal plates",
+        "visible": ["fon", "region", "b1", "digit"]
+      },
+      {
+        "id": "8",
+        "label": "Red license plates",
+        "visible": ["fon", "region", "digit"]
+      },
+      {
+        "id": "10",
+        "label": "Official services and consulates",
+        "visible": ["fon", "region", "digit"]
+      },
+      {
+        "id": "11",
+        "label": "Electric vehicles",
+        "visible": ["fon", "region", "b1", "digit"]
+      },
+      {
+        "id": "12",
+        "label": "Seasonal plates (Oldtimers)",
+        "visible": ["fon", "region", "b1", "digit"]
+      },
+      {
+        "id": "13",
+        "label": "Transferable license plates",
+        "visible": ["fon", "region", "b1", "digit"]
+      },
+      {
+        "id": "14",
+        "label": "Regional authorities",
+        "visible": ["fon", "regionreg", "digit"]
+      },
+      {
+        "id": "15",
+        "label": "Authorities and federal agencies",
+        "visible": ["fon", "region", "regionreg", "regionfed", "dipf", "regiondip", "regionfed1", "regionmil", "b1", "digit", "inslet", "b2"]
+      },
+      {
+        "id": "16",
+        "label": "Military",
+        "visible": ["fon", "regionmil", "b1", "digit"]
+      },
+      {
+        "id": "17",
+        "label": "Insurance plates",
+        "visible": ["fon", "digit", "inslet"]
+      }
+    ]
+  },
+  "search": {
+    "categories": [
+      {
+        "id": "1",
+        "label": "Regular plates"
+      },
+      {
+        "id": "2",
+        "label": "Short-term transit plates"
+      },
+      {
+        "id": "3",
+        "label": "Export transit plates"
+      },
+      {
+        "id": "6",
+        "label": "Plates for oldtimers (type \"H\")"
+      },
+      {
+        "id": "7",
+        "label": "Seasonal plates"
+      },
+      {
+        "id": "8",
+        "label": "Red license plates"
+      },
+      {
+        "id": "10",
+        "label": "Official services and consulates"
+      },
+      {
+        "id": "11",
+        "label": "Electric vehicles"
+      },
+      {
+        "id": "12",
+        "label": "Seasonal plates (Oldtimers)"
+      },
+      {
+        "id": "13",
+        "label": "Transferable license plates"
+      },
+      {
+        "id": "14",
+        "label": "Regional authorities"
+      },
+      {
+        "id": "15",
+        "label": "Authorities and federal agencies"
+      },
+      {
+        "id": "16",
+        "label": "Military"
+      },
+      {
+        "id": "19",
+        "label": "NATO"
+      },
+      {
+        "id": "17",
+        "label": "Insurance plates"
+      },
+      {
+        "id": "4",
+        "label": "Diplomatic"
+      }
+    ]
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "code": "is",
+  "name": "Iceland",
+  "upload": {
+    "typeMenu": true,
+    "hooks": ["disis"],
+    "types": [
+      {
+        "id": "1",
+        "label": "Cars",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "2",
+        "label": "Commercial vehicles",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "3",
+        "label": "Special machinery",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "4",
+        "label": "\"Oil\"",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "5",
+        "label": "Dealer",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "6",
+        "label": "ATV and snowmobiles",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "7",
+        "label": "Mopeds",
+        "visible": ["nomer"]
+      },
+      {
+        "id": "8",
+        "label": "Vanity Plates",
+        "visible": ["b1", "b2", "b3", "b4", "b5", "b6", "fon"]
+      },
+      {
+        "id": "9",
+        "label": "Diplomatic",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "10",
+        "label": "Oldtimers",
+        "visible": ["nomer", "region"]
+      }
+    ]
+  },
+  "search": {
+    "categories": [
+      {
+        "id": "1",
+        "label": "Cars"
+      },
+      {
+        "id": "2",
+        "label": "Commercial vehicles"
+      },
+      {
+        "id": "3",
+        "label": "Special machinery"
+      },
+      {
+        "id": "4",
+        "label": "\"Oil\""
+      },
+      {
+        "id": "5",
+        "label": "Dealer"
+      },
+      {
+        "id": "6",
+        "label": "ATV and snowmobiles"
+      },
+      {
+        "id": "7",
+        "label": "Mopeds"
+      },
+      {
+        "id": "8",
+        "label": "Vanity Plates"
+      },
+      {
+        "id": "9",
+        "label": "Diplomatic"
+      },
+      {
+        "id": "10",
+        "label": "Oldtimers"
+      }
+    ]
+  }
+}

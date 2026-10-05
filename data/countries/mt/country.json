@@ -1,0 +1,37 @@
+{
+  "code": "mt",
+  "name": "Malta",
+  "upload": {
+    "typeMenu": false,
+    "hooks": [],
+    "types": []
+  },
+  "search": {
+    "categories": [
+      {
+        "id": "1",
+        "label": "Regular plates (ABC 123)"
+      },
+      {
+        "id": "2",
+        "label": "Trailers (TR 123(4))"
+      },
+      {
+        "id": "3",
+        "label": "Taxi (TAXI 123A)"
+      },
+      {
+        "id": "4",
+        "label": "Vanity Plates"
+      },
+      {
+        "id": "5",
+        "label": "High authorities (GM-12)"
+      },
+      {
+        "id": "6",
+        "label": "Oldtimers (ABC 123)"
+      }
+    ]
+  }
+}

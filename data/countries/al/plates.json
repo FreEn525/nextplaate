@@ -1,0 +1,65 @@
+[
+  {
+    "category": "Cars (1993)",
+    "plate": "LE 0075 B",
+    "read": "LE 0075 B",
+    "count": 1,
+    "date": "2026-10-05T01:41:24.792Z"
+  },
+  {
+    "category": "Cars (1993)",
+    "plate": "TP 0525 B",
+    "read": "TP 0525 B",
+    "count": 2,
+    "date": "2026-10-05T01:41:25.150Z"
+  },
+  {
+    "category": "Cars (1993)",
+    "plate": "TR 2069 L",
+    "read": "TR 2069 L",
+    "count": 1,
+    "date": "2026-10-05T01:41:25.505Z"
+  },
+  {
+    "category": "Cars (2011)",
+    "plate": "AA 896 TH",
+    "read": "AA 896 TH",
+    "count": 3,
+    "date": "2026-10-05T01:41:20.407Z"
+  },
+  {
+    "category": "Cars (2011)",
+    "plate": "AB 383 UG",
+    "read": "AB 383 UG",
+    "count": 1,
+    "date": "2026-10-05T01:41:20.766Z"
+  },
+  {
+    "category": "Cars (2011)",
+    "plate": "AB 979 ZL",
+    "read": "AB 979 ZL",
+    "count": 2,
+    "date": "2026-10-05T01:41:21.122Z"
+  },
+  {
+    "category": "Motorcycles (2011)",
+    "plate": "BE 342",
+    "read": "BE 342",
+    "count": 1,
+    "date": "2026-10-05T01:41:22.182Z"
+  },
+  {
+    "category": "Motorcycles (2011)",
+    "plate": "CP 675",
+    "read": "CP 675",
+    "count": 1,
+    "date": "2026-10-05T01:41:22.537Z"
+  },
+  {
+    "category": "Motorcycles (2011)",
+    "plate": "CV 138",
+    "read": "CV 138",
+    "count": 1,
+    "date": "2026-10-05T01:41:22.891Z"
+  }
+]

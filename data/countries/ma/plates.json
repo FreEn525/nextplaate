@@ -1,0 +1,44 @@
+[
+  {
+    "category": "Regular plates",
+    "plate": "3385|د|40",
+    "read": "3385|د|40 أ",
+    "count": 0,
+    "date": "2026-10-05T01:51:15.708Z"
+  },
+  {
+    "category": "Regular plates",
+    "plate": "56484|أ|10",
+    "read": "56484|أ|10 أ",
+    "count": 0,
+    "date": "2026-10-05T01:51:16.063Z"
+  },
+  {
+    "category": "Regular plates",
+    "plate": "70144|د|8",
+    "read": "70144|د|8 أ",
+    "count": 0,
+    "date": "2026-10-05T01:51:16.417Z"
+  },
+  {
+    "category": "Trailers",
+    "plate": "5502-07",
+    "read": "5502 07",
+    "count": 3,
+    "date": "2026-10-05T01:51:17.477Z"
+  },
+  {
+    "category": "Trailers",
+    "plate": "6610-08",
+    "read": "6610 08",
+    "count": 1,
+    "date": "2026-10-05T01:51:17.832Z"
+  },
+  {
+    "category": "Trailers",
+    "plate": "7129-011",
+    "read": "7129 011",
+    "count": 1,
+    "date": "2026-10-05T01:51:18.187Z"
+  }
+]

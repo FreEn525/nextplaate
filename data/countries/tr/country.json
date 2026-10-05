@@ -1,0 +1,68 @@
+{
+  "code": "tr",
+  "name": "Turkey",
+  "upload": {
+    "typeMenu": true,
+    "hooks": ["distr"],
+    "types": [
+      {
+        "id": "1",
+        "label": "Regular plates",
+        "visible": ["fon", "let", "digit"]
+      },
+      {
+        "id": "2",
+        "label": "Provincial governments, university rectors",
+        "visible": ["fon", "let", "digit"]
+      },
+      {
+        "id": "3",
+        "label": "Police",
+        "visible": ["fon", "let", "digit"]
+      },
+      {
+        "id": "4",
+        "label": "Government and public administrations",
+        "visible": ["fon", "let", "digit"]
+      },
+      {
+        "id": "5",
+        "label": "Temporary",
+        "visible": ["fon", "let", "digit"]
+      },
+      {
+        "id": "6",
+        "label": "Diplomatic",
+        "visible": ["fon", "let", "digit"]
+      }
+    ]
+  },
+  "search": {
+    "categories": [
+      {
+        "id": "1",
+        "label": "Regular plates"
+      },
+      {
+        "id": "2",
+        "label": "Provincial governments, university rectors"
+      },
+      {
+        "id": "3",
+        "label": "Police"
+      },
+      {
+        "id": "4",
+        "label": "Government and public administrations"
+      },
+      {
+        "id": "5",
+        "label": "Temporary"
+      },
+      {
+        "id": "6",
+        "label": "Diplomatic"
+      }
+    ]
+  }
+}

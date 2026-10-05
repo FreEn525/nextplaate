@@ -1,0 +1,191 @@
+[
+  {
+    "category": "Cars",
+    "plate": "ETX-775",
+    "read": "ETX 775",
+    "count": 1,
+    "date": "2026-10-05T01:08:21.991Z"
+  },
+  {
+    "category": "Cars",
+    "plate": "FOL-332",
+    "read": "FOL 332",
+    "count": 1,
+    "date": "2026-10-05T01:08:22.347Z"
+  },
+  {
+    "category": "Cars",
+    "plate": "XSR-524",
+    "read": "XSR 524",
+    "count": 2,
+    "date": "2026-10-05T01:08:22.702Z"
+  },
+  {
+    "category": "Dealer",
+    "plate": "317-Q",
+    "read": "317 Q",
+    "count": 1,
+    "date": "2026-10-05T01:08:27.307Z"
+  },
+  {
+    "category": "Dealer",
+    "plate": "999-N",
+    "read": "999 N",
+    "count": 1,
+    "date": "2026-10-05T01:08:27.663Z"
+  },
+  {
+    "category": "Dealer",
+    "plate": "J-621",
+    "read": "J 621",
+    "count": 1,
+    "date": "2026-10-05T01:08:28.019Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "CD-2111",
+    "read": "CD 2111",
+    "count": 2,
+    "date": "2026-10-05T01:08:36.169Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "CD-2609",
+    "read": "CD 2609",
+    "count": 2,
+    "date": "2026-10-05T01:08:36.525Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "CD-6702",
+    "read": "CD 6702",
+    "count": 1,
+    "date": "2026-10-05T01:08:36.881Z"
+  },
+  {
+    "category": "Export transit plates",
+    "plate": "A-6132",
+    "read": "A 6132",
+    "count": 3,
+    "date": "2026-10-05T01:08:30.853Z"
+  },
+  {
+    "category": "Export transit plates",
+    "plate": "A-6667",
+    "read": "A 6667",
+    "count": 3,
+    "date": "2026-10-05T01:08:31.208Z"
+  },
+  {
+    "category": "Export transit plates",
+    "plate": "A-7679",
+    "read": "A 7679",
+    "count": 1,
+    "date": "2026-10-05T01:08:31.563Z"
+  },
+  {
+    "category": "Military",
+    "plate": "3253",
+    "read": "3253",
+    "count": 1,
+    "date": "2026-10-05T01:08:32.623Z"
+  },
+  {
+    "category": "Military",
+    "plate": "9763",
+    "read": "9763",
+    "count": 1,
+    "date": "2026-10-05T01:08:32.977Z"
+  },
+  {
+    "category": "Military",
+    "plate": "9975",
+    "read": "9975",
+    "count": 1,
+    "date": "2026-10-05T01:08:33.332Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "33HIY",
+    "read": "33HIY",
+    "count": 1,
+    "date": "2026-10-05T01:08:34.393Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "33SIH",
+    "read": "33SIH",
+    "count": 1,
+    "date": "2026-10-05T01:08:34.747Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "63NJH",
+    "read": "63NJH",
+    "count": 1,
+    "date": "2026-10-05T01:08:35.105Z"
+  },
+  {
+    "category": "Oldtimers",
+    "plate": "CDV-56",
+    "read": "CDV 56",
+    "count": 1,
+    "date": "2026-10-05T01:08:23.762Z"
+  },
+  {
+    "category": "Oldtimers",
+    "plate": "CTO-8",
+    "read": "CTO 8",
+    "count": 1,
+    "date": "2026-10-05T01:08:24.117Z"
+  },
+  {
+    "category": "Oldtimers",
+    "plate": "TU-516",
+    "read": "TU 516",
+    "count": 1,
+    "date": "2026-10-05T01:08:24.473Z"
+  },
+  {
+    "category": "Provisional",
+    "plate": "NK-0886",
+    "read": "NK 0886",
+    "count": 1,
+    "date": "2026-10-05T01:08:29.080Z"
+  },
+  {
+    "category": "Provisional",
+    "plate": "OC-1959",
+    "read": "OC 1959",
+    "count": 2,
+    "date": "2026-10-05T01:08:29.437Z"
+  },
+  {
+    "category": "Provisional",
+    "plate": "OE-7022",
+    "read": "OE 7022",
+    "count": 1,
+    "date": "2026-10-05T01:08:29.793Z"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "361-UO",
+    "read": "361 UO",
+    "count": 1,
+    "date": "2026-10-05T01:08:25.534Z"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "798-BAH",
+    "read": "798 BAH",
+    "count": 1,
+    "date": "2026-10-05T01:08:25.889Z"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "932-XBB",
+    "read": "932 XBB",
+    "count": 1,
+    "date": "2026-10-05T01:08:26.245Z"
+  }
+]

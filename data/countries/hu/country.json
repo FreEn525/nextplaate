@@ -1,0 +1,221 @@
+{
+  "code": "hu",
+  "name": "Hungary",
+  "upload": {
+    "typeMenu": true,
+    "hooks": ["dishuhu"],
+    "types": [
+      {
+        "id": "1",
+        "label": "Cars (1990)",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "2",
+        "label": "Commercial vehicles (1990)",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "3",
+        "label": "Motorcycles (1990)",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "4",
+        "label": "Slow vehicles (red) (1990)",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "5",
+        "label": "Army (1990)",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "6",
+        "label": "National Ambulance Service (1990)",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "7",
+        "label": "Oldtimers (1990)",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "8",
+        "label": "Ministry of Interior (1990)",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "9",
+        "label": "Sportcars (1990)",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "10",
+        "label": "Electric vehicles (1990)",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "11",
+        "label": "Vanity Plates (1990)",
+        "visible": ["fon1", "nomer", "fon"]
+      },
+      {
+        "id": "12",
+        "label": "Temporary (1990)",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "13",
+        "label": "Diplomatic",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "14",
+        "label": "Regular plates (2022)",
+        "visible": ["fon1", "nomer", "fon"]
+      },
+      {
+        "id": "15",
+        "label": "Vanity Plates (2022)",
+        "visible": ["fon1", "nomer", "fon"]
+      },
+      {
+        "id": "16",
+        "label": "Oldtimers (2022)",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "17",
+        "label": "Taxi (2022)",
+        "visible": ["fon2", "nomer", "fon"]
+      },
+      {
+        "id": "18",
+        "label": "Specialty plates (2022)",
+        "visible": ["fon1", "nomer", "fon"]
+      },
+      {
+        "id": "19",
+        "label": "Temporary (2022)",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "20",
+        "label": "Oldtimers (OT 12-345)",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "21",
+        "label": "Sportcars (2022)",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "22",
+        "label": "Agricultural vehicles (1990)",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "23",
+        "label": "Mopeds (1990)",
+        "visible": ["nomer", "fon"]
+      }
+    ]
+  },
+  "search": {
+    "categories": [
+      {
+        "id": "1",
+        "label": "Cars (1990)"
+      },
+      {
+        "id": "2",
+        "label": "Commercial vehicles (1990)"
+      },
+      {
+        "id": "3",
+        "label": "Motorcycles (1990)"
+      },
+      {
+        "id": "4",
+        "label": "Slow vehicles (red) (1990)"
+      },
+      {
+        "id": "5",
+        "label": "Army (1990)"
+      },
+      {
+        "id": "6",
+        "label": "National Ambulance Service (1990)"
+      },
+      {
+        "id": "7",
+        "label": "Oldtimers (1990)"
+      },
+      {
+        "id": "20",
+        "label": "Oldtimers (OT 12-345)"
+      },
+      {
+        "id": "8",
+        "label": "Ministry of Interior (1990)"
+      },
+      {
+        "id": "9",
+        "label": "Sportcars (1990)"
+      },
+      {
+        "id": "10",
+        "label": "Electric vehicles (1990)"
+      },
+      {
+        "id": "11",
+        "label": "Vanity Plates (1990)"
+      },
+      {
+        "id": "12",
+        "label": "Temporary (1990)"
+      },
+      {
+        "id": "22",
+        "label": "Agricultural vehicles (1990)"
+      },
+      {
+        "id": "23",
+        "label": "Mopeds (1990)"
+      },
+      {
+        "id": "13",
+        "label": "Diplomatic"
+      },
+      {
+        "id": "14",
+        "label": "Regular plates (2022)"
+      },
+      {
+        "id": "15",
+        "label": "Vanity Plates (2022)"
+      },
+      {
+        "id": "16",
+        "label": "Oldtimers (2022)"
+      },
+      {
+        "id": "17",
+        "label": "Taxi (2022)"
+      },
+      {
+        "id": "18",
+        "label": "Specialty plates (2022)"
+      },
+      {
+        "id": "19",
+        "label": "Temporary (2022)"
+      },
+      {
+        "id": "21",
+        "label": "Sportcars (2022)"
+      }
+    ]
+  }
+}

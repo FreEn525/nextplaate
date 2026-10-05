@@ -1,0 +1,254 @@
+[
+  {
+    "category": "1913-1971 - system",
+    "plate": "H-1712",
+    "read": "H 1712",
+    "count": 2,
+    "date": "2026-10-05T01:19:56.379Z"
+  },
+  {
+    "category": "1913-1971 - system",
+    "plate": "H-34142",
+    "read": "H 34142",
+    "count": 1,
+    "date": "2026-10-05T01:19:56.735Z"
+  },
+  {
+    "category": "1913-1971 - system",
+    "plate": "X-1661",
+    "read": "X 1661",
+    "count": 1,
+    "date": "2026-10-05T01:19:57.090Z"
+  },
+  {
+    "category": "Cars",
+    "plate": "DL 98931",
+    "read": "DL 98931",
+    "count": 1,
+    "date": "2026-10-05T01:19:45.469Z"
+  },
+  {
+    "category": "Cars",
+    "plate": "EK 61305",
+    "read": "EK 61305",
+    "count": 1,
+    "date": "2026-10-05T01:19:46.467Z"
+  },
+  {
+    "category": "Cars",
+    "plate": "KJ 50422",
+    "read": "KJ 50422",
+    "count": 1,
+    "date": "2026-10-05T01:19:47.468Z"
+  },
+  {
+    "category": "Commercial vehicles",
+    "plate": "DP 81580",
+    "read": "DP 81580",
+    "count": 1,
+    "date": "2026-10-05T01:19:49.468Z"
+  },
+  {
+    "category": "Commercial vehicles",
+    "plate": "JD 94240",
+    "read": "JD 94240",
+    "count": 1,
+    "date": "2026-10-05T01:19:50.468Z"
+  },
+  {
+    "category": "Commercial vehicles",
+    "plate": "YE 87441",
+    "read": "YE 87441",
+    "count": 1,
+    "date": "2026-10-05T01:19:51.467Z"
+  },
+  {
+    "category": "Dealer",
+    "plate": "ABG 95",
+    "read": "ABG 95",
+    "count": 2,
+    "date": "2026-10-05T01:20:08.776Z"
+  },
+  {
+    "category": "Dealer",
+    "plate": "ABZ 41",
+    "read": "ABZ 41",
+    "count": 2,
+    "date": "2026-10-05T01:20:09.131Z"
+  },
+  {
+    "category": "Dealer",
+    "plate": "ACL 92",
+    "read": "ACL 92",
+    "count": 4,
+    "date": "2026-10-05T01:20:09.485Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "CD 41076",
+    "read": "CD 41076",
+    "count": 1,
+    "date": "2026-10-05T01:20:03.464Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "CD 42072",
+    "read": "CD 42072",
+    "count": 1,
+    "date": "2026-10-05T01:20:03.820Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "CD 71497",
+    "read": "CD 71497",
+    "count": 1,
+    "date": "2026-10-05T01:20:04.179Z"
+  },
+  {
+    "category": "Export/Tourist",
+    "plate": "13088",
+    "read": "13088",
+    "count": 3,
+    "date": "2026-10-05T01:19:58.150Z"
+  },
+  {
+    "category": "Export/Tourist",
+    "plate": "13106",
+    "read": "13106",
+    "count": 1,
+    "date": "2026-10-05T01:19:58.503Z"
+  },
+  {
+    "category": "Export/Tourist",
+    "plate": "13107",
+    "read": "13107",
+    "count": 5,
+    "date": "2026-10-05T01:19:58.858Z"
+  },
+  {
+    "category": "Military",
+    "plate": "12103",
+    "read": "12103",
+    "count": 3,
+    "date": "2026-10-05T01:20:05.239Z"
+  },
+  {
+    "category": "Military",
+    "plate": "31367",
+    "read": "31367",
+    "count": 2,
+    "date": "2026-10-05T01:20:05.594Z"
+  },
+  {
+    "category": "Military",
+    "plate": "59184",
+    "read": "59184",
+    "count": 1,
+    "date": "2026-10-05T01:20:05.948Z"
+  },
+  {
+    "category": "Sportcars",
+    "plate": "CE 10053",
+    "read": "CE 10053",
+    "count": 2,
+    "date": "2026-10-05T01:20:01.691Z"
+  },
+  {
+    "category": "Sportcars",
+    "plate": "LJ 54218",
+    "read": "LJ 54218",
+    "count": 2,
+    "date": "2026-10-05T01:20:02.046Z"
+  },
+  {
+    "category": "Sportcars",
+    "plate": "PP 82821",
+    "read": "PP 82821",
+    "count": 2,
+    "date": "2026-10-05T01:20:02.401Z"
+  },
+  {
+    "category": "Tax-exempt vehicles",
+    "plate": "AS 21165",
+    "read": "AS 21165",
+    "count": 1,
+    "date": "2026-10-05T01:19:52.828Z"
+  },
+  {
+    "category": "Tax-exempt vehicles",
+    "plate": "BE 11551",
+    "read": "BE 11551",
+    "count": 1,
+    "date": "2026-10-05T01:19:53.184Z"
+  },
+  {
+    "category": "Tax-exempt vehicles",
+    "plate": "CF 50439",
+    "read": "CF 50439",
+    "count": 1,
+    "date": "2026-10-05T01:19:53.542Z"
+  },
+  {
+    "category": "Temporary",
+    "plate": "BF476",
+    "read": "BF476",
+    "count": 1,
+    "date": "2026-10-05T01:20:07.006Z"
+  },
+  {
+    "category": "Temporary",
+    "plate": "CX336",
+    "read": "CX336",
+    "count": 1,
+    "date": "2026-10-05T01:20:07.361Z"
+  },
+  {
+    "category": "Temporary",
+    "plate": "LY339",
+    "read": "LY339",
+    "count": 2,
+    "date": "2026-10-05T01:20:07.715Z"
+  },
+  {
+    "category": "Trailers, motorcycles, special vehicles",
+    "plate": "LK 9475",
+    "read": "LK 9475",
+    "count": 1,
+    "date": "2026-10-05T01:19:54.605Z"
+  },
+  {
+    "category": "Trailers, motorcycles, special vehicles",
+    "plate": "XN 7636",
+    "read": "XN 7636",
+    "count": 1,
+    "date": "2026-10-05T01:19:54.961Z"
+  },
+  {
+    "category": "Trailers, motorcycles, special vehicles",
+    "plate": "XU 3881",
+    "read": "XU 3881",
+    "count": 1,
+    "date": "2026-10-05T01:19:55.317Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "OBD",
+    "read": "OBD",
+    "count": 2,
+    "date": "2026-10-05T01:19:59.917Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "ØYANS 1",
+    "read": "ØYANS 1",
+    "count": 4,
+    "date": "2026-10-05T01:20:00.626Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "SKAMLØS",
+    "read": "SKAMLØS",
+    "count": 1,
+    "date": "2026-10-05T01:20:00.271Z"
+  }
+]

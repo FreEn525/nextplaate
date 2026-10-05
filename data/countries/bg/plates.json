@@ -1,0 +1,149 @@
+[
+  {
+    "category": "Cars",
+    "plate": "CB 4476 KM",
+    "read": "CB 4476 KM",
+    "count": 2,
+    "date": "2026-10-05T01:42:58.809Z"
+  },
+  {
+    "category": "Cars",
+    "plate": "EH 0645 BH",
+    "read": "EH 0645 BH",
+    "count": 1,
+    "date": "2026-10-05T01:42:59.165Z"
+  },
+  {
+    "category": "Cars",
+    "plate": "PB 0786 YA",
+    "read": "PB 0786 YA",
+    "count": 1,
+    "date": "2026-10-05T01:42:59.523Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "C 0520 27",
+    "read": "C 0520 27",
+    "count": 2,
+    "date": "2026-10-05T01:43:07.668Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "C 1808 28",
+    "read": "C 1808 28",
+    "count": 1,
+    "date": "2026-10-05T01:43:08.021Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "CT 0503 26",
+    "read": "CT 0503 26",
+    "count": 1,
+    "date": "2026-10-05T01:43:08.375Z"
+  },
+  {
+    "category": "Foreign citizens and enterprises",
+    "plate": "XH 3074 26",
+    "read": "XH 3074 26",
+    "count": 2,
+    "date": "2026-10-05T01:43:09.436Z"
+  },
+  {
+    "category": "Foreign citizens and enterprises",
+    "plate": "XH 3785 27",
+    "read": "XH 3785 27",
+    "count": 2,
+    "date": "2026-10-05T01:43:09.789Z"
+  },
+  {
+    "category": "Foreign citizens and enterprises",
+    "plate": "XH 4321 28",
+    "read": "XH 4321 28",
+    "count": 1,
+    "date": "2026-10-05T01:43:10.143Z"
+  },
+  {
+    "category": "Military",
+    "plate": "BA 118892",
+    "read": "BA 118892",
+    "count": 1,
+    "date": "2026-10-05T01:43:02.361Z"
+  },
+  {
+    "category": "Military",
+    "plate": "BA 118942",
+    "read": "BA 118942",
+    "count": 2,
+    "date": "2026-10-05T01:43:02.715Z"
+  },
+  {
+    "category": "Military",
+    "plate": "BA 119225",
+    "read": "BA 119225",
+    "count": 1,
+    "date": "2026-10-05T01:43:03.068Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "C 3012 T",
+    "read": "C 3012 T",
+    "count": 1,
+    "date": "2026-10-05T01:43:00.585Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "C 4139 T",
+    "read": "C 4139 T",
+    "count": 1,
+    "date": "2026-10-05T01:43:00.945Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "CA 0401 X",
+    "read": "CA 0401 X",
+    "count": 1,
+    "date": "2026-10-05T01:43:01.302Z"
+  },
+  {
+    "category": "Temporary",
+    "plate": "016 B 964 29",
+    "read": "016 B 964 29",
+    "count": 0,
+    "date": "2026-10-05T01:43:05.899Z"
+  },
+  {
+    "category": "Temporary",
+    "plate": "879 M 985 26",
+    "read": "879 M 985 26",
+    "count": 0,
+    "date": "2026-10-05T01:43:06.254Z"
+  },
+  {
+    "category": "Temporary",
+    "plate": "883 M 948 26",
+    "read": "883 M 948 26",
+    "count": 0,
+    "date": "2026-10-05T01:43:06.609Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "C 066666",
+    "read": "C 066666",
+    "count": 1,
+    "date": "2026-10-05T01:43:04.129Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "CB CECOOO",
+    "read": "CB CECOOO",
+    "count": 1,
+    "date": "2026-10-05T01:43:04.485Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "CH 77777B",
+    "read": "CH 77777B",
+    "count": 1,
+    "date": "2026-10-05T01:43:04.840Z"
+  }
+]

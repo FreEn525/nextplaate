@@ -1,0 +1,485 @@
+[
+  {
+    "category": "Agricultural vehicles (1990)",
+    "plate": "M008577",
+    "read": "M008577",
+    "count": 2,
+    "date": "2026-10-05T01:13:43.316Z"
+  },
+  {
+    "category": "Agricultural vehicles (1990)",
+    "plate": "M017143",
+    "read": "M017143",
+    "count": 2,
+    "date": "2026-10-05T01:13:43.671Z"
+  },
+  {
+    "category": "Agricultural vehicles (1990)",
+    "plate": "M018059",
+    "read": "M018059",
+    "count": 1,
+    "date": "2026-10-05T01:13:44.025Z"
+  },
+  {
+    "category": "Army (1990)",
+    "plate": "HA 63-93",
+    "read": "HA 63-93",
+    "count": 2,
+    "date": "2026-10-05T01:13:10.468Z"
+  },
+  {
+    "category": "Army (1990)",
+    "plate": "HA 64-31",
+    "read": "HA 64-31",
+    "count": 1,
+    "date": "2026-10-05T01:13:11.468Z"
+  },
+  {
+    "category": "Army (1990)",
+    "plate": "HA 81-64",
+    "read": "HA 81-64",
+    "count": 1,
+    "date": "2026-10-05T01:13:12.467Z"
+  },
+  {
+    "category": "Cars (1990)",
+    "plate": "IPT-929",
+    "read": "IPT-929",
+    "count": 1,
+    "date": "2026-10-05T01:12:54.468Z"
+  },
+  {
+    "category": "Cars (1990)",
+    "plate": "PSR-031",
+    "read": "PSR-031",
+    "count": 1,
+    "date": "2026-10-05T01:12:55.468Z"
+  },
+  {
+    "category": "Cars (1990)",
+    "plate": "RBD-213",
+    "read": "RBD-213",
+    "count": 1,
+    "date": "2026-10-05T01:12:56.468Z"
+  },
+  {
+    "category": "Commercial vehicles (1990)",
+    "plate": "EDH-802",
+    "read": "EDH-802",
+    "count": 1,
+    "date": "2026-10-05T01:12:58.468Z"
+  },
+  {
+    "category": "Commercial vehicles (1990)",
+    "plate": "EDK-666",
+    "read": "EDK-666",
+    "count": 3,
+    "date": "2026-10-05T01:12:59.468Z"
+  },
+  {
+    "category": "Commercial vehicles (1990)",
+    "plate": "FLN-661",
+    "read": "FLN-661",
+    "count": 2,
+    "date": "2026-10-05T01:13:00.467Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "CD012-210",
+    "read": "CD012-210",
+    "count": 4,
+    "date": "2026-10-05T01:13:46.854Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "CD511-433",
+    "read": "CD511-433",
+    "count": 3,
+    "date": "2026-10-05T01:13:47.208Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "CD525-400",
+    "read": "CD525-400",
+    "count": 3,
+    "date": "2026-10-05T01:13:47.563Z"
+  },
+  {
+    "category": "Electric vehicles (1990)",
+    "plate": "NLE-350",
+    "read": "NLE-350",
+    "count": 1,
+    "date": "2026-10-05T01:13:34.468Z"
+  },
+  {
+    "category": "Electric vehicles (1990)",
+    "plate": "REW-366",
+    "read": "REW-366",
+    "count": 1,
+    "date": "2026-10-05T01:13:35.468Z"
+  },
+  {
+    "category": "Electric vehicles (1990)",
+    "plate": "TIX-050",
+    "read": "TIX-050",
+    "count": 2,
+    "date": "2026-10-05T01:13:36.467Z"
+  },
+  {
+    "category": "Ministry of Interior (1990)",
+    "plate": "RK 86-61",
+    "read": "RK 86-61",
+    "count": 1,
+    "date": "2026-10-05T01:13:26.468Z"
+  },
+  {
+    "category": "Ministry of Interior (1990)",
+    "plate": "RK 87-08",
+    "read": "RK 87-08",
+    "count": 1,
+    "date": "2026-10-05T01:13:27.468Z"
+  },
+  {
+    "category": "Ministry of Interior (1990)",
+    "plate": "RR 02-66",
+    "read": "RR 02-66",
+    "count": 2,
+    "date": "2026-10-05T01:13:28.467Z"
+  },
+  {
+    "category": "Mopeds (1990)",
+    "plate": "S AAK 75",
+    "read": "S AAK 75",
+    "count": 1,
+    "date": "2026-10-05T01:13:45.085Z"
+  },
+  {
+    "category": "Mopeds (1990)",
+    "plate": "S ABV 64",
+    "read": "S ABV 64",
+    "count": 1,
+    "date": "2026-10-05T01:13:45.439Z"
+  },
+  {
+    "category": "Mopeds (1990)",
+    "plate": "S ABW 08",
+    "read": "S ABW 08",
+    "count": 1,
+    "date": "2026-10-05T01:13:45.794Z"
+  },
+  {
+    "category": "Motorcycles (1990)",
+    "plate": "UDR-066",
+    "read": "UDR-066",
+    "count": 1,
+    "date": "2026-10-05T01:13:02.467Z"
+  },
+  {
+    "category": "Motorcycles (1990)",
+    "plate": "UNS-914",
+    "read": "UNS-914",
+    "count": 1,
+    "date": "2026-10-05T01:13:03.468Z"
+  },
+  {
+    "category": "Motorcycles (1990)",
+    "plate": "UXB-504",
+    "read": "UXB-504",
+    "count": 2,
+    "date": "2026-10-05T01:13:04.468Z"
+  },
+  {
+    "category": "National Ambulance Service (1990)",
+    "plate": "MA 03-06",
+    "read": "MA 03-06",
+    "count": 2,
+    "date": "2026-10-05T01:13:14.468Z"
+  },
+  {
+    "category": "National Ambulance Service (1990)",
+    "plate": "MA 05-53",
+    "read": "MA 05-53",
+    "count": 1,
+    "date": "2026-10-05T01:13:15.467Z"
+  },
+  {
+    "category": "National Ambulance Service (1990)",
+    "plate": "MA 06-31",
+    "read": "MA 06-31",
+    "count": 2,
+    "date": "2026-10-05T01:13:16.468Z"
+  },
+  {
+    "category": "Oldtimers (1990)",
+    "plate": "OT 28-66",
+    "read": "OT 28-66",
+    "count": 4,
+    "date": "2026-10-05T01:13:18.468Z"
+  },
+  {
+    "category": "Oldtimers (1990)",
+    "plate": "OT 54-63",
+    "read": "OT 54-63",
+    "count": 2,
+    "date": "2026-10-05T01:13:19.467Z"
+  },
+  {
+    "category": "Oldtimers (1990)",
+    "plate": "OT 95-73",
+    "read": "OT 95-73",
+    "count": 1,
+    "date": "2026-10-05T01:13:20.467Z"
+  },
+  {
+    "category": "Oldtimers (2022)",
+    "plate": "OT AB-475",
+    "read": "OT AB-475",
+    "count": 6,
+    "date": "2026-10-05T01:13:52.448Z"
+  },
+  {
+    "category": "Oldtimers (2022)",
+    "plate": "OT AC-363",
+    "read": "OT AC-363",
+    "count": 1,
+    "date": "2026-10-05T01:13:52.803Z"
+  },
+  {
+    "category": "Oldtimers (2022)",
+    "plate": "OT AE-775",
+    "read": "OT AE-775",
+    "count": 1,
+    "date": "2026-10-05T01:13:53.158Z"
+  },
+  {
+    "category": "Oldtimers (OT 12-345)",
+    "plate": "OT 10-033",
+    "read": "OT 10-033",
+    "count": 3,
+    "date": "2026-10-05T01:13:22.469Z"
+  },
+  {
+    "category": "Oldtimers (OT 12-345)",
+    "plate": "OT 10-153",
+    "read": "OT 10-153",
+    "count": 4,
+    "date": "2026-10-05T01:13:23.468Z"
+  },
+  {
+    "category": "Oldtimers (OT 12-345)",
+    "plate": "OT 10-373",
+    "read": "OT 10-373",
+    "count": 3,
+    "date": "2026-10-05T01:13:24.468Z"
+  },
+  {
+    "category": "Regular plates (2022)",
+    "plate": "AA HD-767",
+    "read": "AA HD-767",
+    "count": 1,
+    "date": "2026-10-05T01:13:48.624Z"
+  },
+  {
+    "category": "Regular plates (2022)",
+    "plate": "AU CU-574",
+    "read": "AU CU-574",
+    "count": 1,
+    "date": "2026-10-05T01:13:48.978Z"
+  },
+  {
+    "category": "Regular plates (2022)",
+    "plate": "TL TL-040",
+    "read": "TL TL-040",
+    "count": 1,
+    "date": "2026-10-05T01:13:49.331Z"
+  },
+  {
+    "category": "Slow vehicles (red) (1990)",
+    "plate": "YEP-078",
+    "read": "YEP-078",
+    "count": 1,
+    "date": "2026-10-05T01:13:06.468Z"
+  },
+  {
+    "category": "Slow vehicles (red) (1990)",
+    "plate": "YHF-047",
+    "read": "YHF-047",
+    "count": 1,
+    "date": "2026-10-05T01:13:07.469Z"
+  },
+  {
+    "category": "Slow vehicles (red) (1990)",
+    "plate": "YMN-664",
+    "read": "YMN-664",
+    "count": 1,
+    "date": "2026-10-05T01:13:08.468Z"
+  },
+  {
+    "category": "Specialty plates (2022)",
+    "plate": "HA 00-192",
+    "read": "HA 00-192",
+    "count": 1,
+    "date": "2026-10-05T01:13:55.988Z"
+  },
+  {
+    "category": "Specialty plates (2022)",
+    "plate": "MA 00-096",
+    "read": "MA 00-096",
+    "count": 1,
+    "date": "2026-10-05T01:13:56.341Z"
+  },
+  {
+    "category": "Specialty plates (2022)",
+    "plate": "MA 00-345",
+    "read": "MA 00-345",
+    "count": 1,
+    "date": "2026-10-05T01:13:56.695Z"
+  },
+  {
+    "category": "Sportcars (1990)",
+    "plate": "SP 03-88",
+    "read": "SP 03-88",
+    "count": 3,
+    "date": "2026-10-05T01:13:30.468Z"
+  },
+  {
+    "category": "Sportcars (1990)",
+    "plate": "SP 08-34",
+    "read": "SP 08-34",
+    "count": 3,
+    "date": "2026-10-05T01:13:31.468Z"
+  },
+  {
+    "category": "Sportcars (1990)",
+    "plate": "SP 11-18",
+    "read": "SP 11-18",
+    "count": 3,
+    "date": "2026-10-05T01:13:32.467Z"
+  },
+  {
+    "category": "Sportcars (2022)",
+    "plate": "I 286-SP",
+    "read": "I 286-SP",
+    "count": 4,
+    "date": "2026-10-05T01:13:59.524Z"
+  },
+  {
+    "category": "Sportcars (2022)",
+    "plate": "I 348-SP",
+    "read": "I 348-SP",
+    "count": 2,
+    "date": "2026-10-05T01:13:59.879Z"
+  },
+  {
+    "category": "Sportcars (2022)",
+    "plate": "I 583-AG",
+    "read": "I 583-AG",
+    "count": 2,
+    "date": "2026-10-05T01:14:00.234Z"
+  },
+  {
+    "category": "Taxi (2022)",
+    "plate": "TX AH-275",
+    "read": "TX AH-275",
+    "count": 2,
+    "date": "2026-10-05T01:13:54.219Z"
+  },
+  {
+    "category": "Taxi (2022)",
+    "plate": "TX AI-829",
+    "read": "TX AI-829",
+    "count": 2,
+    "date": "2026-10-05T01:13:54.574Z"
+  },
+  {
+    "category": "Taxi (2022)",
+    "plate": "TX AK-620",
+    "read": "TX AK-620",
+    "count": 1,
+    "date": "2026-10-05T01:13:54.928Z"
+  },
+  {
+    "category": "Temporary (1990)",
+    "plate": "E-05789 93",
+    "read": "E-05789 93",
+    "count": 1,
+    "date": "2026-10-05T01:13:41.539Z"
+  },
+  {
+    "category": "Temporary (1990)",
+    "plate": "P-06785 20",
+    "read": "P-06785 20",
+    "count": 2,
+    "date": "2026-10-05T01:13:41.901Z"
+  },
+  {
+    "category": "Temporary (1990)",
+    "plate": "Z-00384 12",
+    "read": "Z-00384 12",
+    "count": 1,
+    "date": "2026-10-05T01:13:42.256Z"
+  },
+  {
+    "category": "Temporary (2022)",
+    "plate": "I 45LU",
+    "read": "I 45LU",
+    "count": 1,
+    "date": "2026-10-05T01:13:57.755Z"
+  },
+  {
+    "category": "Temporary (2022)",
+    "plate": "I 64FJ",
+    "read": "I 64FJ",
+    "count": 3,
+    "date": "2026-10-05T01:13:58.109Z"
+  },
+  {
+    "category": "Temporary (2022)",
+    "plate": "I 85GS",
+    "read": "I 85GS",
+    "count": 1,
+    "date": "2026-10-05T01:13:58.463Z"
+  },
+  {
+    "category": "Vanity Plates (1990)",
+    "plate": "HGYNO-1",
+    "read": "HGYNO-1",
+    "count": 4,
+    "date": "2026-10-05T01:13:38.469Z"
+  },
+  {
+    "category": "Vanity Plates (1990)",
+    "plate": "LULU-01",
+    "read": "LULU-01",
+    "count": 1,
+    "date": "2026-10-05T01:13:39.467Z"
+  },
+  {
+    "category": "Vanity Plates (1990)",
+    "plate": "TRABI-7",
+    "read": "TRABI-7",
+    "count": 2,
+    "date": "2026-10-05T01:13:40.468Z"
+  },
+  {
+    "category": "Vanity Plates (2022)",
+    "plate": "ECRS-800",
+    "read": "ECRS-800",
+    "count": 2,
+    "date": "2026-10-05T01:13:50.391Z"
+  },
+  {
+    "category": "Vanity Plates (2022)",
+    "plate": "MILLER-1",
+    "read": "MILLER-1",
+    "count": 2,
+    "date": "2026-10-05T01:13:50.745Z"
+  },
+  {
+    "category": "Vanity Plates (2022)",
+    "plate": "RIZI-976",
+    "read": "RIZI-976",
+    "count": 1,
+    "date": "2026-10-05T01:13:51.100Z"
+  }
+]

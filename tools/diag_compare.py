@@ -2,12 +2,15 @@
 our script and by the other "Notification Doubles Plaques" script (MIT). Countries where they differ
 are the only ones that need a real check on the site.
 
-    python tests/diag_compare.py
+    python tools/diag_compare.py
 """
 import re
 import sys
 
 from playwright.sync_api import sync_playwright
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tests'))
 from fake_site import ROOT, SCRIPT, route_site
 
 PAGES = ROOT / "reference" / "real" / "countries"

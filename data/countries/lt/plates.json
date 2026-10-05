@@ -1,0 +1,191 @@
+[
+  {
+    "category": "Cars",
+    "plate": "HCA 895",
+    "read": "HCA 895",
+    "count": 1,
+    "date": "2026-10-05T01:15:36.707Z"
+  },
+  {
+    "category": "Cars",
+    "plate": "MBL 212",
+    "read": "MBL 212",
+    "count": 2,
+    "date": "2026-10-05T01:15:37.061Z"
+  },
+  {
+    "category": "Cars",
+    "plate": "MSD 017",
+    "read": "MSD 017",
+    "count": 1,
+    "date": "2026-10-05T01:15:37.416Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "01 1 001",
+    "read": "01 1 001",
+    "count": 4,
+    "date": "2026-10-05T01:15:50.871Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "14 3 236",
+    "read": "14 3 236",
+    "count": 1,
+    "date": "2026-10-05T01:15:51.225Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "30 2 005",
+    "read": "30 2 005",
+    "count": 1,
+    "date": "2026-10-05T01:15:51.580Z"
+  },
+  {
+    "category": "Electric vehicles",
+    "plate": "EE8362",
+    "read": "EE8362",
+    "count": 1,
+    "date": "2026-10-05T01:15:45.560Z"
+  },
+  {
+    "category": "Electric vehicles",
+    "plate": "EF2462",
+    "read": "EF2462",
+    "count": 1,
+    "date": "2026-10-05T01:15:45.915Z"
+  },
+  {
+    "category": "Electric vehicles",
+    "plate": "EF4858",
+    "read": "EF4858",
+    "count": 1,
+    "date": "2026-10-05T01:15:46.270Z"
+  },
+  {
+    "category": "Mopeds",
+    "plate": "03 HOG",
+    "read": "03 HOG",
+    "count": 1,
+    "date": "2026-10-05T01:15:42.019Z"
+  },
+  {
+    "category": "Mopeds",
+    "plate": "69 BYH",
+    "read": "69 BYH",
+    "count": 1,
+    "date": "2026-10-05T01:15:42.373Z"
+  },
+  {
+    "category": "Mopeds",
+    "plate": "77 HOG",
+    "read": "77 HOG",
+    "count": 2,
+    "date": "2026-10-05T01:15:42.726Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "555 AZ",
+    "read": "555 AZ",
+    "count": 2,
+    "date": "2026-10-05T01:15:38.480Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "743 BC",
+    "read": "743 BC",
+    "count": 1,
+    "date": "2026-10-05T01:15:38.834Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "999 BN",
+    "read": "999 BN",
+    "count": 1,
+    "date": "2026-10-05T01:15:39.189Z"
+  },
+  {
+    "category": "Oldtimers",
+    "plate": "H00191",
+    "read": "H00191",
+    "count": 1,
+    "date": "2026-10-05T01:15:47.332Z"
+  },
+  {
+    "category": "Oldtimers",
+    "plate": "H56011",
+    "read": "H56011",
+    "count": 3,
+    "date": "2026-10-05T01:15:47.686Z"
+  },
+  {
+    "category": "Oldtimers",
+    "plate": "H75020",
+    "read": "H75020",
+    "count": 9,
+    "date": "2026-10-05T01:15:48.041Z"
+  },
+  {
+    "category": "Trailers",
+    "plate": "IL 870",
+    "read": "IL 870",
+    "count": 1,
+    "date": "2026-10-05T01:15:40.250Z"
+  },
+  {
+    "category": "Trailers",
+    "plate": "MP 495",
+    "read": "MP 495",
+    "count": 1,
+    "date": "2026-10-05T01:15:40.604Z"
+  },
+  {
+    "category": "Trailers",
+    "plate": "RI 326",
+    "read": "RI 326",
+    "count": 1,
+    "date": "2026-10-05T01:15:40.958Z"
+  },
+  {
+    "category": "Transit plates",
+    "plate": "5699 CZ",
+    "read": "5699 CZ",
+    "count": 1,
+    "date": "2026-10-05T01:15:49.101Z"
+  },
+  {
+    "category": "Transit plates",
+    "plate": "5755 CZ",
+    "read": "5755 CZ",
+    "count": 1,
+    "date": "2026-10-05T01:15:49.457Z"
+  },
+  {
+    "category": "Transit plates",
+    "plate": "9639 CH",
+    "read": "9639 CH",
+    "count": 1,
+    "date": "2026-10-05T01:15:49.811Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "N0LIFE",
+    "read": "N0LIFE",
+    "count": 1,
+    "date": "2026-10-05T01:15:43.789Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "S1NER",
+    "read": "S1NER",
+    "count": 2,
+    "date": "2026-10-05T01:15:44.145Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "ZUJUK0",
+    "read": "ZUJUK0",
+    "count": 1,
+    "date": "2026-10-05T01:15:44.500Z"
+  }
+]

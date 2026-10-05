@@ -1,0 +1,86 @@
+{
+  "code": "mk",
+  "name": "North Macedonia",
+  "upload": {
+    "typeMenu": true,
+    "hooks": ["dismk"],
+    "types": [
+      {
+        "id": "1",
+        "label": "Regular plates (2012)",
+        "visible": ["digit", "let", "region2", "fon"]
+      },
+      {
+        "id": "2",
+        "label": "Regular plates (1993)",
+        "visible": ["digit", "let", "region1", "fon"]
+      },
+      {
+        "id": "3",
+        "label": "Vanity Plates",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "4",
+        "label": "Foreign citizens and enterprises",
+        "visible": ["digit", "let", "region2", "fon"]
+      },
+      {
+        "id": "5",
+        "label": "Taxi",
+        "visible": ["digit", "let", "region2", "fon"]
+      },
+      {
+        "id": "6",
+        "label": "Diplomatic",
+        "visible": ["region3", "nomer", "fon"]
+      },
+      {
+        "id": "7",
+        "label": "Authorities",
+        "visible": ["digit", "let", "region2", "fon"]
+      },
+      {
+        "id": "8",
+        "label": "Exceptional vehicles",
+        "visible": ["digit", "let", "region2", "fon"]
+      }
+    ]
+  },
+  "search": {
+    "categories": [
+      {
+        "id": "1",
+        "label": "Regular plates (2012)"
+      },
+      {
+        "id": "2",
+        "label": "Regular plates (1993)"
+      },
+      {
+        "id": "3",
+        "label": "Vanity Plates"
+      },
+      {
+        "id": "4",
+        "label": "Foreign citizens and enterprises"
+      },
+      {
+        "id": "5",
+        "label": "Taxi"
+      },
+      {
+        "id": "6",
+        "label": "Diplomatic"
+      },
+      {
+        "id": "7",
+        "label": "Authorities"
+      },
+      {
+        "id": "8",
+        "label": "Exceptional vehicles"
+      }
+    ]
+  }
+}

@@ -1,0 +1,317 @@
+[
+  {
+    "category": "Dealer (2004)",
+    "plate": "T4 TE 2773",
+    "read": "T4 2773 TE",
+    "count": 0,
+    "date": "2026-10-05T01:56:46.613Z"
+  },
+  {
+    "category": "Dealer (2004)",
+    "plate": "T4 TP 4881",
+    "read": "T4 4881 TP",
+    "count": 0,
+    "date": "2026-10-05T01:56:50.581Z"
+  },
+  {
+    "category": "Dealer (2004)",
+    "plate": "T5 BI 7208",
+    "read": "T5 7208 BI",
+    "count": 0,
+    "date": "2026-10-05T01:56:53.619Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "DP 201 191",
+    "read": "201",
+    "count": 439,
+    "date": "2026-10-05T01:58:17.631Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "DP 212 095",
+    "read": "212",
+    "count": 293,
+    "date": "2026-10-05T01:58:20.694Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "DP 221 026",
+    "read": "221",
+    "count": 367,
+    "date": "2026-10-05T01:58:23.612Z"
+  },
+  {
+    "category": "Mopeds (2004)",
+    "plate": "AE 0499 AA",
+    "read": "AE 0499 AA",
+    "count": 3,
+    "date": "2026-10-05T01:55:50.500Z"
+  },
+  {
+    "category": "Mopeds (2004)",
+    "plate": "BE 0543 AA",
+    "read": "BE 0543 AA",
+    "count": 1,
+    "date": "2026-10-05T01:55:50.858Z"
+  },
+  {
+    "category": "Mopeds (2004)",
+    "plate": "BH 1568 AB",
+    "read": "BH 1568 AB",
+    "count": 1,
+    "date": "2026-10-05T01:55:51.216Z"
+  },
+  {
+    "category": "Motorcycles (1995)",
+    "plate": "0708 CKA",
+    "read": "0708 CK",
+    "count": 6,
+    "date": "2026-10-05T01:58:08.683Z"
+  },
+  {
+    "category": "Motorcycles (1995)",
+    "plate": "0790 CAA",
+    "read": "0790 CA",
+    "count": 3,
+    "date": "2026-10-05T01:58:11.610Z"
+  },
+  {
+    "category": "Motorcycles (1995)",
+    "plate": "2195 OMA",
+    "read": "2195 OM",
+    "count": 0,
+    "date": "2026-10-05T01:58:14.676Z"
+  },
+  {
+    "category": "Motorcycles (2004)",
+    "plate": "AX 4393 AA",
+    "read": "AX 4393 AA",
+    "count": 1,
+    "date": "2026-10-05T01:55:48.722Z"
+  },
+  {
+    "category": "Motorcycles (2004)",
+    "plate": "BH 1385 JB",
+    "read": "BH 1385 JB",
+    "count": 1,
+    "date": "2026-10-05T01:55:49.080Z"
+  },
+  {
+    "category": "Motorcycles (2004)",
+    "plate": "BH 4537 JB",
+    "read": "BH 4537 JB",
+    "count": 1,
+    "date": "2026-10-05T01:55:49.439Z"
+  },
+  {
+    "category": "Police (2004)",
+    "plate": "14 0491",
+    "read": "14 0491",
+    "count": 1,
+    "date": "2026-10-05T01:56:59.656Z"
+  },
+  {
+    "category": "Police (2004)",
+    "plate": "14 1355",
+    "read": "14 1355",
+    "count": 1,
+    "date": "2026-10-05T01:57:02.612Z"
+  },
+  {
+    "category": "Police (2004)",
+    "plate": "14 1735",
+    "read": "14 1735",
+    "count": 1,
+    "date": "2026-10-05T01:57:05.707Z"
+  },
+  {
+    "category": "Public transport (2004)",
+    "plate": "BC 5346 OO",
+    "read": "BC 5346 OO",
+    "count": 1,
+    "date": "2026-10-05T01:55:46.942Z"
+  },
+  {
+    "category": "Public transport (2004)",
+    "plate": "BH 2927 AA",
+    "read": "BH 2927 AA",
+    "count": 3,
+    "date": "2026-10-05T01:55:47.300Z"
+  },
+  {
+    "category": "Public transport (2004)",
+    "plate": "BH 3973 AA",
+    "read": "BH 3973 AA",
+    "count": 1,
+    "date": "2026-10-05T01:55:47.659Z"
+  },
+  {
+    "category": "Regular plates (2004)",
+    "plate": "AT 2626 EC",
+    "read": "AT 2626 EC",
+    "count": 2,
+    "date": "2026-10-05T01:55:45.154Z"
+  },
+  {
+    "category": "Regular plates (2004)",
+    "plate": "BE 0881 HE",
+    "read": "BE 0881 HE",
+    "count": 1,
+    "date": "2026-10-05T01:55:45.516Z"
+  },
+  {
+    "category": "Regular plates (2004)",
+    "plate": "KA 8657 KC",
+    "read": "KA 8657 KC",
+    "count": 2,
+    "date": "2026-10-05T01:55:45.875Z"
+  },
+  {
+    "category": "Special machinery (1995)",
+    "plate": "00828 АС",
+    "read": "00828",
+    "count": 2,
+    "date": "2026-10-05T01:57:47.655Z"
+  },
+  {
+    "category": "Special machinery (1995)",
+    "plate": "18490 ВН",
+    "read": "18490",
+    "count": 1,
+    "date": "2026-10-05T01:57:50.635Z"
+  },
+  {
+    "category": "Special machinery (1995)",
+    "plate": "45177 АС",
+    "read": "45177",
+    "count": 1,
+    "date": "2026-10-05T01:57:53.598Z"
+  },
+  {
+    "category": "Trailers (1995)",
+    "plate": "01605 OA",
+    "read": "01605 OA",
+    "count": 1,
+    "date": "2026-10-05T01:57:38.592Z"
+  },
+  {
+    "category": "Trailers (1995)",
+    "plate": "02386 MO",
+    "read": "02386 MO",
+    "count": 1,
+    "date": "2026-10-05T01:57:41.622Z"
+  },
+  {
+    "category": "Trailers (1995)",
+    "plate": "18211 MA",
+    "read": "18211 MA",
+    "count": 1,
+    "date": "2026-10-05T01:57:44.598Z"
+  },
+  {
+    "category": "Trailers for special vehicles (1995)",
+    "plate": "ВЕ 07067",
+    "read": "07067",
+    "count": 1,
+    "date": "2026-10-05T01:57:56.693Z"
+  },
+  {
+    "category": "Trailers for special vehicles (1995)",
+    "plate": "ЯР 03380",
+    "read": "03380",
+    "count": 1,
+    "date": "2026-10-05T01:57:59.604Z"
+  },
+  {
+    "category": "Trailers for special vehicles (1995)",
+    "plate": "ЯР 04943",
+    "read": "04943",
+    "count": 1,
+    "date": "2026-10-05T01:58:02.612Z"
+  },
+  {
+    "category": "Transit plates (2004)",
+    "plate": "05 CH 8725",
+    "read": "05 8725 CH",
+    "count": 0,
+    "date": "2026-10-05T01:56:34.282Z"
+  },
+  {
+    "category": "Transit plates (2004)",
+    "plate": "16 BP 3159",
+    "read": "16 3159 BP",
+    "count": 0,
+    "date": "2026-10-05T01:56:37.201Z"
+  },
+  {
+    "category": "Transit plates (2004)",
+    "plate": "21 BA 0640",
+    "read": "21 0640 BA",
+    "count": 0,
+    "date": "2026-10-05T01:56:40.192Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "16 VISHNYA",
+    "read": "HA OM",
+    "count": 0,
+    "date": "2026-10-05T01:31:47.333Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "16 W7777W",
+    "read": "HA OM",
+    "count": 0,
+    "date": "2026-10-05T01:31:47.689Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "19 ROST",
+    "read": "HA OM",
+    "count": 0,
+    "date": "2026-10-05T01:31:48.045Z"
+  },
+  {
+    "category": "Work vehicles (1995)",
+    "plate": "Т0625 РВ",
+    "read": "Т0625",
+    "count": 1,
+    "date": "2026-10-05T01:58:38.621Z"
+  },
+  {
+    "category": "Work vehicles (1995)",
+    "plate": "Т1668 МК",
+    "read": "Т1668",
+    "count": 1,
+    "date": "2026-10-05T01:58:41.692Z"
+  },
+  {
+    "category": "Work vehicles (1995)",
+    "plate": "Т2966 ЗС",
+    "read": "Т2966",
+    "count": 1,
+    "date": "2026-10-05T01:58:44.656Z"
+  },
+  {
+    "category": "Work vehicles (2004)",
+    "plate": "02058 T AX",
+    "read": "AX 02058",
+    "count": 0,
+    "date": "2026-10-05T01:57:14.627Z"
+  },
+  {
+    "category": "Work vehicles (2004)",
+    "plate": "03213 T AI",
+    "read": "AI 03213",
+    "count": 0,
+    "date": "2026-10-05T01:57:17.635Z"
+  },
+  {
+    "category": "Work vehicles (2004)",
+    "plate": "10696 T AE",
+    "read": "AE 10696",
+    "count": 0,
+    "date": "2026-10-05T01:57:20.618Z"
+  }
+]

@@ -12,6 +12,11 @@
 !src/**
 !tests/
 !tests/**
+!data/
+!data/**
+!docs/
+!docs/**
+!logo_nextplaate.svg
 __pycache__/
 *.pyc
 .pytest_cache/

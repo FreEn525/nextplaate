@@ -1,0 +1,32 @@
+{
+  "code": "ma",
+  "name": "Morocco",
+  "upload": {
+    "typeMenu": true,
+    "hooks": ["disma"],
+    "types": [
+      {
+        "id": "1",
+        "label": "Regular plates",
+        "visible": ["fon", "let", "digit", "region"]
+      },
+      {
+        "id": "2",
+        "label": "Trailers",
+        "visible": ["digit", "region"]
+      }
+    ]
+  },
+  "search": {
+    "categories": [
+      {
+        "id": "1",
+        "label": "Regular plates"
+      },
+      {
+        "id": "2",
+        "label": "Trailers"
+      }
+    ]
+  }
+}

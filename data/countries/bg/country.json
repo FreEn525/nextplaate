@@ -1,0 +1,77 @@
+{
+  "code": "bg",
+  "name": "Bulgaria",
+  "upload": {
+    "typeMenu": true,
+    "hooks": ["discbg"],
+    "types": [
+      {
+        "id": "1",
+        "label": "Cars",
+        "visible": ["region", "letter", "digit", "fon"]
+      },
+      {
+        "id": "2",
+        "label": "Motorcycles",
+        "visible": ["region", "letter", "digit", "fon"]
+      },
+      {
+        "id": "3",
+        "label": "Military",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "4",
+        "label": "Vanity Plates",
+        "visible": ["nomer", "region", "fon"]
+      },
+      {
+        "id": "5",
+        "label": "Temporary",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "6",
+        "label": "Diplomatic",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "7",
+        "label": "Foreign citizens and enterprises",
+        "visible": ["nomer", "fon"]
+      }
+    ]
+  },
+  "search": {
+    "categories": [
+      {
+        "id": "1",
+        "label": "Cars"
+      },
+      {
+        "id": "2",
+        "label": "Motorcycles"
+      },
+      {
+        "id": "3",
+        "label": "Military"
+      },
+      {
+        "id": "4",
+        "label": "Vanity Plates"
+      },
+      {
+        "id": "5",
+        "label": "Temporary"
+      },
+      {
+        "id": "6",
+        "label": "Diplomatic"
+      },
+      {
+        "id": "7",
+        "label": "Foreign citizens and enterprises"
+      }
+    ]
+  }
+}

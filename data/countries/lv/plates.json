@@ -1,0 +1,191 @@
+[
+  {
+    "category": "Dealer",
+    "plate": "B 340-7",
+    "read": "BY 340",
+    "count": 0,
+    "date": "2026-10-05T01:51:02.125Z"
+  },
+  {
+    "category": "Dealer",
+    "plate": "B 452-7",
+    "read": "BY 452",
+    "count": 0,
+    "date": "2026-10-05T01:51:02.481Z"
+  },
+  {
+    "category": "Dealer",
+    "plate": "B 1122-6",
+    "read": "BY 1122",
+    "count": 0,
+    "date": "2026-10-05T01:51:01.768Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "C-4307",
+    "read": "4307",
+    "count": 22,
+    "date": "2026-10-05T01:51:03.544Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "CD-810",
+    "read": "810",
+    "count": 30,
+    "date": "2026-10-05T01:51:03.900Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "CD-9006",
+    "read": "9006",
+    "count": 22,
+    "date": "2026-10-05T01:51:04.255Z"
+  },
+  {
+    "category": "Electric vehicles",
+    "plate": "EI-1231",
+    "read": "EI 1231",
+    "count": 1,
+    "date": "2026-10-05T01:50:59.989Z"
+  },
+  {
+    "category": "Electric vehicles",
+    "plate": "EX-9270",
+    "read": "EX 9270",
+    "count": 1,
+    "date": "2026-10-05T01:51:00.345Z"
+  },
+  {
+    "category": "Electric vehicles",
+    "plate": "EY-2614",
+    "read": "EY 2614",
+    "count": 1,
+    "date": "2026-10-05T01:51:00.702Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "KL 866",
+    "read": "KL 866",
+    "count": 1,
+    "date": "2026-10-05T01:50:56.442Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "TJ 1607",
+    "read": "TJ 1607",
+    "count": 1,
+    "date": "2026-10-05T01:50:56.800Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "TO 669",
+    "read": "TO 669",
+    "count": 1,
+    "date": "2026-10-05T01:50:57.156Z"
+  },
+  {
+    "category": "Regular car plates",
+    "plate": "GD-1777",
+    "read": "GD 1777",
+    "count": 1,
+    "date": "2026-10-05T01:50:49.338Z"
+  },
+  {
+    "category": "Regular car plates",
+    "plate": "OD-2755",
+    "read": "OD 2755",
+    "count": 1,
+    "date": "2026-10-05T01:50:49.695Z"
+  },
+  {
+    "category": "Regular car plates",
+    "plate": "WA-10",
+    "read": "WA 10",
+    "count": 2,
+    "date": "2026-10-05T01:50:50.051Z"
+  },
+  {
+    "category": "Taxi",
+    "plate": "TQ-3564",
+    "read": "TQ 3564",
+    "count": 1,
+    "date": "2026-10-05T01:50:54.665Z"
+  },
+  {
+    "category": "Taxi",
+    "plate": "TQ-4473",
+    "read": "TQ 4473",
+    "count": 1,
+    "date": "2026-10-05T01:50:55.022Z"
+  },
+  {
+    "category": "Taxi",
+    "plate": "TQ-9253",
+    "read": "TQ 9253",
+    "count": 1,
+    "date": "2026-10-05T01:50:55.379Z"
+  },
+  {
+    "category": "Trailers",
+    "plate": "B-362Y",
+    "read": "BA 362Y",
+    "count": 0,
+    "date": "2026-10-05T01:50:51.112Z"
+  },
+  {
+    "category": "Trailers",
+    "plate": "B-389E",
+    "read": "BA 389E",
+    "count": 0,
+    "date": "2026-10-05T01:50:51.468Z"
+  },
+  {
+    "category": "Trailers",
+    "plate": "B-906J",
+    "read": "BA 906J",
+    "count": 0,
+    "date": "2026-10-05T01:50:51.822Z"
+  },
+  {
+    "category": "Transit plates",
+    "plate": "QC 4195",
+    "read": "QC 4195",
+    "count": 1,
+    "date": "2026-10-05T01:50:52.886Z"
+  },
+  {
+    "category": "Transit plates",
+    "plate": "QC 7482",
+    "read": "QC 7482",
+    "count": 1,
+    "date": "2026-10-05T01:50:53.242Z"
+  },
+  {
+    "category": "Transit plates",
+    "plate": "QC 7728",
+    "read": "QC 7728",
+    "count": 2,
+    "date": "2026-10-05T01:50:53.602Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "19 MK",
+    "read": "19 MK",
+    "count": 5,
+    "date": "2026-10-05T01:50:58.216Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "PENNY",
+    "read": "PENNY",
+    "count": 1,
+    "date": "2026-10-05T01:50:58.570Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "SAAB",
+    "read": "SAAB",
+    "count": 4,
+    "date": "2026-10-05T01:50:58.923Z"
+  }
+]

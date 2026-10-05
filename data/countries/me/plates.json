@@ -1,0 +1,128 @@
+[
+  {
+    "category": "Cars",
+    "plate": "BD BV030",
+    "read": "BD BV030",
+    "count": 1,
+    "date": "2026-10-05T01:51:50.017Z"
+  },
+  {
+    "category": "Cars",
+    "plate": "HN BU234",
+    "read": "HN BU234",
+    "count": 1,
+    "date": "2026-10-05T01:51:50.373Z"
+  },
+  {
+    "category": "Cars",
+    "plate": "UL BH075",
+    "read": "UL BH075",
+    "count": 1,
+    "date": "2026-10-05T01:51:50.729Z"
+  },
+  {
+    "category": "Mopeds",
+    "plate": "BD AH53",
+    "read": "BD AH53",
+    "count": 1,
+    "date": "2026-10-05T01:51:55.334Z"
+  },
+  {
+    "category": "Mopeds",
+    "plate": "UL AA69",
+    "read": "UL AA69",
+    "count": 1,
+    "date": "2026-10-05T01:51:55.689Z"
+  },
+  {
+    "category": "Mopeds",
+    "plate": "ZT AA07",
+    "read": "ZT AA07",
+    "count": 1,
+    "date": "2026-10-05T01:51:56.046Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "BR BN36",
+    "read": "BR BN36",
+    "count": 1,
+    "date": "2026-10-05T01:51:53.562Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "BR CA56",
+    "read": "BR CA56",
+    "count": 1,
+    "date": "2026-10-05T01:51:53.917Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "TZ AA64",
+    "read": "TZ AA64",
+    "count": 1,
+    "date": "2026-10-05T01:51:54.273Z"
+  },
+  {
+    "category": "Police",
+    "plate": "P PG273",
+    "read": "PG PG273",
+    "count": 0,
+    "date": "2026-10-05T01:51:58.903Z"
+  },
+  {
+    "category": "Police",
+    "plate": "P PG288",
+    "read": "PG PG288",
+    "count": 0,
+    "date": "2026-10-05T01:51:59.259Z"
+  },
+  {
+    "category": "Police",
+    "plate": "P PG607",
+    "read": "PG PG607",
+    "count": 0,
+    "date": "2026-10-05T01:51:59.617Z"
+  },
+  {
+    "category": "Trailers",
+    "plate": "NK 571AB",
+    "read": "NK 571AB",
+    "count": 1,
+    "date": "2026-10-05T01:51:51.790Z"
+  },
+  {
+    "category": "Trailers",
+    "plate": "PG 731AB",
+    "read": "PG 731AB",
+    "count": 1,
+    "date": "2026-10-05T01:51:52.147Z"
+  },
+  {
+    "category": "Trailers",
+    "plate": "ZT 260AA",
+    "read": "ZT 260AA",
+    "count": 1,
+    "date": "2026-10-05T01:51:52.502Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "BD CMM02",
+    "read": "BD C M M 0 2",
+    "count": 0,
+    "date": "2026-10-05T01:51:57.116Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "PG CGN65",
+    "read": "PG C G N 6 5",
+    "count": 0,
+    "date": "2026-10-05T01:51:57.478Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "PG CGP07",
+    "read": "PG C G P 0 7",
+    "count": 0,
+    "date": "2026-10-05T01:51:57.840Z"
+  }
+]

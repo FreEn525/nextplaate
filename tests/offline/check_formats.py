@@ -2,12 +2,15 @@
 search box (the placeholder). Each example is typed into the saved upload page, and the script must
 read it back the same way. Uses the dev build (nextplaate.dev.user.js).
 
-    python tests/check_formats.py
+    python tests/offline/check_formats.py
 """
 import re
 import sys
 
 from playwright.sync_api import sync_playwright
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from fake_site import ROOT, route_site
 
 REF = ROOT / "reference" / "real" / "countries"

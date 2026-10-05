@@ -1,0 +1,425 @@
+[
+  {
+    "code": "ad",
+    "name": "Andorra",
+    "upload": true,
+    "uploadTypes": 0,
+    "searchCategories": 5,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "al",
+    "name": "Albania",
+    "upload": true,
+    "uploadTypes": 4,
+    "searchCategories": 4,
+    "plates": 9,
+    "categoriesWithPlate": 3
+  },
+  {
+    "code": "at",
+    "name": "Austria",
+    "upload": true,
+    "uploadTypes": 9,
+    "searchCategories": 9,
+    "plates": 24,
+    "categoriesWithPlate": 8
+  },
+  {
+    "code": "ba",
+    "name": "Bosnia and Herzegovina",
+    "upload": true,
+    "uploadTypes": 5,
+    "searchCategories": 5,
+    "plates": 9,
+    "categoriesWithPlate": 3
+  },
+  {
+    "code": "be",
+    "name": "Belgium",
+    "upload": true,
+    "uploadTypes": 5,
+    "searchCategories": 5,
+    "plates": 15,
+    "categoriesWithPlate": 5
+  },
+  {
+    "code": "bg",
+    "name": "Bulgaria",
+    "upload": true,
+    "uploadTypes": 7,
+    "searchCategories": 7,
+    "plates": 21,
+    "categoriesWithPlate": 7
+  },
+  {
+    "code": "by",
+    "name": "Belarus",
+    "upload": true,
+    "uploadTypes": 18,
+    "searchCategories": 18,
+    "plates": 42,
+    "categoriesWithPlate": 14
+  },
+  {
+    "code": "ch",
+    "name": "Switzerland",
+    "upload": true,
+    "uploadTypes": 11,
+    "searchCategories": 11,
+    "plates": 21,
+    "categoriesWithPlate": 7
+  },
+  {
+    "code": "cz",
+    "name": "Czech Republic",
+    "upload": true,
+    "uploadTypes": 22,
+    "searchCategories": 22,
+    "plates": 33,
+    "categoriesWithPlate": 11
+  },
+  {
+    "code": "de",
+    "name": "Germany",
+    "upload": true,
+    "uploadTypes": 15,
+    "searchCategories": 16,
+    "plates": 27,
+    "categoriesWithPlate": 9
+  },
+  {
+    "code": "dk",
+    "name": "Denmark",
+    "upload": true,
+    "uploadTypes": 8,
+    "searchCategories": 8,
+    "plates": 24,
+    "categoriesWithPlate": 8
+  },
+  {
+    "code": "dz",
+    "name": "Algeria",
+    "upload": true,
+    "uploadTypes": 7,
+    "searchCategories": 7,
+    "plates": 12,
+    "categoriesWithPlate": 4
+  },
+  {
+    "code": "ee",
+    "name": "Estonia",
+    "upload": true,
+    "uploadTypes": 10,
+    "searchCategories": 10,
+    "plates": 30,
+    "categoriesWithPlate": 10
+  },
+  {
+    "code": "es",
+    "name": "Spain",
+    "upload": true,
+    "uploadTypes": 6,
+    "searchCategories": 6,
+    "plates": 18,
+    "categoriesWithPlate": 6
+  },
+  {
+    "code": "fi",
+    "name": "Finland",
+    "upload": true,
+    "uploadTypes": 9,
+    "searchCategories": 9,
+    "plates": 27,
+    "categoriesWithPlate": 9
+  },
+  {
+    "code": "fr",
+    "name": "France",
+    "upload": true,
+    "uploadTypes": 17,
+    "searchCategories": 17,
+    "plates": 54,
+    "categoriesWithPlate": 17
+  },
+  {
+    "code": "gg",
+    "name": "Guernsey (UK)",
+    "upload": true,
+    "uploadTypes": 3,
+    "searchCategories": 3,
+    "plates": 6,
+    "categoriesWithPlate": 2
+  },
+  {
+    "code": "gr",
+    "name": "Greece",
+    "upload": true,
+    "uploadTypes": 16,
+    "searchCategories": 16,
+    "plates": 13,
+    "categoriesWithPlate": 5
+  },
+  {
+    "code": "hr",
+    "name": "Croatia",
+    "upload": true,
+    "uploadTypes": 11,
+    "searchCategories": 11,
+    "plates": 18,
+    "categoriesWithPlate": 6
+  },
+  {
+    "code": "hu",
+    "name": "Hungary",
+    "upload": true,
+    "uploadTypes": 23,
+    "searchCategories": 23,
+    "plates": 69,
+    "categoriesWithPlate": 23
+  },
+  {
+    "code": "ie",
+    "name": "Ireland",
+    "upload": true,
+    "uploadTypes": 3,
+    "searchCategories": 3,
+    "plates": 6,
+    "categoriesWithPlate": 2
+  },
+  {
+    "code": "is",
+    "name": "Iceland",
+    "upload": true,
+    "uploadTypes": 10,
+    "searchCategories": 10,
+    "plates": 30,
+    "categoriesWithPlate": 10
+  },
+  {
+    "code": "it",
+    "name": "Italy",
+    "upload": true,
+    "uploadTypes": 14,
+    "searchCategories": 14,
+    "plates": 33,
+    "categoriesWithPlate": 12
+  },
+  {
+    "code": "li",
+    "name": "Liechtenstein",
+    "upload": true,
+    "uploadTypes": 9,
+    "searchCategories": 9,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "lt",
+    "name": "Lithuania",
+    "upload": true,
+    "uploadTypes": 9,
+    "searchCategories": 9,
+    "plates": 27,
+    "categoriesWithPlate": 9
+  },
+  {
+    "code": "lu",
+    "name": "Luxembourg",
+    "upload": true,
+    "uploadTypes": 5,
+    "searchCategories": 5,
+    "plates": 12,
+    "categoriesWithPlate": 4
+  },
+  {
+    "code": "lv",
+    "name": "Latvia",
+    "upload": true,
+    "uploadTypes": 9,
+    "searchCategories": 9,
+    "plates": 27,
+    "categoriesWithPlate": 9
+  },
+  {
+    "code": "ma",
+    "name": "Morocco",
+    "upload": true,
+    "uploadTypes": 2,
+    "searchCategories": 2,
+    "plates": 6,
+    "categoriesWithPlate": 2
+  },
+  {
+    "code": "md",
+    "name": "Moldova",
+    "upload": true,
+    "uploadTypes": 8,
+    "searchCategories": 8,
+    "plates": 24,
+    "categoriesWithPlate": 8
+  },
+  {
+    "code": "me",
+    "name": "Montenegro",
+    "upload": true,
+    "uploadTypes": 6,
+    "searchCategories": 6,
+    "plates": 18,
+    "categoriesWithPlate": 6
+  },
+  {
+    "code": "mk",
+    "name": "North Macedonia",
+    "upload": true,
+    "uploadTypes": 8,
+    "searchCategories": 8,
+    "plates": 18,
+    "categoriesWithPlate": 6
+  },
+  {
+    "code": "mt",
+    "name": "Malta",
+    "upload": true,
+    "uploadTypes": 0,
+    "searchCategories": 6,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "nl",
+    "name": "Netherlands",
+    "upload": true,
+    "uploadTypes": 0,
+    "searchCategories": 27,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "no",
+    "name": "Norway",
+    "upload": true,
+    "uploadTypes": 12,
+    "searchCategories": 12,
+    "plates": 36,
+    "categoriesWithPlate": 12
+  },
+  {
+    "code": "pl",
+    "name": "Poland",
+    "upload": true,
+    "uploadTypes": 13,
+    "searchCategories": 12,
+    "plates": 33,
+    "categoriesWithPlate": 11
+  },
+  {
+    "code": "pt",
+    "name": "Portugal",
+    "upload": true,
+    "uploadTypes": 4,
+    "searchCategories": 4,
+    "plates": 9,
+    "categoriesWithPlate": 3
+  },
+  {
+    "code": "ro",
+    "name": "Romania",
+    "upload": true,
+    "uploadTypes": 5,
+    "searchCategories": 5,
+    "plates": 12,
+    "categoriesWithPlate": 4
+  },
+  {
+    "code": "rs",
+    "name": "Serbia",
+    "upload": true,
+    "uploadTypes": 10,
+    "searchCategories": 10,
+    "plates": 9,
+    "categoriesWithPlate": 3
+  },
+  {
+    "code": "ru",
+    "name": "Russia",
+    "upload": true,
+    "uploadTypes": 21,
+    "searchCategories": 23,
+    "plates": 0,
+    "categoriesWithPlate": 0
+  },
+  {
+    "code": "se",
+    "name": "Sweden",
+    "upload": true,
+    "uploadTypes": 8,
+    "searchCategories": 8,
+    "plates": 24,
+    "categoriesWithPlate": 8
+  },
+  {
+    "code": "si",
+    "name": "Slovenia",
+    "upload": true,
+    "uploadTypes": 4,
+    "searchCategories": 4,
+    "plates": 1,
+    "categoriesWithPlate": 1
+  },
+  {
+    "code": "sk",
+    "name": "Slovakia",
+    "upload": true,
+    "uploadTypes": 21,
+    "searchCategories": 21,
+    "plates": 48,
+    "categoriesWithPlate": 16
+  },
+  {
+    "code": "tj",
+    "name": "Tajikistan",
+    "upload": true,
+    "uploadTypes": 10,
+    "searchCategories": 10,
+    "plates": 15,
+    "categoriesWithPlate": 5
+  },
+  {
+    "code": "tr",
+    "name": "Turkey",
+    "upload": true,
+    "uploadTypes": 6,
+    "searchCategories": 6,
+    "plates": 18,
+    "categoriesWithPlate": 6
+  },
+  {
+    "code": "ua",
+    "name": "Ukraine",
+    "upload": true,
+    "uploadTypes": 19,
+    "searchCategories": 19,
+    "plates": 45,
+    "categoriesWithPlate": 15
+  },
+  {
+    "code": "uk",
+    "name": "United Kingdom",
+    "upload": true,
+    "uploadTypes": 10,
+    "searchCategories": 10,
+    "plates": 30,
+    "categoriesWithPlate": 10
+  },
+  {
+    "code": "uz",
+    "name": "Uzbekistan",
+    "upload": true,
+    "uploadTypes": 9,
+    "searchCategories": 9,
+    "plates": 21,
+    "categoriesWithPlate": 7
+  }
+]

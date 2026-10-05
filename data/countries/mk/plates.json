@@ -1,0 +1,128 @@
+[
+  {
+    "category": "Authorities",
+    "plate": "SK 9474 CA",
+    "read": "SK 9474 CA",
+    "count": 1,
+    "date": "2026-10-05T01:19:07.078Z"
+  },
+  {
+    "category": "Authorities",
+    "plate": "SK 9531 CA",
+    "read": "SK 9531 CA",
+    "count": 1,
+    "date": "2026-10-05T01:19:07.436Z"
+  },
+  {
+    "category": "Authorities",
+    "plate": "SK 9745 CA",
+    "read": "SK 9745 CA",
+    "count": 1,
+    "date": "2026-10-05T01:19:07.793Z"
+  },
+  {
+    "category": "Exceptional vehicles",
+    "plate": "BT 9277 AG",
+    "read": "BT 9277 AG",
+    "count": 1,
+    "date": "2026-10-05T01:19:08.858Z"
+  },
+  {
+    "category": "Exceptional vehicles",
+    "plate": "KA 5096 AB",
+    "read": "KA 5096 AB",
+    "count": 1,
+    "date": "2026-10-05T01:19:09.216Z"
+  },
+  {
+    "category": "Exceptional vehicles",
+    "plate": "SK 6431 BT",
+    "read": "SK 6431 BT",
+    "count": 1,
+    "date": "2026-10-05T01:19:09.574Z"
+  },
+  {
+    "category": "Foreign citizens and enterprises",
+    "plate": "SK 1859 B9",
+    "read": "SK 1859 B9",
+    "count": 1,
+    "date": "2026-10-05T01:18:55.051Z"
+  },
+  {
+    "category": "Foreign citizens and enterprises",
+    "plate": "SK 3062 B9",
+    "read": "SK 3062 B9",
+    "count": 1,
+    "date": "2026-10-05T01:18:55.412Z"
+  },
+  {
+    "category": "Foreign citizens and enterprises",
+    "plate": "SK 3464 B9",
+    "read": "SK 3464 B9",
+    "count": 1,
+    "date": "2026-10-05T01:18:55.770Z"
+  },
+  {
+    "category": "Regular plates (1993)",
+    "plate": "SK 242-UC",
+    "read": "SK 242 UC",
+    "count": 1,
+    "date": "2026-10-05T01:18:51.851Z"
+  },
+  {
+    "category": "Regular plates (1993)",
+    "plate": "SK 544-SB",
+    "read": "SK 544 SB",
+    "count": 1,
+    "date": "2026-10-05T01:18:52.209Z"
+  },
+  {
+    "category": "Regular plates (1993)",
+    "plate": "SK 741-VI",
+    "read": "SK 741 VI",
+    "count": 1,
+    "date": "2026-10-05T01:18:52.566Z"
+  },
+  {
+    "category": "Regular plates (2012)",
+    "plate": "PP 9476 AG",
+    "read": "PP 9476 AG",
+    "count": 1,
+    "date": "2026-10-05T01:18:50.067Z"
+  },
+  {
+    "category": "Regular plates (2012)",
+    "plate": "SK 9663 AP",
+    "read": "SK 9663 AP",
+    "count": 1,
+    "date": "2026-10-05T01:18:50.426Z"
+  },
+  {
+    "category": "Regular plates (2012)",
+    "plate": "ST 2626 AD",
+    "read": "ST 2626 AD",
+    "count": 2,
+    "date": "2026-10-05T01:18:50.783Z"
+  },
+  {
+    "category": "Taxi",
+    "plate": "SK 4519 BF",
+    "read": "SK 4519 BF",
+    "count": 1,
+    "date": "2026-10-05T01:18:56.833Z"
+  },
+  {
+    "category": "Taxi",
+    "plate": "SK 6235 BJ",
+    "read": "SK 6235 BJ",
+    "count": 1,
+    "date": "2026-10-05T01:18:57.190Z"
+  },
+  {
+    "category": "Taxi",
+    "plate": "SK 9252 BG",
+    "read": "SK 9252 BG",
+    "count": 1,
+    "date": "2026-10-05T01:18:57.548Z"
+  }
+]

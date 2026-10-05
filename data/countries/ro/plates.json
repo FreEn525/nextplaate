@@ -1,0 +1,86 @@
+[
+  {
+    "category": "Diplomatic",
+    "plate": "CD 168129",
+    "read": "CD 168129",
+    "count": 2,
+    "date": "2026-10-05T01:21:57.474Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "CD 219103",
+    "read": "CD 219103",
+    "count": 1,
+    "date": "2026-10-05T01:21:57.830Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "CD 233111",
+    "read": "CD 233111",
+    "count": 1,
+    "date": "2026-10-05T01:21:58.186Z"
+  },
+  {
+    "category": "Long-term temporary",
+    "plate": "AG 4954",
+    "read": "AG 4954",
+    "count": 1,
+    "date": "2026-10-05T01:21:59.250Z"
+  },
+  {
+    "category": "Long-term temporary",
+    "plate": "BN 5512",
+    "read": "BN 5512",
+    "count": 1,
+    "date": "2026-10-05T01:21:59.605Z"
+  },
+  {
+    "category": "Long-term temporary",
+    "plate": "TM 12778",
+    "read": "TM 12778",
+    "count": 2,
+    "date": "2026-10-05T01:21:59.961Z"
+  },
+  {
+    "category": "Provisional",
+    "plate": "B 018742",
+    "read": "B 018742",
+    "count": 1,
+    "date": "2026-10-05T01:21:55.699Z"
+  },
+  {
+    "category": "Provisional",
+    "plate": "BC 018079",
+    "read": "BC 018079",
+    "count": 1,
+    "date": "2026-10-05T01:21:56.054Z"
+  },
+  {
+    "category": "Provisional",
+    "plate": "BV 016720",
+    "read": "BV 016720",
+    "count": 1,
+    "date": "2026-10-05T01:21:56.410Z"
+  },
+  {
+    "category": "Regular plates",
+    "plate": "B 102 DCL",
+    "read": "B 102 DCL",
+    "count": 1,
+    "date": "2026-10-05T01:21:53.920Z"
+  },
+  {
+    "category": "Regular plates",
+    "plate": "B 679 BRO",
+    "read": "B 679 BRO",
+    "count": 1,
+    "date": "2026-10-05T01:21:54.278Z"
+  },
+  {
+    "category": "Regular plates",
+    "plate": "SV 58 NAV",
+    "read": "SV 58 NAV",
+    "count": 4,
+    "date": "2026-10-05T01:21:54.635Z"
+  }
+]

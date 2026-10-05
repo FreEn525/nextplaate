@@ -1,0 +1,86 @@
+[
+  {
+    "category": "Consular corps ((11)1 A 1 CC)",
+    "plate": "8 B 3 CC",
+    "read": "8 B 3 CC",
+    "count": 2,
+    "date": "2026-10-05T01:07:17.450Z"
+  },
+  {
+    "category": "Consular corps ((11)1 A 1 CC)",
+    "plate": "19 F 9 CC",
+    "read": "19 F 9 CC",
+    "count": 2,
+    "date": "2026-10-05T01:07:17.096Z"
+  },
+  {
+    "category": "Consular corps ((11)1 A 1 CC)",
+    "plate": "19 F 22 CC",
+    "read": "19 F 22 CC",
+    "count": 2,
+    "date": "2026-10-05T01:07:16.743Z"
+  },
+  {
+    "category": "Diplomatic corps (C(M)D (11)1 (11)1)",
+    "plate": "CD 4 41",
+    "read": "CD 4 41",
+    "count": 1,
+    "date": "2026-10-05T01:07:15.683Z"
+  },
+  {
+    "category": "Diplomatic corps (C(M)D (11)1 (11)1)",
+    "plate": "CD 17 166",
+    "read": "CD 17 166",
+    "count": 2,
+    "date": "2026-10-05T01:07:15.329Z"
+  },
+  {
+    "category": "Diplomatic corps (C(M)D (11)1 (11)1)",
+    "plate": "CD 156 2",
+    "read": "CD 156 2",
+    "count": 1,
+    "date": "2026-10-05T01:07:14.976Z"
+  },
+  {
+    "category": "Regular plates ((1)11111 111 11)",
+    "plate": "00201 405 30",
+    "read": "00201 405 30",
+    "count": 1,
+    "date": "2026-10-05T01:07:04.445Z"
+  },
+  {
+    "category": "Regular plates ((1)11111 111 11)",
+    "plate": "01061 182 16",
+    "read": "01061 182 16",
+    "count": 1,
+    "date": "2026-10-05T01:07:04.800Z"
+  },
+  {
+    "category": "Regular plates ((1)11111 111 11)",
+    "plate": "48247 110 16",
+    "read": "48247 110 16",
+    "count": 1,
+    "date": "2026-10-05T01:07:05.154Z"
+  },
+  {
+    "category": "Temporary ((1)11111 11 11)",
+    "plate": "164929 00 16",
+    "read": "164929 00 16",
+    "count": 1,
+    "date": "2026-10-05T01:07:06.214Z"
+  },
+  {
+    "category": "Temporary ((1)11111 11 11)",
+    "plate": "224489 00 05",
+    "read": "224489 00 05",
+    "count": 2,
+    "date": "2026-10-05T01:07:06.568Z"
+  },
+  {
+    "category": "Temporary ((1)11111 11 11)",
+    "plate": "271201 00 16",
+    "read": "271201 00 16",
+    "count": 1,
+    "date": "2026-10-05T01:07:06.921Z"
+  }
+]

@@ -1,0 +1,170 @@
+[
+  {
+    "category": "Cars (1992)",
+    "plate": "CN AB 640",
+    "read": "CN AB 640",
+    "count": 1,
+    "date": "2026-10-05T01:51:27.515Z"
+  },
+  {
+    "category": "Cars (1992)",
+    "plate": "SL AB 583",
+    "read": "SL AB 583",
+    "count": 1,
+    "date": "2026-10-05T01:51:27.871Z"
+  },
+  {
+    "category": "Cars (1992)",
+    "plate": "TG AA 297",
+    "read": "TG AA 297",
+    "count": 1,
+    "date": "2026-10-05T01:51:28.227Z"
+  },
+  {
+    "category": "Cars (2015)",
+    "plate": "BMR 001",
+    "read": "BMR 001",
+    "count": 1,
+    "date": "2026-10-05T01:51:32.848Z"
+  },
+  {
+    "category": "Cars (2015)",
+    "plate": "ZMB 011",
+    "read": "ZMB 011",
+    "count": 3,
+    "date": "2026-10-05T01:51:33.203Z"
+  },
+  {
+    "category": "Cars (2015)",
+    "plate": "ZPW 177",
+    "read": "ZPW 177",
+    "count": 1,
+    "date": "2026-10-05T01:51:33.557Z"
+  },
+  {
+    "category": "Motorcycles (1992)",
+    "plate": "C AC 703",
+    "read": "C AC 703",
+    "count": 1,
+    "date": "2026-10-05T01:51:29.291Z"
+  },
+  {
+    "category": "Motorcycles (1992)",
+    "plate": "DB AB 570",
+    "read": "DB AB 570",
+    "count": 1,
+    "date": "2026-10-05T01:51:29.648Z"
+  },
+  {
+    "category": "Motorcycles (1992)",
+    "plate": "HN AD 738",
+    "read": "HN AD 738",
+    "count": 1,
+    "date": "2026-10-05T01:51:30.007Z"
+  },
+  {
+    "category": "Motorcycles (2015)",
+    "plate": "031 WGG",
+    "read": "031 WGG",
+    "count": 1,
+    "date": "2026-10-05T01:51:34.616Z"
+  },
+  {
+    "category": "Motorcycles (2015)",
+    "plate": "466 SGL",
+    "read": "466 SGL",
+    "count": 1,
+    "date": "2026-10-05T01:51:34.972Z"
+  },
+  {
+    "category": "Motorcycles (2015)",
+    "plate": "686 JSI",
+    "read": "686 JSI",
+    "count": 1,
+    "date": "2026-10-05T01:51:35.327Z"
+  },
+  {
+    "category": "Public transport (1992)",
+    "plate": "AN AM 681",
+    "read": "AN AM 681",
+    "count": 2,
+    "date": "2026-10-05T01:51:38.166Z"
+  },
+  {
+    "category": "Public transport (1992)",
+    "plate": "C MM 685",
+    "read": "C MM 685",
+    "count": 1,
+    "date": "2026-10-05T01:51:38.525Z"
+  },
+  {
+    "category": "Public transport (1992)",
+    "plate": "K JC 088",
+    "read": "K JC 088",
+    "count": 3,
+    "date": "2026-10-05T01:51:38.884Z"
+  },
+  {
+    "category": "Public transport (2015)",
+    "plate": "GXG 888",
+    "read": "GXG 888",
+    "count": 3,
+    "date": "2026-10-05T01:51:39.947Z"
+  },
+  {
+    "category": "Public transport (2015)",
+    "plate": "KHC 029",
+    "read": "KHC 029",
+    "count": 4,
+    "date": "2026-10-05T01:51:40.300Z"
+  },
+  {
+    "category": "Public transport (2015)",
+    "plate": "TNE 055",
+    "read": "TNE 055",
+    "count": 1,
+    "date": "2026-10-05T01:51:40.655Z"
+  },
+  {
+    "category": "Trailers (1992)",
+    "plate": "C-AV 703",
+    "read": "C 703 AV",
+    "count": 0,
+    "date": "2026-10-05T01:51:31.071Z"
+  },
+  {
+    "category": "Trailers (1992)",
+    "plate": "CS-AB 210",
+    "read": "CS 210 AB",
+    "count": 0,
+    "date": "2026-10-05T01:51:31.429Z"
+  },
+  {
+    "category": "Trailers (1992)",
+    "plate": "FL 070 RA",
+    "read": "FL 070 RA",
+    "count": 1,
+    "date": "2026-10-05T01:51:31.786Z"
+  },
+  {
+    "category": "Trailers (2015)",
+    "plate": "A 677 TT",
+    "read": "A 677 TT",
+    "count": 1,
+    "date": "2026-10-05T01:51:36.389Z"
+  },
+  {
+    "category": "Trailers (2015)",
+    "plate": "B 206 BR",
+    "read": "B 206 BR",
+    "count": 1,
+    "date": "2026-10-05T01:51:36.747Z"
+  },
+  {
+    "category": "Trailers (2015)",
+    "plate": "L 658 MM",
+    "read": "L 658 MM",
+    "count": 1,
+    "date": "2026-10-05T01:51:37.103Z"
+  }
+]

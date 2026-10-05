@@ -1,0 +1,44 @@
+[
+  {
+    "category": "Dealer",
+    "plate": "V2",
+    "read": "V2",
+    "count": 1,
+    "date": "2026-10-05T01:09:27.439Z"
+  },
+  {
+    "category": "Dealer",
+    "plate": "V97",
+    "read": "V97",
+    "count": 1,
+    "date": "2026-10-05T01:09:27.792Z"
+  },
+  {
+    "category": "Dealer",
+    "plate": "V145",
+    "read": "V145",
+    "count": 2,
+    "date": "2026-10-05T01:09:27.085Z"
+  },
+  {
+    "category": "Regular plates",
+    "plate": "43486",
+    "read": "43486",
+    "count": 1,
+    "date": "2026-10-05T01:09:25.318Z"
+  },
+  {
+    "category": "Regular plates",
+    "plate": "55068",
+    "read": "55068",
+    "count": 3,
+    "date": "2026-10-05T01:09:25.673Z"
+  },
+  {
+    "category": "Regular plates",
+    "plate": "57101",
+    "read": "57101",
+    "count": 1,
+    "date": "2026-10-05T01:09:26.026Z"
+  }
+]

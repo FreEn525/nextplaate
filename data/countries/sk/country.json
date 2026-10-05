@@ -1,0 +1,203 @@
+{
+  "code": "sk",
+  "name": "Slovakia",
+  "upload": {
+    "typeMenu": true,
+    "hooks": ["dissk"],
+    "types": [
+      {
+        "id": "1",
+        "label": "Cars",
+        "visible": ["digit", "let2", "region", "fon"]
+      },
+      {
+        "id": "2",
+        "label": "Motorcycles",
+        "visible": ["digit", "let2", "region", "fon"]
+      },
+      {
+        "id": "3",
+        "label": "Export transit plates (AB V(A)123)",
+        "visible": ["digit", "let1", "region", "fon"]
+      },
+      {
+        "id": "4",
+        "label": "Provincial governments, university rectors",
+        "visible": ["digit", "let1", "region", "fon"]
+      },
+      {
+        "id": "5",
+        "label": "Dealer (AB M(A)123)",
+        "visible": ["digit", "let1", "region", "fon"]
+      },
+      {
+        "id": "6",
+        "label": "Oldtimers (AB H(A)123)",
+        "visible": ["digit", "let1", "region", "fon"]
+      },
+      {
+        "id": "7",
+        "label": "Sportcars (AB S(A)123)",
+        "visible": ["digit", "let1", "region", "fon"]
+      },
+      {
+        "id": "8",
+        "label": "Special machinery",
+        "visible": ["digit", "let1", "region", "fon"]
+      },
+      {
+        "id": "9",
+        "label": "Vanity Plates",
+        "visible": ["let2", "nomerpl", "fon"]
+      },
+      {
+        "id": "10",
+        "label": "Police",
+        "visible": ["fon"]
+      },
+      {
+        "id": "11",
+        "label": "Military",
+        "visible": ["digit", "fon"]
+      },
+      {
+        "id": "12",
+        "label": "Electric vehicles",
+        "visible": ["digit", "let2", "region", "fon"]
+      },
+      {
+        "id": "13",
+        "label": "Diplomatic",
+        "visible": ["dip", "fon"]
+      },
+      {
+        "id": "14",
+        "label": "Export transit plates (V(A) 123AB)",
+        "visible": ["digit11", "let11", "let2", "fon"]
+      },
+      {
+        "id": "15",
+        "label": "Dealer (M(A) 123AB)",
+        "visible": ["digit11", "let11", "let2", "fon"]
+      },
+      {
+        "id": "16",
+        "label": "Oldtimers (H(A) 123AB)",
+        "visible": ["digit11", "let11", "let2", "fon"]
+      },
+      {
+        "id": "17",
+        "label": "Sportcars (S(A) 123AB)",
+        "visible": ["digit11", "let11", "let2", "fon"]
+      },
+      {
+        "id": "18",
+        "label": "Agricultural vehicles (F(A) 123AB)",
+        "visible": ["digit11", "let11", "let2", "fon"]
+      },
+      {
+        "id": "19",
+        "label": "Agricultural vehicles (AB F(A)123)",
+        "visible": ["digit", "let1", "region", "fon"]
+      },
+      {
+        "id": "20",
+        "label": "Provisional (C(A) 12345)",
+        "visible": ["let2", "nomerpl", "fon"]
+      },
+      {
+        "id": "21",
+        "label": "Provisional (C 123AB)",
+        "visible": ["digit11", "let11", "let2", "fon"]
+      }
+    ]
+  },
+  "search": {
+    "categories": [
+      {
+        "id": "1",
+        "label": "Cars"
+      },
+      {
+        "id": "2",
+        "label": "Motorcycles"
+      },
+      {
+        "id": "3",
+        "label": "Export transit plates (AB V(A)123)"
+      },
+      {
+        "id": "14",
+        "label": "Export transit plates (V(A) 123AB)"
+      },
+      {
+        "id": "4",
+        "label": "Provincial governments, university rectors"
+      },
+      {
+        "id": "5",
+        "label": "Dealer (AB M(A)123)"
+      },
+      {
+        "id": "15",
+        "label": "Dealer (M(A) 123AB)"
+      },
+      {
+        "id": "6",
+        "label": "Oldtimers (AB H(A)123)"
+      },
+      {
+        "id": "16",
+        "label": "Oldtimers (H(A) 123AB)"
+      },
+      {
+        "id": "7",
+        "label": "Sportcars (AB S(A)123)"
+      },
+      {
+        "id": "17",
+        "label": "Sportcars (S(A) 123AB)"
+      },
+      {
+        "id": "8",
+        "label": "Special machinery"
+      },
+      {
+        "id": "9",
+        "label": "Vanity Plates"
+      },
+      {
+        "id": "10",
+        "label": "Police"
+      },
+      {
+        "id": "11",
+        "label": "Military"
+      },
+      {
+        "id": "12",
+        "label": "Electric vehicles"
+      },
+      {
+        "id": "13",
+        "label": "Diplomatic"
+      },
+      {
+        "id": "18",
+        "label": "Agricultural vehicles (F(A) 123AB)"
+      },
+      {
+        "id": "19",
+        "label": "Agricultural vehicles (AB F(A)123)"
+      },
+      {
+        "id": "20",
+        "label": "Provisional (C(A) 12345)"
+      },
+      {
+        "id": "21",
+        "label": "Provisional (C 123AB)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "code": "lv",
+  "name": "Latvia",
+  "upload": {
+    "typeMenu": true,
+    "hooks": ["dislvn"],
+    "types": [
+      {
+        "id": "1",
+        "label": "Regular car plates",
+        "visible": ["b1", "b2", "digit", "fon"]
+      },
+      {
+        "id": "2",
+        "label": "Trailers",
+        "visible": ["b1", "digit", "fon"]
+      },
+      {
+        "id": "3",
+        "label": "Transit plates",
+        "visible": ["b1", "b2", "digit", "fon"]
+      },
+      {
+        "id": "4",
+        "label": "Taxi",
+        "visible": ["b1", "b2", "digit", "fon"]
+      },
+      {
+        "id": "5",
+        "label": "Motorcycles",
+        "visible": ["b1", "b2", "digit", "fon"]
+      },
+      {
+        "id": "6",
+        "label": "Vanity Plates",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "7",
+        "label": "Electric vehicles",
+        "visible": ["b1", "b2", "digit", "fon"]
+      },
+      {
+        "id": "8",
+        "label": "Dealer",
+        "visible": ["b1", "digit", "digit2", "fon"]
+      },
+      {
+        "id": "9",
+        "label": "Diplomatic",
+        "visible": ["dipreg", "nomer", "fon"]
+      }
+    ]
+  },
+  "search": {
+    "categories": [
+      {
+        "id": "1",
+        "label": "Regular car plates"
+      },
+      {
+        "id": "2",
+        "label": "Trailers"
+      },
+      {
+        "id": "3",
+        "label": "Transit plates"
+      },
+      {
+        "id": "4",
+        "label": "Taxi"
+      },
+      {
+        "id": "5",
+        "label": "Motorcycles"
+      },
+      {
+        "id": "6",
+        "label": "Vanity Plates"
+      },
+      {
+        "id": "7",
+        "label": "Electric vehicles"
+      },
+      {
+        "id": "8",
+        "label": "Dealer"
+      },
+      {
+        "id": "9",
+        "label": "Diplomatic"
+      }
+    ]
+  }
+}

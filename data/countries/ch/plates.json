@@ -1,0 +1,149 @@
+[
+  {
+    "category": "Agricultural vehicles (green)",
+    "plate": "GR 2235",
+    "read": "GR 2235",
+    "count": 1,
+    "date": "2026-10-05T01:00:46.576Z"
+  },
+  {
+    "category": "Agricultural vehicles (green)",
+    "plate": "SZ 127",
+    "read": "SZ 127",
+    "count": 1,
+    "date": "2026-10-05T01:00:46.931Z"
+  },
+  {
+    "category": "Agricultural vehicles (green)",
+    "plate": "TI 6541",
+    "read": "TI 6541",
+    "count": 1,
+    "date": "2026-10-05T01:00:47.289Z"
+  },
+  {
+    "category": "Cars",
+    "plate": "AG 245547",
+    "read": "AG 245547",
+    "count": 1,
+    "date": "2026-10-05T01:00:41.256Z"
+  },
+  {
+    "category": "Cars",
+    "plate": "AI 40101",
+    "read": "AI 40101",
+    "count": 1,
+    "date": "2026-10-05T01:00:41.611Z"
+  },
+  {
+    "category": "Cars",
+    "plate": "VD 359828",
+    "read": "VD 359828",
+    "count": 1,
+    "date": "2026-10-05T01:00:41.967Z"
+  },
+  {
+    "category": "Except vehicles and snowmobiles (brown)",
+    "plate": "SG 892",
+    "read": "SG 892",
+    "count": 1,
+    "date": "2026-10-05T01:00:48.349Z"
+  },
+  {
+    "category": "Except vehicles and snowmobiles (brown)",
+    "plate": "SZ 6",
+    "read": "SZ 6",
+    "count": 5,
+    "date": "2026-10-05T01:00:49.061Z"
+  },
+  {
+    "category": "Except vehicles and snowmobiles (brown)",
+    "plate": "SZ 19",
+    "read": "SZ 19",
+    "count": 4,
+    "date": "2026-10-05T01:00:48.704Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "VD 8019",
+    "read": "VD 8019",
+    "count": 1,
+    "date": "2026-10-05T01:00:43.029Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "ZH 25362",
+    "read": "ZH 25362",
+    "count": 1,
+    "date": "2026-10-05T01:00:43.739Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "ZH 122097",
+    "read": "ZH 122097",
+    "count": 1,
+    "date": "2026-10-05T01:00:43.384Z"
+  },
+  {
+    "category": "Provisional",
+    "plate": "GE 975485",
+    "read": "GE 975485",
+    "count": 1,
+    "date": "2026-10-05T01:00:51.897Z"
+  },
+  {
+    "category": "Provisional",
+    "plate": "GE 986618",
+    "read": "GE 986618",
+    "count": 1,
+    "date": "2026-10-05T01:00:52.253Z"
+  },
+  {
+    "category": "Provisional",
+    "plate": "ZH 860945",
+    "read": "ZH 860945",
+    "count": 2,
+    "date": "2026-10-05T01:00:52.609Z"
+  },
+  {
+    "category": "Slow vehicles (yellow)",
+    "plate": "BL 12670",
+    "read": "BL 12670",
+    "count": 1,
+    "date": "2026-10-05T01:00:44.801Z"
+  },
+  {
+    "category": "Slow vehicles (yellow)",
+    "plate": "BS 60346",
+    "read": "BS 60346",
+    "count": 1,
+    "date": "2026-10-05T01:00:45.157Z"
+  },
+  {
+    "category": "Slow vehicles (yellow)",
+    "plate": "VS 23488",
+    "read": "VS 23488",
+    "count": 1,
+    "date": "2026-10-05T01:00:45.513Z"
+  },
+  {
+    "category": "Work and fire vehicles (blue)",
+    "plate": "GR 252",
+    "read": "GR 252",
+    "count": 1,
+    "date": "2026-10-05T01:00:50.123Z"
+  },
+  {
+    "category": "Work and fire vehicles (blue)",
+    "plate": "GR 517",
+    "read": "GR 517",
+    "count": 1,
+    "date": "2026-10-05T01:00:50.478Z"
+  },
+  {
+    "category": "Work and fire vehicles (blue)",
+    "plate": "GR 612",
+    "read": "GR 612",
+    "count": 2,
+    "date": "2026-10-05T01:00:50.834Z"
+  }
+]

@@ -1,0 +1,104 @@
+{
+  "code": "rs",
+  "name": "Serbia",
+  "upload": {
+    "typeMenu": true,
+    "hooks": ["disrs"],
+    "types": [
+      {
+        "id": "1",
+        "label": "Cars",
+        "visible": ["digit1", "fon", "b1", "b2", "region1"]
+      },
+      {
+        "id": "2",
+        "label": "Trailers",
+        "visible": ["digit2", "fon", "b1", "b2", "region2"]
+      },
+      {
+        "id": "3",
+        "label": "Motorcycles",
+        "visible": ["digit1", "region1"]
+      },
+      {
+        "id": "4",
+        "label": "Vanity Plates",
+        "visible": ["fon", "b1", "b2", "b3", "b4", "b5", "region1"]
+      },
+      {
+        "id": "5",
+        "label": "Police",
+        "visible": ["digit1", "fon"]
+      },
+      {
+        "id": "6",
+        "label": "Diplomatic",
+        "visible": ["digit2", "fon", "region1", "dip"]
+      },
+      {
+        "id": "7",
+        "label": "Mopeds",
+        "visible": ["digit1", "region1"]
+      },
+      {
+        "id": "8",
+        "label": "Oldtimers",
+        "visible": ["fon", "region1", "dip"]
+      },
+      {
+        "id": "9",
+        "label": "Special machinery",
+        "visible": ["region1", "dip"]
+      },
+      {
+        "id": "10",
+        "label": "Military",
+        "visible": ["dip"]
+      }
+    ]
+  },
+  "search": {
+    "categories": [
+      {
+        "id": "1",
+        "label": "Cars"
+      },
+      {
+        "id": "2",
+        "label": "Trailers"
+      },
+      {
+        "id": "3",
+        "label": "Motorcycles"
+      },
+      {
+        "id": "4",
+        "label": "Vanity Plates"
+      },
+      {
+        "id": "5",
+        "label": "Police"
+      },
+      {
+        "id": "6",
+        "label": "Diplomatic"
+      },
+      {
+        "id": "7",
+        "label": "Mopeds"
+      },
+      {
+        "id": "8",
+        "label": "Oldtimers"
+      },
+      {
+        "id": "9",
+        "label": "Special machinery"
+      },
+      {
+        "id": "10",
+        "label": "Military"
+      }
+    ]
+  }
+}

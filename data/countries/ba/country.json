@@ -1,0 +1,59 @@
+{
+  "code": "ba",
+  "name": "Bosnia and Herzegovina",
+  "upload": {
+    "typeMenu": true,
+    "hooks": ["disba"],
+    "types": [
+      {
+        "id": "1",
+        "label": "Regular plates",
+        "visible": ["b1", "let1", "let2", "fon"]
+      },
+      {
+        "id": "2",
+        "label": "Taxi",
+        "visible": ["digit"]
+      },
+      {
+        "id": "3",
+        "label": "Provisional",
+        "visible": ["let1", "digit"]
+      },
+      {
+        "id": "4",
+        "label": "1998 year system",
+        "visible": ["b1", "let1", "let2", "fon"]
+      },
+      {
+        "id": "5",
+        "label": "Diplomatic",
+        "visible": ["fon"]
+      }
+    ]
+  },
+  "search": {
+    "categories": [
+      {
+        "id": "1",
+        "label": "Regular plates"
+      },
+      {
+        "id": "2",
+        "label": "Taxi"
+      },
+      {
+        "id": "3",
+        "label": "Provisional"
+      },
+      {
+        "id": "4",
+        "label": "1998 year system"
+      },
+      {
+        "id": "5",
+        "label": "Diplomatic"
+      }
+    ]
+  }
+}

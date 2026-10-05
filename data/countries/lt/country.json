@@ -1,0 +1,95 @@
+{
+  "code": "lt",
+  "name": "Lithuania",
+  "upload": {
+    "typeMenu": true,
+    "hooks": [],
+    "types": [
+      {
+        "id": "1",
+        "label": "Cars",
+        "visible": []
+      },
+      {
+        "id": "2",
+        "label": "Motorcycles",
+        "visible": []
+      },
+      {
+        "id": "3",
+        "label": "Trailers",
+        "visible": []
+      },
+      {
+        "id": "4",
+        "label": "Mopeds",
+        "visible": []
+      },
+      {
+        "id": "5",
+        "label": "Vanity Plates",
+        "visible": []
+      },
+      {
+        "id": "6",
+        "label": "Electric vehicles",
+        "visible": []
+      },
+      {
+        "id": "7",
+        "label": "Oldtimers",
+        "visible": []
+      },
+      {
+        "id": "8",
+        "label": "Transit plates",
+        "visible": []
+      },
+      {
+        "id": "9",
+        "label": "Diplomatic",
+        "visible": []
+      }
+    ]
+  },
+  "search": {
+    "categories": [
+      {
+        "id": "1",
+        "label": "Cars"
+      },
+      {
+        "id": "2",
+        "label": "Motorcycles"
+      },
+      {
+        "id": "3",
+        "label": "Trailers"
+      },
+      {
+        "id": "4",
+        "label": "Mopeds"
+      },
+      {
+        "id": "5",
+        "label": "Vanity Plates"
+      },
+      {
+        "id": "6",
+        "label": "Electric vehicles"
+      },
+      {
+        "id": "7",
+        "label": "Oldtimers"
+      },
+      {
+        "id": "8",
+        "label": "Transit plates"
+      },
+      {
+        "id": "9",
+        "label": "Diplomatic"
+      }
+    ]
+  }
+}

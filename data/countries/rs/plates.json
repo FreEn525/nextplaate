@@ -1,0 +1,65 @@
+[
+  {
+    "category": "Cars",
+    "plate": "BG 2130-AT",
+    "read": "BG 2130-AT",
+    "count": 2,
+    "date": "2026-10-05T01:53:00.898Z"
+  },
+  {
+    "category": "Cars",
+    "plate": "ČA 085-BM",
+    "read": "ČA 085-BM",
+    "count": 2,
+    "date": "2026-10-05T01:53:01.617Z"
+  },
+  {
+    "category": "Cars",
+    "plate": "VR 160-BD",
+    "read": "VR 160-BD",
+    "count": 1,
+    "date": "2026-10-05T01:53:01.258Z"
+  },
+  {
+    "category": "Trailers",
+    "plate": "AC-334 LE",
+    "read": "ČA AC",
+    "count": 0,
+    "date": "2026-10-05T01:53:02.683Z"
+  },
+  {
+    "category": "Trailers",
+    "plate": "BL-365 BG",
+    "read": "ČA BL",
+    "count": 0,
+    "date": "2026-10-05T01:53:03.042Z"
+  },
+  {
+    "category": "Trailers",
+    "plate": "OO-442 VR",
+    "read": "ČA OO",
+    "count": 1,
+    "date": "2026-10-05T01:53:03.402Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "BG REV",
+    "read": "BG RE",
+    "count": 0,
+    "date": "2026-10-05T01:53:31.267Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "NS MMMM",
+    "read": "NS MM",
+    "count": 0,
+    "date": "2026-10-05T01:53:31.628Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "VA XXXXX",
+    "read": "VA XX",
+    "count": 0,
+    "date": "2026-10-05T01:53:31.991Z"
+  }
+]

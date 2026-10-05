@@ -4,9 +4,9 @@ For every plate the site has already answered for (count > 0, saved by the plate
 page of its country is opened, the form is set to the plate's category, the plate is typed the same way
 the plate check reads it, and the result must be the plate itself. Nothing is sent to the site.
 
-    python tests/check_db.py                  # every country in the database
-    python tests/check_db.py --country by     # one country
-    python tests/check_db.py --report out.json
+    python tests/offline/check_db.py                  # every country in the database
+    python tests/offline/check_db.py --country by     # one country
+    python tests/offline/check_db.py --report out.json
 
 Uses the dev build (nextplaate.dev.user.js). Exit code 1 when a plate fails, so it can run before a release.
 """
@@ -18,6 +18,9 @@ from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
 
 from playwright.sync_api import sync_playwright
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from fake_site import ROOT, route_site
 
 REF = ROOT / "reference" / "real" / "countries"

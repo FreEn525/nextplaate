@@ -1,0 +1,338 @@
+[
+  {
+    "category": "Agricultural vehicles (AB F(A)123)",
+    "plate": "NR F 185",
+    "read": "NR F 185",
+    "count": 1,
+    "date": "2026-10-05T01:54:57.668Z"
+  },
+  {
+    "category": "Agricultural vehicles (AB F(A)123)",
+    "plate": "ZH F 015",
+    "read": "ZH F 015",
+    "count": 1,
+    "date": "2026-10-05T01:54:58.024Z"
+  },
+  {
+    "category": "Agricultural vehicles (AB F(A)123)",
+    "plate": "ZV F 011",
+    "read": "ZV F 011",
+    "count": 1,
+    "date": "2026-10-05T01:54:58.380Z"
+  },
+  {
+    "category": "Cars",
+    "plate": "BA-424RF",
+    "read": "BA-424RF",
+    "count": 1,
+    "date": "2026-10-05T01:54:20.400Z"
+  },
+  {
+    "category": "Cars",
+    "plate": "BA-928AY",
+    "read": "BA-928AY",
+    "count": 1,
+    "date": "2026-10-05T01:54:20.755Z"
+  },
+  {
+    "category": "Cars",
+    "plate": "BA-966HH",
+    "read": "BA-966HH",
+    "count": 1,
+    "date": "2026-10-05T01:54:21.109Z"
+  },
+  {
+    "category": "Dealer (AB M(A)123)",
+    "plate": "KE MB459",
+    "read": "KE MB459",
+    "count": 1,
+    "date": "2026-10-05T01:54:29.263Z"
+  },
+  {
+    "category": "Dealer (AB M(A)123)",
+    "plate": "KE MB826",
+    "read": "KE MB826",
+    "count": 1,
+    "date": "2026-10-05T01:54:29.618Z"
+  },
+  {
+    "category": "Dealer (AB M(A)123)",
+    "plate": "PO M 704",
+    "read": "PO M 704",
+    "count": 2,
+    "date": "2026-10-05T01:54:29.974Z"
+  },
+  {
+    "category": "Dealer (M(A) 123AB)",
+    "plate": "M 059BS",
+    "read": "M 059BS",
+    "count": 1,
+    "date": "2026-10-05T01:54:31.036Z"
+  },
+  {
+    "category": "Dealer (M(A) 123AB)",
+    "plate": "M 365BF",
+    "read": "M 365BF",
+    "count": 1,
+    "date": "2026-10-05T01:54:31.393Z"
+  },
+  {
+    "category": "Dealer (M(A) 123AB)",
+    "plate": "M 619BF",
+    "read": "M 619BF",
+    "count": 1,
+    "date": "2026-10-05T01:54:31.748Z"
+  },
+  {
+    "category": "Electric vehicles",
+    "plate": "BB-578IB",
+    "read": "BB-578IB",
+    "count": 2,
+    "date": "2026-10-05T01:54:48.767Z"
+  },
+  {
+    "category": "Electric vehicles",
+    "plate": "EL 220AR",
+    "read": "EL-220AR",
+    "count": 1,
+    "date": "2026-10-05T01:54:49.122Z"
+  },
+  {
+    "category": "Electric vehicles",
+    "plate": "EL 317BU",
+    "read": "EL-317BU",
+    "count": 1,
+    "date": "2026-10-05T01:54:49.477Z"
+  },
+  {
+    "category": "Export transit plates (AB V(A)123)",
+    "plate": "AA VC409",
+    "read": "AA VC409",
+    "count": 1,
+    "date": "2026-10-05T01:54:23.946Z"
+  },
+  {
+    "category": "Export transit plates (AB V(A)123)",
+    "plate": "AA VD819",
+    "read": "AA VD819",
+    "count": 1,
+    "date": "2026-10-05T01:54:24.301Z"
+  },
+  {
+    "category": "Export transit plates (AB V(A)123)",
+    "plate": "AA VH396",
+    "read": "AA VH396",
+    "count": 1,
+    "date": "2026-10-05T01:54:24.657Z"
+  },
+  {
+    "category": "Export transit plates (V(A) 123AB)",
+    "plate": "V 184AA",
+    "read": "V 184AA",
+    "count": 1,
+    "date": "2026-10-05T01:54:25.718Z"
+  },
+  {
+    "category": "Export transit plates (V(A) 123AB)",
+    "plate": "V 556AA",
+    "read": "V 556AA",
+    "count": 1,
+    "date": "2026-10-05T01:54:26.073Z"
+  },
+  {
+    "category": "Export transit plates (V(A) 123AB)",
+    "plate": "V 846AD",
+    "read": "V 846AD",
+    "count": 1,
+    "date": "2026-10-05T01:54:26.430Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "AA 845RP",
+    "read": "AA-845RP",
+    "count": 1,
+    "date": "2026-10-05T01:54:22.172Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "RV 237CU",
+    "read": "RV-237CU",
+    "count": 1,
+    "date": "2026-10-05T01:54:22.528Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "TO 685AD",
+    "read": "TO-685AD",
+    "count": 1,
+    "date": "2026-10-05T01:54:22.883Z"
+  },
+  {
+    "category": "Oldtimers (AB H(A)123)",
+    "plate": "BA H 411",
+    "read": "BA H 411",
+    "count": 6,
+    "date": "2026-10-05T01:54:32.812Z"
+  },
+  {
+    "category": "Oldtimers (AB H(A)123)",
+    "plate": "KE H 004",
+    "read": "KE H 004",
+    "count": 3,
+    "date": "2026-10-05T01:54:33.167Z"
+  },
+  {
+    "category": "Oldtimers (AB H(A)123)",
+    "plate": "PU H 045",
+    "read": "PU H 045",
+    "count": 1,
+    "date": "2026-10-05T01:54:33.525Z"
+  },
+  {
+    "category": "Oldtimers (H(A) 123AB)",
+    "plate": "H 570AA",
+    "read": "H 570AA",
+    "count": 1,
+    "date": "2026-10-05T01:54:34.588Z"
+  },
+  {
+    "category": "Oldtimers (H(A) 123AB)",
+    "plate": "H 767AA",
+    "read": "H 767AA",
+    "count": 1,
+    "date": "2026-10-05T01:54:34.943Z"
+  },
+  {
+    "category": "Oldtimers (H(A) 123AB)",
+    "plate": "H 768AA",
+    "read": "H 768AA",
+    "count": 1,
+    "date": "2026-10-05T01:54:35.297Z"
+  },
+  {
+    "category": "Provincial governments, university rectors",
+    "plate": "BA XA186",
+    "read": "BA XA186",
+    "count": 2,
+    "date": "2026-10-05T01:54:27.491Z"
+  },
+  {
+    "category": "Provincial governments, university rectors",
+    "plate": "BA XA634",
+    "read": "BA XA634",
+    "count": 1,
+    "date": "2026-10-05T01:54:27.845Z"
+  },
+  {
+    "category": "Provincial governments, university rectors",
+    "plate": "BA XB340",
+    "read": "BA XB340",
+    "count": 1,
+    "date": "2026-10-05T01:54:28.200Z"
+  },
+  {
+    "category": "Provisional (C 123AB)",
+    "plate": "C 143AJ",
+    "read": "C 143AJ",
+    "count": 1,
+    "date": "2026-10-05T01:55:01.212Z"
+  },
+  {
+    "category": "Provisional (C 123AB)",
+    "plate": "C 506BD",
+    "read": "C 506BD",
+    "count": 1,
+    "date": "2026-10-05T01:55:01.567Z"
+  },
+  {
+    "category": "Provisional (C 123AB)",
+    "plate": "C 515BD",
+    "read": "C 515BD",
+    "count": 1,
+    "date": "2026-10-05T01:55:01.923Z"
+  },
+  {
+    "category": "Provisional (C(A) 12345)",
+    "plate": "C 94589",
+    "read": "C 94589",
+    "count": 1,
+    "date": "2026-10-05T01:54:59.442Z"
+  },
+  {
+    "category": "Provisional (C(A) 12345)",
+    "plate": "CA 05804",
+    "read": "CA 05804",
+    "count": 2,
+    "date": "2026-10-05T01:54:59.797Z"
+  },
+  {
+    "category": "Provisional (C(A) 12345)",
+    "plate": "CA 06227",
+    "read": "CA 06227",
+    "count": 1,
+    "date": "2026-10-05T01:55:00.153Z"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "BA Z 385",
+    "read": "BA Z 385",
+    "count": 1,
+    "date": "2026-10-05T01:54:38.955Z"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "GA Z 310",
+    "read": "GA Z 310",
+    "count": 1,
+    "date": "2026-10-05T01:54:39.310Z"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "PP Z 239",
+    "read": "PP Z 239",
+    "count": 1,
+    "date": "2026-10-05T01:54:39.669Z"
+  },
+  {
+    "category": "Sportcars (AB S(A)123)",
+    "plate": "AA S 009",
+    "read": "SA AA 009",
+    "count": 0,
+    "date": "2026-10-05T01:54:36.360Z"
+  },
+  {
+    "category": "Sportcars (AB S(A)123)",
+    "plate": "AA S 010",
+    "read": "SA AA 010",
+    "count": 0,
+    "date": "2026-10-05T01:54:36.716Z"
+  },
+  {
+    "category": "Sportcars (AB S(A)123)",
+    "plate": "AA S 359",
+    "read": "SA AA 359",
+    "count": 0,
+    "date": "2026-10-05T01:54:37.072Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "HC-KOCIK",
+    "read": "HC KOCIK",
+    "count": 1,
+    "date": "2026-10-05T01:54:40.733Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "OO-O777O",
+    "read": "OO O777O",
+    "count": 1,
+    "date": "2026-10-05T01:54:41.087Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "SN-FITT1",
+    "read": "SN FITT1",
+    "count": 1,
+    "date": "2026-10-05T01:54:41.442Z"
+  }
+]

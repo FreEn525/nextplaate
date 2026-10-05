@@ -1,0 +1,41 @@
+{
+  "code": "gg",
+  "name": "Guernsey (UK)",
+  "upload": {
+    "typeMenu": true,
+    "hooks": ["disqq"],
+    "types": [
+      {
+        "id": "1",
+        "label": "Regular plates",
+        "visible": ["digit"]
+      },
+      {
+        "id": "2",
+        "label": "Dealer",
+        "visible": ["digit"]
+      },
+      {
+        "id": "3",
+        "label": "Alderney",
+        "visible": ["digit"]
+      }
+    ]
+  },
+  "search": {
+    "categories": [
+      {
+        "id": "1",
+        "label": "Regular plates"
+      },
+      {
+        "id": "2",
+        "label": "Dealer"
+      },
+      {
+        "id": "3",
+        "label": "Alderney"
+      }
+    ]
+  }
+}

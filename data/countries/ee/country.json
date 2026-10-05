@@ -1,0 +1,104 @@
+{
+  "code": "ee",
+  "name": "Estonia",
+  "upload": {
+    "typeMenu": true,
+    "hooks": ["diseen"],
+    "types": [
+      {
+        "id": "1",
+        "label": "Regular car plates",
+        "visible": ["dig1", "let", "fon"]
+      },
+      {
+        "id": "2",
+        "label": "Regular car plates (US-size)",
+        "visible": ["dig1", "let", "fon"]
+      },
+      {
+        "id": "3",
+        "label": "Motorcycles",
+        "visible": ["dig1", "let", "fon"]
+      },
+      {
+        "id": "4",
+        "label": "Transit plates",
+        "visible": ["dig2", "let", "fon"]
+      },
+      {
+        "id": "5",
+        "label": "Sportcars",
+        "visible": ["dig2", "let", "fon"]
+      },
+      {
+        "id": "6",
+        "label": "Oldtimers",
+        "visible": ["dig2", "let", "fon"]
+      },
+      {
+        "id": "7",
+        "label": "Special machinery",
+        "visible": ["dig1", "let", "fon"]
+      },
+      {
+        "id": "8",
+        "label": "Trailers",
+        "visible": ["dig1", "let", "fon"]
+      },
+      {
+        "id": "9",
+        "label": "Vanity Plates",
+        "visible": ["nomer", "fon"]
+      },
+      {
+        "id": "10",
+        "label": "Diplomatic",
+        "visible": ["dig2", "let", "fon"]
+      }
+    ]
+  },
+  "search": {
+    "categories": [
+      {
+        "id": "1",
+        "label": "Regular car plates"
+      },
+      {
+        "id": "2",
+        "label": "Regular car plates (US-size)"
+      },
+      {
+        "id": "3",
+        "label": "Motorcycles"
+      },
+      {
+        "id": "4",
+        "label": "Transit plates"
+      },
+      {
+        "id": "5",
+        "label": "Sportcars"
+      },
+      {
+        "id": "6",
+        "label": "Oldtimers"
+      },
+      {
+        "id": "7",
+        "label": "Special machinery"
+      },
+      {
+        "id": "8",
+        "label": "Trailers"
+      },
+      {
+        "id": "9",
+        "label": "Vanity Plates"
+      },
+      {
+        "id": "10",
+        "label": "Diplomatic"
+      }
+    ]
+  }
+}

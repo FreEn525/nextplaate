@@ -1,0 +1,95 @@
+{
+  "code": "at",
+  "name": "Austria",
+  "upload": {
+    "typeMenu": true,
+    "hooks": ["disat"],
+    "types": [
+      {
+        "id": "1",
+        "label": "Regular plates",
+        "visible": ["digit1", "fon", "region", "letter"]
+      },
+      {
+        "id": "2",
+        "label": "Vanity Plates",
+        "visible": ["digit2", "fon", "region", "letter"]
+      },
+      {
+        "id": "3",
+        "label": "Official services and consulates",
+        "visible": []
+      },
+      {
+        "id": "4",
+        "label": "Export transit plates",
+        "visible": ["digit1", "fon", "region", "letter"]
+      },
+      {
+        "id": "5",
+        "label": "Provisional",
+        "visible": ["digit1", "fon", "region", "letter"]
+      },
+      {
+        "id": "6",
+        "label": "1947 year system",
+        "visible": ["nomerpl", "fon", "region"]
+      },
+      {
+        "id": "7",
+        "label": "Dealer",
+        "visible": ["nomerpl", "fon", "region"]
+      },
+      {
+        "id": "9",
+        "label": "Dealer (1947)",
+        "visible": ["nomerpl", "fon", "region"]
+      },
+      {
+        "id": "10",
+        "label": "Diplomatic",
+        "visible": ["digit1", "fon", "region"]
+      }
+    ]
+  },
+  "search": {
+    "categories": [
+      {
+        "id": "1",
+        "label": "Regular plates"
+      },
+      {
+        "id": "2",
+        "label": "Vanity Plates"
+      },
+      {
+        "id": "3",
+        "label": "Official services and consulates"
+      },
+      {
+        "id": "4",
+        "label": "Export transit plates"
+      },
+      {
+        "id": "5",
+        "label": "Provisional"
+      },
+      {
+        "id": "6",
+        "label": "1947 year system"
+      },
+      {
+        "id": "7",
+        "label": "Dealer"
+      },
+      {
+        "id": "9",
+        "label": "Dealer (1947)"
+      },
+      {
+        "id": "10",
+        "label": "Diplomatic"
+      }
+    ]
+  }
+}

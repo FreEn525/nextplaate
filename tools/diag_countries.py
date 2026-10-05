@@ -1,13 +1,16 @@
 """Diagnostic (not a test): loads every captured country page in the browser, fills its plate fields
 with recognisable values, and prints the plate the script builds from them.
 
-    python tests/diag_countries.py
+    python tools/diag_countries.py
 """
 import pathlib
 import sys
 import re
 
 from playwright.sync_api import sync_playwright
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tests'))
 from fake_site import ROOT, SCRIPT, route_site
 
 PAGES = ROOT / "reference" / "real" / "countries"

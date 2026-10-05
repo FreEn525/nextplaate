@@ -1,0 +1,128 @@
+[
+  {
+    "category": "Diplomatic",
+    "plate": "025-A-020",
+    "read": "KR 020-R",
+    "count": 0,
+    "date": "2026-10-05T01:49:29.108Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "053-A-024",
+    "read": "KR 024-R",
+    "count": 0,
+    "date": "2026-10-05T01:49:29.466Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "097-A-001",
+    "read": "KR 001-R",
+    "count": 0,
+    "date": "2026-10-05T01:49:29.823Z"
+  },
+  {
+    "category": "Exceptional vehicles",
+    "plate": "RI 226-ZP",
+    "read": "RI 226-ZP",
+    "count": 2,
+    "date": "2026-10-05T01:48:06.605Z"
+  },
+  {
+    "category": "Exceptional vehicles",
+    "plate": "ZG 0117-VP",
+    "read": "ZG 0117-VP",
+    "count": 1,
+    "date": "2026-10-05T01:48:06.964Z"
+  },
+  {
+    "category": "Exceptional vehicles",
+    "plate": "ZG 0216-VP",
+    "read": "ZG 0216-VP",
+    "count": 1,
+    "date": "2026-10-05T01:48:07.325Z"
+  },
+  {
+    "category": "Foreign citizens and enterprises",
+    "plate": "ST 8783-U",
+    "read": "ST 8783-U",
+    "count": 1,
+    "date": "2026-10-05T01:48:04.817Z"
+  },
+  {
+    "category": "Foreign citizens and enterprises",
+    "plate": "ZG 3006-HR",
+    "read": "ZG 3006-HR",
+    "count": 2,
+    "date": "2026-10-05T01:48:05.181Z"
+  },
+  {
+    "category": "Foreign citizens and enterprises",
+    "plate": "ZG 8900-GU",
+    "read": "ZG 8900-GU",
+    "count": 1,
+    "date": "2026-10-05T01:48:05.539Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "PU 563-OO",
+    "read": "PU 563-OO",
+    "count": 1,
+    "date": "2026-10-05T01:48:08.751Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "PU 2576-P",
+    "read": "PU 2576-P",
+    "count": 1,
+    "date": "2026-10-05T01:48:08.393Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "PU 7189-C",
+    "read": "PU 7189-C",
+    "count": 1,
+    "date": "2026-10-05T01:48:09.109Z"
+  },
+  {
+    "category": "Regular plates",
+    "plate": "KR 386-OA",
+    "read": "KR 386-OA",
+    "count": 1,
+    "date": "2026-10-05T01:48:03.033Z"
+  },
+  {
+    "category": "Regular plates",
+    "plate": "PU 5486-H",
+    "read": "PU 5486-H",
+    "count": 1,
+    "date": "2026-10-05T01:48:03.393Z"
+  },
+  {
+    "category": "Regular plates",
+    "plate": "ZG 2962-KL",
+    "read": "ZG 2962-KL",
+    "count": 1,
+    "date": "2026-10-05T01:48:03.752Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "KA CB-0036",
+    "read": "KA CB0036",
+    "count": 0,
+    "date": "2026-10-05T01:48:10.178Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "VU VIVAX",
+    "read": "VU VIVAX",
+    "count": 9,
+    "date": "2026-10-05T01:48:10.544Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "ZG ZMAJ",
+    "read": "ZG ZMAJ",
+    "count": 1,
+    "date": "2026-10-05T01:48:10.907Z"
+  }
+]

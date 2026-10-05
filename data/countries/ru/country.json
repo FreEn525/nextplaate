@@ -1,0 +1,211 @@
+{
+  "code": "ru",
+  "name": "Russia",
+  "upload": {
+    "typeMenu": true,
+    "hooks": ["disru20"],
+    "types": [
+      {
+        "id": "1",
+        "label": "Cars",
+        "visible": []
+      },
+      {
+        "id": "2",
+        "label": "Trailers",
+        "visible": []
+      },
+      {
+        "id": "3",
+        "label": "Special machinery",
+        "visible": []
+      },
+      {
+        "id": "4",
+        "label": "Motorcycles",
+        "visible": []
+      },
+      {
+        "id": "5",
+        "label": "Military cars",
+        "visible": []
+      },
+      {
+        "id": "6",
+        "label": "Military trailers",
+        "visible": []
+      },
+      {
+        "id": "7",
+        "label": "Special military vehicles",
+        "visible": []
+      },
+      {
+        "id": "8",
+        "label": "Military motorcycles",
+        "visible": []
+      },
+      {
+        "id": "9",
+        "label": "Diplomatic",
+        "visible": []
+      },
+      {
+        "id": "10",
+        "label": "Special Vehicles Transits",
+        "visible": []
+      },
+      {
+        "id": "12",
+        "label": "Foreign citizens and enterprises",
+        "visible": []
+      },
+      {
+        "id": "13",
+        "label": "Military Transits",
+        "visible": []
+      },
+      {
+        "id": "14",
+        "label": "ATV and snowmobiles",
+        "visible": []
+      },
+      {
+        "id": "15",
+        "label": "Transit plates",
+        "visible": []
+      },
+      {
+        "id": "16",
+        "label": "Public transport",
+        "visible": []
+      },
+      {
+        "id": "17",
+        "label": "Paper transit plates",
+        "visible": []
+      },
+      {
+        "id": "19",
+        "label": "Export transit plates",
+        "visible": []
+      },
+      {
+        "id": "20",
+        "label": "Police cars",
+        "visible": []
+      },
+      {
+        "id": "21",
+        "label": "Police trailers",
+        "visible": []
+      },
+      {
+        "id": "22",
+        "label": "Police motorcycles",
+        "visible": []
+      },
+      {
+        "id": "33",
+        "label": "Diplomatic motorcycles",
+        "visible": []
+      }
+    ]
+  },
+  "search": {
+    "categories": [
+      {
+        "id": "1",
+        "label": "Cars"
+      },
+      {
+        "id": "11",
+        "label": "High authorities"
+      },
+      {
+        "id": "16",
+        "label": "Public transport"
+      },
+      {
+        "id": "2",
+        "label": "Trailers"
+      },
+      {
+        "id": "3",
+        "label": "Special machinery"
+      },
+      {
+        "id": "4",
+        "label": "Motorcycles"
+      },
+      {
+        "id": "14",
+        "label": "ATV and snowmobiles"
+      },
+      {
+        "id": "5",
+        "label": "Military cars"
+      },
+      {
+        "id": "6",
+        "label": "Military trailers"
+      },
+      {
+        "id": "7",
+        "label": "Special military vehicles"
+      },
+      {
+        "id": "8",
+        "label": "Military motorcycles"
+      },
+      {
+        "id": "12",
+        "label": "Foreign citizens and enterprises"
+      },
+      {
+        "id": "15",
+        "label": "Transit plates"
+      },
+      {
+        "id": "19",
+        "label": "Export transit plates"
+      },
+      {
+        "id": "17",
+        "label": "Paper transit plates"
+      },
+      {
+        "id": "10",
+        "label": "Special Vehicles Transits"
+      },
+      {
+        "id": "13",
+        "label": "Military Transits"
+      },
+      {
+        "id": "20",
+        "label": "Police cars"
+      },
+      {
+        "id": "21",
+        "label": "Police trailers"
+      },
+      {
+        "id": "22",
+        "label": "Police motorcycles"
+      },
+      {
+        "id": "31",
+        "label": "Diplomatic (Ambassador, chief of diplomatic mission)"
+      },
+      {
+        "id": "32",
+        "label": "Diplomatic"
+      },
+      {
+        "id": "33",
+        "label": "Diplomatic motorcycles"
+      }
+    ]
+  }
+}

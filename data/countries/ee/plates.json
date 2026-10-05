@@ -1,0 +1,212 @@
+[
+  {
+    "category": "Diplomatic",
+    "plate": "CD 2807",
+    "read": "CD 2807",
+    "count": 2,
+    "date": "2026-10-05T01:07:43.018Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "CD 3201",
+    "read": "CD 3201",
+    "count": 2,
+    "date": "2026-10-05T01:07:43.374Z"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "CD 4602",
+    "read": "CD 4602",
+    "count": 1,
+    "date": "2026-10-05T01:07:43.729Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "CV 04",
+    "read": "CV 04",
+    "count": 1,
+    "date": "2026-10-05T01:07:30.572Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "EP 84",
+    "read": "EP 84",
+    "count": 1,
+    "date": "2026-10-05T01:07:30.926Z"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "HD 57",
+    "read": "HD 57",
+    "count": 2,
+    "date": "2026-10-05T01:07:31.281Z"
+  },
+  {
+    "category": "Oldtimers",
+    "plate": "A 081",
+    "read": "A 081",
+    "count": 5,
+    "date": "2026-10-05T01:07:35.883Z"
+  },
+  {
+    "category": "Oldtimers",
+    "plate": "A 773",
+    "read": "A 773",
+    "count": 3,
+    "date": "2026-10-05T01:07:36.238Z"
+  },
+  {
+    "category": "Oldtimers",
+    "plate": "A 989",
+    "read": "A 989",
+    "count": 3,
+    "date": "2026-10-05T01:07:36.593Z"
+  },
+  {
+    "category": "Regular car plates",
+    "plate": "290 TLY",
+    "read": "290 TLY",
+    "count": 1,
+    "date": "2026-10-05T01:07:27.027Z"
+  },
+  {
+    "category": "Regular car plates",
+    "plate": "524 RNW",
+    "read": "524 RNW",
+    "count": 1,
+    "date": "2026-10-05T01:07:27.383Z"
+  },
+  {
+    "category": "Regular car plates",
+    "plate": "830 BTB",
+    "read": "830 BTB",
+    "count": 2,
+    "date": "2026-10-05T01:07:27.738Z"
+  },
+  {
+    "category": "Regular car plates (US-size)",
+    "plate": "14 NFS",
+    "read": "14 NFS",
+    "count": 1,
+    "date": "2026-10-05T01:07:28.800Z"
+  },
+  {
+    "category": "Regular car plates (US-size)",
+    "plate": "28 ZKI",
+    "read": "28 ZKI",
+    "count": 5,
+    "date": "2026-10-05T01:07:29.156Z"
+  },
+  {
+    "category": "Regular car plates (US-size)",
+    "plate": "87 NLP",
+    "read": "87 NLP",
+    "count": 1,
+    "date": "2026-10-05T01:07:29.511Z"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "0090 TJ",
+    "read": "0090 TJ",
+    "count": 1,
+    "date": "2026-10-05T01:07:37.655Z"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "3806 TE",
+    "read": "3806 TE",
+    "count": 1,
+    "date": "2026-10-05T01:07:38.010Z"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "9785 TH",
+    "read": "9785 TH",
+    "count": 1,
+    "date": "2026-10-05T01:07:38.366Z"
+  },
+  {
+    "category": "Sportcars",
+    "plate": "SP 0326",
+    "read": "SP 0326",
+    "count": 2,
+    "date": "2026-10-05T01:07:34.113Z"
+  },
+  {
+    "category": "Sportcars",
+    "plate": "SP 0632",
+    "read": "SP 0632",
+    "count": 1,
+    "date": "2026-10-05T01:07:34.468Z"
+  },
+  {
+    "category": "Sportcars",
+    "plate": "SP 0651",
+    "read": "SP 0651",
+    "count": 3,
+    "date": "2026-10-05T01:07:34.824Z"
+  },
+  {
+    "category": "Trailers",
+    "plate": "593 BC",
+    "read": "593 BC",
+    "count": 1,
+    "date": "2026-10-05T01:07:39.473Z"
+  },
+  {
+    "category": "Trailers",
+    "plate": "597 GU",
+    "read": "597 GU",
+    "count": 1,
+    "date": "2026-10-05T01:07:39.830Z"
+  },
+  {
+    "category": "Trailers",
+    "plate": "610 GD",
+    "read": "610 GD",
+    "count": 1,
+    "date": "2026-10-05T01:07:40.186Z"
+  },
+  {
+    "category": "Transit plates",
+    "plate": "AH-2976",
+    "read": "AH 2976",
+    "count": 1,
+    "date": "2026-10-05T01:07:32.344Z"
+  },
+  {
+    "category": "Transit plates",
+    "plate": "AH-3837",
+    "read": "AH 3837",
+    "count": 1,
+    "date": "2026-10-05T01:07:32.699Z"
+  },
+  {
+    "category": "Transit plates",
+    "plate": "AH-7196",
+    "read": "AH 7196",
+    "count": 1,
+    "date": "2026-10-05T01:07:33.054Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "28ZMX",
+    "read": "28ZMX",
+    "count": 1,
+    "date": "2026-10-05T01:07:41.246Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "U3",
+    "read": "U3",
+    "count": 2,
+    "date": "2026-10-05T01:07:41.600Z"
+  },
+  {
+    "category": "Vanity Plates",
+    "plate": "WIN7777",
+    "read": "WIN7777",
+    "count": 1,
+    "date": "2026-10-05T01:07:41.955Z"
+  }
+]

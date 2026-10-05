@@ -5,11 +5,14 @@ import re
 import sys
 
 from playwright.sync_api import sync_playwright
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from fake_site import ROOT, route_site
 
 REF = ROOT / "reference" / "real" / "countries"
 DEV = (ROOT / "nextplaate.dev.user.js").read_text(encoding="utf-8")
-KNOWN = json.loads((ROOT / "tests" / "known_plates.json").read_text(encoding="utf-8"))
+KNOWN = json.loads((ROOT / "tests" / "offline" / "known_plates.json").read_text(encoding="utf-8"))
 
 
 def norm(s):

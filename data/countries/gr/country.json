@@ -1,0 +1,158 @@
+{
+  "code": "gr",
+  "name": "Greece",
+  "upload": {
+    "typeMenu": true,
+    "hooks": ["disgr"],
+    "types": [
+      {
+        "id": "1",
+        "label": "Cars",
+        "visible": ["b1", "region", "fon", "digit"]
+      },
+      {
+        "id": "2",
+        "label": "Tax-exempt vehicles",
+        "visible": ["b1", "region", "fon", "digit"]
+      },
+      {
+        "id": "3",
+        "label": "Government and public administrations",
+        "visible": ["b1", "region", "fon", "digit"]
+      },
+      {
+        "id": "4",
+        "label": "Trucks",
+        "visible": ["b1", "region", "fon", "digit"]
+      },
+      {
+        "id": "5",
+        "label": "Trailers",
+        "visible": ["fon", "digit"]
+      },
+      {
+        "id": "6",
+        "label": "Motorcycles",
+        "visible": ["b1", "region", "fon", "digit"]
+      },
+      {
+        "id": "7",
+        "label": "Taxi",
+        "visible": ["b1", "region", "fon", "digit"]
+      },
+      {
+        "id": "8",
+        "label": "Oldtimers",
+        "visible": ["fon", "digit"]
+      },
+      {
+        "id": "9",
+        "label": "1972 year system",
+        "visible": ["region", "let", "fon", "digit"]
+      },
+      {
+        "id": "10",
+        "label": "Diplomatic corps",
+        "visible": ["fon", "digit"]
+      },
+      {
+        "id": "11",
+        "label": "Administrative and technical staff",
+        "visible": ["fon", "digit"]
+      },
+      {
+        "id": "12",
+        "label": "Mopeds",
+        "visible": ["let", "fon", "digit"]
+      },
+      {
+        "id": "13",
+        "label": "Agricultural vehicles",
+        "visible": ["region", "fon", "digit"]
+      },
+      {
+        "id": "14",
+        "label": "Private trailers",
+        "visible": ["b1", "fon", "digit"]
+      },
+      {
+        "id": "15",
+        "label": "Police",
+        "visible": ["fon", "digit"]
+      },
+      {
+        "id": "16",
+        "label": "Coast Guard",
+        "visible": ["fon", "digit"]
+      }
+    ]
+  },
+  "search": {
+    "categories": [
+      {
+        "id": "1",
+        "label": "Cars"
+      },
+      {
+        "id": "2",
+        "label": "Tax-exempt vehicles"
+      },
+      {
+        "id": "3",
+        "label": "Government and public administrations"
+      },
+      {
+        "id": "4",
+        "label": "Trucks"
+      },
+      {
+        "id": "5",
+        "label": "Trailers"
+      },
+      {
+        "id": "6",
+        "label": "Motorcycles"
+      },
+      {
+        "id": "7",
+        "label": "Taxi"
+      },
+      {
+        "id": "8",
+        "label": "Oldtimers"
+      },
+      {
+        "id": "9",
+        "label": "1972 year system"
+      },
+      {
+        "id": "10",
+        "label": "Diplomatic corps"
+      },
+      {
+        "id": "11",
+        "label": "Administrative and technical staff"
+      },
+      {
+        "id": "12",
+        "label": "Mopeds"
+      },
+      {
+        "id": "13",
+        "label": "Agricultural vehicles"
+      },
+      {
+        "id": "14",
+        "label": "Private trailers"
+      },
+      {
+        "id": "15",
+        "label": "Police"
+      },
+      {
+        "id": "16",
+        "label": "Coast Guard"
+      }
+    ]
+  }
+}
