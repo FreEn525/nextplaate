@@ -5593,162 +5593,44 @@
  },
  "vn": {
   "Cars": {
-   "ok": 1,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "47A-271.12",
-     "read": "47 A",
-     "status": "not-fit"
-    },
-    {
-     "plate": "51N-096.00",
-     "read": "51 N",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Commercial vehicles": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "47C-144.72",
-     "read": "47 C",
-     "status": "not-fit"
-    },
-    {
-     "plate": "47F-001.48",
-     "read": "47 F",
-     "status": "not-fit"
-    },
-    {
-     "plate": "47H-046.91",
-     "read": "47 H",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Diplomatic": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "41-671-NG-01",
-     "read": "",
-     "status": "no-field"
-    },
-    {
-     "plate": "80-441-NG-93",
-     "read": "",
-     "status": "no-field"
-    },
-    {
-     "plate": "80-442-NG-49",
-     "read": "",
-     "status": "no-field"
-    }
-   ]
+   "failed": []
   },
   "Government and public administrations": {
-   "ok": 1,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "80A-039.27",
-     "read": "80 A",
-     "status": "not-fit"
-    },
-    {
-     "plate": "99A-003.43",
-     "read": "99 A",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Government motorcycles": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "29-B1 0910",
-     "read": "29 B",
-     "status": "not-fit"
-    },
-    {
-     "plate": "51-B2 0223",
-     "read": "51 B",
-     "status": "not-fit"
-    },
-    {
-     "plate": "79-A1 000.22",
-     "read": "79 A",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Military": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "KC-56-49",
-     "read": "KC",
-     "status": "not-fit"
-    },
-    {
-     "plate": "KC-57-26",
-     "read": "KC",
-     "status": "not-fit"
-    },
-    {
-     "plate": "TH-12-13",
-     "read": "TH",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Motorcycles": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "47-K1 270.77",
-     "read": "",
-     "status": "no-field"
-    },
-    {
-     "plate": "79-N2 936.29",
-     "read": "",
-     "status": "no-field"
-    },
-    {
-     "plate": "79-N6 9877",
-     "read": "",
-     "status": "no-field"
-    }
-   ]
+   "failed": []
   },
   "Specialty plates": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "15CD-015.02",
-     "read": "15 CD",
-     "status": "not-fit"
-    },
-    {
-     "plate": "34LA-1010",
-     "read": "34 LA",
-     "status": "not-fit"
-    },
-    {
-     "plate": "79LD-002.51",
-     "read": "79 LD",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   }
  }
 }
