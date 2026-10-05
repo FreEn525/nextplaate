@@ -4,6 +4,7 @@
 //        (written by scripts/analyze-pages.mjs, which reads the saved pages: local, not in the repository)
 // Writes data/countries/<cc>/country.json   name, which pages exist, which menu chooses the plate type
 //        data/countries/<cc>/plates.json    plates seen on the site, per category
+//        data/countries/<cc>/empty.json     categories whose gallery has no plate (reference/real/countries/empty-categories.json)
 //        data/index.json                    one line per country, with counts
 // The output is sorted and has no run date, so the same input gives the same files (clean diffs).
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
@@ -28,6 +29,7 @@ const countriesSrc = readFileSync(join(root, 'src/lib/countries.js'), 'utf8');
 const names = Object.fromEntries([...countriesSrc.matchAll(/\{ code: '([a-z]{2})', name: '([^']*)' \}/g)].map(m => [m[1], m[2]]));
 
 const seen = readJson('plates-db.json');
+const emptyRows = existsSync(join(SRC, 'empty-categories.json')) ? readJson('empty-categories.json') : [];
 const analysed = cc => ['form', 'search'].map(k => { const f = join(OUT, 'countries', cc, k + '.json'); return existsSync(f) ? JSON.parse(readFileSync(f, 'utf8')) : null; });
 const codes = [...new Set([...seen.map(p => p.country),
   ...Object.keys(names).filter(c => existsSync(join(SRC, c + '.html')) || existsSync(join(SRC, 'search-' + c + '.html')))])].sort();
@@ -53,6 +55,9 @@ for (const cc of codes) {
   const plates = [...best.values()].map(({ category, plate, read, count, date, source }) => ({ category, plate, read, count, date, ...(source ? { source } : {}) }))
     .sort((a, b) => byText(a.category, b.category) || byText(a.plate, b.plate));
   write(join(OUT, 'countries', cc, 'plates.json'), plates);
+  // a category whose gallery was empty but that has a plate now (found another way) is not empty
+  const withPlate = new Set(plates.map(p => p.category));
+  write(join(OUT, 'countries', cc, 'empty.json'), emptyRows.filter(r => r.country === cc && !withPlate.has(r.category)).map(r => r.category).sort(byText));
 
   index.push({ code: cc, name: names[cc] || cc.toUpperCase(), upload: !!form, uploadTypes: upload.length,
     searchCategories: categories.length, plates: plates.length,

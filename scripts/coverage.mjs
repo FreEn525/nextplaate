@@ -19,24 +19,27 @@ const siteCountries = [...readFileSync(join(root, 'src/lib/countries.js'), 'utf8
 const ownRule = new Set(readdirSync(join(root, 'src/lib/plate')).filter(f => /^[a-z]{2}\.js$/.test(f)).map(f => f.slice(0, 2)));
 const index = json('data/index.json');
 
-const rows = [], failing = [], unknown = {}, untestable = {};
-let cats = 0, ok = 0, bad = 0, none = 0, noForm = 0;
+const rows = [], failing = [], unknown = {}, untestable = {}, emptyGal = {};
+let cats = 0, ok = 0, bad = 0, none = 0, noForm = 0, noPlate = 0;
 for (const c of index) {
   const list = json(`data/countries/${c.code}/search.json`).categories.map(x => x.label);
   const res = check[c.code] ?? {};
-  let o = 0, b = 0, n = 0, u = 0;
+  const emptyFile = join(root, `data/countries/${c.code}/empty.json`);
+  const empties = new Set(existsSync(emptyFile) ? json(`data/countries/${c.code}/empty.json`) : []);
+  let o = 0, b = 0, n = 0, u = 0, e = 0;
   // a category can be tried only through the upload form's type menu: no upload page, or no menu (the Netherlands), means it cannot
   const form = existsSync(join(root, `data/countries/${c.code}/form.json`)) ? json(`data/countries/${c.code}/form.json`) : null;
   const why = !form ? "pas de page d'ajout" : !form.typeMenu ? 'pas de menu de type' : null;
   for (const label of list) {
     const r = res[label];
     if (!r && why) { u++; (untestable[c.code] ??= { why, labels: [] }).labels.push(label); continue; }
+    if (!r && empties.has(label)) { e++; (emptyGal[c.code] ??= []).push(label); continue; }
     if (!r) { n++; (unknown[c.code] ??= []).push(label); continue; }
     if (r.ok === r.total) o++;
     else { b++; failing.push({ code: c.code, label, r }); }
   }
-  cats += list.length; ok += o; bad += b; none += n; noForm += u;
-  rows.push({ code: c.code, name: c.name, rule: ownRule.has(c.code) ? 'own' : 'generic', total: list.length, o, b, n, u, add: c.upload });
+  cats += list.length; ok += o; bad += b; none += n; noForm += u; noPlate += e;
+  rows.push({ code: c.code, name: c.name, rule: ownRule.has(c.code) ? 'own' : 'generic', total: list.length, o, b, n, u, e, add: c.upload });
 }
 const pct = (a, t) => (t ? Math.round((100 * a) / t) : 0) + ' %';
 const captured = new Set(index.map(c => c.code));
@@ -56,6 +59,7 @@ out.push('# Couverture des règles de plaque', '',
   `| Vérifiées | ${ok} | ${pct(ok, cats)} |`,
   `| **À corriger** | **${bad}** | ${pct(bad, cats)} |`,
   `| **À trouver** (aucune plaque connue) | **${none}** | ${pct(none, cats)} |`,
+  `| Galerie vide sur le site (aucune plaque n'existe) | ${noPlate} | ${pct(noPlate, cats)} |`,
   `| Non testables par le formulaire (pas de page d'ajout ni de menu de type) | ${noForm} | ${pct(noForm, cats)} |`, '');
 
 out.push('## À corriger', '');
@@ -68,15 +72,19 @@ else {
 }
 
 out.push('## Par pays', '', '`own` : règle dans `src/lib/plate/<cc>.js`. `generic` : lecture des champs visibles.', '',
-  '| Pays | Règle | Catégories | Vérifiées | À corriger | À trouver | Page d\'ajout |', '|---|---|---|---|---|---|---|');
+  "| Pays | Règle | Catégories | Vérifiées | À corriger | À trouver | Galerie vide | Non testables | Page d'ajout |", '|---|---|---|---|---|---|---|---|---|');
 for (const r of rows.sort((a, b) => (b.b + b.n) - (a.b + a.n) || a.code.localeCompare(b.code)))
-  out.push(`| ${r.code} ${r.name} | ${r.rule} | ${r.total} | ${r.o} | ${r.b || ''} | ${r.n || ''} | ${r.u || ''} | ${r.add ? 'oui' : 'non'} |`);
+  out.push(`| ${r.code} ${r.name} | ${r.rule} | ${r.total} | ${r.o} | ${r.b || ''} | ${r.n || ''} | ${r.e || ''} | ${r.u || ''} | ${r.add ? 'oui' : 'non'} |`);
 out.push('');
 
 out.push('## Catégories à trouver (par pays)', '', 'Pour chacune : trouver une plaque réelle sur le site, la saisir, puis relancer le contrôle. Le remplissage du build dev (`Fill missing plates`) le fait.', '');
 for (const code of Object.keys(unknown).sort()) {
   out.push(`<details><summary><b>${code}</b> : ${unknown[code].length}</summary>`, '', ...unknown[code].map(l => `- ${l}`), '', '</details>', '');
 }
+
+out.push('## Galerie vide sur le site', '', "Aucune photo dans la galerie de ces catégories : il n'y a pas de plaque à utiliser. À revérifier de temps en temps.", '');
+for (const code of Object.keys(emptyGal).sort()) out.push(`- **${code}** : ${emptyGal[code].join(', ')}`);
+out.push('');
 
 out.push('## Non testables par le formulaire', '', "Ces catégories existent dans la recherche du site mais le formulaire d'ajout ne permet pas de les choisir : leur règle ne peut pas être prouvée par ce moyen.", '');
 for (const code of Object.keys(untestable).sort()) out.push(`- **${code}** (${untestable[code].why}) : ${untestable[code].labels.length} catégorie(s)`);

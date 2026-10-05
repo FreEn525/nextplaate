@@ -16,6 +16,7 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | Vérifiées | 297 | 36 % |
 | **À corriger** | **0** | 0 % |
 | **À trouver** (aucune plaque connue) | **468** | 56 % |
+| Galerie vide sur le site (aucune plaque n'existe) | 0 | 0 % |
 | Non testables par le formulaire (pas de page d'ajout ni de menu de type) | 64 | 8 % |
 
 ## À corriger
@@ -26,104 +27,104 @@ Aucune.
 
 `own` : règle dans `src/lib/plate/<cc>.js`. `generic` : lecture des champs visibles.
 
-| Pays | Règle | Catégories | Vérifiées | À corriger | À trouver | Page d'ajout |
-|---|---|---|---|---|---|---|
-| ru Russia | own | 23 | 0 |  | 23 |  | oui |
-| kz Kazakhstan | generic | 18 | 0 |  | 18 |  | oui |
-| ir Iran | generic | 16 | 0 |  | 16 |  | oui |
-| cl Chile | generic | 15 | 0 |  | 15 |  | oui |
-| su USSR | generic | 15 | 0 |  | 15 |  | oui |
-| cz Czech Republic | own | 22 | 8 |  | 14 |  | oui |
-| br Brazil | generic | 13 | 0 |  | 13 |  | oui |
-| sm San Marino | generic | 13 | 0 |  | 13 |  | oui |
-| ge Georgia | generic | 12 | 0 |  | 12 |  | oui |
-| ke Kenya | generic | 12 | 0 |  | 12 |  | oui |
-| kg Kyrgyzstan | generic | 12 | 0 |  | 12 |  | oui |
-| gr Greece | own | 16 | 5 |  | 11 |  | oui |
-| gu Guam (USA) | generic | 9 | 0 |  | 9 |  | oui |
-| la Laos | generic | 9 | 0 |  | 9 |  | oui |
-| li Liechtenstein | own | 9 | 0 |  | 9 |  | oui |
-| sc Seychelles | generic | 9 | 0 |  | 9 |  | oui |
-| th Thailand | generic | 9 | 0 |  | 9 |  | oui |
-| tj Tajikistan | own | 10 | 1 |  | 9 |  | oui |
-| am Armenia | generic | 8 | 0 |  | 8 |  | oui |
-| il Israel | generic | 8 | 0 |  | 8 |  | oui |
-| rs Serbia | own | 10 | 2 |  | 8 |  | oui |
-| ua Ukraine | own | 19 | 11 |  | 8 |  | oui |
-| vn Vietnam | generic | 8 | 0 |  | 8 |  | oui |
-| bh Bahrain | generic | 7 | 0 |  | 7 |  | oui |
-| bs Bahamas | generic | 7 | 0 |  | 7 |  | oui |
-| de Germany | own | 16 | 9 |  | 7 |  | oui |
-| id Indonesia | generic | 7 | 0 |  | 7 |  | oui |
-| kh Cambodia | generic | 7 | 0 |  | 7 |  | oui |
-| ar Argentina | generic | 6 | 0 |  | 6 |  | oui |
-| by Belarus | own | 18 | 12 |  | 6 |  | oui |
-| cn China | generic | 6 | 0 |  | 6 |  | oui |
-| hr Croatia | own | 11 | 5 |  | 6 |  | oui |
-| mp Northern Mariana Islands (USA) | generic | 6 | 0 |  | 6 |  | oui |
-| mt Malta | generic | 6 | 0 |  | 6 |  | oui |
-| ps Palestinian Authority | generic | 6 | 0 |  | 6 |  | oui |
-| qa Qatar | generic | 6 | 0 |  | 6 |  | oui |
-| sa Saudi Arabia | generic | 6 | 0 |  | 6 |  | oui |
-| sk Slovakia | own | 21 | 15 |  | 6 |  | oui |
-| va Vatican | generic | 6 | 0 |  | 6 |  | oui |
-| ad Andorra | generic | 5 | 0 |  | 5 |  | oui |
-| ax Åland (FI) | generic | 5 | 0 |  | 5 |  | oui |
-| az Azerbaijan | generic | 5 | 0 |  | 5 |  | oui |
-| cy Cyprus | generic | 5 | 0 |  | 5 |  | oui |
-| nz New Zealand | generic | 5 | 0 |  | 5 |  | oui |
-| pl Poland | own | 12 | 7 |  | 5 |  | oui |
-| ch Switzerland | generic | 11 | 7 |  | 4 |  | oui |
-| eg Egypt | generic | 4 | 0 |  | 4 |  | oui |
-| gi Gibraltar (UK) | generic | 4 | 0 |  | 4 |  | oui |
-| iq Iraq | generic | 4 | 0 |  | 4 |  | oui |
-| jp Japan | generic | 4 | 0 |  | 4 |  | oui |
-| kw Kuwait | generic | 4 | 0 |  | 4 |  | oui |
-| mc Monaco | generic | 4 | 0 |  | 4 |  | oui |
-| mn Mongolia | generic | 4 | 0 |  | 4 |  | oui |
-| dz Algeria | own | 7 | 4 |  | 3 |  | oui |
-| it Italy | generic | 14 | 11 |  | 3 |  | oui |
-| kr South Korea | generic | 3 | 0 |  | 3 |  | oui |
-| si Slovenia | own | 4 | 1 |  | 3 |  | oui |
-| ba Bosnia and Herzegovina | own | 5 | 3 |  | 2 |  | oui |
-| hk Hong Kong (CN) | generic | 2 | 0 |  | 2 |  | oui |
-| je Jersey (UK) | generic | 2 | 0 |  | 2 |  | oui |
-| lv Latvia | own | 9 | 7 |  | 2 |  | oui |
-| me Montenegro | own | 6 | 4 |  | 2 |  | oui |
-| mk North Macedonia | generic | 8 | 6 |  | 2 |  | oui |
-| uz Uzbekistan | own | 9 | 7 |  | 2 |  | oui |
-| al Albania | own | 4 | 3 |  | 1 |  | oui |
-| at Austria | generic | 9 | 8 |  | 1 |  | oui |
-| bg Bulgaria | generic | 7 | 6 |  | 1 |  | oui |
-| dk Denmark | own | 8 | 7 |  | 1 |  | oui |
-| gg Guernsey (UK) | own | 3 | 2 |  | 1 |  | oui |
-| ie Ireland | generic | 3 | 2 |  | 1 |  | oui |
-| is Iceland | own | 10 | 9 |  | 1 |  | oui |
-| lu Luxembourg | generic | 5 | 4 |  | 1 |  | oui |
-| ma Morocco | generic | 2 | 1 |  | 1 |  | oui |
-| pt Portugal | generic | 4 | 3 |  | 1 |  | oui |
-| ro Romania | generic | 5 | 4 |  | 1 |  | oui |
-| ae UAE | generic | 0 | 0 |  |  |  | oui |
-| au Australia | generic | 0 | 0 |  |  |  | oui |
-| be Belgium | generic | 5 | 5 |  |  |  | oui |
-| ca Canada | generic | 0 | 0 |  |  |  | oui |
-| ee Estonia | own | 10 | 10 |  |  |  | oui |
-| es Spain | own | 6 | 6 |  |  |  | oui |
-| fi Finland | generic | 9 | 9 |  |  |  | oui |
-| fr France | own | 17 | 17 |  |  |  | oui |
-| hu Hungary | generic | 23 | 23 |  |  |  | oui |
-| lt Lithuania | generic | 9 | 9 |  |  |  | oui |
-| md Moldova | own | 8 | 8 |  |  |  | oui |
-| mx Mexico | generic | 20 | 0 |  |  | 20 | oui |
-| my Malaysia | generic | 4 | 0 |  |  | 4 | oui |
-| nl Netherlands | generic | 27 | 0 |  |  | 27 | oui |
-| no Norway | generic | 12 | 12 |  |  |  | oui |
-| se Sweden | generic | 8 | 8 |  |  |  | oui |
-| sg Singapore | generic | 13 | 0 |  |  | 13 | oui |
-| tr Turkey | own | 6 | 6 |  |  |  | oui |
-| uk United Kingdom | generic | 10 | 10 |  |  |  | oui |
-| us USA | generic | 0 | 0 |  |  |  | oui |
-| xx Non-recognized and partially recognized states | generic | 0 | 0 |  |  |  | oui |
+| Pays | Règle | Catégories | Vérifiées | À corriger | À trouver | Galerie vide | Non testables | Page d'ajout |
+|---|---|---|---|---|---|---|---|---|
+| ru Russia | own | 23 | 0 |  | 23 |  |  | oui |
+| kz Kazakhstan | generic | 18 | 0 |  | 18 |  |  | oui |
+| ir Iran | generic | 16 | 0 |  | 16 |  |  | oui |
+| cl Chile | generic | 15 | 0 |  | 15 |  |  | oui |
+| su USSR | generic | 15 | 0 |  | 15 |  |  | oui |
+| cz Czech Republic | own | 22 | 8 |  | 14 |  |  | oui |
+| br Brazil | generic | 13 | 0 |  | 13 |  |  | oui |
+| sm San Marino | generic | 13 | 0 |  | 13 |  |  | oui |
+| ge Georgia | generic | 12 | 0 |  | 12 |  |  | oui |
+| ke Kenya | generic | 12 | 0 |  | 12 |  |  | oui |
+| kg Kyrgyzstan | generic | 12 | 0 |  | 12 |  |  | oui |
+| gr Greece | own | 16 | 5 |  | 11 |  |  | oui |
+| gu Guam (USA) | generic | 9 | 0 |  | 9 |  |  | oui |
+| la Laos | generic | 9 | 0 |  | 9 |  |  | oui |
+| li Liechtenstein | own | 9 | 0 |  | 9 |  |  | oui |
+| sc Seychelles | generic | 9 | 0 |  | 9 |  |  | oui |
+| th Thailand | generic | 9 | 0 |  | 9 |  |  | oui |
+| tj Tajikistan | own | 10 | 1 |  | 9 |  |  | oui |
+| am Armenia | generic | 8 | 0 |  | 8 |  |  | oui |
+| il Israel | generic | 8 | 0 |  | 8 |  |  | oui |
+| rs Serbia | own | 10 | 2 |  | 8 |  |  | oui |
+| ua Ukraine | own | 19 | 11 |  | 8 |  |  | oui |
+| vn Vietnam | generic | 8 | 0 |  | 8 |  |  | oui |
+| bh Bahrain | generic | 7 | 0 |  | 7 |  |  | oui |
+| bs Bahamas | generic | 7 | 0 |  | 7 |  |  | oui |
+| de Germany | own | 16 | 9 |  | 7 |  |  | oui |
+| id Indonesia | generic | 7 | 0 |  | 7 |  |  | oui |
+| kh Cambodia | generic | 7 | 0 |  | 7 |  |  | oui |
+| ar Argentina | generic | 6 | 0 |  | 6 |  |  | oui |
+| by Belarus | own | 18 | 12 |  | 6 |  |  | oui |
+| cn China | generic | 6 | 0 |  | 6 |  |  | oui |
+| hr Croatia | own | 11 | 5 |  | 6 |  |  | oui |
+| mp Northern Mariana Islands (USA) | generic | 6 | 0 |  | 6 |  |  | oui |
+| mt Malta | generic | 6 | 0 |  | 6 |  |  | oui |
+| ps Palestinian Authority | generic | 6 | 0 |  | 6 |  |  | oui |
+| qa Qatar | generic | 6 | 0 |  | 6 |  |  | oui |
+| sa Saudi Arabia | generic | 6 | 0 |  | 6 |  |  | oui |
+| sk Slovakia | own | 21 | 15 |  | 6 |  |  | oui |
+| va Vatican | generic | 6 | 0 |  | 6 |  |  | oui |
+| ad Andorra | generic | 5 | 0 |  | 5 |  |  | oui |
+| ax Åland (FI) | generic | 5 | 0 |  | 5 |  |  | oui |
+| az Azerbaijan | generic | 5 | 0 |  | 5 |  |  | oui |
+| cy Cyprus | generic | 5 | 0 |  | 5 |  |  | oui |
+| nz New Zealand | generic | 5 | 0 |  | 5 |  |  | oui |
+| pl Poland | own | 12 | 7 |  | 5 |  |  | oui |
+| ch Switzerland | generic | 11 | 7 |  | 4 |  |  | oui |
+| eg Egypt | generic | 4 | 0 |  | 4 |  |  | oui |
+| gi Gibraltar (UK) | generic | 4 | 0 |  | 4 |  |  | oui |
+| iq Iraq | generic | 4 | 0 |  | 4 |  |  | oui |
+| jp Japan | generic | 4 | 0 |  | 4 |  |  | oui |
+| kw Kuwait | generic | 4 | 0 |  | 4 |  |  | oui |
+| mc Monaco | generic | 4 | 0 |  | 4 |  |  | oui |
+| mn Mongolia | generic | 4 | 0 |  | 4 |  |  | oui |
+| dz Algeria | own | 7 | 4 |  | 3 |  |  | oui |
+| it Italy | generic | 14 | 11 |  | 3 |  |  | oui |
+| kr South Korea | generic | 3 | 0 |  | 3 |  |  | oui |
+| si Slovenia | own | 4 | 1 |  | 3 |  |  | oui |
+| ba Bosnia and Herzegovina | own | 5 | 3 |  | 2 |  |  | oui |
+| hk Hong Kong (CN) | generic | 2 | 0 |  | 2 |  |  | oui |
+| je Jersey (UK) | generic | 2 | 0 |  | 2 |  |  | oui |
+| lv Latvia | own | 9 | 7 |  | 2 |  |  | oui |
+| me Montenegro | own | 6 | 4 |  | 2 |  |  | oui |
+| mk North Macedonia | generic | 8 | 6 |  | 2 |  |  | oui |
+| uz Uzbekistan | own | 9 | 7 |  | 2 |  |  | oui |
+| al Albania | own | 4 | 3 |  | 1 |  |  | oui |
+| at Austria | generic | 9 | 8 |  | 1 |  |  | oui |
+| bg Bulgaria | generic | 7 | 6 |  | 1 |  |  | oui |
+| dk Denmark | own | 8 | 7 |  | 1 |  |  | oui |
+| gg Guernsey (UK) | own | 3 | 2 |  | 1 |  |  | oui |
+| ie Ireland | generic | 3 | 2 |  | 1 |  |  | oui |
+| is Iceland | own | 10 | 9 |  | 1 |  |  | oui |
+| lu Luxembourg | generic | 5 | 4 |  | 1 |  |  | oui |
+| ma Morocco | generic | 2 | 1 |  | 1 |  |  | oui |
+| pt Portugal | generic | 4 | 3 |  | 1 |  |  | oui |
+| ro Romania | generic | 5 | 4 |  | 1 |  |  | oui |
+| ae UAE | generic | 0 | 0 |  |  |  |  | oui |
+| au Australia | generic | 0 | 0 |  |  |  |  | oui |
+| be Belgium | generic | 5 | 5 |  |  |  |  | oui |
+| ca Canada | generic | 0 | 0 |  |  |  |  | oui |
+| ee Estonia | own | 10 | 10 |  |  |  |  | oui |
+| es Spain | own | 6 | 6 |  |  |  |  | oui |
+| fi Finland | generic | 9 | 9 |  |  |  |  | oui |
+| fr France | own | 17 | 17 |  |  |  |  | oui |
+| hu Hungary | generic | 23 | 23 |  |  |  |  | oui |
+| lt Lithuania | generic | 9 | 9 |  |  |  |  | oui |
+| md Moldova | own | 8 | 8 |  |  |  |  | oui |
+| mx Mexico | generic | 20 | 0 |  |  |  | 20 | oui |
+| my Malaysia | generic | 4 | 0 |  |  |  | 4 | oui |
+| nl Netherlands | generic | 27 | 0 |  |  |  | 27 | oui |
+| no Norway | generic | 12 | 12 |  |  |  |  | oui |
+| se Sweden | generic | 8 | 8 |  |  |  |  | oui |
+| sg Singapore | generic | 13 | 0 |  |  |  | 13 | oui |
+| tr Turkey | own | 6 | 6 |  |  |  |  | oui |
+| uk United Kingdom | generic | 10 | 10 |  |  |  |  | oui |
+| us USA | generic | 0 | 0 |  |  |  |  | oui |
+| xx Non-recognized and partially recognized states | generic | 0 | 0 |  |  |  |  | oui |
 
 ## Catégories à trouver (par pays)
 
@@ -971,6 +972,11 @@ Pour chacune : trouver une plaque réelle sur le site, la saisir, puis relancer 
 - Diplomatic
 
 </details>
+
+## Galerie vide sur le site
+
+Aucune photo dans la galerie de ces catégories : il n'y a pas de plaque à utiliser. À revérifier de temps en temps.
+
 
 ## Non testables par le formulaire
 
