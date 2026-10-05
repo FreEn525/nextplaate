@@ -94,7 +94,6 @@
         const region = (document.getElementById('drop_1') || { value: '' }).value.trim();
         return joinParts([region, fieldVal('nomer')]);
       }
-      case 'sk': return joinParts([selText('region'), fieldVal('digit') + fieldVal('let2')]);   // Slovakia: AB 123AB
       case 'tj': {                                                  // Tajikistan: 7717XZ07, the plate then the region label (once)
         const n = squash(fieldVal('nomer')), r = selText('region2');
         return r && !n.endsWith(r) ? n + r : n;
@@ -128,7 +127,12 @@
         const digits = ['digit1', 'digit2', 'digit3'].map(shownVal).filter(Boolean).join('');
         return joinParts([letters, digits]);
       }
-      case 'sk': return joinParts([selText('region') + '-' + fieldVal('digit') + fieldVal('let2')]);   // Slovakia: BA-427RF (a space is refused by the site)
+      case 'sk': {                                                  // Slovakia: BA 427RF; the types with a middle letter (dealer, oldtimers...) read it: PO M 704
+        const region = selText('region');
+        if (shownVal('let1')) return joinParts([region, shownVal('let1'), fieldVal('digit')]);
+        if (!fieldVal('digit')) return genericPlate();                // vanity and provisional types have no digit field: read the shown fields
+        return region + '-' + fieldVal('digit') + fieldVal('let2');   // a space is refused by the site
+      }
       case 'ee':                                                    // Estonia: motorcycles (ctype 3) are ABC 123; the other types are read from their fields
         return fieldVal('ctype') === '3' ? joinParts([fieldVal('let'), fieldVal('dig1')]) : genericPlate();
       case 'al': {                                                  // Albania, by type: cars 2011 AA 896 TH; cars 1993 LE 0075 B (region, digits, letter); others: letter, digits
