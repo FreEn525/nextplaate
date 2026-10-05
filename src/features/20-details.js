@@ -2,6 +2,7 @@
    *  DETAILS  (location and hashtags written at the top of every description)
    * ===================================================================== */
   registerFeature({
+    id: 'details', label: 'Location and hashtags',
     groups: [{
       drawer: 'pair', title: 'Details',
       build: () => [

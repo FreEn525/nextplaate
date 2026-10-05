@@ -64,6 +64,7 @@
   }, true);
 
   registerFeature({
+    id: 'selection', label: 'Photo pair selection',
     groups: [{
       drawer: 'pair', title: 'Selection',
       build: () => [

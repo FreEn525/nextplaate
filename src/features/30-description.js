@@ -86,6 +86,7 @@
 
 
   registerFeature({
+    id: 'description', label: 'Descriptions and auto-fill', requires: ['details'],
     groups: [
       {
         drawer: 'pair', title: 'Description', pages: ['edit'],

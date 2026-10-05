@@ -35,6 +35,7 @@
 
 
   registerFeature({
+    id: 'pages', label: 'Gallery page keys',
     groups: [{
       drawer: 'gallery', title: 'Pages', pages: ['gallery'],
       build: () => [

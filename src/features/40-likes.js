@@ -123,6 +123,7 @@
 
 
   registerFeature({
+    id: 'likes', label: 'Likes',
     groups: [{
       drawer: 'gallery', title: 'Likes', pages: ['gallery'],
       build: () => [

@@ -41,6 +41,10 @@ NextPlaate est un script Tampermonkey (userscript) pour [PlatesMania](https://pl
 - **Protection Cloudflare** : si le site renvoie une vérification ou une limite, les envois se mettent en pause 15 minutes.
 - Touches : `U` (ouvrir la fenêtre de lot), `N` (démarrer), `R` (reprendre).
 
+### Réglages (tiroir `settings`)
+- Une case par fonction (`registerFeature({ id, label })`) : décochée, la fonction n'ajoute ni contrôle, ni touche, ni étape d'Échap. Une fonction qui en demande une autre (`requires`) s'éteint avec elle. Le bouton « Apply » recharge la page.
+- Le registre est dans `src/core/15-settings.js` : `settings.define(id, défaut, libellé, groupe)`, `settings.get(id)`, `settings.on(id)`, `settings.set(id, valeur)`. Les valeurs sont gardées dans le navigateur (`pmg_set_<id>`). Les autres réglages (`autoCheck`, `delay`, `qDelay`...) y seront migrés au fil des modifications.
+
 ### Raccourcis (tiroir `keys`)
 - Tous les raccourcis sont modifiables. Le réglage est sauvegardé dans le navigateur (`pmg_*`).
 - Échange automatique si une touche est déjà prise.

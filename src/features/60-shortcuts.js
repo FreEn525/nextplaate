@@ -44,6 +44,7 @@
   }
 
   registerFeature({
+    id: 'shortcuts', label: 'Shortcut editor',
     groups: [{
       drawer: 'keys', title: 'Keys',
       build: () => [

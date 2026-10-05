@@ -178,3 +178,9 @@ Chaque page d'ajout et de recherche a été lue pays par pays : `data/countries/
 - **Départ** : 1 314 plaques des galeries, 706 non relues (1482 / 2188). **Maintenant 2031 / 2188 (93 %)** ; couverture : voir `docs/COUVERTURE.md` (régénéré). Méthode et astuces : `docs/REGLES.md`.
 - **Découvertes** (chacune règle des dizaines de plaques) : lettres cyrilliques/latines semblables (Russie : 0/69 → 57/69), champs désactivés mais affichés qui contiennent des lettres écrites par le site (Grèce, Croatie, Pologne, Laos, Slovaquie, Irlande, Gibraltar...), un menu par caractère (Iran, Égypte, Arabie saoudite, Irak), formulaires à champs inhabituels (Japon, Vietnam, Thaïlande, Corée).
 - **Reste** (≈ 25 catégories) : voir « À corriger » dans `docs/COUVERTURE.md`. Plusieurs sont des plaques dont le texte de galerie ne correspond pas à ce que le formulaire peut écrire (Seychelles, Israël), d'autres demandent de lire de plus près la page (Tchéquie 1960/1977, Italie, Cambodge, Kirghizistan diplomatique).
+
+### Version 5.5 et registre de réglages (branche `feature/settings`)
+
+- **5.5 préparée** : `@version` 5.5, `CHANGELOG.md`, build public vérifié. Pas encore poussée (en attente de votre accord). Garde-fou : `check_known` (16 plaques tapées à la main) doit rester à 0 échec : il a détecté une erreur d'ordre en Grèce (`IAZ`) que le contrôle complet ne voyait pas ; corrigée.
+- **Registre de réglages** (étape 1 du plan) : `src/core/15-settings.js`, tiroir *Settings*, un interrupteur par fonction, dépendances (`requires`), fonctions verrouillées (`locked`). 36 tests (chaque fonction coupée, sur galerie, photo, édition et ajout, touches pressées : aucune erreur).
+- **Reste de l'étape 1** : migrer les clés libres du stockage (`autoCheck`, `delay`, `qDelay`, `pages`...) vers `settings.define`.

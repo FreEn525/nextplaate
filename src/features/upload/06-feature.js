@@ -16,6 +16,7 @@
   }
 
   registerFeature({
+    id: 'upload', label: 'Batch upload',
     groups: [{
       drawer: 'upload', title: 'Batch upload',
       build: () => [

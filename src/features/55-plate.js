@@ -72,11 +72,13 @@
   // Checks when the user leaves a field, presses Enter, or changes the plate type: no polling
   let checkTimer = null;
   const later = ms => { clearTimeout(checkTimer); checkTimer = setTimeout(() => checkPlate(false), ms); };
-  document.addEventListener('input', e => { if (here.add && isPlateField(e.target)) later(700); }, true);
-  document.addEventListener('blur', e => { if (here.add && isPlateField(e.target)) later(0); }, true);
-  document.addEventListener('change', e => { if (here.add && e.target.tagName === 'SELECT') later(0); }, true);
+  const plateOn = () => here.add && featureOn('plate');
+  document.addEventListener('input', e => { if (plateOn() && isPlateField(e.target)) later(700); }, true);
+  document.addEventListener('blur', e => { if (plateOn() && isPlateField(e.target)) later(0); }, true);
+  document.addEventListener('change', e => { if (plateOn() && e.target.tagName === 'SELECT') later(0); }, true);
 
   registerFeature({
+    id: 'plate', label: 'Plate check',
     groups: [{
       drawer: 'search', title: 'Plate check', pages: ['add'],
       build: () => [

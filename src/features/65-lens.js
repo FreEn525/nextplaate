@@ -39,6 +39,7 @@
   }
 
   registerFeature({
+    id: 'lens', label: 'Google Lens',
     groups: [{
       drawer: 'search', title: 'Google Lens', pages: ['add', 'edit', 'gallery'],
       build: () => [

@@ -47,6 +47,27 @@
   const markFilled = id => { const s = filledSet(); s.add(id); store.set('filled', JSON.stringify([...s])); };
 
   /* =====================================================================
+   *  SETTINGS  (the user's choices, in one place)
+   *    A setting is defined once, with its default and the label shown in the Settings drawer:
+   *      settings.define('feature_likes', '1', 'Likes', 'features')
+   *    and read anywhere with settings.get(id) (a string) or settings.on(id) (true when '1').
+   *    The value is kept in the browser (key pmg_set_<id>). Every feature that has an id and a label
+   *    gets a "feature_<id>" setting from registerFeature: that is how a feature is switched off.
+   * ===================================================================== */
+  const settings = (() => {
+    const defs = [];
+    const find = id => defs.find(d => d.id === id);
+    const api = {
+      define(id, def, label, group) { if (!find(id)) defs.push({ id, def: String(def), label, group: group || 'general' }); },
+      list: group => defs.filter(d => !group || d.group === group),
+      get: id => store.get('set_' + id, (find(id) || { def: '' }).def),
+      on: id => api.get(id) === '1',
+      set: (id, value) => store.set('set_' + id, String(value)),
+      isDefault: id => api.get(id) === (find(id) || { def: '' }).def
+    };
+    return api;
+  })();
+  /* =====================================================================
    *  WHERE AM I  (which kind of PlatesMania page is open, decided once when the script loads)
    * ===================================================================== */
   const here = {
@@ -63,6 +84,9 @@
   // A feature is registered when the script loads, but touches nothing on the page then:
   // mountApp() builds the panel first, and only then runs each feature's init().
   //   registerFeature({
+  //     id: 'likes', label: 'Likes',   // a feature with an id and a label can be switched off in Settings
+  //     requires: ['details'],          // off when one of these is off
+  //     locked: true,                   // cannot be switched off (the Settings drawer itself)
   //     groups:   [{ drawer: 'pair', title: 'Photos', build: () => nodes }], // controls, in a drawer of the bar
   //     keys:     { select: { code: 'KeyS', label: 'Select photos', run: () => true, hintOrder: 10 } },
   //               // run() returns true when it handled the key. The key can be changed by the user (Shortcuts drawer).
@@ -75,7 +99,15 @@
   let escapeChain = [];     // features with onEscape, in escOrder
   const app = { modal: null, capture: null }; // modal: { onKey(e) } while a full window owns the keyboard; capture: waits for a new key
 
-  const registerFeature = f => { features.push(f); };
+  const registerFeature = f => {
+    features.push(f);
+    if (f.id && f.label && !f.locked) settings.define('feature_' + f.id, '1', f.label, 'features');
+  };
+  // A feature is on when the user has not switched it off and everything it requires is on. A feature without an id is always on.
+  const featureOn = id => {
+    const f = features.find(x => x.id === id);
+    return !f || ((f.locked || settings.on('feature_' + id)) && (f.requires || []).every(featureOn));
+  };
 
   // The key an action uses: the user's choice if any, else its default
   const bindingOf = id => store.get('kb_' + id, actions[id].code);
@@ -89,12 +121,14 @@
   }
 
   function mountApp() {
-    features.forEach(f => Object.assign(actions, f.keys || {}));
+    const active = features.filter(f => !f.id || featureOn(f.id));   // a switched-off feature adds no control, no key, no Esc step
+    log('features off', features.filter(f => f.id && !active.includes(f)).map(f => f.id).join(' ') || 'none');
+    active.forEach(f => Object.assign(actions, f.keys || {}));
     rebuildKeys();
     log('actions', Object.entries(actions).map(([id, a]) => id + '=' + a.bound).join(' '));
-    mountRibbon(features);
-    features.forEach(f => f.init && f.init());
-    escapeChain = features.filter(f => f.onEscape).sort((a, b) => (a.escOrder || 0) - (b.escOrder || 0));
+    mountRibbon(active);
+    active.forEach(f => f.init && f.init());
+    escapeChain = active.filter(f => f.onEscape).sort((a, b) => (a.escOrder || 0) - (b.escOrder || 0));
   }
   /* =====================================================================
    *  KEYBOARD  (one listener for the whole script)
@@ -691,6 +725,7 @@
     keyboard: '<path d="M10 8h.01" /> <path d="M12 12h.01" /> <path d="M14 8h.01" /> <path d="M16 12h.01" /> <path d="M18 8h.01" /> <path d="M6 8h.01" /> <path d="M7 16h10" /> <path d="M8 12h.01" /> <rect width="20" height="16" x="2" y="4" rx="2" />',
     gallery: '<rect width="7" height="7" x="3" y="3" rx="1" /> <rect width="7" height="7" x="14" y="3" rx="1" /> <rect width="7" height="7" x="14" y="14" rx="1" /> <rect width="7" height="7" x="3" y="14" rx="1" />',
     car: '<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" /> <circle cx="7" cy="17" r="2" /> <path d="M9 17h6" /> <circle cx="17" cy="17" r="2" />',
+    settings: '<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" /> <circle cx="12" cy="12" r="3" />',
     wrench: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />',
   };
   const icon = name => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[name]}</svg>`;
@@ -795,6 +830,8 @@
     .lbl{font-size:12px;font-weight:600}
     .presult{margin:0;font-size:13px}
     .presult{padding:6px 8px;border-radius:4px;background:#fff;border:1px solid var(--line)}
+    .setrow{display:flex;align-items:center;gap:10px;font-size:13px;padding:4px 0;cursor:pointer}
+    .setrow .off{color:var(--mute)}
     .kv{display:flex;justify-content:space-between;gap:12px;font-size:13px;padding:2px 0}
     .sub{margin:10px 0 2px;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
     .presult.warn{background:#fde2e1;border-color:#f3b5b2;color:#8a1c17;font-weight:600}
@@ -827,6 +864,7 @@
     { id: 'search', icon: 'search', title: 'Search', keys: '' },        // the plate check and Google Lens, one tab
     { id: 'upload', icon: 'upload', title: 'Batch upload', keys: 'U · N' },
     { id: 'keys', icon: 'keyboard', title: 'Shortcuts', keys: 'Esc' },
+    { id: 'settings', icon: 'settings', title: 'Settings', keys: '' },
     { id: 'dev', icon: 'wrench', title: 'Developer', keys: '' }        // shown only when the dev tools are built in
   ];
 
@@ -969,6 +1007,7 @@
   }, true);
 
   registerFeature({
+    id: 'selection', label: 'Photo pair selection',
     groups: [{
       drawer: 'pair', title: 'Selection',
       build: () => [
@@ -996,6 +1035,7 @@
    *  DETAILS  (location and hashtags written at the top of every description)
    * ===================================================================== */
   registerFeature({
+    id: 'details', label: 'Location and hashtags',
     groups: [{
       drawer: 'pair', title: 'Details',
       build: () => [
@@ -1100,6 +1140,7 @@
 
 
   registerFeature({
+    id: 'description', label: 'Descriptions and auto-fill', requires: ['details'],
     groups: [
       {
         drawer: 'pair', title: 'Description', pages: ['edit'],
@@ -1263,6 +1304,7 @@
 
 
   registerFeature({
+    id: 'likes', label: 'Likes',
     groups: [{
       drawer: 'gallery', title: 'Likes', pages: ['gallery'],
       build: () => [
@@ -1331,6 +1373,7 @@
 
 
   registerFeature({
+    id: 'pages', label: 'Gallery page keys',
     groups: [{
       drawer: 'gallery', title: 'Pages', pages: ['gallery'],
       build: () => [
@@ -1422,11 +1465,13 @@
   // Checks when the user leaves a field, presses Enter, or changes the plate type: no polling
   let checkTimer = null;
   const later = ms => { clearTimeout(checkTimer); checkTimer = setTimeout(() => checkPlate(false), ms); };
-  document.addEventListener('input', e => { if (here.add && isPlateField(e.target)) later(700); }, true);
-  document.addEventListener('blur', e => { if (here.add && isPlateField(e.target)) later(0); }, true);
-  document.addEventListener('change', e => { if (here.add && e.target.tagName === 'SELECT') later(0); }, true);
+  const plateOn = () => here.add && featureOn('plate');
+  document.addEventListener('input', e => { if (plateOn() && isPlateField(e.target)) later(700); }, true);
+  document.addEventListener('blur', e => { if (plateOn() && isPlateField(e.target)) later(0); }, true);
+  document.addEventListener('change', e => { if (plateOn() && e.target.tagName === 'SELECT') later(0); }, true);
 
   registerFeature({
+    id: 'plate', label: 'Plate check',
     groups: [{
       drawer: 'search', title: 'Plate check', pages: ['add'],
       build: () => [
@@ -1504,6 +1549,7 @@
   }
 
   registerFeature({
+    id: 'shortcuts', label: 'Shortcut editor',
     groups: [{
       drawer: 'keys', title: 'Keys',
       build: () => [
@@ -1554,6 +1600,7 @@
   }
 
   registerFeature({
+    id: 'lens', label: 'Google Lens',
     groups: [{
       drawer: 'search', title: 'Google Lens', pages: ['add', 'edit', 'gallery'],
       build: () => [
@@ -1574,6 +1621,37 @@
       $('lensOpen').onclick = () => window.open('https://lens.google.com/', '_blank', 'noopener');
       $('lensShow').onclick = lensShow;
     }
+  });
+  /* =====================================================================
+   *  SETTINGS DRAWER  (switch a feature off or on; the page is reloaded to apply it)
+   *    One line per feature that has an id and a label (registerFeature). A switched-off feature has no control,
+   *    no key and no Esc step; whatever it requires switches it off too.
+   * ===================================================================== */
+  function renderSettings() {
+    const rows = settings.list('features').map(d => {
+      const f = features.find(x => 'feature_' + x.id === d.id);
+      const needs = ((f && f.requires) || []).map(r => (features.find(x => x.id === r) || {}).label || r);
+      const box = h('input', { type: 'checkbox', id: 'set_' + d.id });
+      box.checked = settings.on(d.id);
+      box.onchange = () => { settings.set(d.id, box.checked ? '1' : '0'); $('setApply').hidden = false; renderSettings(); };
+      const blocked = box.checked && f && !featureOn(f.id);
+      return h('label', { class: 'setrow' }, box,
+        h('span', { class: blocked ? 'off' : '', text: d.label + (needs.length ? ' (needs: ' + needs.join(', ') + ')' : '') + (blocked ? ' - off, because something it needs is off' : '') }));
+    });
+    $('setList').replaceChildren(...rows);
+  }
+
+  registerFeature({
+    id: 'settings', locked: true,
+    groups: [{
+      drawer: 'settings', title: 'Features',
+      build: () => [
+        h('p', { class: 'presult', text: 'Switch a feature off to remove its controls and keys. The page reloads to apply the change.' }),
+        h('div', { id: 'setList' }),
+        h('button', { id: 'setApply', class: 'btn', hidden: true, text: 'Apply (reload the page)', onclick: () => location.reload() })
+      ]
+    }],
+    init: () => renderSettings()
   });
   /* =====================================================================
    *  BATCH UPLOAD
@@ -2267,7 +2345,7 @@
     setBatch({ ...b, pendingSubmit: b.current, ts: Date.now() });
   };
   document.addEventListener('submit', e => {
-    if (e.defaultPrevented || !e.target || e.target.id !== 'frm') return;
+    if (!featureOn('upload') || e.defaultPrevented || !e.target || e.target.id !== 'frm') return;
     markSubmitted();
   });
   { // patch the PAGE's form.submit (the script runs in Tampermonkey's sandbox, so go through unsafeWindow)
@@ -2343,6 +2421,7 @@
   }
 
   registerFeature({
+    id: 'upload', label: 'Batch upload',
     groups: [{
       drawer: 'upload', title: 'Batch upload',
       build: () => [
@@ -2380,7 +2459,8 @@
     // a banner in the console, once: the name and the version (replace with an ASCII art when it is chosen)
   console.log('%c NextPlaate %c v' + (typeof GM_info !== 'undefined' && GM_info.script ? GM_info.script.version : '') + ' ', 'background:#3781c5;color:#fff;font:bold 14px monospace;padding:2px 6px;border-radius:4px', 'color:#3781c5;font:12px monospace');
 mountApp();
-  if (here.edit) { if ($('autoFill').checked) fillDescription(); }
-  else if (!backToGallery()) { autoEdit(); resumeLikeRun(); }
-  batchOnLoad().catch(() => {});
+  const describing = featureOn('description');
+  if (here.edit) { if (describing && $('autoFill').checked) fillDescription(); }
+  else if (!(describing && backToGallery())) { if (describing) autoEdit(); if (featureOn('likes')) resumeLikeRun(); }
+  if (featureOn('upload')) batchOnLoad().catch(() => {});
 })();

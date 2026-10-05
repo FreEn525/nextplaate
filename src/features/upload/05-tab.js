@@ -105,7 +105,7 @@
     setBatch({ ...b, pendingSubmit: b.current, ts: Date.now() });
   };
   document.addEventListener('submit', e => {
-    if (e.defaultPrevented || !e.target || e.target.id !== 'frm') return;
+    if (!featureOn('upload') || e.defaultPrevented || !e.target || e.target.id !== 'frm') return;
     markSubmitted();
   });
   { // patch the PAGE's form.submit (the script runs in Tampermonkey's sandbox, so go through unsafeWindow)

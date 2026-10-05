@@ -40,6 +40,8 @@
     .lbl{font-size:12px;font-weight:600}
     .presult{margin:0;font-size:13px}
     .presult{padding:6px 8px;border-radius:4px;background:#fff;border:1px solid var(--line)}
+    .setrow{display:flex;align-items:center;gap:10px;font-size:13px;padding:4px 0;cursor:pointer}
+    .setrow .off{color:var(--mute)}
     .kv{display:flex;justify-content:space-between;gap:12px;font-size:13px;padding:2px 0}
     .sub{margin:10px 0 2px;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
     .presult.warn{background:#fde2e1;border-color:#f3b5b2;color:#8a1c17;font-weight:600}

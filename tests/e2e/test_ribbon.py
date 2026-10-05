@@ -93,7 +93,7 @@ def test_panel_is_docked_on_the_right_edge(page):
 def test_bar_has_one_icon_per_drawer_in_order(page):
     open_at(page, GALLERY)
     # the dev build adds its own drawer at the end
-    assert icon_drawers(page) == ["pair", "gallery", "search", "upload", "keys"] + (["dev"] if "(dev)" in SCRIPT[:300] else [])
+    assert icon_drawers(page) == ["pair", "gallery", "search", "upload", "keys", "settings"] + (["dev"] if "(dev)" in SCRIPT[:300] else [])
 
 
 def test_icon_opens_its_drawer_and_a_second_click_closes_it(page):

@@ -9,6 +9,7 @@
     { id: 'search', icon: 'search', title: 'Search', keys: '' },        // the plate check and Google Lens, one tab
     { id: 'upload', icon: 'upload', title: 'Batch upload', keys: 'U · N' },
     { id: 'keys', icon: 'keyboard', title: 'Shortcuts', keys: 'Esc' },
+    { id: 'settings', icon: 'settings', title: 'Settings', keys: '' },
     { id: 'dev', icon: 'wrench', title: 'Developer', keys: '' }        // shown only when the dev tools are built in
   ];
 
