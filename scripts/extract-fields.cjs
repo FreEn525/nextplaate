@@ -50,6 +50,8 @@ function run(s, fnName, typeValue) {
   const mk = () => ({ style: {}, disabled: false, value: '', options: [], selectedIndex: 0, checked: false, removeAttribute() {}, setAttribute() {}, appendChild() {}, addEventListener() {}, parentElement: { style: {}, removeAttribute() {}, setAttribute() {}, appendChild() {} } });
   const els = {};
   for (const id of idsUsed(src)) els[id] = mk();
+  // every plate field of the page, even the ones the function never mentions
+  for (const m of s.matchAll(/<(?:input|select)[^>]*\bid="([^"]+)"/g)) if (PLATE_ID.test(m[1])) els[m[1]] = els[m[1]] || mk();
   els.ctype = { ...mk(), value: typeValue };
   const doc = {
     getElementById: id => (els[id] = els[id] || mk()),
@@ -88,7 +90,8 @@ for (const f of fs.readdirSync(dir).filter(f => /^[a-z]{2}\.html$/.test(f))) {
       if (r.error) { error = r.error; continue; }
       for (const [id, el] of Object.entries(r.els)) {
         if (id === 'ctype' || !PLATE_ID.test(id)) continue;
-        seen[id] = el.style.visibility === 'visible' && !el.disabled && el.style.display !== 'none';
+        // a field the function never hides is visible by default (the page shows it)
+        seen[id] = el.style.visibility !== 'hidden' && !el.disabled && el.style.display !== 'none';
       }
     }
     entry.types[v] = { label, visible: Object.keys(seen).filter(id => seen[id]), ...(error ? { error } : {}) };
