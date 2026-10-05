@@ -11,10 +11,10 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | Pays du site | 96 | |
 | Pays capturés (pages sauvegardées) | 96 | 100 % |
 | **Pays non capturés** | **0** | |
-| Pays avec une règle propre | 38 sur 96 | |
+| Pays avec une règle propre | 40 sur 96 | |
 | Catégories (pays capturés) | 829 | |
-| Vérifiées | 679 | 82 % |
-| **À corriger** | **43** | 5 % |
+| Vérifiées | 682 | 82 % |
+| **À corriger** | **40** | 5 % |
 | **À trouver** (aucune plaque connue) | **0** | 0 % |
 | Galerie vide sur le site (aucune plaque n'existe) | 21 | 3 % |
 | Non testables par le formulaire (pas de menu de type, catégorie absente du menu, ou aucun champ de plaque) | 86 | 10 % |
@@ -23,12 +23,8 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 
 | Pays | Catégorie | OK | Plaque attendue | Lue |
 |---|---|---|---|---|
-| am | High officials | 0/3 | `ARM 025` | `ARM` |
-| am | High officials | 0/3 | `ARM 035` | `ARM` |
-| am | High officials | 0/3 | `ARM 160` | `ARM` |
-| ax | Cars (ÅLA 1234) | 0/3 | `ÅLA 4642` | `Å L L A4642` |
-| ax | Cars (ÅLA 1234) | 0/3 | `ÅLA 5168` | `Å L L A5168` |
-| ax | Cars (ÅLA 1234) | 0/3 | `ÅLA 7020` | `Å L L A7020` |
+| ax | Vanity Plates | 1/3 | `BOMAN2` | `BOM` |
+| ax | Vanity Plates | 1/3 | `ÅLAND 2` | `ÅLA` |
 | ch | Vehicles w/o paid duty (with "Z") | 2/3 | `ZH 1257 Z` | `VS H 1257 Z` |
 | cy | Trailers | 2/3 | `14001 CT` | `P 14001` |
 | cz | Electric vehicles | 0/3 | `EL5 57CP` | `557CP` |
@@ -39,17 +35,18 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | cz | Trailers (1977) | 0/3 | `44-AI-59` | `AI4 4` |
 | de | Plates for oldtimers (type "H") | 1/3 | `HEI Z 924 H` | `EI Z 924 H` |
 | de | Plates for oldtimers (type "H") | 1/3 | `HH CW 311 H` | `CW 311 H` |
-| de | Seasonal plates | 0/3 | `AC W 2005 (04/10)` | `AC W 2005` |
-| de | Seasonal plates | 0/3 | `EI KK 88 (04/10)` | `EI KK 88` |
-| de | Seasonal plates | 0/3 | `ILL Z 300 (03/10)` | `ILL Z 300` |
-| de | Seasonal plates (Oldtimers) | 0/3 | `GS KV 72H (05/10)` | `GS KV 72 H` |
-| de | Seasonal plates (Oldtimers) | 0/3 | `H NG 382H (04/10)` | `N G 382 H` |
-| de | Seasonal plates (Oldtimers) | 0/3 | `NU SW 57H (04/10)` | `NU SW 57 H` |
-| de | Regional authorities | 0/3 | `BBL 4 7675` | `4 7675` |
-| de | Regional authorities | 0/3 | `NRW 3-58E` | `3 58E` |
-| de | Regional authorities | 0/3 | `RPL 4 8731` | `4 8731` |
+| de | Seasonal plates (Oldtimers) | 2/3 | `H NG 382H (04/10)` | `N G 382H H (04/10)` |
 | dk | Vanity Plates | 1/3 | `777` | `777AAAA` |
 | dk | Vanity Plates | 1/3 | `USANO1` | `USANO1J` |
+| fr | SIV (temporary) | 0/3 | `WW-254-DW` | `WW` |
+| fr | SIV (temporary) | 0/3 | `WW-295-BD` | `WW` |
+| fr | SIV (temporary) | 0/3 | `WW-518-JF` | `WW` |
+| fr | SIV (transit plates) | 0/3 | `HL-670-GQ` | `HL` |
+| fr | SIV (transit plates) | 0/3 | `HM-235-JD` | `HM` |
+| fr | SIV (transit plates) | 0/3 | `HM-624-XX` | `HM` |
+| fr | FNI (transit) | 0/3 | `644 TJW 92` | `644` |
+| fr | FNI (transit) | 0/3 | `733 TXH 75` | `733` |
+| fr | FNI (transit) | 0/3 | `791 TNE 92` | `791` |
 | gi | Regular car plates (G 1234 A) | 1/3 | `G 1267 G` | `G 1267` |
 | gi | Regular car plates (G 1234 A) | 1/3 | `G 4684 G` | `G 4684` |
 | il | Diplomatic | 0/3 | `33-232-21` | `0 33-232-21` |
@@ -82,24 +79,15 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | kz | Military (1993) | 0/3 | `2723 АЯ` | `2723` |
 | kz | Military (1993) | 0/3 | `2883 АЗ` | `2883` |
 | kz | Military (1993) | 0/3 | `8906 АВ` | `8906` |
-| li | Dealer (with "U") | 0/3 | `FL 116-U` | `FL 116` |
-| li | Dealer (with "U") | 0/3 | `FL 125-U` | `FL 125` |
-| li | Dealer (with "U") | 0/3 | `FL 213-U` | `FL 213` |
-| lv | Trailers | 0/3 | `B-362Y` | `BQ 362Y` |
-| lv | Trailers | 0/3 | `B-389E` | `BQ 389E` |
-| lv | Trailers | 0/3 | `B-906J` | `BQ 906J` |
-| lv | Dealer | 0/3 | `B 1122-6` | `BA 1122` |
-| lv | Dealer | 0/3 | `B 340-7` | `BA 340` |
-| lv | Dealer | 0/3 | `B 452-7` | `BA 452` |
 | ma | Regular plates | 0/3 | `3385|د|40` | `3385|د|40 أ` |
 | ma | Regular plates | 0/3 | `66555|د|1` | `66555|د|1 أ` |
 | ma | Regular plates | 0/3 | `70144|د|8` | `70144|د|8 أ` |
 | mc | Provisional | 0/3 | `1517 WW MC` | `1517 WW` |
 | mc | Provisional | 0/3 | `1725 WW MC` | `1725 WW` |
 | mc | Provisional | 0/3 | `2000 WW MC` | `2000 WW` |
-| me | Police | 0/3 | `P PG273` | `Single-row plate TZG273` |
-| me | Police | 0/3 | `P PG288` | `Single-row plate GSG288` |
-| me | Police | 0/3 | `P PG607` | `Single-row plate GSG607` |
+| me | Police | 0/3 | `P PG273` | `P TZG273` |
+| me | Police | 0/3 | `P PG288` | `P GSG288` |
+| me | Police | 0/3 | `P PG607` | `P GSG607` |
 | mn | Cars | 0/3 | `2294 БӨН` | `2294 - DIPLOMATIC MISSIONS Б` |
 | mn | Cars | 0/3 | `4067 УЕН` | `4067 - DIPLOMATIC MISSIONS У` |
 | mn | Cars | 0/3 | `9393 УБЦ` | `9393 - DIPLOMATIC MISSIONS У` |
@@ -147,19 +135,18 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 
 | Pays | Règle | Catégories | Vérifiées | À corriger | À trouver | Galerie vide | Non testables | Page d'ajout |
 |---|---|---|---|---|---|---|---|---|
-| de Germany | own | 16 | 11 | 4 |  |  | 1 | oui |
+| fr France | own | 17 | 14 | 3 |  |  |  | oui |
 | il Israel | generic | 8 | 5 | 3 |  |  |  | oui |
 | mn Mongolia | generic | 4 | 1 | 3 |  |  |  | oui |
 | ua Ukraine | own | 19 | 16 | 3 |  |  |  | oui |
 | cz Czech Republic | own | 22 | 18 | 2 |  | 1 | 1 | oui |
+| de Germany | own | 16 | 13 | 2 |  |  | 1 | oui |
 | kh Cambodia | generic | 7 | 4 | 2 |  | 1 |  | oui |
 | kz Kazakhstan | generic | 18 | 16 | 2 |  |  |  | oui |
-| lv Latvia | own | 9 | 7 | 2 |  |  |  | oui |
 | ru Russia | own | 23 | 19 | 2 |  |  | 2 | oui |
 | sc Seychelles | generic | 9 | 6 | 2 |  | 1 |  | oui |
 | th Thailand | own | 9 | 7 | 2 |  |  |  | oui |
-| am Armenia | generic | 8 | 7 | 1 |  |  |  | oui |
-| ax Åland (FI) | generic | 5 | 4 | 1 |  |  |  | oui |
+| ax Åland (FI) | own | 5 | 4 | 1 |  |  |  | oui |
 | ch Switzerland | generic | 11 | 10 | 1 |  |  |  | oui |
 | cy Cyprus | generic | 5 | 3 | 1 |  |  | 1 | oui |
 | dk Denmark | own | 8 | 7 | 1 |  |  |  | oui |
@@ -167,7 +154,6 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | ir Iran | own | 16 | 15 | 1 |  |  |  | oui |
 | it Italy | generic | 14 | 11 | 1 |  |  | 2 | oui |
 | kg Kyrgyzstan | own | 12 | 11 | 1 |  |  |  | oui |
-| li Liechtenstein | own | 9 | 8 | 1 |  |  |  | oui |
 | ma Morocco | generic | 2 | 1 | 1 |  |  |  | oui |
 | mc Monaco | generic | 4 | 3 | 1 |  |  |  | oui |
 | me Montenegro | own | 6 | 5 | 1 |  |  |  | oui |
@@ -177,6 +163,7 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | ad Andorra | generic | 5 | 5 |  |  |  |  | oui |
 | ae UAE | generic | 0 | 0 |  |  |  |  | oui |
 | al Albania | own | 4 | 4 |  |  |  |  | oui |
+| am Armenia | own | 8 | 8 |  |  |  |  | oui |
 | ar Argentina | generic | 6 | 6 |  |  |  |  | oui |
 | at Austria | generic | 9 | 9 |  |  |  |  | oui |
 | au Australia | generic | 0 | 0 |  |  |  |  | oui |
@@ -196,7 +183,6 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | eg Egypt | own | 4 | 4 |  |  |  |  | oui |
 | es Spain | own | 6 | 6 |  |  |  |  | oui |
 | fi Finland | generic | 9 | 9 |  |  |  |  | oui |
-| fr France | own | 17 | 17 |  |  |  |  | oui |
 | ge Georgia | generic | 12 | 10 |  |  |  | 2 | oui |
 | gg Guernsey (UK) | own | 3 | 3 |  |  |  |  | oui |
 | gr Greece | own | 16 | 16 |  |  |  |  | oui |
@@ -214,8 +200,10 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | kr South Korea | own | 3 | 3 |  |  |  |  | oui |
 | kw Kuwait | generic | 4 | 4 |  |  |  |  | oui |
 | la Laos | own | 9 | 9 |  |  |  |  | oui |
+| li Liechtenstein | own | 9 | 9 |  |  |  |  | oui |
 | lt Lithuania | generic | 9 | 9 |  |  |  |  | oui |
 | lu Luxembourg | generic | 5 | 5 |  |  |  |  | oui |
+| lv Latvia | own | 9 | 9 |  |  |  |  | oui |
 | md Moldova | own | 8 | 8 |  |  |  |  | oui |
 | mk North Macedonia | generic | 8 | 7 |  |  | 1 |  | oui |
 | mp Northern Mariana Islands (USA) | generic | 6 | 2 |  |  | 4 |  | oui |

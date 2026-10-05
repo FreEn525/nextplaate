@@ -122,7 +122,7 @@
     // what the site wrote itself: a menu or a field that is shown but disabled (any plate field), or a hidden field of the known kinds
     const siteFilled = [...document.querySelectorAll('input, select')]
       .filter(el => el.id !== 'ctype' && el.id !== 'drop_2' && (el.disabled && el.offsetParent !== null
-        ? isPlateField(el) || /^(trz|tx)$|nomer|fixed|special|police|^dop$/i.test(el.id || el.name || '')
+        ? isPlateField(el) || /^(trz|tx)$|nomer|fixed|special|police|arm|^dop$/i.test(el.id || el.name || '')
         : el.tagName !== 'SELECT' && el.offsetParent === null && /^(trz|tx)$|nomer|let|digit|trl|^dig|fixed|special|^b\d/i.test(el.id || el.name || '')))
       .map(filled).filter(Boolean);
     // the plate starts with what the site wrote (the G of "G 1267 G"): that first piece is not typed; a later equal piece is

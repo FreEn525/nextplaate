@@ -55,25 +55,9 @@
    "failed": []
   },
   "High officials": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ARM 025",
-     "read": "ARM",
-     "status": "not-fit"
-    },
-    {
-     "plate": "ARM 035",
-     "read": "ARM",
-     "status": "not-fit"
-    },
-    {
-     "plate": "ARM 160",
-     "read": "ARM",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Organizations": {
    "ok": 3,
@@ -192,25 +176,9 @@
    "failed": []
   },
   "Cars (ÅLA 1234)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ÅLA 4642",
-     "read": "Å L L A4642",
-     "status": "wrong"
-    },
-    {
-     "plate": "ÅLA 5168",
-     "read": "Å L L A5168",
-     "status": "wrong"
-    },
-    {
-     "plate": "ÅLA 7020",
-     "read": "Å L L A7020",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Provisional (ÅF 1234)": {
    "ok": 3,
@@ -223,9 +191,20 @@
    "failed": []
   },
   "Vanity Plates": {
-   "ok": 3,
+   "ok": 1,
    "total": 3,
-   "failed": []
+   "failed": [
+    {
+     "plate": "BOMAN2",
+     "read": "BOM",
+     "status": "wrong"
+    },
+    {
+     "plate": "ÅLAND 2",
+     "read": "ÅLA",
+     "status": "wrong"
+    }
+   ]
   }
  },
  "az": {

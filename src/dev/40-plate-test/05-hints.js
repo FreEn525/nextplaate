@@ -12,6 +12,7 @@
     'lv|Diplomatic': { field: 'nomer' },
     'lv|Vanity Plates': { field: 'nomer' },
     'rs|Trailers': { order: ['b1', 'b2', 'digit2', 'region2'] },
+    'ax|Cars (ÅLA 1234)': { prefix: 'ÅL' },
     'li|*': { drop: ['FL'] },
     'li|Dealer (with "U")': { drop: ['FL', 'U'] },
     'jp|*': { right: true },
