@@ -12,6 +12,7 @@
     'rs|Trailers': { order: ['b1', 'b2', 'digit2', 'region2'] },
     'li|*': { drop: ['FL'] },
     'jp|*': { right: true },
+    'rs|Diplomatic': { order: ['region1', 'dip'] },
     'kg|*': { order: ['region', 'nomerpl'] },
     'kg|Diplomatic': { order: null },
     'ir|*': { chars: 'before' },

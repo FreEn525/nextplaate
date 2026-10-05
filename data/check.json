@@ -3366,17 +3366,17 @@
    "failed": [
     {
      "plate": "P PG273",
-     "read": "Single-row plate PGPG273",
+     "read": "Single-row plate TZG273",
      "status": "wrong"
     },
     {
      "plate": "P PG288",
-     "read": "Single-row plate PGPG288",
+     "read": "Single-row plate TZG288",
      "status": "wrong"
     },
     {
      "plate": "P PG607",
-     "read": "Single-row plate PGPG607",
+     "read": "Single-row plate TZG607",
      "status": "wrong"
     }
    ]
@@ -3634,25 +3634,9 @@
  },
  "pl": {
   "1976 year system": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ROK 8992",
-     "read": "RO 8992",
-     "status": "wrong"
-    },
-    {
-     "plate": "WGW 823N",
-     "read": "WG 823N",
-     "status": "wrong"
-    },
-    {
-     "plate": "WIC 8729",
-     "read": "WI 8729",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Authorities": {
    "ok": 3,
@@ -3660,25 +3644,9 @@
    "failed": []
   },
   "Diplomatic": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "W 016600",
-     "read": "016",
-     "status": "wrong"
-    },
-    {
-     "plate": "W 028011",
-     "read": "028",
-     "status": "wrong"
-    },
-    {
-     "plate": "W 110500",
-     "read": "110",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Electric vehicles": {
    "ok": 3,
@@ -3701,25 +3669,9 @@
    "failed": []
   },
   "Provisional and testing": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "B2 5891",
-     "read": "B 5891",
-     "status": "wrong"
-    },
-    {
-     "plate": "C3 4089",
-     "read": "C 4089",
-     "status": "wrong"
-    },
-    {
-     "plate": "S0 3853",
-     "read": "S 3853",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Regular car plates": {
    "ok": 3,
@@ -3732,46 +3684,14 @@
    "failed": []
   },
   "Sportcars": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "K0 069U",
-     "read": "K 069U",
-     "status": "wrong"
-    },
-    {
-     "plate": "K0 414U",
-     "read": "K 414U",
-     "status": "wrong"
-    },
-    {
-     "plate": "W8 751Y",
-     "read": "W 751Y",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Vanity Plates": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "G0 ARTY",
-     "read": "G ARTY",
-     "status": "wrong"
-    },
-    {
-     "plate": "P3 KOTEK",
-     "read": "P KOTEK",
-     "status": "wrong"
-    },
-    {
-     "plate": "P5 ATS",
-     "read": "P ATS",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   }
  },
  "ps": {
@@ -3990,151 +3910,39 @@
    "failed": []
   },
   "Diplomatic": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "BG 162-A-017",
-     "read": "BG BM",
-     "status": "not-fit"
-    },
-    {
-     "plate": "BG 80-A-010",
-     "read": "BG BM",
-     "status": "not-fit"
-    },
-    {
-     "plate": "BG 86-A-009",
-     "read": "BG BM",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Military": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "K-5605",
-     "read": "BG BM",
-     "status": "wrong"
-    },
-    {
-     "plate": "P-1864",
-     "read": "BG BM",
-     "status": "wrong"
-    },
-    {
-     "plate": "P-2019",
-     "read": "BG BM",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Mopeds": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "BG 223-09",
-     "read": "BG 223 09-BM",
-     "status": "wrong"
-    },
-    {
-     "plate": "BG 265-09",
-     "read": "BG 265 09-BM",
-     "status": "wrong"
-    },
-    {
-     "plate": "LE 037-81",
-     "read": "LE 037 81-BM",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Motorcycles": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "BG 64-565",
-     "read": "BG 64 565-BM",
-     "status": "wrong"
-    },
-    {
-     "plate": "BG 66-711",
-     "read": "BG 66 711-BM",
-     "status": "wrong"
-    },
-    {
-     "plate": "BG 70-493",
-     "read": "BG 70 493-BM",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Oldtimers": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "BG OT-190",
-     "read": "BG BM",
-     "status": "wrong"
-    },
-    {
-     "plate": "BG OT-241",
-     "read": "BG BM",
-     "status": "wrong"
-    },
-    {
-     "plate": "ČA OT-003",
-     "read": "ČA BM",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Police": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "П 009-299",
-     "read": "ČA П-BM",
-     "status": "not-fit"
-    },
-    {
-     "plate": "П 009-502",
-     "read": "ČA П-BM",
-     "status": "not-fit"
-    },
-    {
-     "plate": "П 024-923",
-     "read": "ČA П-BM",
-     "status": "not-fit"
-    }
-   ]
+   "failed": []
   },
   "Special machinery": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "BG AEA-96",
-     "read": "BG BM",
-     "status": "wrong"
-    },
-    {
-     "plate": "BG AEC-49",
-     "read": "BG BM",
-     "status": "wrong"
-    },
-    {
-     "plate": "BG AEC-58",
-     "read": "BG BM",
-     "status": "wrong"
-    }
-   ]
+   "failed": []
   },
   "Trailers": {
    "ok": 1,
@@ -4542,17 +4350,17 @@
     {
      "plate": "EE 10228",
      "read": "1",
-     "status": "not-fit"
+     "status": "wrong"
     },
     {
      "plate": "ZZ 44238",
      "read": "2",
-     "status": "not-fit"
+     "status": "wrong"
     },
     {
      "plate": "ZZ 72047",
      "read": "2",
-     "status": "not-fit"
+     "status": "wrong"
     }
    ]
   },
@@ -4578,17 +4386,17 @@
     {
      "plate": "67-38966",
      "read": "-67",
-     "status": "not-fit"
+     "status": "wrong"
     },
     {
      "plate": "71-00089",
      "read": "-71",
-     "status": "not-fit"
+     "status": "wrong"
     },
     {
      "plate": "72-56208",
      "read": "-72",
-     "status": "not-fit"
+     "status": "wrong"
     }
    ]
   },
@@ -4613,18 +4421,18 @@
    "failed": [
     {
      "plate": "P-00040",
-     "read": "",
-     "status": "no-field"
+     "read": "P",
+     "status": "wrong"
     },
     {
      "plate": "P-00502",
-     "read": "",
-     "status": "no-field"
+     "read": "P",
+     "status": "wrong"
     },
     {
      "plate": "P-00540",
-     "read": "",
-     "status": "no-field"
+     "read": "P",
+     "status": "wrong"
     }
    ]
   },

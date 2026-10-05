@@ -78,7 +78,7 @@ def set_category(page, label):
 
 # true when the form shows at least one field to type the plate in (the look of the plate, "fon"/"font", does not count)
 SHOWN_FIELDS_JS = r"""() => [...document.querySelectorAll('input, select')].some(el =>
-  /nomer|let|digit|region|^b\d|^d\d|^p\d|dip|drop|^dig|trl|letter|^code$|^hiragana$|^mm$|^moto$|^spec$|^gov$|^tt95$|^mil_b\d$|^el$|^tx$|^trz$|^nonr$/i.test(el.id || el.name || '') &&
+  /nomer|let|digit|region|^b\d|^d\d|^p\d|dip|drop|^dig|trl|letter|^code$|^hiragana$|^mm$|^moto$|^spec$|^gov$|^tt95$|^police$|^mil_b\d$|^el$|^tx$|^trz$|^nonr$/i.test(el.id || el.name || '') &&
   !/^(ctype|drop_2)$/.test(el.id) && el.offsetParent !== null && !el.disabled)"""
 
 
