@@ -101,7 +101,7 @@
       }
       case 'ua': return joinParts([selText('region1'), fieldVal('digit1'), fieldVal('b1') + fieldVal('b2')]);   // Ukraine: AA 0001 AA
       case 'lv': return joinParts([selText('b1') + selText('b2'), fieldVal('digit')]);   // Latvia: AB 1234
-      case 'li': return joinParts(['FL', fieldVal('digit')]);       // Liechtenstein: FL 12345 (the FL is fixed)
+      case 'li': return joinParts(['FL', fieldVal('digit').replace(/^FL\s*/i, '')]);   // Liechtenstein: FL 12345 (the FL is fixed; the digit field may already hold it)
       case 'ru': {                                                  // Russia: А 001 АА 77. Only the menus shown for this type (the site's disru20 function)
         const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };
         return joinParts([menu('b1') + menu('b2'), shownVal('digit'), menu('b3') + menu('b4'), menu('region')]);
@@ -149,6 +149,11 @@
       case 'dk': {                                                  // Denmark: vanity plates are seven boxes, one character each (MARIAKJ)
         if (fieldVal('ctype') === '4') return ['b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7'].map(shownVal).join('').toUpperCase();
         return genericPlate();
+      }
+      case 'pl': {                                                  // Poland: CNA 32756 = region menu (only when shown) + nomerpl
+        const el = document.getElementById('region');
+        const region = el && el.offsetParent !== null ? selText('region') : '';
+        return joinParts([region, fieldVal('nomerpl').toUpperCase()]);
       }
       case 'dz': return fieldVal('nomer').replace(/\s+/g, ' ');     // Algeria: the groups are typed as the site shows them (271201 00 16)
       default:
