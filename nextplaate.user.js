@@ -350,7 +350,10 @@
         const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };
         return joinParts([menu('b1') + menu('b2'), shownVal('digit'), menu('b3') + menu('b4'), menu('region')]);
       }
-      case 'uz': return joinParts([selText('region'), fieldVal('b1'), fieldVal('dig1'), fieldVal('b2')]);   // Uzbekistan: PP A 123 AA
+      case 'uz': {                                                  // Uzbekistan: PP A 123 AA (cars); motorcycles, trailers, special machinery: 010 LA 50 (digits, letters, region)
+        if (['5', '6', '7', '8'].includes(fieldVal('ctype'))) return joinParts([fieldVal('dig3'), fieldVal('b4'), selText('region')]);
+        return joinParts([selText('region'), fieldVal('b1'), fieldVal('dig1'), fieldVal('b2')]);
+      }
       case 'gr': {                                                  // Greece: IAZ 6038 (cars). 1972 system (9): IN-4662; mopeds (12): ZHE 3860. Only the shown fields
         const ctype = fieldVal('ctype');
         if (ctype === '9') return shownVal('let') + '-' + shownVal('digit');
