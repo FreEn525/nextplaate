@@ -269,6 +269,16 @@
   }
 
   // Fills the missing plates of every country, one after the other (same pauses and resume as the other runs)
+  // The categories of a country from the search page kept by the capture (no request to the site); null if not kept
+  function ptTypesKept(cc, all) {
+    const html = all['search:' + cc];
+    if (!html) return null;
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const sel = doc.querySelector('select[name="ctype"]');
+    if (!sel) return null;
+    return [...sel.options].filter(o => o.value).map(o => ({ code: o.value, label: o.textContent.trim() }));
+  }
+
   // Only the countries that still have a category without a confirmed plate go in the run.
   // The check reads the search page of each country (one request each), so the upload pages are not opened for nothing.
   async function ptStartFill() {
@@ -277,8 +287,8 @@
     const todo = [];
     for (const cc of CAPTURE_COUNTRIES) {
       if (all['plates-skip:' + cc]) continue;                    // no upload page for this country
-      let types;
-      try { types = await ptSearchTypes(cc); } catch (e) { todo.push(cc); continue; }   // unknown: keep it in the run
+      const types = ptTypesKept(cc, all);
+      if (!types) { todo.push(cc); continue; }                   // no saved search page: it stays in the run
       const confirmed = new Set(dbAll.filter(r => r.country === cc && r.count > 0).map(r => r.category));
       if (types.some(t => !confirmed.has(t.label))) todo.push(cc);
     }
@@ -333,7 +343,7 @@
     const cc = here.country;
     const log = [];
     const row = (category, shown, read, status, detail) => log.push({ category, shown: shown || '', read: read || '', status, detail: detail || '' });
-    const types = await ptSearchTypes(cc);
+    const types = ptTypesKept(cc, await capAll()) || await ptSearchTypes(cc);
     const known = await dbLoad(cc);
     const confirmed = new Set(known.filter(r => r.count > 0).map(r => r.category));
     const missing = types.filter(t => !confirmed.has(t.label));
