@@ -1,1 +1,626 @@
-[]
+[
+  {
+    "category": "Agricultural trailers (2021 system)",
+    "plate": "LGD-03-G",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:25.303Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Agricultural trailers (2021 system)",
+    "plate": "LJB-23-T",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:25.303Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Agricultural trailers (2021 system)",
+    "plate": "LPX-13-K",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:25.303Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Agricultural vehicles",
+    "plate": "T-25-DLK",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:50.373Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Agricultural vehicles",
+    "plate": "T-51-DVD",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:50.373Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Agricultural vehicles",
+    "plate": "TDB-51-F",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:50.373Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Allied Joint Force Command Brunssum",
+    "plate": "08-SC-23",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:02.264Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Allied Joint Force Command Brunssum",
+    "plate": "AF-DP-99",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:02.264Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Allied Joint Force Command Brunssum",
+    "plate": "RC-40-28",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:02.264Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Border Traffic (1953-2021 system)",
+    "plate": "01-09-GV",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:29.324Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Border Traffic (1953-2021 system)",
+    "plate": "1-GV-349",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:29.324Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Border Traffic (1953-2021 system)",
+    "plate": "83-GV-29",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:29.324Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars",
+    "plate": "T-127-BB",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:22.898Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars",
+    "plate": "T-139-SP",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:22.898Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars",
+    "plate": "T-949-XR",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:22.898Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Commercial vehicles",
+    "plate": "BZ-84-XT",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:42.305Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Commercial vehicles",
+    "plate": "MB-54-12",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:42.305Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Commercial vehicles",
+    "plate": "NJ-17-32",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:42.305Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Dealer",
+    "plate": "0-HA-323",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:46.345Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Dealer",
+    "plate": "5-HA-963",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:46.345Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Dealer",
+    "plate": "74-96-HH",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:46.345Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Dealer (Agricultural)",
+    "plate": "LH-04-24",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:33.266Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Dealer (Agricultural)",
+    "plate": "LH-06-29",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:33.266Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Dealer (Agricultural)",
+    "plate": "LH-08-08",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:33.266Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Dealer (Trailers)",
+    "plate": "OA-18-68",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:37.274Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Dealer (Trailers)",
+    "plate": "OA-44-29",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:37.275Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Dealer (Trailers)",
+    "plate": "OA-87-45",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:37.274Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "68-CD-62",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:34.322Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "CD-14-94",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:34.322Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic",
+    "plate": "CD-23-04",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:34.322Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic Justice Corps (CDJ)",
+    "plate": "CDJ-362",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:01.409Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic Justice Corps (CDJ)",
+    "plate": "CDJ-416",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:01.409Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Diplomatic Justice Corps (CDJ)",
+    "plate": "CDJ-422",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:01.409Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Except vehicles / Oldtimers",
+    "plate": "25-28-ZZ",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:54.266Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Except vehicles / Oldtimers",
+    "plate": "28-69-ZZ",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:54.266Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Except vehicles / Oldtimers",
+    "plate": "ZZ-92-10",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:54.266Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Heavy Commercial Vehicles (1994 system)",
+    "plate": "13-BVS-5",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:13.291Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Heavy Commercial Vehicles (1994 system)",
+    "plate": "23-BSK-1",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:13.291Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Heavy Commercial Vehicles (1994 system)",
+    "plate": "BB-576-G",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:13.291Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Imported oldtimers (commercial vehicles)",
+    "plate": "BE-21-07",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:49.274Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Imported oldtimers (commercial vehicles)",
+    "plate": "BH-01-68",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:49.274Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Imported oldtimers (commercial vehicles)",
+    "plate": "BH-11-33",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:49.274Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Imported oldtimers (motorcycles)",
+    "plate": "ZF-59-98",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:45.360Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Imported oldtimers (motorcycles)",
+    "plate": "ZF-66-15",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:45.359Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Imported oldtimers (motorcycles)",
+    "plate": "ZF-74-03",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:45.360Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Imported youngtimers / oldtimers",
+    "plate": "04-YE-62",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:06.279Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Imported youngtimers / oldtimers",
+    "plate": "AR-72-30",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:06.279Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Imported youngtimers / oldtimers",
+    "plate": "DR-32-12",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:06.279Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Light Commercial Vehicles (1994 system)",
+    "plate": "16-VDK-6",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:17.284Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Light Commercial Vehicles (1994 system)",
+    "plate": "55-VG-JF",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:17.284Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Light Commercial Vehicles (1994 system)",
+    "plate": "V-34-FDV",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:17.284Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Light electric vehicles and special mopeds",
+    "plate": "E-30-BFP",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:57.362Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Light electric vehicles and special mopeds",
+    "plate": "E-32-BGR",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:57.362Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Light electric vehicles and special mopeds",
+    "plate": "E-72-BDN",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:57.362Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military",
+    "plate": "06-DMZ-3",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:58.359Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military",
+    "plate": "96-DMJ-4",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:58.358Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military",
+    "plate": "D-449-MB",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:58.358Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Mopeds",
+    "plate": "DSG-06-H",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:09.313Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Mopeds",
+    "plate": "FHG-76-J",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:09.313Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Mopeds",
+    "plate": "FJZ-79-G",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:09.313Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "68-MR-PP",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:26.254Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "84-MJ-SN",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:26.254Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "XU-20-60",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:26.254Z",
+    "source": "gallery"
+  },
+  {
+    "category": "One-day registration plate",
+    "plate": "E-02-17",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:04.285Z",
+    "source": "gallery"
+  },
+  {
+    "category": "One-day registration plate",
+    "plate": "L-30-14",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:04.285Z",
+    "source": "gallery"
+  },
+  {
+    "category": "One-day registration plate",
+    "plate": "L-77-60",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:04.285Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Royal Household",
+    "plate": "AA-49",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:53.258Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Royal Household",
+    "plate": "AA-59",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:53.258Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Royal Household",
+    "plate": "AA-86",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:53.258Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Semi-trailers",
+    "plate": "OS-87-RD",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:21.284Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Semi-trailers",
+    "plate": "OV-11-FS",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:21.284Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Semi-trailers",
+    "plate": "OV-38-GD",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:19:21.284Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Taxi",
+    "plate": "JR-742-L",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:30.379Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Taxi",
+    "plate": "KPN-61-D",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:30.379Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Taxi",
+    "plate": "KRX-42-S",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:30.379Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers",
+    "plate": "33-WPD-7",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:38.324Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers",
+    "plate": "68-57-WR",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:38.324Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers",
+    "plate": "WB-84-RZ",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:38.325Z",
+    "source": "gallery"
+  }
+]

@@ -1,1 +1,98 @@
-[]
+[
+  {
+    "category": "A(BC) 1(234)",
+    "plate": "AJX 9386",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:16:51.804Z",
+    "source": "gallery"
+  },
+  {
+    "category": "A(BC) 1(234)",
+    "plate": "ALR 1102",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:16:51.804Z",
+    "source": "gallery"
+  },
+  {
+    "category": "A(BC) 1(234)",
+    "plate": "BPH 5261",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:16:51.804Z",
+    "source": "gallery"
+  },
+  {
+    "category": "AB(C) 1(234) D",
+    "plate": "SSA 1024 A",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:16:54.731Z",
+    "source": "gallery"
+  },
+  {
+    "category": "AB(C) 1(234) D",
+    "plate": "SU 6 K",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:16:54.731Z",
+    "source": "gallery"
+  },
+  {
+    "category": "AB(C) 1(234) D",
+    "plate": "WB 3818 X",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:16:54.731Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military (Z(A) 1(234))",
+    "plate": "ZD 7",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:02.315Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military (Z(A) 1(234))",
+    "plate": "ZD 7175",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:02.316Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Military (Z(A) 1(234))",
+    "plate": "ZD 8212",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:02.316Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Taxi (HAB 1(234))",
+    "plate": "HBB 7880",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:16:58.376Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Taxi (HAB 1(234))",
+    "plate": "HJA 6668",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:16:58.376Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Taxi (HAB 1(234))",
+    "plate": "HWE 9748",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:16:58.376Z",
+    "source": "gallery"
+  }
+]

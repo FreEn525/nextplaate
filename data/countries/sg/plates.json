@@ -1,1 +1,314 @@
-[]
+[
+  {
+    "category": "Authorities",
+    "plate": "QY 98 K",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:51.273Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Authorities",
+    "plate": "QY 113 A",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:51.273Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Authorities",
+    "plate": "QY 452 X",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:51.273Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Buses",
+    "plate": "PC 9090 A",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:23.316Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Buses",
+    "plate": "PD 2391 Y",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:23.316Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Buses",
+    "plate": "PZ 1473 K",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:23.316Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Commercial vehicles",
+    "plate": "GBE 14 K",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:12.339Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Commercial vehicles",
+    "plate": "GBN 392 X",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:12.339Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Commercial vehicles",
+    "plate": "QB 8888 R",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:12.339Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Exceptional vehicles",
+    "plate": "XD 5279 A",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:29.411Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Exceptional vehicles",
+    "plate": "XE 3459 E",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:29.411Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Exceptional vehicles",
+    "plate": "XE 6069 R",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:29.411Z",
+    "source": "gallery"
+  },
+  {
+    "category": "For research and development",
+    "plate": "RD 3203 C",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:43.260Z",
+    "source": "gallery"
+  },
+  {
+    "category": "For research and development",
+    "plate": "RD 3263 D",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:43.260Z",
+    "source": "gallery"
+  },
+  {
+    "category": "For research and development",
+    "plate": "RD 6114 G",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:43.260Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "FBF 9578 K",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:20.303Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "FBN 6798 U",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:20.302Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles",
+    "plate": "FBU 5555 Z",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:20.303Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police",
+    "plate": "QX 1928 P",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:35.504Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police",
+    "plate": "QX 3250 Y",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:35.504Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Police",
+    "plate": "TP 395 P",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:35.504Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Private owners",
+    "plate": "SNP 7178 A",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:08.339Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Private owners",
+    "plate": "SNX 7610 B",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:08.339Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Private owners",
+    "plate": "SPB 9777 H",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:08.339Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Restricted Use",
+    "plate": "RU 4289 J",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:39.286Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Restricted Use",
+    "plate": "RU 4649 D",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:39.286Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Restricted Use",
+    "plate": "RU 4672 K",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:39.286Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "WA 4006 E",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:47.250Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "WD 2459 D",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:47.250Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Special machinery",
+    "plate": "WD 7626 E",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:47.250Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Taxi / Rentals",
+    "plate": "SHC 179 H",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:16.325Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Taxi / Rentals",
+    "plate": "SHC 358 H",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:16.325Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Taxi / Rentals",
+    "plate": "SHD 899 H",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:16.325Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers",
+    "plate": "TRD 3414 J",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:32.401Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers",
+    "plate": "TRD 9573 U",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:32.401Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers",
+    "plate": "TRE 484 Y",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:32.401Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trucks",
+    "plate": "YN 8941 L",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:26.362Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trucks",
+    "plate": "YP 3209 R",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:26.362Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trucks",
+    "plate": "YR 5088 Z",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:20:26.362Z",
+    "source": "gallery"
+  }
+]

@@ -11,12 +11,12 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | Pays du site | 96 | |
 | Pays capturés (pages sauvegardées) | 96 | 100 % |
 | **Pays non capturés** | **0** | |
-| Pays avec une règle propre | 42 sur 96 | |
+| Pays avec une règle propre | 43 sur 96 | |
 | Catégories (pays capturés) | 829 | |
-| Vérifiées | 705 | 85 % |
+| Vérifiées | 768 | 93 % |
 | **À corriger** | **39** | 5 % |
-| **À trouver** (aucune plaque connue) | **64** | 8 % |
-| Galerie vide sur le site (aucune plaque n'existe) | 21 | 3 % |
+| **À trouver** (aucune plaque connue) | **0** | 0 % |
+| Galerie vide sur le site (aucune plaque n'existe) | 22 | 3 % |
 | Sans champ de plaque dans le formulaire ou sans page d'ajout | 0 | 0 % |
 
 ## À corriger
@@ -132,10 +132,6 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 
 | Pays | Règle | Catégories | Vérifiées | À corriger | À trouver | Galerie vide | Non testables | Page d'ajout |
 |---|---|---|---|---|---|---|---|---|
-| nl Netherlands | generic | 27 | 0 |  | 27 |  |  | oui |
-| mx Mexico | generic | 20 | 0 |  | 20 |  |  | oui |
-| sg Singapore | generic | 13 | 0 |  | 13 |  |  | oui |
-| my Malaysia | generic | 4 | 0 |  | 4 |  |  | oui |
 | il Israel | generic | 8 | 5 | 3 |  |  |  | oui |
 | mn Mongolia | generic | 4 | 1 | 3 |  |  |  | oui |
 | ru Russia | own | 23 | 20 | 3 |  |  |  | oui |
@@ -209,6 +205,9 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | mk North Macedonia | generic | 8 | 7 |  |  | 1 |  | oui |
 | mp Northern Mariana Islands (USA) | generic | 6 | 2 |  |  | 4 |  | oui |
 | mt Malta | generic | 6 | 6 |  |  |  |  | oui |
+| mx Mexico | generic | 20 | 20 |  |  |  |  | oui |
+| my Malaysia | generic | 4 | 4 |  |  |  |  | oui |
+| nl Netherlands | generic | 27 | 26 |  |  | 1 |  | oui |
 | no Norway | generic | 12 | 12 |  |  |  |  | oui |
 | nz New Zealand | generic | 5 | 5 |  |  |  |  | oui |
 | pl Poland | own | 12 | 12 |  |  |  |  | oui |
@@ -218,6 +217,7 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | rs Serbia | own | 10 | 10 |  |  |  |  | oui |
 | sa Saudi Arabia | own | 6 | 6 |  |  |  |  | oui |
 | se Sweden | generic | 8 | 8 |  |  |  |  | oui |
+| sg Singapore | own | 13 | 13 |  |  |  |  | oui |
 | sm San Marino | generic | 13 | 13 |  |  |  |  | oui |
 | su USSR | generic | 15 | 15 |  |  |  |  | oui |
 | tj Tajikistan | own | 10 | 10 |  |  |  |  | oui |
@@ -233,90 +233,6 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 
 Pour chacune : trouver une plaque réelle sur le site, la saisir, puis relancer le contrôle. Le remplissage du build dev (`Fill missing plates`) le fait.
 
-<details><summary><b>mx</b> : 20</summary>
-
-- Cars (AAA-00-00)
-- Cars (AAA-000-A)
-- Cars (000-AAA)
-- Cars (A00-AAA)
-- Trucks (AA-0000-A)
-- Trucks (AA-00-000)
-- Trucks (00-00-AA)
-- Trucks (A-000-AA)
-- Trailers (0-AA-0000)
-- Trailers (0AA-000-A)
-- Trailers (A-00-00)
-- Border zone (A00-AAA-0)
-- Border zone (000-AAA-0)
-- Federal (00-AA-0A)
-- Federal (00-00-AA)
-- Federal (000-AA-0)
-- Motorcycles (00AAA0)
-- Motorcycles (AAA0A)
-- Oldtimers (0AA-00)
-- Dealer (0-AA-00)
-
-</details>
-
-<details><summary><b>my</b> : 4</summary>
-
-- A(BC) 1(234)
-- AB(C) 1(234) D
-- Taxi (HAB 1(234))
-- Military (Z(A) 1(234))
-
-</details>
-
-<details><summary><b>nl</b> : 27</summary>
-
-- Cars
-- Motorcycles
-- Taxi
-- Diplomatic
-- Trailers
-- Commercial vehicles
-- Dealer
-- Agricultural vehicles
-- Except vehicles / Oldtimers
-- Military
-- Allied Joint Force Command Brunssum
-- Imported youngtimers / oldtimers
-- Mopeds
-- Heavy Commercial Vehicles (1994 system)
-- Light Commercial Vehicles (1994 system)
-- Semi-trailers
-- Agricultural trailers (2021 system)
-- Border Traffic (1953-2021 system)
-- Dealer (Agricultural)
-- Dealer (Trailers)
-- Dealer (Scooters)
-- Imported oldtimers (motorcycles)
-- Imported oldtimers (commercial vehicles)
-- Royal Household
-- Light electric vehicles and special mopeds
-- Diplomatic Justice Corps (CDJ)
-- One-day registration plate
-
-</details>
-
-<details><summary><b>sg</b> : 13</summary>
-
-- Private owners
-- Commercial vehicles
-- Taxi / Rentals
-- Motorcycles
-- Buses
-- Trucks
-- Exceptional vehicles
-- Trailers
-- Police
-- Restricted Use
-- For research and development
-- Special machinery
-- Authorities
-
-</details>
-
 ## Galerie vide sur le site
 
 Aucune photo dans la galerie de ces catégories : il n'y a pas de plaque à utiliser. À revérifier de temps en temps.
@@ -328,6 +244,7 @@ Aucune photo dans la galerie de ces catégories : il n'y a pas de plaque à util
 - **kh** : Regular plates
 - **mk** : Vanity Plates
 - **mp** : Heavy Equipment, Vanity Plates, Amateur Radio, Motorcycles
+- **nl** : Dealer (Scooters)
 - **sc** : Dealer
 - **sk** : Sportcars (S(A) 123AB), Agricultural vehicles (F(A) 123AB)
 - **va** : Dealer (PROVA SCV)

@@ -599,8 +599,8 @@
     "upload": true,
     "uploadTypes": 0,
     "searchCategories": 20,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 56,
+    "categoriesWithPlate": 20
   },
   {
     "code": "my",
@@ -608,8 +608,8 @@
     "upload": true,
     "uploadTypes": 0,
     "searchCategories": 4,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 12,
+    "categoriesWithPlate": 4
   },
   {
     "code": "nl",
@@ -617,8 +617,8 @@
     "upload": true,
     "uploadTypes": 0,
     "searchCategories": 27,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 78,
+    "categoriesWithPlate": 26
   },
   {
     "code": "no",
@@ -734,8 +734,8 @@
     "upload": true,
     "uploadTypes": 0,
     "searchCategories": 13,
-    "plates": 0,
-    "categoriesWithPlate": 0
+    "plates": 39,
+    "categoriesWithPlate": 13
   },
   {
     "code": "si",

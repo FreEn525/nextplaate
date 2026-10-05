@@ -3065,6 +3065,312 @@
    "failed": []
   }
  },
+ "mx": {
+  "Border zone (000-AAA-0)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Border zone (A00-AAA-0)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Cars (000-AAA)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Cars (A00-AAA)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Cars (AAA-00-00)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Cars (AAA-000-A)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Dealer (0-AA-00)": {
+   "ok": 1,
+   "total": 1,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Federal (00-00-AA)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Federal (00-AA-0A)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Federal (000-AA-0)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Motorcycles (00AAA0)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Motorcycles (AAA0A)": {
+   "ok": 1,
+   "total": 1,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Oldtimers (0AA-00)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Trailers (0-AA-0000)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Trailers (0AA-000-A)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Trailers (A-00-00)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Trucks (00-00-AA)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Trucks (A-000-AA)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Trucks (AA-00-000)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Trucks (AA-0000-A)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  }
+ },
+ "my": {
+  "A(BC) 1(234)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "AB(C) 1(234) D": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Military (Z(A) 1(234))": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Taxi (HAB 1(234))": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  }
+ },
+ "nl": {
+  "Agricultural trailers (2021 system)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Agricultural vehicles": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Allied Joint Force Command Brunssum": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Border Traffic (1953-2021 system)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Cars": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Commercial vehicles": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Dealer": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Dealer (Agricultural)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Dealer (Trailers)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Diplomatic": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Diplomatic Justice Corps (CDJ)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Except vehicles / Oldtimers": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Heavy Commercial Vehicles (1994 system)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Imported oldtimers (commercial vehicles)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Imported oldtimers (motorcycles)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Imported youngtimers / oldtimers": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Light Commercial Vehicles (1994 system)": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Light electric vehicles and special mopeds": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Military": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Mopeds": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Motorcycles": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "One-day registration plate": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Royal Household": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Semi-trailers": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Taxi": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Trailers": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  }
+ },
  "no": {
   "1913-1971 - system": {
    "ok": 3,
@@ -3709,6 +4015,86 @@
    "ok": 3,
    "total": 3,
    "failed": []
+  }
+ },
+ "sg": {
+  "Authorities": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Buses": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Commercial vehicles": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Exceptional vehicles": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "For research and development": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Motorcycles": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Police": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Private owners": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Restricted Use": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Special machinery": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Taxi / Rentals": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Trailers": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
+  },
+  "Trucks": {
+   "ok": 3,
+   "total": 3,
+   "failed": [],
+   "via": "no-menu"
   }
  },
  "si": {

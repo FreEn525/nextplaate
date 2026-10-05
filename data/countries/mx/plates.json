@@ -1,1 +1,450 @@
-[]
+[
+  {
+    "category": "Border zone (000-AAA-0)",
+    "plate": "368-PNJ-6",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:50.267Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Border zone (000-AAA-0)",
+    "plate": "386-SKE-9",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:50.267Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Border zone (000-AAA-0)",
+    "plate": "605-RBU-2",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:50.267Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Border zone (A00-AAA-0)",
+    "plate": "A82-NVH-7",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:46.256Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Border zone (A00-AAA-0)",
+    "plate": "D19-NWL-4",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:46.256Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Border zone (A00-AAA-0)",
+    "plate": "D69-NWK-6",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:46.256Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (000-AAA)",
+    "plate": "312-SVG",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:13.263Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (000-AAA)",
+    "plate": "330-RDG",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:13.263Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (000-AAA)",
+    "plate": "834-YMU",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:13.263Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (A00-AAA)",
+    "plate": "A48-BGU",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:17.259Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (A00-AAA)",
+    "plate": "D64-ABX",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:17.259Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (A00-AAA)",
+    "plate": "Z21-AWU",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:17.259Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (AAA-00-00)",
+    "plate": "GWF-10-00",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:06.327Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (AAA-00-00)",
+    "plate": "JKS-31-13",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:06.327Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (AAA-00-00)",
+    "plate": "LWX-30-90",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:06.327Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (AAA-000-A)",
+    "plate": "MBG-133-A",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:10.259Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (AAA-000-A)",
+    "plate": "VVP-804-C",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:10.259Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Cars (AAA-000-A)",
+    "plate": "XZV-812-C",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:10.259Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Dealer (0-AA-00)",
+    "plate": "2-YT-30",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:18.383Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Federal (00-00-AA)",
+    "plate": "22-93-ZR",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:58.328Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Federal (00-00-AA)",
+    "plate": "23-72-ZP",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:58.328Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Federal (00-00-AA)",
+    "plate": "73-93-ZP",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:58.328Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Federal (000-AA-0)",
+    "plate": "021-JV-2",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:02.260Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Federal (000-AA-0)",
+    "plate": "322-HR-8",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:02.260Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Federal (000-AA-0)",
+    "plate": "377-ES-7",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:02.260Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Federal (00-AA-0A)",
+    "plate": "29-BF-9T",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:54.453Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Federal (00-AA-0A)",
+    "plate": "40-BB-3H",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:54.453Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Federal (00-AA-0A)",
+    "plate": "81-BA-2R",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:54.453Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (00AAA0)",
+    "plate": "24APY4",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:06.243Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (00AAA0)",
+    "plate": "32BFH3",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:06.243Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (00AAA0)",
+    "plate": "80BFS1",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:06.243Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Motorcycles (AAA0A)",
+    "plate": "VMG9K",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:10.252Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Oldtimers (0AA-00)",
+    "plate": "4ND-60",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:14.277Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Oldtimers (0AA-00)",
+    "plate": "4NH-53",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:14.277Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Oldtimers (0AA-00)",
+    "plate": "7MZ-84",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:18:14.277Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (0-AA-0000)",
+    "plate": "1-YA-6095",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:35.316Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (0-AA-0000)",
+    "plate": "7-HU-4267",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:35.316Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (0-AA-0000)",
+    "plate": "7-HU-6235",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:35.317Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (0AA-000-A)",
+    "plate": "1NM-546-A",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:38.291Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (0AA-000-A)",
+    "plate": "3CY-968-A",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:38.291Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (0AA-000-A)",
+    "plate": "4XX-248-F",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:38.291Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (A-00-00)",
+    "plate": "C-09-68",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:42.520Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (A-00-00)",
+    "plate": "C-10-10",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:42.520Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trailers (A-00-00)",
+    "plate": "R-84-39",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:42.520Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trucks (00-00-AA)",
+    "plate": "56-94-CM",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:28.276Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trucks (00-00-AA)",
+    "plate": "65-51-CJ",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:28.276Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trucks (00-00-AA)",
+    "plate": "73-27-CM",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:28.276Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trucks (A-000-AA)",
+    "plate": "A-243-AN",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:31.567Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trucks (A-000-AA)",
+    "plate": "A-359-AM",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:31.567Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trucks (A-000-AA)",
+    "plate": "A-982-AA",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:31.567Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trucks (AA-00-000)",
+    "plate": "SN-40-078",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:24.265Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trucks (AA-00-000)",
+    "plate": "XV-07-982",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:24.265Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trucks (AA-00-000)",
+    "plate": "XV-18-031",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:24.265Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trucks (AA-0000-A)",
+    "plate": "WE-8892-B",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:20.304Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trucks (AA-0000-A)",
+    "plate": "XL-2228-A",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:20.304Z",
+    "source": "gallery"
+  },
+  {
+    "category": "Trucks (AA-0000-A)",
+    "plate": "YB-7595-A",
+    "read": "",
+    "count": null,
+    "date": "2026-10-05T21:17:20.304Z",
+    "source": "gallery"
+  }
+]

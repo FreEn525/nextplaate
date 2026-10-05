@@ -633,6 +633,9 @@
   PLATE_RULES.ps = () => joinParts([menu('reg1'), shownVal('digit1'), shownVal('digit2')]);
   // Portugal: diplomatic plates are 007-CC453 = a number, the kind (CD, CC, FM, OI), a number; the other types are read from their fields
   PLATE_RULES.pt = () => shownVal('mnum1') || shownVal('mnum2') ? shownVal('mnum1') + '-' + menu('mtype') + shownVal('mnum2') : genericPlate();
+  // Forms with a region menu (drop_1: a state, a province, an emirate) and a free plate text (nomer): the region is not part of the plate
+  // text (MBG-133-A, not AGUASCALIENTES MBG-133-A), so only the text is read.
+  PLATE_RULES.ae = PLATE_RULES.au = PLATE_RULES.ca = PLATE_RULES.mx = PLATE_RULES.us = () => fieldVal('nomer');
   // Serbia: BG 123-AB; trailers (2): OO-442 VR (two letters, digits, then the region menu); vanity (4): region then the letter boxes;
   // diplomatic (6), military (10), oldtimers (8), special machinery (9) put their text in "dip" after the region; police (5) has a
   // letter written by the site (П 009-299)
@@ -654,6 +657,8 @@
     const side = fieldVal('ctype') === '6' ? 'before' : 'after';
     return joinParts([charsOf(['d1', 'd2', 'd3', 'd4'], side), charsOf(['b1', 'b2', 'b3'], side)]);
   };
+  // Singapore: PC 9090 A = the letters, the digits, then the check letter (three fields)
+  PLATE_RULES.sg = () => joinParts([shownVal('let'), shownVal('dig'), shownVal('checksum')]);
   // Slovenia: LJ 123-AB (the region code, then the plate)
   PLATE_RULES.si = () => {
     const region = (document.getElementById('drop_1') || { value: '' }).value.trim();
