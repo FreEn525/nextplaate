@@ -118,7 +118,9 @@
     const sel = document.getElementById('ctype');
     if (!sel) return null;
     const want = label.toLowerCase();
+    // exact label first; then the form label with its pattern: "2001 year system (AA11AAA)" for "2001 year system"
     const opt = [...sel.options].find(o => o.value && o.text.trim().toLowerCase() === want)
+      || [...sel.options].find(o => o.value && o.text.trim().toLowerCase().startsWith(want + ' ('))
       || [...sel.options].find(o => o.value && o.value === code);
     return opt ? opt.value : null;
   }

@@ -52,7 +52,10 @@ def set_category(page, label):
         const sel = document.getElementById('ctype');
         if (!sel) return false;
         const want = label.toLowerCase();
-        const opt = [...sel.options].find(o => o.value && o.text.trim().toLowerCase() === want);
+        const text = o => o.text.trim().toLowerCase();
+        // exact label first; then "2001 year system (AA11AAA)" for the search label "2001 year system"
+        const opt = [...sel.options].find(o => o.value && text(o) === want)
+          || [...sel.options].find(o => o.value && text(o).startsWith(want + ' ('));
         if (!opt) return false;
         sel.value = opt.value;
         sel.dispatchEvent(new Event('change', { bubbles: true }));
