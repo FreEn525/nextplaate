@@ -13,7 +13,7 @@ python tools/fields.py xx [ids]           # les champs du formulaire du pays (ta
 node scripts/refresh-data.mjs             # régénère data/ et docs/COUVERTURE.md
 ```
 
-**Garde-fou** : `python tests/offline/check_known.py` (16 plaques tapées à la main sur le vrai site) doit toujours dire `failed: 0`. Le contrôle complet peut réussir avec un mauvais ordre de lecture tant que la saisie de test suit le même ordre ; seules ces plaques vérifiées sur le site le détectent (la Grèce l'a montré : `IAZ` = la lettre `I` puis le code `AZ`). Ajouter une plaque vérifiée à la main dans `tests/offline/known_plates.json` chaque fois qu'on en a une.
+**Garde-fou** : `python tests/offline/check_known.py` (16 plaques tapées à la main sur le vrai site) doit toujours dire `failed: 0`. Le contrôle complet peut réussir avec un mauvais ordre de lecture tant que la saisie de test suit le même ordre ; seules ces plaques vérifiées sur le site le détectent (la Grèce l'a montré : `IAZ` = la lettre `I` puis le code `AZ`, alors que la page liste le menu du code avant celui de la lettre : un utilisateur qui tape dans l'ordre de la page obtient `AZI`, la saisie doit suivre l'ordre de lecture de la plaque). Ajouter une plaque vérifiée à la main dans `tests/offline/known_plates.json` (une plaque ou une liste par pays) chaque fois qu'on en a une. Vérifiées à la main le 5 octobre 2026 : Pologne `K0 069U`, Vietnam `47A 271.12`, Serbie `OO-442 VR`.
 
 Ordre d'une correction : `fails` (quoi) → `diag_shown` (quels champs, lesquels sont fixes) → corriger `src/lib/plate/<cc>.js` → `check_db --country xx` → un contrôle complet (rien d'autre ne doit baisser) → `refresh-data` → commit.
 

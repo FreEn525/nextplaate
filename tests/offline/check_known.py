@@ -24,7 +24,8 @@ def main():
     bad = 0
     with sync_playwright() as p:
         b = p.chromium.launch()
-        for code, plate in KNOWN.items():
+        cases = [(code, plate) for code, v in KNOWN.items() for plate in (v if isinstance(v, list) else [v])]   # one plate or a list per country
+        for code, plate in cases:
             html = (REF / f"{code}.html").read_text(encoding="utf-8", errors="ignore")
             ctx = b.new_context()
             route_site(ctx)
@@ -34,7 +35,7 @@ def main():
                 body=h.replace("</body>", "<script>" + DEV + "</script></body>")))
             page.goto(f"https://platesmania.com/{code}/add", wait_until="domcontentloaded")
             page.wait_for_timeout(600)
-            res = page.evaluate("(t) => window.nextplaateDev.testText(t)", plate)
+            res = page.evaluate("([t, o]) => window.nextplaateDev.testText(t, o)", [plate, {"country": code, "settle": 350}])
             ok = res["fits"] and norm(res["read"]) == norm(plate)
             bad += 0 if ok else 1
             print(f"{code:4} {'OK  ' if ok else 'FAIL'} plate: {plate:14} fits: {res['fits']!s:5} reads: {res['read']}")

@@ -52,7 +52,7 @@ def test_a_feature_goes_off_with_what_it_needs(browser):
     page.wait_for_selector("#pmg-host")
     assert "Details" not in titles(page) and "Description" not in titles(page)
     text = page.evaluate(f"() => {SHADOW}.getElementById('setList').textContent")
-    assert "because something it needs is off" in text
+    assert "off: it needs Location and hashtags" in text
     assert errors == []
     c.close()
 

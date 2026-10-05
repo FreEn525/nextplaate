@@ -8,11 +8,12 @@
       const f = features.find(x => 'feature_' + x.id === d.id);
       const needs = ((f && f.requires) || []).map(r => (features.find(x => x.id === r) || {}).label || r);
       const box = h('input', { type: 'checkbox', id: 'set_' + d.id });
-      box.checked = settings.on(d.id);
+      const blocked = settings.on(d.id) && f && !featureOn(f.id);   // on, but something it needs is off: shown as off and not clickable
+      box.checked = settings.on(d.id) && !blocked;
+      box.disabled = !!blocked;
       box.onchange = () => { settings.set(d.id, box.checked ? '1' : '0'); $('setApply').hidden = false; renderSettings(); };
-      const blocked = box.checked && f && !featureOn(f.id);
-      return h('label', { class: 'setrow' }, box,
-        h('span', { class: blocked ? 'off' : '', text: d.label + (needs.length ? ' (needs: ' + needs.join(', ') + ')' : '') + (blocked ? ' - off, because something it needs is off' : '') }));
+      const note = blocked ? ' (off: it needs ' + needs.join(', ') + ')' : needs.length ? ' (needs ' + needs.join(', ') + ')' : '';
+      return h('label', { class: 'chk' + (blocked ? ' dim' : '') }, box, d.label + note);
     });
     $('setList').replaceChildren(...rows);
   }
@@ -23,7 +24,7 @@
       drawer: 'settings', title: 'Features',
       build: () => [
         h('p', { class: 'presult', text: 'Switch a feature off to remove its controls and keys. The page reloads to apply the change.' }),
-        h('div', { id: 'setList' }),
+        h('div', { id: 'setList', class: 'chklist' }),
         h('button', { id: 'setApply', class: 'btn', hidden: true, text: 'Apply (reload the page)', onclick: () => location.reload() })
       ]
     }],

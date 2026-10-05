@@ -27,7 +27,7 @@
     .field label{font-size:12px;font-weight:600}
     .field input{width:100%}
     .chk{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer}
-    .chk input{width:16px;height:16px;margin:0}
+    .chk input{width:16px;height:16px;margin:0;flex:none}
     .slots{display:flex;flex-direction:column;gap:8px}
     .slot{display:flex;align-items:center;gap:8px;min-height:52px;padding:6px 8px;border:1px solid var(--line);border-radius:var(--r);background:#f7f7f7}
     .slot img{width:52px;height:40px;object-fit:cover;border-radius:4px;border:1px solid var(--line);flex:none}
@@ -40,8 +40,8 @@
     .lbl{font-size:12px;font-weight:600}
     .presult{margin:0;font-size:13px}
     .presult{padding:6px 8px;border-radius:4px;background:#fff;border:1px solid var(--line)}
-    .setrow{display:flex;align-items:center;gap:10px;font-size:13px;padding:4px 0;cursor:pointer}
-    .setrow .off{color:var(--mute)}
+    .chk.dim{color:var(--mute)}
+    .chklist{display:flex;flex-direction:column;gap:8px}
     .kv{display:flex;justify-content:space-between;gap:12px;font-size:13px;padding:2px 0}
     .sub{margin:10px 0 2px;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
     .presult.warn{background:#fde2e1;border-color:#f3b5b2;color:#8a1c17;font-weight:600}

@@ -546,7 +546,9 @@
     const digits = shownVal('digit');
     const written = shownVal('let') || shownVal('bfixed').replace(/\./g, '');
     if (written) return joinParts([written + menu('b1'), digits]);                               // private trailers: the T written by the site, then the letter
-    // cars and most types: the letter, then the two-letter code (I AZ = IAZ, checked by hand on the site); trucks: the code, then the letter (EK B)
+    // cars and most types: the single letter (b1), then the two-letter code, although the page lists the code menu first:
+    // IAZ = I + AZ (the code menu has no IA, and IAZ 6038 was checked by hand on the site). Trucks: the code, then the letter (EK + B,
+    // their code menu holds only EK, IA and NX)
     return joinParts([ctype === '4' ? menu('region') + menu('b1') : menu('b1') + menu('region'), digits]);
   };
   // Croatia: ZG 8899-JB; vanity (5) is region + the letter boxes shown: ZG ZMAJ. Dealer and oldtimers: OS PP-178, KR PV-081
@@ -817,7 +819,7 @@
     .field label{font-size:12px;font-weight:600}
     .field input{width:100%}
     .chk{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer}
-    .chk input{width:16px;height:16px;margin:0}
+    .chk input{width:16px;height:16px;margin:0;flex:none}
     .slots{display:flex;flex-direction:column;gap:8px}
     .slot{display:flex;align-items:center;gap:8px;min-height:52px;padding:6px 8px;border:1px solid var(--line);border-radius:var(--r);background:#f7f7f7}
     .slot img{width:52px;height:40px;object-fit:cover;border-radius:4px;border:1px solid var(--line);flex:none}
@@ -830,8 +832,8 @@
     .lbl{font-size:12px;font-weight:600}
     .presult{margin:0;font-size:13px}
     .presult{padding:6px 8px;border-radius:4px;background:#fff;border:1px solid var(--line)}
-    .setrow{display:flex;align-items:center;gap:10px;font-size:13px;padding:4px 0;cursor:pointer}
-    .setrow .off{color:var(--mute)}
+    .chk.dim{color:var(--mute)}
+    .chklist{display:flex;flex-direction:column;gap:8px}
     .kv{display:flex;justify-content:space-between;gap:12px;font-size:13px;padding:2px 0}
     .sub{margin:10px 0 2px;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
     .presult.warn{background:#fde2e1;border-color:#f3b5b2;color:#8a1c17;font-weight:600}
@@ -1632,11 +1634,12 @@
       const f = features.find(x => 'feature_' + x.id === d.id);
       const needs = ((f && f.requires) || []).map(r => (features.find(x => x.id === r) || {}).label || r);
       const box = h('input', { type: 'checkbox', id: 'set_' + d.id });
-      box.checked = settings.on(d.id);
+      const blocked = settings.on(d.id) && f && !featureOn(f.id);   // on, but something it needs is off: shown as off and not clickable
+      box.checked = settings.on(d.id) && !blocked;
+      box.disabled = !!blocked;
       box.onchange = () => { settings.set(d.id, box.checked ? '1' : '0'); $('setApply').hidden = false; renderSettings(); };
-      const blocked = box.checked && f && !featureOn(f.id);
-      return h('label', { class: 'setrow' }, box,
-        h('span', { class: blocked ? 'off' : '', text: d.label + (needs.length ? ' (needs: ' + needs.join(', ') + ')' : '') + (blocked ? ' - off, because something it needs is off' : '') }));
+      const note = blocked ? ' (off: it needs ' + needs.join(', ') + ')' : needs.length ? ' (needs ' + needs.join(', ') + ')' : '';
+      return h('label', { class: 'chk' + (blocked ? ' dim' : '') }, box, d.label + note);
     });
     $('setList').replaceChildren(...rows);
   }
@@ -1647,7 +1650,7 @@
       drawer: 'settings', title: 'Features',
       build: () => [
         h('p', { class: 'presult', text: 'Switch a feature off to remove its controls and keys. The page reloads to apply the change.' }),
-        h('div', { id: 'setList' }),
+        h('div', { id: 'setList', class: 'chklist' }),
         h('button', { id: 'setApply', class: 'btn', hidden: true, text: 'Apply (reload the page)', onclick: () => location.reload() })
       ]
     }],

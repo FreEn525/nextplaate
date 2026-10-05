@@ -8,6 +8,8 @@
     const digits = shownVal('digit');
     const written = shownVal('let') || shownVal('bfixed').replace(/\./g, '');
     if (written) return joinParts([written + menu('b1'), digits]);                               // private trailers: the T written by the site, then the letter
-    // cars and most types: the letter, then the two-letter code (I AZ = IAZ, checked by hand on the site); trucks: the code, then the letter (EK B)
+    // cars and most types: the single letter (b1), then the two-letter code, although the page lists the code menu first:
+    // IAZ = I + AZ (the code menu has no IA, and IAZ 6038 was checked by hand on the site). Trucks: the code, then the letter (EK + B,
+    // their code menu holds only EK, IA and NX)
     return joinParts([ctype === '4' ? menu('region') + menu('b1') : menu('b1') + menu('region'), digits]);
   };
