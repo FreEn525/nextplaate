@@ -7,6 +7,7 @@
 // @description  PlatesMania - NextPlaate: post and upload PlatesMania photos faster. Front/rear descriptions, auto edit & fill, auto-like, shortcuts, batch upload (one tab per photo).
 // @match        https://platesmania.com/*
 // @match        https://*.platesmania.com/*
+// @match        https://www.google.com/*
 // @match        https://www.google.*/*
 // @match        https://lens.google.com/*
 // @require      https://cdn.jsdelivr.net/npm/libheif-js@1.19.8/libheif-wasm/libheif-bundle.js
