@@ -213,3 +213,25 @@ def test_batch_upload_opens_one_tab_per_photo(page, ctx, tmp_path, errors):
     assert "/fr/add#pmg=" in urls
     assert "/de/add#pmg=" in urls
     assert errors == []
+
+
+def test_the_empty_batch_manager_says_what_to_do_first_with_the_buttons_in_reach(page):
+    open_at(page, GALLERY)
+    page.keyboard.press("KeyU")
+    root = "document.getElementById('pmg-batch').shadowRoot"
+    assert page.evaluate(f"() => {root}.querySelector('.empty h3').textContent") == "No photos yet"
+    labels = page.evaluate(f"() => [...{root}.querySelectorAll('.empty button')].map(b => b.textContent)")
+    assert labels == ["Add photos", "Add a folder"]
+    steps = page.evaluate(f"() => [...{root}.querySelectorAll('.step')].map(s => s.textContent)")
+    assert steps[0].startswith("1") and steps[1].startswith("2")
+    # the country chips are as wide as their content, side by side (not one full-width line each)
+    widths = page.evaluate(f"() => [...{root}.querySelectorAll('.chip')].map(c => Math.round(c.getBoundingClientRect().width))")
+    assert widths and max(widths) < 260
+
+
+def test_a_photo_without_a_country_says_so_in_words(page, tmp_path):
+    open_at(page, GALLERY)
+    page.keyboard.press("KeyU")
+    page.locator("#pmg-batch #fMulti").set_input_files(_png_files(tmp_path, ["a.png"]))
+    page.wait_for_function("() => document.getElementById('pmg-batch').shadowRoot.querySelectorAll('.card').length === 1", timeout=15000)
+    assert page.evaluate("() => document.getElementById('pmg-batch').shadowRoot.querySelector('.card .badge').textContent") == "No country"

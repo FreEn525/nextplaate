@@ -6,7 +6,7 @@
     const nm = document.createElement('div'); nm.className = 'name'; nm.textContent = it.name; nm.title = it.name; c.appendChild(nm);
     if (it.dupes) c.appendChild(h('div', { class: 'dupbadge', text: `⚠ ${it.dupes} already on the site`, title: it.plate || '' }));
     const row = document.createElement('div'); row.className = 'row';
-    const bd = document.createElement('span'); bd.className = 'badge'; bd.textContent = it.country ? it.country.toUpperCase() : '?'; bd.title = it.country ? cName(it.country) : 'No country yet';
+    const bd = document.createElement('span'); bd.className = 'badge'; bd.textContent = it.country ? it.country.toUpperCase() : 'No country'; bd.title = it.country ? cName(it.country) : 'No country yet';
     row.appendChild(bd);
     if (it.country && catsCache[it.country] === undefined) ensureCats(it.country);
     const cats = it.country ? catsCache[it.country] : null;
@@ -57,8 +57,9 @@
     hideZoom();
     const g = M('grid'), frag = document.createDocumentFragment();
     if (!queue.length) {
-      const e = document.createElement('div'); e.className = 'empty';
-      e.textContent = 'No photos yet. Use “Add photos” or “Add a folder”, or drop photos here.';
+      // an empty list says what to do first, with the buttons right there
+      const e = h('div', { class: 'empty' }, h('h3', { text: 'No photos yet' }), h('p', { text: 'Add the photos you want to send, or drop them here. You give each one a country next.' }),
+        h('div', { class: 'acts' }, h('button', { class: 'btn', text: 'Add photos', onclick: () => M('mAdd').click() }), h('button', { class: 'btn ghost', text: 'Add a folder', onclick: () => M('mFolder').click() })));
       frag.appendChild(e);
     }
     queue.forEach(it => frag.appendChild(buildCard(it)));

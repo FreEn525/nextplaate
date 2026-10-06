@@ -13,10 +13,13 @@
       .acts{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
       .inl{display:inline-flex;align-items:center;gap:6px;font-size:13px}
 
-      .paint{padding:12px 18px;background:#fff;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-      .lbl{font-weight:600;font-size:13px}
+      .paint{padding:12px 18px;background:#fff;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+      .steps{display:flex;gap:6px 24px;flex-wrap:wrap}
+      .step{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600}
+      .step b{display:inline-grid;place-items:center;flex:none;width:22px;height:22px;border-radius:var(--r-round);background:var(--primary);color:var(--on-primary);font-size:12px}
+      .chiprow{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
       .chips{display:flex;gap:8px;flex-wrap:wrap}
-      .chip{display:inline-flex;align-items:center;gap:7px;height:var(--h);padding:0 10px;border-radius:var(--r);border:2px solid var(--line2);background:#fff;color:var(--ink);font:inherit;font-size:13px;cursor:pointer}
+      .chip{flex:none;width:auto;display:inline-flex;align-items:center;gap:7px;height:var(--h);padding:0 10px;border-radius:var(--r);border:2px solid var(--line2);background:#fff;color:var(--ink);font:inherit;font-size:13px;cursor:pointer}
       .chip:hover{border-color:var(--primary-soft);background:var(--primary-tint)}
       .chip.on{background:var(--primary-soft);color:var(--primary-h);border-color:var(--primary-soft)}
       .chip kbd{display:inline-grid;place-items:center;min-width:18px;height:18px;border-radius:var(--r);background:var(--soft);color:var(--ink);font:700 11px system-ui}
@@ -32,7 +35,10 @@
       .grid{flex:1 1 0;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:14px 18px 18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(var(--cw,300px),1fr));gap:14px;align-content:start;grid-auto-rows:max-content}
       .grid::-webkit-scrollbar{width:12px}
       .grid::-webkit-scrollbar-thumb{background:var(--line2);border-radius:var(--r);border:3px solid var(--bg)}
-      .empty{grid-column:1/-1;padding:40px 10px;text-align:center;color:var(--mute)}
+      .empty{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;gap:10px;padding:48px 16px;text-align:center;color:var(--mute);border:2px dashed var(--line2);background:#fff}
+      .empty h3{margin:0;font-size:16px;color:var(--ink)}
+      .empty p{margin:0;font-size:13px}
+      .empty .acts{justify-content:center}
       .card{position:relative;background:#fff;border:2px solid var(--primary-soft);border-radius:var(--r);overflow:hidden;cursor:pointer;user-select:none}
       .card.none{border:2px dashed var(--line2)}
       .card.done,.card.submitted{opacity:.5;cursor:default}
@@ -82,10 +88,8 @@
           </div>
         </div>
         <div class="paint">
-          <span class="lbl">1 · Click photos to select them (blue)</span>
-          <span class="lbl">2 · Then give them a country:</span>
-          <div class="chips" id="chips"></div>
-          <select class="more" id="more"></select>
+          <div class="steps"><span class="step"><b>1</b>Click the photos to select them</span><span class="step"><b>2</b>Give the selection a country (click one, or press its number)</span></div>
+          <div class="chiprow"><div class="chips" id="chips"></div><select class="more" id="more"></select></div>
         </div>
         <div class="tools">
           <button class="btn ghost sm" id="mSelAll">Select all</button>
