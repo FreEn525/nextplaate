@@ -16,7 +16,7 @@
 ## Fonctionnalités
 
 - **Statut du site** : à faire. Une indication (en ligne, bloqué, en pause après un blocage) visible dans la barre, à partir de la file de requêtes existante (`http.js`).
-- **Recherche Google Lens** : à faire. Un bouton qui ouvre Lens avec la photo, et un prompt préparé (marque, modèle, génération, code châssis…). Le prompt doit être défini avant, c'est le point à valider.
+- **Recherche Google Lens** : **fait** (version 5.8). Bouton « Search this photo on Google Lens » (adresse `lens.google.com/uploadbyurl?url=…`), prompt à copier, réponse collée et affichée en trois colonnes. Reste : un raccourci clavier, et un bouton sous la photo de la page d'ajout si vous le voulez.
 - **Génération de modèle** : **info nécessaire**. Je ne sais pas ce que tu entends : une génération par rapport à l'année, au code châssis, ou une suggestion par IA ? Ça change tout.
 - **Ajout simplifié** : à faire. Un mode « simple » avec un indicateur (flag) à la place du menu déroulant, pour l'ajout de photo.
 - **Remplissage marque, modèle, génération** : à faire. Quand la plaque existe déjà sur le site, pré-remplir les menus avec les photos existantes. Dépend de la lecture de la galerie de recherche (déjà utilisée par la vérification de plaque).

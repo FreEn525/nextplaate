@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.8
+
+**Google Lens**
+- New button *Search this photo on Google Lens* in the Google Lens group (Search drawer): one click opens the results for the photo of the page (the big photo of the upload page, or the main photo of a photo page). It uses Google's image-link address, so nothing is read from or typed into a Google page and the script still only contacts PlatesMania. A photo that is not published yet has no public address: the script says so.
+
 ## 5.7
 
 **Plate check**

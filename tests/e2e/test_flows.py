@@ -213,3 +213,19 @@ def test_batch_upload_opens_one_tab_per_photo(page, ctx, tmp_path, errors):
     assert "/fr/add#pmg=" in urls
     assert "/de/add#pmg=" in urls
     assert errors == []
+
+
+def test_google_lens_button_opens_the_search_for_the_photo(page, ctx):
+    ctx.route("https://lens.google.com/**", lambda r: r.fulfill(status=200, content_type="text/html", body="<html></html>"))
+    open_at(page, ADD)
+    page.evaluate("""() => { const i = document.createElement('img'); i.id = 'zoomimg'; i.src = 'https://img1.platesmania.com/10/m/101.jpg'; document.body.appendChild(i); }""")
+    with page.expect_popup() as popup:
+        page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('lensSearch').click()")
+    popup.value.wait_for_load_state()
+    assert popup.value.url.startswith("https://lens.google.com/uploadbyurl?url=https%3A%2F%2Fimg1.platesmania.com%2F10%2Fm%2F101.jpg")
+
+
+def test_google_lens_button_says_when_there_is_no_photo(page):
+    open_at(page, ADD)
+    page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('lensSearch').click()")
+    assert "No published photo" in page.evaluate("() => document.getElementById('pmg-host').shadowRoot.textContent")
