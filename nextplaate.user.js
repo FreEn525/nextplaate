@@ -200,27 +200,34 @@
    *                     ... do the work on that page ...
    *                     bridgeAnswer('lens', request, titles);
    *
-   *    A job has a name ('lens'); a new request replaces the old one; an answer carries the stamp of its request, so an answer to an
+   *    The tab that was opened for the job is closed once the answer is in (opts.close, default true); when nothing comes back it stays
+   *    open, so the user can see the page. A job has a name ('lens'); a new request replaces the old one; an answer carries the stamp of its request, so an answer to an
    *    older request is never taken for the new one. Only function declarations: the other side starts from core/00-open.js,
    *    before the rest of the script is set up. Needs GM_setValue, GM_getValue (and GM_openInTab) in the header.
    * ===================================================================== */
   function bridgeKey(job, part) { return 'br_' + job + '_' + part; }
 
-  // Leaves the request, opens the page of the other site, resolves with the answer (rejects after opts.timeout seconds, default 120)
+  // Leaves the request, opens the page of the other site, resolves with the answer (rejects after opts.timeout seconds, default 120),
+// then closes that tab unless opts.close is false
   function bridgeAsk(job, payload, url, opts) {
-    const o = Object.assign({ background: false, timeout: 120 }, opts);
+    const o = Object.assign({ background: false, timeout: 120, close: true }, opts);
     const stamp = Date.now();
     GM_setValue(bridgeKey(job, 'req'), JSON.stringify({ stamp, payload }));
     GM_setValue(bridgeKey(job, 'res'), '');
-    let opened = false;
-    try { if (typeof GM_openInTab === 'function') { GM_openInTab(url, { active: !o.background, insert: true, setParent: true }); opened = true; } } catch (e) { /* the popup below */ }
-    if (!opened && !window.open(url, '_blank')) return Promise.reject(new Error('could not open the tab'));
+    let tab = null;
+    try { if (typeof GM_openInTab === 'function') tab = GM_openInTab(url, { active: !o.background, insert: true, setParent: true }); } catch (e) { /* the popup below */ }
+    if (!tab) tab = window.open(url, '_blank');
+    if (!tab) return Promise.reject(new Error('could not open the tab'));
     return new Promise((ok, no) => {
       let waited = 0;
       const timer = setInterval(() => {
         const raw = GM_getValue(bridgeKey(job, 'res'), '');
         const got = raw ? JSON.parse(raw) : null;
-        if (got && got.stamp === stamp) { clearInterval(timer); ok(got.data); }
+        if (got && got.stamp === stamp) {
+          clearInterval(timer);
+          if (o.close) { try { tab.close(); } catch (e) { /* the user may have closed it already */ } }
+          ok(got.data);
+        }
         else if (++waited > o.timeout) { clearInterval(timer); no(new Error('no answer')); }
       }, 1000);
     });
@@ -995,6 +1002,7 @@
     .btn.sm{height:var(--h-sm);padding:0 12px;font-size:13px}
     .btn.lg{height:44px;padding:0 22px}
     .btn:disabled{background:var(--off);border-color:var(--off);color:var(--off-ink);cursor:not-allowed}
+    input,select,textarea{color:var(--ink)}
     input[type=text],input[type=number],select,textarea{padding:0 10px;border:1px solid var(--line2);border-radius:var(--r);background:#fff;color:var(--ink);font:inherit;outline:none}
     input[type=text],input[type=number],select{height:36px}
     input[type=text]:focus,input[type=number]:focus,select:focus,textarea:focus{border-color:var(--primary)}
@@ -1057,11 +1065,11 @@
     .group{background:#fff;border:1px solid var(--line);border-radius:var(--r);display:flex;flex-direction:column;overflow:hidden}
     .gbody{display:flex;flex-direction:column;gap:8px;padding:10px}
     .gtitle{order:-1;padding:7px 10px;border-bottom:1px solid var(--line);background:#fff;color:var(--primary-h);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
-    .gbody .btn{width:100%}
+    .gbody .btn{width:100%;height:auto;min-height:var(--h);padding-top:6px;padding-bottom:6px;line-height:1.25;white-space:normal}   /* a long label wraps instead of widening the drawer */
     .pnote{margin:0;padding:6px 8px;border-radius:var(--r);background:var(--primary-tint);color:var(--mute);font-size:12px}
-    .btnrow{display:flex;gap:8px}
-    .btnrow .btn{flex:1}
-    .row{display:flex;align-items:center;gap:8px;font-size:12px}
+    .btnrow{display:flex;flex-wrap:wrap;gap:8px}
+    .btnrow .btn{flex:1 1 110px;min-width:0}
+    .row{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:12px}
     .row label{font-weight:600;white-space:nowrap}
     .row input{width:90px}
     .field{display:flex;flex-direction:column;gap:4px}

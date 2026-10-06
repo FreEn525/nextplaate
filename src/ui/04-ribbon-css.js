@@ -16,11 +16,11 @@
     .group{background:#fff;border:1px solid var(--line);border-radius:var(--r);display:flex;flex-direction:column;overflow:hidden}
     .gbody{display:flex;flex-direction:column;gap:8px;padding:10px}
     .gtitle{order:-1;padding:7px 10px;border-bottom:1px solid var(--line);background:#fff;color:var(--primary-h);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
-    .gbody .btn{width:100%}
+    .gbody .btn{width:100%;height:auto;min-height:var(--h);padding-top:6px;padding-bottom:6px;line-height:1.25;white-space:normal}   /* a long label wraps instead of widening the drawer */
     .pnote{margin:0;padding:6px 8px;border-radius:var(--r);background:var(--primary-tint);color:var(--mute);font-size:12px}
-    .btnrow{display:flex;gap:8px}
-    .btnrow .btn{flex:1}
-    .row{display:flex;align-items:center;gap:8px;font-size:12px}
+    .btnrow{display:flex;flex-wrap:wrap;gap:8px}
+    .btnrow .btn{flex:1 1 110px;min-width:0}
+    .row{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:12px}
     .row label{font-weight:600;white-space:nowrap}
     .row input{width:90px}
     .field{display:flex;flex-direction:column;gap:4px}

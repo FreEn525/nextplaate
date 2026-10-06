@@ -300,3 +300,26 @@ def test_the_panel_answer_fits_a_phone_width(page, ctx):
     page.evaluate(f"() => {PANEL}.getElementById('lensMsg').scrollIntoView()")
     over = page.evaluate(f"() => {{ const o = {PANEL}.getElementById('lensOut'); return [o.scrollWidth, o.clientWidth]; }}")
     assert over[0] <= over[1]
+
+
+def test_the_google_tab_is_closed_once_the_answer_is_in(page, ctx):
+    google_fake(ctx)
+    open_at(page, ADD)
+    with page.expect_popup() as popup:
+        choose_photo(page)
+    popup.value.wait_for_load_state()
+    assert not popup.value.is_closed()                           # open while the search runs
+    lens_answer(page, ["Volkswagen Golf 2019"])
+    popup.value.wait_for_event("close", timeout=5000)
+    assert popup.value.is_closed()
+
+
+def test_the_google_tab_stays_open_when_nothing_comes_back(page, ctx):
+    google_fake(ctx)
+    open_at(page, ADD)
+    with page.expect_popup() as popup:
+        choose_photo(page)
+    popup.value.wait_for_load_state()
+    lens_answer(page, ["Volkswagen Golf 2019"], stamp=1)       # an answer to another request: nothing for this one
+    page.wait_for_timeout(1600)
+    assert not popup.value.is_closed()

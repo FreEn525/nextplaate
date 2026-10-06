@@ -97,7 +97,7 @@ def inject(html):
     """Adds the userscript at the end of the page, like Tampermonkey does at document-idle."""
     shims = """<script>
 window.unsafeWindow = window;
-window.GM_openInTab = (url) => { window.open(url, '_blank'); return { close() {} }; };
+window.GM_openInTab = (url) => { const w = window.open(url, '_blank'); return { close() { if (w) w.close(); } }; };
 window.GM_addStyle = (css) => { const s = document.createElement('style'); s.textContent = css; document.head.appendChild(s); return s; };
 window.GM_getValue = (k, d) => { const v = localStorage.getItem('gm_' + k); return v === null ? d : JSON.parse(v); };
 window.GM_setValue = (k, v) => localStorage.setItem('gm_' + k, JSON.stringify(v));

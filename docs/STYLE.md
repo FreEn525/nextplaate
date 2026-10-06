@@ -28,6 +28,10 @@ Le texte secondaire (`--mute`, `#626a70`) est **plus foncé** que le gris du sit
 
 - **Le logo** est aux couleurs du site : son bleu est `--primary` (`#4765a0`), dans le panneau (via `SITE_BLUE`), dans `logo_nextplaate.svg` et dans l'icône du script (`@icon`).
 
+## Écrans étroits
+
+Rien ne doit élargir un tiroir : un téléphone de 320 px lui laisse 264 px. Les libellés longs passent à la ligne (`.gbody .btn`), les rangées de boutons aussi (`.btnrow`), les champs étiquettés aussi (`.row`). `tests/e2e/test_responsive.py` ouvre chaque tiroir à 320, 360, 768 et 1280 px et refuse tout débordement. Les colonnes de choix (`.cols`) s'empilent d'elles-mêmes quand la place manque.
+
 ## États
 
 | État | Fond | Bordure | Texte |

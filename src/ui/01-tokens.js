@@ -35,6 +35,7 @@
     .btn.sm{height:var(--h-sm);padding:0 12px;font-size:13px}
     .btn.lg{height:44px;padding:0 22px}
     .btn:disabled{background:var(--off);border-color:var(--off);color:var(--off-ink);cursor:not-allowed}
+    input,select,textarea{color:var(--ink)}
     input[type=text],input[type=number],select,textarea{padding:0 10px;border:1px solid var(--line2);border-radius:var(--r);background:#fff;color:var(--ink);font:inherit;outline:none}
     input[type=text],input[type=number],select{height:36px}
     input[type=text]:focus,input[type=number]:focus,select:focus,textarea:focus{border-color:var(--primary)}

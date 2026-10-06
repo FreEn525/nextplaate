@@ -17,7 +17,7 @@ Ce que le script offre déjà pour construire une nouvelle fonction sans réécr
 Le navigateur sépare les sites : une page de PlatesMania ne peut pas lire une page de Google. Le script tourne sur les deux et partage une petite mémoire (`GM_setValue` / `GM_getValue`). Un **travail** a un nom (`'lens'`) ; une **demande** porte un tampon (l'heure), et la **réponse** porte le même tampon, donc une réponse à une ancienne demande n'est jamais prise pour la nouvelle.
 
 ```js
-// côté PlatesMania : demander, attendre la réponse
+// côté PlatesMania : demander, attendre la réponse (l'onglet ouvert est fermé à l'arrivée de la réponse, sauf `close: false`)
 bridgeAsk('lens', { photo }, 'https://www.google.com/?olud&src=pm', { background: true, timeout: 120 })
   .then(titles => ..., erreur => ...);
 
