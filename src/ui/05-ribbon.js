@@ -24,7 +24,7 @@
         <header class="dhead"><h2 id="dtitle"></h2><button class="iconbtn" id="dclose" title="Close (Esc)">${icon('close')}</button></header>
         <div class="dbody" id="dbody"></div>
       </aside>
-      <nav class="rail" id="rail"><div class="logo">${LOGO(28)}</div></nav>
+      <nav class="rail" id="rail"><div class="logo">${LOGO(36)}</div></nav>
     </div>
     <div class="toast" id="status"></div>`;
   document.body.appendChild(host);
