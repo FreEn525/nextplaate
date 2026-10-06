@@ -77,6 +77,7 @@ UPLOAD_PAGE = (
     + '<input type="text" id="nomer" name="nomer">'
     + '<select id="ctype" name="ctype"><option value="1">Car</option><option value="2">Motorbike</option></select>'
     + '<input type="file" id="filename" name="filename">'
+    + '<div id="zoomimgid" class="hidden"><img id="zoomimg" width="260" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="></div>'
     + '<button type="button" id="pm-photo-editor-open">Upload through editor</button></form>'
     + "</body></html>"
 )

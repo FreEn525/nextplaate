@@ -7,8 +7,11 @@
 // @description  PlatesMania - NextPlaate: post and upload PlatesMania photos faster. Front/rear descriptions, auto edit & fill, auto-like, shortcuts, batch upload (one tab per photo).
 // @match        https://platesmania.com/*
 // @match        https://*.platesmania.com/*
+// @match        https://www.google.*/*
 // @require      https://cdn.jsdelivr.net/npm/libheif-js@1.19.8/libheif-wasm/libheif-bundle.js
 // @grant        GM_openInTab
+// @grant        GM_setValue
+// @grant        GM_getValue
 // @grant        unsafeWindow
 // @run-at       document-idle
 // ==/UserScript==

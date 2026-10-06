@@ -228,28 +228,50 @@ def lens_status(page):
     return page.evaluate("() => document.getElementById('pmg-host').shadowRoot.textContent")
 
 
-def test_google_lens_button_opens_the_search_for_a_published_photo(page, ctx):
-    ctx.route("https://lens.google.com/**", lambda r: r.fulfill(status=200, content_type="text/html", body="<html></html>"))
-    ctx.route("https://img1.platesmania.com/**", lambda r: r.fulfill(status=200, content_type="image/png", body=base64.b64decode(PIXELS.split(",")[1])))
+GOOGLE_HOME = "https://www.google.com/?olud&src=pm"
+BLANK_GIF = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+
+
+def google_fake(ctx):
+    """A Google page with the box and the button of search by image; the test reads what the script did to them."""
+    from fake_site import inject
+    html = ('<html><body><input type="text" jsname="W7hAGe" id="box">'
+            '<div role="button" jsname="ZtOxCb" id="go" onclick="window.__go = 1"></div></body></html>')
+    ctx.route("https://www.google.com/**", lambda r: r.fulfill(status=200, content_type="text/html", body=inject(html)))
+
+
+def test_google_lens_button_opens_google_with_the_photo(page, ctx):
+    google_fake(ctx)
     open_at(page, ADD)
-    page.evaluate("""() => { const i = document.createElement('img'); i.id = 'zoomimg'; i.src = 'https://img1.platesmania.com/10/m/101.jpg'; document.body.appendChild(i); }""")
-    page.wait_for_function("() => document.getElementById('zoomimg').naturalWidth > 1")
+    page.evaluate("(src) => { document.getElementById('zoomimg').src = src; }", PIXELS)
+    page.wait_for_timeout(600)       # the photo is searched by itself once: this test is about the button
     with page.expect_popup() as popup:
         lens_click(page)
     popup.value.wait_for_load_state()
-    assert popup.value.url.startswith("https://lens.google.com/uploadbyurl?url=https%3A%2F%2Fimg1.platesmania.com%2F10%2Fm%2F101.jpg")
+    assert popup.value.url == GOOGLE_HOME
+    assert json.loads(page.evaluate("() => localStorage.getItem('gm_lens_image')")) == PIXELS
 
 
-def test_google_lens_button_copies_a_photo_that_is_not_published(page, ctx):
-    ctx.grant_permissions(["clipboard-read", "clipboard-write"], origin="https://platesmania.com")
-    ctx.route("https://lens.google.com/**", lambda r: r.fulfill(status=200, content_type="text/html", body="<html></html>"))
+def test_a_photo_chosen_on_the_upload_page_is_searched_by_itself(page, ctx):
+    google_fake(ctx)
     open_at(page, ADD)
-    page.evaluate("(src) => { const i = document.createElement('img'); i.id = 'zoomimg'; i.src = src; document.body.appendChild(i); }", PIXELS)
-    page.wait_for_function("() => document.getElementById('zoomimg').naturalWidth > 1")
     with page.expect_popup() as popup:
-        lens_click(page)
+        page.evaluate("(src) => { document.getElementById('zoomimg').src = src; }", PIXELS)
     assert popup.value
-    assert "Ctrl+V" in lens_status(page)
+    assert json.loads(page.evaluate("() => localStorage.getItem('gm_lens_image')")) == PIXELS
+
+
+def test_a_photo_is_not_searched_by_itself_when_the_option_is_off(page, ctx):
+    google_fake(ctx)
+    open_at(page, ADD)
+    set_storage(page, {"set_lens_auto": "0"})
+    page.reload()
+    page.wait_for_selector("#pmg-host")
+    opened = []
+    ctx.on("page", lambda p: opened.append(p))
+    page.evaluate("(src) => { document.getElementById('zoomimg').src = src; }", PIXELS)
+    page.wait_for_timeout(900)
+    assert opened == []
 
 
 def test_google_lens_button_says_when_there_is_no_photo(page):
@@ -261,3 +283,22 @@ def test_google_lens_button_says_when_there_is_no_photo(page):
 def test_the_lens_prompt_is_not_shown_in_the_panel(page):
     open_at(page, ADD)
     assert "You are a car expert" not in lens_status(page)
+
+
+def test_the_google_side_puts_the_photo_in_the_box_and_starts_the_search(ctx):
+    google_fake(ctx)
+    p = ctx.new_page()
+    p.add_init_script(f"localStorage.setItem('gm_lens_image', JSON.stringify({PIXELS!r}))")
+    p.goto(GOOGLE_HOME)
+    p.wait_for_function("() => window.__go === 1")
+    assert p.evaluate("() => document.getElementById('box').value") == PIXELS
+    assert p.evaluate("() => !!document.getElementById('pmg-host')") is False      # no panel on a Google page
+
+
+def test_a_google_page_without_the_marker_is_left_alone(ctx):
+    google_fake(ctx)
+    p = ctx.new_page()
+    p.add_init_script(f"localStorage.setItem('gm_lens_image', JSON.stringify({PIXELS!r}))")
+    p.goto("https://www.google.com/")
+    p.wait_for_timeout(600)
+    assert p.evaluate("() => document.getElementById('box').value") == ""

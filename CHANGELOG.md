@@ -3,9 +3,9 @@
 ## 5.8
 
 **Google Lens**
-- New button *Search this photo on Google Lens* (Search drawer, Google Lens group). A published photo opens its Lens results in one click, through Google's image-link address: nothing is read from or typed into a Google page, and the script still only contacts PlatesMania. A photo that is only on your computer (upload page) is copied to the clipboard and Lens opens: press Ctrl+V.
-- The prompt is now in English and no longer shown in the panel: one button copies it. The answer table accepts `Category | 1 | 2 | 3`.
-- The panel fits its drawer: the answer box and the three-column result no longer overflow.
+- A photo chosen on the upload page is searched on Google Lens by itself, in a background tab (option *Search each new photo by itself*, on by default). The button *Search this photo on Google Lens* does the same on demand, also on a photo page.
+- How: the panel saves the photo (its address, or the photo itself while it is not published) and opens Google; on that page only, the script puts the photo in Google's "paste an image link" box and starts the search, as the box is used by hand. Nothing is read from Google. This needs two new permissions, `GM_setValue` / `GM_getValue`, and the script now also runs on `www.google.*` (and stops at once there unless the panel opened the page): Tampermonkey may ask to confirm the update.
+- The prompt is now in English and no longer shown in the panel: one button copies it. The answer table accepts `Category | 1 | 2 | 3`. The panel fits its drawer.
 
 ## 5.7
 

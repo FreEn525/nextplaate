@@ -7,8 +7,11 @@
 // @description  PlatesMania - NextPlaate: post and upload PlatesMania photos faster. Front/rear descriptions, auto edit & fill, auto-like, shortcuts, batch upload (one tab per photo).
 // @match        https://platesmania.com/*
 // @match        https://*.platesmania.com/*
+// @match        https://www.google.*/*
 // @require      https://cdn.jsdelivr.net/npm/libheif-js@1.19.8/libheif-wasm/libheif-bundle.js
 // @grant        GM_openInTab
+// @grant        GM_setValue
+// @grant        GM_getValue
 // @grant        unsafeWindow
 // @run-at       document-idle
 // ==/UserScript==
@@ -17,6 +20,8 @@
   'use strict';
   if (window.top !== window.self) return;           // ignore iframes
   if (document.getElementById('pmg-host')) return;  // already loaded
+  // A Google page (the script also matches Google, for Lens): the photo goes into Google's box, nothing else starts here
+  if (!/(^|\.)platesmania\.com$/.test(location.hostname)) { lensOnGoogle(); return; }
 
   /* =====================================================================
    *  STORAGE  (survives page navigation)
@@ -1655,10 +1660,9 @@
   });
   /* =====================================================================
    *  GOOGLE LENS  (in the panel: search the photo, copy the prompt, paste the answer shown in 3 columns)
-   *    A published photo is searched with Google's own address for an image link (lens.google.com/uploadbyurl): one click opens
-   *    the results. A photo that is only on the computer (upload page, not published yet) is put on the clipboard and Lens is
-   *    opened: Ctrl+V pastes it there. Nothing is read from or typed into a Google page, and the script keeps contacting
-   *    PlatesMania only. The prompt is not shown: the user copies it with one button.
+   *    The panel saves the photo for the Google side (66-lens-google.js) and opens Google in a tab: the photo goes into Google's
+   *    "paste an image link" box and the search starts. On the upload page this happens by itself as soon as a photo is chosen.
+   *    The prompt is not shown: the user copies it with one button.
    *    The answer is a table: one row per category (brand, model, generation), three candidates each. It is only read and shown
    *    here: nothing is typed into the form.
    * ===================================================================== */
@@ -1673,38 +1677,35 @@
     'If the photo does not show enough detail for a category, write "unknown" instead of guessing.',
     'Answer only with a table, no text around it, with the columns: Category | 1 | 2 | 3.'
   ].join('\n');
+  settings.define('lens_auto', '1', 'Search each new photo on Google Lens', 'lens');
 
-  // The photo to search. Upload page: the preview #zoomimg (a 1-pixel placeholder until a photo is chosen). Other pages: the main
-  // photo of the page (the thumbnails of a gallery are many photos: not guessed). { src, local }: local = only on this computer.
+  // The photo to search: on the upload page the preview #zoomimg (a 1-pixel placeholder until a photo is chosen; its address is the
+  // photo itself while it is not published), on another page the main photo. '' when there is none.
+  const LENS_PLACEHOLDER = /^data:image\/gif/i;
   function lensPhoto() {
-    let img = here.add ? document.getElementById('zoomimg') : [...document.images].find(i => /\/\/img\d+\.platesmania\.com\/\d+\/m\/\d+\.jpg/i.test(i.src));
-    if (!img || !img.src || img.naturalWidth <= 1) return null;
-    const src = img.src.replace(/\/s\/(\d+\.jpg)/, '/m/$1');
-    return { src, local: !/^https?:/i.test(src), img };
+    const img = here.add ? document.getElementById('zoomimg') : [...document.images].find(i => /\/\/img\d+\.platesmania\.com\/\d+\/m\/\d+\.jpg/i.test(i.src));
+    return img && img.src && !LENS_PLACEHOLDER.test(img.src) ? img.src.replace(/\/s\/(\d+\.jpg)/, '/m/$1') : '';
   }
 
-  const lensUrl = photo => 'https://lens.google.com/uploadbyurl?url=' + encodeURIComponent(photo);
-
-  // A photo on this computer as a PNG blob, the only image format the clipboard accepts
-  async function lensPng(img) {
-    const canvas = document.createElement('canvas');
-    canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
-    canvas.getContext('2d').drawImage(img, 0, 0);
-    return new Promise((ok, no) => canvas.toBlob(b => (b ? ok(b) : no(new Error('no image'))), 'image/png'));
+  // Hands the photo to the Google side and opens Google; in the background when the search starts by itself
+  function lensStart(photo, background) {
+    GM_setValue('lens_image', photo);
+    const url = lensMarkedUrl();
+    try { if (typeof GM_openInTab === 'function') { GM_openInTab(url, { active: !background, insert: true, setParent: true }); return true; } } catch (e) { /* the popup below */ }
+    return !!window.open(url, '_blank');
   }
 
-  async function lensSearch() {
-    const photo = lensPhoto();
-    if (!photo) { setStatus('No photo on this page yet: choose or upload one first.', 3500); return; }
-    if (!photo.local) { window.open(lensUrl(photo.src), '_blank', 'noopener'); return; }
-    // not published: Google cannot fetch it, so the photo goes to the clipboard and Lens opens to receive it
-    try {
-      await navigator.clipboard.write([new ClipboardItem({ 'image/png': await lensPng(photo.img) })]);
-      window.open('https://lens.google.com/', '_blank', 'noopener');
-      setStatus('Photo copied. In Google Lens, press Ctrl+V to paste it.', 6000);
-    } catch (e) {
-      setStatus('Could not copy the photo. Open Google Lens and upload it by hand.', 5000);
-    }
+  // A photo chosen on the upload page changes the address of #zoomimg: search it at once (not at load: a photo already there was seen)
+  let lensSent = '';
+  function lensWatch() {
+    const img = document.getElementById('zoomimg');
+    if (!img) return;
+    new MutationObserver(() => setTimeout(() => {
+      const photo = lensPhoto();
+      if (!settings.on('lens_auto') || !photo || photo === lensSent) return;
+      lensSent = photo;
+      if (lensStart(photo, true)) setStatus('Photo sent to Google Lens (new tab).', 3500);
+    }, 300)).observe(img, { attributes: true, attributeFilter: ['src'] });
   }
 
   // "| Brand | Peugeot | Citroën | Renault |" -> { category: 'Brand', candidates: ['Peugeot', 'Citroën', 'Renault'] }
@@ -1736,6 +1737,7 @@
       drawer: 'search', title: 'Google Lens', pages: ['add', 'edit', 'gallery'],
       build: () => [
         h('button', { id: 'lensSearch', class: 'btn', text: 'Search this photo on Google Lens' }),
+        h('label', { class: 'chk' }, h('input', { type: 'checkbox', id: 'lensAuto' }), 'Search each new photo by itself'),
         h('div', { class: 'btnrow' },
           h('button', { id: 'lensCopy', class: 'btn ghost', text: 'Copy the prompt' }),
           h('button', { id: 'lensOpen', class: 'btn ghost', text: 'Open Lens' })),
@@ -1745,7 +1747,14 @@
       ]
     }],
     init: () => {
-      $('lensSearch').onclick = lensSearch;
+      $('lensSearch').onclick = () => {
+        const photo = lensPhoto();
+        if (!photo) { setStatus('No photo on this page yet: choose or upload one first.', 3500); return; }
+        lensStart(photo, false);
+      };
+      $('lensAuto').checked = settings.on('lens_auto');
+      $('lensAuto').onchange = () => settings.set('lens_auto', $('lensAuto').checked ? '1' : '0');
+      lensWatch();
       $('lensCopy').onclick = () => {
         navigator.clipboard.writeText(LENS_PROMPT).then(() => setStatus('Prompt copied.', 2500), () => setStatus('Could not copy the prompt.', 4000));
       };
@@ -1753,6 +1762,47 @@
       $('lensShow').onclick = lensShow;
     }
   });
+  /* =====================================================================
+   *  GOOGLE LENS, ON THE GOOGLE SIDE  (the same script, opened by the Lens group of the panel)
+   *    The panel saves the photo (a public address, or the photo itself for one not published yet) with GM_setValue and opens
+   *    https://www.google.com/?olud&src=pm. This code runs on that Google page only: it puts the photo in the "paste an image
+   *    link" box of Google's search by image and starts the search, the way the box is used by hand.
+   *    It runs only on the pages the panel opened (the marker in the address) and reads nothing from Google. On any Google page the
+   *    script stops here: no panel, no other feature.
+   * ===================================================================== */
+  // Only function declarations here: they run from core/00-open.js, before the rest of the script has set anything up
+  function lensMarkedUrl() { return 'https://www.google.com/?olud&src=pm'; }
+
+  function onLensPage() {
+    try {
+      const u = new URL(location.href);
+      return /^www\.google\./.test(u.hostname) && u.searchParams.has('olud') && u.searchParams.get('src') === 'pm';
+    } catch (e) { return false; }
+  }
+
+  // Google's own markup: the jsname values are the ones of the box and the search button today, the others are a fallback
+  function lensOnGoogle() {
+    if (!onLensPage()) return;
+    let done = false, tries = 0;
+    const first = (...sel) => sel.map(s => document.querySelector(s)).find(Boolean);
+    const attempt = () => {
+      if (done) return;
+      const photo = GM_getValue('lens_image', '');
+      const box = first('input[jsname="W7hAGe"]', 'input.cB9M7', 'input[type="text"]');
+      const go = first('div[role="button"][jsname="ZtOxCb"]', 'button[type="submit"]', 'button, div[role="button"]');
+      if (!photo || !box || !go) return;
+      done = true;
+      box.focus();
+      box.value = photo;
+      box.dispatchEvent(new Event('input', { bubbles: true }));
+      box.dispatchEvent(new Event('change', { bubbles: true }));
+      go.click();
+      // when the click did nothing, Enter in the box does the same
+      setTimeout(() => box.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, cancelable: true, key: 'Enter', code: 'Enter', which: 13, keyCode: 13 })), 400);
+    };
+    const timer = setInterval(() => { if (done || tries++ > 120) clearInterval(timer); else attempt(); }, 150);   // about 18 s
+    attempt();
+  }
   /* =====================================================================
    *  SETTINGS DRAWER  (switch a feature off or on; the page is reloaded to apply it)
    *    One line per feature that has an id and a label (registerFeature). A switched-off feature has no control,

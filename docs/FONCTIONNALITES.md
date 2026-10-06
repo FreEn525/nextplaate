@@ -53,7 +53,8 @@ NextPlaate est un script Tampermonkey (userscript) pour [PlatesMania](https://pl
 - Compatible AZERTY : `Ctrl+A` se lit sur la touche `a` (`e.key`), pas sur la position physique.
 
 ### Google Lens (tiroir `search`, pages d'ajout, de modification et de galerie)
-- **Search this photo on Google Lens** : photo publiée = résultats de Lens dans un nouvel onglet (`lens.google.com/uploadbyurl`) ; photo seulement sur l'ordinateur (page d'ajout) = copiée dans le presse-papiers, Lens s'ouvre, Ctrl+V. Aucune page Google n'est lue ni remplie.
+- **Recherche automatique** : une photo choisie sur la page d'ajout est cherchée sur Google Lens toute seule, dans un onglet en arrière-plan (option « Search each new photo by itself »). Le bouton **Search this photo on Google Lens** le fait à la demande.
+- Principe : le panneau garde la photo (`GM_setValue`) et ouvre `https://www.google.com/?olud&src=pm` ; sur cette page seulement (le marqueur est dans l'adresse), le script colle la photo dans la case « coller un lien d'image » de Google et lance la recherche. Rien n'est lu sur Google (`src/features/66-lens-google.js`).
 - Prompt (en anglais, non affiché) copié par un bouton pour une IA, puis réponse collée en tableau et affichée en trois colonnes (marque, modèle, génération).
 
 ### Développeur (tiroir `dev`, seulement dans le build dev)
