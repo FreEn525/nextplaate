@@ -577,18 +577,18 @@
    *  PAN AND ZOOM  (for an SVG map: the world, the regions of a country)
    *    The viewBox is the window on the map. The wheel zooms at the pointer, a drag moves the map (and the click that ends a drag opens
    *    nothing), buttons zoom by steps and go to a preset view.
-   *      const pz = panZoom(svg, { w, h, max: 40, onChange: zoom => ... });   // w, h: the size of the whole map; zoom: 1 = the whole map
+   *      const pz = panZoom(svg, { w, h, max: 40, home: 'World', onChange: zoom => ... });   // w, h: the size of the whole map; zoom: 1 = the whole map
    *      pz.set(x, y, width)    pz.zoomAt(factor, x, y)    pz.reset()    pz.toolbar([{ label, title, view: [x, y, width] }])
    * ===================================================================== */
-  function panZoom(svg, { w: W, h: H, max = 40, onChange = () => {} }) {
+  function panZoom(svg, { w: W, h: H, max = 40, home = 'World', onChange = () => {} }) {
     let box = [0, 0, W];
-    const label = h('span', { class: 'mute zl', text: 'World' });
+    const label = h('span', { class: 'mute zl', text: home });
     const set = (x, y, w) => {
       w = Math.min(W, Math.max(W / max, w));
       const hh = w * H / W;
       box = [Math.min(W - w, Math.max(0, x)), Math.min(H - hh, Math.max(0, y)), w];
       svg.setAttribute('viewBox', `${box[0]} ${box[1]} ${w} ${hh}`);
-      label.textContent = w >= W - 0.5 ? 'World' : `\u00d7${(W / w).toFixed(1)}`;
+      label.textContent = w >= W - 0.5 ? home : `\u00d7${(W / w).toFixed(1)}`;
       onChange(W / w);
     };
     const zoomAt = (factor, cx, cy) => {                      // cx, cy in map units: the point that stays where it is
@@ -615,7 +615,7 @@
     const tool = (text, title, run) => h('button', { type: 'button', class: 'pill', text, title, onclick: run });
     const toolbar = (presets = []) => h('div', { class: 'views' },
       tool('+', 'Zoom in', () => zoomAt(1.5, ...centre())), tool('\u2212', 'Zoom out', () => zoomAt(1 / 1.5, ...centre())),
-      tool('World', 'The whole map', () => set(0, 0, W)), presets.map(p => tool(p.label, p.title, () => set(...p.view))),
+      tool(home, 'The whole map', () => set(0, 0, W)), presets.map(p => tool(p.label, p.title, () => set(...p.view))),
       label, h('span', { class: 'mute', text: 'Scroll to zoom, drag to move' }));
     return { set, zoomAt, reset: () => set(0, 0, W), toolbar };
   }
@@ -1074,14 +1074,23 @@
   const REGION_API = 'https://www.geoboundaries.org/api/current/gbOpen/';
   const regionGeoCache = new Map();
 
-  async function regionFetchJson(url) {
+  // what: the step, named in the error so that a failure says where it happened ("the list of shapes: Failed to fetch")
+  async function regionFetchJson(url, what) {
     const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), 60000);
     try {
       const res = await fetch(url, { signal: ctrl.signal });
-      if (!res.ok) throw new Error('geoBoundaries answered ' + res.status);
+      if (!res.ok) throw new Error('answered ' + res.status);
       return await res.json();
+    } catch (e) {
+      log('region shapes', what, url, e.message);
+      throw new Error(`${what}: ${e.name === 'AbortError' ? 'no answer in 60 s' : e.message}`);
     } finally { clearTimeout(timer); }
   }
+
+  // The API names its files on github.com/<owner>/<repo>/raw/<commit>/<path>. That address answers with a redirect to
+  // media.githubusercontent.com (the big files are stored there) and the redirect has no CORS header, so a page cannot follow it: the
+  // address of the media server, which does allow it, is used directly.
+  const regionFileUrl = url => String(url).replace(/^https:\/\/github\.com\/([^/]+)\/([^/]+)\/raw\/([^/]+)\/(.+)$/, 'https://media.githubusercontent.com/media/$1/$2/$3/$4');
 
   // The rings of a feature, as [[lon, lat], ...] lists
   const regionRings = geometry => (geometry.type === 'Polygon' ? [geometry.coordinates] : geometry.coordinates).flat();
@@ -1105,14 +1114,14 @@
   async function regionShapes(iso3, level) {
     const key = iso3 + level;
     if (regionGeoCache.has(key)) return regionGeoCache.get(key);
-    const meta = await regionFetchJson(`${REGION_API}${iso3}/${level}/`);
-    const geo = await regionFetchJson(meta.simplifiedGeometryGeoJSON);
+    const meta = await regionFetchJson(`${REGION_API}${iso3}/${level}/`, 'geoBoundaries (the list of shapes)');
+    const geo = await regionFetchJson(regionFileUrl(meta.simplifiedGeometryGeoJSON), 'geoBoundaries (the shapes file)');
     let x0 = 180, x1 = -180, y0 = 90, y1 = -90;
     for (const f of geo.features) for (const ring of regionRings(f.geometry)) for (const [lon, lat] of ring) { x0 = Math.min(x0, lon); x1 = Math.max(x1, lon); y0 = Math.min(y0, lat); y1 = Math.max(y1, lat); }
     const k = 1000 / ((x1 - x0) * Math.cos((y0 + y1) / 2 * Math.PI / 180));
     const project = (lon, lat) => [(lon - x0) * Math.cos((y0 + y1) / 2 * Math.PI / 180) * k, (y1 - lat) * k];
     const h_ = Math.ceil((y1 - y0) * k) + 2;
-    const shapes = geo.features.map(f => ({ name: f.properties.shapeName || '', iso: f.properties.shapeISO || '', d: regionPath(regionRings(f.geometry), project, 0.6) })).filter(s => s.d);
+    const shapes = geo.features.map(f => ({ name: f.properties.shapeName || '', iso: f.properties.shapeISO || '', d: regionPath(regionRings(f.geometry), project, 1) })).filter(s => s.d);
     const result = { w: 1000, h: h_, shapes, license: meta.boundaryLicense || '', year: meta.boundaryYearRepresented || '' };
     regionGeoCache.set(key, result);
     return result;
@@ -4366,7 +4375,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
       title.textContent = r ? `${r.code ? r.code + ' ' : ''}${r.name}: ${n ? n + ' photo' + (n > 1 ? 's' : '') : 'no photo yet'}` : s.name;
       svg.append(r && n ? svgEl('a', { href: link(r), target: '_blank', rel: 'noopener noreferrer' }, title, shape) : svgEl('g', null, title, shape));
     });
-    const pz = panZoom(svg, { w: geo.w, h: geo.h });
+    const pz = panZoom(svg, { w: geo.w, h: geo.h, home: 'Whole country' });
     const seen = regions.filter(r => count(r) > 0).sort((a, b) => count(b) - count(a));
     const lost = missing.filter(r => count(r) > 0);
     const total = seen.reduce((n, r) => n + count(r), 0);

@@ -9,14 +9,23 @@
   const REGION_API = 'https://www.geoboundaries.org/api/current/gbOpen/';
   const regionGeoCache = new Map();
 
-  async function regionFetchJson(url) {
+  // what: the step, named in the error so that a failure says where it happened ("the list of shapes: Failed to fetch")
+  async function regionFetchJson(url, what) {
     const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), 60000);
     try {
       const res = await fetch(url, { signal: ctrl.signal });
-      if (!res.ok) throw new Error('geoBoundaries answered ' + res.status);
+      if (!res.ok) throw new Error('answered ' + res.status);
       return await res.json();
+    } catch (e) {
+      log('region shapes', what, url, e.message);
+      throw new Error(`${what}: ${e.name === 'AbortError' ? 'no answer in 60 s' : e.message}`);
     } finally { clearTimeout(timer); }
   }
+
+  // The API names its files on github.com/<owner>/<repo>/raw/<commit>/<path>. That address answers with a redirect to
+  // media.githubusercontent.com (the big files are stored there) and the redirect has no CORS header, so a page cannot follow it: the
+  // address of the media server, which does allow it, is used directly.
+  const regionFileUrl = url => String(url).replace(/^https:\/\/github\.com\/([^/]+)\/([^/]+)\/raw\/([^/]+)\/(.+)$/, 'https://media.githubusercontent.com/media/$1/$2/$3/$4');
 
   // The rings of a feature, as [[lon, lat], ...] lists
   const regionRings = geometry => (geometry.type === 'Polygon' ? [geometry.coordinates] : geometry.coordinates).flat();
@@ -40,14 +49,14 @@
   async function regionShapes(iso3, level) {
     const key = iso3 + level;
     if (regionGeoCache.has(key)) return regionGeoCache.get(key);
-    const meta = await regionFetchJson(`${REGION_API}${iso3}/${level}/`);
-    const geo = await regionFetchJson(meta.simplifiedGeometryGeoJSON);
+    const meta = await regionFetchJson(`${REGION_API}${iso3}/${level}/`, 'geoBoundaries (the list of shapes)');
+    const geo = await regionFetchJson(regionFileUrl(meta.simplifiedGeometryGeoJSON), 'geoBoundaries (the shapes file)');
     let x0 = 180, x1 = -180, y0 = 90, y1 = -90;
     for (const f of geo.features) for (const ring of regionRings(f.geometry)) for (const [lon, lat] of ring) { x0 = Math.min(x0, lon); x1 = Math.max(x1, lon); y0 = Math.min(y0, lat); y1 = Math.max(y1, lat); }
     const k = 1000 / ((x1 - x0) * Math.cos((y0 + y1) / 2 * Math.PI / 180));
     const project = (lon, lat) => [(lon - x0) * Math.cos((y0 + y1) / 2 * Math.PI / 180) * k, (y1 - lat) * k];
     const h_ = Math.ceil((y1 - y0) * k) + 2;
-    const shapes = geo.features.map(f => ({ name: f.properties.shapeName || '', iso: f.properties.shapeISO || '', d: regionPath(regionRings(f.geometry), project, 0.6) })).filter(s => s.d);
+    const shapes = geo.features.map(f => ({ name: f.properties.shapeName || '', iso: f.properties.shapeISO || '', d: regionPath(regionRings(f.geometry), project, 1) })).filter(s => s.d);
     const result = { w: 1000, h: h_, shapes, license: meta.boundaryLicense || '', year: meta.boundaryYearRepresented || '' };
     regionGeoCache.set(key, result);
     return result;

@@ -8,7 +8,8 @@ from fake_site import route_site
 PANEL = "document.getElementById('pmg-host').shadowRoot"
 MODAL = "document.getElementById('pmg-worldmap').shadowRoot"
 META = "https://www.geoboundaries.org/api/current/gbOpen/FRA/ADM2/"
-GEOJSON = "https://shapes.test/fra.geojson"
+GITHUB = "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/FRA/ADM2/geoBoundaries-FRA-ADM2_simplified.geojson"
+GEOJSON = "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/FRA/ADM2/geoBoundaries-FRA-ADM2_simplified.geojson"
 ASKED = []
 
 
@@ -30,7 +31,7 @@ def ctx(browser):
     def meta(route):
         ASKED.append(route.request.url)
         route.fulfill(status=200, content_type="application/json", headers={"access-control-allow-origin": "*"},
-                      body=json.dumps({"simplifiedGeometryGeoJSON": GEOJSON, "boundaryLicense": "Etalab Open License 2.0", "boundaryYearRepresented": "2022"}))
+                      body=json.dumps({"simplifiedGeometryGeoJSON": GITHUB, "boundaryLicense": "Etalab Open License 2.0", "boundaryYearRepresented": "2022"}))
 
     def geo(route):
         ASKED.append(route.request.url)
@@ -38,6 +39,7 @@ def ctx(browser):
 
     c.route(META, meta)
     c.route(GEOJSON, geo)
+    c.route(GITHUB, lambda r: r.abort())                      # the real github.com address answers with a redirect a page cannot follow (no CORS header)
     yield c
     c.close()
 
@@ -115,4 +117,11 @@ def test_a_failure_of_the_shapes_says_so(ctx):
     ctx.route(META, lambda r: r.fulfill(status=500, content_type="text/plain", headers={"access-control-allow-origin": "*"}, body="no"))
     page = open_map(ctx)
     choose(page)
-    assert "Not drawn" in page.evaluate(f"() => {MODAL}.textContent")
+    text = page.evaluate(f"() => {MODAL}.textContent")
+    assert "Not drawn" in text and "geoBoundaries (the list of shapes): answered 500" in text            # and the step that failed is named
+
+
+def test_the_shapes_are_fetched_from_the_media_server_not_from_the_github_redirect(ctx):
+    page = open_map(ctx)
+    choose(page)
+    assert GEOJSON in ASKED and GITHUB not in ASKED

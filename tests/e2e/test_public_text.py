@@ -3,7 +3,8 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-REPO = re.compile(r"github\.com|githubusercontent|FreEn525", re.I)
+# the project's own repository, by its owner or its name; other hosts the script needs (the shapes of geoBoundaries sit on github.com too) are fine
+REPO = re.compile(r"FreEn525|(github\.com|githubusercontent\.com)/[^\s'\"`]*nextplaate", re.I)
 
 
 def test_the_script_and_its_header_do_not_mention_the_repository():

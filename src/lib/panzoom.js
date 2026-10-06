@@ -2,18 +2,18 @@
    *  PAN AND ZOOM  (for an SVG map: the world, the regions of a country)
    *    The viewBox is the window on the map. The wheel zooms at the pointer, a drag moves the map (and the click that ends a drag opens
    *    nothing), buttons zoom by steps and go to a preset view.
-   *      const pz = panZoom(svg, { w, h, max: 40, onChange: zoom => ... });   // w, h: the size of the whole map; zoom: 1 = the whole map
+   *      const pz = panZoom(svg, { w, h, max: 40, home: 'World', onChange: zoom => ... });   // w, h: the size of the whole map; zoom: 1 = the whole map
    *      pz.set(x, y, width)    pz.zoomAt(factor, x, y)    pz.reset()    pz.toolbar([{ label, title, view: [x, y, width] }])
    * ===================================================================== */
-  function panZoom(svg, { w: W, h: H, max = 40, onChange = () => {} }) {
+  function panZoom(svg, { w: W, h: H, max = 40, home = 'World', onChange = () => {} }) {
     let box = [0, 0, W];
-    const label = h('span', { class: 'mute zl', text: 'World' });
+    const label = h('span', { class: 'mute zl', text: home });
     const set = (x, y, w) => {
       w = Math.min(W, Math.max(W / max, w));
       const hh = w * H / W;
       box = [Math.min(W - w, Math.max(0, x)), Math.min(H - hh, Math.max(0, y)), w];
       svg.setAttribute('viewBox', `${box[0]} ${box[1]} ${w} ${hh}`);
-      label.textContent = w >= W - 0.5 ? 'World' : `\u00d7${(W / w).toFixed(1)}`;
+      label.textContent = w >= W - 0.5 ? home : `\u00d7${(W / w).toFixed(1)}`;
       onChange(W / w);
     };
     const zoomAt = (factor, cx, cy) => {                      // cx, cy in map units: the point that stays where it is
@@ -40,7 +40,7 @@
     const tool = (text, title, run) => h('button', { type: 'button', class: 'pill', text, title, onclick: run });
     const toolbar = (presets = []) => h('div', { class: 'views' },
       tool('+', 'Zoom in', () => zoomAt(1.5, ...centre())), tool('\u2212', 'Zoom out', () => zoomAt(1 / 1.5, ...centre())),
-      tool('World', 'The whole map', () => set(0, 0, W)), presets.map(p => tool(p.label, p.title, () => set(...p.view))),
+      tool(home, 'The whole map', () => set(0, 0, W)), presets.map(p => tool(p.label, p.title, () => set(...p.view))),
       label, h('span', { class: 'mute', text: 'Scroll to zoom, drag to move' }));
     return { set, zoomAt, reset: () => set(0, 0, W), toolbar };
   }

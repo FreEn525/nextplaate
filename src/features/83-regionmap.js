@@ -32,7 +32,7 @@
       title.textContent = r ? `${r.code ? r.code + ' ' : ''}${r.name}: ${n ? n + ' photo' + (n > 1 ? 's' : '') : 'no photo yet'}` : s.name;
       svg.append(r && n ? svgEl('a', { href: link(r), target: '_blank', rel: 'noopener noreferrer' }, title, shape) : svgEl('g', null, title, shape));
     });
-    const pz = panZoom(svg, { w: geo.w, h: geo.h });
+    const pz = panZoom(svg, { w: geo.w, h: geo.h, home: 'Whole country' });
     const seen = regions.filter(r => count(r) > 0).sort((a, b) => count(b) - count(a));
     const lost = missing.filter(r => count(r) > 0);
     const total = seen.reduce((n, r) => n + count(r), 0);
