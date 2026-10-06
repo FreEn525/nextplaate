@@ -14,7 +14,8 @@
     .top{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:8px 12px;background:#fff;border-bottom:1px solid var(--line)}
     .top b{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--primary-h)}
     .top .msg{flex:1 1 150px;min-width:0;font-size:12px;color:var(--mute);overflow-wrap:anywhere}
-    .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;padding:12px}   /* three side by side where there is room, stacked under a photo */
+    .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,260px));gap:12px;padding:12px}   /* three side by side where there is room, stacked under a photo */
+    .colshead{padding:12px 12px 0}
     .col{display:flex;flex-direction:column;gap:6px;min-width:0}
     .none{font-size:13px;color:var(--mute)}
     .bar{display:flex;gap:8px;padding:0 12px 12px}

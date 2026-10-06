@@ -29,9 +29,13 @@
         const first = [];
         for (const r of rows) { if (!r.candidates[0]) break; first.push(r.candidates[0].id); }
         cardChoices(card, rows.map(r => ({ label: r.category, level: r.level, choices: r.candidates })),
-          { pick: lensPick, current: vehicleCurrent, action: { label: 'Fill with the first choices', path: first } });
-      }
-      if (similar && similar.length) card.body.prepend(lensSays(similar));              // above the columns (cardChoices empties the card first)
+          { pick: lensPick, current: vehicleCurrent });
+        const cols = card.body.querySelector('.cols');
+        if (cols) cols.before(h('div', { class: 'cat colshead', text: 'Not right? Pick another' }));
+        // above the columns (cardChoices empties the card first): the answer first, then what Google says, then the other choices
+        if (similar && similar.length) card.body.prepend(lensSays(similar));
+        if (first.length) card.body.prepend(lensBest(rows, first));
+      } else if (similar && similar.length) card.body.prepend(lensSays(similar));
     }
     $('lensMsg').textContent = message;
     const out = $('lensOut');
@@ -55,13 +59,21 @@
   const lensGuessNow = pin => vehicleGuess(lensNamed.concat(lensTitles), vehicleData(), pin, lensNamed.length);   // what Google names counts first, and more
   function lensPick(path) {
     vehicleFill(path);
-    lensShow('Lens results compared with PlatesMania. Click a choice to fill the menu.', lensGuessNow({ brand: path[0], model: path[1] }), lensNamed);
+    lensShow('Compared with the menus of this page.', lensGuessNow({ brand: path[0], model: path[1] }), lensNamed);
+  }
+
+  // The answer in one line, with the one button that uses it: the first choice of each menu
+  function lensBest(rows, first) {
+    const names = rows.map(r => r.candidates[0] && r.candidates[0].name).filter(Boolean);
+    return h('div', { class: 'cardbox best' }, h('div', { class: 'cat', text: 'Best match' }),
+      h('div', { class: 'vehline' }, h('b', { text: names.join(' › ') })),
+      h('div', { class: 'cardrow' }, h('button', { type: 'button', class: 'btn', text: 'Fill the menus', onclick: () => lensPick(first) })));
   }
 
   // What Google itself calls the vehicle, each name a button: it goes into the site's own "brand and model" box, which finds the
   // vehicle (the way out when the menus of the page do not name it)
   function lensSays(similar) {
-    return h('div', { class: 'cardbox says' }, h('div', { class: 'cat', text: 'Google says' }),
+    return h('div', { class: 'cardbox says' }, h('div', { class: 'cat', text: 'Google calls it' }),
       h('div', { class: 'pills' }, similar.slice(0, 3).map(q => h('button', { type: 'button', class: 'pill', text: q, title: 'Use in the brand and model box',
         onclick: () => { if (!vehicleSearchBox(q)) setStatus('This page has no brand and model box.', 3000); } }))));
   }
@@ -74,7 +86,7 @@
       lensTitles = Array.isArray(answer) ? answer : answer.titles || [];
       lensNamed = Array.isArray(answer) ? [] : answer.similar || [];
       const rows = lensGuessNow();
-      lensShow(rows[0].candidates.length ? 'Lens results compared with PlatesMania. Click a choice to fill the menu.' : 'Lens answered, but no PlatesMania brand was found in the results.', rows, lensNamed);
+      lensShow(rows[0].candidates.length ? 'Compared with the menus of this page.' : 'Lens answered, but no PlatesMania brand was found in the results.', rows, lensNamed);
       setStatus('Google Lens results are ready.', 3500);
     }, e => lensShow(e.message === 'no answer' ? 'No result came back from Google Lens. Open its tab to see the page.' : 'Could not open Google Lens: ' + e.message + '.', null));
     return true;

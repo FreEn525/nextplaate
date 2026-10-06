@@ -17,7 +17,7 @@ Notes prises pendant la collecte des séries. On les fait au fur et à mesure, d
 9. **Nouveau logo** : **fait** (version 5.9, appareil photo rond avec un plus ; panneau, `logo_nextplaate.svg` et `@icon`).
 10. **Plate check** : **fait** (version 5.10, lien « See the N photos of this plate on the site » dans la carte). Pouvoir ouvrir depuis la carte la recherche de la plaque (la page du site qui liste les photos déjà présentes).
 11. **Remplissage automatique par site d'informations** : **à faire**. Pour les plaques qui ont un site où toutes les informations sont trouvables, remplir automatiquement (étendre le registre officiel NL, IL ; voir `src/lib/registries.js`).
-12. **Design de Google Lens sur la page d'ajout** : **à faire**. Encore un peu étrange ; à revoir.
+12. **Design de Google Lens sur la page d'ajout** : **fait** (version 5.10 : « Best match » avec un seul bouton, « Google calls it », puis « Not right? Pick another »). Encore un peu étrange ; à revoir.
 
 13. **Clic sur le logo du panneau = mise à jour du script** : **fait** (version 5.10, `src/features/91-update.js`). Vérifier s'il existe une version plus récente et proposer de l'installer.
 14. **Positionnement responsive partout** : **fait** (version 5.10 : la barre de drapeaux est à côté du contenu s'il y a la place, sinon un onglet « Add a photo in… » au bord droit, au même endroit sur le profil et les pages d'ajout). À valider sur l'écran de l'ami. Les boîtes doivent être au même endroit sur tous les écrans. Exemple d'un ami : sur un profil, la boîte « Add a photo in… » avec les drapeaux se retrouve sous la photo de profil sur son petit écran (et revient à sa place s'il dézoome un peu) : trouver une solution qui marche à toute taille.

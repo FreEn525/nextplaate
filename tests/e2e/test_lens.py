@@ -129,7 +129,7 @@ def test_the_button_says_when_there_is_no_photo(page):
 
 def card_choices(page):
     page.wait_for_function(f"() => document.getElementById('pmg-lens-card') && {CARD}.querySelector('.chip')")
-    return page.evaluate(f"() => [...{CARD}.querySelectorAll('.cat, .chip')].map(e => e.textContent)")
+    return page.evaluate(f"() => [...{CARD}.querySelectorAll('.cols .cat, .cols .chip')].map(e => e.textContent)")
 
 
 def test_titles_become_brand_model_and_generation(page, ctx):
@@ -166,7 +166,7 @@ def test_a_choice_of_the_card_fills_the_menus_of_the_page(page, ctx):
     choose_photo(page)
     lens_answer(page, ["2019 Volkswagen Golf 8", "Volkswagen Golf Mk8 2020", "Volkswagen Polo"])
     card_choices(page)
-    page.evaluate(f"() => {CARD}.querySelectorAll('.chip')[2].click()")      # chips: the brand, then Golf, then Polo
+    page.evaluate(f"() => {CARD}.querySelectorAll('.cols .chip')[2].click()")      # chips: the brand, then Golf, then Polo
     assert page.evaluate("() => [document.querySelector('[name=markaavto]').value, document.getElementById('model').value]") == ["7", "71"]
     assert page.evaluate(f"() => {CARD}.querySelectorAll('.chip.on').length") == 2     # the brand and the model are marked
 
@@ -177,7 +177,7 @@ def test_the_card_fills_the_three_menus_at_once(page, ctx):
     choose_photo(page)
     lens_answer(page, ["2019 Volkswagen Golf 8", "Volkswagen Golf Mk8 2020", "Volkswagen Golf 2021"])
     card_choices(page)
-    page.evaluate(f"() => {CARD}.querySelector('.bar .btn').click()")
+    page.evaluate(f"() => {CARD}.querySelector('.cardbox.best .btn').click()")
     assert page.evaluate("() => [document.querySelector('[name=markaavto]').value, document.getElementById('model').value, document.getElementById('modgen').value]") == ["7", "70", "701"]
 
 
@@ -404,3 +404,14 @@ def test_a_google_search_that_is_not_a_lens_search_is_left_alone(ctx):
     p.goto("https://www.google.com/search?q=cars")                                                       # but this is an images search the user opened
     p.wait_for_timeout(1500)
     assert p.evaluate("() => localStorage.getItem('gm_br_lens_res')") is None
+
+
+def test_the_card_leads_with_the_best_match_then_what_google_calls_it_then_the_other_choices(page, ctx):
+    google_fake(ctx)
+    open_at(page, ADD)
+    choose_photo(page)
+    lens_answer(page, {"similar": ["Volkswagen Golf Mk8"], "titles": ["2019 Volkswagen Golf 8", "Volkswagen Golf Mk8 2020", "Volkswagen Golf 2021"]})
+    page.wait_for_function(f"() => {CARD}.querySelector('.cols .chip')", timeout=10000)
+    heads = page.evaluate(f"() => [...{CARD}.querySelectorAll('.cbody > .cardbox .cat, .cbody > .colshead')].map(e => e.textContent)")
+    assert heads == ["Best match", "Google calls it", "Not right? Pick another"]
+    assert page.evaluate(f"() => {CARD}.querySelector('.cardbox.best .vehline').textContent") == "Volkswagen › Golf › Mk8, 2019–"
