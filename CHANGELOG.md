@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.9.1
+
+**Fix**
+- A long label in a list of choices (the lookup sites in Settings) wraps instead of widening the drawer on a narrow screen. A fix version does not open the *What's new* window.
+
 ## 5.9
 
 **What's new window and signature**

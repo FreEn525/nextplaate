@@ -29,7 +29,7 @@ def open_page(ctx, seen=None):
 def test_a_first_install_shows_nothing_and_remembers_the_version(ctx):
     page = open_page(ctx)
     assert page.evaluate(f"() => !{MODAL}")
-    assert page.evaluate("() => localStorage.getItem('pmg_seen_version')") == "5.9"
+    assert page.evaluate("() => localStorage.getItem('pmg_seen_version')") == "5.9.1"
 
 
 def test_after_an_update_the_window_opens_once(ctx):
@@ -39,7 +39,7 @@ def test_after_an_update_the_window_opens_once(ctx):
     assert title == "What’s new in 5.9"
     sections = page.evaluate(f"() => [...{MODAL}.shadowRoot.querySelectorAll('.wn-section .cat')].map(e => e.textContent)")
     assert sections == ["On the upload page", "On profiles and series", "Good to know"]
-    assert page.evaluate("() => localStorage.getItem('pmg_seen_version')") == "5.9"
+    assert page.evaluate("() => localStorage.getItem('pmg_seen_version')") == "5.9.1"
     page.reload()
     page.wait_for_selector("#pmg-host")
     page.wait_for_timeout(300)
@@ -59,7 +59,7 @@ def test_settings_has_the_signature_with_the_profile_link(ctx):
     page = open_page(ctx)
     page.evaluate(f"() => {PANEL}.querySelector('.rbtn[data-drawer=\"settings\"]').click()")
     text = page.evaluate(f"() => {PANEL}.querySelector('.dsec[data-drawer=\"settings\"]').textContent")
-    assert "NextPlaate 5.9" in text and "© 2026 NextEnzzo" in text
+    assert "NextPlaate 5.9.1" in text and "© 2026 NextEnzzo" in text
     a = page.evaluate(f"() => {{ const a = [...{PANEL}.querySelectorAll('.dsec[data-drawer=\"settings\"] a')].find(x => x.textContent === 'NextEnzzo'); return [a.href, a.target, a.rel]; }}")
     assert a == ["https://platesmania.com/user121559", "_blank", "noopener noreferrer"]
 
@@ -78,4 +78,10 @@ def test_every_version_has_its_whats_new_entry():
     root = Path(__file__).resolve().parents[2]
     version = re.search(r"@version\s+(\S+)", (root / "src/meta/00-header.txt").read_text(encoding="utf-8")).group(1)
     first = re.search(r"WHATS_NEW = \[\{\s*version: '([^']+)'", (root / "src/lib/whatsnew.js").read_text(encoding="utf-8")).group(1)
-    assert first == version, f"@version is {version} but the newest entry of src/lib/whatsnew.js is {first}"
+    assert first == ".".join(version.split(".")[:2]), f"@version is {version} but the newest entry of src/lib/whatsnew.js is {first}"
+
+
+def test_a_fix_version_does_not_open_the_window(ctx):
+    page = open_page(ctx, seen="5.9")                                                          # 5.9 -> 5.9.1
+    assert page.evaluate(f"() => !{MODAL}")
+    assert page.evaluate("() => localStorage.getItem('pmg_seen_version')") == "5.9.1"

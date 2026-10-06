@@ -1,6 +1,7 @@
   /* =====================================================================
    *  ABOUT  (Settings drawer: who made it, which version, what is new)
-   *    The "What's new" window opens by itself once after an update (not on a first install: the script has just been chosen),
+   *    The "What's new" window opens by itself once after an update to a new minor version (not on a first install: the script has
+   *    just been chosen; not after a fix such as 5.9 -> 5.9.1),
    *    and any time from the button in Settings. It reads WHATS_NEW (src/lib/whatsnew.js).
    * ===================================================================== */
   const SCRIPT_VERSION = '__VERSION__';
@@ -25,7 +26,9 @@
     const seen = store.get('seen_version', '');
     if (seen === SCRIPT_VERSION) return;
     store.set('seen_version', SCRIPT_VERSION);
-    if (seen && WHATS_NEW[0] && WHATS_NEW[0].version === SCRIPT_VERSION) whatsNewOpen();
+    // only a new minor version (5.9 -> 5.10) opens the window: a fix (5.9 -> 5.9.1) is silent
+    const minor = v => String(v).split('.').slice(0, 2).join('.');
+    if (seen && minor(seen) !== minor(SCRIPT_VERSION) && WHATS_NEW[0] && WHATS_NEW[0].version === minor(SCRIPT_VERSION)) whatsNewOpen();
   }
 
   registerFeature({
