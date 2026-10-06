@@ -280,6 +280,14 @@ def test_google_lens_button_says_when_there_is_no_photo(page):
     assert "No photo on this page yet" in lens_status(page)
 
 
+CARD = "document.getElementById('pmg-lens-card').shadowRoot"
+
+
+def card_choices(page):
+    page.wait_for_function(f"() => document.getElementById('pmg-lens-card') && {CARD}.querySelector('.chip')")
+    return page.evaluate(f"() => [...{CARD}.querySelectorAll('.cat, .chip')].map(e => e.textContent)")
+
+
 def test_lens_titles_become_brand_model_and_generation(page, ctx):
     google_fake(ctx)
     open_at(page, ADD)
@@ -288,9 +296,8 @@ def test_lens_titles_become_brand_model_and_generation(page, ctx):
     stamp = json.loads(page.evaluate("() => localStorage.getItem('gm_lens_pending')"))
     titles = ["2019 Volkswagen Golf 8 - Wikipedia", "Volkswagen Golf Mk8 2020 review", "Golf GTI 2021", "Volkswagen Polo", "Audi RS 6 Avant"]
     page.evaluate("(v) => localStorage.setItem('gm_lens_titles', JSON.stringify(v))", json.dumps({"at": stamp, "titles": titles}))
-    page.wait_for_function("() => document.getElementById('pmg-host').shadowRoot.querySelector('.lens-cand')")
-    cands = page.evaluate("() => [...document.getElementById('pmg-host').shadowRoot.querySelectorAll('.lens-cat, .lens-cand')].map(e => e.textContent)")
-    assert cands[:3] == ["Brand", "Volkswagen", "—"] or cands[:3] == ["Brand", "Volkswagen", "Audi"]    # a weak second guess may stay
+    cands = card_choices(page)
+    assert cands[:3] == ["Brand", "Volkswagen", "Audi"] or cands[:2] == ["Brand", "Volkswagen"]    # a weak second guess may stay
     assert cands[cands.index("Model") + 1] == "Golf"
     assert cands[cands.index("Generation") + 1] == "Mk8, 2019–"       # 2019, 2020, 2021 are Mk8 years; 2019 is also Mk7's last
 
@@ -302,7 +309,7 @@ def test_lens_titles_of_another_search_are_ignored(page, ctx):
     page.wait_for_function("() => localStorage.getItem('gm_lens_pending')")
     page.evaluate("(v) => localStorage.setItem('gm_lens_titles', JSON.stringify(v))", json.dumps({"at": 1, "titles": ["Volkswagen Golf"]}))
     page.wait_for_timeout(1500)
-    assert page.evaluate("() => document.getElementById('pmg-host').shadowRoot.querySelectorAll('.lens-cand').length") == 0
+    assert page.evaluate("() => !!document.getElementById('pmg-lens-card').shadowRoot.querySelector('.chip')") is False
 
 
 def google_results(ctx):
@@ -356,6 +363,37 @@ def test_a_weak_guess_is_not_shown_as_a_second_brand(page, ctx):
     stamp = json.loads(page.evaluate("() => localStorage.getItem('gm_lens_pending')"))
     titles = ["Volkswagen Golf %d" % i for i in range(10)] + ["Audi A3"]
     page.evaluate("(v) => localStorage.setItem('gm_lens_titles', JSON.stringify(v))", json.dumps({"at": stamp, "titles": titles}))
-    page.wait_for_function("() => document.getElementById('pmg-host').shadowRoot.querySelector('.lens-cand')")
-    cands = page.evaluate("() => [...document.getElementById('pmg-host').shadowRoot.querySelectorAll('.lens-cat, .lens-cand')].map(e => e.textContent)")
-    assert cands[:4] == ["Brand", "Volkswagen", "—", "—"]
+    cands = card_choices(page)
+    assert cands[:3] == ["Brand", "Volkswagen", "Model"]          # no second brand: the next heading follows
+
+
+def lens_answer(page, titles):
+    page.evaluate("(src) => { document.getElementById('zoomimg').src = src; }", PIXELS)
+    page.wait_for_function("() => localStorage.getItem('gm_lens_pending')")
+    stamp = json.loads(page.evaluate("() => localStorage.getItem('gm_lens_pending')"))
+    page.evaluate("(v) => localStorage.setItem('gm_lens_titles', JSON.stringify(v))", json.dumps({"at": stamp, "titles": titles}))
+    page.wait_for_function(f"() => document.getElementById('pmg-lens-card') && {CARD}.querySelector('.chip')")
+
+
+def test_a_choice_of_the_card_fills_the_menus_of_the_page(page, ctx):
+    google_fake(ctx)
+    open_at(page, ADD)
+    lens_answer(page, ["2019 Volkswagen Golf 8", "Volkswagen Golf Mk8 2020", "Volkswagen Polo"])
+    page.evaluate(f"() => {CARD}.querySelectorAll('.chip')[2].click()")      # chips: the brand, then Golf, then Polo
+    assert page.evaluate("() => [document.querySelector('[name=markaavto]').value, document.getElementById('model').value]") == ["7", "71"]
+    assert page.evaluate(f"() => {CARD}.querySelectorAll('.chip.on').length") == 2     # the brand and the model are marked
+
+
+def test_the_card_fills_the_three_menus_at_once(page, ctx):
+    google_fake(ctx)
+    open_at(page, ADD)
+    lens_answer(page, ["2019 Volkswagen Golf 8", "Volkswagen Golf Mk8 2020", "Volkswagen Golf 2021"])
+    page.evaluate(f"() => {CARD}.querySelector('.bar .btn').click()")
+    assert page.evaluate("() => [document.querySelector('[name=markaavto]').value, document.getElementById('model').value, document.getElementById('modgen').value]") == ["7", "70", "701"]
+
+
+def test_the_menus_stay_untouched_until_a_choice_is_clicked(page, ctx):
+    google_fake(ctx)
+    open_at(page, ADD)
+    lens_answer(page, ["2019 Volkswagen Golf 8", "Volkswagen Golf Mk8 2020"])
+    assert page.evaluate("() => document.querySelector('[name=markaavto]').value") == "200"

@@ -55,46 +55,45 @@
     return m ? [+m[1], m[2] ? +m[2] : (/[–—-]\s*$/.test(name) ? 9999 : +m[1])] : null;
   }
 
-  // titles -> [{ category, candidates: [name, name, name] }]
+  // titles -> [{ category, level, candidates: [{ id, path, name }] }]; path = the menu values to set, from the brand down to this choice
   function lensGuess(titles, d) {
     const brandNames = d.brands.map(b => [b.id, b.name.replace(/\s*\(.*\)\s*$/, '')]);
     const brands = lensScore(titles, brandNames, 3);
-    const out = [{ category: 'Brand', candidates: brands.slice(0, 3).map(([id]) => d.brands.find(b => b.id === id).name) }];
     const top = brands[0] && brands[0][0];
-    const modelIds = top ? d.models[top] || [] : [];
-    const models = lensScore(titles, modelIds.map(id => [id, d.modelNames[id]]), 2, true);
-    out.push({ category: 'Model', candidates: models.slice(0, 3).map(([id]) => d.modelNames[id]) });
+    const out = [{ category: 'Brand', level: 0, candidates: brands.slice(0, 3).map(([id]) => ({ id, path: [id], name: d.brands.find(b => b.id === id).name })) }];
+    const models = lensScore(titles, (top ? d.models[top] || [] : []).map(id => [String(id), d.modelNames[id]]), 2, true);
+    out.push({ category: 'Model', level: 1, candidates: models.slice(0, 3).map(([id]) => ({ id, path: [top, id], name: d.modelNames[id] })) });
     // the generations of the best model whose years are the ones named in the titles
     const years = titles.join(' ').match(/\b(19[2-9]\d|20[0-3]\d)\b/g) || [];
     const gens = (models[0] ? d.gens[models[0][0]] || [] : []).filter(id => String(d.genNames[id]) !== '0').map(id => {
       const r = lensYears(d.genNames[id]);
-      return [d.genNames[id], r ? years.filter(y => +y >= r[0] && +y <= r[1]).length : 0];
-    }).filter(g => g[1]).sort((a, b) => b[1] - a[1]);
-    out.push({ category: 'Generation', candidates: gens.slice(0, 3).map(g => g[0]) });
+      return [String(id), r ? years.filter(y => +y >= r[0] && +y <= r[1]).length : 0];
+    }).filter(g => g[1]).sort((x, y) => y[1] - x[1]);
+    out.push({ category: 'Generation', level: 2, candidates: gens.slice(0, 3).map(([id]) => ({ id, path: [top, models[0][0], id], name: d.genNames[id] })) });
     return out;
   }
 
-  function lensShow(rows) {
+  // Where the answer goes: the card above the menus of the upload page, else the panel
+  function lensShow(message, rows) {
+    $('lensMsg').textContent = lensCardShow(message, rows) ? 'The answer is above the brand, model and generation menus.' : message;
     const out = $('lensOut');
     out.textContent = '';
+    if (!rows || document.getElementById('pmg-lens-card')) return;
     for (const r of rows) {
       out.appendChild(h('div', { class: 'lens-cat', text: r.category }));
-      out.appendChild(h('div', { class: 'lens-cands' }, ...[0, 1, 2].map(i => h('span', { class: 'lens-cand', text: r.candidates[i] || '—' }))));
+      out.appendChild(h('div', { class: 'lens-cands' }, ...[0, 1, 2].map(i => h('span', { class: 'lens-cand', text: r.candidates[i] ? r.candidates[i].name : '—' }))));
     }
   }
 
   // ---- the search
   let lensStamp = 0, lensTimer = null;
-  const lensSay = text => { const el = $('lensMsg'); if (el) el.textContent = text; };
-
   // Hands the photo to the Google side and opens Google; in the background when the search starts by itself
   function lensStart(photo, background) {
     lensStamp = Date.now();
     GM_setValue('lens_image', photo);
     GM_setValue('lens_pending', lensStamp);
     GM_setValue('lens_titles', '');
-    lensSay('Searching on Google Lens…');
-    $('lensOut').textContent = '';
+    lensShow('Searching on Google Lens…', null);
     clearInterval(lensTimer);
     let waited = 0;
     lensTimer = setInterval(() => {                       // the titles come from the other tab
@@ -103,12 +102,11 @@
       if (got && got.at === lensStamp) {
         clearInterval(lensTimer);
         const rows = lensGuess(got.titles, lensData());
-        lensShow(rows);
-        lensSay(rows[0].candidates.length ? 'Lens results compared with PlatesMania.' : 'Lens answered, but no PlatesMania brand was found in the results.');
-        setStatus('Google Lens results are ready (Search drawer).', 4000);
+        lensShow(rows[0].candidates.length ? 'Lens results compared with PlatesMania. Click a choice to fill the menu.' : 'Lens answered, but no PlatesMania brand was found in the results.', rows);
+        setStatus('Google Lens results are ready.', 3500);
       } else if (++waited > 120) {
         clearInterval(lensTimer);
-        lensSay('No result came back from Google Lens. Open its tab to see the page.');
+        lensShow('No result came back from Google Lens. Open its tab to see the page.', null);
       }
     }, 1000);
     const url = lensMarkedUrl();
@@ -136,7 +134,7 @@
       build: () => [
         h('button', { id: 'lensSearch', class: 'btn', text: 'Search this photo on Google Lens' }),
         h('label', { class: 'chk' }, h('input', { type: 'checkbox', id: 'lensAuto' }), 'Search each new photo by itself'),
-        h('p', { id: 'lensMsg', class: 'presult', text: 'Choose a photo: it is searched on Google Lens and the likely brand, model and generation appear here.' }),
+        h('p', { id: 'lensMsg', class: 'presult', text: 'Choose a photo: it is searched on Google Lens, and the likely brand, model and generation appear above the vehicle menus.' }),
         h('div', { id: 'lensOut', class: 'lens-out' })
       ]
     }],
