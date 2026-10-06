@@ -96,7 +96,6 @@ Chaque fonction s'enregistre avec `registerFeature({ groups, keys, onEscape, ini
 - `python -m pytest tests -q` (dossier `tests/e2e/`) : 77 tests (83 avec le build dev) sur une version simulée du site (`fake_site.py`). Pas d'accès réel à PlatesMania.
 - `python tests/offline/check_known.py` : 39 plaques validées à la main, tapées dans les pages sauvegardées.
 - `python tests/offline/check_db.py` : toutes les plaques de la base, dans la catégorie correspondante, en parallèle. Hors ligne.
-- `python tests/offline/check_formats.py` : les exemples de format affichés par le site, dans les pages sauvegardées.
 - `scripts/extract-fields.cjs` (données dérivées : `node scripts/build-data.mjs` → `data/`, voir `data/README.md`)
 - `scripts/extract-fields.cjs` : lit, pour chaque pays et catégorie, les champs visibles, à partir du JavaScript des pages.
 
