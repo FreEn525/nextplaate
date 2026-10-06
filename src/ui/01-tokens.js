@@ -51,6 +51,17 @@
     .chip:hover{background:var(--primary-tint);border-color:var(--primary-soft)}
     .chip.best{border-color:var(--primary-soft);background:var(--primary-soft);color:var(--primary-h);font-weight:600}
     .chip.on{border-color:var(--primary);box-shadow:inset 0 0 0 1px var(--primary)}
+    .pills{display:flex;flex-wrap:wrap;gap:6px}
+    .pill{min-height:var(--h-sm);padding:4px 12px;border:1px solid var(--line2);border-radius:var(--r);background:#fff;color:var(--ink);font:inherit;font-size:13px;cursor:pointer;overflow-wrap:anywhere}
+    .pill:hover{background:var(--primary-tint);border-color:var(--primary-soft)}
+    .pill.on{border-color:var(--primary);background:var(--primary-soft);color:var(--primary-h);font-weight:600}
+    .pill.removable:hover{background:var(--danger-soft);border-color:var(--danger-line);color:var(--danger-ink)}
+    .tagbox{display:flex;flex-direction:column;gap:12px;padding:12px}
+    .tagbox input[type=text]{width:100%}
+    .tagrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+    .tagrow .pills{flex:1 1 200px;min-width:0}
+    .tagquick,.taggroup{display:flex;flex-direction:column;gap:6px}
+    .taggroups{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px 18px}
     .flags{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:6px}
     .flagpick{display:flex;flex-direction:column;gap:8px}
     .flagpick input[type=text]{width:100%}

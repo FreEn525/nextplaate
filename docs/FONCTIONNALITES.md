@@ -52,6 +52,11 @@ NextPlaate est un script Tampermonkey (userscript) pour [PlatesMania](https://pl
 - Les raccourcis ne s'activent pas quand on tape dans un champ de texte.
 - Compatible AZERTY : `Ctrl+A` se lit sur la touche `a` (`e.key`), pas sur la position physique.
 
+### Tags (page d'ajout, `src/features/71-tags.js`)
+- La section « Add tags » du site (accordéon fermé, 52 tags à faire défiler, un « + » par tag) est remplacée par une carte : chaque tag est un bouton, rangé dans les 7 groupes du site ; une case de recherche trouve un tag en tapant (Entrée choisit le premier) ; les tags choisis sont des pastilles qu'on retire d'un clic, avec « Clear » ; les plus utilisés et ceux du dernier envoi sont à un clic (« Use again »).
+- Les cases du site restent la source de vérité : un clic coche ou décoche la vraie case et déclenche son événement `change`, donc le formulaire part comme avant et le compteur du site (« Tags (3) ») continue de marcher. La section du site est seulement masquée ; l'interrupteur de Settings la rend.
+- Ce qui est retenu (compteurs et dernier envoi) l'est à l'envoi du formulaire, dans le navigateur.
+
 ### Aperçu de la plaque en direct (page d'ajout, `src/features/69-preview.js`)
 - Le site dessine un aperçu de la plaque à partir des champs du pays et propose un bouton « Generate preview » ; tout changement des champs l'efface. Ici le bouton est pressé 0,7 s après la dernière frappe : l'aperçu est toujours là. Seuls les champs du pays comptent (ceux avant la photo), comme pour le site.
 - C'est la requête du site lui-même (le script ne fait que cliquer) : jamais deux aperçus à moins de 2 s, rien pendant un chargement, sans plaque, ou quand l'aperçu affiché correspond déjà aux champs. Un aperçu revenu en retard pour d'anciens champs est refait. Interrupteur dans Settings.

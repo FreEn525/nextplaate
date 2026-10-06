@@ -20,7 +20,8 @@
     .bar{display:flex;gap:8px;padding:0 12px 12px}
   `;
 
-  // opts: { id, title, after | before: the element the card goes behind or in front of }; null when there is no such element
+  // opts: { id, title, after | before: the element the card goes behind or in front of, closable: false for a card that must stay };
+  // null when there is no such element
   function inlineCard(opts) {
     let host = document.getElementById(opts.id);
     if (!host) {
@@ -31,7 +32,7 @@
       const root = host.attachShadow({ mode: 'open' });
       root.append(h('style', { text: UI_BASE + INLINE_CARD_CSS }), h('div', { class: 'card' },
         h('div', { class: 'top' }, h('b', { text: opts.title }), h('span', { class: 'msg' }),
-          h('button', { class: 'iconbtn', title: 'Hide', text: '×', onclick: () => { host.hidden = true; } })),
+          opts.closable === false ? null : h('button', { class: 'iconbtn', title: 'Hide', text: '×', onclick: () => { host.hidden = true; } })),
         h('div', { class: 'cbody' })));
     }
     const root = host.shadowRoot;
