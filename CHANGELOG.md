@@ -2,6 +2,9 @@
 
 ## 5.9 (in progress)
 
+**Profile: regions**
+- New feature *Profile: regions* (switch in Settings): on a member's profile, a button reads the site's region statistics page (nothing is asked on loading the profile) and shows how many regions (departments, districts, states...) of a country the member has a photo from, with a bar, each region seen as a link to those photos, and the list of the missing ones. The menu of countries comes from the page itself (no list in the script) and each country is asked once.
+
 **Your photos of this vehicle**
 - New feature *Your photos of this vehicle* (switch in Settings): on the upload page, under the brand / model / generation menus, a card says how many photos of that brand, that model and that generation you already have, each number a link to those photos. It follows the menus however they were filled (by you, the plate check or Lens). Counts come from your own gallery filtered on the vehicle, through the shared queue (most precise level first) and are kept for the visit.
 

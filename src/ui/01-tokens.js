@@ -65,6 +65,9 @@
     .stat a{font-size:18px;font-weight:700;color:var(--primary-h);text-decoration:none}
     .stat a:hover{text-decoration:underline}
     .stat span{font-size:12px}
+    .track{height:8px;background:var(--primary-tint);border:1px solid var(--line)}
+    .fill{height:100%;background:var(--primary)}
+    details.missing summary{cursor:pointer;font-size:12px;color:var(--mute)}
     .lookups{display:flex;flex-direction:column;gap:6px}
     .vehline{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;font-size:14px}
     .cardrow{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}

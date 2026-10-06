@@ -17,6 +17,7 @@ PNG = base64.b64decode(
     "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gAAAABJRU5ErkJggg=="
 )
 
+USERREG = []            # the region pages asked
 GALLERY_USR = []        # the queries of the member galleries asked
 SEARCHES = []     # the plates searched in the gallery, in order (a test reads it)
 
@@ -181,6 +182,18 @@ def route_site(context):
             cards = "".join(f'<div class="panel-body"><h4 class="text-center"><a href="/fr/nomer{i}">car</a></h4><small><p class="text-center"><a href="/gallery.php?{c}">gen</a></p></small></div>' for i, c in enumerate(cars))
             html = HEAD.format(title="Search") + f'<div class="breadcrumbs"><h1 class="pull-left">License plates found <b>{n}</b></h1></div>{cards}</body></html>'
             return route.fulfill(status=200, content_type="text/html; charset=utf-8", body=html)
+        if path == "/userreg.php":
+            system, uid = query.get("gallery", ["fr1-0"])[0].rsplit("-", 1)
+            USERREG.append(system)
+            flag = '<td class="region-flag-column"></td>'
+            def row(rid, code, name, n):
+                photos = f'<a href="/fr/gallery.php?region={rid}&amp;usr={uid}"><i class="fa fa-camera-retro color-blue"></i> {n}</a>' if n else "-"
+                return f'<tr class="odd" role="row">{flag}<td class="sorting_1"><span>{rid}</span></td><td><b>{code}</b></td><td align="left"><b>{name}</b></td><td>{photos}</td><td>-</td><td>-</td></tr>'
+            rows = {"fr1": [row(2103, "", "Without code of department", 3), row(21000, "01", "Ain", 0), row(21001, "02", "Aisne", 4), row(21002, "03", "Allier", 0), row(21003, "04", "Alpes", 2)],
+                    "de": [row(20001, "A", "Augsburg", 0), row(20002, "AA", "Ostalbkreis", 0)], "lu": []}.get(system, [])
+            menu = "".join(f'<option value="{c}-{uid}"{" selected" if c == system else ""}>{n}</option>' for c, n in [("fr1", "France (SIV)"), ("de", "Germany"), ("lu", "Luxembourg")])
+            html = HEAD.format(title="Statistics by regions") + f'<select name="gallery">{menu}</select><table id="example"><thead><tr><th></th><th></th><th>#</th><th>region</th><th></th><th></th><th></th></tr></thead><tbody>{"".join(rows)}</tbody></table></body></html>'
+            return route.fulfill(status=200, content_type="text/html; charset=utf-8", body=html)
         if path == "/gallery.php" and "usr" in query:
             # a member's gallery: the real total, or the count inside a window of dates
             GALLERY_USR.append(query)
@@ -202,7 +215,7 @@ def route_site(context):
             html = (HEAD.format(title="Profile") + '<div class="container content profile" style="max-width:1170px;width:100%;margin:0 auto"><div class="row"><div class="col-md-3 text-center">'
                     + f'<img class="img-responsive profile-img" width="120" height="120" alt="" src="https://forum.platesmania.com/data/avatars/l/121/{uid}.jpg"></div>'
                     + f'<div class="col-md-9"><h1><a href="https://forum.platesmania.com/members/member{uid}.{uid}/">member{uid}</a> <small class="pull-right">ID: {uid}</small></h1></div></div>'
-                    + f'<div class="service-block-v3"><span class="counter"><a href="/gallery.php?usr={uid}">715 </a>  <font style="color:green">(+28)</font></span></div></div></body></html>')
+                    + f'<div class="service-block-v3"><a href="/userreg.php?gallery=fr1-{uid}" class="tooltips"><i class="fa fa-globe"></i></a><span class="counter"><a href="/gallery.php?usr={uid}">715 </a>  <font style="color:green">(+28)</font></span></div></div></body></html>')
         elif path == "/add":
             html = HEAD.format(title="Add") + '<div class="content"><div class="container" style="max-width:1170px;width:100%;margin:0 auto"><h2>Choose a country</h2></div></div></body></html>'
         else:
