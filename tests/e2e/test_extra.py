@@ -35,8 +35,9 @@ def test_the_card_replaces_the_site_box_and_is_tall_from_the_start(ctx):
     page = open_add(ctx)
     assert page.evaluate("() => document.querySelector('textarea[name=dop]').closest('.row').style.display") == "none"
     assert page.evaluate(f"() => {CARD}.querySelector('textarea').getBoundingClientRect().height") >= 175
-    assert page.evaluate(f"() => {CARD}.querySelector('textarea').placeholder") == "Specify the place of the spot"
     assert page.evaluate(f"() => {CARD}.querySelector('.hint').textContent") == "Specify the place of the spot"
+    texts = page.evaluate(f"() => [{CARD}.querySelector('.hint').textContent, {CARD}.querySelector('textarea').placeholder, {CARD}.querySelector('.msg').textContent].filter(Boolean)")
+    assert len(texts) == len(set(texts))                                                                    # no sentence shown twice
 
 
 def test_what_is_typed_goes_into_the_site_box_and_the_form(ctx):

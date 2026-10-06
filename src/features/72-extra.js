@@ -17,7 +17,8 @@
     if (!card) return;
     block.style.display = 'none';
 
-    const mine = h('textarea', { rows: 8, placeholder: real.placeholder || '', value: real.value, 'aria-label': 'Extra information' });
+    // the site's hint is shown once, above the box; the box itself only says where to type
+    const mine = h('textarea', { rows: 8, placeholder: 'Type here…', value: real.value, 'aria-label': 'Extra information' });
     mine.className = 'extra';
     const count = h('span', { class: 'count' });
     const here_ = () => (store.get('place', '') || '').trim();                  // the location saved in Details (never its default)
@@ -47,7 +48,6 @@
     real.addEventListener('input', () => { if (real.value !== mine.value) { mine.value = real.value; show(); } });   // site -> card
     mine.addEventListener('focus', () => { if (real.value !== mine.value) { mine.value = real.value; show(); } });
 
-    card.message('Where it was spotted, anything worth knowing');
     card.body.append(h('div', { class: 'cardbox' },
       h('p', { class: 'hint', text: real.placeholder || 'Anything worth knowing about the photo.' }),
       mine, h('div', { class: 'cardrow' }, place, count)));
