@@ -9,7 +9,7 @@
     if (ctype === '8') return (shown ? selText('region2') : '') + spaceOut(n);
     const codes = shown ? [...el.options].map(o => o.text.trim()).filter(Boolean) : [];
     const r = shown ? selText('region2') : '';
-    if (ctype === '9') return n.replace(/^(\d+)(\D+\d+)$/, '$1 $2');   // 121 A20: the code is already in the number
+    if (ctype === '9') return (r && !n.endsWith(r) ? n + r : n).replace(/^(\d+)(\D+\d+)$/, '$1 $2');   // 121 A20: the number 121A, then the code menu (20)
     if (codes.some(c => n.endsWith(c))) return n;
     if (ctype === '10' && r) return spaceOut(n) + ' ' + r;
     return r ? n + r : n;
