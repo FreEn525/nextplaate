@@ -873,6 +873,7 @@
    *      vehicleData()                      the catalogue of the page
    *      vehicleGuess(texts, data)          the likely brand, model and generation named in some texts (titles, captions...)
    *      vehicleFill(path)                  chooses brand, model, generation in the menus of the page
+   *      vehicleSearchBox(text)             types a text in the site's own "brand and model" box (it finds the vehicle itself)
    *      vehicleCurrent()                   the values the menus have now
    *    A guess is [{ category, level, candidates: [{ id, path, name }] }]: level 0 brand, 1 model, 2 generation; path = the menu
    *    values from the brand down to the candidate, which is what vehicleFill takes.
@@ -899,6 +900,19 @@
     });
   }
 
+  // The site's own box for "brand and model" (a text with autocomplete): what is typed there is resolved by the site itself
+  function vehicleSearchBox(text) {
+    const box = document.getElementById('markamodtype');
+    if (!box) return false;
+    const jq = vehiclePage().jQuery;
+    try { if (jq) { jq(box).val(text).autocomplete('search', text); return true; } } catch (e) { /* the plain way below */ }
+    box.value = text;
+    box.dispatchEvent(new Event('input', { bubbles: true }));
+    box.dispatchEvent(new Event('change', { bubbles: true }));
+    return true;
+  }
+
+  const VEHICLE_STRONG = 5;      // what Google itself names counts as five titles: its naming is a curated entity, a title is a page's words
   const vehicleNorm = s => String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
   // A text near the top of a list counts more than one far down
   const vehicleWeight = i => 1 / (1 + i / 10);
@@ -907,7 +921,8 @@
   // inside a longer word (RS6 in RS6Avant, but also Gol in Golf); brands are whole words only ("ogle" is in "Google"). A name that is
   // part of a longer candidate which scores as well (Gol, Golf) is that candidate's echo: dropped. A candidate far behind the first
   // one is page noise, not a second guess: it needs a quarter of the best score.
-  function vehicleScore(texts, names, minLength, loose) {
+  // The first `strong` texts are named by an authority (what Google calls the vehicle): each counts as much as VEHICLE_STRONG ordinary texts.
+  function vehicleScore(texts, names, minLength, loose, strong) {
     const padded = texts.map(t => ' ' + vehicleNorm(t) + ' ');
     const compact = padded.map(t => t.replace(/ /g, ''));
     const found = new Map();
@@ -915,7 +930,7 @@
       const n = vehicleNorm(name), c = n.replace(/ /g, '');
       if (!n || c.length < minLength || /^\d+$/.test(c)) continue;
       let score = 0;
-      padded.forEach((t, i) => { score += vehicleWeight(i) * (t.includes(' ' + n + ' ') ? 1 : loose && c.length >= 3 && compact[i].includes(c) ? 0.5 : 0); });
+      padded.forEach((t, i) => { score += (i < strong ? VEHICLE_STRONG : vehicleWeight(i - (strong || 0))) * (t.includes(' ' + n + ' ') ? 1 : loose && c.length >= 3 && compact[i].includes(c) ? 0.5 : 0); });
       if (score) found.set(id, [score, c]);
     }
     const all = [...found].map(([id, [score, c]]) => [id, score, c]).sort((a, b) => b[1] - a[1]);
@@ -931,13 +946,13 @@
 
   // pin: { brand, model } the user chose: the models are those of that brand, the generations those of that model (a click on a
   // generation must never change the model the user picked)
-  function vehicleGuess(texts, d, pin) {
+  function vehicleGuess(texts, d, pin, strong) {
     pin = pin || {};
     const brandNames = d.brands.map(b => [b.id, b.name.replace(/\s*\(.*\)\s*$/, '')]);
-    const brands = vehicleScore(texts, brandNames, 3);
+    const brands = vehicleScore(texts, brandNames, 3, false, strong);
     const top = pin.brand || (brands[0] && brands[0][0]);
     const out = [{ category: 'Brand', level: 0, candidates: brands.slice(0, 3).map(([id]) => ({ id, path: [id], name: d.brands.find(b => b.id === id).name })) }];
-    const models = vehicleScore(texts, (top ? d.models[top] || [] : []).map(id => [String(id), d.modelNames[id]]), 2, true);
+    const models = vehicleScore(texts, (top ? d.models[top] || [] : []).map(id => [String(id), d.modelNames[id]]), 2, true, strong);
     out.push({ category: 'Model', level: 1, candidates: models.slice(0, 3).map(([id]) => ({ id, path: [top, id], name: d.modelNames[id] })) });
     const model = pin.model || (models[0] && models[0][0]);
     // the generations of that model (the best one unless pinned) whose years are the ones named in the texts
@@ -2094,7 +2109,7 @@
 
   // Where the answer goes: the card under the photo of the upload page (above the vehicle menus when the page has no photo block),
   // and always the panel, so both show it at once
-  function lensShow(message, rows) {
+  function lensShow(message, rows, similar) {
     const photo = document.getElementById('zoomimgid'), menus = document.querySelector('.pm-vehicle-fields-row');
     const card = inlineCard({ id: 'pmg-lens-card', title: 'Google Lens', after: photo, before: photo ? null : menus });
     if (card) {
@@ -2106,10 +2121,12 @@
         cardChoices(card, rows.map(r => ({ label: r.category, level: r.level, choices: r.candidates })),
           { pick: lensPick, current: vehicleCurrent, action: { label: 'Fill with the first choices', path: first } });
       }
+      if (similar && similar.length) card.body.prepend(lensSays(similar));              // above the columns (cardChoices empties the card first)
     }
     $('lensMsg').textContent = message;
     const out = $('lensOut');
     out.textContent = '';
+    if (similar && similar.length) out.appendChild(lensSays(similar));
     if (!rows) return;
     // the same choices as the card, stacked (the drawer is narrow), and clickable the same way
     for (const r of rows) {
@@ -2124,19 +2141,30 @@
 
   // A click on a choice fills the menus, then the guess is redone around what was picked: the models of the picked brand, the
   // generations of the picked model
-  let lensTitles = [];
+  let lensTitles = [], lensNamed = [];
+  const lensGuessNow = pin => vehicleGuess(lensNamed.concat(lensTitles), vehicleData(), pin, lensNamed.length);   // what Google names counts first, and more
   function lensPick(path) {
     vehicleFill(path);
-    lensShow('Lens results compared with PlatesMania. Click a choice to fill the menu.', vehicleGuess(lensTitles, vehicleData(), { brand: path[0], model: path[1] }));
+    lensShow('Lens results compared with PlatesMania. Click a choice to fill the menu.', lensGuessNow({ brand: path[0], model: path[1] }), lensNamed);
+  }
+
+  // What Google itself calls the vehicle, each name a button: it goes into the site's own "brand and model" box, which finds the
+  // vehicle (the way out when the menus of the page do not name it)
+  function lensSays(similar) {
+    return h('div', { class: 'cardbox says' }, h('div', { class: 'cat', text: 'Google says' }),
+      h('div', { class: 'pills' }, similar.slice(0, 3).map(q => h('button', { type: 'button', class: 'pill', text: q, title: 'Use in the brand and model box',
+        onclick: () => { if (!vehicleSearchBox(q)) setStatus('This page has no brand and model box.', 3000); } }))));
   }
 
   // The search: the photo goes to the Google side, the titles of the results come back
   function lensStart(photo, background) {
     lensShow('Searching on Google Lens…', null);
-    bridgeAsk('lens', { photo }, lensMarkedUrl(), { background, timeout: 120 }).then(titles => {
-      lensTitles = titles;
-      const rows = vehicleGuess(titles, vehicleData());
-      lensShow(rows[0].candidates.length ? 'Lens results compared with PlatesMania. Click a choice to fill the menu.' : 'Lens answered, but no PlatesMania brand was found in the results.', rows);
+    bridgeAsk('lens', { photo }, lensMarkedUrl(), { background, timeout: 120 }).then(answer => {
+      // { similar, titles }; an older answer is the titles alone
+      lensTitles = Array.isArray(answer) ? answer : answer.titles || [];
+      lensNamed = Array.isArray(answer) ? [] : answer.similar || [];
+      const rows = lensGuessNow();
+      lensShow(rows[0].candidates.length ? 'Lens results compared with PlatesMania. Click a choice to fill the menu.' : 'Lens answered, but no PlatesMania brand was found in the results.', rows, lensNamed);
       setStatus('Google Lens results are ready.', 3500);
     }, e => lensShow(e.message === 'no answer' ? 'No result came back from Google Lens. Open its tab to see the page.' : 'Could not open Google Lens: ' + e.message + '.', null));
     return true;
@@ -2182,8 +2210,10 @@
    *    Two steps, on the two pages Google shows:
    *      1. the page the panel opened (the marker in the address): the photo of the request goes into the "paste an image link" box
    *         of Google's search by image, and the search starts, the way the box is used by hand;
-   *      2. the results page that follows (within three minutes of the request): the titles of the results (links, headings, image
-   *         descriptions) are the answer to the request. The panel compares them with its menus.
+   *      2. the results page that follows (within three minutes of the request): the answer is { similar, titles }. similar = what
+   *         Google itself calls the vehicle (the "similar searches" chips: links with a thumbnail whose address carries the query and a
+   *         knowledge-graph id), titles = the titles of the results (links, headings, image descriptions). The panel compares both
+   *         with its menus, and gives more weight to what Google names.
    *    A Google page the panel did not ask for is left alone. On any Google page the script stops here: no panel, no other feature.
    *    Only function declarations: this runs from core/00-open.js, before the rest of the script is set up.
    * ===================================================================== */
@@ -2199,7 +2229,21 @@
     } catch (e) { return false; }
   }
 
-  // Step 2: the titles of the results, once the page has them (it fills in after loading)
+  // What Google names: the text of the query of each similar-search chip (Lens links them with a knowledge-graph id or a Lens surface
+  // and a thumbnail). Works in any language: it reads the address, not the words of the page.
+  function lensSimilar() {
+    const out = [];
+    document.querySelectorAll('a[href*="q="]').forEach(a => {
+      const href = a.getAttribute('href') || '';
+      if (!/[?&](kgmid|lns_surface)=/.test(href) || !a.querySelector('img')) return;
+      let q = '';
+      try { q = (new URL(href, location.href).searchParams.get('q') || '').replace(/\+/g, ' ').trim(); } catch (e) { return; }
+      if (q && !out.some(x => x.toLowerCase() === q.toLowerCase()) && out.length < 8) out.push(q);
+    });
+    return out;
+  }
+
+  // Step 2: the answer, once the page has the results (it fills in after loading)
   function lensReadResults() {
     const request = bridgePending('lens', 180);
     const results = /^lens\.google\./.test(location.hostname) || /^\/search/.test(location.pathname);
@@ -2215,11 +2259,14 @@
     };
     let tries = 0;
     const timer = setInterval(() => {
-      const titles = collect();
-      if (titles.length < 12 && ++tries <= 40) return;      // up to about 20 s for the results to appear
+      const titles = collect(), similar = lensSimilar();
+      tries++;
+      // the results are there (titles); Google's own naming comes with them or a little later (about 6 s more), else it is left out
+      const ready = titles.length >= 12 && (similar.length || tries >= 12);
+      if (!ready && tries <= 40) return;                    // up to about 20 s for the results to appear
       clearInterval(timer);
-      lensLog('titles found', titles.length, titles.slice(0, 5));
-      if (titles.length) bridgeAnswer('lens', request, titles);
+      lensLog('found', { titles: titles.length, similar }, titles.slice(0, 5));
+      if (titles.length || similar.length) bridgeAnswer('lens', request, { similar, titles });
     }, 500);
   }
 

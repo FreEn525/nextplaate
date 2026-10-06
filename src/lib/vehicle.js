@@ -5,6 +5,7 @@
    *      vehicleData()                      the catalogue of the page
    *      vehicleGuess(texts, data)          the likely brand, model and generation named in some texts (titles, captions...)
    *      vehicleFill(path)                  chooses brand, model, generation in the menus of the page
+   *      vehicleSearchBox(text)             types a text in the site's own "brand and model" box (it finds the vehicle itself)
    *      vehicleCurrent()                   the values the menus have now
    *    A guess is [{ category, level, candidates: [{ id, path, name }] }]: level 0 brand, 1 model, 2 generation; path = the menu
    *    values from the brand down to the candidate, which is what vehicleFill takes.
@@ -31,6 +32,19 @@
     });
   }
 
+  // The site's own box for "brand and model" (a text with autocomplete): what is typed there is resolved by the site itself
+  function vehicleSearchBox(text) {
+    const box = document.getElementById('markamodtype');
+    if (!box) return false;
+    const jq = vehiclePage().jQuery;
+    try { if (jq) { jq(box).val(text).autocomplete('search', text); return true; } } catch (e) { /* the plain way below */ }
+    box.value = text;
+    box.dispatchEvent(new Event('input', { bubbles: true }));
+    box.dispatchEvent(new Event('change', { bubbles: true }));
+    return true;
+  }
+
+  const VEHICLE_STRONG = 5;      // what Google itself names counts as five titles: its naming is a curated entity, a title is a page's words
   const vehicleNorm = s => String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
   // A text near the top of a list counts more than one far down
   const vehicleWeight = i => 1 / (1 + i / 10);
@@ -39,7 +53,8 @@
   // inside a longer word (RS6 in RS6Avant, but also Gol in Golf); brands are whole words only ("ogle" is in "Google"). A name that is
   // part of a longer candidate which scores as well (Gol, Golf) is that candidate's echo: dropped. A candidate far behind the first
   // one is page noise, not a second guess: it needs a quarter of the best score.
-  function vehicleScore(texts, names, minLength, loose) {
+  // The first `strong` texts are named by an authority (what Google calls the vehicle): each counts as much as VEHICLE_STRONG ordinary texts.
+  function vehicleScore(texts, names, minLength, loose, strong) {
     const padded = texts.map(t => ' ' + vehicleNorm(t) + ' ');
     const compact = padded.map(t => t.replace(/ /g, ''));
     const found = new Map();
@@ -47,7 +62,7 @@
       const n = vehicleNorm(name), c = n.replace(/ /g, '');
       if (!n || c.length < minLength || /^\d+$/.test(c)) continue;
       let score = 0;
-      padded.forEach((t, i) => { score += vehicleWeight(i) * (t.includes(' ' + n + ' ') ? 1 : loose && c.length >= 3 && compact[i].includes(c) ? 0.5 : 0); });
+      padded.forEach((t, i) => { score += (i < strong ? VEHICLE_STRONG : vehicleWeight(i - (strong || 0))) * (t.includes(' ' + n + ' ') ? 1 : loose && c.length >= 3 && compact[i].includes(c) ? 0.5 : 0); });
       if (score) found.set(id, [score, c]);
     }
     const all = [...found].map(([id, [score, c]]) => [id, score, c]).sort((a, b) => b[1] - a[1]);
@@ -63,13 +78,13 @@
 
   // pin: { brand, model } the user chose: the models are those of that brand, the generations those of that model (a click on a
   // generation must never change the model the user picked)
-  function vehicleGuess(texts, d, pin) {
+  function vehicleGuess(texts, d, pin, strong) {
     pin = pin || {};
     const brandNames = d.brands.map(b => [b.id, b.name.replace(/\s*\(.*\)\s*$/, '')]);
-    const brands = vehicleScore(texts, brandNames, 3);
+    const brands = vehicleScore(texts, brandNames, 3, false, strong);
     const top = pin.brand || (brands[0] && brands[0][0]);
     const out = [{ category: 'Brand', level: 0, candidates: brands.slice(0, 3).map(([id]) => ({ id, path: [id], name: d.brands.find(b => b.id === id).name })) }];
-    const models = vehicleScore(texts, (top ? d.models[top] || [] : []).map(id => [String(id), d.modelNames[id]]), 2, true);
+    const models = vehicleScore(texts, (top ? d.models[top] || [] : []).map(id => [String(id), d.modelNames[id]]), 2, true, strong);
     out.push({ category: 'Model', level: 1, candidates: models.slice(0, 3).map(([id]) => ({ id, path: [top, id], name: d.modelNames[id] })) });
     const model = pin.model || (models[0] && models[0][0]);
     // the generations of that model (the best one unless pinned) whose years are the ones named in the texts

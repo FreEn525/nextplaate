@@ -19,7 +19,7 @@
 
   // Where the answer goes: the card under the photo of the upload page (above the vehicle menus when the page has no photo block),
   // and always the panel, so both show it at once
-  function lensShow(message, rows) {
+  function lensShow(message, rows, similar) {
     const photo = document.getElementById('zoomimgid'), menus = document.querySelector('.pm-vehicle-fields-row');
     const card = inlineCard({ id: 'pmg-lens-card', title: 'Google Lens', after: photo, before: photo ? null : menus });
     if (card) {
@@ -31,10 +31,12 @@
         cardChoices(card, rows.map(r => ({ label: r.category, level: r.level, choices: r.candidates })),
           { pick: lensPick, current: vehicleCurrent, action: { label: 'Fill with the first choices', path: first } });
       }
+      if (similar && similar.length) card.body.prepend(lensSays(similar));              // above the columns (cardChoices empties the card first)
     }
     $('lensMsg').textContent = message;
     const out = $('lensOut');
     out.textContent = '';
+    if (similar && similar.length) out.appendChild(lensSays(similar));
     if (!rows) return;
     // the same choices as the card, stacked (the drawer is narrow), and clickable the same way
     for (const r of rows) {
@@ -49,19 +51,30 @@
 
   // A click on a choice fills the menus, then the guess is redone around what was picked: the models of the picked brand, the
   // generations of the picked model
-  let lensTitles = [];
+  let lensTitles = [], lensNamed = [];
+  const lensGuessNow = pin => vehicleGuess(lensNamed.concat(lensTitles), vehicleData(), pin, lensNamed.length);   // what Google names counts first, and more
   function lensPick(path) {
     vehicleFill(path);
-    lensShow('Lens results compared with PlatesMania. Click a choice to fill the menu.', vehicleGuess(lensTitles, vehicleData(), { brand: path[0], model: path[1] }));
+    lensShow('Lens results compared with PlatesMania. Click a choice to fill the menu.', lensGuessNow({ brand: path[0], model: path[1] }), lensNamed);
+  }
+
+  // What Google itself calls the vehicle, each name a button: it goes into the site's own "brand and model" box, which finds the
+  // vehicle (the way out when the menus of the page do not name it)
+  function lensSays(similar) {
+    return h('div', { class: 'cardbox says' }, h('div', { class: 'cat', text: 'Google says' }),
+      h('div', { class: 'pills' }, similar.slice(0, 3).map(q => h('button', { type: 'button', class: 'pill', text: q, title: 'Use in the brand and model box',
+        onclick: () => { if (!vehicleSearchBox(q)) setStatus('This page has no brand and model box.', 3000); } }))));
   }
 
   // The search: the photo goes to the Google side, the titles of the results come back
   function lensStart(photo, background) {
     lensShow('Searching on Google Lens…', null);
-    bridgeAsk('lens', { photo }, lensMarkedUrl(), { background, timeout: 120 }).then(titles => {
-      lensTitles = titles;
-      const rows = vehicleGuess(titles, vehicleData());
-      lensShow(rows[0].candidates.length ? 'Lens results compared with PlatesMania. Click a choice to fill the menu.' : 'Lens answered, but no PlatesMania brand was found in the results.', rows);
+    bridgeAsk('lens', { photo }, lensMarkedUrl(), { background, timeout: 120 }).then(answer => {
+      // { similar, titles }; an older answer is the titles alone
+      lensTitles = Array.isArray(answer) ? answer : answer.titles || [];
+      lensNamed = Array.isArray(answer) ? [] : answer.similar || [];
+      const rows = lensGuessNow();
+      lensShow(rows[0].candidates.length ? 'Lens results compared with PlatesMania. Click a choice to fill the menu.' : 'Lens answered, but no PlatesMania brand was found in the results.', rows, lensNamed);
       setStatus('Google Lens results are ready.', 3500);
     }, e => lensShow(e.message === 'no answer' ? 'No result came back from Google Lens. Open its tab to see the page.' : 'Could not open Google Lens: ' + e.message + '.', null));
     return true;

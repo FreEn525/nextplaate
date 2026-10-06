@@ -115,6 +115,7 @@ UPLOAD_PAGE = (
     + '<label class="pm-tag-type1-option" data-group-id="5" data-tag-id="24"><input id="CheckBox24" name="CheckBox[24]" type="checkbox"><span>taxicab</span></label>'
     + '</div></div></div></div></div></fieldset>'
     + '<script>document.getElementById("add-tags-picker").addEventListener("change", function () { var n = document.querySelectorAll("#add-tags-picker input:checked").length; var s = document.getElementById("add-tags-summary"); s.textContent = n ? "Tags (" + n + ")" : "Add tags"; });</script>'
+    + '<input id="markamodtype" class="ui-autocomplete-input" autocomplete="off">'
     + '<div class="row pm-vehicle-fields-row"><div class="pm-vehicle-column">'
     + '<select name="markaavto" onchange="changeBrand(this.value)"><option value="200">I don`t know...</option><option value="7">Volkswagen</option><option value="8">Audi</option></select>'
     + '<select id="model" name="model" onchange="changeModel(this.value)"></select>'

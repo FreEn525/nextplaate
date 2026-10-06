@@ -69,9 +69,13 @@ def google_fake(ctx):
     ctx.route("https://www.google.com/?**", lambda r: r.fulfill(status=200, content_type="text/html", body=inject(html)))
 
 
-def google_results(ctx):
+def google_results(ctx, similar=()):
+    """A results page: fifteen links, and the "similar searches" chips of Lens (a link with a thumbnail whose address carries q= and kgmid=)."""
     links = "".join(f'<a href="/x{i}">2019 Volkswagen Golf result number {i}</a>' for i in range(15))
-    ctx.route("https://www.google.com/search**", lambda r: r.fulfill(status=200, content_type="text/html", body=inject(f"<html><body>{links}</body></html>")))
+    chips = "".join(f'<a href="/search?q={q.replace(" ", "+")}&kgmid=/m/0{i}"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACw="></a>' for i, q in enumerate(similar))
+    # a link with a thumbnail but no knowledge-graph id is a picture result, not Google's naming
+    chips += '<a href="/search?q=not+a+chip"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACw="></a>'
+    ctx.route("https://www.google.com/search**", lambda r: r.fulfill(status=200, content_type="text/html", body=inject(f"<html><body>{chips}{links}</body></html>")))
 
 
 def ask_google(page, request):
@@ -217,7 +221,8 @@ def test_the_google_side_answers_with_the_titles_of_the_results(ctx):
     p.goto("https://www.google.com/search?q=lens")
     p.wait_for_function("() => localStorage.getItem('gm_br_lens_res')")
     answer = json.loads(json.loads(p.evaluate("() => localStorage.getItem('gm_br_lens_res')")))
-    assert answer["stamp"] == stamp and len(answer["data"]) == 15 and answer["data"][0].startswith("2019 Volkswagen Golf")
+    assert answer["stamp"] == stamp and len(answer["data"]["titles"]) == 15 and answer["data"]["titles"][0].startswith("2019 Volkswagen Golf")
+    assert answer["data"]["similar"] == []                                                                # this page has no similar-search chips
 
 
 def test_the_google_side_leaves_a_search_nobody_asked_for(ctx):
@@ -323,3 +328,68 @@ def test_the_google_tab_stays_open_when_nothing_comes_back(page, ctx):
     lens_answer(page, ["Volkswagen Golf 2019"], stamp=1)       # an answer to another request: nothing for this one
     page.wait_for_timeout(1600)
     assert not popup.value.is_closed()
+
+
+# ---------------------------------------------------------------- what Google itself names
+
+def test_the_google_side_reads_what_google_names_with_the_titles(ctx):
+    import time
+    google_results(ctx, similar=["Volkswagen Golf Mk8", "Volkswagen Polo"])
+    p = ctx.new_page()
+    stamp = int(time.time() * 1000)
+    ask_google(p, {"stamp": stamp, "payload": {"photo": PIXELS}})
+    p.goto("https://www.google.com/search?q=lens")
+    p.wait_for_function("() => localStorage.getItem('gm_br_lens_res')")
+    data = json.loads(json.loads(p.evaluate("() => localStorage.getItem('gm_br_lens_res')")))["data"]
+    assert data["similar"] == ["Volkswagen Golf Mk8", "Volkswagen Polo"]                                  # the chips, from the address; the plain picture link is not one
+    assert len(data["titles"]) >= 12
+
+
+def answer_with(page, similar, titles):
+    page.evaluate("(src) => { document.getElementById('zoomimg').src = src; }", PIXELS)
+    request = lens_request(page)
+    gm_set(page, "br_lens_res", json.dumps({"stamp": request["stamp"], "data": {"similar": similar, "titles": titles}}))
+
+
+def test_what_google_names_outweighs_the_titles(page, ctx):
+    google_fake(ctx)
+    open_at(page, ADD)
+    answer_with(page, ["Volkswagen Golf"], ["Volkswagen Polo 2019", "Volkswagen Polo", "Volkswagen Polo 2020", "Volkswagen Polo GTI"])
+    cands = card_choices(page)
+    assert cands[cands.index("Model") + 1] == "Golf"                                                      # one naming by Google beats four titles that say Polo
+
+
+def test_without_a_naming_the_titles_decide_as_before(page, ctx):
+    google_fake(ctx)
+    open_at(page, ADD)
+    answer_with(page, [], ["Volkswagen Polo 2019", "Volkswagen Polo", "Volkswagen Polo 2020", "Volkswagen Golf"])
+    cands = card_choices(page)
+    assert cands[cands.index("Model") + 1] == "Polo"
+
+
+def test_an_old_answer_that_is_only_the_titles_still_works(page, ctx):
+    google_fake(ctx)
+    open_at(page, ADD)
+    choose_photo(page)
+    lens_answer(page, ["Volkswagen Golf 2019", "Volkswagen Golf"])
+    assert card_choices(page)[:2] == ["Brand", "Volkswagen"]
+
+
+def test_google_says_shows_the_names_and_a_click_uses_the_sites_own_box(page, ctx):
+    google_fake(ctx)
+    open_at(page, ADD)
+    answer_with(page, ["Volkswagen Golf Mk8", "Audi A3 Sportback"], ["Volkswagen Golf 2019"])
+    card_choices(page)
+    says = page.evaluate(f"() => [...{CARD}.querySelectorAll('.says .pill')].map(p => p.textContent)")
+    assert says == ["Volkswagen Golf Mk8", "Audi A3 Sportback"]
+    page.evaluate(f"() => {CARD}.querySelectorAll('.says .pill')[1].click()")
+    assert page.evaluate("() => document.getElementById('markamodtype').value") == "Audi A3 Sportback"
+    assert page.evaluate(f"() => [...{PANEL}.querySelectorAll('#lensOut .pill')].map(p => p.textContent)") == ["Volkswagen Golf Mk8", "Audi A3 Sportback"]   # the drawer too
+
+
+def test_a_name_google_gives_that_the_menus_do_not_know_is_still_usable(page, ctx):
+    google_fake(ctx)
+    open_at(page, ADD)
+    answer_with(page, ["Rolls-Royce Phantom"], [])
+    page.wait_for_function(f"() => document.getElementById('pmg-lens-card') && {CARD}.querySelector('.says .pill')")
+    assert page.evaluate(f"() => {CARD}.querySelector('.says .pill').textContent") == "Rolls-Royce Phantom"
