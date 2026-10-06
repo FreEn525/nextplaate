@@ -57,6 +57,7 @@
   // 'before' compares with the part before the slash, 'after' with the part after it. A letter that the site wrote itself in a
   // disabled field (the taxi letter of Iran) is not typed.
   function ptTypeChars(text, side) {
+    if (side === 'boxes') return ptTypeBoxes(text);
     const headOf = (t, s) => { const p = String(t).split('/'); return ptCanon((s === 'after' ? p[p.length - 1] : p[0]).trim()); };
     const head = t => headOf(t, side);
     const parts = text.split(/\s+/).filter(Boolean);
@@ -94,6 +95,21 @@
     }
     if (regionMenu) { if (regionText && !pick(regionMenu, regionText, 'before')) return false; }
     return chars.length === 0;
+  }
+
+  // Boxes (Iceland, Åland vanity): each character, spaces included, goes in the next shown menu b1, b2...; a space picks the blank choice
+  function ptTypeBoxes(text) {
+    const menus = [...document.querySelectorAll('#frm select')].filter(el => el.offsetParent !== null && !el.disabled && /^b\d$/.test(el.id));
+    const chars = [...text];
+    if (chars.length > menus.length) return false;
+    return menus.every((el, i) => {
+      const c = chars[i] === undefined ? ' ' : chars[i];
+      const opt = [...el.options].find(o => (c === ' ' ? !o.value.trim() : ptCanon(o.value) === ptCanon(c)));
+      if (!opt) return false;
+      el.value = opt.value;
+      el.dispatchEvent(new Event('change', { bubbles: true }));
+      return true;
+    });
   }
 
   function ptTypeOnce(text, split) {

@@ -2,10 +2,15 @@
   PLATE_RULES.tj = () => {
     const el = document.getElementById('region2'), shown = el && el.offsetParent !== null;
     const n = squash(fieldVal('nomer'));
-    if (menu('region1')) return n + menu('region1');   // 1996 system: the number, then the code (X6778 01)
-    if (fieldVal('ctype') === '8') return (shown ? selText('region2') : '') + n;   // trailers 2009: the region code first (01AB 0096)
+    const ctype = fieldVal('ctype');
+    // the gallery text keeps its spaces: 1996 system 0542 AA 02, AH 9832 02 (the number, then the code); 2009 motorcycles 121 A20, police 0247 M 01,
+    // trailers 01AB 0096 (the code first); the other 2009 types are written together (815XM01)
+    if (menu('region1')) return spaceOut(n) + ' ' + menu('region1');
+    if (ctype === '8') return (shown ? selText('region2') : '') + spaceOut(n);
     const codes = shown ? [...el.options].map(o => o.text.trim()).filter(Boolean) : [];
-    if (codes.some(c => n.endsWith(c))) return n;
     const r = shown ? selText('region2') : '';
+    if (ctype === '9') return n.replace(/^(\d+)(\D+\d+)$/, '$1 $2');   // 121 A20: the code is already in the number
+    if (codes.some(c => n.endsWith(c))) return n;
+    if (ctype === '10' && r) return spaceOut(n) + ' ' + r;
     return r ? n + r : n;
   };

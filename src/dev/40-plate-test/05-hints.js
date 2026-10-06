@@ -40,6 +40,8 @@
     'ir|*': { chars: 'before' },
     'ir|License plates for driving abroad (2010)': { chars: null },
     'ir|License plates for driving abroad (2015)': { chars: null },
+    'is|Vanity Plates': { chars: 'boxes' },
+    'ax|Vanity Plates': { chars: 'boxes' },
     'eg|*': { chars: 'before' },
     'sa|*': { chars: 'after' },
     'sa|1996 year system': { chars: 'before' },

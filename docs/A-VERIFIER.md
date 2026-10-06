@@ -19,6 +19,6 @@ Généré par `python tools/hand_check.py`. Pour chaque ligne : ouvrir `platesma
 | mc | Provisional | `1517 WW MC` | `nomerpl` champ : 1517 ; `drop_1` menu : WW → la vérification lit `1517 WW MC` |
 | mn | Motorcycles | `БӨЗ 3510` | `format` menu : RRA 1234 ; `digit` champ : 3510 ; `region` menu : БӨ - Bayan-Ölgii Province ; `b1` menu : З → la vérification lit `БӨЗ 3510` |
 | si | Trailers | `H4-86 KP` | `drop_1` menu : KP - Koper ; `nomer` champ : H4 86 → la vérification lit `H4 86 KP` |
-| ru | Diplomatic | `032 D 345 77` | `code` champ : 032 ; `dipb1` menu : D ; `digit` champ : 345 ; `region` menu : 77 → la vérification lit `032 D 345 77` |
-| cz | Electric vehicles | `EL5 57CP` | `el` = EL (écrit par le site) ; `digit3` champ : 557CP → la vérification lit `EL 557CP` |
+| ru | Diplomatic | `032 D 345 77` | `code` champ : 032 ; `dipb1` menu : D ; `digit` champ : 345 ; `region` menu : 77 → la vérification lit `032 * 345 77` |
+| cz | Electric vehicles | `EL5 57CP` | `el` = EL (écrit par le site) ; `digit3` champ : 557CP → la vérification lit `EL5 57CP` |
 | ma | Regular plates | `3385|د|40` | `digit` champ : 3385 ; `let` menu : د/D ; `region` champ : 40 → la vérification lit `3385 د 40` |

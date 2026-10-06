@@ -33,6 +33,7 @@ def main():
         print("before:", [(f["id"], f["value"]) for f in page.evaluate(DUMP) if f["shown"] or f["value"]])
         fits = page.evaluate("([t, cc, cat]) => window.nextplaateDev.type(t, cc, cat)", [plate, cc, category])
         page.wait_for_timeout(200)
+        print("parts:", page.evaluate("() => [\"dop\",\"dop1\",\"digit\",\"ctype\"].map(i => [i, (document.getElementById(i)||{}).value, !!(document.getElementById(i)||{}).offsetParent])"))
         print("fits:", fits, "| the script reads:", repr(page.evaluate("() => window.nextplaateDev.read()")))
         for f in page.evaluate(DUMP):
             print(f"  {'shown ' if f['shown'] else 'hidden'} {f['tag']} {f['id']!r:14} {f['value']!r}")

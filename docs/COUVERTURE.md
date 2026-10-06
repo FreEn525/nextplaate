@@ -11,12 +11,12 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | Pays du site | 96 | |
 | Pays capturés (pages sauvegardées) | 96 | 100 % |
 | **Pays non capturés** | **0** | |
-| Pays avec une règle propre | 49 sur 96 | |
+| Pays avec une règle propre | 51 sur 96 | |
 | Catégories (pays capturés) | 829 | |
-| Vérifiées | 749 | 90 % |
+| Vérifiées | 794 | 96 % |
 | **À corriger** | **0** | 0 % |
 | **À trouver** (aucune plaque connue) | **0** | 0 % |
-| À vérifier sur le site : mêmes caractères, espaces différents | 46 | 6 % |
+| À vérifier sur le site : mêmes caractères, espaces différents | 1 | 0 % |
 | Limite connue du formulaire du site (voir plus bas) | 12 | 1 % |
 | Galerie vide sur le site (aucune plaque n'existe) | 22 | 3 % |
 | Sans champ de plaque dans le formulaire ou sans page d'ajout | 0 | 0 % |
@@ -34,11 +34,11 @@ Aucune.
 | ad Andorra | generic | 5 | 5 |  |  |  |  | oui |
 | ae UAE | generic | 0 | 0 |  |  |  |  | oui |
 | al Albania | own | 4 | 4 |  |  |  |  | oui |
-| am Armenia | own | 8 | 5 |  |  |  |  | oui |
+| am Armenia | own | 8 | 8 |  |  |  |  | oui |
 | ar Argentina | generic | 6 | 6 |  |  |  |  | oui |
 | at Austria | generic | 9 | 9 |  |  |  |  | oui |
 | au Australia | generic | 0 | 0 |  |  |  |  | oui |
-| ax Åland (FI) | own | 5 | 4 |  |  |  |  | oui |
+| ax Åland (FI) | own | 5 | 5 |  |  |  |  | oui |
 | az Azerbaijan | generic | 5 | 4 |  |  |  |  | oui |
 | ba Bosnia and Herzegovina | own | 5 | 5 |  |  |  |  | oui |
 | be Belgium | generic | 5 | 5 |  |  |  |  | oui |
@@ -50,10 +50,10 @@ Aucune.
 | ca Canada | generic | 0 | 0 |  |  |  |  | oui |
 | ch Switzerland | generic | 11 | 11 |  |  |  |  | oui |
 | cl Chile | generic | 15 | 12 |  |  | 3 |  | oui |
-| cn China | generic | 6 | 5 |  |  |  |  | oui |
+| cn China | own | 6 | 6 |  |  |  |  | oui |
 | cy Cyprus | generic | 5 | 4 |  |  |  |  | oui |
-| cz Czech Republic | own | 22 | 14 |  |  | 1 |  | oui |
-| de Germany | own | 16 | 15 |  |  |  |  | oui |
+| cz Czech Republic | own | 22 | 21 |  |  | 1 |  | oui |
+| de Germany | own | 16 | 16 |  |  |  |  | oui |
 | dk Denmark | own | 8 | 8 |  |  |  |  | oui |
 | dz Algeria | own | 7 | 4 |  |  | 3 |  | oui |
 | ee Estonia | own | 10 | 10 |  |  |  |  | oui |
@@ -62,7 +62,7 @@ Aucune.
 | fi Finland | generic | 9 | 9 |  |  |  |  | oui |
 | fr France | own | 17 | 17 |  |  |  |  | oui |
 | ge Georgia | own | 12 | 12 |  |  |  |  | oui |
-| gg Guernsey (UK) | own | 3 | 2 |  |  |  |  | oui |
+| gg Guernsey (UK) | own | 3 | 3 |  |  |  |  | oui |
 | gi Gibraltar (UK) | generic | 4 | 4 |  |  |  |  | oui |
 | gr Greece | own | 16 | 16 |  |  |  |  | oui |
 | gu Guam (USA) | generic | 9 | 5 |  |  | 4 |  | oui |
@@ -73,8 +73,8 @@ Aucune.
 | ie Ireland | generic | 3 | 3 |  |  |  |  | oui |
 | il Israel | own | 8 | 8 |  |  |  |  | oui |
 | iq Iraq | own | 4 | 4 |  |  |  |  | oui |
-| ir Iran | own | 16 | 14 |  |  |  |  | oui |
-| is Iceland | own | 10 | 9 |  |  |  |  | oui |
+| ir Iran | own | 16 | 15 |  |  |  |  | oui |
+| is Iceland | own | 10 | 10 |  |  |  |  | oui |
 | it Italy | own | 14 | 14 |  |  |  |  | oui |
 | je Jersey (UK) | generic | 2 | 2 |  |  |  |  | oui |
 | jp Japan | own | 4 | 4 |  |  |  |  | oui |
@@ -83,12 +83,12 @@ Aucune.
 | kh Cambodia | own | 7 | 6 |  |  | 1 |  | oui |
 | kr South Korea | own | 3 | 3 |  |  |  |  | oui |
 | kw Kuwait | generic | 4 | 4 |  |  |  |  | oui |
-| kz Kazakhstan | own | 18 | 13 |  |  |  |  | oui |
-| la Laos | own | 9 | 5 |  |  |  |  | oui |
+| kz Kazakhstan | own | 18 | 18 |  |  |  |  | oui |
+| la Laos | own | 9 | 8 |  |  |  |  | oui |
 | li Liechtenstein | own | 9 | 9 |  |  |  |  | oui |
 | lt Lithuania | generic | 9 | 9 |  |  |  |  | oui |
 | lu Luxembourg | generic | 5 | 5 |  |  |  |  | oui |
-| lv Latvia | own | 9 | 8 |  |  |  |  | oui |
+| lv Latvia | own | 9 | 9 |  |  |  |  | oui |
 | ma Morocco | generic | 2 | 2 |  |  |  |  | oui |
 | mc Monaco | own | 4 | 4 |  |  |  |  | oui |
 | md Moldova | own | 8 | 8 |  |  |  |  | oui |
@@ -103,7 +103,7 @@ Aucune.
 | no Norway | generic | 12 | 12 |  |  |  |  | oui |
 | nz New Zealand | generic | 5 | 5 |  |  |  |  | oui |
 | pl Poland | own | 12 | 12 |  |  |  |  | oui |
-| ps Palestinian Authority | own | 6 | 4 |  |  |  |  | oui |
+| ps Palestinian Authority | own | 6 | 5 |  |  |  |  | oui |
 | pt Portugal | own | 4 | 4 |  |  |  |  | oui |
 | qa Qatar | generic | 6 | 6 |  |  |  |  | oui |
 | ro Romania | generic | 5 | 5 |  |  |  |  | oui |
@@ -116,16 +116,16 @@ Aucune.
 | si Slovenia | own | 4 | 4 |  |  |  |  | oui |
 | sk Slovakia | own | 21 | 18 |  |  | 2 |  | oui |
 | sm San Marino | generic | 13 | 13 |  |  |  |  | oui |
-| su USSR | generic | 15 | 4 |  |  |  |  | oui |
+| su USSR | own | 15 | 15 |  |  |  |  | oui |
 | th Thailand | own | 9 | 7 |  |  |  |  | oui |
-| tj Tajikistan | own | 10 | 3 |  |  |  |  | oui |
+| tj Tajikistan | own | 10 | 10 |  |  |  |  | oui |
 | tr Turkey | own | 6 | 6 |  |  |  |  | oui |
 | ua Ukraine | own | 19 | 16 |  |  |  |  | oui |
 | uk United Kingdom | generic | 10 | 10 |  |  |  |  | oui |
 | us USA | generic | 0 | 0 |  |  |  |  | oui |
 | uz Uzbekistan | own | 9 | 9 |  |  |  |  | oui |
 | va Vatican | generic | 6 | 5 |  |  | 1 |  | oui |
-| vn Vietnam | own | 8 | 7 |  |  |  |  | oui |
+| vn Vietnam | own | 8 | 8 |  |  |  |  | oui |
 | xx Non-recognized and partially recognized states | generic | 0 | 0 |  |  |  |  | oui |
 
 ## Catégories à trouver (par pays)
@@ -136,52 +136,7 @@ Pour chacune : trouver une plaque réelle sur le site, la saisir, puis relancer 
 
 Le script lit les mêmes caractères que le texte de la galerie, mais avec d'autres espaces (EL 557CP au lieu de EL5 57CP). La recherche du site garde les espaces (D09003 ne trouve pas D 09 003) mais traite le tiret comme un espace. Le build dev, boîte « Verify the reads », demande au site si chaque lecture est trouvée.
 
-- **am** Private owners (0/3) : `02 LO 364` lu `02 L O 364`, `14 AA 888` lu `14 A A 888`
-- **am** Organizations (0/3) : `002 DD 52` lu `002 D D 52`, `033 OP 80` lu `033 O P 80`
-- **am** Export transit plates (0/3) : `CC 1930` lu `C C 1930`, `DO 5519` lu `D O 5519`
-- **ax** Vanity Plates (2/3) : `ÅLAND 2` lu `ÅLAND2`
-- **cn** Trailers (0/3) : `浙C·B152挂` lu `浙C·B152 挂`, `浙C·B252挂` lu `浙C·B252 挂`
-- **cz** Commercial vehicles (1960) (2/3) : `AX 63-60` lu `AX6 3 60`
-- **cz** Diplomatic (2004) (0/3) : `011 HC08` lu `011HC08`, `023 XX15` lu `023XX15`
-- **cz** Agricultural vehicles (1960) (0/3) : `CB 88-39` lu `CB8 8 39`, `HO 43-40` lu `HO4 3 40`
-- **cz** Trailers (1977) (0/3) : `24 DOA-99` lu `24DOA 99`, `40-AH-85` lu `40AH8 5`
-- **cz** Military (1960) (0/3) : `214 75-56` lu `21475 56`, `217 43-76` lu `21743 76`
-- **cz** Special machinery (2001) (0/3) : `A01 3505` lu `A 013505`, `A01 6597` lu `A 016597`
-- **cz** Diplomatic (2025) (0/3) : `001 42CD` lu `00142CD`, `002 28CD` lu `00228CD`
-- **de** Seasonal plates (Oldtimers) (0/3) : `GS KV 72H (05/10)` lu `GS KV 72 H (05/10)`, `H NG 382H (04/10)` lu `H NG 382 H (04/10)`
-- **gg** Dealer (0/3) : `V145` lu `V 145`, `V2` lu `V 2`
-- **ir** Motorcycles (0/3) : `۷۷۴ ۷۷۷۸۹` lu `۷۷۴۷۷۷۸۹`, `۸۲۸ ۵۸۶۱۲` lu `۸۲۸۵۸۶۱۲`
-- **is** Vanity Plates (2/3) : `T BÍRD` lu `TBÍRD`
-- **kz** Private owners (1993) (0/3) : `P 555 OXM` lu `P 555 O X M`, `S 302 SHM` lu `S 302 S H M`
-- **kz** Organizations (1993) (0/3) : `A 752 HN` lu `A 752 H N`, `A 888 DW` lu `A 888 D W`
-- **kz** Trailers (1993) (0/3) : `0235 AS` lu `0235 A S`, `2127 BF` lu `2127 B F`
-- **kz** Motorcycles (1993) (0/3) : `4015 FM` lu `4015 F M`, `4347 MB` lu `4347 M B`
-- **kz** Police (1993) (0/3) : `A 117 KP` lu `A 117 K P`, `F 345 KP` lu `F 345 K P`
-- **la** Diplomatic (2/3) : `ສທ23-78` lu `ສທ 2378`
-- **la** Military (2/3) : `ກທ 5868` lu `ກທ5868`
-- **la** Police (1/3) : `ປກສ 1099` lu `ປກສ1099`, `ປກສ 1132` lu `ປກສ1132`
-- **la** Temporary (0/3) : `ຂຄ3-541` lu `ຂຄ 3541`, `ຂຄ3-659` lu `ຂຄ 3659`
-- **lv** Dealer (0/3) : `B 1122-6` lu `B 11226`, `B 340-7` lu `B 3407`
-- **ps** Authorities (0/3) : `5396` lu `5 396`, `5559` lu `5 559`
-- **su** State-owned cars (1977) (0/3) : `1220 ВНН` lu `1220 ВН Н`, `5758 ИРУ` lu `5758 ИР У`
-- **su** Motorcycles (1977) (0/3) : `0658 РВД` lu `0658 РВ Д`, `0721 ССВ` lu `0721 СС В`
-- **su** Special cars (1977) (0/3) : `КШС 1888` lu `КШ С 1888`, `ЯКЯ 2832` lu `ЯК Я 2832`
-- **su** Special vehicles (1977) (0/3) : `3133 ЮЮ` lu `3133 Ю Ю`, `4315 ОС` lu `4315 О С`
-- **su** Trailers for special vehicles (1977) (0/3) : `ОР 7679` lu `О Р 7679`, `РД 1917` lu `Р Д 1917`
-- **su** Сars (1958) (0/3) : `5686 МКЛ` lu `5686 МК Л`, `6792 ГСН` lu `6792 ГС Н`
-- **su** Motorcycles and mopeds (1958) (0/3) : `6156 ВИР` lu `6156 ВИ Р`, `6716 ТОЖ` lu `6716 ТО Ж`
-- **su** Military (0/3) : `1248 ОЭ` lu `1248 О Э`, `2141 АЧ` lu `2141 А Ч`
-- **su** 1946 year license plates (0/3) : `ГС 5466` lu `Г С 5466`, `МБ 6316` lu `М Б 6316`
-- **su** Special vehicles (1965) (0/3) : `2293 КМ` lu `2293 К М`, `5640 ЗО` lu `5640 З О`
-- **su** Trailers for special vehicles (1965) (0/3) : `0234 ЗЯ` lu `0234 З Я`, `0554 ЗЯ` lu `0554 З Я`
-- **tj** Trailers (2009) (0/3) : `01AB 0096` lu `01AB0096`, `02DD 6000` lu `02DD6000`
-- **tj** Motorcycles (2009) (0/3) : `121 A20` lu `121A20`, `223 G07` lu `223G07`
-- **tj** Police (2009) (0/3) : `0247 M 01` lu `0247M01`, `0270 M 01` lu `0270M01`
-- **tj** Private owners (1996) (0/3) : `AH 9832 02` lu `AH983202`, `BM 8126 01` lu `BM812601`
-- **tj** Organizations (1996) (0/3) : `0526 B 01` lu `0526B01`, `1474 A 04` lu `1474A04`
-- **tj** Trailers (1996) (0/3) : `A 0021 A 04` lu `A0021A04`, `A 0910 A 02` lu `A0910A02`
-- **tj** Motorcycles (1996) (0/2) : `0542 AA 02` lu `0542AA02`, `0772 AA 02` lu `0772AA02`
-- **vn** Government motorcycles (0/3) : `29-B1 0910` lu `29B1 0910`, `51-B2 0223` lu `51B2 0223`
+- **la** Diplomatic (1/3) : `ຂຕ-1192` lu `ຂຕ11-92`, `ຂຕ-1777` lu `ຂຕ17-77`
 
 ## Limites connues du formulaire
 

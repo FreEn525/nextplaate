@@ -2,5 +2,5 @@
   PLATE_RULES.lv = () => {
     if (['6', '9'].includes(fieldVal('ctype'))) return fieldVal('nomer').toUpperCase();
     // dealers add a last digit after a dash (B 1122-6)
-    return joinParts([menu('b1') + menu('b2'), shownVal('digit') + shownVal('digit2')]);
+    return joinParts([menu('b1') + menu('b2'), shownVal('digit') + (shownVal('digit2') ? '-' + shownVal('digit2') : '')]);
   };

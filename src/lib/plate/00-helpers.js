@@ -7,8 +7,14 @@
   const shownVal = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? el.value.trim() : ''; };
   const squash = s => s.replace(/[\s-]+/g, '').toUpperCase();     // "ab-123 cd" -> "AB123CD"
   const joinParts = parts => parts.filter(Boolean).join(' ');
+  // the site writes a space where letters meet digits and none inside a run of letters (HN, not H N): 'A 752 H N' -> 'A 752 HN'
+  const spaceOut = s => s.replace(/\s+/g, '').replace(/(?<=\p{L})(?=\d)|(?<=\d)(?=\p{L})/gu, ' ');
   // a select shows its label (BJ, VZ...), which is what the site expects; its value is an internal code
   const selText = id => { const el = document.getElementById(id); if (!el) return ''; if (el.tagName === 'SELECT') { const o = el.options[el.selectedIndex]; return o && o.value ? o.text.trim() : ''; } return el.value.trim(); };
+
+  // Forms made of boxes, one menu per character (Iceland, Åland vanity plates): a box left blank between two characters is a space
+  // (T BÍRD, ÅLAND 2); a blank at the end is nothing. A menu that is not shown is not a box.
+  const boxes = ids => ids.map(id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? el.value || ' ' : ''; }).join('').replace(/^\s+|\s+$/g, '').replace(/\s+/g, ' ');
 
   const menu = id => { const el = document.getElementById(id); return el && el.offsetParent !== null ? selText(id) : ''; };   // a menu's label, only when the menu is shown (a hidden one keeps an old value)
   // Forms with one menu per character (Iran, Egypt, Saudi Arabia, Iraq): the label of a shown menu in one script ("١ / 1" keeps the

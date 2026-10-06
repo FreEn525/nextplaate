@@ -50,25 +50,9 @@
  },
  "am": {
   "Export transit plates": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "CC 1930",
-     "read": "C C 1930",
-     "status": "spacing"
-    },
-    {
-     "plate": "DO 5519",
-     "read": "D O 5519",
-     "status": "spacing"
-    },
-    {
-     "plate": "HH 4112",
-     "read": "H H 4112",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "High officials": {
    "ok": 3,
@@ -76,46 +60,14 @@
    "failed": []
   },
   "Organizations": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "002 DD 52",
-     "read": "002 D D 52",
-     "status": "spacing"
-    },
-    {
-     "plate": "033 OP 80",
-     "read": "033 O P 80",
-     "status": "spacing"
-    },
-    {
-     "plate": "033 SM 80",
-     "read": "033 S M 80",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Private owners": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "02 LO 364",
-     "read": "02 L O 364",
-     "status": "spacing"
-    },
-    {
-     "plate": "14 AA 888",
-     "read": "14 A A 888",
-     "status": "spacing"
-    },
-    {
-     "plate": "37 FP 559",
-     "read": "37 F P 559",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Privately owned trailers": {
    "ok": 3,
@@ -239,15 +191,9 @@
    "failed": []
   },
   "Vanity Plates": {
-   "ok": 2,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ÅLAND 2",
-     "read": "ÅLAND2",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   }
  },
  "az": {
@@ -767,25 +713,9 @@
    "failed": []
   },
   "Trailers": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "浙C·B152挂",
-     "read": "浙C·B152 挂",
-     "status": "spacing"
-    },
-    {
-     "plate": "浙C·B252挂",
-     "read": "浙C·B252 挂",
-     "status": "spacing"
-    },
-    {
-     "plate": "苏B·ME08挂",
-     "read": "苏B·ME08 挂",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Trucks and buses": {
    "ok": 3,
@@ -829,25 +759,9 @@
  },
  "cz": {
   "Agricultural vehicles (1960)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "CB 88-39",
-     "read": "CB8 8 39",
-     "status": "spacing"
-    },
-    {
-     "plate": "HO 43-40",
-     "read": "HO4 3 40",
-     "status": "spacing"
-    },
-    {
-     "plate": "PB 50-23",
-     "read": "PB5 0 23",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Cars (1960)": {
    "ok": 3,
@@ -860,15 +774,9 @@
    "failed": []
   },
   "Commercial vehicles (1960)": {
-   "ok": 2,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "AX 63-60",
-     "read": "AX6 3 60",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Dealer (2001)": {
    "ok": 1,
@@ -876,46 +784,14 @@
    "failed": []
   },
   "Diplomatic (2004)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "011 HC08",
-     "read": "011HC08",
-     "status": "spacing"
-    },
-    {
-     "plate": "023 XX15",
-     "read": "023XX15",
-     "status": "spacing"
-    },
-    {
-     "plate": "061 CD23",
-     "read": "061CD23",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Diplomatic (2025)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "001 42CD",
-     "read": "00142CD",
-     "status": "spacing"
-    },
-    {
-     "plate": "002 28CD",
-     "read": "00228CD",
-     "status": "spacing"
-    },
-    {
-     "plate": "006 26CD",
-     "read": "00626CD",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Electric vehicles": {
    "ok": 3,
@@ -934,25 +810,9 @@
    "via": "other-type"
   },
   "Military (1960)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "214 75-56",
-     "read": "21475 56",
-     "status": "spacing"
-    },
-    {
-     "plate": "217 43-76",
-     "read": "21743 76",
-     "status": "spacing"
-    },
-    {
-     "plate": "220 11-55",
-     "read": "22011 55",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Mopeds (1956)": {
    "ok": 3,
@@ -985,25 +845,9 @@
    "failed": []
   },
   "Special machinery (2001)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "A01 3505",
-     "read": "A 013505",
-     "status": "spacing"
-    },
-    {
-     "plate": "A01 6597",
-     "read": "A 016597",
-     "status": "spacing"
-    },
-    {
-     "plate": "K00 8685",
-     "read": "K 008685",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Sportcars (2001)": {
    "ok": 3,
@@ -1011,25 +855,9 @@
    "failed": []
   },
   "Trailers (1977)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "24 DOA-99",
-     "read": "24DOA 99",
-     "status": "spacing"
-    },
-    {
-     "plate": "40-AH-85",
-     "read": "40AH8 5",
-     "status": "spacing"
-    },
-    {
-     "plate": "44-AI-59",
-     "read": "44AI5 9",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Vanity Plates": {
    "ok": 3,
@@ -1105,25 +933,9 @@
    "failed": []
   },
   "Seasonal plates (Oldtimers)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "GS KV 72H (05/10)",
-     "read": "GS KV 72 H (05/10)",
-     "status": "spacing"
-    },
-    {
-     "plate": "H NG 382H (04/10)",
-     "read": "H NG 382 H (04/10)",
-     "status": "spacing"
-    },
-    {
-     "plate": "NU SW 57H (04/10)",
-     "read": "NU SW 57 H (04/10)",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Short-term transit plates": {
    "ok": 3,
@@ -1511,25 +1323,9 @@
    "failed": []
   },
   "Dealer": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "V145",
-     "read": "V 145",
-     "status": "spacing"
-    },
-    {
-     "plate": "V2",
-     "read": "V 2",
-     "status": "spacing"
-    },
-    {
-     "plate": "V97",
-     "read": "V 97",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Regular plates": {
    "ok": 3,
@@ -2045,25 +1841,9 @@
    "failed": []
   },
   "Motorcycles": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "۷۷۴ ۷۷۷۸۹",
-     "read": "۷۷۴۷۷۷۸۹",
-     "status": "spacing"
-    },
-    {
-     "plate": "۸۲۸ ۵۸۶۱۲",
-     "read": "۸۲۸۵۸۶۱۲",
-     "status": "spacing"
-    },
-    {
-     "plate": "۸۵۹ ۵۸۹۸۸",
-     "read": "۸۵۹۵۸۹۸۸",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Oldtimers": {
    "ok": 2,
@@ -2133,15 +1913,9 @@
    "failed": []
   },
   "Vanity Plates": {
-   "ok": 2,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "T BÍRD",
-     "read": "TBÍRD",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   }
  },
  "it": {
@@ -2477,25 +2251,9 @@
    "failed": []
   },
   "Motorcycles (1993)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "4015 FM",
-     "read": "4015 F M",
-     "status": "spacing"
-    },
-    {
-     "plate": "4347 MB",
-     "read": "4347 M B",
-     "status": "spacing"
-    },
-    {
-     "plate": "5957 AV",
-     "read": "5957 A V",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Motorcycles (2012)": {
    "ok": 3,
@@ -2503,25 +2261,9 @@
    "failed": []
   },
   "Organizations (1993)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "A 752 HN",
-     "read": "A 752 H N",
-     "status": "spacing"
-    },
-    {
-     "plate": "A 888 DW",
-     "read": "A 888 D W",
-     "status": "spacing"
-    },
-    {
-     "plate": "Z 025 CZ",
-     "read": "Z 025 C Z",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Organizations (2012)": {
    "ok": 3,
@@ -2529,25 +2271,9 @@
    "failed": []
   },
   "Police (1993)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "A 117 KP",
-     "read": "A 117 K P",
-     "status": "spacing"
-    },
-    {
-     "plate": "F 345 KP",
-     "read": "F 345 K P",
-     "status": "spacing"
-    },
-    {
-     "plate": "M 669 KP",
-     "read": "M 669 K P",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Police (2012)": {
    "ok": 3,
@@ -2555,25 +2281,9 @@
    "failed": []
   },
   "Private owners (1993)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "P 555 OXM",
-     "read": "P 555 O X M",
-     "status": "spacing"
-    },
-    {
-     "plate": "S 302 SHM",
-     "read": "S 302 S H M",
-     "status": "spacing"
-    },
-    {
-     "plate": "X 810 KAN",
-     "read": "X 810 K A N",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Private owners (2012)": {
    "ok": 3,
@@ -2586,25 +2296,9 @@
    "failed": []
   },
   "Trailers (1993)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "0235 AS",
-     "read": "0235 A S",
-     "status": "spacing"
-    },
-    {
-     "plate": "2127 BF",
-     "read": "2127 B F",
-     "status": "spacing"
-    },
-    {
-     "plate": "6493 AS",
-     "read": "6493 A S",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Trailers (2012)": {
    "ok": 3,
@@ -2624,12 +2318,17 @@
    "failed": []
   },
   "Diplomatic": {
-   "ok": 2,
+   "ok": 1,
    "total": 3,
    "failed": [
     {
-     "plate": "ສທ23-78",
-     "read": "ສທ 2378",
+     "plate": "ຂຕ-1192",
+     "read": "ຂຕ11-92",
+     "status": "spacing"
+    },
+    {
+     "plate": "ຂຕ-1777",
+     "read": "ຂຕ17-77",
      "status": "spacing"
     }
    ]
@@ -2640,15 +2339,9 @@
    "failed": []
   },
   "Military": {
-   "ok": 2,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ກທ 5868",
-     "read": "ກທ5868",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Organizations": {
    "ok": 3,
@@ -2656,20 +2349,9 @@
    "failed": []
   },
   "Police": {
-   "ok": 1,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ປກສ 1099",
-     "read": "ປກສ1099",
-     "status": "spacing"
-    },
-    {
-     "plate": "ປກສ 1132",
-     "read": "ປກສ1132",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Private owners": {
    "ok": 3,
@@ -2677,25 +2359,9 @@
    "failed": []
   },
   "Temporary": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ຂຄ3-541",
-     "read": "ຂຄ 3541",
-     "status": "spacing"
-    },
-    {
-     "plate": "ຂຄ3-659",
-     "read": "ຂຄ 3659",
-     "status": "spacing"
-    },
-    {
-     "plate": "ຂຄ3-730",
-     "read": "ຂຄ 3730",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Сompany (1% paid tax)": {
    "ok": 3,
@@ -2826,25 +2492,9 @@
  },
  "lv": {
   "Dealer": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "B 1122-6",
-     "read": "B 11226",
-     "status": "spacing"
-    },
-    {
-     "plate": "B 340-7",
-     "read": "B 3407",
-     "status": "spacing"
-    },
-    {
-     "plate": "B 452-7",
-     "read": "B 4527",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Diplomatic": {
    "ok": 3,
@@ -3557,25 +3207,9 @@
  },
  "ps": {
   "Authorities": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "5396",
-     "read": "5 396",
-     "status": "spacing"
-    },
-    {
-     "plate": "5559",
-     "read": "5 559",
-     "status": "spacing"
-    },
-    {
-     "plate": "7124",
-     "read": "7 124",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Dealer": {
    "ok": 0,
@@ -4303,25 +3937,9 @@
  },
  "su": {
   "1946 year license plates": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ГС 5466",
-     "read": "Г С 5466",
-     "status": "spacing"
-    },
-    {
-     "plate": "МБ 6316",
-     "read": "М Б 6316",
-     "status": "spacing"
-    },
-    {
-     "plate": "СВ 1811",
-     "read": "С В 1811",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Foreign citizens and enterprises": {
    "ok": 3,
@@ -4329,67 +3947,19 @@
    "failed": []
   },
   "Military": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "1248 ОЭ",
-     "read": "1248 О Э",
-     "status": "spacing"
-    },
-    {
-     "plate": "2141 АЧ",
-     "read": "2141 А Ч",
-     "status": "spacing"
-    },
-    {
-     "plate": "6415 РБ",
-     "read": "6415 Р Б",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Motorcycles (1977)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "0658 РВД",
-     "read": "0658 РВ Д",
-     "status": "spacing"
-    },
-    {
-     "plate": "0721 ССВ",
-     "read": "0721 СС В",
-     "status": "spacing"
-    },
-    {
-     "plate": "5279 АХК",
-     "read": "5279 АХ К",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Motorcycles and mopeds (1958)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "6156 ВИР",
-     "read": "6156 ВИ Р",
-     "status": "spacing"
-    },
-    {
-     "plate": "6716 ТОЖ",
-     "read": "6716 ТО Ж",
-     "status": "spacing"
-    },
-    {
-     "plate": "8952 ОДН",
-     "read": "8952 ОД Н",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Private-owned cars (1977)": {
    "ok": 3,
@@ -4397,88 +3967,24 @@
    "failed": []
   },
   "Special cars (1977)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "КШС 1888",
-     "read": "КШ С 1888",
-     "status": "spacing"
-    },
-    {
-     "plate": "ЯКЯ 2832",
-     "read": "ЯК Я 2832",
-     "status": "spacing"
-    },
-    {
-     "plate": "ЯКЯ 2968",
-     "read": "ЯК Я 2968",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Special vehicles (1965)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "2293 КМ",
-     "read": "2293 К М",
-     "status": "spacing"
-    },
-    {
-     "plate": "5640 ЗО",
-     "read": "5640 З О",
-     "status": "spacing"
-    },
-    {
-     "plate": "6457 ЭВ",
-     "read": "6457 Э В",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Special vehicles (1977)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "3133 ЮЮ",
-     "read": "3133 Ю Ю",
-     "status": "spacing"
-    },
-    {
-     "plate": "4315 ОС",
-     "read": "4315 О С",
-     "status": "spacing"
-    },
-    {
-     "plate": "4316 ОС",
-     "read": "4316 О С",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "State-owned cars (1977)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "1220 ВНН",
-     "read": "1220 ВН Н",
-     "status": "spacing"
-    },
-    {
-     "plate": "5758 ИРУ",
-     "read": "5758 ИР У",
-     "status": "spacing"
-    },
-    {
-     "plate": "5814 КАА",
-     "read": "5814 КА А",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Trailers (1958)": {
    "ok": 3,
@@ -4491,67 +3997,19 @@
    "failed": []
   },
   "Trailers for special vehicles (1965)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "0234 ЗЯ",
-     "read": "0234 З Я",
-     "status": "spacing"
-    },
-    {
-     "plate": "0554 ЗЯ",
-     "read": "0554 З Я",
-     "status": "spacing"
-    },
-    {
-     "plate": "0559 ЗЯ",
-     "read": "0559 З Я",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Trailers for special vehicles (1977)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "ОР 7679",
-     "read": "О Р 7679",
-     "status": "spacing"
-    },
-    {
-     "plate": "РД 1917",
-     "read": "Р Д 1917",
-     "status": "spacing"
-    },
-    {
-     "plate": "РД 1973",
-     "read": "Р Д 1973",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Сars (1958)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "5686 МКЛ",
-     "read": "5686 МК Л",
-     "status": "spacing"
-    },
-    {
-     "plate": "6792 ГСН",
-     "read": "6792 ГС Н",
-     "status": "spacing"
-    },
-    {
-     "plate": "8822 КРМ",
-     "read": "8822 КР М",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   }
  },
  "th": {
@@ -4620,62 +4078,19 @@
  },
  "tj": {
   "Motorcycles (1996)": {
-   "ok": 0,
+   "ok": 2,
    "total": 2,
-   "failed": [
-    {
-     "plate": "0542 AA 02",
-     "read": "0542AA02",
-     "status": "spacing"
-    },
-    {
-     "plate": "0772 AA 02",
-     "read": "0772AA02",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Motorcycles (2009)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "121 A20",
-     "read": "121A20",
-     "status": "spacing"
-    },
-    {
-     "plate": "223 G07",
-     "read": "223G07",
-     "status": "spacing"
-    },
-    {
-     "plate": "707 U07",
-     "read": "707U07",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Organizations (1996)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "0526 B 01",
-     "read": "0526B01",
-     "status": "spacing"
-    },
-    {
-     "plate": "1474 A 04",
-     "read": "1474A04",
-     "status": "spacing"
-    },
-    {
-     "plate": "2080 A 04",
-     "read": "2080A04",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Organizations (2009)": {
    "ok": 1,
@@ -4683,46 +4098,14 @@
    "failed": []
   },
   "Police (2009)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "0247 M 01",
-     "read": "0247M01",
-     "status": "spacing"
-    },
-    {
-     "plate": "0270 M 01",
-     "read": "0270M01",
-     "status": "spacing"
-    },
-    {
-     "plate": "2200 M 02",
-     "read": "2200M02",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Private owners (1996)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "AH 9832 02",
-     "read": "AH983202",
-     "status": "spacing"
-    },
-    {
-     "plate": "BM 8126 01",
-     "read": "BM812601",
-     "status": "spacing"
-    },
-    {
-     "plate": "X 6778 01",
-     "read": "X677801",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Private owners (2009)": {
    "ok": 3,
@@ -4735,46 +4118,14 @@
    "failed": []
   },
   "Trailers (1996)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "A 0021 A 04",
-     "read": "A0021A04",
-     "status": "spacing"
-    },
-    {
-     "plate": "A 0910 A 02",
-     "read": "A0910A02",
-     "status": "spacing"
-    },
-    {
-     "plate": "A 0950 A 01",
-     "read": "A0950A01",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Trailers (2009)": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "01AB 0096",
-     "read": "01AB0096",
-     "status": "spacing"
-    },
-    {
-     "plate": "02DD 6000",
-     "read": "02DD6000",
-     "status": "spacing"
-    },
-    {
-     "plate": "07MA 7070",
-     "read": "07MA7070",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   }
  },
  "tr": {
@@ -5092,25 +4443,9 @@
    "failed": []
   },
   "Government motorcycles": {
-   "ok": 0,
+   "ok": 3,
    "total": 3,
-   "failed": [
-    {
-     "plate": "29-B1 0910",
-     "read": "29B1 0910",
-     "status": "spacing"
-    },
-    {
-     "plate": "51-B2 0223",
-     "read": "51B2 0223",
-     "status": "spacing"
-    },
-    {
-     "plate": "79-A1 000.22",
-     "read": "79A1 000.22",
-     "status": "spacing"
-    }
-   ]
+   "failed": []
   },
   "Military": {
    "ok": 3,
