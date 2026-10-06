@@ -2164,6 +2164,11 @@
    "total": 3,
    "failed": []
   },
+  "Regular plates": {
+   "ok": 3,
+   "total": 3,
+   "failed": []
+  },
   "Right hand drive vehicles": {
    "ok": 3,
    "total": 3,

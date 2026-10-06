@@ -13,12 +13,12 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | **Pays non capturés** | **0** | |
 | Pays avec une règle propre | 51 sur 96 | |
 | Catégories (pays capturés) | 829 | |
-| Vérifiées | 794 | 96 % |
+| Vérifiées | 795 | 96 % |
 | **À corriger** | **0** | 0 % |
 | **À trouver** (aucune plaque connue) | **0** | 0 % |
 | À vérifier sur le site : mêmes caractères, espaces différents | 1 | 0 % |
 | Limite connue du formulaire du site (voir plus bas) | 12 | 1 % |
-| Galerie vide sur le site (aucune plaque n'existe) | 22 | 3 % |
+| Galerie vide sur le site (aucune plaque n'existe) | 21 | 3 % |
 | Sans champ de plaque dans le formulaire ou sans page d'ajout | 0 | 0 % |
 
 ## À corriger
@@ -80,7 +80,7 @@ Aucune.
 | jp Japan | own | 4 | 4 |  |  |  |  | oui |
 | ke Kenya | generic | 12 | 12 |  |  |  |  | oui |
 | kg Kyrgyzstan | own | 12 | 12 |  |  |  |  | oui |
-| kh Cambodia | own | 7 | 6 |  |  | 1 |  | oui |
+| kh Cambodia | own | 7 | 7 |  |  |  |  | oui |
 | kr South Korea | own | 3 | 3 |  |  |  |  | oui |
 | kw Kuwait | generic | 4 | 4 |  |  |  |  | oui |
 | kz Kazakhstan | own | 18 | 18 |  |  |  |  | oui |
@@ -163,7 +163,6 @@ Aucune photo dans la galerie de ces catégories : il n'y a pas de plaque à util
 - **cz** : Diplomatic (2001)
 - **dz** : Police ((1)11111), Protection Civile ((111)111111), Military (111111111)
 - **gu** : Commercial vehicles (2008), Amateur Radio, Motorcycles (M1234), Mopeds (MP1234)
-- **kh** : Regular plates
 - **mk** : Vanity Plates
 - **mp** : Heavy Equipment, Vanity Plates, Amateur Radio, Motorcycles
 - **nl** : Dealer (Scooters)
