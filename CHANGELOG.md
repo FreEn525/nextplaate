@@ -2,11 +2,17 @@
 
 ## 5.9 (in progress)
 
+**Plate lookup links**
+- New feature *Plate lookup links* (switch in Settings): for the plate you type, a link to each public lookup page of the country (Finnik, car.info, carcheck-type sites... about forty), and to a picture search (Google Images, Flickr, Autogespot), each writing the plate the way that site wants it. In the plate card above the vehicle menus and in the Search drawer. They are plain links opening a new tab: nothing is sent before a click and the script reads nothing from those sites. Each site can be hidden in Settings.
+
+**Extra information**
+- The card offers the date of the photo: the site lists the EXIF dates under the photo it is given, and the earliest is the shot; two buttons add it on a line of its own (*Date: October 2026*, *4 October 2026*).
+
 **Floating upload button**
 - New feature *Floating upload button* (switch in Settings): the form is long and its Upload button is at the very end. While that button is out of view, a button of ours stands at the bottom of the window and presses the site's own, so the form's checks and options apply as before; it goes away when the real button is on the screen.
 
 **Google Lens**
-- The Google side now also reads what Google itself calls the vehicle (the "similar searches" chips of Lens, read from their addresses, so in any language), next to the titles of the results. What Google names counts as five titles when the card guesses the brand, model and generation, and a *Google says* line shows the names: a click types one in the site's own "brand and model" box, which finds the vehicle itself (the way out when the page's menus do not name it). Without such chips, the titles decide as before. The dev build logs what was found on the Google page.
+- The Google side now also reads what Google itself calls the vehicle (the "similar searches" chips of Lens, read from their addresses, so in any language), next to the titles of the results. What Google names counts as five titles when the card guesses the brand, model and generation, and a *Google says* line shows the names: a click types one in the site's own "brand and model" box, which finds the vehicle itself (the way out when the page's menus do not name it). Without such chips, the titles decide as before. The dev build logs what was found on the Google page. A Google search is only taken for the answer when it carries Lens parameters (an images search opened by hand is left alone).
 
 **Plate check**
 - The vehicle of the photos already on the site is offered above the vehicle menus: the page that counts the photos of a plate also names the vehicle of each one (as the numbers of the form's menus); the most common is shown with the names of the menus themselves (*Volkswagen › Golf › Mk8, 2019–*, *2 of 3 photos*) and one click fills the menus. Nothing is filled before the click, and no request is made for it. A vehicle the menus do not know is not offered.

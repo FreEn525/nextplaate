@@ -134,7 +134,7 @@ UPLOAD_PAGE = (
     + ' var all = [].slice.call(document.querySelectorAll("#frm input, #frm select")); if (all.indexOf(e.target) > all.findIndex(function (x) { return x.id === "filename"; })) return;'
     + ' document.getElementById("informer-preview-btn").style.display = ""; document.getElementById("informer-preview-result").style.display = "none"; });'
     + '</script>'
-    + '<div id="zoomimgid" class="hidden"><img id="zoomimg" width="260" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="></div>'
+    + '<div id="zoomimgid" class="hidden"><img id="zoomimg" width="260" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="><div id="fotodiv"></div></div>'
     + '<button type="button" id="pm-photo-editor-open">Upload through editor</button>'
     + '<div style="height:2400px"></div>'
     + '<button class="btn-u" type="submit" onclick="window.__uploads = (window.__uploads || 0) + 1; return false">Upload</button></form>'

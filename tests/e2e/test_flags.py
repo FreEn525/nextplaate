@@ -166,7 +166,7 @@ def open_settings(page):
 def test_the_settings_choice_updates_the_bar_at_once_and_is_kept(ctx):
     page = open_page(ctx, "https://platesmania.com/fr/add")
     open_settings(page)
-    assert page.evaluate(f"() => {PANEL}.querySelectorAll('.pickrows input[type=checkbox]').length") >= 90
+    assert page.evaluate(f"() => {PANEL}.querySelectorAll('.flagpick .pickrows input[type=checkbox]').length") >= 90
     page.evaluate(f"() => {PANEL}.querySelector('.flagpick .btnrow button:last-child').click()")       # None
     assert bar_names(page) == []
     for code in ("be", "nl"):
@@ -191,7 +191,7 @@ def test_the_settings_list_can_be_filtered(ctx):
     page = open_page(ctx, "https://platesmania.com/fr/add")
     open_settings(page)
     page.evaluate(f"() => {{ const i = {PANEL}.querySelector('.flagpick input[type=text]'); i.value = 'swe'; i.dispatchEvent(new Event('input')); }}")
-    shown = page.evaluate(f"() => [...{PANEL}.querySelectorAll('.pickrows label:not([hidden])')].map(l => l.textContent.trim())")
+    shown = page.evaluate(f"() => [...{PANEL}.querySelectorAll('.flagpick .pickrows label:not([hidden])')].map(l => l.textContent.trim())")
     assert shown == ["Sweden"]
 
 

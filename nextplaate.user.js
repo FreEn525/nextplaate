@@ -423,6 +423,88 @@
     siteBusy = false;
   }
   /* =====================================================================
+   *  LOOKUP SITES  (public pages where a plate can be looked up, by country)
+   *    Only links: nothing is sent to any of them before the user clicks, and the script reads nothing from them.
+   *    A site is { name, url } with {plate} where the plate goes, and fmt, how the plate is written there:
+   *      'squash' (default)  letters and digits only, in capitals: AB-12 CDE -> AB12CDE
+   *      'hyphen'            the parts joined by hyphens: AB 123 CD -> AB-123-CD
+   *      'raw'               as the form gives it
+   *    A site that fails or goes away is taken off here, or hidden by the user in Settings. The list starts from the public
+   *    userscript "Platesmania Lookup Toolbox" (links only; its fiches that call an API are not part of it: see
+   *    docs/ANALYSE-SCRIPTS-PUBLICS.md).
+   * ===================================================================== */
+  const LOOKUP_SITES = {
+    '*': [
+      { name: 'Google Images', url: 'https://www.google.com/search?tbm=isch&q="{plate}"', fmt: 'raw' },
+      { name: 'Flickr', url: 'https://www.flickr.com/search/?text={plate}', fmt: 'raw' },
+      { name: 'Autogespot', url: 'https://www.autogespot.com/spots?licenseplate={plate}' }
+    ],
+    nl: [
+      { name: 'Finnik', url: 'https://finnik.nl/kenteken/{plate}' },
+      { name: 'Autoweek', url: 'https://www.autoweek.nl/kentekencheck/{plate}' },
+      { name: 'voertuig.net', url: 'https://voertuig.net/kenteken/{plate}' },
+      { name: 'Kentekencheck.info', url: 'https://www.kentekencheck.info/kenteken/{plate}' },
+      { name: 'Kentekencheck.nu', url: 'https://www.kentekencheck.nu/kenteken/{plate}' },
+      { name: 'Qenteken', url: 'https://www.qenteken.nl/kentekencheck/{plate}' },
+      { name: 'RDW', url: 'https://www.rdwdata.nl/kenteken/{plate}' }
+    ],
+    se: [
+      { name: 'car.info', url: 'https://www.car.info/?s={plate}' },
+      { name: 'biluppgifter.se', url: 'https://biluppgifter.se/fordon/{plate}' },
+      { name: 'Transportstyrelsen', url: 'https://fordon-fu-regnr.transportstyrelsen.se/?ts-regnr-sok={plate}' }
+    ],
+    ua: [
+      { name: 'carplates.app', url: 'https://ua.carplates.app/en/number/{plate}' },
+      { name: 'baza-gai.com.ua', url: 'https://baza-gai.com.ua/nomer/{plate}' },
+      { name: 'auto-inform.com.ua', url: 'https://auto-inform.com.ua/search/{plate}' }
+    ],
+    uk: [
+      { name: 'checkcardetails', url: 'https://www.checkcardetails.co.uk/cardetails/{plate}' },
+      { name: 'totalcarcheck', url: 'https://totalcarcheck.co.uk/FreeCheck?regno={plate}' },
+      { name: 'checkhistory', url: 'https://checkhistory.uk/vehicle/{plate}' },
+      { name: 'carhistorycheck', url: 'https://carhistorycheck.co.uk/confirm-vehicle/?vrm={plate}' },
+      { name: 'carbaba', url: 'https://carbaba.co.uk/?reg={plate}' }
+    ],
+    dk: [
+      { name: 'digitalservicebog', url: 'https://app.digitalservicebog.dk/search?country=dk&Registration={plate}' },
+      { name: 'esyn.dk', url: 'https://findsynsrapport.esyn.dk/result?registration={plate}' }
+    ],
+    no: [
+      { name: 'Statens vegvesen', url: 'https://www.vegvesen.no/en/vehicles/buy-and-sell/vehicle-information/check-vehicle-information/?registreringsnummer={plate}' },
+      { name: 'regnr.info', url: 'https://regnr.info/{plate}' }
+    ],
+    fr: [
+      { name: 'immatriculation-auto.info', url: 'https://immatriculation-auto.info/vehicle/{plate}' },
+      { name: 'Carter-Cash', url: 'https://www.carter-cash.com/pieces-auto/?plate={plate}', fmt: 'hyphen' }
+    ],
+    es: [{ name: 'Carter-Cash', url: 'https://www.carter-cash.es/piezas-auto/?plate={plate}' }],
+    it: [{ name: 'Carter-Cash', url: 'https://www.carter-cash.it/ricambi-auto/?plate={plate}' }],
+    fi: [{ name: 'Biltema', url: 'https://www.biltema.fi/sv-fi/rekosok-bil/{plate}' }],
+    sk: [
+      { name: 'overenie.digital', url: 'https://overenie.digital/over/sk/ecv/{plate}' },
+      { name: 'stkonline', url: 'https://www.stkonline.sk/spz/{plate}' }
+    ],
+    ie: [
+      { name: 'cartell.ie', url: 'https://www.cartell.ie/ssl/servlet/beginStarLookup?registration={plate}' },
+      { name: 'motorcheck.ie', url: 'https://www.motorcheck.ie/free-car-check/?vrm={plate}' }
+    ],
+    is: [{ name: 'island.is', url: 'https://island.is/uppfletting-i-oekutaekjaskra?vq={plate}' }],
+    ch: [{ name: 'swisscarinfo', url: 'https://swisscarinfo.ch/en/search?type=all&q={plate}' }]
+  };
+
+  // The plate as a site wants it
+  function lookupPlate(plate, fmt) {
+    if (fmt === 'raw') return plate;
+    const clean = String(plate).toUpperCase().replace(/[\s-]+/g, fmt === 'hyphen' ? '-' : '');
+    return fmt === 'hyphen' ? clean.replace(/^-|-$/g, '') : clean;
+  }
+
+  // The sites for a country: its own, then the ones for every country; { key, name, href }
+  function lookupFor(cc, plate) {
+    const all = [...(LOOKUP_SITES[cc] || []).map(s => ({ ...s, cc })), ...LOOKUP_SITES['*'].map(s => ({ ...s, cc: '*' }))];
+    return all.map(s => ({ key: s.cc + '|' + s.name, name: s.name, href: s.url.replace('{plate}', encodeURIComponent(lookupPlate(plate, s.fmt))) }));
+  }
+  /* =====================================================================
    *  PHOTO DETECTION
    * ===================================================================== */
   // Works on the main photo (/m/) and on thumbnails (/s/): both sit inside a link to nomerXXXX
@@ -1044,6 +1126,7 @@
     .pill.removable:hover{background:var(--danger-soft);border-color:var(--danger-line);color:var(--danger-ink)}
     .cardbox{display:flex;flex-direction:column;gap:10px;padding:12px}
     .cardbox textarea{width:100%;min-height:180px;padding:10px;resize:vertical;line-height:1.5}
+    .lookups{display:flex;flex-direction:column;gap:6px}
     .vehline{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;font-size:14px}
     .cardrow{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
     .hint{margin:0;font-size:12px;color:var(--mute)}
@@ -1938,12 +2021,14 @@
     if (!plate) { card.host.hidden = true; return; }
     card.message(message);
     const v = info && info.vehicle && plateVehicleNames(info.vehicle);
-    if (!v) return;
-    const agree = info.vehicle.of > 1 ? ` (${info.vehicle.photos} of ${info.vehicle.of} photos)` : '';
+    const links = lookupLinks(plate);                                           // public lookup pages, plain links (75-lookups.js)
+    if (!v && !links) return;
+    const agree = v && info.vehicle.of > 1 ? ` (${info.vehicle.photos} of ${info.vehicle.of} photos)` : '';
     card.body.append(h('div', { class: 'cardbox' },
-      h('p', { class: 'hint', text: 'The photos of this plate on the site show:' }),
-      h('div', { class: 'vehline' }, h('b', { text: v.text }), h('span', { class: 'mute', text: agree })),
-      h('div', { class: 'cardrow' }, h('button', { type: 'button', class: 'btn', text: 'Fill the menus', onclick: () => { vehicleFill(v.path); card.message('Menus filled.'); } }))));
+      v ? h('p', { class: 'hint', text: 'The photos of this plate on the site show:' }) : null,
+      v ? h('div', { class: 'vehline' }, h('b', { text: v.text }), h('span', { class: 'mute', text: agree })) : null,
+      v ? h('div', { class: 'cardrow' }, h('button', { type: 'button', class: 'btn', text: 'Fill the menus', onclick: () => { vehicleFill(v.path); card.message('Menus filled.'); } })) : null,
+      links));
   }
 
   // The result goes to the photo this tab is loading, if the batch is running
@@ -1971,6 +2056,7 @@
     if (!here.add) { showResult('Open an upload page to check a plate.'); return; }
     const plate = plateForForm();
     $('plateNow').textContent = plate || '—';
+    lookupRefresh(plate);
     log('plate check', { manual, plate, country: here.country });
     if (!plate) { lastPlate = null; showResult('Type the plate in the form to check it.'); plateCard('', null, ''); return; }
     if (!manual && (plate === lastPlate || store.get('autoCheck', '1') !== '1')) return;
@@ -2246,7 +2332,8 @@
   // Step 2: the answer, once the page has the results (it fills in after loading)
   function lensReadResults() {
     const request = bridgePending('lens', 180);
-    const results = /^lens\.google\./.test(location.hostname) || /^\/search/.test(location.pathname);
+    // a results page of Lens: its own host, or a search whose address carries Lens parameters (lns_mode, lns_surface...)
+    const results = /^lens\.google\./.test(location.hostname) || (/^\/search/.test(location.pathname) && /[?&]lns_/.test(location.search));
     lensLog('results page?', { results, asked: !!request, url: location.href });
     if (!results || !request) return;
     const collect = () => {
@@ -2692,13 +2779,25 @@
   /* =====================================================================
    *  EXTRA INFORMATION  (the site's "Extra information" box, large from the start and in the look of the panel)
    *    The site shows a small three-line box with a label. Here a card takes its place: a tall box that grows with what is typed, the
-   *    site's own hint, a character count, and the location saved in Details one click away. The card sits above the tags card with
+   *    site's own hint, a character count, the location saved in Details one click away, and the date of the photo (its EXIF date,
+   *    which the site shows under the photo once it is chosen) in two forms. The card sits above the tags card with
    *    a clear space between the two.
    *    The site's own box stays the source of truth (it is only hidden): what is typed in the card is copied into it with its input
    *    event, so the form is sent exactly as before; and what the site (or another script) writes in it shows in the card.
    *    A box inside a shadow root is not part of the form, which is why the card does not simply take the real one in.
    * ===================================================================== */
   const EXTRA_MIN = 180;          // px: the height of the box before anything is typed
+
+  // The date the photo was taken: the site lists the EXIF dates of the photo under it (#fotodiv, "YYYY.MM.DD HH:MM:SS" in the text and
+  // in the onclick that adds it to the box); the earliest is the shot. null when the photo has none.
+  function photoDate() {
+    const found = [...document.querySelectorAll('#fotodiv span[onclick^="appdop"]')].map(el => {
+      const m = (el.textContent + ' ' + (el.getAttribute('onclick') || '')).match(/(\d{4})[.:](\d{2})[.:](\d{2})(?:\s+(\d{2}):(\d{2}):(\d{2}))?/);
+      return m ? { y: +m[1], m: +m[2], d: +m[3], at: Date.UTC(+m[1], +m[2] - 1, +m[3], +(m[4] || 0), +(m[5] || 0), +(m[6] || 0)) } : null;
+    }).filter(Boolean).sort((a, b) => a.at - b.at);
+    return found[0] || null;
+  }
+  const extraMonth = m => new Date(Date.UTC(2000, m - 1, 1)).toLocaleDateString('en', { month: 'long', timeZone: 'UTC' });
 
   function extraCard() {
     const real = document.querySelector('#frm textarea[name="dop"]');
@@ -2712,13 +2811,20 @@
     const mine = h('textarea', { rows: 8, placeholder: 'Type here…', value: real.value, 'aria-label': 'Extra information' });
     mine.className = 'extra';
     const count = h('span', { class: 'count' });
+    // the date buttons: month and year, or the whole date; there only while the photo has a date
+    const dateBtn = full => h('button', { type: 'button', class: 'btn ghost sm', onclick: () => {
+      const d = photoDate();
+      if (d) insert(full ? `${d.d} ${extraMonth(d.m)} ${d.y}` : `${extraMonth(d.m)} ${d.y}`);
+    } });
+    const dateMonth = dateBtn(false), dateFull = dateBtn(true);
     const here_ = () => (store.get('place', '') || '').trim();                  // the location saved in Details (never its default)
-    const place = h('button', { type: 'button', class: 'btn ghost sm', onclick: () => {
-      const text = here_();
+    // adds a text on a line of its own at the end
+    function insert(text) {
       mine.value = mine.value.trim() ? mine.value.replace(/\s+$/, '') + '\n' + text : text;
       push();                                                                // before the focus: focusing re-reads the site's box
       mine.focus();
-    } });
+    }
+    const place = h('button', { type: 'button', class: 'btn ghost sm', onclick: () => insert(here_()) });
 
     function grow() {
       mine.style.height = 'auto';
@@ -2728,6 +2834,9 @@
       count.textContent = mine.value.length ? `${mine.value.length} character${mine.value.length > 1 ? 's' : ''}` : '';
       place.hidden = !here_();
       place.textContent = 'Use my location: ' + here_();
+      const d = photoDate();
+      dateMonth.hidden = dateFull.hidden = !d;
+      if (d) { dateMonth.textContent = `Date: ${extraMonth(d.m)} ${d.y}`; dateFull.textContent = `${d.d} ${extraMonth(d.m)} ${d.y}`; }
       grow();
     }
     function push() {                                                         // card -> site
@@ -2741,8 +2850,11 @@
 
     card.body.append(h('div', { class: 'cardbox' },
       h('p', { class: 'hint', text: real.placeholder || 'Anything worth knowing about the photo.' }),
-      mine, h('div', { class: 'cardrow' }, place, count)));
+      mine, h('div', { class: 'cardrow' }, place, dateMonth, dateFull, count)));
     show();
+    // the site fills #fotodiv when a photo is chosen (and again when another is): the date buttons follow
+    const photo = document.getElementById('fotodiv');
+    if (photo) new MutationObserver(show).observe(photo, { childList: true, subtree: true, characterData: true });
     requestAnimationFrame(grow);
   }
 
@@ -3062,6 +3174,59 @@
   registerFeature({
     id: 'floatupload', label: 'Floating upload button',
     init: () => { if (here.add) floatingUpload(); }
+  });
+  /* =====================================================================
+   *  PLATE LOOKUP LINKS  (the plate you type, one click from the public pages that know it)
+   *    For the plate the form reads (src/lib/plate), a link to each public lookup site of the country (src/lib/lookups.js), and to
+   *    a picture search. They are plain links that open in a new tab: nothing is sent anywhere before a click. They are in the
+   *    plate card above the vehicle menus and in the Search drawer. In Settings each site can be hidden.
+   * ===================================================================== */
+  const lookupHidden = () => new Set((store.get('lookup_hidden', '') || '').split(',').filter(Boolean));
+
+  // The links for a plate, minus the sites the user hid; null when there is no plate or nothing to show
+  function lookupLinks(plate) {
+    if (!plate || !featureOn('lookup')) return null;
+    const hidden = lookupHidden();
+    const sites = lookupFor(here.country, plate).filter(s => !hidden.has(s.key));
+    if (!sites.length) return null;
+    return h('div', { class: 'lookups' }, h('div', { class: 'cat', text: 'Look up this plate' }),
+      h('div', { class: 'pills' }, sites.map(s => h('a', { class: 'pill', href: s.href, target: '_blank', rel: 'noopener noreferrer', text: s.name, title: 'Opens ' + s.name + ' in a new tab' }))));
+  }
+
+  // The drawer shows the same links, for the plate of the form
+  function lookupRefresh(plate) {
+    const box = $('lookupBox');
+    if (!box) return;
+    box.replaceChildren(...[lookupLinks(plate) || h('p', { class: 'presult', text: plate ? 'No lookup site for this country.' : 'Type the plate in the form to see the sites.' })]);
+  }
+
+  // Settings: a box per site, to hide the ones that are of no use (a site that failed, or that you never open)
+  function lookupPicker() {
+    const hidden = lookupHidden();
+    const save = () => store.set('lookup_hidden', [...hidden].join(','));
+    const rows = [];
+    for (const cc of Object.keys(LOOKUP_SITES)) {
+      const country = cc === '*' ? 'Every country' : cName(cc);
+      for (const s of LOOKUP_SITES[cc]) {
+        const key = cc + '|' + s.name;
+        const box = h('input', { type: 'checkbox', checked: !hidden.has(key) });
+        box.onchange = () => { box.checked ? hidden.delete(key) : hidden.add(key); save(); checkPlate(true); };                                  // the plate is checked again (from the cache: no request) and both places redraw
+        rows.push(h('label', { class: 'chk' }, box, h('span', { text: s.name }), h('span', { class: 'mute', text: ' · ' + country })));
+      }
+    }
+    return h('div', { class: 'pickrows' }, rows);
+  }
+
+  registerFeature({
+    id: 'lookup', label: 'Plate lookup links',
+    groups: [{
+      drawer: 'search', title: 'Look up the plate', pages: ['add'],
+      build: () => [h('div', { id: 'lookupBox' })]
+    }, {
+      drawer: 'settings', title: 'Lookup sites',
+      build: () => [h('p', { class: 'presult', text: 'Untick the sites you never use. They are only links: nothing is sent before you click.' }), lookupPicker()]
+    }],
+    init: () => lookupRefresh(plateForForm())
   });
   /* =====================================================================
    *  BATCH UPLOAD

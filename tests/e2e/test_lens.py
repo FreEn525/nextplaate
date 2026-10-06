@@ -218,7 +218,7 @@ def test_the_google_side_answers_with_the_titles_of_the_results(ctx):
     p = ctx.new_page()
     stamp = int(time.time() * 1000)
     ask_google(p, {"stamp": stamp, "payload": {"photo": PIXELS}})
-    p.goto("https://www.google.com/search?q=lens")
+    p.goto("https://www.google.com/search?q=lens&lns_mode=un")
     p.wait_for_function("() => localStorage.getItem('gm_br_lens_res')")
     answer = json.loads(json.loads(p.evaluate("() => localStorage.getItem('gm_br_lens_res')")))
     assert answer["stamp"] == stamp and len(answer["data"]["titles"]) == 15 and answer["data"]["titles"][0].startswith("2019 Volkswagen Golf")
@@ -228,7 +228,7 @@ def test_the_google_side_answers_with_the_titles_of_the_results(ctx):
 def test_the_google_side_leaves_a_search_nobody_asked_for(ctx):
     google_results(ctx)
     p = ctx.new_page()
-    p.goto("https://www.google.com/search?q=lens")
+    p.goto("https://www.google.com/search?q=lens&lns_mode=un")
     p.wait_for_timeout(1200)
     assert p.evaluate("() => localStorage.getItem('gm_br_lens_res')") is None
 
@@ -338,7 +338,7 @@ def test_the_google_side_reads_what_google_names_with_the_titles(ctx):
     p = ctx.new_page()
     stamp = int(time.time() * 1000)
     ask_google(p, {"stamp": stamp, "payload": {"photo": PIXELS}})
-    p.goto("https://www.google.com/search?q=lens")
+    p.goto("https://www.google.com/search?q=lens&lns_mode=un")
     p.wait_for_function("() => localStorage.getItem('gm_br_lens_res')")
     data = json.loads(json.loads(p.evaluate("() => localStorage.getItem('gm_br_lens_res')")))["data"]
     assert data["similar"] == ["Volkswagen Golf Mk8", "Volkswagen Polo"]                                  # the chips, from the address; the plain picture link is not one
@@ -393,3 +393,14 @@ def test_a_name_google_gives_that_the_menus_do_not_know_is_still_usable(page, ct
     answer_with(page, ["Rolls-Royce Phantom"], [])
     page.wait_for_function(f"() => document.getElementById('pmg-lens-card') && {CARD}.querySelector('.says .pill')")
     assert page.evaluate(f"() => {CARD}.querySelector('.says .pill').textContent") == "Rolls-Royce Phantom"
+
+
+def test_a_google_search_that_is_not_a_lens_search_is_left_alone(ctx):
+    google_results(ctx)
+    ctx.route("https://www.google.com/search?q=cars", lambda r: r.fulfill(status=200, content_type="text/html", body=inject('<html><body>' + ''.join(f'<a href="/x{i}">2019 Volkswagen Golf {i}</a>' for i in range(15)) + '</body></html>')))
+    import time
+    p = ctx.new_page()
+    ask_google(p, {"stamp": int(time.time() * 1000), "payload": {"photo": PIXELS}})                      # a request is waiting
+    p.goto("https://www.google.com/search?q=cars")                                                       # but this is an images search the user opened
+    p.wait_for_timeout(1500)
+    assert p.evaluate("() => localStorage.getItem('gm_br_lens_res')") is None

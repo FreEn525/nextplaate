@@ -100,3 +100,42 @@ def test_switching_the_feature_off_brings_the_site_box_back(ctx):
     page.wait_for_timeout(300)
     assert page.evaluate("() => !document.getElementById('pmg-extra')")
     assert page.evaluate("() => document.querySelector('textarea[name=dop]').closest('.row').style.display") != "none"
+
+
+# ---------------------------------------------------------------- the date of the photo
+
+def show_exif(page, *dates):
+    spans = "".join(f"<span onclick=\"appdop('{d}')\">{d}</span> " for d in dates)
+    page.evaluate("(h) => { document.getElementById('fotodiv').innerHTML = h; }", spans)
+
+
+def date_buttons(page):
+    return page.evaluate(f"() => [...{CARD}.querySelectorAll('.cardrow .btn:not([hidden])')].map(b => b.textContent)")
+
+
+def test_the_dates_of_the_photo_are_offered_once_it_has_some(ctx):
+    page = open_add(ctx)
+    assert date_buttons(page) == []                                                                       # no photo data: no date buttons
+    show_exif(page, "2026.10.04 14:03:11", "2026.10.06 09:00:00")
+    page.wait_for_function(f"() => [...{CARD}.querySelectorAll('.cardrow .btn:not([hidden])')].length >= 1", timeout=3000)
+    assert date_buttons(page) == ["Date: October 2026", "4 October 2026"]                                # the earliest date: the shot
+
+
+def test_a_date_button_adds_the_date_on_a_line_of_its_own(ctx):
+    page = open_add(ctx)
+    type_in_card(page, "At the station")
+    show_exif(page, "2026.10.04 14:03:11")
+    page.wait_for_function(f"() => {CARD}.querySelectorAll('.cardrow .btn:not([hidden])').length === 2", timeout=3000)
+    page.evaluate(f"() => {CARD}.querySelectorAll('.cardrow .btn:not([hidden])')[0].click()")
+    assert page.evaluate("() => document.querySelector('textarea[name=dop]').value") == "At the station\nOctober 2026"
+    page.evaluate(f"() => {CARD}.querySelectorAll('.cardrow .btn:not([hidden])')[1].click()")
+    assert page.evaluate("() => document.querySelector('textarea[name=dop]').value") == "At the station\nOctober 2026\n4 October 2026"
+
+
+def test_a_date_with_colons_is_read_too_and_the_buttons_go_when_the_photo_changes(ctx):
+    page = open_add(ctx)
+    show_exif(page, "2025:12:31 23:59:59")
+    page.wait_for_function(f"() => {CARD}.querySelectorAll('.cardrow .btn:not([hidden])').length === 2", timeout=3000)
+    assert date_buttons(page) == ["Date: December 2025", "31 December 2025"]
+    page.evaluate("() => { document.getElementById('fotodiv').innerHTML = ''; }")
+    page.wait_for_function(f"() => {CARD}.querySelectorAll('.cardrow .btn:not([hidden])').length === 0", timeout=3000)

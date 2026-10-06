@@ -39,7 +39,8 @@
   // Step 2: the answer, once the page has the results (it fills in after loading)
   function lensReadResults() {
     const request = bridgePending('lens', 180);
-    const results = /^lens\.google\./.test(location.hostname) || /^\/search/.test(location.pathname);
+    // a results page of Lens: its own host, or a search whose address carries Lens parameters (lns_mode, lns_surface...)
+    const results = /^lens\.google\./.test(location.hostname) || (/^\/search/.test(location.pathname) && /[?&]lns_/.test(location.search));
     lensLog('results page?', { results, asked: !!request, url: location.href });
     if (!results || !request) return;
     const collect = () => {

@@ -79,12 +79,14 @@
     if (!plate) { card.host.hidden = true; return; }
     card.message(message);
     const v = info && info.vehicle && plateVehicleNames(info.vehicle);
-    if (!v) return;
-    const agree = info.vehicle.of > 1 ? ` (${info.vehicle.photos} of ${info.vehicle.of} photos)` : '';
+    const links = lookupLinks(plate);                                           // public lookup pages, plain links (75-lookups.js)
+    if (!v && !links) return;
+    const agree = v && info.vehicle.of > 1 ? ` (${info.vehicle.photos} of ${info.vehicle.of} photos)` : '';
     card.body.append(h('div', { class: 'cardbox' },
-      h('p', { class: 'hint', text: 'The photos of this plate on the site show:' }),
-      h('div', { class: 'vehline' }, h('b', { text: v.text }), h('span', { class: 'mute', text: agree })),
-      h('div', { class: 'cardrow' }, h('button', { type: 'button', class: 'btn', text: 'Fill the menus', onclick: () => { vehicleFill(v.path); card.message('Menus filled.'); } }))));
+      v ? h('p', { class: 'hint', text: 'The photos of this plate on the site show:' }) : null,
+      v ? h('div', { class: 'vehline' }, h('b', { text: v.text }), h('span', { class: 'mute', text: agree })) : null,
+      v ? h('div', { class: 'cardrow' }, h('button', { type: 'button', class: 'btn', text: 'Fill the menus', onclick: () => { vehicleFill(v.path); card.message('Menus filled.'); } })) : null,
+      links));
   }
 
   // The result goes to the photo this tab is loading, if the batch is running
@@ -112,6 +114,7 @@
     if (!here.add) { showResult('Open an upload page to check a plate.'); return; }
     const plate = plateForForm();
     $('plateNow').textContent = plate || '—';
+    lookupRefresh(plate);
     log('plate check', { manual, plate, country: here.country });
     if (!plate) { lastPlate = null; showResult('Type the plate in the form to check it.'); plateCard('', null, ''); return; }
     if (!manual && (plate === lastPlate || store.get('autoCheck', '1') !== '1')) return;
