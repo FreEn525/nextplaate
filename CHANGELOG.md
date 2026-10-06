@@ -1,6 +1,6 @@
 # Changelog
 
-## 5.9 (in progress)
+## 5.9
 
 **Series counter**
 - New feature *Series counter* (switch in Settings), for the French plates (the shape was checked on the real site; other countries join once their pages are checked): in the plate card of the upload page, how many photos of the series of the plate you already have (HF-137-QQ is in the series HF-*-QQ), a link to them; on a series page of the site, how many of its numbers are on the site, which ones, and how many photos of the series you have. One request each, through the shared queue.
