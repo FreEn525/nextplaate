@@ -70,7 +70,9 @@ NextPlaate est un script Tampermonkey (userscript) pour [PlatesMania](https://pl
 ### Raccourcis vers les membres (tiroir `gallery`, et sur un profil, `src/features/73-members.js`)
 - Les profils que vous visitez souvent : chacun avec sa photo et son pseudo ; un clic mène à la page du membre (`/user<id>`). Sans photo enregistrée, l'initiale du pseudo la remplace.
 - **Sur un profil** : la liste est à gauche du contenu, à la hauteur de la photo de profil (les drapeaux sont à droite) ; sur un écran plus étroit, sous la photo, dans la colonne de gauche. Le membre de la page est encadré.
-- **Ajouter** : « Add this member » sur un profil ; ou, depuis n'importe quelle page, par le numéro (`121546`) ou le lien de la page : la page est lue une fois, par la file de requêtes du script (une à la fois), pour la photo et le pseudo. Un membre déjà présent n'est pas ajouté deux fois ; un numéro qui n'est pas un membre le dit.
+- **Vous d'abord** : le membre connecté (lu dans la barre du haut du site) est toujours la première ligne, marquée « You » ; elle ne se déplace ni ne se retire, et vous n'êtes jamais listé deux fois. Votre photo est gardée depuis votre propre page, ou lue une fois en arrière-plan si elle n'est pas connue.
+- **L'ordre** : glissez une ligne par sa poignée (⋮⋮) ; une barre bleue montre où elle tombera, jamais au-dessus de vous. Au clavier : donnez le focus à la poignée et appuyez sur les flèches Haut / Bas (le focus reste sur la ligne). L'ordre est gardé. Le glisser-déposer ne marche pas au doigt sur un écran tactile : les flèches du clavier restent possibles.
+- **Ajouter** : « Add this member » sur un profil (pas proposé sur votre propre page) ; ou, depuis n'importe quelle page, par le numéro (`121546`) ou le lien de la page : la page est lue une fois, par la file de requêtes du script (une à la fois), pour la photo et le pseudo. Un membre déjà présent n'est pas ajouté deux fois ; un numéro qui n'est pas un membre le dit.
 - La liste est gardée dans le navigateur ; la photo et le pseudo se rafraîchissent quand on visite le membre. Interrupteur dans Settings.
 
 ### Drapeaux des pays (tiroir `upload`, et sur les pages d'ajout)

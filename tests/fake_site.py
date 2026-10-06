@@ -18,6 +18,7 @@ PNG = base64.b64decode(
 )
 
 HEAD = """<!doctype html><html><head><meta charset="utf-8"><title>{title}</title></head><body>
+<div class="header"><div class="topbar"><ul class="loginbar"><li><a href="/user121559">freen525</a></li></ul></div></div>
 <h1 class="pull-left">PlatesMania</h1>"""
 
 HEARTS_JS = """<script>
