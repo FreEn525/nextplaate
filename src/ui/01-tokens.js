@@ -14,6 +14,7 @@
   //   neutrals  --ink (text), --mute (secondary text), --line / --line2 (borders), --bg (panel), --paper, --soft, --off
   //   states    --danger*, --ok*, --warn* : a fill, a border and a text colour each
   //   shape     --r (radius: 0, PlatesMania is all rectangles), --h (control height), --h-sm
+  //   type      11 (small caps labels) 12 (help, small) 13 (controls, chips) 14 (text) 16 (titles, the cross) 18 (the star): no other size
   // Where the site and the script differ on purpose: the secondary text is darker than the site's grey (#7c8082) to stay readable at
   // 12 px; every control has the same height scale, the same square corners and the same focus ring.
   const UI_BASE = `
@@ -21,7 +22,7 @@
           --ink:#2d2d2d;--mute:#626a70;--line:#e4e4e4;--line2:#cfcfcf;--bg:#f5f5f5;--paper:#fafafa;--soft:#f0f0f0;--off:#e8e8e8;--off-ink:#8f9498;
           --danger:#d9534f;--danger-soft:#fde2e1;--danger-line:#f3b5b2;--danger-ink:#8a1c17;
           --ok-soft:#e6f4ea;--ok-line:#b7dfc1;--ok-ink:#1e6b34;--warn-soft:#fff3cd;--warn-line:#f0dc9a;--warn-ink:#7a4f00;
-          --r:0;--h:38px;--h-sm:32px;
+          --r:0;--h:38px;--h-sm:32px;--h-rail:40px;
           font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink)}
     *{box-sizing:border-box}
     [hidden]{display:none!important}
@@ -37,17 +38,17 @@
     .btn:disabled{background:var(--off);border-color:var(--off);color:var(--off-ink);cursor:not-allowed}
     input,select,textarea{color:var(--ink)}
     input[type=text],input[type=number],select,textarea{padding:0 10px;border:1px solid var(--line2);border-radius:var(--r);background:#fff;color:var(--ink);font:inherit;outline:none}
-    input[type=text],input[type=number],select{height:36px}
+    input[type=text],input[type=number],select{height:var(--h)}
     input[type=text]:focus,input[type=number]:focus,select:focus,textarea:focus{border-color:var(--primary)}
     input[type=checkbox],input[type=range]{accent-color:var(--primary);cursor:pointer}
     .brand{display:flex;align-items:center;gap:10px;font-weight:500;letter-spacing:-.01em;color:var(--ink)}
     .brand svg{display:block;flex:none}
     .brand b{font-weight:800;color:var(--primary)}
     .mute{color:var(--mute)}
-    .iconbtn{width:var(--h-sm);height:var(--h-sm);padding:0;display:grid;place-items:center;border:1px solid var(--line2);border-radius:var(--r);background:#fff;color:var(--mute);cursor:pointer}
+    .iconbtn{width:var(--h-sm);height:var(--h-sm);padding:0;display:grid;place-items:center;font:inherit;font-size:16px;line-height:1;border:1px solid var(--line2);border-radius:var(--r);background:#fff;color:var(--mute);cursor:pointer}
     .iconbtn:hover{background:var(--primary-tint);color:var(--ink);border-color:var(--primary-soft)}
     .iconbtn svg{display:block;margin:auto}
-    .chip{width:100%;min-height:34px;padding:6px 10px;border:1px solid var(--line2);border-radius:var(--r);background:#fff;color:var(--ink);font:inherit;font-size:13px;text-align:left;cursor:pointer;overflow-wrap:anywhere}
+    .chip{width:100%;min-height:var(--h-sm);padding:5px 10px;border:1px solid var(--line2);border-radius:var(--r);background:#fff;color:var(--ink);font:inherit;font-size:13px;text-align:left;cursor:pointer;overflow-wrap:anywhere}
     .chip:hover{background:var(--primary-tint);border-color:var(--primary-soft)}
     .chip.best{border-color:var(--primary-soft);background:var(--primary-soft);color:var(--primary-h);font-weight:600}
     .chip.on{border-color:var(--primary);box-shadow:inset 0 0 0 1px var(--primary)}
@@ -89,15 +90,15 @@
     .member img,.member .mav{flex:none;width:40px;height:40px;object-fit:cover;background:var(--soft)}
     .member .mav{display:grid;place-items:center;font-weight:700;font-size:16px;color:var(--primary-h);background:var(--primary-soft)}
     .member .mname{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px;font-weight:600}
-    .member .mtag{flex:none;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--primary-h)}
-    .mrow .iconbtn{height:auto;min-height:52px}
+    .member .mtag{flex:none;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--primary-h)}
+    .mrow .iconbtn{height:auto;min-height:54px}
     .flagpick{display:flex;flex-direction:column;gap:8px}
     .flagpick input[type=text]{width:100%}
     .pickrows{display:flex;flex-direction:column;gap:6px;max-height:340px;overflow-y:auto;padding:2px}
     .pickrows .chk img{flex:none}
     .flagblock{display:flex;flex-direction:column;gap:8px}
     .flagblock input{width:100%}
-    .flag{height:30px;min-width:0;display:flex;align-items:center;gap:8px;padding:0 8px;border:1px solid var(--line2);background:#fff;color:var(--ink);font-size:12px;text-decoration:none}
+    .flag{height:var(--h-sm);min-width:0;display:flex;align-items:center;gap:8px;padding:0 8px;border:1px solid var(--line2);background:#fff;color:var(--ink);font-size:12px;text-decoration:none}
     .flag .fname{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .flag .flagcode{font-weight:700}
     .flag:hover{background:var(--primary-tint);border-color:var(--primary)}

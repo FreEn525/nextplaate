@@ -4,7 +4,7 @@
     .rail{width:56px;flex:none;display:flex;flex-direction:column;align-items:center;gap:8px;padding:10px 0;background:#fff;border-left:1px solid var(--line2);box-shadow:-6px 0 20px rgba(0,0,0,.08)}
     .rail .logo{margin-bottom:6px}
     .rsep{width:24px;height:1px;background:var(--line2);margin:auto 0 4px}
-    .rbtn{width:40px;height:40px;display:grid;place-items:center;border:0;border-radius:var(--r);background:none;color:var(--mute);cursor:pointer}
+    .rbtn{width:var(--h-rail);height:var(--h-rail);display:grid;place-items:center;border:0;border-radius:var(--r);background:none;color:var(--mute);cursor:pointer}
     .rbtn:hover{background:var(--primary-tint);color:var(--primary-h)}
     .rbtn[aria-pressed="true"]{background:var(--primary);color:var(--on-primary)}
     .drawer.passive{pointer-events:none!important;opacity:.82}
@@ -61,12 +61,12 @@
     .kblist{display:flex;flex-direction:column;gap:6px}
     .kbrow{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px}
         .kbright{display:flex;align-items:center;gap:4px}
-    .kbkey{width:84px;height:30px;padding:0 8px;border:1px solid var(--line2);border-radius:var(--r);background:#fff;color:var(--ink);font:700 12px system-ui,sans-serif;cursor:pointer}
+    .kbkey{width:84px;height:var(--h-sm);padding:0 8px;border:1px solid var(--line2);border-radius:var(--r);background:#fff;color:var(--ink);font:700 12px system-ui,sans-serif;cursor:pointer}
     .kbkey:hover{border-color:var(--primary-soft);background:var(--primary-tint)}
     .kbkey.static{cursor:default}
     .kbkey.static:hover{border-color:var(--line2);background:#fff}
     .kbspacer{width:26px;flex:none}
-    .kbreset{width:26px;height:30px;border:0;background:none;color:var(--mute);cursor:pointer;font-size:14px}
+    .kbreset{width:26px;height:var(--h-sm);border:0;background:none;color:var(--mute);cursor:pointer;font-size:14px}
     .kbreset:hover{color:var(--ink)}
     .kbreset.off{visibility:hidden}
     @media (max-width:520px){ .drawer{width:calc(100vw - 56px)} .rail{width:48px} }

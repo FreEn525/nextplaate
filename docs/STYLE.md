@@ -28,6 +28,12 @@ Le texte secondaire (`--mute`, `#626a70`) est **plus foncé** que le gris du sit
 
 - **Le logo** est aux couleurs du site : son bleu est `--primary` (`#4765a0`), dans le panneau (via `SITE_BLUE`), dans `logo_nextplaate.svg` et dans l'icône du script (`@icon`).
 
+## L'échelle
+
+Tailles de texte : **11** (étiquettes en petites capitales), **12** (aide, détails), **13** (contrôles, choix), **14** (texte), **16** (titres, la croix), **18** (l'étoile). Aucune autre.
+
+Hauteurs : **38 px** (`--h`) pour les boutons, champs et listes ; **32 px** (`--h-sm`) pour les petits boutons, boutons-icônes, pastilles, drapeaux et choix ; **40 px** (`--h-rail`) pour la barre du panneau. Les lignes de membres (photo de 40 px) sont à 54 px. `test_style.py` mesure tout cela dans le navigateur et lit les sources : une taille hors de l'échelle, ou un bouton à une autre hauteur, fait échouer le test.
+
 ## Écrans étroits
 
 Rien ne doit élargir un tiroir : un téléphone de 320 px lui laisse 264 px. Les libellés longs passent à la ligne (`.gbody .btn`), les rangées de boutons aussi (`.btnrow`), les champs étiquettés aussi (`.row`). `tests/e2e/test_responsive.py` ouvre chaque tiroir à 320, 360, 768 et 1280 px et refuse tout débordement. Les colonnes de choix (`.cols`) s'empilent d'elles-mêmes quand la place manque.

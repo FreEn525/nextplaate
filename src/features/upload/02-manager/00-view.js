@@ -16,12 +16,12 @@
       .paint{padding:12px 18px;background:#fff;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
       .lbl{font-weight:600;font-size:13px}
       .chips{display:flex;gap:8px;flex-wrap:wrap}
-      .chip{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 10px;border-radius:var(--r);border:2px solid var(--line2);background:#fff;color:var(--ink);font:inherit;font-size:13px;cursor:pointer}
+      .chip{display:inline-flex;align-items:center;gap:7px;height:var(--h);padding:0 10px;border-radius:var(--r);border:2px solid var(--line2);background:#fff;color:var(--ink);font:inherit;font-size:13px;cursor:pointer}
       .chip:hover{border-color:var(--primary-soft);background:var(--primary-tint)}
       .chip.on{background:var(--primary-soft);color:var(--primary-h);border-color:var(--primary-soft)}
       .chip kbd{display:inline-grid;place-items:center;min-width:18px;height:18px;border-radius:var(--r);background:var(--soft);color:var(--ink);font:700 11px system-ui}
       .chip.on kbd{background:#fff}
-      .chip .rm{margin-left:2px;opacity:.55;font-size:15px;line-height:1}
+      .chip .rm{margin-left:2px;opacity:.55;font-size:16px;line-height:1}
       .chip .rm:hover{opacity:1}
       select.more{max-width:210px;font-size:13px}
       .tools{padding:10px 18px;background:var(--paper);border-bottom:1px solid var(--line);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
@@ -51,7 +51,7 @@
       .st{position:absolute;top:6px;left:6px;padding:2px 8px;border-radius:var(--r);background:#fff;border:1px solid var(--line2);font-size:11px;font-weight:700}
       .mini{position:absolute;top:6px;height:24px;border-radius:var(--r);border:1px solid var(--line2);font-size:11px;font-weight:700;cursor:pointer}
       .mini.rt{right:36px;padding:0 8px;background:var(--primary-soft);border-color:var(--primary-soft);color:var(--primary-h)}
-      .mini.x{right:6px;width:24px;padding:0;background:#fff;color:var(--mute);font-size:15px;line-height:1;display:none}
+      .mini.x{right:6px;width:24px;padding:0;background:#fff;color:var(--mute);font-size:16px;line-height:1;display:none}
       .card:hover .mini.x{display:block}
       .mini.x:hover{background:var(--danger);border-color:var(--danger);color:#fff}
 
