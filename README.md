@@ -49,8 +49,10 @@ Where a key is given, it can be changed in the Shortcuts drawer.
 
 **The panel itself**
 
-22. **Shortcut editor**: every key is yours to change (AZERTY-safe).
-23. **Settings**: one switch per feature; a switched-off feature adds no control and no key.
+22. **Profile page look**: a member's profile in the look of the script: the picture, badges and figures in one box, the uploads, likes and comments as tiles, the private messages and the notifications in two identical panels, the countries table and the last photos tidied. Only the style of the site's own elements changes (sort, filter and delete of the messages keep working); one switch gives the site's look back.
+23. **Notification pop-ups**: a notice in the corner, like a phone's, for a new like, comment or private message, on any PlatesMania page while a tab is open: you choose the kinds and how often (2 to 30 minutes), and can ask for a system notification when the tab is in the background. The first look marks what is there as seen.
+24. **Shortcut editor**: every key is yours to change (AZERTY-safe).
+25. **Settings**: one switch per feature; a switched-off feature adds no control and no key.
 
 ## Installation
 

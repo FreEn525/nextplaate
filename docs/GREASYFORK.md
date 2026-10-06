@@ -65,8 +65,10 @@ A click on the logo of the panel checks for a newer version. The bar follows the
 21. **World map** (`G`, globe) - the countries a member has photos from on a map of the world, shaded by how many photos, each a link to the member's photos of it; a Europe view; yours or anyone's (a member number or a profile link); for 54 countries, a map of the regions (departments, states...).
 
 ## The panel
-22. **Shortcut editor** - every key can be changed (AZERTY-safe).
-23. **Settings** - one switch per feature.
+22. **Profile page look** - a member's profile in the look of the script: figures as tiles, the private messages and notifications in two identical panels, the countries table and the last photos tidied. One switch gives the site's look back.
+23. **Notification pop-ups** - a notice in the corner, like a phone's, for a new like, comment or private message on any PlatesMania page while a tab is open. You choose the kinds and how often.
+24. **Shortcut editor** - every key can be changed (AZERTY-safe).
+25. **Settings** - one switch per feature.
 
 ## Permissions, in plain words
 - It works on platesmania.com. Everything it reads from the site goes through one queue: one request at a time, three seconds apart, a pause after a block.

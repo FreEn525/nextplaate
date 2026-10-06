@@ -12,6 +12,8 @@
   const SITE_BLUE = '#4765a0';
   // The greys of the site's own page, for what the script restyles on the page itself (outside its shadow roots, where the tokens below do not reach)
   const PAGE_GREY = { line: '#bdbdbd', mute: '#626a70', ink: '#2d2d2d' };
+  // The same palette for the site's pages themselves (the profile): the tokens of the panel, written as variables a page rule can scope
+  const PAGE_TOKENS = `--pm:${SITE_BLUE};--pm-h:color-mix(in srgb,${SITE_BLUE} 78%,#000);--pm-soft:color-mix(in srgb,${SITE_BLUE} 22%,#fff);--pm-tint:color-mix(in srgb,${SITE_BLUE} 7%,#fff);--pm-ink:${PAGE_GREY.ink};--pm-mute:${PAGE_GREY.mute};--pm-line:#e4e4e4;--pm-line2:#cfcfcf;--pm-paper:#fafafa;--pm-danger:#d9534f;--pm-ok:#72c02c;--pm-warn:#f0ad4e`;
 
   // DESIGN TOKENS. Every colour of the panel, the card and the batch window comes from here: no other file writes a colour.
   //   palette   --primary, --primary-h (hover), --primary-soft (light fill and borders), --primary-tint (very light fill), --ring (focus)

@@ -29,8 +29,10 @@ Chaque fonction a un interrupteur dans Settings (sauf Settings elle-même) : ét
 | 19 | Vrais uploads | Profile: real uploads | profils | total réel de la galerie et uploads du jour (dès 03 h 30), écart avec le chiffre du profil | |
 | 20 | Régions | Profile: regions | profils | régions d'un pays dont vous avez une photo, barre, liste des manquantes ; menu des pays lu sur la page du site | |
 | 21 | Carte du monde | World map | tiroir Browse, profils, touche `G` | les pays dont un membre a des photos sur une carte du monde, nuancés selon le nombre de photos, chacun un lien vers ses photos ; vue Europe ; vous ou n'importe quel membre | `G` |
-| 22 | Éditeur de raccourcis | Shortcut editor | tiroir Raccourcis | change chaque touche | |
-| 23 | Réglages | (verrouillée) | tiroir Settings | un interrupteur par fonction ; choix des pays de la barre | |
+| 22 | Apparence du profil | Profile page look | profils | la page de profil d'un membre dans le style du script : fiche, tuiles, deux panneaux identiques pour messages et notifications, tableau et dernières photos ; seul le style change | |
+| 23 | Notifications | Notification pop-ups | partout (connecté) | une pastille en coin pour un nouveau like, commentaire ou message privé, tant qu'un onglet PlatesMania est ouvert | |
+| 24 | Éditeur de raccourcis | Shortcut editor | tiroir Raccourcis | change chaque touche | |
+| 25 | Réglages | (verrouillée) | tiroir Settings | un interrupteur par fonction ; choix des pays de la barre | |
 
 Autour de ces fonctions : la barre d'icônes (avec votre photo de profil sous le logo), le message d'état en bas, et pour le développement le tiroir Developer du build dev (capture, test de plaques, vérification des lectures, base).
 
@@ -67,6 +69,8 @@ La barre suit l'ordre d'usage : **Check a plate** (vérifier ce qu'on va envoyer
 | Profile: real uploads | every member |
 | Profile: regions | every country the site has regions for |
 | World map | every member |
+| Profile page look | every profile |
+| Notification pop-ups | everywhere you are logged in |
 | Shortcut editor | everywhere |
 
 ## Installation et version
@@ -203,6 +207,18 @@ La barre suit l'ordre d'usage : **Check a plate** (vérifier ce qu'on va envoyer
 - Les contours viennent de **geoBoundaries** (CC-BY 4.0, API publique et ouverte), chargés à la demande, simplifiés au chargement (projection équirectangulaire corrigée de la latitude, 1000 unités de large, points trop proches supprimés) ; rien n'est embarqué dans le script. Rapprochement (`regionMatch`, `lib/regions-match.js`) dans l'ordre : nom normalisé (sans accent, sans mots comme region, oblast, city ; plusieurs noms lus : « A, B », « A and B » ; lettres sans forme accentuée traduites), table d'alias du pays (`lib/regions-alias.js`), code ISO 3166-2 seulement pour les pays où le code de plaque est le code ISO (`REGION_CODE_COUNTRIES` : us, ca, au, it, br, ch), puis, pour les villes et les anciennes provinces, l'unité où Wikidata la dit située, ou à défaut la forme qui contient le point de l'endroit (`lib/regions-codes.js`, écrit par `measure-regions.py --codes` ; approximatif : la région est posée sur la forme de son chef-lieu), puis la forme la plus proche si elle est seule (quelques lettres d'écart ou préfixe ; une ville en plusieurs districts les prend tous), enfin les noms entre parenthèses (l'ancien chef-lieu d'un district). Ce qui n'est pas un territoire (Mopeds, Historic vehicles, Ministry, les pays des plaques diplomatiques) est mis à part. L'outil `tools/measure-regions.py` exécute ce même code (par `tools/match-regions.mjs`) : `--why` liste les régions sans forme, `--suggest` leurs formes les plus proches, `--pairs` un échantillon de ce qui a été placé où.
 - Quels pays : `lib/regions-levels.js`, écrit par `tools/measure-regions.py` à partir des pages collectées (`reference/real/regions/`) : un pays n'a une carte que si au moins sept régions sur dix trouvent leur forme (France 88 %, Italie 83 %, Serbie 87 %, Turquie 100 %...). Les autres (Allemagne 37 % : 772 codes de plaque contre 428 Kreise ; Pologne, Royaume-Uni, Japon...) gardent le tableau, en attendant un rapprochement travaillé.
 
+#### La fenêtre de la carte (`81-worldmap.js`, `82-worldmap-view.js`, `ui/08-map-css.js`, `ui/09-map-layout.js`)
+- Presque tout l'écran (même cadre que le gestionnaire d'envoi `U` : le logo, le nom de la fenêtre, *Close*), rien ne défile sauf la liste : la barre (le membre, *Show*, vos raccourcis, le menu *Map*), la carte à gauche qui remplit la hauteur et se voit toujours en entier (monde ou pays), ses boutons (+, −, *Fit*, *Europe*) posés dessus, la légende en bas à gauche ; à droite, le résumé, le classement (une barre par part, le nom en lien vers les photos, un bouton *Regions* pour les pays qui ont une carte) et les notes. Passer sur une ligne allume sa forme. Sous 760 px la colonne passe sous la carte.
+- Un seul menu *Map* : *World* ou un pays (*Germany (regions)*). Le panneau se ferme à l'ouverture.
+
+### Apparence du profil (`84-profile-style.js`, `ui/10-profile-css.js`)
+- Une feuille de style appliquée à la page de profil du site (celui du membre qu'on regarde) : la fiche (photo, badges, nom, identifiant) dans un cadre, les compteurs (envois, likes, commentaires) en tuiles, les messages privés et les notifications dans deux panneaux identiques (même en-tête, même hauteur, plus de fonds jaune et bleu ciel), le tableau des pays plus calme, les dernières photos en grille régulière. Rien n'est reconstruit : tri, filtre et suppression des messages, *Load more*, tri du tableau gardent leurs scripts. Les couleurs sont les jetons de page (`PAGE_TOKENS`). Un interrupteur (*Profile page look*) rend l'apparence du site.
+
+### Notifications (`85-notify.js`, `lib/notify-parse.js`, `ui/11-toast.js`)
+- Tant qu'un onglet PlatesMania est ouvert, sur n'importe quelle page, le script interroge le site (par la file commune) : la liste des likes et commentaires par `action2.php?num=0&user=<id>` (une requête légère, toutes les 5 minutes par défaut) et la page de profil pour les messages privés (moins souvent : au moins 10 minutes). Ce qui est nouveau apparaît en pastille en bas à droite, comme sur un téléphone : une couleur et un mot par genre (like, commentaire, message), un lien vers la photo, la croix, disparition seule après 9 secondes (le survol la garde). Plus de trois nouveautés : deux pastilles et un compte.
+- La première fois, ce qui est déjà là est noté comme vu (pas de déluge). Plusieurs onglets : celui qui trouve la dernière vérification assez vieille la fait ; les pastilles s'affichent dans l'onglet regardé et attendent s'il n'y en a pas. Option : notification du système quand l'onglet est en arrière-plan (demande l'autorisation du navigateur).
+- Limite : sans onglet PlatesMania ouvert, rien ne tourne (un script d'utilisateur ne vit que dans la page). Réglages (*Settings > Notifications*) : les genres, la fréquence (2, 5, 10, 30 minutes), la notification du système, *Look now* et *Show a test*.
+
 ### À propos et nouveautés (tiroir `settings`, `src/features/90-about.js`, `src/lib/whatsnew.js`)
 - Signature « © 2026 NextEnzzo » avec le lien du profil (`@author`, `@copyright`, bannière de la console aussi). Le bouton *What's new* ouvre la fenêtre des nouveautés ; elle s'ouvre seule une fois après une mise à jour (pas à la première installation). Son texte est dans `whatsnew.js` ; un test échoue si `@version` change sans son entrée.
 
@@ -253,7 +269,7 @@ Chaque fonction s'enregistre avec `registerFeature({ groups, keys, onEscape, ini
 
 ## Tests (`tests/`)
 
-- `python -m pytest -q` (dossier `tests/e2e/`) : 417 tests (431 avec le build dev, `NEXTPLAATE_SCRIPT=nextplaate.dev.user.js`) sur une version simulée du site (`fake_site.py`, avec une fausse page Google pour le Lens). Un fichier par fonction (`test_lens.py`, `test_tags.py`, `test_members.py`, `test_flags.py`, `test_extra.py`, `test_preview.py`…), plus `test_style.py` (couleurs, rayons, tailles, hauteurs) et `test_responsive.py` (aucun débordement de 320 à 1280 px). Pas d'accès réel à PlatesMania ni à Google.
+- `python -m pytest -q` (dossier `tests/e2e/`) : 434 tests (448 avec le build dev, `NEXTPLAATE_SCRIPT=nextplaate.dev.user.js`) sur une version simulée du site (`fake_site.py`, avec une fausse page Google pour le Lens). Un fichier par fonction (`test_lens.py`, `test_tags.py`, `test_members.py`, `test_flags.py`, `test_extra.py`, `test_preview.py`…), plus `test_style.py` (couleurs, rayons, tailles, hauteurs) et `test_responsive.py` (aucun débordement de 320 à 1280 px). Pas d'accès réel à PlatesMania ni à Google.
 - `python tests/offline/check_known.py` : 39 plaques validées à la main, tapées dans les pages sauvegardées.
 - `python tests/offline/check_db.py` : toutes les plaques de la base, dans la catégorie correspondante, en parallèle. Hors ligne.
 - Les données dérivées : `node scripts/refresh-data.mjs` → `data/` et `docs/COUVERTURE.md` (voir `data/README.md`).

@@ -21,6 +21,7 @@
     lookup: { about: 'For the plate you type: links to public lookup sites (open or free image searches, plus official sites by country). Nothing is sent before you click.', scope: 'every country, with their own sites for 14' },
     profile: { about: 'On a member’s profile: the real total of the gallery and today’s uploads, next to the figure the site only updates from time to time.', scope: 'every member' },
     profilestyle: { about: 'A member’s profile page in the look of the script: the figures, the private messages, the notifications, the countries and the last photos in one style. The site’s own elements and buttons stay.', scope: 'every profile' },
+    notify: { about: 'A notice in the corner for a new like, comment or private message, on any PlatesMania page, like a phone. It works while a PlatesMania tab is open; you choose the kinds and how often.', scope: 'everywhere you are logged in' },
     mine: { about: 'Under the vehicle menus: how many photos of that brand, model and generation you already have.', scope: 'every country' },
     regions: { about: 'On a member’s profile: which regions of a country the member has a photo from, and which are missing.', scope: 'every country the site has regions for' },
     series: { about: 'How many of your photos are in the series of the plate you type (HF-137-QQ is in HF-*-QQ); on a series page, the numbers already on the site.', scope: '84 countries (checked on the real site)' },

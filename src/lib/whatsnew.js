@@ -13,6 +13,9 @@
       title: 'New',
       items: [
         { title: 'World map', text: 'The countries a member has photos from, on a map of the world, shaded by how many photos. Yours, or anyone’s: type a number or paste a profile link. Open it with G (globe), from Browse, or from a profile. Scroll to zoom, drag to move, or use the Europe view. Under the map, pick a country to see its regions (France’s departments, Russia’s regions, the US states...).' },
+        { title: 'Notifications', text: 'A notice in the corner, like a phone’s, for a new like, comment or private message, on any PlatesMania page while a tab is open. Choose the kinds and how often in Settings > Notifications.' },
+        { title: 'A profile in one style', text: 'A member’s profile page is tidied: the picture, badges and figures in one box, the private messages and notifications in two matching panels, the countries and last photos neater. Switch it off in Settings if you prefer the site’s look.' },
+        { title: 'The map window', text: 'The map takes the screen, is always whole, with its buttons on it and a ranked list beside it. The windows of the script now share one frame.' },
         { title: 'The brand and model box', text: 'The site’s text box is clearer: a short label, a field with an example, a clear button and nicer suggestions. The plate card is also in labelled sections now.' }
       ]
     }]

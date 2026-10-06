@@ -417,6 +417,7 @@
     lookup: { about: 'For the plate you type: links to public lookup sites (open or free image searches, plus official sites by country). Nothing is sent before you click.', scope: 'every country, with their own sites for 14' },
     profile: { about: 'On a member’s profile: the real total of the gallery and today’s uploads, next to the figure the site only updates from time to time.', scope: 'every member' },
     profilestyle: { about: 'A member’s profile page in the look of the script: the figures, the private messages, the notifications, the countries and the last photos in one style. The site’s own elements and buttons stay.', scope: 'every profile' },
+    notify: { about: 'A notice in the corner for a new like, comment or private message, on any PlatesMania page, like a phone. It works while a PlatesMania tab is open; you choose the kinds and how often.', scope: 'everywhere you are logged in' },
     mine: { about: 'Under the vehicle menus: how many photos of that brand, model and generation you already have.', scope: 'every country' },
     regions: { about: 'On a member’s profile: which regions of a country the member has a photo from, and which are missing.', scope: 'every country the site has regions for' },
     series: { about: 'How many of your photos are in the series of the plate you type (HF-137-QQ is in HF-*-QQ); on a series page, the numbers already on the site.', scope: '84 countries (checked on the real site)' },
@@ -574,6 +575,40 @@
   function lookupFor(cc, plate) {
     const all = [...(LOOKUP_SITES[cc] || []).map(s => ({ ...s, cc })), ...LOOKUP_SITES['*'].map(s => ({ ...s, cc: '*' }))];
     return all.map(s => ({ key: s.cc + '|' + s.name, name: s.name, href: s.url.replace('{plate}', encodeURIComponent(lookupPlate(plate, s.fmt))) }));
+  }
+  /* =====================================================================
+   *  NOTIFICATIONS, READ  (what the site tells a member, as plain items)
+   *    Two places hold it: the list the profile loads by itself (action2.php?num=0&user=<id>: likes, comments, 10 at a time, light) and the
+   *    cards of the private messages on the profile page itself (changes made by moderators, deletions, awards, comments).
+   *      notifyParseList(html)      -> [{ key, kind: 'like' | 'comment' | 'other', title, body, href, time }]
+   *      notifyParseMessages(html)  -> [{ key, kind: 'message', title, body, href, time }]
+   *    key is stable: it is how an item is told from one already shown. time is in milliseconds (0 when unknown).
+   * ===================================================================== */
+  const NOTIFY_VERBS = { like: 'liked', comment: 'commented on', other: '' };
+
+  function notifyParseList(html) {
+    const doc = new DOMParser().parseFromString(String(html), 'text/html');
+    return [...doc.querySelectorAll('li')].map(li => {
+      const icon = (li.querySelector('i.fa') || {}).className || '';
+      const kind = /heart/.test(icon) ? 'like' : /comment/.test(icon) ? 'comment' : 'other';
+      const who = li.querySelector('strong a'), plate = li.querySelector('a[href*="/nomer"]'), when = li.querySelector('time');
+      const name = who ? who.textContent.trim() : '', what = plate ? plate.textContent.trim() : '';
+      const time = when ? Date.parse(when.getAttribute('datetime') || '') || 0 : 0;
+      const href = plate ? plate.getAttribute('href') : who ? who.getAttribute('href') : '';
+      const title = name ? `${name} ${NOTIFY_VERBS[kind]} ${what}`.replace(/\s+/g, ' ').trim() : li.textContent.replace(/\s+/g, ' ').trim();
+      return { key: `${kind}|${name}|${href}|${time}`, kind, title, body: '', href, time };
+    }).filter(i => i.title);
+  }
+
+  function notifyParseMessages(html) {
+    const doc = new DOMParser().parseFromString(String(html), 'text/html');
+    return [...doc.querySelectorAll('.profile-notification-card')].map(card => {
+      const link = card.querySelector('.profile-notification-card-title a'), type = card.querySelector('.profile-notification-card-type');
+      const id = card.getAttribute('data-notification-delete-id') || '', time = +(card.getAttribute('data-notification-time') || 0) || 0;
+      const what = link ? link.textContent.trim() : '', label = type ? type.textContent.trim() : (card.getAttribute('data-notification-category') || 'message');
+      const by = card.querySelector('.profile-notification-card-meta a');
+      return { key: `message|${id}|${time}`, kind: 'message', title: what ? `${label}: ${what}` : label, body: by ? `by ${by.textContent.trim()}` : '', href: link ? link.getAttribute('href') : '', time };
+    });
   }
   /* =====================================================================
    *  PAN AND ZOOM  (for an SVG map: the world, the regions of a country)
@@ -1429,6 +1464,9 @@
       title: 'New',
       items: [
         { title: 'World map', text: 'The countries a member has photos from, on a map of the world, shaded by how many photos. Yours, or anyone’s: type a number or paste a profile link. Open it with G (globe), from Browse, or from a profile. Scroll to zoom, drag to move, or use the Europe view. Under the map, pick a country to see its regions (France’s departments, Russia’s regions, the US states...).' },
+        { title: 'Notifications', text: 'A notice in the corner, like a phone’s, for a new like, comment or private message, on any PlatesMania page while a tab is open. Choose the kinds and how often in Settings > Notifications.' },
+        { title: 'A profile in one style', text: 'A member’s profile page is tidied: the picture, badges and figures in one box, the private messages and notifications in two matching panels, the countries and last photos neater. Switch it off in Settings if you prefer the site’s look.' },
+        { title: 'The map window', text: 'The map takes the screen, is always whole, with its buttons on it and a ranked list beside it. The windows of the script now share one frame.' },
         { title: 'The brand and model box', text: 'The site’s text box is clearer: a short label, a field with an example, a clear button and nicer suggestions. The plate card is also in labelled sections now.' }
       ]
     }]
@@ -1519,6 +1557,8 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
   const SITE_BLUE = '#4765a0';
   // The greys of the site's own page, for what the script restyles on the page itself (outside its shadow roots, where the tokens below do not reach)
   const PAGE_GREY = { line: '#bdbdbd', mute: '#626a70', ink: '#2d2d2d' };
+  // The same palette for the site's pages themselves (the profile): the tokens of the panel, written as variables a page rule can scope
+  const PAGE_TOKENS = `--pm:${SITE_BLUE};--pm-h:color-mix(in srgb,${SITE_BLUE} 78%,#000);--pm-soft:color-mix(in srgb,${SITE_BLUE} 22%,#fff);--pm-tint:color-mix(in srgb,${SITE_BLUE} 7%,#fff);--pm-ink:${PAGE_GREY.ink};--pm-mute:${PAGE_GREY.mute};--pm-line:#e4e4e4;--pm-line2:#cfcfcf;--pm-paper:#fafafa;--pm-danger:#d9534f;--pm-ok:#72c02c;--pm-warn:#f0ad4e`;
 
   // DESIGN TOKENS. Every colour of the panel, the card and the batch window comes from here: no other file writes a colour.
   //   palette   --primary, --primary-h (hover), --primary-soft (light fill and borders), --primary-tint (very light fill), --ring (focus)
@@ -2133,76 +2173,121 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
    *    this CSS lives on the page, where the panel's tokens do not reach. Scoped to the profile container.
    * ===================================================================== */
   const PROFILE_CSS = `
-    .container.profile{--p:${SITE_BLUE};--ph:color-mix(in srgb,${SITE_BLUE} 78%,#000);--ps:color-mix(in srgb,${SITE_BLUE} 22%,#fff);--pt:color-mix(in srgb,${SITE_BLUE} 7%,#fff);--ink:${PAGE_GREY.ink};--mute:${PAGE_GREY.mute};--line:#e4e4e4;--line2:#cfcfcf;--paper:#fafafa}
+    .container.profile{${PAGE_TOKENS}}
     .profile .panel,.profile .tag-box,.profile .service-block-v3{border-radius:0;box-shadow:none}
     /* the member: picture and badges on the left, name and figures on the right, in one box */
-    .profile > .row:first-child{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 16px;padding:16px;border:1px solid var(--line);background:#fff}
+    .profile > .row:first-child{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 16px;padding:16px;border:1px solid var(--pm-line);background:#fff}
     .profile > .row:first-child > [class*=col-md]{float:none;width:auto;padding:0}
     .profile > .row:first-child > .col-md-3{flex:0 0 150px}
     .profile > .row:first-child > .col-md-9{flex:1 1 320px;min-width:0}
-    .profile .profile-img{width:120px;height:120px;margin:0 auto 12px;object-fit:cover;border:1px solid var(--line2)}
+    .profile .profile-img{width:120px;height:120px;margin:0 auto 12px;object-fit:cover;border:1px solid var(--pm-line2)}
     .profile .devider{display:none}
     .profile .badge-lists{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 6px;margin:0;padding:0}
     .profile .badge-lists li{display:flex;align-items:center;gap:4px;padding:0}
-    .profile .badge-lists li a{display:grid;place-items:center;width:32px;height:32px;border:1px solid var(--line2);background:#fff;color:var(--ink)}
-    .profile .badge-lists li a:hover{background:var(--pt);border-color:var(--ps);color:var(--p)}
-    .profile .badge-lists .badge{border-radius:0;font-size:11px;line-height:1.6;background:var(--p)}
-    .profile h1{display:flex;align-items:baseline;gap:8px;margin:0 0 12px;font-size:18px;font-weight:700;line-height:1.3;color:var(--p)}
-    .profile h1 a{color:var(--p)}
-    .profile h1 small{margin-left:auto;font-size:12px;font-weight:400;color:var(--mute)}
+    .profile .badge-lists li a{display:grid;place-items:center;width:32px;height:32px;border:1px solid var(--pm-line2);background:#fff;color:var(--pm-ink)}
+    .profile .badge-lists li a:hover{background:var(--pm-tint);border-color:var(--pm-soft);color:var(--pm)}
+    .profile .badge-lists .badge{border-radius:0;font-size:11px;line-height:1.6;background:var(--pm)}
+    .profile h1{display:flex;align-items:baseline;gap:8px;margin:0 0 12px;font-size:18px;font-weight:700;line-height:1.3;color:var(--pm)}
+    .profile h1 a{color:var(--pm)}
+    .profile h1 small{margin-left:auto;font-size:12px;font-weight:400;color:var(--pm-mute)}
     /* the figures: the uploads, then the likes and the comments, as tiles */
-    .profile .service-block-v3{display:flex;align-items:center;gap:10px;margin:0 0 8px;padding:10px 12px;border:1px solid var(--line);background:var(--paper);text-align:left}
-    .profile .service-block-v3 i{font-size:16px;color:var(--p);margin:0}
-    .profile .service-block-v3 .service-heading{flex:1;min-width:0;margin:0;font-size:13px;font-weight:400;color:var(--mute)}
+    .profile .service-block-v3{display:flex;align-items:center;gap:10px;margin:0 0 8px;padding:10px 12px;border:1px solid var(--pm-line);background:var(--pm-paper);text-align:left}
+    .profile .service-block-v3 i{font-size:16px;color:var(--pm);margin:0}
+    .profile .service-block-v3 .service-heading{flex:1;min-width:0;margin:0;font-size:13px;font-weight:400;color:var(--pm-mute)}
     .profile .service-block-v3 .counter{margin:0;font-size:18px;font-weight:700}
-    .profile .service-block-v3 .counter a{color:var(--ink)}
-    .profile .tag-box-v7{display:flex;flex-wrap:wrap;margin:0;padding:0;border:1px solid var(--line);background:#fff}
+    .profile .service-block-v3 .counter a{color:var(--pm-ink)}
+    .profile .tag-box-v7{display:flex;flex-wrap:wrap;margin:0;padding:0;border:1px solid var(--pm-line);background:#fff}
     .profile .tag-box-v7 .service-in{float:none;flex:1 1 200px;width:auto;padding:10px 12px}
-    .profile .tag-box-v7 .service-in + .service-in{border-left:1px solid var(--line)}
-    .profile h4.counter{margin:0;padding:3px 0;font-size:13px;font-weight:400;color:var(--mute)}
-    .profile h4.counter b,.profile h4.counter b a{font-size:16px;font-weight:700;color:var(--ink)}
+    .profile .tag-box-v7 .service-in + .service-in{border-left:1px solid var(--pm-line)}
+    .profile h4.counter{margin:0;padding:3px 0;font-size:13px;font-weight:400;color:var(--pm-mute)}
+    .profile h4.counter b,.profile h4.counter b a{font-size:16px;font-weight:700;color:var(--pm-ink)}
     .profile h4.counter .badge{border-radius:0;font-size:11px}
     /* the two panels: the same box, the same header, the same height */
-    .profile .panel{margin:0 0 16px;border:1px solid var(--line);background:#fff}
-    .profile .panel-heading{display:flex;align-items:center;justify-content:space-between;min-height:40px;padding:0 12px;border:0;border-bottom:1px solid var(--line);background:var(--paper)!important}
-    .profile .panel-title{float:none!important;margin:0;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--p)}
+    .profile .panel{margin:0 0 16px;border:1px solid var(--pm-line);background:#fff}
+    .profile .panel-heading{display:flex;align-items:center;justify-content:space-between;min-height:40px;padding:0 12px;border:0;border-bottom:1px solid var(--pm-line);background:var(--pm-paper)!important}
+    .profile .panel-title{float:none!important;margin:0;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--pm)}
     .profile .panel-title i{margin-right:4px}
-    .profile .profile-notification-title-count{font-weight:400;color:var(--mute)}
+    .profile .profile-notification-title-count{font-weight:400;color:var(--pm-mute)}
     .profile .profile-notification-actions{float:none;display:flex;gap:2px}
-    .profile .profile-notification-actions .btn{display:grid;place-items:center;width:32px;height:32px;margin:0;padding:0;border:1px solid transparent;color:var(--mute)}
-    .profile .profile-notification-actions .btn:hover,.profile .profile-notification-actions .btn:focus{background:var(--pt);border-color:var(--ps);color:var(--p)}
+    .profile .profile-notification-actions .btn{display:grid;place-items:center;width:32px;height:32px;margin:0;padding:0;border:1px solid transparent;color:var(--pm-mute)}
+    .profile .profile-notification-actions .btn:hover,.profile .profile-notification-actions .btn:focus{background:var(--pm-tint);border-color:var(--pm-soft);color:var(--pm)}
     .profile .panel-body.mCustomScrollbar,.profile ul.mCustomScrollbar{height:380px!important;max-height:380px;margin:0}
-    .profile .profile-notification-card{margin:0;padding:10px 12px;border:0;border-bottom:1px solid var(--line);border-left:3px solid var(--p);background:#fff!important;box-shadow:none;color:var(--ink)}
-    .profile .profile-notification-card[data-notification-category=deleted]{border-left-color:#d9534f}
-    .profile .profile-notification-card[data-notification-category=comments]{border-left-color:#72c02c}
-    .profile .profile-notification-card[data-notification-category=awards]{border-left-color:#f0ad4e}
-    .profile .profile-notification-card-type{font-size:12px;color:var(--mute)}
-    .profile .profile-notification-card-title a{font-size:14px;font-weight:700;color:var(--p)}
-    .profile .profile-notification-card-meta{font-size:12px;color:var(--mute)}
-    .profile ul.mCustomScrollbar li > div{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0;padding:8px 12px;border-bottom:1px solid var(--line);background:transparent!important;font-size:13px}
-    .profile ul.mCustomScrollbar li > div:hover{background:var(--pt)!important}
-    .profile ul.mCustomScrollbar li a{color:var(--p);font-weight:600}
-    .profile ul.mCustomScrollbar li .pull-right{margin:0 0 0 auto;font-size:12px;color:var(--mute)}
-    .profile #load{display:block;width:100%;height:38px;border:1px solid var(--p);border-radius:0;background:var(--p);color:#fff;font-weight:600;cursor:pointer}
-    .profile #load:hover{background:var(--ph);border-color:var(--ph)}
+    .profile .profile-notification-card{margin:0;padding:10px 12px;border:0;border-bottom:1px solid var(--pm-line);border-left:3px solid var(--pm);background:#fff!important;box-shadow:none;color:var(--pm-ink)}
+    .profile .profile-notification-card[data-notification-category=deleted]{border-left-color:var(--pm-danger)}
+    .profile .profile-notification-card[data-notification-category=comments]{border-left-color:var(--pm-ok)}
+    .profile .profile-notification-card[data-notification-category=awards]{border-left-color:var(--pm-warn)}
+    .profile .profile-notification-card-type{font-size:12px;color:var(--pm-mute)}
+    .profile .profile-notification-card-title a{font-size:14px;font-weight:700;color:var(--pm)}
+    .profile .profile-notification-card-meta{font-size:12px;color:var(--pm-mute)}
+    .profile ul.mCustomScrollbar li > div{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0;padding:8px 12px;border-bottom:1px solid var(--pm-line);background:transparent!important;font-size:13px}
+    .profile ul.mCustomScrollbar li > div:hover{background:var(--pm-tint)!important}
+    .profile ul.mCustomScrollbar li a{color:var(--pm);font-weight:600}
+    .profile ul.mCustomScrollbar li .pull-right{margin:0 0 0 auto;font-size:12px;color:var(--pm-mute)}
+    .profile #load{display:block;width:100%;height:38px;border:1px solid var(--pm);border-radius:0;background:var(--pm);color:#fff;font-weight:600;cursor:pointer}
+    .profile #load:hover{background:var(--pm-h);border-color:var(--pm-h)}
     /* the countries: the table, quiet */
     .profile .panel-blue .table{margin:0;font-size:13px}
-    .profile .panel-blue .table th{padding:10px 12px;border-bottom:1px solid var(--line2);font-size:13px;color:var(--mute)}
-    .profile .panel-blue .table td{padding:8px 12px;border-top:1px solid var(--line);vertical-align:middle;color:var(--ink)}
-    .profile .panel-blue .table td:first-child b a{color:var(--ink)}
-    .profile .panel-blue .table tbody tr:hover td{background:var(--pt)}
+    .profile .panel-blue .table th{padding:10px 12px;border-bottom:1px solid var(--pm-line2);font-size:13px;color:var(--pm-mute)}
+    .profile .panel-blue .table td{padding:8px 12px;border-top:1px solid var(--pm-line);vertical-align:middle;color:var(--pm-ink)}
+    .profile .panel-blue .table td:first-child b a{color:var(--pm-ink)}
+    .profile .panel-blue .table tbody tr:hover td{background:var(--pm-tint)}
     .profile .panel-blue .table .fa-lg{font-size:14px}
     /* the last photos: an even grid */
-    .profile h3{margin:0 0 8px;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--p)}
+    .profile h3{margin:0 0 8px;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--pm)}
     .profile .portfolio-box-v1{margin:0 -6px 16px}
     .profile .portfolio-box-v1 li{padding:0 6px 12px}
-    .profile .portfolio-box-v1 li > img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border:1px solid var(--line2)}
+    .profile .portfolio-box-v1 li > img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border:1px solid var(--pm-line2)}
     .profile .portfolio-box-v1-in{position:relative;padding:6px 0 0}
-    .profile .portfolio-box-v1-in h3{margin:0;font-size:14px;letter-spacing:0;text-transform:none;color:var(--ink)}
-    .profile .portfolio-box-v1-in p{margin:0;font-size:12px;color:var(--mute)}
-    .profile .portfolio-box-v1-in .btn-u{position:absolute;right:0;top:6px;display:grid;place-items:center;width:32px;height:32px;padding:0;border:1px solid var(--line2);border-radius:0;background:#fff;color:var(--p)}
-    .profile .portfolio-box-v1-in .btn-u:hover{background:var(--pt);border-color:var(--ps)}
+    .profile .portfolio-box-v1-in h3{margin:0;font-size:14px;letter-spacing:0;text-transform:none;color:var(--pm-ink)}
+    .profile .portfolio-box-v1-in p{margin:0;font-size:12px;color:var(--pm-mute)}
+    .profile .portfolio-box-v1-in .btn-u{position:absolute;right:0;top:6px;display:grid;place-items:center;width:32px;height:32px;padding:0;border:1px solid var(--pm-line2);border-radius:0;background:#fff;color:var(--pm)}
+    .profile .portfolio-box-v1-in .btn-u:hover{background:var(--pm-tint);border-color:var(--pm-soft)}
   `;
+  /* =====================================================================
+   *  TOAST  (a small notice that comes up in a corner and goes by itself, like a phone's)
+   *      toast({ title, body, href, kind })      kind: 'like' | 'comment' | 'message' | 'other' (the colour and the word on it)
+   *    They stack above the panel's rail, bottom right. Pointing at one keeps it; the cross or a click on the title closes it; a click on
+   *    the line opens its link in a new tab. Under reduced motion they appear without sliding. It is in a shadow root, in the panel's tokens.
+   * ===================================================================== */
+  const TOAST_WORDS = { like: 'Like', comment: 'Comment', message: 'Message', other: 'News' };
+  const TOAST_CSS = `
+    .stack{position:fixed;right:72px;bottom:16px;display:flex;flex-direction:column;gap:8px;width:min(340px,calc(100vw - 88px));pointer-events:none}
+    .t{position:relative;display:flex;flex-direction:column;gap:2px;padding:10px 36px 10px 14px;border:1px solid var(--line2);border-left:3px solid var(--primary);background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.2);pointer-events:auto;animation:in .2s ease-out}
+    .t.like{border-left-color:var(--danger)}.t.comment{border-left-color:var(--ok-ink)}.t.message{border-left-color:var(--primary)}
+    .t .k{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
+    .t a.ti{font-size:14px;font-weight:600;color:var(--ink);text-decoration:none;overflow-wrap:anywhere}
+    .t a.ti:hover{color:var(--primary-h);text-decoration:underline}
+    .t .b{font-size:12px;color:var(--mute)}
+    .t .x{position:absolute;top:4px;right:4px;width:var(--h-sm);height:var(--h-sm);display:grid;place-items:center;border:0;background:none;color:var(--mute);font:inherit;font-size:16px;cursor:pointer}
+    .t .x:hover{background:var(--primary-tint);color:var(--ink)}
+    @keyframes in{from{transform:translateX(24px);opacity:0}to{transform:none;opacity:1}}
+    @media (prefers-reduced-motion:reduce){.t{animation:none}}
+  `;
+  let toastStack = null;
+
+  function toast({ title, body = '', href = '', kind = 'other', ms = 9000 }) {
+    if (!toastStack || !toastStack.isConnected) {
+      const host = h('div', { id: 'pmg-toasts' });
+      host.style.cssText = 'position:fixed;inset:0;z-index:2147483646;pointer-events:none';
+      const root = host.attachShadow({ mode: 'open' });
+      toastStack = h('div', { class: 'stack', role: 'status', 'aria-live': 'polite' });
+      root.append(h('style', { text: UI_BASE + TOAST_CSS }), toastStack);
+      document.body.appendChild(host);
+    }
+    const el = h('div', { class: 't ' + kind },
+      h('span', { class: 'k', text: TOAST_WORDS[kind] || TOAST_WORDS.other }),
+      href ? h('a', { class: 'ti', href, target: '_blank', rel: 'noopener noreferrer', text: title }) : h('span', { class: 'ti', text: title }),
+      body ? h('span', { class: 'b', text: body }) : null,
+      h('button', { type: 'button', class: 'x', title: 'Close', 'aria-label': 'Close', text: '×', onclick: () => el.remove() }));
+    let timer = 0;
+    const arm = () => { clearTimeout(timer); timer = setTimeout(() => el.remove(), ms); };
+    el.addEventListener('mouseenter', () => clearTimeout(timer));
+    el.addEventListener('mouseleave', arm);
+    toastStack.append(el);
+    while (toastStack.children.length > 4) toastStack.firstChild.remove();       // never a wall of them
+    arm();
+    return el;
+  }
   /* =====================================================================
    *  PAIR  (choose the front and rear photos of a car by clicking them on the site)
    * ===================================================================== */
@@ -4681,6 +4766,107 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
       style.id = 'pmg-profile-style';
       style.textContent = PROFILE_CSS;
       document.head.appendChild(style);
+    }
+  });
+  /* =====================================================================
+   *  NOTIFICATIONS  (pop-ups for what the site tells you: likes, comments, private messages)
+   *    While a PlatesMania tab is open, on any page, the script asks the site from time to time (through the shared queue, one light request
+   *    for the likes and comments, the profile page now and then for the private messages) and shows what is new as a notice in the corner,
+   *    like a phone: src/ui/11-toast.js. It cannot run when no PlatesMania tab is open. The first time, what is there already is marked as
+   *    seen (no flood). Several tabs share the work: the one that finds the last check old enough does it; the notices come up in the tab you
+   *    are looking at, and wait for you if none is. Optionally also as a system notification when the tab is in the background.
+   *    Choices (Settings > Notifications): which kinds, how often, system notifications. Read in src/lib/notify-parse.js.
+   * ===================================================================== */
+  settings.define('notify_like', '1', 'Likes', 'notify');
+  settings.define('notify_comment', '1', 'Comments', 'notify');
+  settings.define('notify_message', '1', 'Private messages', 'notify');
+  settings.define('notify_other', '1', 'Other news', 'notify');
+  settings.define('notify_every', '5', 'Look every (minutes)', 'notify');
+  settings.define('notify_system', '0', 'Also as a system notification when this tab is in the background', 'notify');
+  const NOTIFY_KINDS = ['like', 'comment', 'message', 'other'];
+  const NOTIFY_KEEP = 600;                                  // the keys of the items already shown that are kept
+
+  const notifyLoad = (key, fallback) => { try { return JSON.parse(store.get(key, '')) || fallback; } catch (e) { return fallback; } };
+
+  // What is new in a fetched list: the items whose key is not known yet. The first time (no baseline) all are known, none is new.
+  function notifyFresh(items, seen, name) {
+    const known = new Set(seen.keys);
+    const fresh = items.filter(i => !known.has(i.key));
+    fresh.forEach(i => seen.keys.push(i.key));
+    seen.keys = seen.keys.slice(-NOTIFY_KEEP);
+    const first = !seen[name];
+    seen[name] = true;
+    return first ? [] : fresh;
+  }
+
+  async function notifyPoll(force) {
+    const me = membersMe();
+    if (!me) return;
+    const now = Date.now(), every = Math.max(1, +settings.get('notify_every') || 5) * 60000;
+    if (!force && now - +store.get('notify_last_list', '0') < every * 0.9) return;                 // another tab has just looked
+    store.set('notify_last_list', String(now));
+    const seen = notifyLoad('notify_seen', { keys: [] });
+    let fresh = [];
+    try { fresh = fresh.concat(notifyFresh(notifyParseList(await siteFetch(`/action2.php?num=0&user=${me.id}`)), seen, 'list')); } catch (e) { /* the site is busy: next time */ }
+    if (force || now - +store.get('notify_last_msgs', '0') >= Math.max(every * 2, 600000)) {         // the profile page is heavy: less often
+      store.set('notify_last_msgs', String(now));
+      try { fresh = fresh.concat(notifyFresh(notifyParseMessages(await siteFetch('/user' + me.id)), seen, 'msgs')); } catch (e) { /* idem */ }
+    }
+    store.set('notify_seen', JSON.stringify(seen));
+    if (fresh.length) store.set('notify_unseen', JSON.stringify([...notifyLoad('notify_unseen', []), ...fresh]));
+    notifyShow();
+  }
+
+  // Shows what is waiting, in the tab that is in view; sends it as a system notification when it is in the background and that is allowed
+  function notifyShow() {
+    const waiting = notifyLoad('notify_unseen', []).filter(i => settings.on('notify_' + (NOTIFY_KINDS.includes(i.kind) ? i.kind : 'other')));
+    if (!waiting.length) { store.set('notify_unseen', '[]'); return; }
+    if (document.visibilityState === 'visible') {
+      store.set('notify_unseen', '[]');
+      const shown = waiting.length > 3 ? waiting.slice(0, 2) : waiting;
+      shown.forEach(i => toast({ title: i.title, body: i.body, href: i.href, kind: i.kind }));
+      if (waiting.length > shown.length) toast({ title: `${waiting.length - shown.length} more new notification${waiting.length - shown.length > 1 ? 's' : ''}`, href: membersMe() ? '/user' + membersMe().id : '', kind: 'other' });
+    } else if (settings.on('notify_system') && window.Notification && Notification.permission === 'granted') {
+      store.set('notify_unseen', '[]');
+      waiting.slice(0, 3).forEach(i => new Notification(i.title, { body: i.body || 'PlatesMania' }));
+    }
+  }
+
+  registerFeature({
+    id: 'notify', label: 'Notification pop-ups', requires: [],
+    groups: [{
+      drawer: 'settings', rank: 20, title: 'Notifications',
+      about: 'A notice in the corner for a new like, comment or private message, on any PlatesMania page, like a phone. It works while a PlatesMania tab is open.',
+      build: () => [
+        ...NOTIFY_KINDS.map(k => {
+          const box = h('input', { type: 'checkbox', checked: settings.on('notify_' + k) });
+          box.onchange = () => settings.set('notify_' + k, box.checked ? '1' : '0');
+          return h('label', { class: 'chk' }, box, settings.list('notify').find(d => d.id === 'notify_' + k).label);
+        }),
+        h('label', { class: 'row' }, h('span', { class: 'lbl', text: 'Look every' }),
+          (() => { const s = h('select', null, ['2', '5', '10', '30'].map(v => h('option', { value: v, text: v + ' min', selected: settings.get('notify_every') === v }))); s.onchange = () => settings.set('notify_every', s.value); return s; })()),
+        (() => {
+          const box = h('input', { type: 'checkbox', checked: settings.on('notify_system') });
+          box.onchange = async () => {
+            settings.set('notify_system', box.checked ? '1' : '0');
+            if (box.checked && window.Notification && Notification.permission === 'default') { const answer = await Notification.requestPermission(); if (answer !== 'granted') { box.checked = false; settings.set('notify_system', '0'); } }
+          };
+          return h('label', { class: 'chk' }, box, settings.list('notify').find(d => d.id === 'notify_system').label);
+        })(),
+        h('div', { class: 'btnrow' },
+          h('button', { type: 'button', class: 'btn ghost', id: 'notifyNow', text: 'Look now' }),
+          h('button', { type: 'button', class: 'btn ghost', id: 'notifyTest', text: 'Show a test' }))
+      ]
+    }],
+    init: () => {
+      if (!membersMe()) return;
+      $('notifyNow').onclick = () => notifyPoll(true);
+      $('notifyTest').onclick = () => toast({ title: 'This is how a notification looks', body: 'It goes by itself, or with the cross', kind: 'like' });
+      window.addEventListener('pmg-notify-poll', () => notifyPoll(true));
+      document.addEventListener('visibilitychange', notifyShow);
+      window.addEventListener('storage', e => { if (e.key === 'pmg_notify_unseen') notifyShow(); });
+      setTimeout(() => notifyPoll(false), 4000);
+      setInterval(() => notifyPoll(false), 60000);
     }
   });
   /* =====================================================================
