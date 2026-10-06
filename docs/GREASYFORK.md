@@ -59,9 +59,11 @@ Elle est dans `src/meta/00-header.txt` (`@description`, et `@description:fr` pou
 - It works on platesmania.com. Everything it reads from the site goes through one queue: one request at a time, three seconds apart, a pause after a block.
 - For Google Lens only, it also runs on Google pages, where it acts only for a search the panel asked for. `GM_setValue` / `GM_getValue` pass the photo to that page and the results back. `GM_openInTab` opens the batch upload and Lens tabs.
 - Nothing is sent to any server of ours: there is none.
-
-Source and changelog: https://github.com/FreEn525/nextplaate
 ```
+
+## Le dépôt n'est pas cité
+
+Ni le script, ni son en-tête, ni le texte à coller ci-dessus ne mentionnent le dépôt (aucun lien, aucun nom de compte GitHub) ; `tests/e2e/test_public_text.py` le vérifie. Le `README.md` reste dans le dépôt, mais n'envoie pas non plus vers lui : l'installation passe par Greasy Fork.
 
 ## Quand le texte change
 

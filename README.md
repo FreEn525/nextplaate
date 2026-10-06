@@ -33,7 +33,7 @@ Where a key is given, it can be changed in the Shortcuts drawer.
 ## Installation
 
 1. Install [Tampermonkey](https://www.tampermonkey.net/).
-2. Install the script from [Greasy Fork](https://greasyfork.org/fr/scripts/598722-nextplaate), or open `nextplaate.user.js` from this repository and click "Raw".
+2. Install the script from [Greasy Fork](https://greasyfork.org/fr/scripts/598722-nextplaate).
 
 ### What it contacts, and the permissions
 
