@@ -7,7 +7,7 @@ GALLERY = "https://platesmania.com/fr/gallery.php"
 PHOTO = "https://platesmania.com/fr/nomer101"
 EDIT = "https://platesmania.com/fr/edit_dopol.php?id=101"
 ADD = "https://platesmania.com/fr/add"
-FEATURES = ["selection", "details", "description", "likes", "pages", "plate", "shortcuts", "lens", "flags", "preview", "tags", "extra", "members", "floatupload", "lookup", "upload"]
+FEATURES = ["selection", "details", "description", "likes", "pages", "plate", "shortcuts", "lens", "flags", "preview", "tags", "extra", "members", "floatupload", "lookup", "profile", "upload"]
 SHADOW = "document.getElementById('pmg-host').shadowRoot"
 
 

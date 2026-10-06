@@ -59,6 +59,10 @@
     .pill.removable:hover{background:var(--danger-soft);border-color:var(--danger-line);color:var(--danger-ink)}
     .cardbox{display:flex;flex-direction:column;gap:10px;padding:12px}
     .cardbox textarea{width:100%;min-height:180px;padding:10px;resize:vertical;line-height:1.5}
+    .stats{display:flex;flex-wrap:wrap;gap:12px 28px}
+    .stat{display:flex;flex-direction:column}
+    .stat b{font-size:18px;color:var(--primary-h)}
+    .stat span{font-size:12px}
     .lookups{display:flex;flex-direction:column;gap:6px}
     .vehline{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;font-size:14px}
     .cardrow{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}

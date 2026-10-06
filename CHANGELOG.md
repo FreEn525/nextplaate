@@ -2,6 +2,9 @@
 
 ## 5.9 (in progress)
 
+**Profile: real uploads**
+- New feature *Profile: real uploads* (switch in Settings): on a member's profile, a card with the real total of the gallery and the uploads of the day. The figure the profile shows is a statistic the site recalculates from time to time (its (+n) runs since that calculation, not since today), so the card reads the member's gallery, which is live: the whole gallery, and the day from 03:30 local time to 03:30 the next day, and says how far the profile figure is. Two requests, through the shared queue.
+
 **Plate lookup links**
 - New feature *Plate lookup links* (switch in Settings): for the plate you type, a link to each public lookup page of the country (Finnik, car.info, carcheck-type sites... about forty), and to a picture search (Google Images, Flickr, Autogespot), each writing the plate the way that site wants it. In the plate card above the vehicle menus and in the Search drawer. They are plain links opening a new tab: nothing is sent before a click and the script reads nothing from those sites. Each site can be hidden in Settings.
 

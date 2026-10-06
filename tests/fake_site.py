@@ -17,6 +17,7 @@ PNG = base64.b64decode(
     "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gAAAABJRU5ErkJggg=="
 )
 
+GALLERY_USR = []        # the queries of the member galleries asked
 SEARCHES = []     # the plates searched in the gallery, in order (a test reads it)
 
 HEAD = """<!doctype html><html><head><meta charset="utf-8"><title>{title}</title></head><body>
@@ -180,6 +181,12 @@ def route_site(context):
             cards = "".join(f'<div class="panel-body"><h4 class="text-center"><a href="/fr/nomer{i}">car</a></h4><small><p class="text-center"><a href="/gallery.php?{c}">gen</a></p></small></div>' for i, c in enumerate(cars))
             html = HEAD.format(title="Search") + f'<div class="breadcrumbs"><h1 class="pull-left">License plates found <b>{n}</b></h1></div>{cards}</body></html>'
             return route.fulfill(status=200, content_type="text/html; charset=utf-8", body=html)
+        if path == "/gallery.php" and "usr" in query:
+            # a member's gallery: the real total, or the count inside a window of dates
+            GALLERY_USR.append(query)
+            n = 2 if "date1" in query else 731
+            html = HEAD.format(title="Gallery") + f'<div class="breadcrumbs"><h1 class="pull-left">License plates found <b>{n}</b></h1></div></body></html>'
+            return route.fulfill(status=200, content_type="text/html; charset=utf-8", body=html)
         if path in ("/fr/gallery.php",):
             html = gallery_page(query.get("start", ["0"])[0])
         elif re.fullmatch(r"/fr/nomer\d+", path):
@@ -194,7 +201,8 @@ def route_site(context):
                 return route.fulfill(status=200, content_type="text/html", body=HEAD.format(title="No member") + "</body></html>")
             html = (HEAD.format(title="Profile") + '<div class="container content profile" style="max-width:1170px;width:100%;margin:0 auto"><div class="row"><div class="col-md-3 text-center">'
                     + f'<img class="img-responsive profile-img" width="120" height="120" alt="" src="https://forum.platesmania.com/data/avatars/l/121/{uid}.jpg"></div>'
-                    + f'<div class="col-md-9"><h1><a href="https://forum.platesmania.com/members/member{uid}.{uid}/">member{uid}</a> <small class="pull-right">ID: {uid}</small></h1></div></div></div></body></html>')
+                    + f'<div class="col-md-9"><h1><a href="https://forum.platesmania.com/members/member{uid}.{uid}/">member{uid}</a> <small class="pull-right">ID: {uid}</small></h1></div></div>'
+                    + f'<div class="service-block-v3"><span class="counter"><a href="/gallery.php?usr={uid}">715 </a>  <font style="color:green">(+28)</font></span></div></div></body></html>')
         elif path == "/add":
             html = HEAD.format(title="Add") + '<div class="content"><div class="container" style="max-width:1170px;width:100%;margin:0 auto"><h2>Choose a country</h2></div></div></body></html>'
         else:
