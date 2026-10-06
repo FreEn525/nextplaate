@@ -1,6 +1,6 @@
 # PlatesMania - NextPlaate : todo
 
-État au 6 octobre 2026 (version 5.8). Le bilan est dans `ETAT-ET-PLAN.md`. Légende : **fait**, **en cours**, **à faire**, **info nécessaire** (il me faut une précision de ta part).
+État au 6 octobre 2026 (version 5.9). Le bilan est dans `ETAT-ET-PLAN.md`. Légende : **fait**, **en cours**, **à faire**, **info nécessaire** (il me faut une précision de ta part).
 
 ## Remarques de l'utilisateur (6 octobre 2026) : à traiter une par une
 
@@ -36,15 +36,14 @@ Autres demandes en cours : compteur de série pour tous les pays (attend les pag
 
 Idées tirées des scripts publics de PlatesMania : `ANALYSE-SCRIPTS-PUBLICS.md` (dix idées classées, avec l'effort et la source).
 
+Faites en 5.9 : compteur par marque et modèle (*Your photos of this vehicle*), vrais uploads et régions du profil, liens de recherche par pays, registre officiel (NL, IL), compteur de série (84 pays), bouton d'envoi flottant, véhicule des photos déjà sur le site, date de la photo, Google says, fenêtre des nouveautés, signature, nouveau logo.
+
 Faites (5.8, voir `FONCTIONNALITES.md`) : Google Lens automatique avec marque / modèle / génération, sélecteur de tags (page d'ajout et page d'une photo), information complémentaire, aperçu de plaque en direct, drapeaux des pays (avec le choix des pays), raccourcis vers les membres (vous en premier, ordre au choix, votre photo dans la barre).
 
 - **Statut du site** : à faire. Une indication (en ligne, bloqué, en pause après un blocage) visible dans la barre, à partir de la file de requêtes existante (`http.js`).
 - **Génération de modèle** : **info nécessaire**. Le Lens propose déjà une génération d'après les années des résultats ; dites si vous voulez autre chose (code châssis, suggestion par IA).
 - **Suggestion de tags** : à faire. Proposer des tags d'après la catégorie de plaque (par exemple « police »), sans rien cocher sans clic.
 - **Ajout simplifié** : à faire. Un mode « simple » avec un indicateur (flag) à la place du menu déroulant du pays pour l'ajout de photo (les drapeaux sont déjà là).
-- **Compteur par marque et modèle** : à faire. À côté des menus, le nombre de vos photos correspondantes. Ça demande de lire votre profil ou votre galerie.
-- **Vrai total d'uploads** : à faire. Le nombre réel de photos publiées depuis la galerie, et le total du jour. Même source que le compteur.
-- **Boîte à outils de recherche** : à faire. Boutons de recherche (d'autres sites que Lens) sur la page d'ajout.
 - **Ajout d'un membre depuis n'importe quel lien** : à faire si besoin (une étoile sur chaque pseudo des galeries et des commentaires).
 - **Platesmania Plus** : **info nécessaire**. Un des scripts de la liste (`reference/platesmania-scripts/597418`) n'est qu'un faux menu d'abonnement ; dites ce que vous attendez de ce nom.
 

@@ -55,6 +55,17 @@ cardChoices(card, colonnes, { pick: chemin => ..., current: () => valeursActuell
 
 La carte est dans un shadow root : le CSS du site ne l'atteint pas, et elle reprend les couleurs et boutons du panneau. Les colonnes se mettent côte à côte quand la place le permet et s'empilent sous une photo. Le même `id` redonne la même carte. `colonnes` : `[{ label, level, choices: [{ id, name, path }] }]` ; le premier choix de chaque colonne est mis en avant, les choix égaux aux valeurs actuelles sont marqués.
 
+## Les compteurs de la galerie (`profileCount`, `seriesQuery`)
+
+| Brique | Rôle |
+|---|---|
+| `profileCount(url)` (`76-profile.js`) | le nombre qu'une page de galerie annonce (« License plates found N »), par `siteFetch` ; sert aux vrais uploads, à vos photos par véhicule et aux séries |
+| `membersMe()` (`73-members.js`) | le membre connecté (lien de la barre du haut) : `{ id, name, avatar }` ou `null` |
+| `seriesQuery(plate)` (`79-series.js`) | la recherche de série d'une plaque : le plus long groupe de chiffres devient `*` |
+| `lookupFor(cc, plate)` (`lib/lookups.js`) | les liens de recherche d'un pays pour une plaque |
+| `REGISTRIES` (`lib/registries.js`) | les registres ouverts : `{ name, plate, url, read }` par pays |
+| `WHATS_NEW` (`lib/whatsnew.js`) | le texte de la fenêtre des nouveautés, une entrée par version |
+
 ## Pour une nouvelle fonction
 
 1. Un fichier dans `src/features/` avec `registerFeature({ id, label, groups, init })` (copier `65-lens.js` ou `20-details.js`).

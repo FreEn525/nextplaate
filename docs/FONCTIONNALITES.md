@@ -64,6 +64,8 @@ Autour de ces fonctions : la barre d'icônes (avec votre photo de profil sous le
 - Option « Check as I type » : vérifie quand on quitte un champ, qu'on appuie sur Entrée ou qu'on change le type. Pas de vérification en boucle.
 - Quand un envoi par lot est en cours, le résultat est gardé sur la photo et affiché en avertissement dans la fenêtre de lot.
 - La recherche du site garde les espaces de la plaque (un tiret vaut un espace) : la plaque est lue avec l'espacement de la galerie. Couverture : `COUVERTURE.md`.
+- **Le véhicule des photos déjà sur le site** (5.9) : la même page de résultats donne les liens de catalogue (`gallery.php?markaavto=&model=&modgen=`) des photos de la plaque ; le véhicule le plus fréquent est proposé dans la carte, et *Fill the menus* remplit marque, modèle et génération (`vehicleFill`).
+- **La carte** (`pmg-plate-card`, au-dessus des menus du véhicule) réunit : le compte, le véhicule, **votre nombre de photos de la série** (voir Compteur de série), le bouton du registre officiel (NL, IL) et les liens de recherche.
 
 ### Envoi par lots (tiroir `upload`)
 - Ajouter plusieurs photos (ou un dossier), chacune avec ses options.
@@ -84,6 +86,7 @@ Autour de ces fonctions : la barre d'icônes (avec votre photo de profil sous le
 - Compatible AZERTY : `Ctrl+A` se lit sur la touche `a` (`e.key`), pas sur la position physique.
 
 ### Information complémentaire (page d'ajout, `src/features/72-extra.js`)
+- **Date de la photo** (5.9) : le site liste les dates EXIF sous la photo choisie (`#fotodiv`, `span[onclick^="appdop"]`) ; la plus ancienne est la prise de vue. Deux boutons ajoutent la date sur une ligne à part (*Date: October 2026*, *4 October 2026*) ; ils apparaissent et disparaissent avec la photo.
 - La petite boîte de trois lignes du site (« Extra information ») devient une grande carte au style du panneau : haute dès le départ, elle grandit avec le texte, rappelle l'indication du site, compte les caractères et propose « Use my location » (le lieu enregistré dans Détails, jamais sa valeur par défaut).
 - Elle est au-dessus de la carte des tags, avec un espace net entre les deux (toutes les cartes laissent maintenant 20 px dessous).
 - La boîte du site reste la source de vérité : masquée, remplie à chaque frappe (avec son événement `input`), donc le formulaire part comme avant. Ce qu'écrit le site dans sa boîte apparaît dans la carte. Interrupteur dans Settings.
@@ -117,8 +120,40 @@ Autour de ces fonctions : la barre d'icônes (avec votre photo de profil sous le
 - **Recherche automatique** : une photo choisie sur la page d'ajout est cherchée sur Google Lens toute seule, dans un onglet en arrière-plan (option « Search each new photo by itself »). Le bouton **Search this photo on Google Lens** le fait à la demande.
 - **Onglet Google** : il se ferme tout seul quand les résultats sont lus ; s'il ne revient rien, il reste ouvert pour que vous voyiez la page.
 - **Résultat** : une carte juste sous la photo de la page d'ajout (et le même tableau dans le tiroir Search) (`src/ui/06-inline-card.js`), trois choix pour chacun, le premier mis en avant. Un clic sur un choix remplit les menus du site ; « Fill with the first choices » remplit les trois. Rien n'est rempli sans clic. Si la page n'a pas de bloc photo, la carte se place au-dessus des menus.
+- **Google says** (5.9) : la page Google est lue aussi pour ce que Google appelle lui-même le véhicule (les pastilles « recherches similaires » : liens avec une vignette et un `kgmid` ou `lns_surface`, lus dans l'adresse donc dans toutes les langues). Ces noms comptent comme cinq titres dans la comparaison, s'affichent en une ligne *Google says*, et un clic en tape un dans la case « marque et modèle » du site (`vehicleSearchBox`, `#markamodtype`) : la sortie quand les menus ne connaissent pas le véhicule. Une page de recherche Google n'est prise comme réponse que si son adresse porte des paramètres Lens (`lns_`).
 - **Comparaison** (`src/lib/vehicle.js`) : les titres des résultats de Lens sont comparés aux menus de PlatesMania (`bmObject`, `modelObject`, `bmgObject`, `modgenObject` de la page d'ajout) : la marque la plus citée, puis ses modèles les plus cités, puis les générations dont les années sont celles des titres.
 - **Principe** : le panneau garde la photo (`GM_setValue`) et ouvre `https://www.google.com/?olud&src=pm`. Sur cette page (le marqueur est dans l'adresse), le script colle la photo dans la case « coller un lien d'image » de Google et lance la recherche ; sur la page de résultats qui suit (dans les 3 minutes), il note les titres et le panneau les lit. Une page Google non demandée par le panneau est laissée telle quelle (`src/features/66-lens-google.js`). Limite : cela dépend de la page de Google, qui peut changer.
+
+### Bouton d'envoi flottant (page d'ajout, `src/features/74-upload-button.js`)
+- Tant que le bouton Upload du site est hors de vue (`IntersectionObserver`), un bouton **Upload** suit en bas de page, aligné sur le contenu ; il appuie sur le vrai bouton (`real.click()`). Interrupteur *Floating upload button*.
+
+### Liens de recherche de plaque (carte Plate check et tiroir `search`, `src/features/75-lookups.js`, `src/lib/lookups.js`)
+- Pour la plaque lue, un lien par site public du pays (liste `LOOKUP_SITES`) et des recherches d'images valables partout (Google Images, Wikimedia Commons, DuckDuckGo, Yandex, Flickr, Autogespot). Chaque lien écrit la plaque comme ce site la veut (`squash`, `hyphen` ou `raw`).
+- Ce sont de simples liens (nouvel onglet, `noopener noreferrer`) : rien n'est envoyé avant le clic, rien n'est lu chez ces sites. Chaque site se masque dans Settings (clé `lookup_hidden`).
+- Pays avec des sites propres : nl, se, ua, uk (dont l'historique MOT de GOV.UK), dk, no, fr, es, it, fi, sk, ie, is, ch, nz (Carjam). Les autres pays n'ont que les liens généraux ; presque aucun pays n'a de site gratuit et officiel qui répond à une plaque (voir la recherche dans `CHANGELOG.md`).
+
+### Registre officiel (carte Plate check, `src/features/80-registry.js`, `src/lib/registries.js`)
+- Pour les Pays-Bas (RDW open data) et Israël (data.gov.il), un bouton interroge le registre ouvert du pays : marque, modèle, année, couleur, fin du contrôle technique. Les deux répondent en JSON, sans clé, avec `access-control-allow-origin: *` (vérifié), donc un `fetch` simple suffit.
+- La plaque n'est envoyée **qu'au clic** ; la réponse est gardée pour la visite. Pour les Pays-Bas, *Fill the menus* compare marque et modèle aux menus du site comme Lens. Israël donne la marque en hébreu : l'information est affichée, les menus ne sont pas remplis.
+
+### Compteur de série (carte Plate check et pages de série, `src/features/79-series.js`)
+- La série d'une plaque est sa recherche rapide (`gallery.php?fastsearch=`) avec le plus long groupe de chiffres en joker : `HF-137-QQ` donne `HF * QQ`, `AA 7181` donne `AA *`, `01 A 123 ZZ` donne `01 A * ZZ` (`seriesQuery`). Une seule lettre collée après les chiffres derrière un séparateur (`FAJ 04A`) ne donne pas de série : le site ne trouve rien.
+- Dans la carte : *your photos in the series HF-*-QQ*, le chiffre est un lien vers ces photos (recherche + `&usr=<vous>`, une requête, gardée pour la visite). Le chiffre est confirmé sur le vrai site pour la France et le Luxembourg.
+- Activé pour 84 pays (`SERIES_COUNTRIES`) : ceux où l'outil *Series check* (build dev) a retrouvé deux vraies plaques par leur recherche de série. Pas dans la liste : bh, eg, ir, ke, qa, sa (plaques de chiffres seuls ou en chiffres arabes ou persans) et ch (preuve trop faible).
+- Sur une page de série du site (`/fr/series-HF-QQ-1`, les 999 numéros) : combien de numéros ont une photo (cases avec vignette, les autres proposent d'envoyer ce numéro), lesquels (liens), et vos photos de la série.
+
+### Vos photos de ce véhicule (page d'ajout, `src/features/77-mine.js`)
+- Sous les menus marque, modèle et génération : combien de photos de chaque niveau vous avez déjà (`gallery.php?usr=<vous>&markaavto=&model=&modgen=`, le niveau le plus précis d'abord, par la file de requêtes, gardé pour la visite). Chaque chiffre est un lien. La carte suit les menus quelle que soit la façon dont ils sont remplis (vous, la vérification de plaque, Lens).
+
+### Profil : vrais uploads (pages `/user<id>`, `src/features/76-profile.js`)
+- Le chiffre « uploaded » d'un profil est une statistique que le site recalcule de temps en temps ; son `(+n)` court depuis ce calcul, pas depuis aujourd'hui. La carte lit la galerie du membre, toujours à jour : le total réel et les uploads du jour (de 03 h 30 locale à 03 h 30 le lendemain, `date1`, `date2`, `tz_offset`), l'écart avec le chiffre du profil, et un lien vers les photos du jour. Deux requêtes.
+- Vérifié sur deux profils réels : les sommes du tableau par pays égalent les chiffres du haut (photos, likes reçus, commentaires reçus).
+
+### Profil : régions (pages `/user<id>`, `src/features/78-regions.js`)
+- Un bouton lit `userreg.php?gallery=<système>-<id>` (rien n'est demandé au chargement) : une ligne par région, le nombre de photos en lien quand il y en a, un tiret sinon, et un menu `select[name=gallery]` qui liste tous les systèmes de tous les pays (aucune liste dans le script). La carte montre « X / Y régions », une barre, les régions vues (liens vers vos photos) et les manquantes. Chaque système est demandé une fois.
+
+### À propos et nouveautés (tiroir `settings`, `src/features/90-about.js`, `src/lib/whatsnew.js`)
+- Signature « © 2026 NextEnzzo » avec le lien du profil (`@author`, `@copyright`, bannière de la console aussi). Le bouton *What's new* ouvre la fenêtre des nouveautés ; elle s'ouvre seule une fois après une mise à jour (pas à la première installation). Son texte est dans `whatsnew.js` ; un test échoue si `@version` change sans son entrée.
 
 ### Développeur (tiroir `dev`, seulement dans le build dev)
 - **Save** : enregistre la page en HTML.
@@ -136,8 +171,8 @@ Autour de ces fonctions : la barre d'icônes (avec votre photo de profil sous le
 - `src/meta` : en-tête Tampermonkey.
 - `src/core` : point d'entrée, stockage (`store`), détection de la page (`here`), registre des fonctions, raccourcis clavier.
 - `src/ui` : icônes, styles, barre et tiroirs.
-- `src/lib` : format des plaques (`plate/` : `00-helpers.js` puis un fichier par pays, `PLATE_RULES.<cc>`), file de requêtes vers le site (`http.js`), pays (`countries.js`).
-- `src/features` : une fonction par fichier (pair, details, description, likes, pages, plate, shortcuts), et `upload/` pour les envois par lots.
+- `src/lib` : format des plaques (`plate/` : `00-helpers.js` puis un fichier par pays, `PLATE_RULES.<cc>`), file de requêtes vers le site (`http.js`), pays (`countries.js`), véhicule (`vehicle.js`), pont entre sites (`bridge.js`), sites de recherche (`lookups.js`), registres ouverts (`registries.js`), texte des nouveautés (`whatsnew.js`).
+- `src/features` : une fonction par fichier (pair, details, description, likes, pages, plate, shortcuts, lens, flags, preview, tags, extra, members, bouton flottant, liens, profil, vos photos, régions, séries, registre, à propos), et `upload/` pour les envois par lots.
 - `src/boot` : démarrage.
 - `src/dev` : outils de développement (seulement dans le build dev).
 - `scripts/build.mjs` assemble les fichiers dans l'ordre et vérifie qu'aucun fichier n'est oublié.
@@ -163,7 +198,7 @@ Chaque fonction s'enregistre avec `registerFeature({ groups, keys, onEscape, ini
 
 ## Tests (`tests/`)
 
-- `python -m pytest -q` (dossier `tests/e2e/`) : 321 tests (330 avec le build dev, `NEXTPLAATE_SCRIPT=nextplaate.dev.user.js`) sur une version simulée du site (`fake_site.py`, avec une fausse page Google pour le Lens). Un fichier par fonction (`test_lens.py`, `test_tags.py`, `test_members.py`, `test_flags.py`, `test_extra.py`, `test_preview.py`…), plus `test_style.py` (couleurs, rayons, tailles, hauteurs) et `test_responsive.py` (aucun débordement de 320 à 1280 px). Pas d'accès réel à PlatesMania ni à Google.
+- `python -m pytest -q` (dossier `tests/e2e/`) : 327 tests (336 avec le build dev, `NEXTPLAATE_SCRIPT=nextplaate.dev.user.js`) sur une version simulée du site (`fake_site.py`, avec une fausse page Google pour le Lens). Un fichier par fonction (`test_lens.py`, `test_tags.py`, `test_members.py`, `test_flags.py`, `test_extra.py`, `test_preview.py`…), plus `test_style.py` (couleurs, rayons, tailles, hauteurs) et `test_responsive.py` (aucun débordement de 320 à 1280 px). Pas d'accès réel à PlatesMania ni à Google.
 - `python tests/offline/check_known.py` : 39 plaques validées à la main, tapées dans les pages sauvegardées.
 - `python tests/offline/check_db.py` : toutes les plaques de la base, dans la catégorie correspondante, en parallèle. Hors ligne.
 - Les données dérivées : `node scripts/refresh-data.mjs` → `data/` et `docs/COUVERTURE.md` (voir `data/README.md`).
@@ -174,4 +209,8 @@ Chaque fonction s'enregistre avec `registerFeature({ groups, keys, onEscape, ini
 - La vérification de plaque dépend des règles. Un pays ou une catégorie sans règle vérifiée peut donner un mauvais format.
 - Les tests hors ligne prouvent la lecture du script, pas l'acceptation par le site.
 - 21 catégories n'ont aucune plaque sur le site, 13 ont une limite du formulaire (`data/limits.json`).
-- Pas encore : Regcheck (informations de véhicule, tierce partie), remplissage automatique marque et modèle, compteurs de séries.
+- Registre officiel : seulement les Pays-Bas et Israël (les seuls registres gratuits, sans clé et ouverts trouvés).
+- Compteur de série : 84 pays vérifiés (recherche retrouvée) ; le chiffre « vos photos » est confirmé pour la France et le Luxembourg seulement.
+- « Your photos of this vehicle » suppose que `usr` se combine avec marque, modèle, génération dans `gallery.php` (confirmé par l'usage).
+- Liens de recherche : seulement 14 pays ont des sites propres, les autres ont les liens généraux.
+- Pas encore : réorganisation des icônes et explication fonction par fonction (voir `TODO.md`).
