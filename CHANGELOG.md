@@ -2,6 +2,9 @@
 
 ## 5.10.1
 
+**The brand and model box**
+- The site's text box *Specify brand and model of vehicle* keeps its own autocomplete but looks like the rest: a short label (*Brand and model*), a full-width 38 px field with a placeholder (*Type a brand or a model, for example Golf*), a clear button inside the field instead of the bold X, a hint under it, and the list of suggestions styled to match.
+
 **The plate card, calmer**
 - **The plate card in labelled sections**: *On the site* (the vehicle the photos show, with its *Fill the menus*, and the link to the photos), *Official register* (NL, IL, with the source in its title), *Your photos* (a sentence: *In the series HF-*-QQ: you have 2 photos*) and the lookup sites folded under one line (*Look up this plate on other sites (13)*) instead of thirteen buttons at once. *Your photos of this vehicle* reads *Brand Nissan: 4 · Model Qashqai: 2*, brand first. A stray word *null* after the register answer is gone.
 

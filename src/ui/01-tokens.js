@@ -10,6 +10,8 @@
   // The one blue of the script: the site's own (theme dark-blue.css of platesmania.com, #4765a0). The page-level pieces that cannot read
   // the tokens below (the hover outline while selecting, the console banner) use this constant.
   const SITE_BLUE = '#4765a0';
+  // The greys of the site's own page, for what the script restyles on the page itself (outside its shadow roots, where the tokens below do not reach)
+  const PAGE_GREY = { line: '#bdbdbd', mute: '#626a70', ink: '#2d2d2d' };
 
   // DESIGN TOKENS. Every colour of the panel, the card and the batch window comes from here: no other file writes a colour.
   //   palette   --primary, --primary-h (hover), --primary-soft (light fill and borders), --primary-tint (very light fill), --ring (focus)
