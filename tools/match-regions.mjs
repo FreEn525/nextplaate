@@ -9,7 +9,7 @@ const root = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace
 const sandbox = {};
 vm.createContext(sandbox);
 // the two files are plain declarations of the script: run together, then the matcher is picked up
-const code = ['countries.js', 'regions-alias.js', 'regions-match.js'].map(f => fs.readFileSync(path.join(root, 'src/lib', f), 'utf8')).join('\n');
+const code = ['countries.js', 'regions-alias.js', 'regions-codes.js', 'regions-match.js'].map(f => fs.readFileSync(path.join(root, 'src/lib', f), 'utf8')).join('\n');
 vm.runInContext(code + '\n;Object.assign(globalThis, { regionMatch, regionNames, regionDistance });', sandbox);
 
 const input = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));

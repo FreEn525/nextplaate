@@ -28,7 +28,7 @@ Notes prises pendant la collecte des séries. On les fait au fur et à mesure, d
 17. **Boîte « Specify brand and model of vehicle »** : **fait** (version 5.10.1).
 18. **Carte du monde d'un membre** : **fait** (version 5.11, `81-worldmap.js`). Idée suivante si tu veux : des cartes de régions pays par pays (France, Allemagne...) à partir de `userreg.php`.
 
-19. **Carte de toutes les régions (départements de la France, districts de la Serbie...)** : **fait pour 42 pays** (version 5.11) ; les autres (Allemagne, Pologne, Royaume-Uni, Japon...) gardent le tableau. Source ouverte trouvée : geoBoundaries (CC-BY 4.0), contours par pays chargés à la demande ; rapprochement des noms de régions du site avec les formes pays par pays, couverture mesurée. Étape 1 : l'outil *Regions collection* (build dev). Étape 2 : le rapprochement et la vue « régions » dans la carte, pays par pays. Voir le détail dans la réponse du 6 octobre.
+19. **Carte de toutes les régions (départements de la France, districts de la Serbie...)** : **fait pour 43 pays** (version 5.11) ; les autres (Allemagne, Pologne, Royaume-Uni, Japon...) gardent le tableau. Source ouverte trouvée : geoBoundaries (CC-BY 4.0), contours par pays chargés à la demande ; rapprochement des noms de régions du site avec les formes pays par pays, couverture mesurée. Étape 1 : l'outil *Regions collection* (build dev). Étape 2 : le rapprochement et la vue « régions » dans la carte, pays par pays. Voir le détail dans la réponse du 6 octobre.
 
 Autres demandes en cours : compteur de série pour tous les pays (attend les pages de `reference/real/series/` de l'outil Series collection) ; liens de recherche par pays (faits : liens universels ouverts, NL, IL, UK, NZ).
 

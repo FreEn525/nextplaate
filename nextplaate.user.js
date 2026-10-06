@@ -420,7 +420,7 @@
     regions: { about: 'On a member’s profile: which regions of a country the member has a photo from, and which are missing.', scope: 'every country the site has regions for' },
     series: { about: 'How many of your photos are in the series of the plate you type (HF-137-QQ is in HF-*-QQ); on a series page, the numbers already on the site.', scope: '84 countries (checked on the real site)' },
     registry: { about: 'Asks the country’s open register (public data) for make, model, year and colour, and fills the menus that are still empty. Only the plate is sent; two switches in Settings turn it off.', scope: 'Netherlands and Israel' },
-    worldmap: { about: 'The countries a member has photos from on a map of the world, shaded by how many photos. Yours, or anyone’s: type a number or paste a profile link. For many countries, the regions too (departments, districts, states).', scope: 'every member (the regions: 30 countries)' },
+    worldmap: { about: 'The countries a member has photos from on a map of the world, shaded by how many photos. Yours, or anyone’s: type a number or paste a profile link. For many countries, the regions too (departments, districts, states).', scope: 'every member (the regions: 42 countries)' },
     upload: { about: 'Queue many photos (or a folder), give each a country and a plate category, and send them one tab per photo with a pause between.', scope: 'every country' }
   };
   /* =====================================================================
@@ -1082,6 +1082,17 @@
     mn: { 'ulan bator': 'ulaanbaatar' }
   };
   /* =====================================================================
+   *  REGION CODE NAMES  (written by tools/measure-regions.py --codes: do not edit by hand)
+   *    For some countries the regions of the site are plate codes (Germany: AE, AL, AIB...) whose own name finds no shape. Wikidata (CC0)
+   *    knows the places that carry each code, with their names; the first name of a code that finds a shape on the map is kept here:
+   *    country -> plate code -> name.
+   * ===================================================================== */
+  const REGION_CODE_NAMES = {
+    cz: {"B": "Brno", "C": "P\u0159eborov", "J": "Jihlava", "S": "T\u0159eb\u00edz", "T": "Ostrava"},
+    de: {"AC": "St\u00e4dteregion Aachen", "ANA": "Amtsberg", "ASZ": "Amtsberg", "AT": "Landkreis Mecklenburgische Seenplatte", "AU": "Amtsberg", "BED": "Landkreis Mittelsachsen", "BIT": "Eifelkreis Bitburg-Pr\u00fcm", "DL": "Landkreis Mittelsachsen", "DLG": "Landkreis Dillingen an der Donau", "DM": "Landkreis Mecklenburgische Seenplatte", "DW": "Hermsdorf/Erzgeb.", "ERZ": "Thalheim/Erzgeb.", "FG": "Landkreis Mittelsachsen", "FL\u00d6": "Landkreis Mittelsachsen", "FN": "Bodenseekreis", "FTL": "Landkreis S\u00e4chsische Schweiz-Osterzgebirge", "GDB": "Landkreis Nordwestmecklenburg", "GEL": "Kleve", "GVM": "Landkreis Nordwestmecklenburg", "HC": "Landkreis Mittelsachsen", "HH": "Hamburg", "HL": "L\u00fcbeck", "HOM": "Homburg", "HRO": "Rostock", "HZ": "Ilsenburg", "K": "K\u00f6ln", "KLE": "Kleve", "M": "Landkreis M\u00fcnchen", "MAB": "Seiffen/Erzgeb.", "MC": "Landkreis Mecklenburgische Seenplatte", "MEK": "Amtsberg", "MSE": "Landkreis Mecklenburgische Seenplatte", "MST": "Landkreis Mecklenburgische Seenplatte", "M\u00dcR": "Waren", "MW": "Landkreis Mittelsachsen", "NE": "Rhein-Kreis Neuss", "NEA": "Landkreis Neustadt an der Aisch-Bad Windsheim", "NOH": "Landkreis Grafschaft Bentheim", "NWM": "Landkreis Nordwestmecklenburg", "NZ": "Waren", "OVP": "Neuenkirchen", "PIR": "Landkreis S\u00e4chsische Schweiz-Osterzgebirge", "RL": "Landkreis Mittelsachsen", "RM": "Landkreis Mecklenburgische Seenplatte", "RZ": "G\u00f6ttin", "SAW": "Altmarkkreis Salzwedel", "SB": "Regionalverband Saarbr\u00fccken", "SEB": "Hermsdorf/Erzgeb.", "SEF": "Landkreis Neustadt an der Aisch-Bad Windsheim", "SF": "Landkreis Oberallg\u00e4u", "STL": "Amtsberg", "SZB": "Seiffen/Erzgeb.", "TDO": "Landkreis Nordsachsen", "UER": "Meiersberg", "UFF": "Landkreis Neustadt an der Aisch-Bad Windsheim", "VK": "Regionalverband Saarbr\u00fccken", "WIS": "Landkreis Nordwestmecklenburg", "ZP": "Seiffen/Erzgeb.", "MU": "Landkreis M\u00fcnchen", "MUC": "M\u00fcnchen"},
+    pl: {"BGR": "powiat grajewski", "BKL": "powiat kolne\u0144ski", "BMN": "powiat moniecki", "BSE": "powiat sejne\u0144ski", "BSK": "powiat sok\u00f3lski", "BWM": "powiat wysokomazowiecki", "CGD": "Gmina Radomin", "CMG": "powiat mogile\u0144ski", "CNA": "powiat nakielski", "CRA": "P\u0142owki", "CSE": "So\u015bno", "CSW": "powiat \u015bwiecki", "CTU": "Lisiny, Gmina \u015aliwice", "CWA": "powiat w\u0105brzeski", "CZN": "Budzis\u0142aw", "DGR": "powiat g\u00f3rowski", "DJE": "Mys\u0142akowice", "DKA": "Krzesz\u00f3w", "DLW": "Kamie\u0144", "DMI": "D\u0105browa", "DOA": "powiat o\u0142awski", "DOL": "D\u0105browa", "DZA": "powiat z\u0105bkowicki", "DZL": "powiat z\u0142otoryjski", "EBR": "powiat brzezi\u0144ski", "ELA": "D\u0105browa", "ELC": "powiat \u0142owicki", "ELE": "Leszno", "ELW": "Koluszki", "EOP": "Antoni\u00f3w, Gmina \u017barn\u00f3w", "EPJ": "powiat paj\u0119cza\u0144ski", "ERW": "Aleksandr\u00f3w", "ETM": "powiat tomaszowski", "EZD": "powiat zdu\u0144skowolski", "EZG": "powiat zgierski", "FNW": "powiat nowosolski", "FSD": "powiat strzelecko-drezdenecki", "FSL": "powiat s\u0142ubicki", "FWS": "powiat wschowski", "FZA": "powiat \u017carski", "GKA": "powiat kartuski", "GKS": "powiat ko\u015bcierski", "GLE": "\u017barnowska", "GMB": "\u015awierki", "GND": "Che\u0142mek-Osada", "GPU": "powiat pucki", "GWE": "D\u0105br\u00f3wka", "KBC": "powiat boche\u0144ski", "KGR": "powiat gorlicki", "KLI": "powiat limanowski", "KMY": "powiat my\u015blenicki", "KNT": "Falsztyn", "KOL": "powiat olkuski", "KSU": "powiat suski", "KTT": "powiat tatrza\u0144ski", "KWA": "powiat wadowicki", "LJA": "powiat janowski", "LKR": "powiat kra\u015bnicki", "LKS": "powiat krasnostawski", "LLE": "powiat \u0142\u0119czy\u0144ski", "LPU": "powiat pu\u0142awski", "LRA": "Radzy\u0144 County", "LRY": "powiat rycki", "LSW": "powiat \u015bwidnicki", "LTM": "powiat tomaszowski", "LWL": "Sobib\u00f3r, Lublin Voivodeship", "NBR": "powiat braniewski", "NDZ": "powiat dzia\u0142dowski", "NEL": "powiat e\u0142cki", "NIL": "powiat i\u0142awski", "NMR": "powiat mr\u0105gowski", "NNI": "powiat nidzicki", "NNM": "powiat nowomiejski", "NOG": "Olecko", "NOS": "powiat ostr\u00f3dzki", "NPI": "powiat piski", "NSZ": "powiat szczycie\u0144ski", "NWE": "powiat w\u0119gorzewski", "OB": "R\u00f3\u017cyna, Opole Voivodeship", "OK": "Grodzisko", "ONY": "Regulice, Opole Voivodeship", "OOL": "Jelonki, Opole Voivodeship", "OPR": "powiat prudnicki", "OST": "Por\u0119ba, Gmina Le\u015bnica", "PCH": "powiat chodzieski", "PCT": "powiat czarnkowsko-trzcianecki", "PGN": "Mielno, powiat gnie\u017anie\u0144ski", "PGO": "Tarnowa", "PKE": "powiat k\u0119pi\u0144ski", "PKL": "Janowice", "PNT": "\u0141\u0119czno", "POS": "powiat ostrowski", "PP": "powiat pilski", "PRA": "powiat rawicki", "PSE": "Brodniczka", "PSL": "Ko\u015bcianki", "PSR": "Ka\u017amierki", "PSZ": "powiat szamotulski", "PTU": "Tarnowa", "PWR": "Stroszki", "RBI": "powiat bieszczadzki", "RDE": "powiat d\u0119bicki", "RJS": "powiat jasielski", "RKL": "powiat kolbuszowski", "RLA": "Gmina Bia\u0142obrzegi", "RNI": "powiat ni\u017ca\u0144ski", "RRS": "powiat ropczycko-s\u0119dziszowski", "RSA": "powiat sanocki", "RST": "powiat stalowowolski", "SBL": "Bieru\u0144", "SLU": "Kosz\u0119cin", "SPS": "powiat pszczy\u0144ski", "SZA": "powiat zawiercia\u0144ski", "TKA": "powiat kazimierski", "TKN": "powiat konecki", "TLW": "Kras\u00f3w", "TSA": "powiat sandomierski", "WL": "powiat legionowski", "WLS": "powiat \u0142osicki", "WMA": "Mak\u00f3w County", "WML": "Gmina Stupsk", "WND": "powiat nowodworski", "WPI": "powiat piaseczy\u0144ski", "WPY": "powiat przysuski", "WSE": "powiat sierpecki", "WSK": "Soko\u0142\u00f3w County", "WT": "Aleksandr\u00f3w", "WZ": "Leszno", "ZCH": "Ko\u0142ki", "ZGR": "Strzesz\u00f3w, West Pomeranian Voivodeship", "ZGY": "powiat gryficki", "ZKL": "Leszczyn", "ZLO": "Sielsko", "ZMY": "powiat my\u015bliborski", "ZPL": "powiat policki", "ZPY": "Brzesko", "ZSL": "Ostrowiec", "ZWA": "Miel\u0119cin, Wa\u0142cz County"}
+  };
+  /* =====================================================================
    *  REGION SHAPES  (the boundaries of the regions of a country, from geoBoundaries, loaded when a map asks for them)
    *    geoBoundaries (CC-BY 4.0, an open public API) gives, for a country (ISO 3166 alpha-3) and a level (ADM1 regions, ADM2
    *    departments or districts, ADM3...), the shapes as GeoJSON. Nothing is shipped in the script: the API names the file of the
@@ -1148,10 +1159,10 @@
    *  REGION MAPS: WHICH COUNTRIES, AT WHICH LEVEL  (written by tools/measure-regions.py: do not edit by hand)
    *    For each country of the site that has regions: its ISO 3166 alpha-3 code and the geoBoundaries level whose shapes the site's regions
    *    fall on best. A country is listed only when at least seven regions in ten are placed on the shapes; the others show the table of
-   *    their regions, without a map, until their matching is worked out. 42 countries.
+   *    their regions, without a map, until their matching is worked out. 43 countries.
    * ===================================================================== */
   const REGION_MAPS = {
-    ae: ['ARE', 'ADM1'], al: ['ALB', 'ADM2'], at: ['AUT', 'ADM2'], au: ['AUS', 'ADM1'], az: ['AZE', 'ADM2'], bg: ['BGR', 'ADM1'], by: ['BLR', 'ADM1'], ca: ['CAN', 'ADM1'], ch: ['CHE', 'ADM1'], cn: ['CHN', 'ADM1'], cz: ['CZE', 'ADM2'], de: ['DEU', 'ADM3'], eg: ['EGY', 'ADM1'], es: ['ESP', 'ADM2'], fr: ['FRA', 'ADM2'], id: ['IDN', 'ADM1'], iq: ['IRQ', 'ADM1'], it: ['ITA', 'ADM3'], kg: ['KGZ', 'ADM1'], kh: ['KHM', 'ADM1'], kr: ['KOR', 'ADM1'], kz: ['KAZ', 'ADM1'], la: ['LAO', 'ADM1'], md: ['MDA', 'ADM1'], me: ['MNE', 'ADM1'], mk: ['MKD', 'ADM2'], mn: ['MNG', 'ADM1'], mx: ['MEX', 'ADM1'], no: ['NOR', 'ADM2'], pt: ['PRT', 'ADM2'], ro: ['ROU', 'ADM1'], rs: ['SRB', 'ADM2'], ru: ['RUS', 'ADM1'], si: ['SVN', 'ADM2'], sk: ['SVK', 'ADM2'], th: ['THA', 'ADM1'], tj: ['TJK', 'ADM1'], tr: ['TUR', 'ADM1'], ua: ['UKR', 'ADM1'], us: ['USA', 'ADM1'], uz: ['UZB', 'ADM1'], vn: ['VNM', 'ADM1']
+    ae: ['ARE', 'ADM1'], al: ['ALB', 'ADM2'], at: ['AUT', 'ADM2'], au: ['AUS', 'ADM1'], az: ['AZE', 'ADM2'], bg: ['BGR', 'ADM1'], by: ['BLR', 'ADM1'], ca: ['CAN', 'ADM1'], ch: ['CHE', 'ADM1'], cn: ['CHN', 'ADM1'], cz: ['CZE', 'ADM2'], de: ['DEU', 'ADM3'], eg: ['EGY', 'ADM1'], es: ['ESP', 'ADM2'], fr: ['FRA', 'ADM2'], id: ['IDN', 'ADM1'], iq: ['IRQ', 'ADM1'], it: ['ITA', 'ADM3'], kg: ['KGZ', 'ADM1'], kh: ['KHM', 'ADM1'], kr: ['KOR', 'ADM1'], kz: ['KAZ', 'ADM1'], la: ['LAO', 'ADM1'], md: ['MDA', 'ADM1'], me: ['MNE', 'ADM1'], mk: ['MKD', 'ADM2'], mn: ['MNG', 'ADM1'], mx: ['MEX', 'ADM1'], no: ['NOR', 'ADM2'], pl: ['POL', 'ADM2'], pt: ['PRT', 'ADM2'], ro: ['ROU', 'ADM1'], rs: ['SRB', 'ADM2'], ru: ['RUS', 'ADM1'], si: ['SVN', 'ADM2'], sk: ['SVK', 'ADM2'], th: ['THA', 'ADM1'], tj: ['TJK', 'ADM1'], tr: ['TUR', 'ADM1'], ua: ['UKR', 'ADM1'], us: ['USA', 'ADM1'], uz: ['UZB', 'ADM1'], vn: ['VNM', 'ADM1']
   };
   /* =====================================================================
    *  REGION MATCHING  (the regions of the site, to the shapes of a map)
@@ -1160,9 +1171,10 @@
    *    for some countries, an ISO 3166-2 code. In order, a region is placed on:
    *      1. the shapes whose normalised name equals one of its names (a shape "Aachen, Stadteregion" answers to "aachen" too);
    *      2. the shapes the country's alias table names (src/lib/regions-alias.js: "chechen" -> "chechnya");
-   *      3. the shapes whose ISO code ends with its code (only where the plate codes are the ISO codes: REGION_CODE_COUNTRIES);
-   *      4. the one shape whose name is a few letters away (Mangistau/Mangystau) or a prefix of it (Chuvash/Chuvashia), when it is alone;
-   *      5. the same with the names inside brackets (the old seat of a district), which are never looked at before.
+   *      3. the name Wikidata gives to its plate code (src/lib/regions-codes.js, for Germany, Poland...: the code AE is the Vogtlandkreis);
+   *      4. the shapes whose ISO code ends with its code (only where the plate codes are the ISO codes: REGION_CODE_COUNTRIES);
+   *      5. the one shape whose name is a few letters away (Mangistau/Mangystau) or a prefix of it (Chuvash/Chuvashia), when it is alone;
+   *      6. the same with the names inside brackets (the old seat of a district), which are never looked at before.
    *    Entries that are not an area (Mopeds, Historic vehicles, Ministry, the countries of diplomatic plates...) are set apart: they have no
    *    place on a map.
    *      regionMatch(regions, shapes, cc) -> { placed: Map(regionId -> [shape index]), missing: [region], special: [region] }
@@ -1216,6 +1228,7 @@
       if (code) byCode.set(code, [...(byCode.get(code) || []), i]);
     });
     const alias = (typeof REGION_ALIAS !== 'undefined' && REGION_ALIAS[cc]) || {};
+    const codeNames = (typeof REGION_CODE_NAMES !== 'undefined' && REGION_CODE_NAMES[cc]) || {};
     const known = [...byName.keys()];
     const placed = new Map(), missing = [], special = [];
     for (const r of regions) {
@@ -1224,6 +1237,7 @@
       const add = key => (byName.get(key) || []).forEach(i => found.add(i));
       main.forEach(add);
       main.forEach(n => alias[n] && add(alias[n]));
+      if (!found.size && r.code && codeNames[r.code]) regionNames(codeNames[r.code]).main.forEach(add);
       if (!found.size && r.code && REGION_CODE_COUNTRIES.includes(cc)) (byCode.get(r.code.toLowerCase()) || []).forEach(i => found.add(i));
       for (const group of found.size ? [] : [main, extra]) {
         for (const n of group.filter(x => x.length >= 5)) {

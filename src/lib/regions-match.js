@@ -5,9 +5,10 @@
    *    for some countries, an ISO 3166-2 code. In order, a region is placed on:
    *      1. the shapes whose normalised name equals one of its names (a shape "Aachen, Stadteregion" answers to "aachen" too);
    *      2. the shapes the country's alias table names (src/lib/regions-alias.js: "chechen" -> "chechnya");
-   *      3. the shapes whose ISO code ends with its code (only where the plate codes are the ISO codes: REGION_CODE_COUNTRIES);
-   *      4. the one shape whose name is a few letters away (Mangistau/Mangystau) or a prefix of it (Chuvash/Chuvashia), when it is alone;
-   *      5. the same with the names inside brackets (the old seat of a district), which are never looked at before.
+   *      3. the name Wikidata gives to its plate code (src/lib/regions-codes.js, for Germany, Poland...: the code AE is the Vogtlandkreis);
+   *      4. the shapes whose ISO code ends with its code (only where the plate codes are the ISO codes: REGION_CODE_COUNTRIES);
+   *      5. the one shape whose name is a few letters away (Mangistau/Mangystau) or a prefix of it (Chuvash/Chuvashia), when it is alone;
+   *      6. the same with the names inside brackets (the old seat of a district), which are never looked at before.
    *    Entries that are not an area (Mopeds, Historic vehicles, Ministry, the countries of diplomatic plates...) are set apart: they have no
    *    place on a map.
    *      regionMatch(regions, shapes, cc) -> { placed: Map(regionId -> [shape index]), missing: [region], special: [region] }
@@ -61,6 +62,7 @@
       if (code) byCode.set(code, [...(byCode.get(code) || []), i]);
     });
     const alias = (typeof REGION_ALIAS !== 'undefined' && REGION_ALIAS[cc]) || {};
+    const codeNames = (typeof REGION_CODE_NAMES !== 'undefined' && REGION_CODE_NAMES[cc]) || {};
     const known = [...byName.keys()];
     const placed = new Map(), missing = [], special = [];
     for (const r of regions) {
@@ -69,6 +71,7 @@
       const add = key => (byName.get(key) || []).forEach(i => found.add(i));
       main.forEach(add);
       main.forEach(n => alias[n] && add(alias[n]));
+      if (!found.size && r.code && codeNames[r.code]) regionNames(codeNames[r.code]).main.forEach(add);
       if (!found.size && r.code && REGION_CODE_COUNTRIES.includes(cc)) (byCode.get(r.code.toLowerCase()) || []).forEach(i => found.add(i));
       for (const group of found.size ? [] : [main, extra]) {
         for (const n of group.filter(x => x.length >= 5)) {

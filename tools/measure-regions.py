@@ -6,6 +6,7 @@ src/lib/regions-levels.js with the countries where at least THRESHOLD of the reg
     python tools/measure-regions.py ru kz --why   # only these countries, and the regions that found no shape
     python tools/measure-regions.py de uk --pairs # a sample of what was placed where, to check by eye
     python tools/measure-regions.py ru --suggest  # for what found no shape, the nearest shape names (to write an alias)
+    python tools/measure-regions.py --codes       # also writes src/lib/regions-codes.js from the plate codes of Wikidata (tools/wikidata-codes.py)
 
 Input: the region pages of the site, written by the developer tool "Regions collection" into reference/real/regions/ (one per system).
 The matching is done by node tools/match-regions.mjs, which runs src/lib/regions-match.js itself (names, aliases, codes, near names).
@@ -100,10 +101,43 @@ def main():
                     print("      ", pair)
         else:
             print(f"{cc:3} regions {n:4}  no shapes")
+    if "--codes" in sys.argv:
+        write_code_names(by_country, result, iso3)
     if "--table" not in sys.argv and not only:
         body = ", ".join(f"{cc}: ['{iso}', '{lv}']" for cc, (iso, lv) in sorted(chosen.items()))
         (ROOT / "src" / "lib" / "regions-levels.js").write_text(HEADER.format(n=len(chosen), body=body), encoding="utf-8")
         print(f"\nsrc/lib/regions-levels.js: {len(chosen)} countries")
+
+
+def write_code_names(by_country, result, iso3):
+    """Names of plate codes from Wikidata (tools/wikidata-codes.py), kept when they find a shape: src/lib/regions-codes.js."""
+    wd = ROOT / "reference" / "real" / "regions" / "wikidata"
+    data = {}
+    for cc, res in result.items():
+        f = wd / f"{cc}.json"
+        best = max(((v["placed"], lv) for lv, v in res.items()), default=None)
+        if f.exists() and best:
+            props = shapes(iso3[cc], best[1])
+            data[cc] = {"regions": by_country[cc], "shapes": [{"name": p.get("shapeName") or "", "iso": p.get("shapeISO") or ""} for p in props], "labels": json.loads(f.read_text(encoding="utf-8"))}
+    tmp = CACHE / "code-names-input.json"
+    tmp.write_text(json.dumps(data), encoding="utf-8")
+    out = json.loads(subprocess.run(["node", str(ROOT / "tools" / "code-names.mjs"), str(tmp)], capture_output=True, text=True, check=True, encoding="utf-8").stdout)
+    out = {cc: table for cc, table in out.items() if table}
+    body = ("," + chr(10) + "    ").join(f"{cc}: {json.dumps(table)}" for cc, table in sorted(out.items()))
+    (ROOT / "src" / "lib" / "regions-codes.js").write_text(CODES_HEADER.format(body=body), encoding="utf-8")
+    print(chr(10) + "src/lib/regions-codes.js:", {cc: len(t) for cc, t in out.items()})
+
+
+CODES_HEADER = """  /* =====================================================================
+   *  REGION CODE NAMES  (written by tools/measure-regions.py --codes: do not edit by hand)
+   *    For some countries the regions of the site are plate codes (Germany: AE, AL, AIB...) whose own name finds no shape. Wikidata (CC0)
+   *    knows the places that carry each code, with their names; the first name of a code that finds a shape on the map is kept here:
+   *    country -> plate code -> name.
+   * ===================================================================== */
+  const REGION_CODE_NAMES = {{
+    {body}
+  }};
+"""
 
 
 HEADER = """  /* =====================================================================
