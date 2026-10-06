@@ -38,6 +38,7 @@
 
   // For the offline check of the saved pages: types a text, returns what the script reads back
   window.nextplaateDev = {
+    seriesLinks: SERIES_LINKS,          // the countries that link a table of series (the tests of the series collection read it)
     type: (text, cc, category) => {   // types a plate and leaves the fields as they are (tools/diag_typing.py, tools/hand_check.py); tries both cuts like testText
       const h = ptHint(cc, category);
       ptApplySet(text, h.set);

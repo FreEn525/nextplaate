@@ -182,6 +182,9 @@ def route_site(context):
             cards = "".join(f'<div class="panel-body"><h4 class="text-center"><a href="/fr/nomer{i}">car</a></h4><small><p class="text-center"><a href="/gallery.php?{c}">gen</a></p></small></div>' for i, c in enumerate(cars))
             html = HEAD.format(title="Search") + f'<div class="breadcrumbs"><h1 class="pull-left">License plates found <b>{n}</b></h1></div>{cards}</body></html>'
             return route.fulfill(status=200, content_type="text/html; charset=utf-8", body=html)
+        if path == "/fr/series.php":
+            html = HEAD.format(title="Series") + '<div class="container"><table class="table table-bordered table-condensed"><tbody><tr><td><a href="gallery.php?nomer=AA * AA">AA-AA</a></td><td><a href="/fr/series-HF-QQ-1">HF-QQ</a></td></tr></tbody></table></div></body></html>'
+            return route.fulfill(status=200, content_type="text/html; charset=utf-8", body=html)
         if re.fullmatch(r"/fr/series-[A-Z]{2}-[A-Z]{2}-\d+", path):
             cells = "".join(
                 (f'<td class="text-center"><a href="/fr/nomer{9000 + i}"><img src="data:,"></a><br><a href="/fr/nomer{9000 + i}">{i:03d}</a></td>' if i in (9, 137, 300)

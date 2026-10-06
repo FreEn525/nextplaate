@@ -2,6 +2,9 @@
 
 ## 5.9
 
+**Developer build**
+- New tool *Series collection* (dev drawer, not in the published script): for the 55 countries whose pages link a table of series, it reads the table, one series page and the site's own wildcard search with your member number, through the shared queue (about three requests per country, it carries on where it stopped), keeps them in the browser and writes them to a folder, to build the series feature for more countries offline.
+
 **Official register (Netherlands, Israel)**
 - New feature *Official register* (switch in Settings): for Dutch and Israeli plates, a button in the plate card asks the country's open register (RDW open data; the Ministry of Transport's data.gov.il), both free, with no key, and answering to a page of another site. It shows make, model, year, colour and the end of the inspection, and for the Netherlands *Fill the menus* compares the make and model with the site's menus. The plate is sent to the register only when you click; the answer is kept for the visit.
 

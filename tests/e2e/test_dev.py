@@ -35,7 +35,7 @@ def test_developer_drawer_groups_and_status(browser):
     page.wait_for_selector("#pmg-host")
     page.evaluate("() => document.getElementById('pmg-host').shadowRoot.querySelector('.rbtn[data-drawer=\"dev\"]').click()")
     titles = page.evaluate("() => [...document.getElementById('pmg-host').shadowRoot.querySelectorAll('.dsec[data-drawer=\"dev\"] .gtitle')].map(e => e.textContent)")
-    assert titles == ["Status", "Save the page", "Capture", "Plate test", "Verify the reads", "Database"]
+    assert titles == ["Status", "Save the page", "Capture", "Plate test", "Verify the reads", "Database", "Series collection"]
     # the status box reads the dev store: nothing kept yet on a fresh profile
     page.wait_for_function("() => document.getElementById('pmg-host').shadowRoot.getElementById('devStatus').textContent.includes('Upload pages kept')")
     text = page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('devStatus').textContent")
@@ -132,4 +132,35 @@ def test_verify_the_reads_asks_the_site_and_searches_the_gallery_text_when_the_r
     page.wait_for_function(f"() => {SHADOW}.getElementById('vrMsg').textContent.startsWith('Finished')", timeout=20000)
     assert any("EL+557CP" in u for u in asked) and any("EL5+57CP" in u for u in asked)   # the read first, then the gallery text
     assert "0 reads found, 1 not found" in page.evaluate(f"() => {SHADOW}.getElementById('vrMsg').textContent")
+    c.close()
+
+
+@needs_dev
+def test_series_collection_reads_the_table_a_series_page_and_the_wildcard_with_your_number(browser):
+    c, page = _dev_page(browser)
+    # every country but France is already collected: the run asks only for France
+    for cc in page.evaluate("() => Object.keys(nextplaateDev.seriesLinks)"):
+        if cc != "fr":
+            page.evaluate(SEED_JS, ["seriesrec:" + cc, {"country": cc, "tables": [], "page": None, "wildcard": None}])
+    asked = []
+    c.route("**/*", lambda r: (asked.append(r.request.url), r.fallback())[1] if "platesmania.com" in r.request.url else r.fallback())
+    page.evaluate(f"() => {SHADOW}.getElementById('seriesGo').click()")
+    page.wait_for_function(f"() => {SHADOW}.getElementById('seriesMsg').textContent.startsWith('Finished')", timeout=40000)
+    urls = [u.replace("https://platesmania.com", "") for u in asked if "/fr/" in u]
+    assert urls[0] == "/fr/series.php"                                                        # the table
+    assert urls[1] == "/fr/series-HF-QQ-1"                                                    # a series page it leads to
+    assert "usr=121559" in urls[2] and "nomer=AA" in urls[2]                                  # the wildcard search with your number
+    page.evaluate(f"() => {SHADOW}.getElementById('seriesCheck').click()")
+    page.wait_for_function(f"() => {SHADOW}.getElementById('seriesMsg').textContent.includes('with a series page')", timeout=10000)
+    assert "1 with a series page" in page.evaluate(f"() => {SHADOW}.getElementById('seriesMsg').textContent")
+    c.close()
+
+
+@needs_dev
+def test_series_collection_does_not_ask_again_for_what_is_collected(browser):
+    c, page = _dev_page(browser)
+    for cc in page.evaluate("() => Object.keys(nextplaateDev.seriesLinks)"):
+        page.evaluate(SEED_JS, ["seriesrec:" + cc, {"country": cc, "tables": [], "page": None, "wildcard": None}])
+    page.evaluate(f"() => {SHADOW}.getElementById('seriesGo').click()")
+    page.wait_for_function(f"() => {SHADOW}.getElementById('seriesMsg').textContent.includes('Every country is collected')", timeout=10000)
     c.close()
