@@ -408,7 +408,7 @@
     mine: { about: 'Under the vehicle menus: how many photos of that brand, model and generation you already have.', scope: 'every country' },
     regions: { about: 'On a member’s profile: which regions of a country the member has a photo from, and which are missing.', scope: 'every country the site has regions for' },
     series: { about: 'How many of your photos are in the series of the plate you type (HF-137-QQ is in HF-*-QQ); on a series page, the numbers already on the site.', scope: '84 countries (checked on the real site)' },
-    registry: { about: 'A button asks the country’s open register for make, model, year and colour. The plate is sent only when you click.', scope: 'Netherlands and Israel' },
+    registry: { about: 'Asks the country’s open register (public data) for make, model, year and colour, and fills the menus that are still empty. Only the plate is sent; two switches in Settings turn it off.', scope: 'Netherlands and Israel' },
     upload: { about: 'Queue many photos (or a folder), give each a country and a plate category, and send them one tab per photo with a pause between.', scope: 'every country' }
   };
   /* =====================================================================
@@ -1161,7 +1161,7 @@
         { title: 'Plate check, for 96 countries', text: 'Type a plate: how many photos of it are already on the site. Now it also offers the vehicle of those photos (one click fills the brand, model and generation) and links to look the plate up.' },
         { title: 'Your photos of the series', text: 'Under the plate: how many of your photos are in its series (HF-137-QQ is in HF-*-QQ). Works for 84 countries.' },
         { title: 'Your photos of this vehicle', text: 'Under the brand, model and generation menus: how many photos of each you already have, each number a link.' },
-        { title: 'Official register (Netherlands, Israel)', text: 'A button asks the country’s open register for make, model, year and colour. The plate is sent only when you click.' },
+        { title: 'Official register (Netherlands, Israel)', text: 'The country’s open register (public data) is asked for make, model, year and colour, and the menus that are still empty are filled. Only the plate is sent; two switches in Settings turn it off.' },
         { title: 'Google Lens, Google says', text: 'Lens now shows what Google itself calls the vehicle, and a click types it in the site’s brand and model box.' },
         { title: 'Date of the photo, and a floating Upload button', text: 'The extra information card can insert the date of the photo, and the Upload button follows you down the page.' }
       ]
@@ -3854,13 +3854,22 @@
     return path;
   }
 
+  // The register is open public data (the vehicles of the road, the same facts as the plate itself shows), so the script may ask it by itself:
+  // two switches in Settings, on by default. The menus are only filled when they are all empty and once per plate: a choice of yours is
+  // never overwritten.
+  settings.define('registry_auto', '1', 'Ask the open register by itself (NL, IL)', 'registry');
+  settings.define('registry_fill', '1', 'Fill the empty menus from the register', 'registry');
+  const registryFilled = new Set();
+
   // The block of the plate card; null when the country has no register, the plate is not of its shape or the feature is off
   function registryLine(plate) {
     const reg = REGISTRIES[here.country];
     const asked = reg && featureOn('registry') && reg.plate(plate);
     if (!asked) return null;
     const out = h('div', { class: 'cardrow' });
-    const ask = h('button', { type: 'button', class: 'btn ghost sm', text: `Ask ${reg.name}`, title: 'Sends this plate to that open register', onclick: async () => {
+    const menusEmpty = () => vehicleCurrent().every(v => !(+v > 0 && +v !== 200));
+    const ask = h('button', { type: 'button', class: 'btn ghost sm', text: `Ask ${reg.name}`, title: 'Sends this plate to that open register', onclick: () => run() });
+    async function run() {
       ask.disabled = true;
       out.replaceChildren(h('span', { class: 'mute', text: 'Asking…' }));
       try {
@@ -3868,13 +3877,29 @@
         if (!facts) { out.replaceChildren(h('span', { class: 'mute', text: 'No such plate in that register.' })); return; }
         const path = registryPath(facts);
         const text = [facts.make, facts.model, facts.year, facts.colour, facts.until ? 'inspection until ' + facts.until : ''].filter(Boolean).join(' · ');
-        out.replaceChildren(h('b', { text }), path.length ? h('button', { type: 'button', class: 'btn sm', text: 'Fill the menus', onclick: () => vehicleFill(path) }) : null);
-      } catch (e) { out.replaceChildren(h('span', { class: 'mute', text: 'Not read: ' + (e.name === 'AbortError' ? 'no answer in 15 s' : e.message) })); ask.disabled = false; }
-    } });
+        const filled = path.length && settings.on('registry_fill') && out.isConnected && !registryFilled.has(asked) && menusEmpty();
+        if (filled) { registryFilled.add(asked); vehicleFill(path); }
+        out.replaceChildren(h('b', { text }), path.length ? h('button', { type: 'button', class: 'btn sm', text: 'Fill the menus', onclick: () => vehicleFill(path) }) : null,
+          filled ? h('span', { class: 'mute', text: 'Menus filled from the register.' }) : null);
+      } catch (e) { out.replaceChildren(h('span', { class: 'mute', text: 'Not read: ' + (e.name === 'AbortError' ? 'no answer in 15 s' : e.message) })); ask.hidden = false; ask.disabled = false; }
+    }
+    ask.hidden = settings.on('registry_auto');                                // by itself: the button only comes back if the asking fails
+    if (settings.on('registry_auto')) run();
     return h('div', { class: 'cardrow' }, ask, out);
   }
 
-  registerFeature({ id: 'registry', label: 'Official register (NL, IL)', init: () => {} });
+  registerFeature({
+    id: 'registry', label: 'Official register (NL, IL)',
+    groups: [{
+      drawer: 'settings', title: 'Official register', about: 'Public open data (RDW for the Netherlands, data.gov.il for Israel): the plate you typed is sent to it, nothing else.',
+      build: () => ['registry_auto', 'registry_fill'].map(id => {
+        const box = h('input', { type: 'checkbox', checked: settings.on(id) });
+        box.onchange = () => settings.set(id, box.checked ? '1' : '0');
+        return h('label', { class: 'chk' }, box, settings.list('registry').find(d => d.id === id).label);
+      })
+    }],
+    init: () => {}
+  });
   /* =====================================================================
    *  ABOUT  (Settings drawer: who made it, which version, what is new)
    *    The "What's new" window opens by itself once after an update to a new minor version (not on a first install: the script has

@@ -16,7 +16,7 @@ Notes prises pendant la collecte des séries. On les fait au fur et à mesure, d
 8. **UX et UI du menu U** : **fait** (version 5.10 : étapes numérotées, pastilles de pays côte à côte, état vide clair, « No country » à la place du « ? »). À revoir.
 9. **Nouveau logo** : **fait** (version 5.9, appareil photo rond avec un plus ; panneau, `logo_nextplaate.svg` et `@icon`).
 10. **Plate check** : **fait** (version 5.10, lien « See the N photos of this plate on the site » dans la carte). Pouvoir ouvrir depuis la carte la recherche de la plaque (la page du site qui liste les photos déjà présentes).
-11. **Remplissage automatique par site d'informations** : **à faire**. Pour les plaques qui ont un site où toutes les informations sont trouvables, remplir automatiquement (étendre le registre officiel NL, IL ; voir `src/lib/registries.js`).
+11. **Remplissage automatique par site d'informations** : **fait pour les sites ouverts** (version 5.10 : registres NL et IL interrogés tout seuls, menus vides remplis ; réglages dans Settings). Les autres pays n'ont pas de source ouverte. Pour les plaques qui ont un site où toutes les informations sont trouvables, remplir automatiquement (étendre le registre officiel NL, IL ; voir `src/lib/registries.js`).
 12. **Design de Google Lens sur la page d'ajout** : **fait** (version 5.10 : « Best match » avec un seul bouton, « Google calls it », puis « Not right? Pick another »). Encore un peu étrange ; à revoir.
 
 13. **Clic sur le logo du panneau = mise à jour du script** : **fait** (version 5.10, `src/features/91-update.js`). Vérifier s'il existe une version plus récente et proposer de l'installer.

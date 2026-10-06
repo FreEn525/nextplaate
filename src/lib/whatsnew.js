@@ -27,7 +27,7 @@
         { title: 'Plate check, for 96 countries', text: 'Type a plate: how many photos of it are already on the site. Now it also offers the vehicle of those photos (one click fills the brand, model and generation) and links to look the plate up.' },
         { title: 'Your photos of the series', text: 'Under the plate: how many of your photos are in its series (HF-137-QQ is in HF-*-QQ). Works for 84 countries.' },
         { title: 'Your photos of this vehicle', text: 'Under the brand, model and generation menus: how many photos of each you already have, each number a link.' },
-        { title: 'Official register (Netherlands, Israel)', text: 'A button asks the country’s open register for make, model, year and colour. The plate is sent only when you click.' },
+        { title: 'Official register (Netherlands, Israel)', text: 'The country’s open register (public data) is asked for make, model, year and colour, and the menus that are still empty are filled. Only the plate is sent; two switches in Settings turn it off.' },
         { title: 'Google Lens, Google says', text: 'Lens now shows what Google itself calls the vehicle, and a click types it in the site’s brand and model box.' },
         { title: 'Date of the photo, and a floating Upload button', text: 'The extra information card can insert the date of the photo, and the Upload button follows you down the page.' }
       ]
