@@ -40,9 +40,9 @@ for (const c of index) {
     if (!r) { n++; (unknown[c.code] ??= []).push(label); continue; }
     if (r.ok === r.total) o++;
     // every failed plate says the form cannot take this category at all: not a rule to fix
+    else if (limits[c.code + '|' + label]) { lim++; limited.push({ code: c.code, label, reason: limits[c.code + '|' + label], r }); }
     // the same characters as the gallery text but other spaces: the site's search decides (dev build: Verify the reads)
     else if (r.failed.every(f => f.status === 'spacing')) { spc++; spacing.push({ code: c.code, label, r }); }
-    else if (limits[c.code + '|' + label]) { lim++; limited.push({ code: c.code, label, reason: limits[c.code + '|' + label], r }); }
     else if (r.ok === 0 && r.failed.every(f => f.status === 'no-type')) { u++; (untestable[c.code] ??= []).push({ label, why: 'absente du menu du formulaire' }); }
     else if (r.ok === 0 && r.failed.every(f => f.status === 'no-field')) { u++; (untestable[c.code] ??= []).push({ label, why: "le formulaire n'a aucun champ de plaque pour ce type" }); }
     else { b++; failing.push({ code: c.code, label, r }); }

@@ -1,6 +1,6 @@
 # PlatesMania - NextPlaate : todo
 
-État au 5 octobre 2026. Légende : **fait**, **en cours**, **à faire**, **info nécessaire** (il me faut une précision de ta part).
+État au 6 octobre 2026 (version 5.7). Le bilan est dans `ETAT-ET-PLAN.md`. Légende : **fait**, **en cours**, **à faire**, **info nécessaire** (il me faut une précision de ta part).
 
 ## Identité visuelle
 
@@ -11,7 +11,7 @@
 
 - **Retirer les logs de la console** : **fait** (le build public a les logs éteints, le dev les garde). Les logs de test (`[NextPlaate] plate check`, etc.) restent dans le build dev. Dans le build public, il faut les supprimer, ou les garder seulement derrière un réglage.
 - **Console ASCII** : **fait en version simple** (bannière stylée au démarrage). Remplace-la par ton ASCII art quand tu l'as choisi. Un logo en ASCII affiché une fois dans la console au démarrage du script (build public et dev).
-- **Options de désactivation** : à faire. Un réglage par fonctionnalité (tiroir, raccourcis, vérification de plaque…), sauvegardé dans le navigateur.
+- **Options de désactivation** : **fait** (version 5.5, tiroir Settings, registre `src/core/15-settings.js`). Reste à migrer les clés libres `autoCheck`, `delay`, `qDelay`, `pages` vers le registre.
 
 ## Fonctionnalités
 
@@ -28,12 +28,13 @@
 
 ## Ce qui est déjà en place (pas dans la todo, mais utile)
 
-- Vérification de plaque, testée sur 770 plaques de la base (commit `31d4d83`).
-- Test par type sur tous les pays, qui utilise maintenant la base (commit `937aff8`).
+- Vérification de plaque : 96 pays, 795 catégories sur 829 vérifiées exactement (voir `COUVERTURE.md`), 39 plaques confirmées à la main sur le site.
+- Outils de collecte du build dev (capture, Collect only, Verify the reads, Database) et données dans `data/`.
+- CI : tests sur chaque push, échec si `src/` change sans nouvelle `@version`.
 - File de requêtes vers le site, avec pause de 15 minutes après un blocage.
 - Documentation des fonctionnalités : `docs/FONCTIONNALITES.md` et `docs/PLATESMANIA-ETAT.md`.
 
-## Ordre proposé
+## Ordre proposé (plan du 5 octobre : étapes 1 et 2 faites, le reste à faire)
 
 1. Logs et console ASCII (rapide, sans risque).
 2. Options de désactivation (à faire avant les nouvelles fonctions, pour pouvoir les couper).

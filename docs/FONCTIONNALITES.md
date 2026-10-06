@@ -27,11 +27,12 @@ NextPlaate est un script Tampermonkey (userscript) pour [PlatesMania](https://pl
 - **Pages** : boutons précédent et suivant, touches `A` (précédent) et `D` (suivant).
 
 ### Vérification de plaque (tiroir `plate`, sur la page d'ajout)
-- Lit la plaque tapée dans le formulaire, selon les règles du pays et de la catégorie (`src/lib/plate.js`).
+- Lit la plaque tapée dans le formulaire, selon les règles du pays et de la catégorie (`src/lib/plate/`, un fichier par pays).
 - Compte les photos de cette plaque sur le site (recherche `gallery.php`). Le nombre est lu dans le titre de la page, donc indépendant de la langue du compte.
 - Affiche : « N photos de cette plaque sont déjà sur le site » ou « Pas encore sur le site ».
 - Option « Check as I type » : vérifie quand on quitte un champ, qu'on appuie sur Entrée ou qu'on change le type. Pas de vérification en boucle.
 - Quand un envoi par lot est en cours, le résultat est gardé sur la photo et affiché en avertissement dans la fenêtre de lot.
+- La recherche du site garde les espaces de la plaque (un tiret vaut un espace) : la plaque est lue avec l'espacement de la galerie. Couverture : `COUVERTURE.md`.
 
 ### Envoi par lots (tiroir `upload`)
 - Ajouter plusieurs photos (ou un dossier), chacune avec ses options.
@@ -54,6 +55,9 @@ NextPlaate est un script Tampermonkey (userscript) pour [PlatesMania](https://pl
 ### Développeur (tiroir `dev`, seulement dans le build dev)
 - **Save** : enregistre la page en HTML.
 - **Capture** : garde la page d'ajout et de recherche de chaque pays, puis les écrit dans un dossier.
+- **Collect only** : une requête de galerie par catégorie sans plaque connue ; distingue une galerie vide (0) d'une galerie dont le texte n'est pas lisible.
+- **Verify the reads** : demande au site si la lecture du script est trouvée (`data/verify/reads.json`).
+- **Database** : écrit la base, le journal des requêtes, les galeries vides et les résultats de vérification.
 - **Plate test** : teste les plaques de la galerie dans le formulaire de chaque catégorie, sur tous les pays, et écrit un rapport (`plates-report.md` et `.json`) et une base (`plates-db.json`, `request-log.json`).
 
 ## Fonctionnement technique
@@ -89,8 +93,8 @@ Chaque fonction s'enregistre avec `registerFeature({ groups, keys, onEscape, ini
 
 ## Tests (`tests/`)
 
-- `python -m pytest tests -q` (dossier `tests/e2e/`) : 37 tests sur une version simulée du site (`fake_site.py`). Pas d'accès réel à PlatesMania.
-- `python tests/offline/check_known.py` : 16 plaques validées à la main, tapées dans les pages sauvegardées.
+- `python -m pytest tests -q` (dossier `tests/e2e/`) : 77 tests (83 avec le build dev) sur une version simulée du site (`fake_site.py`). Pas d'accès réel à PlatesMania.
+- `python tests/offline/check_known.py` : 39 plaques validées à la main, tapées dans les pages sauvegardées.
 - `python tests/offline/check_db.py` : toutes les plaques de la base, dans la catégorie correspondante, en parallèle. Hors ligne.
 - `python tests/offline/check_formats.py` : les exemples de format affichés par le site, dans les pages sauvegardées.
 - `scripts/extract-fields.cjs` (données dérivées : `node scripts/build-data.mjs` → `data/`, voir `data/README.md`)
@@ -100,5 +104,5 @@ Chaque fonction s'enregistre avec `registerFeature({ groups, keys, onEscape, ini
 
 - La vérification de plaque dépend des règles. Un pays ou une catégorie sans règle vérifiée peut donner un mauvais format.
 - Les tests hors ligne prouvent la lecture du script, pas l'acceptation par le site.
-- Certaines catégories n'ont pas de plaque connue (détail dans le rapport).
+- 21 catégories n'ont aucune plaque sur le site, 13 ont une limite du formulaire (`data/limits.json`).
 - Pas encore : Regcheck (informations de véhicule, tierce partie), remplissage automatique marque et modèle, compteurs de séries.

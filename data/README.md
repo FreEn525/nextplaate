@@ -12,6 +12,8 @@ Données dérivées, petites et versionnées. Les pages brutes (270 Mo) restent 
 data/
   index.json                 une ligne par pays : nombre de types, de catégories, de plaques
   check.json                 résultat du dernier contrôle complet des règles (tests/offline/check_db.py)
+  limits.json                limites connues du formulaire du site, avec la raison (écrit à la main)
+  verify/reads.json          lectures qui ne diffèrent du texte de la galerie que par les espaces (pour « Verify the reads »)
   countries/<cc>/            <cc> = code du site (fr, de, uk...)
     country.json             nom, pages présentes, menu qui choisit le type de plaque
     form.json                formulaire d'ajout : types, champs de plaque dans l'ordre de la page, autres champs

@@ -16,8 +16,8 @@ Généré par `node scripts/coverage.mjs` : ne pas modifier à la main. Après u
 | Vérifiées | 795 | 96 % |
 | **À corriger** | **0** | 0 % |
 | **À trouver** (aucune plaque connue) | **0** | 0 % |
-| À vérifier sur le site : mêmes caractères, espaces différents | 1 | 0 % |
-| Limite connue du formulaire du site (voir plus bas) | 12 | 1 % |
+| À vérifier sur le site : mêmes caractères, espaces différents | 0 | 0 % |
+| Limite connue du formulaire du site (voir plus bas) | 13 | 2 % |
 | Galerie vide sur le site (aucune plaque n'existe) | 21 | 3 % |
 | Sans champ de plaque dans le formulaire ou sans page d'ajout | 0 | 0 % |
 
@@ -136,7 +136,6 @@ Pour chacune : trouver une plaque réelle sur le site, la saisir, puis relancer 
 
 Le script lit les mêmes caractères que le texte de la galerie, mais avec d'autres espaces (EL 557CP au lieu de EL5 57CP). La recherche du site garde les espaces (D09003 ne trouve pas D 09 003) mais traite le tiret comme un espace. Le build dev, boîte « Verify the reads », demande au site si chaque lecture est trouvée.
 
-- **la** Diplomatic (1/3) : `ຂຕ-1192` lu `ຂຕ11-92`, `ຂຕ-1777` lu `ຂຕ17-77`
 
 ## Limites connues du formulaire
 
@@ -145,6 +144,7 @@ Plaques de galerie que le formulaire d'ajout du site ne peut pas écrire exactem
 - **az** Foreign citizens and enterprises (0/3) : Le formulaire de l'Azerbaïdjan n'a pas ce type : sa plaque (H 014401, une lettre et six chiffres) ne peut pas y être écrite.
 - **cy** Trailers (2/3) : Une plaque sur trois (14001 CT) n'a pas la forme P 12345 que le formulaire produit.
 - **ir** Disabled (0/3) : Le texte de galerie écrit une lettre (ژ) là où le formulaire met le symbole du fauteuil roulant.
+- **la** Diplomatic (1/3) : La galerie mélange deux écritures : ສທ23-78 (deux fois deux chiffres) et ຂຕ-1192 (tiret après les lettres). Le script lit la première ; l'autre ne peut pas être produite par la même règle.
 - **ps** Dealer (0/3) : Le menu du premier chiffre n'a que 1 à 9 : la plaque 62-100-76 (deux chiffres) ne peut pas y être écrite.
 - **sc** Ambassador, chief of diplomatic mission (0/3) : Le texte de galerie (S 16958) ne contient pas les lettres que le formulaire ajoute (CD).
 - **sc** Government (0/3) : Le texte de galerie (S 13069) ne contient pas les lettres que le formulaire ajoute (GS).
