@@ -48,7 +48,7 @@ Elle est dans `src/meta/00-header.txt` (`@description`, et `@description:fr` pou
 11. **Plate lookup links** - one link per public lookup page of the country for the plate you type, each writing the plate the way that site wants it; plain links, nothing is sent before you click, each site can be hidden.
 12. **Your photos of this vehicle** - under the vehicle menus, how many photos of that brand, model and generation you already have, each number a link.
 13. **Official register** (Netherlands, Israel) - a button in the plate card asks the country's open register (free, no key) about the plate: make, model, year, colour, inspection date; it can fill the menus for the Netherlands. The plate is sent only when you click.
-14. **Series counter** - French plates: your photos of the plate's series (HF-137-QQ is in HF-*-QQ); on a series page, the numbers on the site.
+14. **Series counter** - 84 countries (checked on the real site with real plates): your photos of the plate's series (HF-137-QQ is in HF-*-QQ); on a series page, the numbers on the site.
 
 ## Browsing
 15. **Likes** (`L`) - like a page, or several pages in a row, with a delay between likes.

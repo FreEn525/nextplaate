@@ -81,3 +81,32 @@ def test_with_the_feature_off_there_is_nothing(ctx):
     page.wait_for_selector("#pmg-host")
     page.wait_for_timeout(500)
     assert page.evaluate("() => !document.getElementById('pmg-series-card')")
+
+
+def test_other_countries_checked_on_the_real_site_have_the_series_line_too(ctx):
+    page = ctx.new_page()
+    page.goto("https://platesmania.com/nl/add")
+    page.wait_for_selector("#pmg-host")
+    page.fill("#nomer", "GT-123-B")
+    page.dispatch_event("#nomer", "blur")
+    page.wait_for_function(f"() => document.getElementById('pmg-plate-card') && {PLATE}.querySelector('.stat a') && {PLATE}.querySelector('.stat a').textContent === '2'", timeout=15000)
+    assert page.evaluate(f"() => {PLATE}.querySelector('.stat span').textContent") == "your photos in the series GT-*-B"
+    assert page.evaluate(f"() => {PLATE}.querySelector('.stat a').getAttribute('href')") == "/nl/gallery.php?fastsearch=GT%20*%20B&usr=121559"
+
+
+def test_a_country_not_checked_has_no_series_line(ctx):
+    page = ctx.new_page()
+    page.goto("https://platesmania.com/ke/add")
+    page.wait_for_selector("#pmg-host")
+    page.fill("#nomer", "KTC-123-B")
+    page.dispatch_event("#nomer", "blur")
+    page.wait_for_function("() => document.getElementById('pmg-plate-card')", timeout=15000)
+    page.wait_for_timeout(500)
+    assert page.evaluate(f"() => !{PLATE}.querySelector('.stat')")
+
+
+def test_a_single_letter_glued_after_the_digits_gets_no_series(ctx):
+    page = type_plate(ctx, "DZN 1390A")
+    page.wait_for_function("() => document.getElementById('pmg-plate-card')", timeout=15000)
+    page.wait_for_timeout(500)
+    assert page.evaluate(f"() => !{PLATE}.querySelector('.stat')")

@@ -3523,8 +3523,10 @@
    *    The series of a plate is its search with the longest run of digits as a wildcard (seriesQuery). It is switched on only for the
    *    countries where the dev tool "Series check" found the plates again on the real site (SERIES_COUNTRIES).
    * ===================================================================== */
-  // The countries where the series search was checked on the real site: a plate comes back from its own series search
-  const SERIES_COUNTRIES = new Set(['fr']);
+  // The countries where the series search was checked on the real site (dev tool "Series check", 6 October 2026: two real plates per
+  // country, the plate came back from its own series search). Not in the list: bh, eg, ir, ke, qa, sa (plates of digits only or in
+  // Arabic or Persian digits, which the wildcard cannot replace) and ch (the plate was not among the first results: not sure).
+  const SERIES_COUNTRIES = new Set('ad al am ar at ax az ba be bg br bs by cl cn cy cz de dk dz ee es fi fr ge gg gi gr gu hk hr hu id ie il iq is it je jp kg kh kr kw kz la li lt lu lv ma mc md me mk mn mp mt mx my nl no nz pl ps pt ro rs ru sc se sg si sk sm su th tj tr ua uk uz va vn'.split(' '));
   const seriesCache = new Map();      // address -> count
 
   // The series search of a plate: its longest run of digits (the last one when equal) becomes the wildcard, the separators become
@@ -3534,6 +3536,9 @@
     let best = null;
     for (const m of s.matchAll(/\d+/g)) if (!best || m[0].length >= best[0].length) best = m;
     if (!best) return null;
+    // a single letter glued after the digits, behind a separator (FAJ 04A, KTCA 881E): the site's wildcard finds nothing, so no series
+    const tail = /^[^\W\d_]+/.exec(s.slice(best.index + best[0].length));
+    if (/[\s-]/.test(s[best.index - 1] || '') && tail && tail[0].length === 1 && best.index + best[0].length + 1 === s.length) return null;
     const q = (s.slice(0, best.index) + '*' + s.slice(best.index + best[0].length)).split(/[\s-]+/).filter(Boolean).join(' ');
     return /[^*\s]/.test(q) ? q : null;
   }

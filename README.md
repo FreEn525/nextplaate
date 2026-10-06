@@ -21,7 +21,7 @@ Where a key is given, it can be changed in the Shortcuts drawer.
 11. **Plate lookup links**: for the plate you type, one link to each public lookup page of the country (and to a picture search), each writing the plate the way that site wants it. Plain links opening a new tab: nothing is sent before a click. Each site can be hidden in Settings.
 12. **Your photos of this vehicle**: under the brand, model and generation menus, how many photos of each you already have on the site, each number a link to those photos.
 13. **Official register** (Netherlands, Israel): a button in the plate card asks the country's open register (RDW open data, data.gov.il) about the plate: make, model, year, colour, inspection date; for the Netherlands it can fill the menus. The plate is sent only when you click.
-14. **Series counter**: for French plates, how many photos of the plate's series (HF-137-QQ is in HF-*-QQ) you already have; on a series page, how many of its numbers are on the site, which ones, and how many photos of the series you have.
+14. **Series counter**: for 84 countries (checked on the real site with real plates, see `docs/COUVERTURE.md`), how many photos of the plate's series (HF-137-QQ is in HF-*-QQ, AA 7181 is in AA-*) you already have; on a series page, how many of its numbers are on the site, which ones, and how many photos of the series you have.
 
 **Browsing**
 

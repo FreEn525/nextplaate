@@ -191,7 +191,7 @@ def route_site(context):
                  else f'<td class="warning text-center"><a href="/fr/add.php?digit={i:03d}"><i></i></a><br>{i:03d}</td>') for i in range(1, 1000))
             html = HEAD.format(title="Series") + f'<div class="container"><table class="table table-bordered table-condensed"><tbody><tr>{cells}</tr></tbody></table></div></body></html>'
             return route.fulfill(status=200, content_type="text/html; charset=utf-8", body=inject(html) if route.request.resource_type == "document" else html)
-        if path == "/fr/gallery.php" and "fastsearch" in query:
+        if re.fullmatch(r"/[a-z]{2}/gallery\.php", path) and "fastsearch" in query:
             GALLERY_USR.append(query)
             html = HEAD.format(title="Search") + '<div class="breadcrumbs"><h1 class="pull-left">License plates found <b>2</b></h1></div></body></html>'
             return route.fulfill(status=200, content_type="text/html; charset=utf-8", body=html)

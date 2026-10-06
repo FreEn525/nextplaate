@@ -25,7 +25,7 @@ Chaque fonction a un interrupteur dans Settings (sauf Settings elle-même) : ét
 | 15 | Liens de recherche de plaque | Plate lookup links | carte Plate check, tiroir Search | un lien par site public du pays (et recherche d'images), la plaque écrite comme ce site la veut ; liens simples, rien n'est envoyé avant le clic ; chaque site masquable | |
 | 16 | Vos photos de ce véhicule | Your photos of this vehicle | page d'ajout | combien de photos de la marque, du modèle, de la génération vous avez déjà, chaque chiffre est un lien | |
 | 17 | Registre officiel (NL, IL) | Official register (NL, IL) | carte Plate check | un bouton interroge le registre ouvert du pays (RDW, data.gov.il) : marque, modèle, année, couleur, contrôle ; remplit les menus (NL) ; la plaque n'est envoyée qu'au clic | |
-| 18 | Compteur de série | Series counter | carte Plate check, pages de série | vos photos de la série de la plaque (FR) ; sur une page de série, les numéros présents sur le site | |
+| 18 | Compteur de série | Series counter | carte Plate check, pages de série | vos photos de la série de la plaque (84 pays vérifiés sur le vrai site : le plus long groupe de chiffres devient un joker) ; sur une page de série, les numéros présents sur le site | |
 | 19 | Vrais uploads | Profile: real uploads | profils | total réel de la galerie et uploads du jour (dès 03 h 30), écart avec le chiffre du profil | |
 | 20 | Régions | Profile: regions | profils | régions d'un pays dont vous avez une photo, barre, liste des manquantes ; menu des pays lu sur la page du site | |
 | 21 | Éditeur de raccourcis | Shortcut editor | tiroir Raccourcis | change chaque touche | |
@@ -163,7 +163,7 @@ Chaque fonction s'enregistre avec `registerFeature({ groups, keys, onEscape, ini
 
 ## Tests (`tests/`)
 
-- `python -m pytest -q` (dossier `tests/e2e/`) : 317 tests (325 avec le build dev, `NEXTPLAATE_SCRIPT=nextplaate.dev.user.js`) sur une version simulée du site (`fake_site.py`, avec une fausse page Google pour le Lens). Un fichier par fonction (`test_lens.py`, `test_tags.py`, `test_members.py`, `test_flags.py`, `test_extra.py`, `test_preview.py`…), plus `test_style.py` (couleurs, rayons, tailles, hauteurs) et `test_responsive.py` (aucun débordement de 320 à 1280 px). Pas d'accès réel à PlatesMania ni à Google.
+- `python -m pytest -q` (dossier `tests/e2e/`) : 321 tests (330 avec le build dev, `NEXTPLAATE_SCRIPT=nextplaate.dev.user.js`) sur une version simulée du site (`fake_site.py`, avec une fausse page Google pour le Lens). Un fichier par fonction (`test_lens.py`, `test_tags.py`, `test_members.py`, `test_flags.py`, `test_extra.py`, `test_preview.py`…), plus `test_style.py` (couleurs, rayons, tailles, hauteurs) et `test_responsive.py` (aucun débordement de 320 à 1280 px). Pas d'accès réel à PlatesMania ni à Google.
 - `python tests/offline/check_known.py` : 39 plaques validées à la main, tapées dans les pages sauvegardées.
 - `python tests/offline/check_db.py` : toutes les plaques de la base, dans la catégorie correspondante, en parallèle. Hors ligne.
 - Les données dérivées : `node scripts/refresh-data.mjs` → `data/` et `docs/COUVERTURE.md` (voir `data/README.md`).
