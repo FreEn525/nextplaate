@@ -252,3 +252,13 @@ def test_the_matcher_uses_the_alias_table_of_the_country(browser):
     r = match(page, ["Chechen Republic", "Primorye (Maritime) Krai"], ["Chechnya", "Primorsky Krai"], "ru")
     assert [p[1] for p in r["placed"]] == [["Chechnya"], ["Primorsky Krai"]]
     c.close()
+
+
+@needs_dev
+def test_the_matcher_puts_a_town_on_the_unit_wikidata_says_it_lies_in(browser):
+    c, page = _dev_page(browser)
+    r = match(page, ["Narita", "Caernarfon"], ["Chiba Prefecture", "Gwynedd"], "jp")
+    assert [p[1] for p in r["placed"]] == [["Chiba Prefecture"]] and r["missing"] == ["Caernarfon"]          # the table is per country: Caernarfon is a British town
+    r = match(page, ["Caernarfon"], ["Gwynedd"], "uk")
+    assert [p[1] for p in r["placed"]] == [["Gwynedd"]]
+    c.close()

@@ -8,4 +8,4 @@ The plate count reads the same gallery search as the "Notification Doubles Plaqu
 
 The way the Google Lens search is started (the script puts the photo in the "paste an image link" box of Google's search by image, on a page it opened, and starts the search) and the selectors of that box and its button come from the userscript "Platesmania → Google Lens" (Greasy Fork script 535713, MIT, https://greasyfork.org/scripts/535713). The code is rewritten in src/features/66-lens-google.js, with the rest of the Lens feature (the bridge between the two sites, the reading of the results, the card) written for this project.
 
-The names of the plate codes in src/lib/regions-codes.js (Germany, Poland, Czech Republic) come from Wikidata (property P395, licence CC0), fetched with tools/wikidata-codes.py.
+The names of the plate codes in src/lib/regions-codes.js (Germany, Poland, Czech Republic) come from Wikidata (property P395, licence CC0), fetched with tools/wikidata-codes.py; the units that towns lie in (property P131, same licence) with tools/wikidata-parents.py.

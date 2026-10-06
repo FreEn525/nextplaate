@@ -110,25 +110,44 @@ def main():
 
 
 def write_code_names(by_country, result, iso3):
-    """Names of plate codes from Wikidata (tools/wikidata-codes.py), kept when they find a shape: src/lib/regions-codes.js."""
+    """Names of plate codes and parent units of towns, from Wikidata (tools/wikidata-*.py), kept when they find a shape: src/lib/regions-codes.js."""
     wd = ROOT / "reference" / "real" / "regions" / "wikidata"
     data = {}
     for cc, res in result.items():
-        f = wd / f"{cc}.json"
+        files = {k: wd / name for k, name in (("labels", f"{cc}.json"), ("parents", f"parents-{cc}.json"))}
         best = max(((v["placed"], lv) for lv, v in res.items()), default=None)
-        if f.exists() and best:
+        if best and any(f.exists() for f in files.values()):
             props = shapes(iso3[cc], best[1])
-            data[cc] = {"regions": by_country[cc], "shapes": [{"name": p.get("shapeName") or "", "iso": p.get("shapeISO") or ""} for p in props], "labels": json.loads(f.read_text(encoding="utf-8"))}
+            data[cc] = {"regions": by_country[cc], "shapes": [{"name": p.get("shapeName") or "", "iso": p.get("shapeISO") or ""} for p in props]}
+            for k, f in files.items():
+                data[cc][k] = json.loads(f.read_text(encoding="utf-8")) if f.exists() else {}
     tmp = CACHE / "code-names-input.json"
     tmp.write_text(json.dumps(data), encoding="utf-8")
     out = json.loads(subprocess.run(["node", str(ROOT / "tools" / "code-names.mjs"), str(tmp)], capture_output=True, text=True, check=True, encoding="utf-8").stdout)
-    out = {cc: table for cc, table in out.items() if table}
-    body = ("," + chr(10) + "    ").join(f"{cc}: {json.dumps(table)}" for cc, table in sorted(out.items()))
-    (ROOT / "src" / "lib" / "regions-codes.js").write_text(CODES_HEADER.format(body=body), encoding="utf-8")
-    print(chr(10) + "src/lib/regions-codes.js:", {cc: len(t) for cc, t in out.items()})
+    sep = "," + chr(10) + "    "
+    def table(key):
+        return sep.join(f"{cc}: {json.dumps(t[key])}" for cc, t in sorted(out.items()) if t[key])
+    (ROOT / "src" / "lib" / "regions-codes.js").write_text(CODES_HEADER.format(codes=table("codes"), parents=table("parents")), encoding="utf-8")
+    print(chr(10) + "src/lib/regions-codes.js:", {cc: (len(t["codes"]), len(t["parents"])) for cc, t in out.items()})
 
 
 CODES_HEADER = """  /* =====================================================================
+   *  REGION NAMES FROM WIKIDATA  (written by tools/measure-regions.py --codes: do not edit by hand)
+   *    REGION_CODE_NAMES: for countries whose regions are plate codes (Germany: AE, AL...), the name Wikidata (CC0) gives to the code, when it
+   *    finds a shape: country -> plate code -> name.
+   *    REGION_PARENTS: for countries whose regions are towns or offices (Norwich, Kobe...), the unit that Wikidata says the place lies in and
+   *    that has a shape (Norfolk, Hyogo): country -> normalised place name -> unit.
+   * ===================================================================== */
+  const REGION_CODE_NAMES = {{
+    {codes}
+  }};
+  const REGION_PARENTS = {{
+    {parents}
+  }};
+"""
+
+
+HEADER = """  /* =====================================================================
    *  REGION CODE NAMES  (written by tools/measure-regions.py --codes: do not edit by hand)
    *    For some countries the regions of the site are plate codes (Germany: AE, AL, AIB...) whose own name finds no shape. Wikidata (CC0)
    *    knows the places that carry each code, with their names; the first name of a code that finds a shape on the map is kept here:
