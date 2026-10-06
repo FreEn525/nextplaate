@@ -15,6 +15,8 @@
 
 ## Fonctionnalités
 
+Idées tirées des scripts publics de PlatesMania : `ANALYSE-SCRIPTS-PUBLICS.md` (dix idées classées, avec l'effort et la source).
+
 Faites (5.8, voir `FONCTIONNALITES.md`) : Google Lens automatique avec marque / modèle / génération, sélecteur de tags (page d'ajout et page d'une photo), information complémentaire, aperçu de plaque en direct, drapeaux des pays (avec le choix des pays), raccourcis vers les membres (vous en premier, ordre au choix, votre photo dans la barre).
 
 - **Statut du site** : à faire. Une indication (en ligne, bloqué, en pause après un blocage) visible dans la barre, à partir de la file de requêtes existante (`http.js`).
