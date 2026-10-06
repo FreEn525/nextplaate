@@ -193,3 +193,26 @@ def test_the_settings_list_can_be_filtered(ctx):
     page.evaluate(f"() => {{ const i = {PANEL}.querySelector('.flagpick input[type=text]'); i.value = 'swe'; i.dispatchEvent(new Event('input')); }}")
     shown = page.evaluate(f"() => [...{PANEL}.querySelectorAll('.pickrows label:not([hidden])')].map(l => l.textContent.trim())")
     assert shown == ["Sweden"]
+
+
+def test_a_member_profile_has_the_bar_beside_the_content_on_a_wide_screen(ctx):
+    width = 2560
+    page = open_page(ctx, "https://platesmania.com/user121559", width)
+    assert page.evaluate("() => !!document.getElementById('pmg-flags')")
+    b = box(page)
+    content_right = page.evaluate("() => document.querySelector('.container.content').getBoundingClientRect().right")
+    assert b["left"] >= content_right + 10 and b["right"] <= width - PANEL_WIDTH
+    content_top = page.evaluate("() => document.querySelector('.container.content').getBoundingClientRect().top + scrollY")
+    assert abs(b["top"] - content_top) < 2                              # level with the top of the profile
+
+
+def test_a_member_profile_on_a_narrow_screen_has_the_bar_under_the_avatar(ctx):
+    page = open_page(ctx, "https://platesmania.com/user121559", 1280)
+    assert page.evaluate("() => document.getElementById('pmg-flags').parentNode.classList.contains('col-md-3')")
+    assert page.evaluate("() => document.documentElement.scrollWidth <= window.innerWidth + 1")
+    assert page.evaluate(f"() => {BAR}.querySelectorAll('a.flag').length") >= 90
+
+
+def test_the_bar_is_not_on_the_other_pages(ctx):
+    page = open_page(ctx, "https://platesmania.com/fr/gallery.php")
+    assert page.evaluate("() => !document.getElementById('pmg-flags')")

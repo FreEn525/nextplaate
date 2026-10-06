@@ -154,6 +154,8 @@ def route_site(context):
             html = edit_page(query.get("id", ["101"])[0])
         elif re.fullmatch(r"/[a-z]{2}/add", path):
             html = UPLOAD_PAGE
+        elif re.fullmatch(r"/user\d+", path):
+            html = HEAD.format(title="Profile") + '<div class="container content profile" style="max-width:1170px;width:100%;margin:0 auto"><div class="row"><div class="col-md-3 text-center"><img class="profile-img" width="120" height="120" alt=""></div><div class="col-md-9"><h1>freen525</h1></div></div></div></body></html>'
         elif path == "/add":
             html = HEAD.format(title="Add") + '<div class="content"><div class="container" style="max-width:1170px;width:100%;margin:0 auto"><h2>Choose a country</h2></div></div></body></html>'
         else:
