@@ -26,6 +26,11 @@
     .field{display:flex;flex-direction:column;gap:4px}
     .field label{font-size:12px;font-weight:600}
     .field input{width:100%}
+    .gbody textarea{width:100%;box-sizing:border-box;min-height:64px;resize:vertical;padding:8px;border:1px solid var(--line2);border-radius:var(--r);font:inherit;font-size:13px}
+    .lens-out{display:flex;flex-direction:column;gap:6px;min-width:0}
+    .lens-cat{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
+    .lens-cands{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+    .lens-cand{padding:6px 4px;border:1px solid var(--line);border-radius:4px;background:#fff;font-size:12px;text-align:center;overflow-wrap:anywhere}
     .chk{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer}
     .chk input{width:16px;height:16px;margin:0;flex:none}
     .slots{display:flex;flex-direction:column;gap:8px}

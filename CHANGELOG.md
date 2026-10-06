@@ -3,7 +3,9 @@
 ## 5.8
 
 **Google Lens**
-- New button *Search this photo on Google Lens* in the Google Lens group (Search drawer): one click opens the results for the photo of the page (the big photo of the upload page, or the main photo of a photo page). It uses Google's image-link address, so nothing is read from or typed into a Google page and the script still only contacts PlatesMania. A photo that is not published yet has no public address: the script says so.
+- New button *Search this photo on Google Lens* (Search drawer, Google Lens group). A published photo opens its Lens results in one click, through Google's image-link address: nothing is read from or typed into a Google page, and the script still only contacts PlatesMania. A photo that is only on your computer (upload page) is copied to the clipboard and Lens opens: press Ctrl+V.
+- The prompt is now in English and no longer shown in the panel: one button copies it. The answer table accepts `Category | 1 | 2 | 3`.
+- The panel fits its drawer: the answer box and the three-column result no longer overflow.
 
 ## 5.7
 

@@ -3,6 +3,7 @@
 Run from the project root:  python -m pytest tests -q
 Each test starts from a clean browser profile.
 """
+import base64
 import json
 import re
 
@@ -215,17 +216,48 @@ def test_batch_upload_opens_one_tab_per_photo(page, ctx, tmp_path, errors):
     assert errors == []
 
 
-def test_google_lens_button_opens_the_search_for_the_photo(page, ctx):
+PIXELS = ("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFElEQVR4nGP8z8Dwn4EIwESMolGF"
+          "9VAAAIw5BAYy2I+HAAAAAElFTkSuQmCC")
+
+
+def lens_click(page):
+    page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('lensSearch').click()")
+
+
+def lens_status(page):
+    return page.evaluate("() => document.getElementById('pmg-host').shadowRoot.textContent")
+
+
+def test_google_lens_button_opens_the_search_for_a_published_photo(page, ctx):
     ctx.route("https://lens.google.com/**", lambda r: r.fulfill(status=200, content_type="text/html", body="<html></html>"))
+    ctx.route("https://img1.platesmania.com/**", lambda r: r.fulfill(status=200, content_type="image/png", body=base64.b64decode(PIXELS.split(",")[1])))
     open_at(page, ADD)
     page.evaluate("""() => { const i = document.createElement('img'); i.id = 'zoomimg'; i.src = 'https://img1.platesmania.com/10/m/101.jpg'; document.body.appendChild(i); }""")
+    page.wait_for_function("() => document.getElementById('zoomimg').naturalWidth > 1")
     with page.expect_popup() as popup:
-        page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('lensSearch').click()")
+        lens_click(page)
     popup.value.wait_for_load_state()
     assert popup.value.url.startswith("https://lens.google.com/uploadbyurl?url=https%3A%2F%2Fimg1.platesmania.com%2F10%2Fm%2F101.jpg")
 
 
+def test_google_lens_button_copies_a_photo_that_is_not_published(page, ctx):
+    ctx.grant_permissions(["clipboard-read", "clipboard-write"], origin="https://platesmania.com")
+    ctx.route("https://lens.google.com/**", lambda r: r.fulfill(status=200, content_type="text/html", body="<html></html>"))
+    open_at(page, ADD)
+    page.evaluate("(src) => { const i = document.createElement('img'); i.id = 'zoomimg'; i.src = src; document.body.appendChild(i); }", PIXELS)
+    page.wait_for_function("() => document.getElementById('zoomimg').naturalWidth > 1")
+    with page.expect_popup() as popup:
+        lens_click(page)
+    assert popup.value
+    assert "Ctrl+V" in lens_status(page)
+
+
 def test_google_lens_button_says_when_there_is_no_photo(page):
     open_at(page, ADD)
-    page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('lensSearch').click()")
-    assert "No published photo" in page.evaluate("() => document.getElementById('pmg-host').shadowRoot.textContent")
+    lens_click(page)
+    assert "No photo on this page yet" in lens_status(page)
+
+
+def test_the_lens_prompt_is_not_shown_in_the_panel(page):
+    open_at(page, ADD)
+    assert "You are a car expert" not in lens_status(page)
