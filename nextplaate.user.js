@@ -1172,7 +1172,7 @@
   /* =====================================================================
    *  INLINE CARD  (a block of the script, inside the site's page, in the look of the panel)
    *    For what is used right where it appears (the answer of Google Lens above the vehicle menus) instead of in a drawer.
-   *      const card = inlineCard({ id: 'pmg-lens-card', title: 'Google Lens', before: someElement });   // null if no element
+   *      const card = inlineCard({ id: 'pmg-lens-card', title: 'Google Lens', after: someElement });   // or before: ; null if no element
    *      card.message('Searching…');        a short line in the title bar
    *      card.body                          the element to fill (card.clear() empties it)
    *      cardChoices(card, columns, opts)   columns of choices to click (see below)
@@ -1185,7 +1185,7 @@
     .top{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
     .top b{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--brand-t)}
     .top .msg{flex:1;min-width:0;font-size:12px;color:var(--mute);overflow-wrap:anywhere}
-    .cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:12px}
+    .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;padding:12px}   /* three side by side where there is room, stacked under a photo */
     .col{display:flex;flex-direction:column;gap:6px;min-width:0}
     .cat{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
     .chip{width:100%;min-height:34px;padding:6px 10px;border:1px solid var(--line2);border-radius:var(--r);background:#fff;color:var(--ink);font:inherit;font-size:13px;text-align:left;cursor:pointer;overflow-wrap:anywhere}
@@ -1194,16 +1194,16 @@
     .chip.on{border-color:var(--brand-l);box-shadow:inset 0 0 0 1px var(--brand-l)}
     .none{font-size:13px;color:var(--mute)}
     .bar{display:flex;gap:8px;padding:0 12px 12px}
-    @media (max-width:640px){.cols{grid-template-columns:1fr}}
   `;
 
-  // opts: { id, title, before: the element the card goes in front of }; null when there is no such element
+  // opts: { id, title, after | before: the element the card goes behind or in front of }; null when there is no such element
   function inlineCard(opts) {
     let host = document.getElementById(opts.id);
     if (!host) {
-      if (!opts.before || !opts.before.parentNode) return null;
+      const anchor = opts.after || opts.before;
+      if (!anchor || !anchor.parentNode) return null;
       host = h('div', { id: opts.id });
-      opts.before.parentNode.insertBefore(host, opts.before);
+      anchor.parentNode.insertBefore(host, opts.after ? anchor.nextSibling : anchor);
       const root = host.attachShadow({ mode: 'open' });
       root.append(h('style', { text: UI_BASE + INLINE_CARD_CSS }), h('div', { class: 'card' },
         h('div', { class: 'top' }, h('b', { text: opts.title }), h('span', { class: 'msg' }),
@@ -1862,7 +1862,7 @@
    *    Built from the shared parts:
    *      bridge (lib/bridge.js)         asks Google, in another tab, for the titles of the Lens results of the photo
    *      vehicle (lib/vehicle.js)       compares those titles with the brands, models and generations of PlatesMania's menus
-   *      inlineCard (ui/06-inline-card) shows the answer above the vehicle menus, where it is used
+   *      inlineCard (ui/06-inline-card) shows the answer under the photo of the upload page, where it is used
    *    The Google side is 66-lens-google.js. On the upload page the search starts by itself as soon as a photo is chosen.
    *    Nothing is filled in the menus until the user clicks a choice.
    * ===================================================================== */
@@ -1876,9 +1876,11 @@
     return img && img.src && !LENS_PLACEHOLDER.test(img.src) ? img.src.replace(/\/s\/(\d+\.jpg)/, '/m/$1') : '';
   }
 
-  // Where the answer goes: the card above the vehicle menus of the upload page, else the panel
+  // Where the answer goes: the card under the photo of the upload page (above the vehicle menus when the page has no photo block),
+  // and always the panel, so both show it at once
   function lensShow(message, rows) {
-    const card = inlineCard({ id: 'pmg-lens-card', title: 'Google Lens', before: document.querySelector('.pm-vehicle-fields-row') });
+    const photo = document.getElementById('zoomimgid'), menus = document.querySelector('.pm-vehicle-fields-row');
+    const card = inlineCard({ id: 'pmg-lens-card', title: 'Google Lens', after: photo, before: photo ? null : menus });
     if (card) {
       card.message(message);
       card.clear();
@@ -1889,10 +1891,10 @@
           { pick: vehicleFill, current: vehicleCurrent, action: { label: 'Fill with the first choices', path: first } });
       }
     }
-    $('lensMsg').textContent = card ? 'The answer is above the brand, model and generation menus.' : message;
+    $('lensMsg').textContent = message;
     const out = $('lensOut');
     out.textContent = '';
-    if (!rows || card) return;
+    if (!rows) return;
     for (const r of rows) {
       out.appendChild(h('div', { class: 'lens-cat', text: r.category }));
       out.appendChild(h('div', { class: 'lens-cands' }, ...[0, 1, 2].map(i => h('span', { class: 'lens-cand', text: r.candidates[i] ? r.candidates[i].name : '—' }))));
@@ -1930,7 +1932,7 @@
       build: () => [
         h('button', { id: 'lensSearch', class: 'btn', text: 'Search this photo on Google Lens' }),
         h('label', { class: 'chk' }, h('input', { type: 'checkbox', id: 'lensAuto' }), 'Search each new photo by itself'),
-        h('p', { id: 'lensMsg', class: 'presult', text: 'Choose a photo: it is searched on Google Lens, and the likely brand, model and generation appear above the vehicle menus.' }),
+        h('p', { id: 'lensMsg', class: 'presult', text: 'Choose a photo: it is searched on Google Lens, and the likely brand, model and generation appear here and under the photo.' }),
         h('div', { id: 'lensOut', class: 'lens-out' })
       ]
     }],

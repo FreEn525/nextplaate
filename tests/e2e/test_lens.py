@@ -226,3 +226,14 @@ def test_the_google_side_leaves_a_search_nobody_asked_for(ctx):
     p.goto("https://www.google.com/search?q=lens")
     p.wait_for_timeout(1200)
     assert p.evaluate("() => localStorage.getItem('gm_br_lens_res')") is None
+
+
+def test_the_card_sits_right_under_the_photo_and_the_panel_shows_the_answer_too(page, ctx):
+    google_fake(ctx)
+    open_at(page, ADD)
+    choose_photo(page)
+    lens_answer(page, ["2019 Volkswagen Golf 8", "Volkswagen Golf Mk8 2020"])
+    card_choices(page)
+    assert page.evaluate("() => document.getElementById('zoomimgid').nextElementSibling.id") == "pmg-lens-card"
+    panel = page.evaluate(f"() => [...{PANEL}.querySelectorAll('.lens-cat, .lens-cand')].map(e => e.textContent)")
+    assert panel[:2] == ["Brand", "Volkswagen"]

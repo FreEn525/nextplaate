@@ -1,7 +1,7 @@
   /* =====================================================================
    *  INLINE CARD  (a block of the script, inside the site's page, in the look of the panel)
    *    For what is used right where it appears (the answer of Google Lens above the vehicle menus) instead of in a drawer.
-   *      const card = inlineCard({ id: 'pmg-lens-card', title: 'Google Lens', before: someElement });   // null if no element
+   *      const card = inlineCard({ id: 'pmg-lens-card', title: 'Google Lens', after: someElement });   // or before: ; null if no element
    *      card.message('Searching…');        a short line in the title bar
    *      card.body                          the element to fill (card.clear() empties it)
    *      cardChoices(card, columns, opts)   columns of choices to click (see below)
@@ -14,7 +14,7 @@
     .top{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
     .top b{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--brand-t)}
     .top .msg{flex:1;min-width:0;font-size:12px;color:var(--mute);overflow-wrap:anywhere}
-    .cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:12px}
+    .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;padding:12px}   /* three side by side where there is room, stacked under a photo */
     .col{display:flex;flex-direction:column;gap:6px;min-width:0}
     .cat{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
     .chip{width:100%;min-height:34px;padding:6px 10px;border:1px solid var(--line2);border-radius:var(--r);background:#fff;color:var(--ink);font:inherit;font-size:13px;text-align:left;cursor:pointer;overflow-wrap:anywhere}
@@ -23,16 +23,16 @@
     .chip.on{border-color:var(--brand-l);box-shadow:inset 0 0 0 1px var(--brand-l)}
     .none{font-size:13px;color:var(--mute)}
     .bar{display:flex;gap:8px;padding:0 12px 12px}
-    @media (max-width:640px){.cols{grid-template-columns:1fr}}
   `;
 
-  // opts: { id, title, before: the element the card goes in front of }; null when there is no such element
+  // opts: { id, title, after | before: the element the card goes behind or in front of }; null when there is no such element
   function inlineCard(opts) {
     let host = document.getElementById(opts.id);
     if (!host) {
-      if (!opts.before || !opts.before.parentNode) return null;
+      const anchor = opts.after || opts.before;
+      if (!anchor || !anchor.parentNode) return null;
       host = h('div', { id: opts.id });
-      opts.before.parentNode.insertBefore(host, opts.before);
+      anchor.parentNode.insertBefore(host, opts.after ? anchor.nextSibling : anchor);
       const root = host.attachShadow({ mode: 'open' });
       root.append(h('style', { text: UI_BASE + INLINE_CARD_CSS }), h('div', { class: 'card' },
         h('div', { class: 'top' }, h('b', { text: opts.title }), h('span', { class: 'msg' }),

@@ -3,7 +3,7 @@
    *    Built from the shared parts:
    *      bridge (lib/bridge.js)         asks Google, in another tab, for the titles of the Lens results of the photo
    *      vehicle (lib/vehicle.js)       compares those titles with the brands, models and generations of PlatesMania's menus
-   *      inlineCard (ui/06-inline-card) shows the answer above the vehicle menus, where it is used
+   *      inlineCard (ui/06-inline-card) shows the answer under the photo of the upload page, where it is used
    *    The Google side is 66-lens-google.js. On the upload page the search starts by itself as soon as a photo is chosen.
    *    Nothing is filled in the menus until the user clicks a choice.
    * ===================================================================== */
@@ -17,9 +17,11 @@
     return img && img.src && !LENS_PLACEHOLDER.test(img.src) ? img.src.replace(/\/s\/(\d+\.jpg)/, '/m/$1') : '';
   }
 
-  // Where the answer goes: the card above the vehicle menus of the upload page, else the panel
+  // Where the answer goes: the card under the photo of the upload page (above the vehicle menus when the page has no photo block),
+  // and always the panel, so both show it at once
   function lensShow(message, rows) {
-    const card = inlineCard({ id: 'pmg-lens-card', title: 'Google Lens', before: document.querySelector('.pm-vehicle-fields-row') });
+    const photo = document.getElementById('zoomimgid'), menus = document.querySelector('.pm-vehicle-fields-row');
+    const card = inlineCard({ id: 'pmg-lens-card', title: 'Google Lens', after: photo, before: photo ? null : menus });
     if (card) {
       card.message(message);
       card.clear();
@@ -30,10 +32,10 @@
           { pick: vehicleFill, current: vehicleCurrent, action: { label: 'Fill with the first choices', path: first } });
       }
     }
-    $('lensMsg').textContent = card ? 'The answer is above the brand, model and generation menus.' : message;
+    $('lensMsg').textContent = message;
     const out = $('lensOut');
     out.textContent = '';
-    if (!rows || card) return;
+    if (!rows) return;
     for (const r of rows) {
       out.appendChild(h('div', { class: 'lens-cat', text: r.category }));
       out.appendChild(h('div', { class: 'lens-cands' }, ...[0, 1, 2].map(i => h('span', { class: 'lens-cand', text: r.candidates[i] ? r.candidates[i].name : '—' }))));
@@ -71,7 +73,7 @@
       build: () => [
         h('button', { id: 'lensSearch', class: 'btn', text: 'Search this photo on Google Lens' }),
         h('label', { class: 'chk' }, h('input', { type: 'checkbox', id: 'lensAuto' }), 'Search each new photo by itself'),
-        h('p', { id: 'lensMsg', class: 'presult', text: 'Choose a photo: it is searched on Google Lens, and the likely brand, model and generation appear above the vehicle menus.' }),
+        h('p', { id: 'lensMsg', class: 'presult', text: 'Choose a photo: it is searched on Google Lens, and the likely brand, model and generation appear here and under the photo.' }),
         h('div', { id: 'lensOut', class: 'lens-out' })
       ]
     }],

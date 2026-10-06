@@ -45,12 +45,12 @@ La page d'ajout contient tout le catalogue de PlatesMania (3 659 marques, leurs 
 ## La carte dans la page (`inlineCard`, `cardChoices`)
 
 ```js
-const card = inlineCard({ id: 'pmg-ma-carte', title: 'Mon titre', before: element });   // null si l'élément n'existe pas
+const card = inlineCard({ id: 'pmg-ma-carte', title: 'Mon titre', after: element });   // ou before: ; null si l'élément n'existe pas
 card.message('Recherche…');
 cardChoices(card, colonnes, { pick: chemin => ..., current: () => valeursActuelles, action: { label: '...', path: [...] } });
 ```
 
-La carte est dans un shadow root : le CSS du site ne l'atteint pas, et elle reprend les couleurs et boutons du panneau. Le même `id` redonne la même carte. `colonnes` : `[{ label, level, choices: [{ id, name, path }] }]` ; le premier choix de chaque colonne est mis en avant, les choix égaux aux valeurs actuelles sont marqués.
+La carte est dans un shadow root : le CSS du site ne l'atteint pas, et elle reprend les couleurs et boutons du panneau. Les colonnes se mettent côte à côte quand la place le permet et s'empilent sous une photo. Le même `id` redonne la même carte. `colonnes` : `[{ label, level, choices: [{ id, name, path }] }]` ; le premier choix de chaque colonne est mis en avant, les choix égaux aux valeurs actuelles sont marqués.
 
 ## Pour une nouvelle fonction
 
