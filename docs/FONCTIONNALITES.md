@@ -207,6 +207,8 @@ La barre suit l'ordre d'usage : **Check a plate** (vérifier ce qu'on va envoyer
 - `scripts/build.mjs` assemble les fichiers dans l'ordre et vérifie qu'aucun fichier n'est oublié.
 
 ### Registre des fonctions
+Un groupe peut porter `lazy: true` : il est construit à la première ouverture de son tiroir (listes longues que personne ne voit avant), pas au chargement de la page. Un groupe sans `lazy` est construit tout de suite, car l'`init` de sa fonction y cherche ses contrôles.
+
 Chaque fonction s'enregistre avec `registerFeature({ groups, keys, onEscape, init })`. Au démarrage, `mountApp()` assigne les actions, reconstruit les raccourcis, monte la barre, lance les `init` et prépare la touche Échap.
 
 ### Requêtes vers le site (`src/lib/http.js`)
@@ -227,7 +229,7 @@ Chaque fonction s'enregistre avec `registerFeature({ groups, keys, onEscape, ini
 
 ## Tests (`tests/`)
 
-- `python -m pytest -q` (dossier `tests/e2e/`) : 335 tests (344 avec le build dev, `NEXTPLAATE_SCRIPT=nextplaate.dev.user.js`) sur une version simulée du site (`fake_site.py`, avec une fausse page Google pour le Lens). Un fichier par fonction (`test_lens.py`, `test_tags.py`, `test_members.py`, `test_flags.py`, `test_extra.py`, `test_preview.py`…), plus `test_style.py` (couleurs, rayons, tailles, hauteurs) et `test_responsive.py` (aucun débordement de 320 à 1280 px). Pas d'accès réel à PlatesMania ni à Google.
+- `python -m pytest -q` (dossier `tests/e2e/`) : 337 tests (346 avec le build dev, `NEXTPLAATE_SCRIPT=nextplaate.dev.user.js`) sur une version simulée du site (`fake_site.py`, avec une fausse page Google pour le Lens). Un fichier par fonction (`test_lens.py`, `test_tags.py`, `test_members.py`, `test_flags.py`, `test_extra.py`, `test_preview.py`…), plus `test_style.py` (couleurs, rayons, tailles, hauteurs) et `test_responsive.py` (aucun débordement de 320 à 1280 px). Pas d'accès réel à PlatesMania ni à Google.
 - `python tests/offline/check_known.py` : 39 plaques validées à la main, tapées dans les pages sauvegardées.
 - `python tests/offline/check_db.py` : toutes les plaques de la base, dans la catégorie correspondante, en parallèle. Hors ligne.
 - Les données dérivées : `node scripts/refresh-data.mjs` → `data/` et `docs/COUVERTURE.md` (voir `data/README.md`).

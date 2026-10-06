@@ -82,13 +82,15 @@
     const links = lookupLinks(plate);                                           // public lookup pages, plain links (75-lookups.js)
     const series = seriesLine(plate);                                           // your photos of the series of the plate (79-series.js)
     const register = registryLine(plate);                                       // the country's open register, on a click (80-registry.js)
-    if (!v && !links && !series && !register) return;
+    // the site's own search for this plate, to see the photos that are already there (a plain link, a new tab)
+    const open = info && info.count > 0 ? h('div', { class: 'cardrow' }, h('a', { class: 'btn ghost sm', href: searchUrl(plate), target: '_blank', rel: 'noopener noreferrer', text: `See the ${info.count} photo${info.count > 1 ? 's' : ''} of this plate on the site`, title: 'Opens the site’s own search in a new tab' })) : null;
+    if (!v && !links && !series && !register && !open) return;
     const agree = v && info.vehicle.of > 1 ? ` (${info.vehicle.photos} of ${info.vehicle.of} photos)` : '';
     card.body.append(h('div', { class: 'cardbox' },
       v ? h('p', { class: 'hint', text: 'The photos of this plate on the site show:' }) : null,
       v ? h('div', { class: 'vehline' }, h('b', { text: v.text }), h('span', { class: 'mute', text: agree })) : null,
       v ? h('div', { class: 'cardrow' }, h('button', { type: 'button', class: 'btn', text: 'Fill the menus', onclick: () => { vehicleFill(v.path); card.message('Menus filled.'); } })) : null,
-      series, register, links));
+      open, series, register, links));
   }
 
   // The result goes to the photo this tab is loading, if the batch is running

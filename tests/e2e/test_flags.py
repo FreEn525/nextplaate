@@ -83,6 +83,7 @@ def test_the_generic_add_page_has_the_bar_too(ctx):
 def test_the_panel_lists_the_flags_too(ctx):
     page = open_page(ctx, "https://platesmania.com/fr/gallery.php")
     assert page.evaluate("() => !document.getElementById('pmg-flags')")                 # no bar on a gallery page
+    page.evaluate(f"() => {PANEL}.querySelector('.rbtn[data-drawer=\"upload\"]').click()")                          # the list is built when its drawer is first opened
     assert page.evaluate(f"() => {PANEL}.querySelectorAll('a.flag').length") >= 90
     assert page.evaluate(f"() => [...{PANEL}.querySelectorAll('a.flag')].some(a => a.getAttribute('href') === '/it/add')")
 
@@ -148,6 +149,7 @@ def bar_names(page):
 def test_the_side_bar_shows_only_the_chosen_countries_and_the_panel_all_of_them(ctx):
     page = choose_countries(ctx, "fr,de,it")
     assert bar_names(page) == ["France", "Germany", "Italy"]
+    page.evaluate(f"() => {PANEL}.querySelector('.rbtn[data-drawer=\"upload\"]').click()")
     assert page.evaluate(f"() => {PANEL}.querySelectorAll('.flagblock a.flag').length") >= 90     # the panel keeps the full list
     assert page.evaluate(f"() => {BAR}.querySelector('input').hidden")                       # three countries: no find box
 
@@ -227,3 +229,12 @@ def test_typing_in_the_country_search_of_the_flag_bar_does_not_trigger_the_keys(
     page.keyboard.type("uU")
     assert page.evaluate(f"() => {BAR}.querySelector('input[type=text]').value") == "uU"        # written in the field
     assert page.evaluate(f"() => !{PANEL}.querySelector('.dsec[data-drawer=\"upload\"]:not([hidden])') || {PANEL}.querySelector('.dsec[data-drawer=\"upload\"]').hidden")
+
+
+def test_the_panel_lists_are_built_when_their_drawer_is_opened_not_at_load(ctx):
+    page = open_page(ctx, "https://platesmania.com/fr/gallery.php")
+    assert page.evaluate(f"() => {PANEL}.querySelectorAll('.flagblock').length") == 0               # nothing built yet: no cost at page load
+    page.evaluate(f"() => {PANEL}.querySelector('.rbtn[data-drawer=\"upload\"]').click()")
+    assert page.evaluate(f"() => {PANEL}.querySelectorAll('.flagblock').length") == 1
+    page.evaluate(f"() => {PANEL}.querySelector('.rbtn[data-drawer=\"settings\"]').click()")
+    assert page.evaluate(f"() => {PANEL}.querySelectorAll('.flagpick .pickrows label').length") >= 90

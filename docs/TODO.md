@@ -12,10 +12,10 @@ Notes prises pendant la collecte des séries. On les fait au fur et à mesure, d
 4. **Signature** : **fait dans le script** (Settings > About, en-tête `@author`/`@copyright`, bannière de la console) ; README et texte Greasy Fork aussi. Copyright « NextEnzzo » et lien vers le profil : https://platesmania.com/user121559 (dans le script, le panneau, le README et le texte Greasy Fork, sans mentionner le dépôt).
 5. **Dire clairement ce qui marche pour tous les pays** : **fait** (Settings, README, texte Greasy Fork, tableau de `FONCTIONNALITES.md`). Mettre en avant les fonctions complètes et valables pour tous les pays (la vérification de plaque : 96 pays, 829 catégories, probablement jamais fait ailleurs), et dire pour lesquelles ce n'est pas sûr.
 6. **Page https://platesmania.com/add** : **à faire**. Refaire la boîte « Select a country » et y déplacer « Add flags » en plus grand, seulement sur cette page (plus propre, plus simple).
-7. **Fluidité** : **à faire**. Vérifier que tout est fluide, sans bug ni lag pour les utilisateurs (mesurer le coût du script au chargement et à l'usage).
+7. **Fluidité** : **fait** (version 5.10, mesures sur la page d'ajout : le script coûte environ 45 ms au chargement, 2 ms sur une galerie, une tâche longue de 70 ms au démarrage, aucune activité au repos, 9,5 Mo de mémoire ; les longues listes des tiroirs sont construites à la première ouverture ; `lazy: true` dans un groupe). À revérifier si une fonction coûteuse est ajoutée. Vérifier que tout est fluide, sans bug ni lag pour les utilisateurs (mesurer le coût du script au chargement et à l'usage).
 8. **UX et UI du menu U** : **à faire**. À revoir.
 9. **Nouveau logo** : **fait** (version 5.9, appareil photo rond avec un plus ; panneau, `logo_nextplaate.svg` et `@icon`).
-10. **Plate check** : **à faire**. Pouvoir ouvrir depuis la carte la recherche de la plaque (la page du site qui liste les photos déjà présentes).
+10. **Plate check** : **fait** (version 5.10, lien « See the N photos of this plate on the site » dans la carte). Pouvoir ouvrir depuis la carte la recherche de la plaque (la page du site qui liste les photos déjà présentes).
 11. **Remplissage automatique par site d'informations** : **à faire**. Pour les plaques qui ont un site où toutes les informations sont trouvables, remplir automatiquement (étendre le registre officiel NL, IL ; voir `src/lib/registries.js`).
 12. **Design de Google Lens sur la page d'ajout** : **à faire**. Encore un peu étrange ; à revoir.
 

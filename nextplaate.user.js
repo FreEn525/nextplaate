@@ -1470,6 +1470,15 @@
     return h('p', { class: 'pnote', text: 'Works on ' + g.pages.map(p => PAGE_NAMES[p]).join(' or ') + ' page.' });
   }
 
+  const lazyGroups = [];       // { drawer, g, body } of the groups not built yet
+  function buildLazy(drawerId) {
+    for (let i = lazyGroups.length - 1; i >= 0; i--) {
+      if (lazyGroups[i].drawer !== drawerId) continue;
+      const { g, body } = lazyGroups.splice(i, 1)[0];
+      body.append(...[].concat(g.build()).filter(Boolean));
+    }
+  }
+
   // One icon per drawer that has features, one section per drawer; each feature group is a box with its title under it
   function mountRibbon(list) {
     const byDrawer = {};
@@ -1481,9 +1490,12 @@
       if (d.id === 'keys') $('rail').append(h('div', { class: 'rsep' }));
       $('rail').append(btn);
       $('dbody').append(h('section', { class: 'dsec', 'data-drawer': d.id, hidden: true },
-        byDrawer[d.id].map(g => h('div', { class: 'group' },
-          h('div', { class: 'gbody' }, g.about ? h('p', { class: 'gabout', text: g.about }) : null, pageNote(g), g.build()),
-          h('div', { class: 'gtitle', text: g.title })))));
+        byDrawer[d.id].map(g => {
+          // a group with lazy: true is built when its drawer is first opened (long lists nobody sees until then: no cost at page load)
+          const body = h('div', { class: 'gbody' }, g.about ? h('p', { class: 'gabout', text: g.about }) : null, pageNote(g));
+          if (g.lazy) lazyGroups.push({ drawer: d.id, g, body }); else body.append(...[].concat(g.build()).filter(Boolean));
+          return h('div', { class: 'group' }, body, h('div', { class: 'gtitle', text: g.title }));
+        })));
     });
     $('dclose').onclick = () => closeDrawer();
     // the drawer that was open stays open after a reload or a page change
@@ -1495,6 +1507,7 @@
   function openDrawer(id) {
     if (id === openId) return;
     openId = id;
+    buildLazy(id);
     root.querySelectorAll('.rbtn').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.drawer === openId)));
     root.querySelectorAll('.dsec').forEach(s => { s.hidden = s.dataset.drawer !== openId; });
     $('drawer').hidden = !openId;
@@ -2174,13 +2187,15 @@
     const links = lookupLinks(plate);                                           // public lookup pages, plain links (75-lookups.js)
     const series = seriesLine(plate);                                           // your photos of the series of the plate (79-series.js)
     const register = registryLine(plate);                                       // the country's open register, on a click (80-registry.js)
-    if (!v && !links && !series && !register) return;
+    // the site's own search for this plate, to see the photos that are already there (a plain link, a new tab)
+    const open = info && info.count > 0 ? h('div', { class: 'cardrow' }, h('a', { class: 'btn ghost sm', href: searchUrl(plate), target: '_blank', rel: 'noopener noreferrer', text: `See the ${info.count} photo${info.count > 1 ? 's' : ''} of this plate on the site`, title: 'Opens the site’s own search in a new tab' })) : null;
+    if (!v && !links && !series && !register && !open) return;
     const agree = v && info.vehicle.of > 1 ? ` (${info.vehicle.photos} of ${info.vehicle.of} photos)` : '';
     card.body.append(h('div', { class: 'cardbox' },
       v ? h('p', { class: 'hint', text: 'The photos of this plate on the site show:' }) : null,
       v ? h('div', { class: 'vehline' }, h('b', { text: v.text }), h('span', { class: 'mute', text: agree })) : null,
       v ? h('div', { class: 'cardrow' }, h('button', { type: 'button', class: 'btn', text: 'Fill the menus', onclick: () => { vehicleFill(v.path); card.message('Menus filled.'); } })) : null,
-      series, register, links));
+      open, series, register, links));
   }
 
   // The result goes to the photo this tab is loading, if the batch is running
@@ -2563,7 +2578,7 @@
   // An image that fails shows the code instead.
   function flagLinks(only) {
     return h('nav', { class: 'flags' }, COUNTRIES.filter(c => !only || only.has(c.code)).map(c => {
-      const img = h('img', { src: flagUrl(c.code), alt: '', width: 22, height: 15 });
+      const img = h('img', { src: flagUrl(c.code), alt: '', width: 22, height: 15, loading: 'lazy' });
       img.addEventListener('error', () => img.replaceWith(h('span', { class: 'flagcode', text: c.code.toUpperCase() })));
       return h('a', { class: 'flag' + (c.code === here.country ? ' on' : ''), href: `/${c.code}/add`, title: c.name, 'data-find': (c.name + ' ' + c.code).toLowerCase() },
         img, h('span', { class: 'fname', text: c.name }));
@@ -2649,7 +2664,7 @@
       const box = h('input', { type: 'checkbox', checked: state.has(c.code), id: 'flag_' + c.code });
       box.onchange = () => { box.checked ? state.add(c.code) : state.delete(c.code); save(); };
       boxes.push(box);
-      return h('label', { class: 'chk', 'data-find': (c.name + ' ' + c.code).toLowerCase() }, box, h('img', { src: flagUrl(c.code), alt: '', width: 22, height: 15 }), c.name);
+      return h('label', { class: 'chk', 'data-find': (c.name + ' ' + c.code).toLowerCase() }, box, h('img', { src: flagUrl(c.code), alt: '', width: 22, height: 15, loading: 'lazy' }), c.name);
     });
     const setAll = on => { state.clear(); if (on) COUNTRIES.forEach(c => state.add(c.code)); boxes.forEach(b => { b.checked = on; }); save(); };
     const find = h('input', { type: 'text', placeholder: 'Find a country…' });
@@ -2666,10 +2681,10 @@
   registerFeature({
     id: 'flags', label: 'Country flags',
     groups: [{
-      drawer: 'upload', title: 'Add a photo in a country', about: "Choose the country of the photo you are about to send.",
+      drawer: 'upload', title: 'Add a photo in a country', about: "Choose the country of the photo you are about to send.", lazy: true,
       build: () => [h('p', { class: 'presult', text: 'Click a country to open its upload page.' }), flagBlock(null)]
     }, {
-      drawer: 'settings', title: 'Country flags: the side bar',
+      drawer: 'settings', title: 'Country flags: the side bar', lazy: true,
       build: () => [h('p', { class: 'presult', text: 'Choose the countries shown on the side of the upload pages. The panel always lists all of them.' }), flagsPicker()]
     }],
     init: () => {

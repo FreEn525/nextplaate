@@ -39,6 +39,15 @@
     return h('p', { class: 'pnote', text: 'Works on ' + g.pages.map(p => PAGE_NAMES[p]).join(' or ') + ' page.' });
   }
 
+  const lazyGroups = [];       // { drawer, g, body } of the groups not built yet
+  function buildLazy(drawerId) {
+    for (let i = lazyGroups.length - 1; i >= 0; i--) {
+      if (lazyGroups[i].drawer !== drawerId) continue;
+      const { g, body } = lazyGroups.splice(i, 1)[0];
+      body.append(...[].concat(g.build()).filter(Boolean));
+    }
+  }
+
   // One icon per drawer that has features, one section per drawer; each feature group is a box with its title under it
   function mountRibbon(list) {
     const byDrawer = {};
@@ -50,9 +59,12 @@
       if (d.id === 'keys') $('rail').append(h('div', { class: 'rsep' }));
       $('rail').append(btn);
       $('dbody').append(h('section', { class: 'dsec', 'data-drawer': d.id, hidden: true },
-        byDrawer[d.id].map(g => h('div', { class: 'group' },
-          h('div', { class: 'gbody' }, g.about ? h('p', { class: 'gabout', text: g.about }) : null, pageNote(g), g.build()),
-          h('div', { class: 'gtitle', text: g.title })))));
+        byDrawer[d.id].map(g => {
+          // a group with lazy: true is built when its drawer is first opened (long lists nobody sees until then: no cost at page load)
+          const body = h('div', { class: 'gbody' }, g.about ? h('p', { class: 'gabout', text: g.about }) : null, pageNote(g));
+          if (g.lazy) lazyGroups.push({ drawer: d.id, g, body }); else body.append(...[].concat(g.build()).filter(Boolean));
+          return h('div', { class: 'group' }, body, h('div', { class: 'gtitle', text: g.title }));
+        })));
     });
     $('dclose').onclick = () => closeDrawer();
     // the drawer that was open stays open after a reload or a page change
@@ -64,6 +76,7 @@
   function openDrawer(id) {
     if (id === openId) return;
     openId = id;
+    buildLazy(id);
     root.querySelectorAll('.rbtn').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.drawer === openId)));
     root.querySelectorAll('.dsec').forEach(s => { s.hidden = s.dataset.drawer !== openId; });
     $('drawer').hidden = !openId;

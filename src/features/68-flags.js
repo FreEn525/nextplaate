@@ -24,7 +24,7 @@
   // An image that fails shows the code instead.
   function flagLinks(only) {
     return h('nav', { class: 'flags' }, COUNTRIES.filter(c => !only || only.has(c.code)).map(c => {
-      const img = h('img', { src: flagUrl(c.code), alt: '', width: 22, height: 15 });
+      const img = h('img', { src: flagUrl(c.code), alt: '', width: 22, height: 15, loading: 'lazy' });
       img.addEventListener('error', () => img.replaceWith(h('span', { class: 'flagcode', text: c.code.toUpperCase() })));
       return h('a', { class: 'flag' + (c.code === here.country ? ' on' : ''), href: `/${c.code}/add`, title: c.name, 'data-find': (c.name + ' ' + c.code).toLowerCase() },
         img, h('span', { class: 'fname', text: c.name }));
@@ -110,7 +110,7 @@
       const box = h('input', { type: 'checkbox', checked: state.has(c.code), id: 'flag_' + c.code });
       box.onchange = () => { box.checked ? state.add(c.code) : state.delete(c.code); save(); };
       boxes.push(box);
-      return h('label', { class: 'chk', 'data-find': (c.name + ' ' + c.code).toLowerCase() }, box, h('img', { src: flagUrl(c.code), alt: '', width: 22, height: 15 }), c.name);
+      return h('label', { class: 'chk', 'data-find': (c.name + ' ' + c.code).toLowerCase() }, box, h('img', { src: flagUrl(c.code), alt: '', width: 22, height: 15, loading: 'lazy' }), c.name);
     });
     const setAll = on => { state.clear(); if (on) COUNTRIES.forEach(c => state.add(c.code)); boxes.forEach(b => { b.checked = on; }); save(); };
     const find = h('input', { type: 'text', placeholder: 'Find a country…' });
@@ -127,10 +127,10 @@
   registerFeature({
     id: 'flags', label: 'Country flags',
     groups: [{
-      drawer: 'upload', title: 'Add a photo in a country', about: "Choose the country of the photo you are about to send.",
+      drawer: 'upload', title: 'Add a photo in a country', about: "Choose the country of the photo you are about to send.", lazy: true,
       build: () => [h('p', { class: 'presult', text: 'Click a country to open its upload page.' }), flagBlock(null)]
     }, {
-      drawer: 'settings', title: 'Country flags: the side bar',
+      drawer: 'settings', title: 'Country flags: the side bar', lazy: true,
       build: () => [h('p', { class: 'presult', text: 'Choose the countries shown on the side of the upload pages. The panel always lists all of them.' }), flagsPicker()]
     }],
     init: () => {
