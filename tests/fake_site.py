@@ -178,12 +178,19 @@ def route_site(context):
         elif re.fullmatch(r"/[a-z]{2}/add", path):
             html = UPLOAD_PAGE
         elif re.fullmatch(r"/user\d+", path):
-            html = HEAD.format(title="Profile") + '<div class="container content profile" style="max-width:1170px;width:100%;margin:0 auto"><div class="row"><div class="col-md-3 text-center"><img class="profile-img" width="120" height="120" alt=""></div><div class="col-md-9"><h1>freen525</h1></div></div></div></body></html>'
+            uid = path[5:]
+            if uid == "99999999":
+                return route.fulfill(status=200, content_type="text/html", body=HEAD.format(title="No member") + "</body></html>")
+            html = (HEAD.format(title="Profile") + '<div class="container content profile" style="max-width:1170px;width:100%;margin:0 auto"><div class="row"><div class="col-md-3 text-center">'
+                    + f'<img class="img-responsive profile-img" width="120" height="120" alt="" src="https://forum.platesmania.com/data/avatars/l/121/{uid}.jpg"></div>'
+                    + f'<div class="col-md-9"><h1><a href="https://forum.platesmania.com/members/member{uid}.{uid}/">member{uid}</a> <small class="pull-right">ID: {uid}</small></h1></div></div></div></body></html>')
         elif path == "/add":
             html = HEAD.format(title="Add") + '<div class="content"><div class="container" style="max-width:1170px;width:100%;margin:0 auto"><h2>Choose a country</h2></div></div></body></html>'
         else:
             return route.fulfill(status=404, content_type="text/html", body="<h1>404</h1>")
-        return route.fulfill(status=200, content_type="text/html", body=inject(html))
+        # a page the script reads with fetch() is the site's page alone; the script is added only to the pages that are opened
+        body = inject(html) if route.request.resource_type == "document" else html
+        return route.fulfill(status=200, content_type="text/html", body=body)
 
     context.route(re.compile(r"https://(platesmania\.com|img\d+\.platesmania\.com)/.*"), site)
     context.route(re.compile(r"https?://(?!platesmania\.com).*"), lambda r: r.abort())

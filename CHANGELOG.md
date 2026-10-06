@@ -2,6 +2,9 @@
 
 ## 5.8
 
+**Member shortcuts**
+- New feature *Member shortcuts* (switch in Settings): the profiles of members you go to often, each shown with its picture and name; a click goes to the member's page. On a member's profile the list stands to the left of the content, level with the profile picture (the flags are on the right); on a narrower screen it moves under the picture. The same list is in the Gallery drawer of the panel. *Add this member* on a profile, or add anyone from any page by their number or the link of their page (the page is read once through the script's own queue). The member of the page is marked, and a shortcut's picture and name are refreshed when you visit the member.
+
 **Extra information**
 - New feature *Extra information box* (switch in Settings): the site's small three-line box becomes a tall card in the look of the panel, large from the start, growing with what you type, with the site's own hint, a character count, and a button to insert the location saved in Details (*Use my location*). It sits above the tags card with a clear space between the two (every card now has one). The site's own box stays the source of truth (hidden, and filled as you type), so the form is sent as before; switching the feature off brings it back.
 
