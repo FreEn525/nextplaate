@@ -62,7 +62,7 @@ A click on the logo of the panel checks for a newer version. The bar follows the
 19. **Profile: real uploads** - the real total of a member's gallery and the uploads of the day (from 03:30 local time), next to the profile's own figure, which the site only recalculates from time to time.
 20. **Profile: regions** - how many regions of a country a member has a photo from, with a bar, the regions seen and the missing ones.
 
-21. **World map** (`M`) - the countries a member has photos from on a map of the world, shaded by how many photos, each a link to the member's photos of it; a Europe view; yours or anyone's (a member number or a profile link).
+21. **World map** (`G`, globe) - the countries a member has photos from on a map of the world, shaded by how many photos, each a link to the member's photos of it; a Europe view; yours or anyone's (a member number or a profile link).
 
 ## The panel
 22. **Shortcut editor** - every key can be changed (AZERTY-safe).

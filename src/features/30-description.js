@@ -10,10 +10,10 @@
     const id = photoIdInput.value;
     if (!(state.front && state.rear)) {
       // no pair chosen: the description is only your details (hashtags, then place), still worth writing, but never over a text that is there
-      if (descBox.value.trim()) { setStatus(`Photo <b>#${id}</b> already has a description: left as it is. Choose a front and a rear photo (<b>S</b>) to write the pair’s description.`); return; }
+      if (descBox.value.trim()) { setStatus(`Photo <b>#${id}</b> already has a description: left as it is. Choose a front and a rear photo (<b>${keyOf('select')}</b>) to write the pair’s description.`); return; }
       descBox.value = detailsHead();
       descBox.dispatchEvent(new Event('input', { bubbles: true }));
-      setStatus(`Description filled for <b>#${id}</b> with your details only. Choose a front and a rear photo (<b>S</b>) to add the other side.`);
+      setStatus(`Description filled for <b>#${id}</b> with your details only. Choose a front and a rear photo (<b>${keyOf('select')}</b>) to add the other side.`);
       return;
     }
     // The plate shown in the page title (e.g. "MZ MZ 78") is used for the image alt text
@@ -95,7 +95,7 @@
       {
         drawer: 'pair', title: 'Description', about: "Step 3. On a photo’s edit page: writes the description (your details, then the other side of the pair as a link and a thumbnail). With no pair chosen it writes your details only.", pages: ['edit'],
         build: () => [
-          h('button', { id: 'fillBtn', class: 'btn ghost', disabled: true, text: 'Fill description (F)' }),
+          h('button', { id: 'fillBtn', class: 'btn ghost', disabled: true, text: 'Fill description' }),
           h('button', { id: 'backGallery', class: 'btn ghost', text: 'Back to my gallery', title: 'Go back to the last gallery you visited' })
         ]
       },
@@ -113,6 +113,9 @@
       fill: { code: 'KeyF', label: 'Fill the description', run: () => { if (!here.edit) return false; $('fillBtn').click(); return true; }, hintOrder: 20 }
     },
     init: () => {
+      const fillText = () => { $('fillBtn').textContent = `Fill description (${keyOf('fill')})`; };
+      fillText();
+      window.addEventListener('pmg-keys', fillText);
       $('fillBtn').disabled = !here.edit;
       $('fillBtn').title = here.edit ? 'Fill the description of this photo' : 'Only available on the edit page';
       $('fillBtn').onclick = fillDescription;

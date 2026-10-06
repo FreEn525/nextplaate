@@ -35,7 +35,7 @@ def test_developer_drawer_groups_and_status(browser):
     page.wait_for_selector("#pmg-host")
     page.evaluate("() => document.getElementById('pmg-host').shadowRoot.querySelector('.rbtn[data-drawer=\"dev\"]').click()")
     titles = page.evaluate("() => [...document.getElementById('pmg-host').shadowRoot.querySelectorAll('.dsec[data-drawer=\"dev\"] .gtitle')].map(e => e.textContent)")
-    assert titles == ["Status", "Save the page", "Capture", "Plate test", "Verify the reads", "Database", "Series collection", "Series check"]
+    assert titles == ["Status", "Save the page", "Capture", "Plate test", "Verify the reads", "Database", "Series collection", "Series check", "Regions collection"]
     # the status box reads the dev store: nothing kept yet on a fresh profile
     page.wait_for_function("() => document.getElementById('pmg-host').shadowRoot.getElementById('devStatus').textContent.includes('Upload pages kept')")
     text = page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('devStatus').textContent")
@@ -181,4 +181,18 @@ def test_series_check_summarises_per_country_and_does_not_ask_again(browser):
     page.wait_for_function(f"() => {SHADOW}.getElementById('sckMsg').textContent.includes('Safe')", timeout=10000)
     text = page.evaluate(f"() => {SHADOW}.getElementById('sckMsg').textContent")
     assert "Safe: 1 (fr)" in text and "Mixed: it" in text
+    c.close()
+
+
+@needs_dev
+def test_regions_collection_reads_the_menu_then_one_page_per_country(browser):
+    c, page = _dev_page(browser)
+    asked = []
+    c.route("**/*", lambda r: (asked.append(r.request.url), r.fallback())[1] if "userreg.php" in r.request.url else r.fallback())
+    page.evaluate(f"() => {SHADOW}.getElementById('rcGo').click()")
+    page.wait_for_function(f"() => {SHADOW}.getElementById('rcMsg').textContent.startsWith('Finished')", timeout=60000)
+    systems = [u.split("gallery=")[1].split("-")[0] for u in asked]
+    assert systems[0] == "fr1" and sorted(set(systems[1:])) == ["de", "fr1", "lu"]                # the menu page, then one page per system
+    page.evaluate(f"() => {SHADOW}.getElementById('rcCheck').click()")
+    page.wait_for_function(f"() => {SHADOW}.getElementById('rcMsg').textContent.includes('3 of 3 systems collected')", timeout=10000)
     c.close()

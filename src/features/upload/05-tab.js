@@ -53,7 +53,7 @@
       const input = await waitFor(() => document.getElementById('filename'));
       const openBtn = await waitFor(() => document.getElementById('pm-photo-editor-open'));
       if (!input || !openBtn) { setStatus('Could not find the upload form on this page.'); return; }
-      if (!it.blob) { setStatus(`The photo <b>${esc(it.name)}</b> is no longer stored. Add it again (U).`); return; }
+      if (!it.blob) { setStatus(`The photo <b>${esc(it.name)}</b> is no longer stored. Add it again (${keyOf('open')}).`); return; }
       const file = new File([it.blob], it.name, { type: it.type, lastModified: it.lastModified });
       { // plate category chosen in the manager (default = the page's first one); fires the site's own onchange
         const sel = typeMenuEl();
@@ -144,7 +144,7 @@
         const err = document.querySelector('#filename[type="file"]') ? pageError() : '';
         if (err) {
           it.status = 'failed'; await qPut(it); updateBatchInfo();
-          setStatus(`The site did not accept <b>${esc(it.name)}</b>: ${esc(err)}<br>Press <b>R</b> to try this photo again.`);
+          setStatus(`The site did not accept <b>${esc(it.name)}</b>: ${esc(err)}<br>Press <b>${keyOf('resume')}</b> to try this photo again.`);
           return;
         }
         it.status = 'done'; it.blob = null; await qPut(it); updateBatchInfo();
@@ -160,6 +160,6 @@
       return;
     }
     // 3) anywhere else: stay out of the way
-    if (cur && isOpenable(cur)) setStatus(`Batch paused on <b>${esc(cur.name)}</b>. Press <b>R</b> to open it again.`);
+    if (cur && isOpenable(cur)) setStatus(`Batch paused on <b>${esc(cur.name)}</b>. Press <b>${keyOf('resume')}</b> to open it again.`);
   }
 

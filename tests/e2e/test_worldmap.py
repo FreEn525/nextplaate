@@ -103,16 +103,16 @@ def test_a_page_that_is_not_a_profile_says_so_and_a_wrong_input_too(ctx):
     assert "member number" in page.evaluate(f"() => {MODAL}.querySelector('.wmview').textContent")
 
 
-def test_the_key_m_opens_it_but_not_while_typing(ctx):
+def test_the_key_g_opens_it_but_not_while_typing(ctx):
     page = open_page(ctx)
-    page.keyboard.press("KeyM")
+    page.keyboard.press("KeyG")
     page.wait_for_function("() => document.getElementById('pmg-worldmap')", timeout=20000)
     page.keyboard.press("Escape")
     assert page.evaluate("() => !document.getElementById('pmg-worldmap')")
     page.evaluate("() => { const i = document.createElement('input'); i.type = 'text'; i.id = 'zz'; document.body.appendChild(i); i.focus(); }")
-    page.keyboard.type("m")
+    page.keyboard.type("g")
     page.wait_for_timeout(300)
-    assert page.evaluate("() => !document.getElementById('pmg-worldmap') && document.getElementById('zz').value === 'm'")
+    assert page.evaluate("() => !document.getElementById('pmg-worldmap') && document.getElementById('zz').value === 'g'")
 
 
 def test_a_profile_has_a_button_and_its_own_page_is_not_read_again(ctx):
@@ -133,7 +133,7 @@ def test_with_the_feature_off_there_is_no_group_and_no_key(ctx):
     page.evaluate("() => localStorage.setItem('pmg_set_feature_worldmap', '0')")
     page.reload()
     page.wait_for_selector("#pmg-host")
-    page.keyboard.press("KeyM")
+    page.keyboard.press("KeyG")
     page.wait_for_timeout(300)
     assert page.evaluate(f"() => !document.getElementById('pmg-worldmap') && !{PANEL}.getElementById('wmOpen')")
 
@@ -148,18 +148,77 @@ def test_no_horizontal_overflow(ctx, width):
     assert over == []
 
 
-def test_the_europe_view_zooms_the_same_map_and_keeps_the_dots_the_same_size_on_screen(ctx):
+def view(page):
+    return page.evaluate(f"() => {MODAL}.querySelector('svg').getAttribute('viewBox').split(' ').map(Number)")
+
+
+def button(page, text):
+    return f"() => [...{MODAL}.querySelectorAll('.views button')].find(b => b.textContent === {json.dumps(text)}).click()"
+
+
+def test_the_buttons_zoom_and_go_to_europe_or_back_to_the_world(ctx):
     page = open_page(ctx)
     open_map(page)
-    full = page.evaluate(f"() => {MODAL}.querySelector('svg').getAttribute('viewBox')")
-    r_full = page.evaluate(f"() => +{MODAL}.querySelector('circle').getAttribute('r')")
-    page.evaluate(f"() => [...{MODAL}.querySelectorAll('.views button')].find(b => b.textContent === 'Europe').click()")
-    close = page.evaluate(f"() => {MODAL}.querySelector('svg').getAttribute('viewBox')")
-    r_close = page.evaluate(f"() => +{MODAL}.querySelector('circle').getAttribute('r')")
-    assert full.startswith("0 0 1000") and close != full
-    assert r_close < r_full / 3                                                              # a dot is smaller in the map's units where the map is bigger
-    page.evaluate(f"() => [...{MODAL}.querySelectorAll('.views button')].find(b => b.textContent === 'World').click()")
-    assert page.evaluate(f"() => {MODAL}.querySelector('svg').getAttribute('viewBox')") == full
+    full = view(page)
+    assert full[:3] == [0, 0, 1000]
+    page.evaluate(button(page, "+"))
+    zoomed = view(page)
+    assert zoomed[2] < full[2] and abs(zoomed[2] - 1000 / 1.5) < 1
+    page.evaluate(button(page, "−"))
+    assert abs(view(page)[2] - 1000) < 1
+    page.evaluate(button(page, "Europe"))
+    assert view(page)[2] < 300
+    page.evaluate(button(page, "World"))
+    assert view(page) == full
+
+
+def test_the_wheel_zooms_at_the_pointer_and_a_drag_moves_the_map(ctx):
+    page = open_page(ctx)
+    open_map(page)
+    box = page.evaluate(f"() => {{ const r = {MODAL}.querySelector('svg').getBoundingClientRect(); return [r.x, r.y, r.width, r.height]; }}")
+    cx, cy = box[0] + box[2] * 0.52, box[1] + box[3] * 0.3                                   # over Europe
+    page.mouse.move(cx, cy)
+    for _ in range(4):
+        page.mouse.wheel(0, -100)
+        page.wait_for_timeout(40)
+    z = view(page)
+    assert z[2] < 500 and "×" in page.evaluate(f"() => {MODAL}.querySelector('.zl').textContent")
+    page.mouse.down()
+    page.mouse.move(cx + 80, cy + 20, steps=6)
+    page.mouse.up()
+    moved = view(page)
+    assert moved[2] == z[2] and moved[0] < z[0]                                              # dragged right: the window went left on the map
+    page.mouse.wheel(0, 100)
+    page.wait_for_timeout(40)
+    assert view(page)[2] > z[2]                                                              # the wheel the other way zooms out
+
+
+def test_a_drag_does_not_open_the_country_under_the_pointer(ctx):
+    page = open_page(ctx)
+    open_map(page)
+    page.evaluate(button(page, "Europe"))
+    box = page.evaluate(f"() => {{ const r = {MODAL}.querySelector('[data-cc=\"de\"]').getBoundingClientRect(); return [r.x + r.width / 2, r.y + r.height / 2]; }}")
+    pages = len(ctx.pages)
+    page.mouse.move(box[0], box[1])
+    page.mouse.down()
+    page.mouse.move(box[0] + 60, box[1] + 10, steps=5)
+    page.mouse.up()
+    page.wait_for_timeout(300)
+    assert len(ctx.pages) == pages                                                          # no tab opened by the end of the drag
+
+
+def test_the_dots_keep_their_size_on_screen_when_zooming(ctx):
+    page = open_page(ctx)
+    open_map(page)
+    r0 = page.evaluate(f"() => +{MODAL}.querySelector('circle').getAttribute('r')")
+    page.evaluate(button(page, "Europe"))
+    assert page.evaluate(f"() => +{MODAL}.querySelector('circle').getAttribute('r')") < r0 / 3
+
+
+def test_the_map_has_a_legend_with_no_photo_and_the_five_shades(ctx):
+    page = open_page(ctx)
+    open_map(page)
+    assert page.evaluate(f"() => [...{MODAL}.querySelectorAll('.legend span')].map(s => s.textContent)") == ["no photo", "1 photo", "2–9 photos", "10–49 photos", "50–199 photos", "200 + photos"]
 
 
 def test_the_map_has_a_shape_for_most_countries_and_a_dot_for_the_small_ones(ctx):

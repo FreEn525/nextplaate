@@ -26,17 +26,18 @@
   const unlikedHearts = () =>
     [...document.querySelectorAll('i.rating.fa-heart-o[id^="unit_ul"]')].filter(el => !clickedLikes.has(el.id));
 
+  window.addEventListener('pmg-keys', () => { if ($('likeAll')) updateLikeBtn(); });          // a key was changed: the button says the new one
   function updateLikeBtn() {
     if (liking) return;
     const b = $('likeAll'), r = getRun();
-    if (r) { b.disabled = false; b.textContent = `Stop auto-like (page ${r.done + 1}/${r.total}) (L)`; return; }
+    if (r) { b.disabled = false; b.textContent = `Stop auto-like (page ${r.done + 1}/${r.total}) (${keyOf('like')})`; return; }
     const n = unlikedHearts().length, pages = pagesWanted();
     if (pages > 1) {
       b.disabled = !document.querySelector('i.rating[id^="unit_ul"]');
-      b.textContent = `Like ${pages} pages from this one (L)`;
+      b.textContent = `Like ${pages} pages from this one (${keyOf('like')})`;
     } else {
       b.disabled = n === 0;
-      b.textContent = n ? `Like ${n} photo${n > 1 ? 's' : ''} on this page (L)` : 'No photos to like on this page';
+      b.textContent = n ? `Like ${n} photo${n > 1 ? 's' : ''} on this page (${keyOf('like')})` : 'No photos to like on this page';
     }
   }
 

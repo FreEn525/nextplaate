@@ -5,13 +5,14 @@
   // The drawers, in bar order. A feature joins one of them with groups: [{ drawer: 'pair', title, build }].
   const DRAWERS = [
     // In the order of use: check what you are about to send, send it, describe the pair, browse. The ids stay (keys, tests, memory).
-    { id: 'search', icon: 'search', title: 'Check a plate', keys: '' },       // the plate check, Google Lens and the lookups
-    { id: 'upload', icon: 'upload', title: 'Send photos', keys: 'U · N' },     // a photo in a country, the batch upload
-    { id: 'pair', icon: 'photos', title: 'Describe a pair', keys: 'S · F' },   // front and rear photo, details, description, automation
-    { id: 'gallery', icon: 'gallery', title: 'Browse', keys: 'L · ◀ ▶' },      // likes, pages, members
-    { id: 'keys', icon: 'keyboard', title: 'Shortcuts', keys: 'Esc' },
-    { id: 'settings', icon: 'settings', title: 'Settings', keys: '' },
-    { id: 'dev', icon: 'wrench', title: 'Developer', keys: '' }        // shown only when the dev tools are built in
+    // keys: the actions of the drawer, whose current keys the tooltip tells (they follow what the user chose in Shortcuts)
+    { id: 'search', icon: 'search', title: 'Check a plate', keys: [] },       // the plate check, Google Lens and the lookups
+    { id: 'upload', icon: 'upload', title: 'Send photos', keys: ['open', 'start'] },     // a photo in a country, the batch upload
+    { id: 'pair', icon: 'photos', title: 'Describe a pair', keys: ['select', 'fill'] },   // front and rear photo, details, description, automation
+    { id: 'gallery', icon: 'gallery', title: 'Browse', keys: ['like', 'prev', 'next', 'worldmap'] },      // likes, pages, members, the world map
+    { id: 'keys', icon: 'keyboard', title: 'Shortcuts', keys: ['Esc'] },
+    { id: 'settings', icon: 'settings', title: 'Settings', keys: [] },
+    { id: 'dev', icon: 'wrench', title: 'Developer', keys: [] }        // shown only when the dev tools are built in
   ];
 
   const host = document.createElement('div');
@@ -39,6 +40,13 @@
     return h('p', { class: 'pnote', text: 'Works on ' + g.pages.map(p => PAGE_NAMES[p]).join(' or ') + ' page.' });
   }
 
+  // "Describe a pair (S · F)": the keys are those in force now
+  const drawerTitle = d => {
+    const keys = d.keys.map(k => (actions[k] ? keyOf(k) : k)).filter(Boolean);
+    return keys.length ? `${d.title} (${keys.join(' · ')})` : d.title;
+  };
+  window.addEventListener('pmg-keys', () => root.querySelectorAll('.rbtn').forEach(b => { const d = DRAWERS.find(x => x.id === b.dataset.drawer); if (d) b.title = drawerTitle(d); }));
+
   const lazyGroups = [];       // { drawer, g, body } of the groups not built yet
   function buildLazy(drawerId) {
     for (let i = lazyGroups.length - 1; i >= 0; i--) {
@@ -53,7 +61,7 @@
     const byDrawer = {};
     list.forEach(f => (f.groups || []).forEach(g => { (byDrawer[g.drawer] = byDrawer[g.drawer] || []).push(g); }));
     DRAWERS.filter(d => byDrawer[d.id]).forEach(d => {
-      const btn = h('button', { class: 'rbtn', 'data-drawer': d.id, title: d.keys ? `${d.title} (${d.keys})` : d.title, onclick: () => openDrawer(d.id) });
+      const btn = h('button', { class: 'rbtn', 'data-drawer': d.id, title: drawerTitle(d), onclick: () => openDrawer(d.id) });
       btn.innerHTML = icon(d.icon);   // our own SVG constants, never user data
       // settings (the Shortcuts drawer) sit at the bottom, apart from the working tools
       if (d.id === 'keys') $('rail').append(h('div', { class: 'rsep' }));

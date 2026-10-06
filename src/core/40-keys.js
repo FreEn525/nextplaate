@@ -13,13 +13,24 @@
     }).catch(() => {});
   }
 
-  // Name shown for a key code: KeyS -> S, Digit3 -> 3, ArrowLeft -> ←
+  // What every physical key prints on YOUR keyboard (Chromium): KeyM prints "," on AZERTY, KeyQ prints "A"... Learned from the real layout.
+  let layoutMap = null;
+  if (navigator.keyboard && navigator.keyboard.getLayoutMap) {
+    navigator.keyboard.getLayoutMap().then(map => { layoutMap = map; window.dispatchEvent(new Event('pmg-layout')); window.dispatchEvent(new Event('pmg-keys')); }).catch(() => {});
+  }
+
+  // Name shown for a key code, as printed on the user's keyboard: KeyS -> S, Digit3 -> 3, ArrowLeft -> ←
   const keyName = code => {
-    if (code === 'KeyA') return prevKey;   // the physical left key is labelled for YOUR layout
     if (!code) return '?';
     const arrows = { ArrowLeft: '←', ArrowRight: '→', ArrowUp: '↑', ArrowDown: '↓' };
-    return arrows[code] || code.replace(/^Key|^Digit|^Numpad/, '');
+    if (arrows[code]) return arrows[code];
+    if (code === 'KeyA' && !layoutMap) return prevKey;                                        // before the layout is known
+    const printed = layoutMap && layoutMap.get(code);
+    if (printed && printed.length === 1) return printed.toUpperCase();
+    return code.replace(/^Key|^Digit|^Numpad/, '');
   };
+  // The name of the key an action uses now, for the texts that tell the user to press it ("Select photos (S)"): it follows the user's choice
+  const keyOf = id => (actions[id] ? keyName(actions[id].bound) : '?');
   // Ctrl+A is the letter A, whatever the layout: on AZERTY that key has the code KeyQ
   const isSelectAll = e => (e.key || '').toLowerCase() === 'a';
   // Text fields only: a checkbox, a select or a slider does not take the keys

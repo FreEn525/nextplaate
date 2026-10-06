@@ -11,7 +11,7 @@
     if (multi) return;
     if (cfRecent()) { setStatus('Cloudflare asked for a check a moment ago. Open the site normally, solve it, and wait a few minutes before starting again.'); return; }
     const list = queue.filter(q => q.status === 'pending' && q.country && q.blob);
-    if (!list.length) { setStatus('Nothing ready: give each photo a country first (press <b>U</b>).'); return; }
+    if (!list.length) { setStatus(`Nothing ready: give each photo a country first (press <b>${keyOf('open')}</b>).`); return; }
     multi = { list, total: list.length, opened: 0, timer: null };
     updateBatchInfo();
     multiStep();

@@ -21,7 +21,7 @@
       drawer: 'upload', title: 'Batch upload', about: "Send many photos at once: each gets a country and a category, then one tab per photo opens with a pause between.",
       build: () => [
         h('div', { id: 'qInfo', class: 'qinfo', text: 'No photos queued yet.' }),
-        h('button', { id: 'qOpen', class: 'btn ghost', text: 'Choose photos & countries (U)' }),
+        h('button', { id: 'qOpen', class: 'btn ghost', text: 'Choose photos & countries' }),
         h('button', { id: 'qGo', class: 'btn', disabled: true, text: 'Start uploading' }),
         h('button', { id: 'qStop', class: 'btn ghost', hidden: true, text: 'Stop opening tabs' }),
         h('div', { class: 'row' }, h('label', { for: 'qDelay', text: 'Delay between tabs (s)' }),
@@ -38,6 +38,9 @@
     init: () => {
       $('qDelay').value = Math.min(120, Math.max(5, +store.get('qDelay', '10') || 10));
       $('qDelay').onchange = () => { const v = Math.min(120, Math.max(5, Math.round(+$('qDelay').value) || 10)); $('qDelay').value = v; store.set('qDelay', String(v)); };
+      const openText = () => { $('qOpen').textContent = `Choose photos & countries (${keyOf('open')})`; };
+      openText();
+      window.addEventListener('pmg-keys', openText);
       $('qOpen').onclick = openManager;
       $('qGo').onclick = startMulti;
       $('qStop').onclick = () => stopMulti('Stopped. Photos already opened stay in their tabs; the others are still waiting.');

@@ -5,6 +5,7 @@
   const MODIFIERS = ['Shift', 'Control', 'Alt', 'Meta'];
 
   function renderShortcuts() {
+    window.dispatchEvent(new Event('pmg-keys'));                                // the texts that name a key follow
     const rows = Object.entries(actions)
       .sort(([, a], [, b]) => (a.hintOrder || 99) - (b.hintOrder || 99))
       .map(([id, a]) => h('div', { class: 'kbrow' },
@@ -52,5 +53,5 @@
         h('button', { class: 'btn ghost', text: 'Reset all to the defaults', onclick: resetAll })
       ]
     }],
-    init: () => renderShortcuts()
+    init: () => { renderShortcuts(); window.addEventListener('pmg-layout', renderShortcuts); }               // the keyboard layout is known a moment after the start
   });
