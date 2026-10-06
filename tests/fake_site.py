@@ -184,7 +184,7 @@ def route_site(context):
         if path == "/gallery.php" and "usr" in query:
             # a member's gallery: the real total, or the count inside a window of dates
             GALLERY_USR.append(query)
-            n = 2 if "date1" in query else 731
+            n = 2 if "date1" in query else 1 if "modgen" in query else 3 if "model" in query else 5 if "markaavto" in query else 731
             html = HEAD.format(title="Gallery") + f'<div class="breadcrumbs"><h1 class="pull-left">License plates found <b>{n}</b></h1></div></body></html>'
             return route.fulfill(status=200, content_type="text/html; charset=utf-8", body=html)
         if path in ("/fr/gallery.php",):

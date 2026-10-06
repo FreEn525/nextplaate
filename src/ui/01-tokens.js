@@ -62,6 +62,8 @@
     .stats{display:flex;flex-wrap:wrap;gap:12px 28px}
     .stat{display:flex;flex-direction:column}
     .stat b{font-size:18px;color:var(--primary-h)}
+    .stat a{font-size:18px;font-weight:700;color:var(--primary-h);text-decoration:none}
+    .stat a:hover{text-decoration:underline}
     .stat span{font-size:12px}
     .lookups{display:flex;flex-direction:column;gap:6px}
     .vehline{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;font-size:14px}

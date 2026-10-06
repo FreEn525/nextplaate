@@ -2,6 +2,9 @@
 
 ## 5.9 (in progress)
 
+**Your photos of this vehicle**
+- New feature *Your photos of this vehicle* (switch in Settings): on the upload page, under the brand / model / generation menus, a card says how many photos of that brand, that model and that generation you already have, each number a link to those photos. It follows the menus however they were filled (by you, the plate check or Lens). Counts come from your own gallery filtered on the vehicle, through the shared queue (most precise level first) and are kept for the visit.
+
 **Profile: real uploads**
 - New feature *Profile: real uploads* (switch in Settings): on a member's profile, a card with the real total of the gallery and the uploads of the day. The figure the profile shows is a statistic the site recalculates from time to time (its (+n) runs since that calculation, not since today), so the card reads the member's gallery, which is live: the whole gallery, and the day from 03:30 local time to 03:30 the next day, and says how far the profile figure is. Two requests, through the shared queue.
 
