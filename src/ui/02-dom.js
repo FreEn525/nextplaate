@@ -16,3 +16,11 @@
     kids.flat().forEach(c => { if (c !== null && c !== undefined && c !== false) el.append(c); });
     return el;
   }
+
+  // The same for SVG elements (they need their own namespace): svgEl('path', { d, class }, ...children)
+  function svgEl(tag, attrs, ...kids) {
+    const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    for (const [k, v] of Object.entries(attrs || {})) el.setAttribute(k, v);
+    kids.forEach(k => el.append(k));
+    return el;
+  }

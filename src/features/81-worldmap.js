@@ -1,6 +1,6 @@
   /* =====================================================================
    *  WORLD MAP  (the countries a member has photos from, on a map of the world)
-   *    A window, like the batch window: the world as an SVG (src/lib/worldmap.js), each country the member has photos from filled in
+   *    A window, like the batch window: the world as an SVG (src/lib/worldmap.js; drawn by 82-worldmap-view.js), each country the member has photos from filled in
    *    five shades of the panel's blue by how many photos (1, 2-9, 10-49, 50-199, 200 and more), the others left light. A country is a link
    *    to the member's photos of it (the site's gallery.php?usr=), with its figures as the hover text. The small countries the map has
    *    no shape for are dots; the ones with neither (USSR, the non-recognised states) are listed under the map, and a list of all the
@@ -36,122 +36,6 @@
     return data;
   }
 
-  // 1 photo, 2-9, 10-49, 50-199, 200 and more -> 1..5; none -> 0
-  const worldTier = n => (n >= 200 ? 5 : n >= 50 ? 4 : n >= 10 ? 3 : n >= 2 ? 2 : n >= 1 ? 1 : 0);
-  const worldCss = `
-    .wm{display:flex;flex-direction:column;gap:12px;padding:16px}
-    .wm .who{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
-    .wm .who input{flex:1 1 240px;min-width:0}
-    .wm .sum{font-size:14px}
-    .wm path,.wm circle{vector-effect:non-scaling-stroke}
-    .wm .views{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
-    .wm .views .zl{min-width:40px}
-    .wm svg{display:block;width:100%;height:auto;background:var(--primary-tint);border:1px solid var(--line2);cursor:grab;touch-action:none}
-    .wm svg.drag{cursor:grabbing}
-    .wm .rest{fill:var(--land);stroke:#fff;stroke-width:.6}
-    .wm .c{fill:var(--land);stroke:#fff;stroke-width:.6}
-    .wm a:hover .c,.wm a:focus .c{stroke:var(--ink);stroke-width:1.5}
-    .wm .t1{fill:color-mix(in srgb,var(--primary) 50%,#fff)}
-    .wm .t2{fill:color-mix(in srgb,var(--primary) 63%,#fff)}
-    .wm .t3{fill:color-mix(in srgb,var(--primary) 76%,#fff)}
-    .wm .t4{fill:color-mix(in srgb,var(--primary) 88%,#000)}
-    .wm .t5{fill:color-mix(in srgb,var(--primary-h) 80%,#000)}
-    .wm .dot{stroke:var(--ink);stroke-width:1}
-    .wm .dot.t0{fill:var(--land)}
-    .wm .none{fill:none;stroke:var(--line2);stroke-width:1}
-    .wm .legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:12px;color:var(--mute)}
-    .wm .legend span{display:inline-flex;align-items:center;gap:6px}
-    .wm .legend i{display:inline-block;width:16px;height:12px;border:1px solid var(--line2)}
-    .wm .legend .t1{background:color-mix(in srgb,var(--primary) 50%,#fff)}
-    .wm .legend .t2{background:color-mix(in srgb,var(--primary) 63%,#fff)}
-    .wm .legend .t3{background:color-mix(in srgb,var(--primary) 76%,#fff)}
-    .wm .legend .t4{background:color-mix(in srgb,var(--primary) 88%,#000)}
-    .wm .legend .t5{background:color-mix(in srgb,var(--primary-h) 80%,#000)}
-    .wm .legend .t0{background:var(--land)}
-    .wm .extra{font-size:13px}
-    .wm table{width:100%;border-collapse:collapse;font-size:13px}
-    .wm td,.wm th{padding:5px 8px;border-bottom:1px solid var(--line);text-align:left}
-    .wm th{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
-    .wm td.n{text-align:right;font-variant-numeric:tabular-nums}
-    .wm a.lnk{color:var(--primary-h);font-weight:600}
-  `;
-
-  function svgEl(tag, attrs, ...kids) {
-    const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
-    for (const [k, v] of Object.entries(attrs || {})) el.setAttribute(k, v);
-    kids.forEach(k => el.append(k));
-    return el;
-  }
-
-  // The map and everything under it, for one member's data
-  function worldView(data) {
-    const gallery = cc => `/${cc}/gallery.php?usr=${data.id}`;
-    const stats = cc => data.countries[cc] || { photos: 0, likes: 0, comments: 0 };
-    const text = cc => `${cName(cc)}: ${stats(cc).photos ? `${stats(cc).photos} photo${stats(cc).photos > 1 ? 's' : ''}, ${stats(cc).likes} like${stats(cc).likes === 1 ? '' : 's'}` : 'no photo yet'}`;
-    const svg = svgEl('svg', { viewBox: `0 0 ${WORLD_MAP.w} ${WORLD_MAP.h}`, role: 'img', 'aria-label': `World map of ${data.name}` });
-    svg.append(svgEl('path', { d: WORLD_MAP.rest, class: 'rest' }));
-    const link = (cc, shape) => {
-      const a = svgEl('a', { href: gallery(cc), target: '_blank', rel: 'noopener noreferrer' }, svgEl('title', null));
-      a.firstChild.textContent = text(cc);
-      a.append(shape);
-      return a;
-    };
-    for (const [cc, d] of Object.entries(WORLD_MAP.shapes)) svg.append(link(cc, svgEl('path', { d, class: 'c t' + worldTier(stats(cc).photos), 'data-cc': cc })));
-    for (const [cc, [x, y]] of Object.entries(WORLD_MAP.dots)) svg.append(link(cc, svgEl('circle', { cx: x, cy: y, r: 5, class: 'c dot t' + worldTier(stats(cc).photos), 'data-cc': cc })));
-
-    const have = Object.keys(data.countries).filter(cc => data.countries[cc].photos > 0).sort((a, b) => data.countries[b].photos - data.countries[a].photos || cName(a).localeCompare(cName(b)));
-    const total = have.reduce((n, cc) => n + data.countries[cc].photos, 0);
-    const unmapped = have.filter(cc => !WORLD_MAP.shapes[cc] && !WORLD_MAP.dots[cc]);
-    const legend = h('div', { class: 'legend' }, [['t0', 'none'], ['t1', '1'], ['t2', '2–9'], ['t3', '10–49'], ['t4', '50–199'], ['t5', '200 +']].map(([c, t]) => h('span', null, h('i', { class: c }), t === 'none' ? 'no photo' : t + (t === '1' ? ' photo' : ' photos'))));
-    // Zoom and move: the viewBox is the window on the map. The wheel zooms at the pointer, a drag moves the map, the buttons zoom by steps and
-    // go to the whole world or to Europe (where most of the photos are). The dots keep the same size on screen.
-    const W = WORLD_MAP.w, H = WORLD_MAP.h, MAX_ZOOM = 40;
-    let box = [0, 0, W, H];
-    const setView = (x, y, w) => {
-      w = Math.min(W, Math.max(W / MAX_ZOOM, w));
-      const hh = w * H / W;
-      box = [Math.min(W - w, Math.max(0, x)), Math.min(H - hh, Math.max(0, y)), w];
-      svg.setAttribute('viewBox', `${box[0]} ${box[1]} ${w} ${hh}`);
-      svg.querySelectorAll('circle').forEach(c => c.setAttribute('r', String(5 * w / W)));
-      zoomLabel.textContent = w >= W - 0.5 ? 'World' : `\u00d7${(W / w).toFixed(1)}`;
-    };
-    const zoomLabel = h('span', { class: 'mute zl', text: 'World' });
-    const zoomAt = (factor, cx, cy) => {                      // cx, cy in map units: the point that stays under the pointer
-      const w = Math.min(W, Math.max(W / MAX_ZOOM, box[2] / factor));
-      setView(cx - (cx - box[0]) * (w / box[2]), cy - (cy - box[1]) * (w / box[2]), w);
-    };
-    const centre = () => [box[0] + box[2] / 2, box[1] + box[2] * H / W / 2];
-    const mapPoint = e => { const m = svg.getScreenCTM().inverse(), p = svg.createSVGPoint(); p.x = e.clientX; p.y = e.clientY; const q = p.matrixTransform(m); return [q.x, q.y]; };
-    svg.addEventListener('wheel', e => { e.preventDefault(); const [x, y] = mapPoint(e); zoomAt(e.deltaY < 0 ? 1.25 : 1 / 1.25, x, y); }, { passive: false });
-    let drag = null, moved = false;
-    svg.addEventListener('pointerdown', e => { if (e.button !== 0) return; drag = { x: e.clientX, y: e.clientY, box: box.slice() }; moved = false; });
-    svg.addEventListener('pointermove', e => {
-      if (!drag) return;
-      const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
-      if (!moved && Math.hypot(dx, dy) < 4) return;            // a click is not a drag
-      if (!moved) { moved = true; svg.setPointerCapture(e.pointerId); svg.classList.add('drag'); }
-      const k = drag.box[2] / svg.getBoundingClientRect().width;
-      setView(drag.box[0] - dx * k, drag.box[1] - dy * k, drag.box[2]);
-    });
-    const endDrag = () => { drag = null; svg.classList.remove('drag'); };
-    svg.addEventListener('pointerup', endDrag);
-    svg.addEventListener('pointercancel', endDrag);
-    svg.addEventListener('click', e => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);      // the end of a drag opens no country
-    const tool = (text, title, run) => h('button', { type: 'button', class: 'pill', text, title, onclick: run });
-    const views = h('div', { class: 'views' },
-      tool('+', 'Zoom in', () => zoomAt(1.5, ...centre())), tool('\u2212', 'Zoom out', () => zoomAt(1 / 1.5, ...centre())),
-      tool('World', 'The whole world', () => setView(0, 0, W)), tool('Europe', 'Europe close up', () => setView(...WORLD_MAP.views.europe.slice(0, 2), WORLD_MAP.views.europe[2])),
-      zoomLabel, h('span', { class: 'mute', text: 'Scroll to zoom, drag to move' }));
-    return h('div', null,
-      h('div', { class: 'sum' }, h('b', { text: `${have.length} countr${have.length === 1 ? 'y' : 'ies'}` }), ` of ${Object.keys(data.countries).length}, ${total} photo${total === 1 ? '' : 's'}`),
-      views, svg, legend,
-      unmapped.length ? h('p', { class: 'extra' }, 'Not on the map: ', unmapped.flatMap((cc, i) => [i ? ', ' : null, h('a', { class: 'lnk', href: gallery(cc), target: '_blank', rel: 'noopener noreferrer', text: `${cName(cc)} (${data.countries[cc].photos})` })])) : null,
-      have.length ? h('details', { class: 'fold' }, h('summary', { text: `All the countries (${have.length})` }),
-        h('table', null, h('tr', null, h('th', { text: 'Country' }), h('th', { text: 'Photos' }), h('th', { text: 'Likes' })),
-          have.map(cc => h('tr', null, h('td', null, h('a', { class: 'lnk', href: gallery(cc), target: '_blank', rel: 'noopener noreferrer', text: cName(cc) })),
-            h('td', { class: 'n', text: String(data.countries[cc].photos) }), h('td', { class: 'n', text: String(data.countries[cc].likes) }))))) : h('p', { class: 'hint', text: 'No photo yet.' }));
-  }
-
   // The window. id: the member to show (default: you, or the member of the profile you are on)
   function worldMapOpen(id) {
     const me = membersMe();
@@ -159,7 +43,7 @@
     const view = h('div', { class: 'wmview' });
     const input = h('input', { type: 'text', placeholder: 'Member number or the link of a profile', 'aria-label': 'Member', autocomplete: 'off' });
     const chips = h('div', { class: 'who' });
-    const body = h('div', { class: 'wm' }, h('style', { text: worldCss }),
+    const body = h('div', { class: 'wm' }, h('style', { text: MAP_CSS }),
       h('div', { class: 'who' }, input, h('button', { type: 'button', class: 'btn', text: 'Show', onclick: () => go(input.value) })), chips, view);
     const modal = modalOpen({ id: 'pmg-worldmap', title: 'World map', body, actions: [{ label: 'Close', kind: 'ghost', run: () => modal.close() }] });
     const who = [...(me ? [{ id: me.id, name: 'Me (' + me.name + ')' }] : []), ...membersGet().filter(m => !me || m.id !== me.id).slice(0, 8)];
