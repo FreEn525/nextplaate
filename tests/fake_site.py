@@ -182,6 +182,16 @@ def route_site(context):
             cards = "".join(f'<div class="panel-body"><h4 class="text-center"><a href="/fr/nomer{i}">car</a></h4><small><p class="text-center"><a href="/gallery.php?{c}">gen</a></p></small></div>' for i, c in enumerate(cars))
             html = HEAD.format(title="Search") + f'<div class="breadcrumbs"><h1 class="pull-left">License plates found <b>{n}</b></h1></div>{cards}</body></html>'
             return route.fulfill(status=200, content_type="text/html; charset=utf-8", body=html)
+        if re.fullmatch(r"/fr/series-[A-Z]{2}-[A-Z]{2}-\d+", path):
+            cells = "".join(
+                (f'<td class="text-center"><a href="/fr/nomer{9000 + i}"><img src="data:,"></a><br><a href="/fr/nomer{9000 + i}">{i:03d}</a></td>' if i in (9, 137, 300)
+                 else f'<td class="warning text-center"><a href="/fr/add.php?digit={i:03d}"><i></i></a><br>{i:03d}</td>') for i in range(1, 1000))
+            html = HEAD.format(title="Series") + f'<div class="container"><table class="table table-bordered table-condensed"><tbody><tr>{cells}</tr></tbody></table></div></body></html>'
+            return route.fulfill(status=200, content_type="text/html; charset=utf-8", body=inject(html) if route.request.resource_type == "document" else html)
+        if path == "/fr/gallery.php" and "fastsearch" in query:
+            GALLERY_USR.append(query)
+            html = HEAD.format(title="Search") + '<div class="breadcrumbs"><h1 class="pull-left">License plates found <b>2</b></h1></div></body></html>'
+            return route.fulfill(status=200, content_type="text/html; charset=utf-8", body=html)
         if path == "/userreg.php":
             system, uid = query.get("gallery", ["fr1-0"])[0].rsplit("-", 1)
             USERREG.append(system)

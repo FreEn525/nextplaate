@@ -2,6 +2,9 @@
 
 ## 5.9 (in progress)
 
+**Series counter**
+- New feature *Series counter* (switch in Settings), for the French plates (the shape was checked on the real site; other countries join once their pages are checked): in the plate card of the upload page, how many photos of the series of the plate you already have (HF-137-QQ is in the series HF-*-QQ), a link to them; on a series page of the site, how many of its numbers are on the site, which ones, and how many photos of the series you have. One request each, through the shared queue.
+
 **Profile: regions**
 - New feature *Profile: regions* (switch in Settings): on a member's profile, a button reads the site's region statistics page (nothing is asked on loading the profile) and shows how many regions (departments, districts, states...) of a country the member has a photo from, with a bar, each region seen as a link to those photos, and the list of the missing ones. The menu of countries comes from the page itself (no list in the script) and each country is asked once.
 
