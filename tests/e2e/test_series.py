@@ -43,8 +43,8 @@ def test_the_count_links_to_those_photos_in_a_new_tab(ctx):
     assert a == ["_blank", "noopener noreferrer", "/fr/gallery.php?fastsearch=AB%20*%20CD&usr=121559"]
 
 
-def test_a_plate_that_is_not_of_that_shape_has_no_series_line(ctx):
-    page = type_plate(ctx, "ZZ 99 ZZ")
+def test_a_plate_with_only_digits_has_no_series_line(ctx):
+    page = type_plate(ctx, "9999")
     page.wait_for_function("() => document.getElementById('pmg-plate-card')", timeout=15000)
     page.wait_for_timeout(500)
     assert page.evaluate(f"() => !{PLATE}.querySelector('.stat')")

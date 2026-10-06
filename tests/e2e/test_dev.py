@@ -35,7 +35,7 @@ def test_developer_drawer_groups_and_status(browser):
     page.wait_for_selector("#pmg-host")
     page.evaluate("() => document.getElementById('pmg-host').shadowRoot.querySelector('.rbtn[data-drawer=\"dev\"]').click()")
     titles = page.evaluate("() => [...document.getElementById('pmg-host').shadowRoot.querySelectorAll('.dsec[data-drawer=\"dev\"] .gtitle')].map(e => e.textContent)")
-    assert titles == ["Status", "Save the page", "Capture", "Plate test", "Verify the reads", "Database", "Series collection"]
+    assert titles == ["Status", "Save the page", "Capture", "Plate test", "Verify the reads", "Database", "Series collection", "Series check"]
     # the status box reads the dev store: nothing kept yet on a fresh profile
     page.wait_for_function("() => document.getElementById('pmg-host').shadowRoot.getElementById('devStatus').textContent.includes('Upload pages kept')")
     text = page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('devStatus').textContent")
@@ -163,4 +163,22 @@ def test_series_collection_does_not_ask_again_for_what_is_collected(browser):
         page.evaluate(SEED_JS, ["seriesrec:" + cc, {"country": cc, "tables": [], "page": None, "wildcard": None}])
     page.evaluate(f"() => {SHADOW}.getElementById('seriesGo').click()")
     page.wait_for_function(f"() => {SHADOW}.getElementById('seriesMsg').textContent.includes('Every country is collected')", timeout=10000)
+    c.close()
+
+
+@needs_dev
+def test_series_check_summarises_per_country_and_does_not_ask_again(browser):
+    c, page = _dev_page(browser)
+    samples = page.evaluate("() => nextplaateDev.seriesSamples")
+    assert len(samples) > 50 and all(len(v) <= 2 for v in samples.values())
+    for cc, plates in samples.items():
+        for i, plate in enumerate(plates):
+            ok = cc == "fr" or (cc == "it" and i == 0)                 # fr: all found; it: one of two; the others: none
+            page.evaluate(SEED_JS, [f"seriescheck:{cc}|{i}", {"country": cc, "plate": plate, "query": "x", "count": 3 if ok else 0, "plates": [], "found": ok, "ok": ok}])
+    page.evaluate(f"() => {SHADOW}.getElementById('sckGo').click()")
+    page.wait_for_function(f"() => {SHADOW}.getElementById('sckMsg').textContent.includes('Every sample is checked')", timeout=10000)
+    page.evaluate(f"() => {SHADOW}.getElementById('sckCheck').click()")
+    page.wait_for_function(f"() => {SHADOW}.getElementById('sckMsg').textContent.includes('Safe')", timeout=10000)
+    text = page.evaluate(f"() => {SHADOW}.getElementById('sckMsg').textContent")
+    assert "Safe: 1 (fr)" in text and "Mixed: it" in text
     c.close()

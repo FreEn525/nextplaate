@@ -127,6 +127,7 @@ Autour de ces fonctions : la barre d'icônes (avec votre photo de profil sous le
 - **Verify the reads** : demande au site si la lecture du script est trouvée (`data/verify/reads.json`).
 - **Database** : écrit la base, le journal des requêtes, les galeries vides et les résultats de vérification.
 - **Plate test** : teste les plaques de la galerie dans le formulaire de chaque catégorie, sur tous les pays, et écrit un rapport (`plates-report.md` et `.json`) et une base (`plates-db.json`, `request-log.json`).
+- **Series check** : pour deux vraies plaques par pays (91 pays), construit la recherche de série (le plus long groupe de chiffres devient un joker : `HF-137-QQ` donne `HF * QQ`), la demande au site et note si la plaque revient ; les pays où elle revient seront activés pour le compteur de série.
 - **Series collection** : pour les 55 pays dont les pages renvoient vers un tableau de séries, lit le tableau, une page de série et la recherche à joker du site avec votre numéro de membre (environ trois requêtes par pays, reprend là où elle s'est arrêtée), puis écrit le tout dans un dossier (`reference/real/series/`) pour construire le compteur de série de ces pays hors ligne.
 
 ## Fonctionnement technique

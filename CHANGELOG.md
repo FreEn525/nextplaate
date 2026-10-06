@@ -9,6 +9,7 @@
 - Typing in a text field that sits in a card or bar of the script (the country search of the flag bar, for example) no longer triggers the shortcut keys: `U` no longer opens the Batch upload drawer while you type. The key handler now looks at the control that has the focus through every shadow root.
 
 **Developer build**
+- New tool *Series check* (dev drawer): for two real plates per country (91 countries), it builds the series search the feature will use (the longest run of digits becomes a wildcard: HF-137-QQ is `HF * QQ`, `01 A 123 ZZ` is `01 A * ZZ`), asks the site, and records whether the plate comes back; countries where it does are then switched on for the series counter.
 - New tool *Series collection* (dev drawer, not in the published script): for the 55 countries whose pages link a table of series, it reads the table, one series page and the site's own wildcard search with your member number, through the shared queue (about three requests per country, it carries on where it stopped), keeps them in the browser and writes them to a folder, to build the series feature for more countries offline.
 
 **Official register (Netherlands, Israel)**

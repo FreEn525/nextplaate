@@ -3520,16 +3520,28 @@
    *      gallery.php?fastsearch=HF * QQ&usr=<you>, one request through the shared queue, kept for the visit);
    *    - a series page of the site (/fr/series-HF-QQ-1, the 999 numbers of a series): how many numbers are on the site, which
    *      ones, and how many photos of the series you have.
-   *    Only the countries whose plates and series pages were checked on the real site are listed in SERIES.
+   *    The series of a plate is its search with the longest run of digits as a wildcard (seriesQuery). It is switched on only for the
+   *    countries where the dev tool "Series check" found the plates again on the real site (SERIES_COUNTRIES).
    * ===================================================================== */
-  // country -> how the plate gives its series: the two groups of letters around the digits
-  const SERIES = { fr: /^([A-Z]{2})[\s-]\d{3}[\s-]([A-Z]{2})$/ };
+  // The countries where the series search was checked on the real site: a plate comes back from its own series search
+  const SERIES_COUNTRIES = new Set(['fr']);
   const seriesCache = new Map();      // address -> count
 
-  // { letters: ['HF', 'QQ'], query: 'HF * QQ', label: 'HF-*-QQ' } for a plate of a listed country, else null
+  // The series search of a plate: its longest run of digits (the last one when equal) becomes the wildcard, the separators become
+  // spaces: HF-137-QQ -> "HF * QQ", AA 7181 -> "AA *". null when nothing is left to tell the series (a plate of digits only).
+  function seriesQuery(plate) {
+    const s = String(plate).toUpperCase().trim();
+    let best = null;
+    for (const m of s.matchAll(/\d+/g)) if (!best || m[0].length >= best[0].length) best = m;
+    if (!best) return null;
+    const q = (s.slice(0, best.index) + '*' + s.slice(best.index + best[0].length)).split(/[\s-]+/).filter(Boolean).join(' ');
+    return /[^*\s]/.test(q) ? q : null;
+  }
+
+  // { query: 'HF * QQ', label: 'HF-*-QQ' } for a plate of a country where series are switched on, else null
   function seriesOf(cc, plate) {
-    const m = SERIES[cc] && SERIES[cc].exec(String(plate).toUpperCase());
-    return m ? { query: `${m[1]} * ${m[2]}`, label: `${m[1]}-*-${m[2]}` } : null;
+    const query = SERIES_COUNTRIES.has(cc) && seriesQuery(plate);
+    return query ? { query, label: query.replace(/ /g, '-') } : null;
   }
 
   const seriesGallery = (cc, query, me) => `/${cc}/gallery.php?fastsearch=${encodeURIComponent(query)}&usr=${me}`;
