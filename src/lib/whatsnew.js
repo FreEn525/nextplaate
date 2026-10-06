@@ -7,6 +7,16 @@
   const AUTHOR = { name: 'NextEnzzo', profile: 'https://platesmania.com/user121559' };
 
   const WHATS_NEW = [{
+    version: '5.11',
+    title: 'A world map of the photos',
+    sections: [{
+      title: 'New',
+      items: [
+        { title: 'World map', text: 'The countries a member has photos from, on a map of the world, shaded by how many photos. Yours, or anyone’s: type a number or paste a profile link. Open it with M, from Browse, or from a profile. A Europe view zooms where most of the photos are.' },
+        { title: 'The brand and model box', text: 'The site’s text box is clearer: a short label, a field with an example, a clear button and nicer suggestions. The plate card is also in labelled sections now.' }
+      ]
+    }]
+  }, {
     version: '5.10',
     title: 'The panel in the order of use, and every feature explained',
     sections: [{

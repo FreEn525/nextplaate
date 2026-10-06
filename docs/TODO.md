@@ -25,6 +25,9 @@ Notes prises pendant la collecte des séries. On les fait au fur et à mesure, d
 
 16. **Simplifier l'UX de la page d'ajout d'un pays (`/xx/add`)** : **fait pour la carte Plate check** (version 5.10 : sections « On the site », « Official register », « Your photos », liens repliés, phrases, plus de « null »). À revoir ensemble si d'autres blocs te paraissent encore chargés. Ce que nous ajoutons au-dessus du site (hors tags) est trop chargé : beaucoup d'informations et de boutons sans qu'on sache quoi fait quoi (deux boutons « Fill the menus », des compteurs sans phrase, treize liens de recherche, un « null » affiché). Regrouper par sections claires, plier ce qui est secondaire, écrire des phrases.
 
+17. **Boîte « Specify brand and model of vehicle »** : **fait** (version 5.10.1).
+18. **Carte du monde d'un membre** : **fait** (version 5.11, `81-worldmap.js`). Idée suivante si tu veux : des cartes de régions pays par pays (France, Allemagne...) à partir de `userreg.php`.
+
 Autres demandes en cours : compteur de série pour tous les pays (attend les pages de `reference/real/series/` de l'outil Series collection) ; liens de recherche par pays (faits : liens universels ouverts, NL, IL, UK, NZ).
 
 ## Identité visuelle

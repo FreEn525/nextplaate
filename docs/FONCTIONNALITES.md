@@ -28,8 +28,9 @@ Chaque fonction a un interrupteur dans Settings (sauf Settings elle-même) : ét
 | 18 | Compteur de série | Series counter | carte Plate check, pages de série | vos photos de la série de la plaque (84 pays vérifiés sur le vrai site : le plus long groupe de chiffres devient un joker) ; sur une page de série, les numéros présents sur le site | |
 | 19 | Vrais uploads | Profile: real uploads | profils | total réel de la galerie et uploads du jour (dès 03 h 30), écart avec le chiffre du profil | |
 | 20 | Régions | Profile: regions | profils | régions d'un pays dont vous avez une photo, barre, liste des manquantes ; menu des pays lu sur la page du site | |
-| 21 | Éditeur de raccourcis | Shortcut editor | tiroir Raccourcis | change chaque touche | |
-| 22 | Réglages | (verrouillée) | tiroir Settings | un interrupteur par fonction ; choix des pays de la barre | |
+| 21 | Carte du monde | World map | tiroir Browse, profils, touche `M` | les pays dont un membre a des photos sur une carte du monde, nuancés selon le nombre de photos, chacun un lien vers ses photos ; vue Europe ; vous ou n'importe quel membre | `M` |
+| 22 | Éditeur de raccourcis | Shortcut editor | tiroir Raccourcis | change chaque touche | |
+| 23 | Réglages | (verrouillée) | tiroir Settings | un interrupteur par fonction ; choix des pays de la barre | |
 
 Autour de ces fonctions : la barre d'icônes (avec votre photo de profil sous le logo), le message d'état en bas, et pour le développement le tiroir Developer du build dev (capture, test de plaques, vérification des lectures, base).
 
@@ -65,6 +66,7 @@ La barre suit l'ordre d'usage : **Check a plate** (vérifier ce qu'on va envoyer
 | Member shortcuts | everywhere |
 | Profile: real uploads | every member |
 | Profile: regions | every country the site has regions for |
+| World map | every member |
 | Shortcut editor | everywhere |
 
 ## Installation et version
@@ -190,6 +192,11 @@ La barre suit l'ordre d'usage : **Check a plate** (vérifier ce qu'on va envoyer
 ### Profil : régions (pages `/user<id>`, `src/features/78-regions.js`)
 - Un bouton lit `userreg.php?gallery=<système>-<id>` (rien n'est demandé au chargement) : une ligne par région, le nombre de photos en lien quand il y en a, un tiret sinon, et un menu `select[name=gallery]` qui liste tous les systèmes de tous les pays (aucune liste dans le script). La carte montre « X / Y régions », une barre, les régions vues (liens vers vos photos) et les manquantes. Chaque système est demandé une fois.
 
+### Carte du monde (tiroir `gallery`, profils, touche `M`, `src/features/81-worldmap.js`, `src/lib/worldmap.js`)
+- Une fenêtre (comme celle de l'envoi par lots) avec le monde en SVG : chaque pays dont le membre a des photos est rempli en cinq nuances du bleu du panneau (1, 2-9, 10-49, 50-199, 200 et plus). Chaque pays est un lien vers les photos du membre dans ce pays (`gallery.php?usr=`), avec ses chiffres en texte de survol. Les petits pays sans forme sur la carte sont des points ; USSR et les États non reconnus sont listés sous la carte, et une liste de tous les pays est là pour le clavier. Une vue *Europe* zoome là où sont la plupart des photos.
+- Qui : vous (le membre connecté), ou n'importe qui : une case prend un numéro ou le lien d'un profil, et les membres enregistrés sont à un clic. Les chiffres sont ceux du profil du membre (`table` des pays, liens `/usercountry-<pays>-<id>`) : une page lue par la file de requêtes, ou aucune sur le profil même ; gardés pour la visite.
+- La carte est fabriquée par `tools/build-worldmap.mjs` (Natural Earth, domaine public, via le paquet world-atlas ; projection Equal Earth, sans l'Antarctique) : une forme par pays du site (`uk` est le Royaume-Uni), un seul tracé pour tous les autres, des points pour les petits pays lus sur la carte au 1:50 000 000.
+
 ### À propos et nouveautés (tiroir `settings`, `src/features/90-about.js`, `src/lib/whatsnew.js`)
 - Signature « © 2026 NextEnzzo » avec le lien du profil (`@author`, `@copyright`, bannière de la console aussi). Le bouton *What's new* ouvre la fenêtre des nouveautés ; elle s'ouvre seule une fois après une mise à jour (pas à la première installation). Son texte est dans `whatsnew.js` ; un test échoue si `@version` change sans son entrée.
 
@@ -238,7 +245,7 @@ Chaque fonction s'enregistre avec `registerFeature({ groups, keys, onEscape, ini
 
 ## Tests (`tests/`)
 
-- `python -m pytest -q` (dossier `tests/e2e/`) : 369 tests (374 avec le build dev, `NEXTPLAATE_SCRIPT=nextplaate.dev.user.js`) sur une version simulée du site (`fake_site.py`, avec une fausse page Google pour le Lens). Un fichier par fonction (`test_lens.py`, `test_tags.py`, `test_members.py`, `test_flags.py`, `test_extra.py`, `test_preview.py`…), plus `test_style.py` (couleurs, rayons, tailles, hauteurs) et `test_responsive.py` (aucun débordement de 320 à 1280 px). Pas d'accès réel à PlatesMania ni à Google.
+- `python -m pytest -q` (dossier `tests/e2e/`) : 393 tests (398 avec le build dev, `NEXTPLAATE_SCRIPT=nextplaate.dev.user.js`) sur une version simulée du site (`fake_site.py`, avec une fausse page Google pour le Lens). Un fichier par fonction (`test_lens.py`, `test_tags.py`, `test_members.py`, `test_flags.py`, `test_extra.py`, `test_preview.py`…), plus `test_style.py` (couleurs, rayons, tailles, hauteurs) et `test_responsive.py` (aucun débordement de 320 à 1280 px). Pas d'accès réel à PlatesMania ni à Google.
 - `python tests/offline/check_known.py` : 39 plaques validées à la main, tapées dans les pages sauvegardées.
 - `python tests/offline/check_db.py` : toutes les plaques de la base, dans la catégorie correspondante, en parallèle. Hors ligne.
 - Les données dérivées : `node scripts/refresh-data.mjs` → `data/` et `docs/COUVERTURE.md` (voir `data/README.md`).

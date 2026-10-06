@@ -57,7 +57,8 @@
           h('div', { class: 'stat' }, h('b', { text: profileFormat(total) }), h('span', { class: 'mute', text: 'photos in the gallery now' })),
           h('div', { class: 'stat' }, h('b', { text: '+' + today }), h('span', { class: 'mute', text: `today (since ${at})` }))),
         h('p', { class: 'hint', text: gap === 0 ? 'The profile figure is up to date.' : `The profile says ${profileFormat(shown)}: ${Math.abs(gap)} ${gap > 0 ? 'more' : 'fewer'} in the gallery, the site has not recalculated yet.` }),
-        h('div', { class: 'cardrow' }, h('a', { class: 'btn ghost sm', href: profileGallery(id, day), target: '_blank', rel: 'noopener noreferrer', text: 'See today’s photos' }))));
+        h('div', { class: 'cardrow' }, h('a', { class: 'btn ghost sm', href: profileGallery(id, day), target: '_blank', rel: 'noopener noreferrer', text: 'See today’s photos' }),
+          featureOn('worldmap') ? h('button', { type: 'button', class: 'btn ghost sm', text: 'World map of this member', onclick: () => worldMapOpen(id) }) : null)));
     }).catch(e => card.message('Not counted: ' + e.message));
   }
 

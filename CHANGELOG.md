@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.11
+
+**World map**
+- New feature *World map* (switch in Settings): a window like the batch window (key `M`, or Browse > World map, or the button of a profile) with the world as an SVG and the countries a member has photos from filled in five shades of the panel's blue (1, 2-9, 10-49, 50-199, 200 and more photos). Each country is a link to the member's photos of it, with its figures as the hover text; the small countries the map has no shape for are dots; USSR and the non-recognised states are listed under the map, and a list of all the countries is there for the keyboard. A *Europe* view zooms where most of the photos are. It shows yours, or anyone's: a box takes a member number or the link of a profile, and the members you saved are one click. The figures are those of the member's profile (one page, or none when you are on it), read through the shared queue.
+- The map is Natural Earth data (public domain, through the world-atlas package), built by `tools/build-worldmap.mjs` into `src/lib/worldmap.js`.
+
 ## 5.10.1
 
 **The brand and model box**

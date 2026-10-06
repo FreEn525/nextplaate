@@ -32,7 +32,7 @@ Elle est dans `src/meta/00-header.txt` (`@description`, et `@description:fr` pou
 (En anglais, Markdown : choisir « Markdown » comme format.)
 
 ```markdown
-**NextPlaate** adds a panel to PlatesMania that makes posting photos and browsing faster. Twenty-two features, each with a switch in Settings (except Settings itself). Made by [NextEnzzo](https://platesmania.com/user121559).
+**NextPlaate** adds a panel to PlatesMania that makes posting photos and browsing faster. Twenty-three features, each with a switch in Settings (except Settings itself). Made by [NextEnzzo](https://platesmania.com/user121559).
 
 A click on the logo of the panel checks for a newer version. The bar follows the order of use: Check a plate, Send photos, Describe a pair, Browse. Settings tells what each feature does and where it works: the plate check covers all 96 countries and 829 plate categories (795 checked exactly on real plates), the series counter 84 countries, the official register the Netherlands and Israel; the rest works everywhere.
 
@@ -62,9 +62,11 @@ A click on the logo of the panel checks for a newer version. The bar follows the
 19. **Profile: real uploads** - the real total of a member's gallery and the uploads of the day (from 03:30 local time), next to the profile's own figure, which the site only recalculates from time to time.
 20. **Profile: regions** - how many regions of a country a member has a photo from, with a bar, the regions seen and the missing ones.
 
+21. **World map** (`M`) - the countries a member has photos from on a map of the world, shaded by how many photos, each a link to the member's photos of it; a Europe view; yours or anyone's (a member number or a profile link).
+
 ## The panel
-21. **Shortcut editor** - every key can be changed (AZERTY-safe).
-22. **Settings** - one switch per feature.
+22. **Shortcut editor** - every key can be changed (AZERTY-safe).
+23. **Settings** - one switch per feature.
 
 ## Permissions, in plain words
 - It works on platesmania.com. Everything it reads from the site goes through one queue: one request at a time, three seconds apart, a pause after a block.

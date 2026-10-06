@@ -24,5 +24,6 @@
     regions: { about: 'On a member’s profile: which regions of a country the member has a photo from, and which are missing.', scope: 'every country the site has regions for' },
     series: { about: 'How many of your photos are in the series of the plate you type (HF-137-QQ is in HF-*-QQ); on a series page, the numbers already on the site.', scope: '84 countries (checked on the real site)' },
     registry: { about: 'Asks the country’s open register (public data) for make, model, year and colour, and fills the menus that are still empty. Only the plate is sent; two switches in Settings turn it off.', scope: 'Netherlands and Israel' },
+    worldmap: { about: 'The countries a member has photos from on a map of the world, shaded by how many photos. Yours, or anyone’s: type a number or paste a profile link.', scope: 'every member' },
     upload: { about: 'Queue many photos (or a folder), give each a country and a plate category, and send them one tab per photo with a pause between.', scope: 'every country' }
   };

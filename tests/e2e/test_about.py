@@ -29,17 +29,17 @@ def open_page(ctx, seen=None):
 def test_a_first_install_shows_nothing_and_remembers_the_version(ctx):
     page = open_page(ctx)
     assert page.evaluate(f"() => !{MODAL}")
-    assert page.evaluate("() => localStorage.getItem('pmg_seen_version')") == "5.10.1"
+    assert page.evaluate("() => localStorage.getItem('pmg_seen_version')") == "5.11"
 
 
 def test_after_an_update_the_window_opens_once(ctx):
     page = open_page(ctx, seen="5.8")
     assert page.evaluate(f"() => !!{MODAL}")
     title = page.evaluate(f"() => {MODAL}.shadowRoot.querySelector('h2').textContent")
-    assert title == "What’s new in 5.10"
+    assert title == "What’s new in 5.11"
     sections = page.evaluate(f"() => [...{MODAL}.shadowRoot.querySelectorAll('.wn-section .cat')].map(e => e.textContent)")
-    assert sections == ["The panel", "Clearer pages", "On the upload page", "On profiles and series", "Good to know"]          # 5.10, then 5.9 (seen 5.8)
-    assert page.evaluate("() => localStorage.getItem('pmg_seen_version')") == "5.10.1"
+    assert sections == ["New", "The panel", "Clearer pages", "On the upload page", "On profiles and series", "Good to know"]          # 5.11, 5.10, then 5.9 (seen 5.8)
+    assert page.evaluate("() => localStorage.getItem('pmg_seen_version')") == "5.11"
     page.reload()
     page.wait_for_selector("#pmg-host")
     page.wait_for_timeout(300)
@@ -59,7 +59,7 @@ def test_settings_has_the_signature_with_the_profile_link(ctx):
     page = open_page(ctx)
     page.evaluate(f"() => {PANEL}.querySelector('.rbtn[data-drawer=\"settings\"]').click()")
     text = page.evaluate(f"() => {PANEL}.querySelector('.dsec[data-drawer=\"settings\"]').textContent")
-    assert "NextPlaate 5.10.1" in text and "© 2026 NextEnzzo" in text
+    assert "NextPlaate 5.11" in text and "© 2026 NextEnzzo" in text
     a = page.evaluate(f"() => {{ const a = [...{PANEL}.querySelectorAll('.dsec[data-drawer=\"settings\"] a')].find(x => x.textContent === 'NextEnzzo'); return [a.href, a.target, a.rel]; }}")
     assert a == ["https://platesmania.com/user121559", "_blank", "noopener noreferrer"]
 
@@ -82,12 +82,12 @@ def test_every_version_has_its_whats_new_entry():
 
 
 def test_only_what_is_newer_than_the_version_seen_is_shown(ctx):
-    page = open_page(ctx, seen="5.9.1")                                                        # a fix of 5.9: 5.10 is the news
+    page = open_page(ctx, seen="5.10.1")                                                       # a fix of 5.10: 5.11 is the news
     sections = page.evaluate(f"() => [...{MODAL}.shadowRoot.querySelectorAll('.wn-section .cat')].map(e => e.textContent)")
-    assert sections == ["The panel", "Clearer pages"]
+    assert sections == ["New"]
 
 
 def test_a_fix_version_does_not_open_the_window(ctx):
-    page = open_page(ctx, seen="5.10")                                                         # 5.10 -> 5.10.1: a fix
+    page = open_page(ctx, seen="5.11.1")                                                       # same minor version: a fix
     assert page.evaluate(f"() => !{MODAL}")
-    assert page.evaluate("() => localStorage.getItem('pmg_seen_version')") == "5.10.1"
+    assert page.evaluate("() => localStorage.getItem('pmg_seen_version')") == "5.11"
