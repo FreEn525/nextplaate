@@ -46,7 +46,7 @@
     const chips = h('span', { class: 'who' });
     const menu = h('select', { 'aria-label': 'Map to show', hidden: true });
     const bar = h('div', { class: 'bar' }, input, h('button', { type: 'button', class: 'btn', text: 'Show', onclick: () => go(input.value) }), chips,
-      h('span', { class: 'gap' }), h('span', { class: 'lbl', text: 'Map' }), menu);
+      h('span', { class: 'gap' }), h('span', { class: 'lbl', text: 'Map', hidden: true }), menu);
     const body = h('div', { class: 'wm' }, h('style', { text: MAP_CSS }), bar, view);
     const modal = modalOpen({ id: 'pmg-worldmap', title: 'World map', body, fill: true });
     const who = [...(me ? [{ id: me.id, name: 'Me (' + me.name + ')' }] : []), ...membersGet().filter(m => !me || m.id !== me.id).slice(0, 6)];

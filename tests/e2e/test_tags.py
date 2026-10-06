@@ -197,7 +197,7 @@ def test_escape_and_the_cross_and_the_backdrop_cancel_too(ctx):
     page.click("#tags-edit-link")
     page.wait_for_selector("#pmg-tags-modal")
     win_click(page, "bus")
-    page.evaluate(f"() => {WIN}.querySelector('.mh .iconbtn').click()")
+    page.evaluate(f"() => {WIN}.querySelector('.mh .btn').click()")
     assert page.evaluate("() => document.getElementById('CheckBox21').checked") is False
     page.click("#tags-edit-link")
     page.wait_for_selector("#pmg-tags-modal")

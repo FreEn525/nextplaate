@@ -47,7 +47,7 @@
     .wm .sum span{font-size:12px;color:var(--mute)}
     .wm .rows{flex:1;min-height:0;margin:0;padding:0;list-style:none;overflow:auto}
     .wm .row{position:relative;display:flex;align-items:center;gap:8px;min-height:36px;padding:0 16px;border-bottom:1px solid var(--line);font-size:13px}
-    .wm .row .share{position:absolute;left:0;top:0;bottom:0;background:var(--primary-tint)}
+    .wm .row .share{position:absolute;left:0;top:0;bottom:0;background:var(--primary-soft);border-right:2px solid var(--primary)}
     .wm .row.on{outline:1px solid var(--primary-soft);outline-offset:-1px}
     .wm .row a.lnk,.wm .row .n,.wm .row .go{position:relative}
     .wm .row a.lnk{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--primary-h);font-weight:600}

@@ -1978,16 +1978,18 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
    *    It is in a shadow root (the site's CSS does not reach it) and uses the panel's tokens. One modal of an id at a time.
    * ===================================================================== */
   const MODAL_CSS = `
-    .ov{position:fixed;inset:0;background:rgba(17,17,17,.55);display:flex;justify-content:center;align-items:flex-start;padding:5vh 72px 5vh 16px;overflow:auto}   /* 72 = the panel's rail (56) and a margin: the window never goes under it */
+    .ov{position:fixed;inset:0;background:rgba(17,17,17,.55);display:flex;justify-content:center;align-items:flex-start;padding:22px 72px 22px 22px;overflow:auto}   /* 72 = the panel's rail (56) and a margin: the window never goes under it */
     .dlg{background:#fff;border:1px solid var(--line);width:min(960px,100%);max-height:90vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.35)}
     .mh{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:56px;padding:0 16px;border-bottom:1px solid var(--line)}
-    .mh h2{margin:0;font-size:16px;font-weight:700;color:var(--primary-h)}
+    .mh h2{margin:0;font-size:14px;font-weight:500;color:var(--mute)}                /* the same header as the batch window: the mark, then the name of the window */
+    .mh .mbrand{display:flex;flex:none}
+    .mh .btn{height:var(--h-sm);flex:none}
     .mh .sub{flex:1;min-width:0;font-size:12px;color:var(--mute);overflow-wrap:anywhere}
     .mb{flex:1;min-height:0;overflow:auto}
-    .ov.fill{align-items:center;padding:2vh 72px 2vh 16px}
-    .dlg.fill{width:min(1280px,100%);height:min(860px,100%);max-height:none}
+    .ov.fill{align-items:center}
+    .dlg.fill{width:min(1400px,100%);height:100%;max-height:none}
     .dlg.fill .mb{overflow:hidden;display:flex;flex-direction:column}
-    @media (max-width:640px){.ov.fill{padding:0 56px 0 0}.dlg.fill{height:100%;border:0}}
+    @media (max-width:640px){.ov{padding:0 56px 0 0}.dlg{border:0;max-height:100%}.mh .mbrand span span{display:none}}
     .mf{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px;padding:12px 16px;border-top:1px solid var(--line);background:var(--paper)}
   `;
 
@@ -1997,6 +1999,8 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     host.style.cssText = 'position:fixed;inset:0;z-index:2147483645';
     const root = host.attachShadow({ mode: 'open' });
     const sub = h('span', { class: 'sub' });
+    const brand = h('span', { class: 'mbrand' });
+    brand.innerHTML = WORDMARK(38);                                                  // our own SVG constant, never user data
     const before = document.documentElement.style.overflow;
     let done = false;
     const modal = {
@@ -2014,7 +2018,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     const onKey = e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); modal.dismiss(); } };
     const ov = h('div', { class: 'ov' + (opts.fill ? ' fill' : ''), onclick: e => { if (e.target === ov) modal.dismiss(); } },
       h('div', { class: 'dlg' + (opts.fill ? ' fill' : ''), role: 'dialog' },
-        h('div', { class: 'mh' }, h('h2', { text: opts.title }), sub, h('button', { class: 'iconbtn', title: 'Close', text: '×', onclick: () => modal.dismiss() })),
+        h('div', { class: 'mh' }, brand, h('h2', { text: opts.title }), sub, h('button', { type: 'button', class: 'btn ghost', title: 'Close (Esc)', text: 'Close', onclick: () => modal.dismiss() })),
         modal.body = h('div', { class: 'mb' }, opts.body),
         opts.actions && opts.actions.length
           ? h('div', { class: 'mf' }, opts.actions.map(a => h('button', { type: 'button', class: 'btn' + (a.kind === 'ghost' ? ' ghost' : ''), text: a.label, onclick: a.run })))
@@ -2074,7 +2078,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     .wm .sum span{font-size:12px;color:var(--mute)}
     .wm .rows{flex:1;min-height:0;margin:0;padding:0;list-style:none;overflow:auto}
     .wm .row{position:relative;display:flex;align-items:center;gap:8px;min-height:36px;padding:0 16px;border-bottom:1px solid var(--line);font-size:13px}
-    .wm .row .share{position:absolute;left:0;top:0;bottom:0;background:var(--primary-tint)}
+    .wm .row .share{position:absolute;left:0;top:0;bottom:0;background:var(--primary-soft);border-right:2px solid var(--primary)}
     .wm .row.on{outline:1px solid var(--primary-soft);outline-offset:-1px}
     .wm .row a.lnk,.wm .row .n,.wm .row .go{position:relative}
     .wm .row a.lnk{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--primary-h);font-weight:600}
@@ -4438,7 +4442,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     const chips = h('span', { class: 'who' });
     const menu = h('select', { 'aria-label': 'Map to show', hidden: true });
     const bar = h('div', { class: 'bar' }, input, h('button', { type: 'button', class: 'btn', text: 'Show', onclick: () => go(input.value) }), chips,
-      h('span', { class: 'gap' }), h('span', { class: 'lbl', text: 'Map' }), menu);
+      h('span', { class: 'gap' }), h('span', { class: 'lbl', text: 'Map', hidden: true }), menu);
     const body = h('div', { class: 'wm' }, h('style', { text: MAP_CSS }), bar, view);
     const modal = modalOpen({ id: 'pmg-worldmap', title: 'World map', body, fill: true });
     const who = [...(me ? [{ id: me.id, name: 'Me (' + me.name + ')' }] : []), ...membersGet().filter(m => !me || m.id !== me.id).slice(0, 6)];

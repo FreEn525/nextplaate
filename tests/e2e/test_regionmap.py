@@ -49,13 +49,13 @@ def open_map(ctx):
     page.goto("https://platesmania.com/fr/gallery.php")
     page.wait_for_selector("#pmg-host")
     page.keyboard.press("KeyG")
-    page.wait_for_function(f"() => document.getElementById('pmg-worldmap') && {MODAL}.querySelector('svg')", timeout=20000)
+    page.wait_for_function(f"() => document.getElementById('pmg-worldmap') && {MODAL}.querySelector('svg[role=img]')", timeout=20000)
     return page
 
 
 def choose(page, cc="fr"):
     page.evaluate(f"() => {{ const s = {MODAL}.querySelector('select[aria-label=\"Map to show\"]'); s.value = '{cc}'; s.dispatchEvent(new Event('change')); }}")
-    page.wait_for_function(f"() => {MODAL}.querySelectorAll('svg path.c').length === 4 || {MODAL}.textContent.includes('Not drawn')", timeout=40000)
+    page.wait_for_function(f"() => {MODAL}.querySelectorAll('svg[role=img] path.c').length === 4 || {MODAL}.textContent.includes('Not drawn')", timeout=40000)
 
 
 def test_the_picker_offers_the_countries_that_have_a_map_and_that_the_member_has_photos_in(ctx):
@@ -73,7 +73,7 @@ def test_nothing_is_downloaded_until_a_country_is_chosen(ctx):
 def test_a_country_shows_its_regions_shaded_by_the_photos(ctx):
     page = open_map(ctx)
     choose(page)
-    tiers = page.evaluate(f"() => [...{MODAL}.querySelectorAll('svg path.c')].map(p => [...p.classList].find(c => /^t[0-9]$/.test(c)))")
+    tiers = page.evaluate(f"() => [...{MODAL}.querySelectorAll('svg[role=img] path.c')].map(p => [...p.classList].find(c => /^t[0-9]$/.test(c)))")
     assert tiers == ["t0", "t2", "t0", "t0"]                                                    # Aisne 4 photos: the 2-9 shade; the others none
     assert "2 of 4 regions France · 6 photos" == page.evaluate(f"() => [...{MODAL}.querySelector('.sum').children].map(c => c.textContent).join(' ')")
 
@@ -108,9 +108,9 @@ def test_the_way_back_returns_to_the_map_of_the_world(ctx):
 def test_the_region_map_zooms_like_the_world(ctx):
     page = open_map(ctx)
     choose(page)
-    before = page.evaluate(f"() => {MODAL}.querySelector('svg').getAttribute('viewBox')")
+    before = page.evaluate(f"() => {MODAL}.querySelector('svg[role=img]').getAttribute('viewBox')")
     page.evaluate(f"() => [...{MODAL}.querySelectorAll('.tools button')].find(b => b.textContent === '+').click()")
-    assert page.evaluate(f"() => {MODAL}.querySelector('svg').getAttribute('viewBox')") != before
+    assert page.evaluate(f"() => {MODAL}.querySelector('svg[role=img]').getAttribute('viewBox')") != before
 
 
 def test_a_failure_of_the_shapes_says_so(ctx):

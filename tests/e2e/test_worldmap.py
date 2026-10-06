@@ -31,7 +31,7 @@ def open_page(ctx, url=GALLERY, members=None):
 def open_map(page):
     page.evaluate(f"() => {PANEL}.querySelector('.rbtn[data-drawer=\"gallery\"]').click()")
     page.evaluate(f"() => {PANEL}.getElementById('wmOpen').click()")
-    page.wait_for_function(f"() => document.getElementById('pmg-worldmap') && {MODAL}.querySelector('svg')", timeout=20000)
+    page.wait_for_function(f"() => document.getElementById('pmg-worldmap') && {MODAL}.querySelector('svg[role=img]')", timeout=20000)
 
 
 def show(page, text):
@@ -81,7 +81,7 @@ def test_another_member_is_a_number_or_the_link_of_a_profile(ctx):
     page = open_page(ctx)
     open_map(page)
     show(page, "https://platesmania.com/user121546")
-    page.wait_for_function(f"() => {MODAL}.querySelector('.sub').textContent.includes('121546') && {MODAL}.querySelector('svg')", timeout=20000)
+    page.wait_for_function(f"() => {MODAL}.querySelector('.sub').textContent.includes('121546') && {MODAL}.querySelector('svg[role=img]')", timeout=20000)
     assert page.evaluate(f"() => {MODAL}.querySelector('[data-cc=\"lu\"]').parentNode.getAttribute('href')") == "/lu/gallery.php?usr=121546"
 
 
@@ -122,7 +122,7 @@ def test_a_profile_has_a_button_and_its_own_page_is_not_read_again(ctx):
     page.goto("https://platesmania.com/user121546")
     page.wait_for_function("() => document.getElementById('pmg-profile-card') && document.getElementById('pmg-profile-card').shadowRoot.querySelector('.btn')", timeout=20000)
     page.evaluate("() => [...document.getElementById('pmg-profile-card').shadowRoot.querySelectorAll('button')].find(b => b.textContent === 'World map of this member').click()")
-    page.wait_for_function(f"() => document.getElementById('pmg-worldmap') && {MODAL}.querySelector('svg')", timeout=20000)
+    page.wait_for_function(f"() => document.getElementById('pmg-worldmap') && {MODAL}.querySelector('svg[role=img]')", timeout=20000)
     assert page.evaluate(f"() => {MODAL}.querySelector('.sub').textContent").endswith("ID 121546")
     assert len(asked) == 1                                                                   # the page itself, nothing fetched for the map
 
@@ -149,7 +149,7 @@ def test_no_horizontal_overflow(ctx, width):
 
 
 def view(page):
-    return page.evaluate(f"() => {MODAL}.querySelector('svg').getAttribute('viewBox').split(' ').map(Number)")
+    return page.evaluate(f"() => {MODAL}.querySelector('svg[role=img]').getAttribute('viewBox').split(' ').map(Number)")
 
 
 def button(page, text):
@@ -175,7 +175,7 @@ def test_the_buttons_zoom_and_go_to_europe_or_back_to_the_world(ctx):
 def test_the_wheel_zooms_at_the_pointer_and_a_drag_moves_the_map(ctx):
     page = open_page(ctx)
     open_map(page)
-    box = page.evaluate(f"() => {{ const r = {MODAL}.querySelector('svg').getBoundingClientRect(); return [r.x, r.y, r.width, r.height]; }}")
+    box = page.evaluate(f"() => {{ const r = {MODAL}.querySelector('svg[role=img]').getBoundingClientRect(); return [r.x, r.y, r.width, r.height]; }}")
     cx, cy = box[0] + box[2] * 0.52, box[1] + box[3] * 0.3                                   # over Europe
     page.mouse.move(cx, cy)
     for _ in range(4):
@@ -210,9 +210,9 @@ def test_a_drag_does_not_open_the_country_under_the_pointer(ctx):
 def test_the_dots_keep_their_size_on_screen_when_zooming(ctx):
     page = open_page(ctx)
     open_map(page)
-    r0 = page.evaluate(f"() => +{MODAL}.querySelector('circle').getAttribute('r')")
+    r0 = page.evaluate(f"() => +{MODAL}.querySelector('circle.dot').getAttribute('r')")
     page.evaluate(button(page, "Europe"))
-    assert page.evaluate(f"() => +{MODAL}.querySelector('circle').getAttribute('r')") < r0 / 3
+    assert page.evaluate(f"() => +{MODAL}.querySelector('circle.dot').getAttribute('r')") < r0 / 3
 
 
 def test_the_map_has_a_legend_with_no_photo_and_the_five_shades(ctx):
