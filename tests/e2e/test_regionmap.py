@@ -125,3 +125,11 @@ def test_the_shapes_are_fetched_from_the_media_server_not_from_the_github_redire
     page = open_map(ctx)
     choose(page)
     assert GEOJSON in ASKED and GITHUB not in ASKED
+
+
+def test_the_map_matches_with_the_country_and_the_region_pages_get_time_to_answer():
+    """Without the country the aliases, the names of Wikidata and the towns on their county are never used; a long table needs more than 15 s."""
+    from pathlib import Path
+    root = Path(__file__).resolve().parents[2] / "src"
+    assert "regionMatch(regions, geo.shapes, cc)" in (root / "features" / "83-regionmap.js").read_text(encoding="utf-8")
+    assert "/userreg.php?gallery=${system}-${id}`, 60000)" in (root / "features" / "78-regions.js").read_text(encoding="utf-8")

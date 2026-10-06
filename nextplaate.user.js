@@ -420,7 +420,7 @@
     regions: { about: 'On a member’s profile: which regions of a country the member has a photo from, and which are missing.', scope: 'every country the site has regions for' },
     series: { about: 'How many of your photos are in the series of the plate you type (HF-137-QQ is in HF-*-QQ); on a series page, the numbers already on the site.', scope: '84 countries (checked on the real site)' },
     registry: { about: 'Asks the country’s open register (public data) for make, model, year and colour, and fills the menus that are still empty. Only the plate is sent; two switches in Settings turn it off.', scope: 'Netherlands and Israel' },
-    worldmap: { about: 'The countries a member has photos from on a map of the world, shaded by how many photos. Yours, or anyone’s: type a number or paste a profile link. For many countries, the regions too (departments, districts, states).', scope: 'every member (the regions: 47 countries)' },
+    worldmap: { about: 'The countries a member has photos from on a map of the world, shaded by how many photos. Yours, or anyone’s: type a number or paste a profile link. For many countries, the regions too (departments, districts, states).', scope: 'every member (the regions: 54 countries)' },
     upload: { about: 'Queue many photos (or a folder), give each a country and a plate category, and send them one tab per photo with a pause between.', scope: 'every country' }
   };
   /* =====================================================================
@@ -439,12 +439,13 @@
   const SITE_BLOCK_RE = /Error 1015|rate limited|just a moment|attention required|cf-challenge|checking your browser/i;
 
   // Resolves with the text of the page. Rejects with a clear message when the site asks to wait.
-  function siteFetch(url) {
+  // timeout: how long the site may take to answer (a long table, such as the regions of a country, needs more than a gallery count)
+  function siteFetch(url, timeout = SITE_TIMEOUT_MS) {
     if (Date.now() < siteBlockedUntil()) {
       const mins = Math.ceil((siteBlockedUntil() - Date.now()) / 60000);
       return Promise.reject(new Error(`the site asked to wait: try again in about ${mins} min`));
     }
-    return new Promise((resolve, reject) => { siteQueue.push({ url, resolve, reject }); pumpSite(); });
+    return new Promise((resolve, reject) => { siteQueue.push({ url, timeout, resolve, reject }); pumpSite(); });
   }
 
   // The number a gallery page announces in its title ("License plates found 38.723"): the site writes thousands with a dot (or a
@@ -465,7 +466,7 @@
       if (wait > 0) await siteSleep(wait);
       siteLast = Date.now();
       try {
-        const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), SITE_TIMEOUT_MS);
+        const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), job.timeout);
         const res = await fetch(job.url, { credentials: 'same-origin', signal: ctrl.signal });
         clearTimeout(timer);
         const text = await res.text();
@@ -480,7 +481,7 @@
         if (!res.ok) job.reject(new Error('HTTP ' + res.status));
         else job.resolve(text);
       } catch (e) {
-        job.reject(new Error(e.name === 'AbortError' ? 'the site did not answer in time' : e.message));
+        job.reject(new Error(e.name === 'AbortError' ? `the site did not answer in ${Math.round(job.timeout / 1000)} s` : e.message));
       }
     }
     siteBusy = false;
@@ -4119,7 +4120,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
 
   async function regionsAsk(system, id) {
     if (regionsCache.has(system)) return regionsCache.get(system);
-    const page = regionsParse(new DOMParser().parseFromString(await siteFetch(`/userreg.php?gallery=${system}-${id}`), 'text/html'));
+    const page = regionsParse(new DOMParser().parseFromString(await siteFetch(`/userreg.php?gallery=${system}-${id}`, 60000), 'text/html'));
     if (!page.rows.length && !page.systems.length) throw new Error('no region table on the page');
     regionsCache.set(system, page);
     return page;
@@ -4481,7 +4482,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
   async function regionMapView(cc, data) {
     const [iso, level] = REGION_MAPS[cc];
     const [regions, geo] = await Promise.all([regionRows(cc, data.id), regionShapes(iso, level)]);
-    const { placed, missing } = regionMatch(regions, geo.shapes);
+    const { placed, missing } = regionMatch(regions, geo.shapes, cc);
     const count = r => r.count;
     const link = r => r.href || `/${cc}/gallery.php?usr=${data.id}`;
     const svg = svgEl('svg', { viewBox: `0 0 ${geo.w} ${geo.h}`, role: 'img', 'aria-label': `${cName(cc)}: the regions of ${data.name}` });

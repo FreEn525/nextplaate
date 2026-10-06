@@ -32,7 +32,7 @@
 
   async function regionsAsk(system, id) {
     if (regionsCache.has(system)) return regionsCache.get(system);
-    const page = regionsParse(new DOMParser().parseFromString(await siteFetch(`/userreg.php?gallery=${system}-${id}`), 'text/html'));
+    const page = regionsParse(new DOMParser().parseFromString(await siteFetch(`/userreg.php?gallery=${system}-${id}`, 60000), 'text/html'));
     if (!page.rows.length && !page.systems.length) throw new Error('no region table on the page');
     regionsCache.set(system, page);
     return page;

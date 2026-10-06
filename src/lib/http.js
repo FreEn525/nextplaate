@@ -14,12 +14,13 @@
   const SITE_BLOCK_RE = /Error 1015|rate limited|just a moment|attention required|cf-challenge|checking your browser/i;
 
   // Resolves with the text of the page. Rejects with a clear message when the site asks to wait.
-  function siteFetch(url) {
+  // timeout: how long the site may take to answer (a long table, such as the regions of a country, needs more than a gallery count)
+  function siteFetch(url, timeout = SITE_TIMEOUT_MS) {
     if (Date.now() < siteBlockedUntil()) {
       const mins = Math.ceil((siteBlockedUntil() - Date.now()) / 60000);
       return Promise.reject(new Error(`the site asked to wait: try again in about ${mins} min`));
     }
-    return new Promise((resolve, reject) => { siteQueue.push({ url, resolve, reject }); pumpSite(); });
+    return new Promise((resolve, reject) => { siteQueue.push({ url, timeout, resolve, reject }); pumpSite(); });
   }
 
   // The number a gallery page announces in its title ("License plates found 38.723"): the site writes thousands with a dot (or a
@@ -40,7 +41,7 @@
       if (wait > 0) await siteSleep(wait);
       siteLast = Date.now();
       try {
-        const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), SITE_TIMEOUT_MS);
+        const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), job.timeout);
         const res = await fetch(job.url, { credentials: 'same-origin', signal: ctrl.signal });
         clearTimeout(timer);
         const text = await res.text();
@@ -55,7 +56,7 @@
         if (!res.ok) job.reject(new Error('HTTP ' + res.status));
         else job.resolve(text);
       } catch (e) {
-        job.reject(new Error(e.name === 'AbortError' ? 'the site did not answer in time' : e.message));
+        job.reject(new Error(e.name === 'AbortError' ? `the site did not answer in ${Math.round(job.timeout / 1000)} s` : e.message));
       }
     }
     siteBusy = false;

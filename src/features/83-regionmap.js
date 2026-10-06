@@ -19,7 +19,7 @@
   async function regionMapView(cc, data) {
     const [iso, level] = REGION_MAPS[cc];
     const [regions, geo] = await Promise.all([regionRows(cc, data.id), regionShapes(iso, level)]);
-    const { placed, missing } = regionMatch(regions, geo.shapes);
+    const { placed, missing } = regionMatch(regions, geo.shapes, cc);
     const count = r => r.count;
     const link = r => r.href || `/${cc}/gallery.php?usr=${data.id}`;
     const svg = svgEl('svg', { viewBox: `0 0 ${geo.w} ${geo.h}`, role: 'img', 'aria-label': `${cName(cc)}: the regions of ${data.name}` });
