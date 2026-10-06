@@ -10,7 +10,7 @@
    * ===================================================================== */
   const INLINE_CARD_CSS = `
     :host{display:block;margin:0 0 12px}
-    .card{background:#fff;border:1px solid var(--line);border-top:2px solid var(--primary);border-radius:var(--r);overflow:hidden}
+    .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
     .top{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:8px 12px;background:#fff;border-bottom:1px solid var(--line)}
     .top b{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--primary-h)}
     .top .msg{flex:1 1 150px;min-width:0;font-size:12px;color:var(--mute);overflow-wrap:anywhere}

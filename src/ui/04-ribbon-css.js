@@ -9,11 +9,11 @@
     .rbtn[aria-pressed="true"]{background:var(--primary);color:var(--on-primary)}
     .drawer.passive{pointer-events:none!important;opacity:.82}
     .drawer{width:min(340px,calc(100vw - 56px));display:flex;flex-direction:column;background:var(--bg);border-left:1px solid var(--line2);box-shadow:-10px 0 30px rgba(0,0,0,.14);position:relative}
-    .dhead{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:56px;padding:0 16px;background:#fff;border-bottom:2px solid var(--primary)}
+    .dhead{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:56px;padding:0 16px;background:#fff;border-bottom:1px solid var(--line)}
     .dhead h2{margin:0;font-size:16px;font-weight:700;color:var(--primary-h)}
     .dbody{flex:1;min-height:0;overflow-y:auto;padding:12px;display:flex;flex-direction:column}
     .dsec{display:flex;flex-direction:column;gap:10px}
-    .group{background:#fff;border:1px solid var(--line);border-top:2px solid var(--primary);border-radius:var(--r);display:flex;flex-direction:column;overflow:hidden}
+    .group{background:#fff;border:1px solid var(--line);border-radius:var(--r);display:flex;flex-direction:column;overflow:hidden}
     .gbody{display:flex;flex-direction:column;gap:8px;padding:10px}
     .gtitle{order:-1;padding:7px 10px;border-bottom:1px solid var(--line);background:#fff;color:var(--primary-h);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
     .gbody .btn{width:100%}
@@ -61,7 +61,7 @@
     .kblist{display:flex;flex-direction:column;gap:6px}
     .kbrow{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px}
         .kbright{display:flex;align-items:center;gap:4px}
-    .kbkey{width:84px;height:30px;padding:0 8px;border:1px solid var(--line2);border-radius:4px;background:#fff;color:var(--ink);font:700 12px system-ui,sans-serif;cursor:pointer}
+    .kbkey{width:84px;height:30px;padding:0 8px;border:1px solid var(--line2);border-radius:var(--r);background:#fff;color:var(--ink);font:700 12px system-ui,sans-serif;cursor:pointer}
     .kbkey:hover{border-color:var(--primary-soft);background:var(--primary-tint)}
     .kbkey.static{cursor:default}
     .kbkey.static:hover{border-color:var(--line2);background:#fff}

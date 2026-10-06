@@ -37,3 +37,21 @@ def test_every_token_used_is_defined():
     for path in SRC.rglob("*.js"):
         used |= set(re.findall(r"var\((--[a-z0-9-]+)\)", path.read_text(encoding="utf-8")))
     assert used - defined == set(), f"tokens used but not defined: {sorted(used - defined)}"
+
+
+def test_corners_are_square_and_come_from_one_token():
+    tokens = (SRC / "ui/01-tokens.js").read_text(encoding="utf-8")
+    assert "--r:0;" in tokens                                    # PlatesMania is all rectangles
+    found = []
+    for rel in STYLED + ["ui/01-tokens.js"]:
+        for n, line in enumerate((SRC / rel).read_text(encoding="utf-8").splitlines(), 1):
+            for m in re.finditer(r"border-radius:([^;}'\"]*)", line):
+                if m.group(1).strip() not in ("var(--r)", "0"):
+                    found.append(f"{rel}:{n}: {m.group(0)}")
+    assert found == [], "radius written outside the token:\n" + "\n".join(found)
+
+
+def test_no_coloured_rule_on_the_blocks():
+    for rel in ("ui/04-ribbon-css.js", "ui/06-inline-card.js"):
+        text = (SRC / rel).read_text(encoding="utf-8")
+        assert not re.search(r"border-(top|bottom):[23]px solid var\(--primary", text), rel

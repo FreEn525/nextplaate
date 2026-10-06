@@ -20,10 +20,11 @@ Le texte secondaire (`--mute`, `#626a70`) est **plus foncé** que le gris du sit
 ## Ce que le script fait autrement, exprès
 
 - **Une seule palette** : aucun fichier n'écrit de couleur, sauf `01-tokens.js`. Le test `tests/e2e/test_style.py` le vérifie et échoue si une couleur apparaît ailleurs (le blanc et les ombres noires exceptés).
-- **Une échelle de tailles** : contrôles de 38 px (`--h`) ou 32 px (`--h-sm`), rayon de 4 px (`--r`) partout.
+- **Une échelle de tailles** : contrôles de 38 px (`--h`) ou 32 px (`--h-sm`).
+- **Angles droits** : `--r` vaut 0, comme les rectangles de PlatesMania. Aucun rayon écrit à la main : seulement `var(--r)`.
 - **Un seul focus** : tout élément cliquable ou saisissable reçoit le même anneau (`--ring`) au clavier.
 - **Les mêmes composants partout** : bouton `.btn` (plein) / `.btn.ghost` (blanc) / `.btn.danger`, choix `.chip` (`.best` = le choix principal, `.on` = le choix en vigueur), étiquette `.cat`. Le panneau, la carte Lens et la fenêtre d'envoi s'en servent tous.
-- **Reprise des signes du site** : filet de 2 px en `--primary` sur le haut des blocs et sous le titre du tiroir, comme les `.headline` et `.tag-box-v1` du site ; titres de bloc en petites capitales.
+- **Pas de filet de couleur** sur les blocs, la carte ou le titre du tiroir : la couleur sert aux actions (boutons, choix, case active), pas à la décoration.
 
 - **Le logo** est aux couleurs du site : son bleu est `--primary` (`#4765a0`), dans le panneau (via `SITE_BLUE`), dans `logo_nextplaate.svg` et dans l'icône du script (`@icon`).
 
