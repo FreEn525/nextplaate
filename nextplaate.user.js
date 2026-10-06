@@ -1821,6 +1821,9 @@
   // Only function declarations here: they run from core/00-open.js, before the rest of the script has set anything up
   function lensMarkedUrl() { return 'https://www.google.com/?olud&src=pm'; }
 
+  // Logs of the dev build only; a function declaration like the others here (the script has not set up its own log yet)
+  function lensLog(...args) { if ('0' === '1') console.log('[NextPlaate] Lens (Google side)', ...args); }
+
   function onLensPage() {
     try {
       const u = new URL(location.href);
@@ -1833,6 +1836,7 @@
   function lensReadResults() {
     const asked = GM_getValue('lens_pending', 0);
     const results = /^lens\.google\./.test(location.hostname) || /^\/search/.test(location.pathname);
+    lensLog('results page?', { results, asked: !!asked, ageSeconds: asked ? Math.round((Date.now() - asked) / 1000) : null, done: GM_getValue('lens_done', 0) === asked, url: location.href });
     if (!results || !asked || Date.now() - asked > 180000 || GM_getValue('lens_done', 0) === asked) return;
     const collect = () => {
       const out = [];
@@ -1847,6 +1851,7 @@
       const titles = collect();
       if (titles.length < 12 && ++tries <= 40) return;      // up to about 20 s for the results to appear
       clearInterval(timer);
+      lensLog('titles found', titles.length, titles.slice(0, 5));
       if (!titles.length) return;
       GM_setValue('lens_titles', JSON.stringify({ at: asked, titles }));
       GM_setValue('lens_done', asked);
@@ -1854,6 +1859,7 @@
   }
 
   function lensOnGoogle() {
+    lensLog('Google page', location.href, 'asked by the panel:', onLensPage());
     if (!onLensPage()) { lensReadResults(); return; }
     let done = false, tries = 0;
     const first = (...sel) => sel.map(s => document.querySelector(s)).find(Boolean);
@@ -1862,8 +1868,10 @@
       const photo = GM_getValue('lens_image', '');
       const box = first('input[jsname="W7hAGe"]', 'input.cB9M7', 'input[type="text"]');
       const go = first('div[role="button"][jsname="ZtOxCb"]', 'button[type="submit"]', 'button, div[role="button"]');
+      if (tries % 20 === 0) lensLog('looking for the box', { photo: photo.length, box: !!box, button: !!go, tries });
       if (!photo || !box || !go) return;
       done = true;
+      lensLog('photo put in the box, search started', { photo: photo.slice(0, 40) + '…', box: box.outerHTML.slice(0, 120) });
       box.focus();
       box.value = photo;
       box.dispatchEvent(new Event('input', { bubbles: true }));

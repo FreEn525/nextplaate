@@ -33,7 +33,7 @@ const ordered = GROUPS.flatMap(g =>
 let out = ordered.map(p => readFileSync(join(root, 'src', p), 'utf8')).join('')
   .replace(/\r\n/g, '\n');   // same output on Windows (CRLF checkout) and in the CI
 const target = DEV ? 'nextplaate.dev.user.js' : 'nextplaate.user.js';
-out = out.replace("'__DEBUG__'", DEV ? "'1'" : "'0'");   // logs: on in the dev build, off in the public one
+out = out.replaceAll("'__DEBUG__'", DEV ? "'1'" : "'0'");   // logs: on in the dev build, off in the public one
 if (DEV) {
   // its own script in Tampermonkey, so it never replaces the published one
   out = out.replace('// @name         NextPlaate\n', '// @name         NextPlaate (dev)\n')
