@@ -9,6 +9,7 @@ Ce que le script offre déjà pour construire une nouvelle fonction sans réécr
 | Requête vers le site | `src/lib/http.js` (`siteFetch`) | lire une page de PlatesMania : une requête à la fois, 3 s d'écart, pause après un blocage |
 | **Pont entre deux sites** | `src/lib/bridge.js` | demander un travail à un autre site, dans un autre onglet, et attendre la réponse |
 | **Véhicule** | `src/lib/vehicle.js` | marques, modèles, générations de PlatesMania : lire, deviner à partir de textes, remplir les menus |
+| **Fenêtre** | `src/ui/07-modal.js` (`modalOpen`) | une fenêtre au style du panneau (croix, Échap, clic à côté = annuler ; boutons d'action) à la place d'un pop-up du site |
 | **Drapeaux des pays** | `src/features/68-flags.js` (`flagLinks`, `flagsPlace`) | liens drapeau vers la page d'ajout, et le placement « à côté du contenu sans passer sous le panneau, sinon sous la photo » (réutilisable pour toute barre latérale) |
 | **Carte dans la page** | `src/ui/06-inline-card.js` | afficher un bloc au bon endroit du site, au style du panneau, avec des choix à cliquer |
 | Interface du panneau | `src/ui/` (`h`, `UI_BASE`, `setStatus`) | construire des contrôles sans `innerHTML` ; style : jetons et composants communs (`docs/STYLE.md`) |

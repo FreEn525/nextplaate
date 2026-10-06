@@ -60,7 +60,8 @@ NextPlaate est un script Tampermonkey (userscript) pour [PlatesMania](https://pl
 ### Tags (page d'ajout, `src/features/71-tags.js`)
 - La section « Add tags » du site (accordéon fermé, 52 tags à faire défiler, un « + » par tag) est remplacée par une carte : chaque tag est un bouton, rangé dans les 7 groupes du site ; une case de recherche trouve un tag en tapant (Entrée choisit le premier) ; les tags choisis sont des pastilles qu'on retire d'un clic, avec « Clear » ; les plus utilisés et ceux du dernier envoi sont à un clic (« Use again »).
 - Les cases du site restent la source de vérité : un clic coche ou décoche la vraie case et déclenche son événement `change`, donc le formulaire part comme avant et le compteur du site (« Tags (3) ») continue de marcher. La section du site est seulement masquée ; l'interrupteur de Settings la rend.
-- Ce qui est retenu (compteurs et dernier envoi) l'est à l'envoi du formulaire, dans le navigateur.
+- **Page d'une photo** : le même sélecteur remplace le pop-up du site. Le lien « add tags » / « edit tags » ouvre une fenêtre à notre style (`src/ui/07-modal.js`) avec les tags déjà posés cochés. « Save » presse le bouton Save du site lui-même : le site enregistre les tags exactement comme avant. « Cancel », la croix, Échap et un clic à côté rendent les cases comme elles étaient. La fenêtre ne passe jamais sous la barre du panneau.
+- Ce qui est retenu (compteurs et dernier envoi) l'est à l'envoi du formulaire ou à « Save », dans le navigateur.
 
 ### Aperçu de la plaque en direct (page d'ajout, `src/features/69-preview.js`)
 - Le site dessine un aperçu de la plaque à partir des champs du pays et propose un bouton « Generate preview » ; tout changement des champs l'efface. Ici le bouton est pressé 0,7 s après la dernière frappe : l'aperçu est toujours là. Seuls les champs du pays comptent (ceux avant la photo), comme pour le site.

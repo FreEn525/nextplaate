@@ -50,12 +50,34 @@ def gallery_page(start):
     return HEAD.format(title="Gallery") + items + pagination + HEARTS_JS + "</body></html>"
 
 
+# The site's "add tags" link and its pop-up on a photo page: the same picker as the upload page, a Save button, and Bootstrap's own opening
+# (simulated: a click on a data-toggle="modal" link counts in window.__bootstrapModal)
+PHOTO_TAGS = (
+    '<span class="label rounded label-light-green"><a href="#" id="tags-edit-link" data-toggle="modal" data-target="#tagedit">add tags</a></span>'
+    '<div class="modal fade" id="tagedit" style="display:none"><div class="modal-dialog"><div class="modal-content"><div class="modal-body">'
+    '<form name="contact" class="sky-form pm-tags-edit-form"><div class="pm-tag-type1">'
+    '<section class="pm-tag-type1-group" data-group-id="3"><button type="button" class="pm-tag-type1-toggle"><span>Vehicle category</span></button></section>'
+    '<section class="pm-tag-type1-group" data-group-id="5"><button type="button" class="pm-tag-type1-toggle"><span>Vehicle purpose</span></button></section>'
+    '<div class="pm-tag-type1-list">'
+    '<label class="pm-tag-type1-option" data-group-id="3" data-tag-id="21"><input id="CheckBox21" name="CheckBox[21]" type="checkbox"><span>bus</span></label>'
+    '<label class="pm-tag-type1-option" data-group-id="3" data-tag-id="22"><input id="CheckBox22" name="CheckBox[22]" type="checkbox" checked><span>truck</span></label>'
+    '<label class="pm-tag-type1-option" data-group-id="5" data-tag-id="23"><input id="CheckBox23" name="CheckBox[23]" type="checkbox"><span>police</span></label>'
+    '<label class="pm-tag-type1-option" data-group-id="5" data-tag-id="24"><input id="CheckBox24" name="CheckBox[24]" type="checkbox"><span>taxicab</span></label>'
+    '</div></div></form></div><div class="modal-footer"><input class="btn btn-success" type="submit" value="Save" id="submit"></div></div></div></div>'
+    '<script>'
+    'document.addEventListener("click", function (e) { var a = e.target.closest && e.target.closest("[data-toggle=modal]"); if (a) { window.__bootstrapModal = (window.__bootstrapModal || 0) + 1; e.preventDefault(); } });'
+    'document.getElementById("submit").addEventListener("click", function () { window.__saved = [].map.call(document.querySelectorAll("#tagedit input:checked"), function (i) { return i.name; }); });'
+    '</script>'
+)
+
+
 def photo_page(pid):
     return (
         HEAD.format(title="Photo")
         + f'<img src="https://img1.platesmania.com/10/m/{pid}.jpg" alt="">'
         + '<form action="/fr/edit_dopol.php" method="get">'
         + f'<input type="hidden" name="id" value="{pid}"><button type="submit">Edit</button></form>'
+        + PHOTO_TAGS
         + "</body></html>"
     )
 

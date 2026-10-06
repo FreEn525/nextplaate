@@ -7,6 +7,7 @@
 
 **Tags**
 - New feature *Tag picker* (switch in Settings): the site's "Add tags" section (a closed accordion with a list to scroll and a + to press for each of the 52 tags) is replaced by a card: every tag is a button, grouped like the site groups them; a search box finds a tag by typing (Enter chooses the first match); what is chosen shows as chips you remove with one click, with a Clear button; the tags you use most and the ones of your last upload are one click away (*Use again*). The site's own check boxes stay the source of truth, so the form is sent exactly as before and the site's own counter keeps working. Switching the feature off brings the site's section back.
+- The same picker replaces the site's pop-up on a photo page: the *add tags* / *edit tags* link opens a window in the look of the panel (new reusable window component) with the tags the photo already has marked. *Save* presses the site's own Save button, so the site saves the tags exactly as before; *Cancel*, the cross, Esc and a click outside give the boxes back as they were. The window never goes under the panel's rail.
 
 **Plate preview**
 - New feature *Plate preview as you type* (switch in Settings): the site's "Generate preview" button is pressed for you 0.7 s after you stop typing, so the preview of the plate is always there and follows the fields. It is the page's own request (the script only clicks its button): never two less than 2 s apart, nothing while a preview is loading, while there is no plate yet, or while the one shown is up to date.

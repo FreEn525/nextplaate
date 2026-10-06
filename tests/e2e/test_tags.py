@@ -130,3 +130,110 @@ def test_switching_the_feature_off_brings_the_site_section_back(ctx):
 def test_the_card_has_no_close_button(ctx):
     page = open_add(ctx)
     assert page.evaluate(f"() => !{CARD}.querySelector('.iconbtn')")                                         # the site's picker is hidden: the card must stay
+
+
+# ---------------------------------------------------------------- a photo page: the "add tags" link opens our window
+
+PHOTO = "https://platesmania.com/fr/nomer101"
+WIN = "document.getElementById('pmg-tags-modal').shadowRoot"
+
+
+def open_window(ctx):
+    page = ctx.new_page()
+    page.goto(PHOTO)
+    page.wait_for_selector("#pmg-host")
+    page.click("#tags-edit-link")
+    page.wait_for_selector("#pmg-tags-modal")
+    return page
+
+
+def win_click(page, name):
+    page.evaluate(f"() => [...{WIN}.querySelectorAll('.taggroups .pill')].find(p => p.textContent === '{name}').click()")
+
+
+def win_button(page, label):
+    page.evaluate(f"() => [...{WIN}.querySelectorAll('.mf .btn')].find(b => b.textContent === '{label}').click()")
+
+
+def test_the_add_tags_link_opens_our_window_and_not_the_site_popup(ctx):
+    page = open_window(ctx)
+    assert page.evaluate("() => window.__bootstrapModal || 0") == 0                                       # the site's own pop-up was not asked to open
+    assert page.evaluate(f"() => {WIN}.querySelector('h2').textContent") == "Tags"
+    groups = page.evaluate(f"() => [...{WIN}.querySelectorAll('.taggroup .cat')].map(c => c.textContent)")
+    assert groups == ["Vehicle category", "Vehicle purpose"]
+
+
+def test_the_tags_the_photo_already_has_are_shown_as_chosen(ctx):
+    page = open_window(ctx)
+    assert page.evaluate(f"() => [...{WIN}.querySelectorAll('.tagrow .pill')].map(p => p.textContent.replace(/\\s+/g, ' ').trim())") == ["truck \u00d7"]
+    assert "1 tag chosen" in page.evaluate(f"() => {WIN}.querySelector('.sub').textContent")
+
+
+def test_save_presses_the_sites_own_save_button_and_closes_the_window(ctx):
+    page = open_window(ctx)
+    win_click(page, "police")
+    win_button(page, "Save")
+    assert page.evaluate("() => window.__saved") == ["CheckBox[22]", "CheckBox[23]"]                       # the site's Save saw both boxes
+    assert page.evaluate("() => !document.getElementById('pmg-tags-modal')")
+    assert page.evaluate("() => document.documentElement.style.overflow") != "hidden"                      # the page scrolls again
+
+
+def test_cancel_gives_the_boxes_back_as_they_were(ctx):
+    page = open_window(ctx)
+    win_click(page, "police")
+    win_click(page, "truck")
+    win_button(page, "Cancel")
+    assert page.evaluate("() => [...document.querySelectorAll('#tagedit input:checked')].map(i => i.name)") == ["CheckBox[22]"]
+    assert page.evaluate("() => window.__saved === undefined")                                              # nothing was sent
+    assert page.evaluate("() => !document.getElementById('pmg-tags-modal')")
+
+
+def test_escape_and_the_cross_and_the_backdrop_cancel_too(ctx):
+    page = open_window(ctx)
+    win_click(page, "bus")
+    page.keyboard.press("Escape")
+    assert page.evaluate("() => !document.getElementById('pmg-tags-modal')")
+    assert page.evaluate("() => document.getElementById('CheckBox21').checked") is False
+    page.click("#tags-edit-link")
+    page.wait_for_selector("#pmg-tags-modal")
+    win_click(page, "bus")
+    page.evaluate(f"() => {WIN}.querySelector('.mh .iconbtn').click()")
+    assert page.evaluate("() => document.getElementById('CheckBox21').checked") is False
+    page.click("#tags-edit-link")
+    page.wait_for_selector("#pmg-tags-modal")
+    win_click(page, "bus")
+    page.evaluate(f"() => {WIN}.querySelector('.ov').dispatchEvent(new MouseEvent('click', {{ bubbles: true }}))")
+    assert page.evaluate("() => document.getElementById('CheckBox21').checked") is False
+
+
+def test_the_window_remembers_what_was_saved_for_the_next_time(ctx):
+    page = open_window(ctx)
+    win_click(page, "police")
+    win_button(page, "Save")
+    assert page.evaluate("() => localStorage.getItem('pmg_tags_last')") == '["22","23"]'
+
+
+def test_with_the_feature_off_the_site_popup_opens_as_before(ctx):
+    page = ctx.new_page()
+    page.goto(PHOTO)
+    page.wait_for_selector("#pmg-host")
+    page.evaluate("() => localStorage.setItem('pmg_set_feature_tags', '0')")
+    page.reload()
+    page.wait_for_selector("#pmg-host")
+    page.click("#tags-edit-link")
+    page.wait_for_timeout(300)
+    assert page.evaluate("() => window.__bootstrapModal") == 1
+    assert page.evaluate("() => !document.getElementById('pmg-tags-modal')")
+
+
+def test_the_window_never_goes_under_the_panel_rail(ctx):
+    for width in (360, 1280):
+        page = ctx.new_page()
+        page.set_viewport_size({"width": width, "height": 800})
+        page.goto(PHOTO)
+        page.wait_for_selector("#pmg-host")
+        page.click("#tags-edit-link")
+        page.wait_for_selector("#pmg-tags-modal")
+        right = page.evaluate(f"() => {WIN}.querySelector('.dlg').getBoundingClientRect().right")
+        assert right <= width - 56                                                                          # the rail takes 56 px of the right edge
+        page.close()
