@@ -69,18 +69,22 @@
     .tagquick,.taggroup{display:flex;flex-direction:column;gap:6px}
     .taggroups{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px 18px}
     .flags{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:6px}
-    .mhead{display:flex;align-items:center;gap:8px;min-height:var(--h-sm)}
-    .mactions{margin-left:auto;display:flex;align-items:center;gap:6px}
+    .mhead{display:flex;align-items:center;gap:8px;min-height:var(--h-sm);margin-bottom:2px}
+    .mactions{margin-left:auto;display:flex;align-items:center;gap:8px}
     .star{font-size:18px;line-height:1}
     .star.on{color:var(--primary);border-color:var(--primary-soft);background:var(--primary-tint)}
-    .members{display:flex;flex-direction:column;gap:6px}
+    .members{display:flex;flex-direction:column;gap:8px}
+    .members-panel{display:flex;flex-direction:column;gap:12px}
+    .membersadd{display:flex;flex-direction:column;gap:8px}
+    .addrow{display:flex;gap:8px}
+    .addrow input{flex:1;min-width:0}
     .mlines{display:flex;flex-direction:column}
-    .mrow{display:flex;align-items:stretch;gap:6px;position:relative}
+    .mrow{display:flex;align-items:stretch;gap:8px;position:relative}
     .mrow.dragging{opacity:.4}
     .mrow.before::before,.mrow.after::after{content:'';position:absolute;left:0;right:0;height:3px;background:var(--primary)}
     .mrow.before::before{top:-5px}
     .mrow.after::after{bottom:-5px}
-    .grip{flex:none;width:22px;padding:0;border:0;background:none;color:var(--off-ink);font:inherit;font-weight:700;letter-spacing:-2px;cursor:grab}
+    .grip{flex:none;width:24px;padding:0;border:0;background:none;color:var(--off-ink);font:inherit;font-weight:700;letter-spacing:-2px;cursor:grab}
     .grip:hover,.grip:focus-visible{color:var(--primary-h)}
     .grip.off{cursor:default;color:transparent}
     .member{flex:1;min-width:0;display:flex;align-items:center;gap:12px;padding:6px 8px;border:1px solid var(--line);background:#fff;color:var(--ink);text-decoration:none}

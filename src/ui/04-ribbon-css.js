@@ -20,7 +20,7 @@
     .group{background:#fff;border:1px solid var(--line);border-radius:var(--r);display:flex;flex-direction:column;overflow:hidden}
     .gbody{display:flex;flex-direction:column;gap:8px;padding:10px}
     .gtitle{order:-1;padding:7px 10px;border-bottom:1px solid var(--line);background:#fff;color:var(--primary-h);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
-    .gbody .btn{width:100%;height:auto;min-height:var(--h);padding-top:6px;padding-bottom:6px;line-height:1.25;white-space:normal}   /* a long label wraps instead of widening the drawer */
+    .gbody .btn:not(.sm):not(.fit){width:100%;height:auto;min-height:var(--h);padding-top:6px;padding-bottom:6px;line-height:1.25;white-space:normal}   /* a long label wraps instead of widening the drawer */
     .pnote{margin:0;padding:6px 8px;border-radius:var(--r);background:var(--primary-tint);color:var(--mute);font-size:12px}
     .btnrow{display:flex;flex-wrap:wrap;gap:8px}
     .btnrow .btn{flex:1 1 110px;min-width:0}

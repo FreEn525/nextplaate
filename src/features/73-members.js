@@ -167,7 +167,7 @@
       } catch (e) { say('Could not read the page: ' + e.message + '.', true); }
     };
     input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); go(); } });
-    return h('div', { class: 'field membersadd' }, input, h('button', { type: 'button', class: 'btn ghost sm', text: 'Add', onclick: go }), msg);
+    return h('div', { class: 'membersadd' }, h('div', { class: 'addrow' }, input, h('button', { type: 'button', class: 'btn ghost fit', text: 'Add', onclick: go })), msg);
   }
 
   // The whole view: the buttons of the title line, the lines, the box to add (editing), the hint
@@ -198,7 +198,7 @@
   // ---- the bar on a profile page, to the left of the content
   const MEMBERS_CSS = `
     :host{display:block}
-    .box{background:#fff;border:1px solid var(--line);padding:10px;display:flex;flex-direction:column;gap:8px}
+    .box{background:#fff;border:1px solid var(--line);padding:12px;display:flex;flex-direction:column;gap:12px}
     .t{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--primary-h)}
     .members,.mlines{max-height:60vh;overflow-y:auto}
   `;

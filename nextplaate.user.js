@@ -1038,18 +1038,22 @@
     .tagquick,.taggroup{display:flex;flex-direction:column;gap:6px}
     .taggroups{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px 18px}
     .flags{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:6px}
-    .mhead{display:flex;align-items:center;gap:8px;min-height:var(--h-sm)}
-    .mactions{margin-left:auto;display:flex;align-items:center;gap:6px}
+    .mhead{display:flex;align-items:center;gap:8px;min-height:var(--h-sm);margin-bottom:2px}
+    .mactions{margin-left:auto;display:flex;align-items:center;gap:8px}
     .star{font-size:18px;line-height:1}
     .star.on{color:var(--primary);border-color:var(--primary-soft);background:var(--primary-tint)}
-    .members{display:flex;flex-direction:column;gap:6px}
+    .members{display:flex;flex-direction:column;gap:8px}
+    .members-panel{display:flex;flex-direction:column;gap:12px}
+    .membersadd{display:flex;flex-direction:column;gap:8px}
+    .addrow{display:flex;gap:8px}
+    .addrow input{flex:1;min-width:0}
     .mlines{display:flex;flex-direction:column}
-    .mrow{display:flex;align-items:stretch;gap:6px;position:relative}
+    .mrow{display:flex;align-items:stretch;gap:8px;position:relative}
     .mrow.dragging{opacity:.4}
     .mrow.before::before,.mrow.after::after{content:'';position:absolute;left:0;right:0;height:3px;background:var(--primary)}
     .mrow.before::before{top:-5px}
     .mrow.after::after{bottom:-5px}
-    .grip{flex:none;width:22px;padding:0;border:0;background:none;color:var(--off-ink);font:inherit;font-weight:700;letter-spacing:-2px;cursor:grab}
+    .grip{flex:none;width:24px;padding:0;border:0;background:none;color:var(--off-ink);font:inherit;font-weight:700;letter-spacing:-2px;cursor:grab}
     .grip:hover,.grip:focus-visible{color:var(--primary-h)}
     .grip.off{cursor:default;color:transparent}
     .member{flex:1;min-width:0;display:flex;align-items:center;gap:12px;padding:6px 8px;border:1px solid var(--line);background:#fff;color:var(--ink);text-decoration:none}
@@ -1124,7 +1128,7 @@
     .group{background:#fff;border:1px solid var(--line);border-radius:var(--r);display:flex;flex-direction:column;overflow:hidden}
     .gbody{display:flex;flex-direction:column;gap:8px;padding:10px}
     .gtitle{order:-1;padding:7px 10px;border-bottom:1px solid var(--line);background:#fff;color:var(--primary-h);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
-    .gbody .btn{width:100%;height:auto;min-height:var(--h);padding-top:6px;padding-bottom:6px;line-height:1.25;white-space:normal}   /* a long label wraps instead of widening the drawer */
+    .gbody .btn:not(.sm):not(.fit){width:100%;height:auto;min-height:var(--h);padding-top:6px;padding-bottom:6px;line-height:1.25;white-space:normal}   /* a long label wraps instead of widening the drawer */
     .pnote{margin:0;padding:6px 8px;border-radius:var(--r);background:var(--primary-tint);color:var(--mute);font-size:12px}
     .btnrow{display:flex;flex-wrap:wrap;gap:8px}
     .btnrow .btn{flex:1 1 110px;min-width:0}
@@ -2803,7 +2807,7 @@
       } catch (e) { say('Could not read the page: ' + e.message + '.', true); }
     };
     input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); go(); } });
-    return h('div', { class: 'field membersadd' }, input, h('button', { type: 'button', class: 'btn ghost sm', text: 'Add', onclick: go }), msg);
+    return h('div', { class: 'membersadd' }, h('div', { class: 'addrow' }, input, h('button', { type: 'button', class: 'btn ghost fit', text: 'Add', onclick: go })), msg);
   }
 
   // The whole view: the buttons of the title line, the lines, the box to add (editing), the hint
@@ -2834,7 +2838,7 @@
   // ---- the bar on a profile page, to the left of the content
   const MEMBERS_CSS = `
     :host{display:block}
-    .box{background:#fff;border:1px solid var(--line);padding:10px;display:flex;flex-direction:column;gap:8px}
+    .box{background:#fff;border:1px solid var(--line);padding:12px;display:flex;flex-direction:column;gap:12px}
     .t{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--primary-h)}
     .members,.mlines{max-height:60vh;overflow-y:auto}
   `;

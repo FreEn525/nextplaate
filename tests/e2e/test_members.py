@@ -379,3 +379,49 @@ def test_with_the_feature_off_the_picture_is_not_in_the_bar(ctx):
     page.wait_for_selector("#pmg-host")
     page.wait_for_timeout(200)
     assert page.evaluate(f"() => !{RAIL}.querySelector('.rme')")
+
+
+# ---------------------------------------------------------------- sizes and spaces
+
+def open_gallery_drawer(page):
+    page.evaluate(f"() => {{ [...{PANEL}.querySelectorAll('.rbtn')].find(b => /gallery/i.test(b.title || '')).click(); }}")
+    page.wait_for_timeout(250)
+
+
+@pytest.mark.parametrize("where", ["bar", "panel"])
+def test_the_add_box_and_its_button_have_the_same_height_and_the_title_buttons_too(ctx, where):
+    page = open_page(ctx, OTHER, width=2560, members=THREE)
+    open_gallery_drawer(page)
+    root = BAR if where == "bar" else PANEL + ".getElementById('membersPanel')"
+    edit(page, BAR if where == "bar" else PANEL)
+    heights = page.evaluate(f"""() => {{
+      const r = {root}, h = el => Math.round(el.getBoundingClientRect().height);
+      return {{ input: h(r.querySelector('.addrow input')), add: h(r.querySelector('.addrow .btn')),
+               star: h(r.querySelector('.mhead .star')), done: h(r.querySelector('.mhead .btn')) }};
+    }}""")
+    assert heights["input"] == heights["add"] == 38                                                   # the box and its button side by side
+    assert heights["star"] == heights["done"] == 32                                                   # the star and Edit / Done in the title line
+
+
+@pytest.mark.parametrize("where", ["bar", "panel"])
+def test_the_lines_and_the_buttons_have_room_between_them(ctx, where):
+    page = open_page(ctx, OTHER, width=2560, members=THREE)
+    open_gallery_drawer(page)
+    root = BAR if where == "bar" else PANEL + ".getElementById('membersPanel')"
+    edit(page, BAR if where == "bar" else PANEL)
+    gaps = page.evaluate(f"""() => {{
+      const r = {root}, rows = [...r.querySelectorAll('.mrow')].map(e => e.getBoundingClientRect());
+      const head = r.querySelector('.mhead').getBoundingClientRect(), add = r.querySelector('.membersadd').getBoundingClientRect();
+      const star = r.querySelector('.mhead .star').getBoundingClientRect(), done = r.querySelector('.mhead .btn').getBoundingClientRect();
+      return {{ between: rows.slice(1).map((b, i) => Math.round(b.top - rows[i].bottom)), headToList: Math.round(rows[0].top - head.bottom),
+               listToAdd: Math.round(add.top - rows[rows.length - 1].bottom), starToDone: Math.round(done.left - star.right) }};
+    }}""")
+    assert all(g >= 8 for g in gaps["between"]), gaps                                               # the lines do not touch
+    assert gaps["headToList"] >= 8 and gaps["listToAdd"] >= 8 and gaps["starToDone"] >= 8, gaps
+
+
+def test_the_edit_button_of_the_panel_is_not_stretched(ctx):
+    page = open_page(ctx, OTHER, width=2560, members=THREE)
+    open_gallery_drawer(page)
+    width = page.evaluate(f"() => Math.round({PANEL}.getElementById('membersPanel').querySelector('.mhead .btn').getBoundingClientRect().width)")
+    assert width < 120                                                                                  # a small button, not the whole width of the drawer
