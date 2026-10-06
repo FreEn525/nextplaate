@@ -34,7 +34,7 @@ Elle est dans `src/meta/00-header.txt` (`@description`, et `@description:fr` pou
 ```markdown
 **NextPlaate** adds a panel to PlatesMania that makes posting photos and browsing faster. Twenty-two features, each with a switch in Settings (except Settings itself). Made by [NextEnzzo](https://platesmania.com/user121559).
 
-The bar follows the order of use: Check a plate, Send photos, Describe a pair, Browse. Settings tells what each feature does and where it works: the plate check covers all 96 countries and 829 plate categories (795 checked exactly on real plates), the series counter 84 countries, the official register the Netherlands and Israel; the rest works everywhere.
+A click on the logo of the panel checks for a newer version. The bar follows the order of use: Check a plate, Send photos, Describe a pair, Browse. Settings tells what each feature does and where it works: the plate check covers all 96 countries and 829 plate categories (795 checked exactly on real plates), the series counter 84 countries, the official register the Netherlands and Israel; the rest works everywhere.
 
 ## Posting photos
 1. **Photo pair selection** (`S`) - pick the front and the rear photo of a vehicle from a gallery.
@@ -55,7 +55,7 @@ The bar follows the order of use: Check a plate, Send photos, Describe a pair, B
 ## Browsing
 15. **Likes** (`L`) - like a page, or several pages in a row, with a delay between likes.
 16. **Gallery page keys** (`A`, `D`) - previous and next page from the keyboard.
-17. **Country flags** - a flag and a name for every country, linking to its upload page: in the panel, and beside the content on the upload pages and on a member's profile. Choose which countries the side bar shows.
+17. **Country flags** - a flag and a name for every country, linking to its upload page: in the panel; on the page /add the drop-down becomes large flags with a search box; elsewhere a bar beside the content, or a tab at the right edge where there is no room. Choose which countries the bar shows.
 18. **Member shortcuts** - the members you go to often, with picture and name, one click to their page. You are always first; an Edit mode lets you drag the lines (or use the arrow keys), remove them and add a member by number or link; a star on a profile saves that member. Your own picture is also in the panel's bar.
 
 ## Profiles

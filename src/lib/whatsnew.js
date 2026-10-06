@@ -17,6 +17,17 @@
         { title: 'Settings explains everything', text: 'Each feature has its sentence and where it works (every country, 84 countries, Netherlands and Israel...), so you know what to expect.' },
         { title: 'Description without a pair', text: 'On an edit page, Fill description now writes your place and hashtags even if no pair is chosen. It never writes over a text that is already there.' }
       ]
+    }, {
+      title: 'Clearer pages',
+      items: [
+        { title: 'The page /add', text: 'The drop-down of countries becomes large flags with a search box (Enter opens the first match) and the countries you opened last.' },
+        { title: 'Google Lens', text: 'The card leads with the best match and one button, then what Google calls the vehicle, then the other choices.' },
+        { title: 'The batch window (U)', text: 'Two numbered steps, country chips side by side, and a clear first screen when no photo is chosen.' },
+        { title: 'Flags on every screen', text: 'Beside the content where there is room, otherwise a tab Add a photo in… at the right edge, the same place everywhere.' },
+        { title: 'Update from the logo', text: 'Click the logo of the panel to check for a newer version and install it.' },
+        { title: 'Open registers, by themselves', text: 'For the Netherlands and Israel the register is asked as soon as the plate is read, and the empty menus are filled. Two switches in Settings turn that off.' },
+        { title: 'Big galleries', text: 'A profile with more than 999 photos is counted (the Uploads card no longer says Not counted).' }
+      ]
     }]
   }, {
     version: '5.9',

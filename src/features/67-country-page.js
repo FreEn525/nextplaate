@@ -52,8 +52,7 @@
       const first = tiles.find(t => !t.hidden);
       if (!first) return;
       e.preventDefault();
-      first.click();                                                         // remembers it
-      location.href = first.getAttribute('href');
+      first.click();                                                         // remembers it, then the link opens the page
     });
 
     card.body.append(h('div', { class: 'cardbox' }, h('div', { class: 'csearch' }, find, count), recentRow, h('div', { class: 'cgroup' }, recentRow ? h('div', { class: 'cat', text: 'All countries' }) : null, grid, none)));

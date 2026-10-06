@@ -4,7 +4,7 @@ Tampermonkey userscript (**NextPlaate**) that makes posting and browsing on [Pla
 
 Made by [NextEnzzo](https://platesmania.com/user121559). © 2026 NextEnzzo, MIT license.
 
-After an update the script shows a *What's new* window once (also in Settings > About).
+After an update the script shows a *What's new* window once (also in Settings > About). A click on the logo of the panel checks for a newer version.
 
 ## Where each feature works
 
@@ -24,7 +24,7 @@ Where a key is given, it can be changed in the Shortcuts drawer.
 4. **Batch upload** (`U`, `N`, `R`): queue many photos (or a folder, HEIC included), give each a country and a plate category, and send them one tab per photo with a delay. The queue survives a reload and pauses 15 minutes when the site asks to wait.
 5. **Plate check**: as you type a plate on the upload page, tells how many photos of that plate are already on the site. It reads the plate the way the site's search writes it, for all 96 countries and 829 categories (795 verified on real plates, see `docs/COUVERTURE.md`). The card also offers the vehicle of the photos already on the site (*Fill the menus*), your photos of the plate's series, and the lookup links.
 6. **Plate preview as you type**: presses the site's "Generate preview" button for you when you stop typing, so the preview is always there.
-7. **Google Lens**: a photo you choose on the upload page is searched on Google Lens by itself, in a background tab that closes when the results are read; the likely brand, model and generation appear under the photo (and in the panel) as three choices each, and a click fills the site's menus. It also reads what Google itself calls the vehicle (shown as *Google says*, a click types it in the site's own brand and model box) and gives it more weight than the titles.
+7. **Google Lens**: a photo you choose on the upload page is searched on Google Lens by itself, in a background tab that closes when the results are read; the likely brand, model and generation appear under the photo (and in the panel) as three choices each, and a click fills the site's menus. It also reads what Google itself calls the vehicle (shown as *Google calls it*, a click types it in the site's own brand and model box) and gives it more weight than the titles. The card reads top to bottom: best match with one *Fill the menus* button, what Google calls it, then the other choices.
 8. **Tag picker**: replaces the site's closed "Add tags" accordion, and its pop-up on a photo page, with buttons by group, a search box, removable chips, your most used tags and the ones of your last upload.
 9. **Extra information box**: the site's three-line box becomes a tall card that grows as you type, with buttons to insert your saved location and the date of the photo (its EXIF date, as month and year or in full).
 10. **Floating upload button**: while the site's own Upload button is out of view, ours follows you at the bottom of the page and presses it.
@@ -37,7 +37,7 @@ Where a key is given, it can be changed in the Shortcuts drawer.
 
 15. **Likes** (`L`): like a page, or several pages in a row, with a delay between likes.
 16. **Gallery page keys** (`A`, `D`): previous and next page of a gallery from the keyboard.
-17. **Country flags**: a link with a flag and a name for every country, to its upload page. In the panel, and on the upload pages and on a member's profile right beside the content (never under the panel); you choose which countries the side bar shows.
+17. **Country flags**: a link with a flag and a name for every country, to its upload page. In the panel; on the page `/add` the site's drop-down becomes large flags with a search box and the countries you opened last; on the other upload pages and on a member's profile a bar beside the content where there is room, otherwise a tab *Add a photo in…* at the right edge (the same place on every screen). You choose which countries the bar shows.
 18. **Member shortcuts**: the members you go to often, each with picture and name, one click to their page. You are always first; edit mode lets you drag the lines (or use the arrow keys), remove them and add a member by number or link; a star on a profile saves that member. Your own picture is also in the panel's bar.
 
 **Profiles**

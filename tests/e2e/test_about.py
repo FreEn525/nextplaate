@@ -38,7 +38,7 @@ def test_after_an_update_the_window_opens_once(ctx):
     title = page.evaluate(f"() => {MODAL}.shadowRoot.querySelector('h2').textContent")
     assert title == "What’s new in 5.10"
     sections = page.evaluate(f"() => [...{MODAL}.shadowRoot.querySelectorAll('.wn-section .cat')].map(e => e.textContent)")
-    assert sections == ["The panel", "On the upload page", "On profiles and series", "Good to know"]          # 5.10, then 5.9 (seen 5.8)
+    assert sections == ["The panel", "Clearer pages", "On the upload page", "On profiles and series", "Good to know"]          # 5.10, then 5.9 (seen 5.8)
     assert page.evaluate("() => localStorage.getItem('pmg_seen_version')") == "5.10"
     page.reload()
     page.wait_for_selector("#pmg-host")
@@ -84,7 +84,7 @@ def test_every_version_has_its_whats_new_entry():
 def test_only_what_is_newer_than_the_version_seen_is_shown(ctx):
     page = open_page(ctx, seen="5.9.1")                                                        # a fix of 5.9: 5.10 is the news
     sections = page.evaluate(f"() => [...{MODAL}.shadowRoot.querySelectorAll('.wn-section .cat')].map(e => e.textContent)")
-    assert sections == ["The panel"]
+    assert sections == ["The panel", "Clearer pages"]
 
 
 def test_a_fix_version_does_not_open_the_window(ctx):
