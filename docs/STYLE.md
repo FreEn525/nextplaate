@@ -26,7 +26,7 @@ Le texte secondaire (`--mute`, `#626a70`) est **plus foncé** que le gris du sit
 - **Les mêmes composants partout** : bouton `.btn` (plein) / `.btn.ghost` (blanc) / `.btn.danger`, choix `.chip` (`.best` = le choix principal, `.on` = le choix en vigueur), étiquette `.cat`. Le panneau, la carte Lens et la fenêtre d'envoi s'en servent tous.
 - **Pas de filet de couleur** sur les blocs, la carte ou le titre du tiroir : la couleur sert aux actions (boutons, choix, case active), pas à la décoration.
 
-- **Le logo** (version 5.9) est un appareil photo rond avec un plus, en trois bleus (`LOGO_BLUES` dans `src/ui/01-tokens.js`) : ce sont les seules couleurs hors palette, celles du logo lui-même. Le fichier `logo_nextplaate.svg` est identique pixel pour pixel au dessin d'origine (chemins arrondis à deux décimales) ; l'icône du script (`@icon`) en est une version simplifiée de 700 octets.
+- **Le logo** (version 5.9) est un appareil photo rond avec un plus, en trois bleus (`LOGO_BLUES` dans `src/ui/01-tokens.js`) : ce sont les seules couleurs hors palette, celles du logo lui-même. Le fichier `logo_nextplaate.svg` est identique pixel pour pixel au dessin d'origine (chemins arrondis à deux décimales) ; l'icône du script (`@icon`) est le même dessin optimisé avec svgo à une décimale (4,5 Ko, identique au pixel près aux tailles d'icône).
 
 ## L'échelle
 

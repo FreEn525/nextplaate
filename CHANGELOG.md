@@ -6,7 +6,7 @@
 - After an update the script opens a *What's new* window once, in plain words (what each new thing does and where it is); it is also in Settings > About, which carries the signature © 2026 NextEnzzo with a link to the author's profile. A first install shows nothing. The text is in `src/lib/whatsnew.js`, and a test fails if `@version` is bumped without its entry.
 
 **New logo**
-- A round camera with a plus, in three blues, in the panel and as the script's icon.
+- A round camera with a plus, in three blues, in the panel and as the script's icon. The icon in Tampermonkey and Greasy Fork is now the real logo (optimised to 4.5 KB, pixel for pixel the same at icon sizes) instead of a simplified drawing. In the panel the logo has its own cell with a line under it, so it no longer sits against the member's picture.
 
 **Fix**
 - Typing in a text field that sits in a card or bar of the script (the country search of the flag bar, for example) no longer triggers the shortcut keys: `U` no longer opens the Batch upload drawer while you type. The key handler now looks at the control that has the focus through every shadow root.
