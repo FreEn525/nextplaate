@@ -416,6 +416,7 @@
     floatupload: { about: 'The Upload button follows you at the bottom of the page while the site’s own button is out of view.', scope: 'every upload page' },
     lookup: { about: 'For the plate you type: links to public lookup sites (open or free image searches, plus official sites by country). Nothing is sent before you click.', scope: 'every country, with their own sites for 14' },
     profile: { about: 'On a member’s profile: the real total of the gallery and today’s uploads, next to the figure the site only updates from time to time.', scope: 'every member' },
+    profilestyle: { about: 'A member’s profile page in the look of the script: the figures, the private messages, the notifications, the countries and the last photos in one style. The site’s own elements and buttons stay.', scope: 'every profile' },
     mine: { about: 'Under the vehicle menus: how many photos of that brand, model and generation you already have.', scope: 'every country' },
     regions: { about: 'On a member’s profile: which regions of a country the member has a photo from, and which are missing.', scope: 'every country the site has regions for' },
     series: { about: 'How many of your photos are in the series of the plate you type (HF-137-QQ is in HF-*-QQ); on a series page, the numbers already on the site.', scope: '84 countries (checked on the real site)' },
@@ -2125,6 +2126,83 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
       h('span', { class: 'n', text: String(n) }),
       go ? h('button', { type: 'button', class: 'go', text: 'Regions', title: 'The regions of this country on a map', onclick: go }) : null);
   }
+  /* =====================================================================
+   *  PROFILE STYLE  (the site's own profile page, brought into the look of the script: flat rectangles, one blue, the greys, the type scale)
+   *    Nothing is rebuilt: the site's elements stay where they are with their own scripts (sort, filter and delete of the messages, load more
+   *    of the notifications, the table's sort), only their look changes. The colours are the page-level constants (SITE_BLUE, PAGE_GREY):
+   *    this CSS lives on the page, where the panel's tokens do not reach. Scoped to the profile container.
+   * ===================================================================== */
+  const PROFILE_CSS = `
+    .container.profile{--p:${SITE_BLUE};--ph:color-mix(in srgb,${SITE_BLUE} 78%,#000);--ps:color-mix(in srgb,${SITE_BLUE} 22%,#fff);--pt:color-mix(in srgb,${SITE_BLUE} 7%,#fff);--ink:${PAGE_GREY.ink};--mute:${PAGE_GREY.mute};--line:#e4e4e4;--line2:#cfcfcf;--paper:#fafafa}
+    .profile .panel,.profile .tag-box,.profile .service-block-v3{border-radius:0;box-shadow:none}
+    /* the member: picture and badges on the left, name and figures on the right, in one box */
+    .profile > .row:first-child{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 16px;padding:16px;border:1px solid var(--line);background:#fff}
+    .profile > .row:first-child > [class*=col-md]{float:none;width:auto;padding:0}
+    .profile > .row:first-child > .col-md-3{flex:0 0 150px}
+    .profile > .row:first-child > .col-md-9{flex:1 1 320px;min-width:0}
+    .profile .profile-img{width:120px;height:120px;margin:0 auto 12px;object-fit:cover;border:1px solid var(--line2)}
+    .profile .devider{display:none}
+    .profile .badge-lists{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 6px;margin:0;padding:0}
+    .profile .badge-lists li{display:flex;align-items:center;gap:4px;padding:0}
+    .profile .badge-lists li a{display:grid;place-items:center;width:32px;height:32px;border:1px solid var(--line2);background:#fff;color:var(--ink)}
+    .profile .badge-lists li a:hover{background:var(--pt);border-color:var(--ps);color:var(--p)}
+    .profile .badge-lists .badge{border-radius:0;font-size:11px;line-height:1.6;background:var(--p)}
+    .profile h1{display:flex;align-items:baseline;gap:8px;margin:0 0 12px;font-size:18px;font-weight:700;line-height:1.3;color:var(--p)}
+    .profile h1 a{color:var(--p)}
+    .profile h1 small{margin-left:auto;font-size:12px;font-weight:400;color:var(--mute)}
+    /* the figures: the uploads, then the likes and the comments, as tiles */
+    .profile .service-block-v3{display:flex;align-items:center;gap:10px;margin:0 0 8px;padding:10px 12px;border:1px solid var(--line);background:var(--paper);text-align:left}
+    .profile .service-block-v3 i{font-size:16px;color:var(--p);margin:0}
+    .profile .service-block-v3 .service-heading{flex:1;min-width:0;margin:0;font-size:13px;font-weight:400;color:var(--mute)}
+    .profile .service-block-v3 .counter{margin:0;font-size:18px;font-weight:700}
+    .profile .service-block-v3 .counter a{color:var(--ink)}
+    .profile .tag-box-v7{display:flex;flex-wrap:wrap;margin:0;padding:0;border:1px solid var(--line);background:#fff}
+    .profile .tag-box-v7 .service-in{float:none;flex:1 1 200px;width:auto;padding:10px 12px}
+    .profile .tag-box-v7 .service-in + .service-in{border-left:1px solid var(--line)}
+    .profile h4.counter{margin:0;padding:3px 0;font-size:13px;font-weight:400;color:var(--mute)}
+    .profile h4.counter b,.profile h4.counter b a{font-size:16px;font-weight:700;color:var(--ink)}
+    .profile h4.counter .badge{border-radius:0;font-size:11px}
+    /* the two panels: the same box, the same header, the same height */
+    .profile .panel{margin:0 0 16px;border:1px solid var(--line);background:#fff}
+    .profile .panel-heading{display:flex;align-items:center;justify-content:space-between;min-height:40px;padding:0 12px;border:0;border-bottom:1px solid var(--line);background:var(--paper)!important}
+    .profile .panel-title{float:none!important;margin:0;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--p)}
+    .profile .panel-title i{margin-right:4px}
+    .profile .profile-notification-title-count{font-weight:400;color:var(--mute)}
+    .profile .profile-notification-actions{float:none;display:flex;gap:2px}
+    .profile .profile-notification-actions .btn{display:grid;place-items:center;width:32px;height:32px;margin:0;padding:0;border:1px solid transparent;color:var(--mute)}
+    .profile .profile-notification-actions .btn:hover,.profile .profile-notification-actions .btn:focus{background:var(--pt);border-color:var(--ps);color:var(--p)}
+    .profile .panel-body.mCustomScrollbar,.profile ul.mCustomScrollbar{height:380px!important;max-height:380px;margin:0}
+    .profile .profile-notification-card{margin:0;padding:10px 12px;border:0;border-bottom:1px solid var(--line);border-left:3px solid var(--p);background:#fff!important;box-shadow:none;color:var(--ink)}
+    .profile .profile-notification-card[data-notification-category=deleted]{border-left-color:#d9534f}
+    .profile .profile-notification-card[data-notification-category=comments]{border-left-color:#72c02c}
+    .profile .profile-notification-card[data-notification-category=awards]{border-left-color:#f0ad4e}
+    .profile .profile-notification-card-type{font-size:12px;color:var(--mute)}
+    .profile .profile-notification-card-title a{font-size:14px;font-weight:700;color:var(--p)}
+    .profile .profile-notification-card-meta{font-size:12px;color:var(--mute)}
+    .profile ul.mCustomScrollbar li > div{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0;padding:8px 12px;border-bottom:1px solid var(--line);background:transparent!important;font-size:13px}
+    .profile ul.mCustomScrollbar li > div:hover{background:var(--pt)!important}
+    .profile ul.mCustomScrollbar li a{color:var(--p);font-weight:600}
+    .profile ul.mCustomScrollbar li .pull-right{margin:0 0 0 auto;font-size:12px;color:var(--mute)}
+    .profile #load{display:block;width:100%;height:38px;border:1px solid var(--p);border-radius:0;background:var(--p);color:#fff;font-weight:600;cursor:pointer}
+    .profile #load:hover{background:var(--ph);border-color:var(--ph)}
+    /* the countries: the table, quiet */
+    .profile .panel-blue .table{margin:0;font-size:13px}
+    .profile .panel-blue .table th{padding:10px 12px;border-bottom:1px solid var(--line2);font-size:13px;color:var(--mute)}
+    .profile .panel-blue .table td{padding:8px 12px;border-top:1px solid var(--line);vertical-align:middle;color:var(--ink)}
+    .profile .panel-blue .table td:first-child b a{color:var(--ink)}
+    .profile .panel-blue .table tbody tr:hover td{background:var(--pt)}
+    .profile .panel-blue .table .fa-lg{font-size:14px}
+    /* the last photos: an even grid */
+    .profile h3{margin:0 0 8px;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--p)}
+    .profile .portfolio-box-v1{margin:0 -6px 16px}
+    .profile .portfolio-box-v1 li{padding:0 6px 12px}
+    .profile .portfolio-box-v1 li > img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border:1px solid var(--line2)}
+    .profile .portfolio-box-v1-in{position:relative;padding:6px 0 0}
+    .profile .portfolio-box-v1-in h3{margin:0;font-size:14px;letter-spacing:0;text-transform:none;color:var(--ink)}
+    .profile .portfolio-box-v1-in p{margin:0;font-size:12px;color:var(--mute)}
+    .profile .portfolio-box-v1-in .btn-u{position:absolute;right:0;top:6px;display:grid;place-items:center;width:32px;height:32px;padding:0;border:1px solid var(--line2);border-radius:0;background:#fff;color:var(--p)}
+    .profile .portfolio-box-v1-in .btn-u:hover{background:var(--pt);border-color:var(--ps)}
+  `;
   /* =====================================================================
    *  PAIR  (choose the front and rear photos of a car by clicking them on the site)
    * ===================================================================== */
@@ -4589,6 +4667,22 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     ];
     return mapLayout({ svg, tools: pz.toolbar(), legend: mapLegend(), tip: 'Scroll to zoom · drag to move', side });
   }
+  /* =====================================================================
+   *  PROFILE LOOK  (a member's profile page, in the look of the script)
+   *    The figures, the badges, the private messages, the notifications, the countries and the last photos keep the site's own elements and
+   *    scripts; only their style changes (src/ui/10-profile-css.js). Switch it off in the settings to get the site's own look back.
+   * ===================================================================== */
+  registerFeature({
+    id: 'profilestyle', label: 'Profile page look',
+    groups: [],
+    init: () => {
+      if (!here.profile || !document.querySelector('.container.profile')) return;
+      const style = document.createElement('style');
+      style.id = 'pmg-profile-style';
+      style.textContent = PROFILE_CSS;
+      document.head.appendChild(style);
+    }
+  });
   /* =====================================================================
    *  ABOUT  (Settings drawer: who made it, which version, what is new)
    *    The "What's new" window opens by itself once after an update to a new minor version (not on a first install: the script has
