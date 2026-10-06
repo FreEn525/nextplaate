@@ -52,6 +52,10 @@ NextPlaate est un script Tampermonkey (userscript) pour [PlatesMania](https://pl
 - Les raccourcis ne s'activent pas quand on tape dans un champ de texte.
 - Compatible AZERTY : `Ctrl+A` se lit sur la touche `a` (`e.key`), pas sur la position physique.
 
+### Aperçu de la plaque en direct (page d'ajout, `src/features/69-preview.js`)
+- Le site dessine un aperçu de la plaque à partir des champs du pays et propose un bouton « Generate preview » ; tout changement des champs l'efface. Ici le bouton est pressé 0,7 s après la dernière frappe : l'aperçu est toujours là. Seuls les champs du pays comptent (ceux avant la photo), comme pour le site.
+- C'est la requête du site lui-même (le script ne fait que cliquer) : jamais deux aperçus à moins de 2 s, rien pendant un chargement, sans plaque, ou quand l'aperçu affiché correspond déjà aux champs. Un aperçu revenu en retard pour d'anciens champs est refait. Interrupteur dans Settings.
+
 ### Drapeaux des pays (tiroir `upload`, et sur les pages d'ajout)
 - Un drapeau et le nom de chaque pays (96), chacun mène à la page d'ajout du pays (`/xx/add`) ; le pays de la page est encadré. Une case « Find a country… » filtre par nom ou par code. Les colonnes s'adaptent à la place (deux dans la barre ou le tiroir) ; dans la page, la liste défile au-delà de 70 % de la hauteur de l'écran. Un drapeau dont l'image ne charge pas affiche le code du pays.
 - **Dans la page** (`/add` et `/xx/add`, `src/features/68-flags.js`) : à droite du contenu quand l'écran a la place, sans jamais passer sous le panneau même ouvert (la barre et le tiroir prennent 56 + 340 px à droite) ; sur un écran plus étroit, sous la photo dans la colonne de droite. Elle suit le redimensionnement.
