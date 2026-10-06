@@ -192,7 +192,7 @@ def test_regions_collection_reads_the_menu_then_one_page_per_country(browser):
     page.evaluate(f"() => {SHADOW}.getElementById('rcGo').click()")
     page.wait_for_function(f"() => {SHADOW}.getElementById('rcMsg').textContent.startsWith('Finished')", timeout=60000)
     systems = [u.split("gallery=")[1].split("-")[0] for u in asked]
-    assert systems[0] == "fr1" and sorted(set(systems[1:])) == ["de", "fr1", "lu"]                # the menu page, then one page per system
+    assert systems[0] == "fr1" and sorted(set(systems[1:])) == ["de", "fr1", "lu", "rs"]                # the menu page, then one page per system
     page.evaluate(f"() => {SHADOW}.getElementById('rcCheck').click()")
-    page.wait_for_function(f"() => {SHADOW}.getElementById('rcMsg').textContent.includes('3 of 3 systems collected')", timeout=10000)
+    page.wait_for_function(f"() => {SHADOW}.getElementById('rcMsg').textContent.includes('4 of 4 systems collected')", timeout=10000)
     c.close()
