@@ -429,13 +429,17 @@
    *      'squash' (default)  letters and digits only, in capitals: AB-12 CDE -> AB12CDE
    *      'hyphen'            the parts joined by hyphens: AB 123 CD -> AB-123-CD
    *      'raw'               as the form gives it
-   *    A site that fails or goes away is taken off here, or hidden by the user in Settings. The list starts from the public
+   *    Universal ones are open or free image searches; the country ones are the ones that answered when tried. The registers that
+   *    answer in JSON (NL, IL) are in src/lib/registries.js. A site that fails or goes away is taken off here, or hidden by the user in Settings. The list starts from the public
    *    userscript "Platesmania Lookup Toolbox" (links only; its fiches that call an API are not part of it: see
    *    docs/ANALYSE-SCRIPTS-PUBLICS.md).
    * ===================================================================== */
   const LOOKUP_SITES = {
     '*': [
       { name: 'Google Images', url: 'https://www.google.com/search?tbm=isch&q="{plate}"', fmt: 'raw' },
+      { name: 'Wikimedia Commons', url: 'https://commons.wikimedia.org/w/index.php?search="{plate}"&ns6=1', fmt: 'raw' },
+      { name: 'DuckDuckGo Images', url: 'https://duckduckgo.com/?q="{plate}"&iax=images&ia=images', fmt: 'raw' },
+      { name: 'Yandex Images', url: 'https://yandex.com/images/search?text="{plate}"', fmt: 'raw' },
       { name: 'Flickr', url: 'https://www.flickr.com/search/?text={plate}', fmt: 'raw' },
       { name: 'Autogespot', url: 'https://www.autogespot.com/spots?licenseplate={plate}' }
     ],
@@ -458,7 +462,9 @@
       { name: 'baza-gai.com.ua', url: 'https://baza-gai.com.ua/nomer/{plate}' },
       { name: 'auto-inform.com.ua', url: 'https://auto-inform.com.ua/search/{plate}' }
     ],
+    nz: [{ name: 'Carjam', url: 'https://www.carjam.co.nz/car/?plate={plate}' }],
     uk: [
+      { name: 'GOV.UK MOT history', url: 'https://www.check-mot.service.gov.uk/results?registration={plate}' },
       { name: 'checkcardetails', url: 'https://www.checkcardetails.co.uk/cardetails/{plate}' },
       { name: 'totalcarcheck', url: 'https://totalcarcheck.co.uk/FreeCheck?regno={plate}' },
       { name: 'checkhistory', url: 'https://checkhistory.uk/vehicle/{plate}' },
@@ -948,6 +954,35 @@
   // motorcycles (2, 6) have a dash after the province code: 29-B1 0910, 47-K1 270.77
   PLATE_RULES.vn = () => shownVal('moto') || (['2', '6'].includes(fieldVal('ctype')) ? joinParts([menu('region'), shownVal('mm') + menu('spec'), shownVal('digit')]) : '') || joinParts([menu('region') + shownVal('mm') + menu('spec'), shownVal('digit')]);
   const plateForForm = () => (PLATE_RULES[here.country] || genericPlate)();   // a country without a rule uses the plain visible fields
+  /* =====================================================================
+   *  OFFICIAL REGISTERS WITH OPEN DATA  (the only ones that answer a plate, free, with no key, to a page of another site)
+   *    A register is { name, plate(plate) -> the plate as it asks for it or '', url(plate), read(json) -> the facts or null }.
+   *    The facts: { make, model, year, colour, until } (all optional text). The plate leaves the page only when the user clicks.
+   *    Checked on the real services: both answer with `access-control-allow-origin: *`, so a plain fetch from PlatesMania works.
+   *    - nl: RDW open data, kentekenregister (opendata.rdw.nl)
+   *    - il: Ministry of Transport vehicle register (data.gov.il), asked by the number of the plate; the make is in Hebrew
+   * ===================================================================== */
+  const REGISTRIES = {
+    nl: {
+      name: 'RDW open data',
+      plate: p => String(p).toUpperCase().replace(/[\s-]+/g, '').replace(/[^A-Z0-9]/g, ''),
+      url: p => `https://opendata.rdw.nl/resource/m9d7-ebf2.json?kenteken=${encodeURIComponent(p)}`,
+      read: rows => {
+        const r = Array.isArray(rows) && rows[0];
+        const day = s => (/^\d{8}$/.test(s || '') ? `${s.slice(0, 4)}-${s.slice(4, 6)}-${s.slice(6)}` : '');
+        return r ? { make: r.merk || '', model: r.handelsbenaming || '', year: (r.datum_eerste_toelating || '').slice(0, 4), colour: r.eerste_kleur || '', until: day(r.vervaldatum_apk) } : null;
+      }
+    },
+    il: {
+      name: 'data.gov.il (Ministry of Transport)',
+      plate: p => (/^\d{5,8}$/.test(String(p).replace(/\D/g, '')) ? String(p).replace(/\D/g, '') : ''),
+      url: p => `https://data.gov.il/api/3/action/datastore_search?resource_id=053cea08-09bc-40ec-8f7a-156f0677aff3&filters=${encodeURIComponent(JSON.stringify({ mispar_rechev: +p }))}&limit=1`,
+      read: json => {
+        const r = json && json.result && json.result.records && json.result.records[0];
+        return r ? { make: r.tozeret_nm || '', model: r.kinuy_mishari || '', year: String(r.shnat_yitzur || ''), colour: r.tzeva_rechev || '', until: r.tokef_dt || '' } : null;
+      }
+    }
+  };
   /* =====================================================================
    *  VEHICLE  (what PlatesMania knows about brands, models and generations, and how to use it)
    *    The upload page carries the whole catalogue: the brand menu (markaavto) and four tables of its script (bmObject: brand ->
@@ -2032,13 +2067,14 @@
     const v = info && info.vehicle && plateVehicleNames(info.vehicle);
     const links = lookupLinks(plate);                                           // public lookup pages, plain links (75-lookups.js)
     const series = seriesLine(plate);                                           // your photos of the series of the plate (79-series.js)
-    if (!v && !links && !series) return;
+    const register = registryLine(plate);                                       // the country's open register, on a click (80-registry.js)
+    if (!v && !links && !series && !register) return;
     const agree = v && info.vehicle.of > 1 ? ` (${info.vehicle.photos} of ${info.vehicle.of} photos)` : '';
     card.body.append(h('div', { class: 'cardbox' },
       v ? h('p', { class: 'hint', text: 'The photos of this plate on the site show:' }) : null,
       v ? h('div', { class: 'vehline' }, h('b', { text: v.text }), h('span', { class: 'mute', text: agree })) : null,
       v ? h('div', { class: 'cardrow' }, h('button', { type: 'button', class: 'btn', text: 'Fill the menus', onclick: () => { vehicleFill(v.path); card.message('Menus filled.'); } })) : null,
-      series, links));
+      series, register, links));
   }
 
   // The result goes to the photo this tab is loading, if the batch is running
@@ -3532,6 +3568,56 @@
     id: 'series', label: 'Series counter',
     init: () => { if (/\/series-[A-Z]{2}-[A-Z]{2}-\d+/i.test(location.pathname) && featureOn('series')) seriesPage(); }
   });
+  /* =====================================================================
+   *  OFFICIAL REGISTER  (plate card of the upload page, for the countries of src/lib/registries.js)
+   *    A button asks the open register of the country about the plate (make, model, year, colour, end of the inspection) and shows
+   *    the answer; where the make is written in the alphabet of the menus, "Fill the menus" compares it with them like Lens does.
+   *    The plate is sent to that register only when the button is clicked, and the answer is kept for the visit.
+   * ===================================================================== */
+  const registryCache = new Map();      // address -> facts (or null when the register has no such plate)
+
+  async function registryAsk(reg, plate) {
+    const url = reg.url(plate);
+    if (registryCache.has(url)) return registryCache.get(url);
+    const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), 15000);
+    try {
+      const res = await fetch(url, { signal: ctrl.signal });
+      if (!res.ok) throw new Error('the register answered ' + res.status);
+      const facts = reg.read(await res.json());
+      registryCache.set(url, facts);
+      return facts;
+    } finally { clearTimeout(timer); }
+  }
+
+  // The first choice of each menu for the text of the answer, or [] when the menus do not know the make
+  function registryPath(facts) {
+    const rows = vehicleGuess([`${facts.make} ${facts.model} ${facts.year}`], vehicleData());
+    const path = [];
+    for (const r of rows) { if (!r.candidates[0]) break; path.push(r.candidates[0].id); }
+    return path;
+  }
+
+  // The block of the plate card; null when the country has no register, the plate is not of its shape or the feature is off
+  function registryLine(plate) {
+    const reg = REGISTRIES[here.country];
+    const asked = reg && featureOn('registry') && reg.plate(plate);
+    if (!asked) return null;
+    const out = h('div', { class: 'cardrow' });
+    const ask = h('button', { type: 'button', class: 'btn ghost sm', text: `Ask ${reg.name}`, title: 'Sends this plate to that open register', onclick: async () => {
+      ask.disabled = true;
+      out.replaceChildren(h('span', { class: 'mute', text: 'Asking…' }));
+      try {
+        const facts = await registryAsk(reg, asked);
+        if (!facts) { out.replaceChildren(h('span', { class: 'mute', text: 'No such plate in that register.' })); return; }
+        const path = registryPath(facts);
+        const text = [facts.make, facts.model, facts.year, facts.colour, facts.until ? 'inspection until ' + facts.until : ''].filter(Boolean).join(' · ');
+        out.replaceChildren(h('b', { text }), path.length ? h('button', { type: 'button', class: 'btn sm', text: 'Fill the menus', onclick: () => vehicleFill(path) }) : null);
+      } catch (e) { out.replaceChildren(h('span', { class: 'mute', text: 'Not read: ' + (e.name === 'AbortError' ? 'no answer in 15 s' : e.message) })); ask.disabled = false; }
+    } });
+    return h('div', { class: 'cardrow' }, ask, out);
+  }
+
+  registerFeature({ id: 'registry', label: 'Official register (NL, IL)', init: () => {} });
   /* =====================================================================
    *  BATCH UPLOAD
    *  U opens a window: add photos (or a folder), click photos to select them (blue), give the selection a

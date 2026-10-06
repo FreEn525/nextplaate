@@ -2,6 +2,12 @@
 
 ## 5.9
 
+**Official register (Netherlands, Israel)**
+- New feature *Official register* (switch in Settings): for Dutch and Israeli plates, a button in the plate card asks the country's open register (RDW open data; the Ministry of Transport's data.gov.il), both free, with no key, and answering to a page of another site. It shows make, model, year, colour and the end of the inspection, and for the Netherlands *Fill the menus* compares the make and model with the site's menus. The plate is sent to the register only when you click; the answer is kept for the visit.
+
+**Plate lookup links**
+- Three more universal image searches that are open or free (Wikimedia Commons, DuckDuckGo Images, Yandex Images), GOV.UK MOT history for the United Kingdom and Carjam for New Zealand.
+
 **Series counter**
 - New feature *Series counter* (switch in Settings), for the French plates (the shape was checked on the real site; other countries join once their pages are checked): in the plate card of the upload page, how many photos of the series of the plate you already have (HF-137-QQ is in the series HF-*-QQ), a link to them; on a series page of the site, how many of its numbers are on the site, which ones, and how many photos of the series you have. One request each, through the shared queue.
 

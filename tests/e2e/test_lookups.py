@@ -40,7 +40,7 @@ def links(page, root=CARD):
 def test_the_plate_card_has_the_lookup_links_of_the_country_and_of_every_country(ctx):
     page = open_add(ctx)
     names = [n for n, _ in links(page)]
-    assert names == ["immatriculation-auto.info", "Carter-Cash", "Google Images", "Flickr", "Autogespot"]
+    assert names == ["immatriculation-auto.info", "Carter-Cash", "Google Images", "Wikimedia Commons", "DuckDuckGo Images", "Yandex Images", "Flickr", "Autogespot"]
 
 
 def test_each_link_writes_the_plate_the_way_that_site_wants_it(ctx):
@@ -65,7 +65,7 @@ def test_nothing_is_fetched_from_the_sites(ctx):
 
 def test_the_drawer_has_the_same_links_and_follows_the_plate(ctx):
     page = open_add(ctx)
-    assert [n for n, _ in links(page, PANEL + ".getElementById('lookupBox')")] == ["immatriculation-auto.info", "Carter-Cash", "Google Images", "Flickr", "Autogespot"]
+    assert [n for n, _ in links(page, PANEL + ".getElementById('lookupBox')")] == ["immatriculation-auto.info", "Carter-Cash", "Google Images", "Wikimedia Commons", "DuckDuckGo Images", "Yandex Images", "Flickr", "Autogespot"]
     page.fill("#nomer", "")
     page.dispatch_event("#nomer", "blur")
     page.wait_for_function(f"() => {PANEL}.getElementById('lookupBox').textContent.includes('Type the plate')", timeout=5000)

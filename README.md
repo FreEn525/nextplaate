@@ -1,6 +1,6 @@
 # PlatesMania - NextPlaate
 
-Tampermonkey userscript (**NextPlaate**) that makes posting and browsing on [PlatesMania](https://platesmania.com) faster: a docked panel with twenty-one features; every one of them but Settings itself can be switched off in Settings.
+Tampermonkey userscript (**NextPlaate**) that makes posting and browsing on [PlatesMania](https://platesmania.com) faster: a docked panel with twenty-two features; every one of them but Settings itself can be switched off in Settings.
 
 ## Features, one by one
 
@@ -20,24 +20,25 @@ Where a key is given, it can be changed in the Shortcuts drawer.
 10. **Floating upload button**: while the site's own Upload button is out of view, ours follows you at the bottom of the page and presses it.
 11. **Plate lookup links**: for the plate you type, one link to each public lookup page of the country (and to a picture search), each writing the plate the way that site wants it. Plain links opening a new tab: nothing is sent before a click. Each site can be hidden in Settings.
 12. **Your photos of this vehicle**: under the brand, model and generation menus, how many photos of each you already have on the site, each number a link to those photos.
-13. **Series counter**: for French plates, how many photos of the plate's series (HF-137-QQ is in HF-*-QQ) you already have; on a series page, how many of its numbers are on the site, which ones, and how many photos of the series you have.
+13. **Official register** (Netherlands, Israel): a button in the plate card asks the country's open register (RDW open data, data.gov.il) about the plate: make, model, year, colour, inspection date; for the Netherlands it can fill the menus. The plate is sent only when you click.
+14. **Series counter**: for French plates, how many photos of the plate's series (HF-137-QQ is in HF-*-QQ) you already have; on a series page, how many of its numbers are on the site, which ones, and how many photos of the series you have.
 
 **Browsing**
 
-14. **Likes** (`L`): like a page, or several pages in a row, with a delay between likes.
-15. **Gallery page keys** (`A`, `D`): previous and next page of a gallery from the keyboard.
-16. **Country flags**: a link with a flag and a name for every country, to its upload page. In the panel, and on the upload pages and on a member's profile right beside the content (never under the panel); you choose which countries the side bar shows.
-17. **Member shortcuts**: the members you go to often, each with picture and name, one click to their page. You are always first; edit mode lets you drag the lines (or use the arrow keys), remove them and add a member by number or link; a star on a profile saves that member. Your own picture is also in the panel's bar.
+15. **Likes** (`L`): like a page, or several pages in a row, with a delay between likes.
+16. **Gallery page keys** (`A`, `D`): previous and next page of a gallery from the keyboard.
+17. **Country flags**: a link with a flag and a name for every country, to its upload page. In the panel, and on the upload pages and on a member's profile right beside the content (never under the panel); you choose which countries the side bar shows.
+18. **Member shortcuts**: the members you go to often, each with picture and name, one click to their page. You are always first; edit mode lets you drag the lines (or use the arrow keys), remove them and add a member by number or link; a star on a profile saves that member. Your own picture is also in the panel's bar.
 
 **Profiles**
 
-18. **Profile: real uploads**: on a member's profile, the real total of the gallery and the uploads of the day (from 03:30 local time), and how far the profile's own figure is: that figure is a statistic the site recalculates from time to time.
-19. **Profile: regions**: on a member's profile, a button reads the site's region statistics and shows how many regions (departments, districts, states...) of a country the member has a photo from, with a bar, the regions seen as links and the missing ones. The country menu comes from the site's page.
+19. **Profile: real uploads**: on a member's profile, the real total of the gallery and the uploads of the day (from 03:30 local time), and how far the profile's own figure is: that figure is a statistic the site recalculates from time to time.
+20. **Profile: regions**: on a member's profile, a button reads the site's region statistics and shows how many regions (departments, districts, states...) of a country the member has a photo from, with a bar, the regions seen as links and the missing ones. The country menu comes from the site's page.
 
 **The panel itself**
 
-20. **Shortcut editor**: every key is yours to change (AZERTY-safe).
-21. **Settings**: one switch per feature; a switched-off feature adds no control and no key.
+21. **Shortcut editor**: every key is yours to change (AZERTY-safe).
+22. **Settings**: one switch per feature; a switched-off feature adds no control and no key.
 
 ## Installation
 
@@ -48,6 +49,7 @@ Where a key is given, it can be changed in the Shortcuts drawer.
 
 - It works on `platesmania.com`. Everything it reads from the site goes through one queue (one request at a time, three seconds apart, a pause after a block).
 - **Google Lens only**: the script also runs on `www.google.*` and `lens.google.com`, but there it does something only for a search that the panel asked for, and it stops at once on any other Google page. It needs `GM_setValue` and `GM_getValue` to pass the photo to that page and the results back.
+- **Official register** (Netherlands, Israel): only when you click its button, the plate is sent to that country's open register (`opendata.rdw.nl`, `data.gov.il`), whose data is public and free.
 - **Lookup links** are plain links: they open a public lookup site in a new tab only when you click one, and the script reads nothing from those sites.
 - `GM_openInTab` opens the tabs of the batch upload and of the Lens search. Nothing is sent to any server of ours: there is none.
 

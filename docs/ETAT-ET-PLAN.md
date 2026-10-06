@@ -6,7 +6,7 @@ Au 6 octobre 2026. Le détail du chemin parcouru est dans `HISTORIQUE.md`.
 
 Au 6 octobre 2026, version **5.8** (en cours de publication). La 5.7 était la version de la vérification de plaque ; la 5.8 ajoute six fonctions et un style commun.
 
-**Les vingt et une fonctions** (le tableau complet, avec leur réglage, leur emplacement et leur touche, est en tête de `FONCTIONNALITES.md`) : sélection d'une paire, lieu et hashtags, descriptions, envoi par lots, vérification de plaque, aperçu de plaque en direct, Google Lens, sélecteur de tags, information complémentaire, likes, touches de page, drapeaux des pays, raccourcis vers les membres, bouton d'envoi flottant, liens de recherche de plaque, vos photos de ce véhicule, compteur de série, vrais uploads du profil, régions du profil, éditeur de raccourcis, réglages. Chacune (sauf les réglages) a un interrupteur dans Settings.
+**Les vingt-deux fonctions** (le tableau complet, avec leur réglage, leur emplacement et leur touche, est en tête de `FONCTIONNALITES.md`) : sélection d'une paire, lieu et hashtags, descriptions, envoi par lots, vérification de plaque, aperçu de plaque en direct, Google Lens, sélecteur de tags, information complémentaire, likes, touches de page, drapeaux des pays, raccourcis vers les membres, bouton d'envoi flottant, liens de recherche de plaque, vos photos de ce véhicule, registre officiel (NL, IL), compteur de série, vrais uploads du profil, régions du profil, éditeur de raccourcis, réglages. Chacune (sauf les réglages) a un interrupteur dans Settings.
 
 **Vérification de plaque** : 96 pays, 829 catégories (voir `COUVERTURE.md`, généré).
 

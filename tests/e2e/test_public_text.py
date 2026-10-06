@@ -16,4 +16,4 @@ def test_the_text_to_paste_on_greasy_fork_does_not_mention_the_repository():
     doc = (ROOT / "docs" / "GREASYFORK.md").read_text(encoding="utf-8")
     block = re.search(r"```markdown\n(.*?)```", doc, re.S).group(1)
     assert not REPO.search(block)
-    assert "Twenty-one features" in block                                                                # and it is the list of the features
+    assert "Twenty-two features" in block                                                                # and it is the list of the features

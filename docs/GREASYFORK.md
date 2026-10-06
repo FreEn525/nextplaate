@@ -32,7 +32,7 @@ Elle est dans `src/meta/00-header.txt` (`@description`, et `@description:fr` pou
 (En anglais, Markdown : choisir « Markdown » comme format.)
 
 ```markdown
-**NextPlaate** adds a panel to PlatesMania that makes posting photos and browsing faster. Twenty-one features, each with a switch in Settings (except Settings itself).
+**NextPlaate** adds a panel to PlatesMania that makes posting photos and browsing faster. Twenty-two features, each with a switch in Settings (except Settings itself).
 
 ## Posting photos
 1. **Photo pair selection** (`S`) - pick the front and the rear photo of a vehicle from a gallery.
@@ -47,21 +47,22 @@ Elle est dans `src/meta/00-header.txt` (`@description`, et `@description:fr` pou
 10. **Floating upload button** - while the site's Upload button is out of view, ours follows you at the bottom of the page and presses it.
 11. **Plate lookup links** - one link per public lookup page of the country for the plate you type, each writing the plate the way that site wants it; plain links, nothing is sent before you click, each site can be hidden.
 12. **Your photos of this vehicle** - under the vehicle menus, how many photos of that brand, model and generation you already have, each number a link.
-13. **Series counter** - French plates: your photos of the plate's series (HF-137-QQ is in HF-*-QQ); on a series page, the numbers on the site.
+13. **Official register** (Netherlands, Israel) - a button in the plate card asks the country's open register (free, no key) about the plate: make, model, year, colour, inspection date; it can fill the menus for the Netherlands. The plate is sent only when you click.
+14. **Series counter** - French plates: your photos of the plate's series (HF-137-QQ is in HF-*-QQ); on a series page, the numbers on the site.
 
 ## Browsing
-14. **Likes** (`L`) - like a page, or several pages in a row, with a delay between likes.
-15. **Gallery page keys** (`A`, `D`) - previous and next page from the keyboard.
-16. **Country flags** - a flag and a name for every country, linking to its upload page: in the panel, and beside the content on the upload pages and on a member's profile. Choose which countries the side bar shows.
-17. **Member shortcuts** - the members you go to often, with picture and name, one click to their page. You are always first; an Edit mode lets you drag the lines (or use the arrow keys), remove them and add a member by number or link; a star on a profile saves that member. Your own picture is also in the panel's bar.
+15. **Likes** (`L`) - like a page, or several pages in a row, with a delay between likes.
+16. **Gallery page keys** (`A`, `D`) - previous and next page from the keyboard.
+17. **Country flags** - a flag and a name for every country, linking to its upload page: in the panel, and beside the content on the upload pages and on a member's profile. Choose which countries the side bar shows.
+18. **Member shortcuts** - the members you go to often, with picture and name, one click to their page. You are always first; an Edit mode lets you drag the lines (or use the arrow keys), remove them and add a member by number or link; a star on a profile saves that member. Your own picture is also in the panel's bar.
 
 ## Profiles
-18. **Profile: real uploads** - the real total of a member's gallery and the uploads of the day (from 03:30 local time), next to the profile's own figure, which the site only recalculates from time to time.
-19. **Profile: regions** - how many regions of a country a member has a photo from, with a bar, the regions seen and the missing ones.
+19. **Profile: real uploads** - the real total of a member's gallery and the uploads of the day (from 03:30 local time), next to the profile's own figure, which the site only recalculates from time to time.
+20. **Profile: regions** - how many regions of a country a member has a photo from, with a bar, the regions seen and the missing ones.
 
 ## The panel
-20. **Shortcut editor** - every key can be changed (AZERTY-safe).
-21. **Settings** - one switch per feature.
+21. **Shortcut editor** - every key can be changed (AZERTY-safe).
+22. **Settings** - one switch per feature.
 
 ## Permissions, in plain words
 - It works on platesmania.com. Everything it reads from the site goes through one queue: one request at a time, three seconds apart, a pause after a block.

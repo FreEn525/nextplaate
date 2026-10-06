@@ -5,13 +5,17 @@
    *      'squash' (default)  letters and digits only, in capitals: AB-12 CDE -> AB12CDE
    *      'hyphen'            the parts joined by hyphens: AB 123 CD -> AB-123-CD
    *      'raw'               as the form gives it
-   *    A site that fails or goes away is taken off here, or hidden by the user in Settings. The list starts from the public
+   *    Universal ones are open or free image searches; the country ones are the ones that answered when tried. The registers that
+   *    answer in JSON (NL, IL) are in src/lib/registries.js. A site that fails or goes away is taken off here, or hidden by the user in Settings. The list starts from the public
    *    userscript "Platesmania Lookup Toolbox" (links only; its fiches that call an API are not part of it: see
    *    docs/ANALYSE-SCRIPTS-PUBLICS.md).
    * ===================================================================== */
   const LOOKUP_SITES = {
     '*': [
       { name: 'Google Images', url: 'https://www.google.com/search?tbm=isch&q="{plate}"', fmt: 'raw' },
+      { name: 'Wikimedia Commons', url: 'https://commons.wikimedia.org/w/index.php?search="{plate}"&ns6=1', fmt: 'raw' },
+      { name: 'DuckDuckGo Images', url: 'https://duckduckgo.com/?q="{plate}"&iax=images&ia=images', fmt: 'raw' },
+      { name: 'Yandex Images', url: 'https://yandex.com/images/search?text="{plate}"', fmt: 'raw' },
       { name: 'Flickr', url: 'https://www.flickr.com/search/?text={plate}', fmt: 'raw' },
       { name: 'Autogespot', url: 'https://www.autogespot.com/spots?licenseplate={plate}' }
     ],
@@ -34,7 +38,9 @@
       { name: 'baza-gai.com.ua', url: 'https://baza-gai.com.ua/nomer/{plate}' },
       { name: 'auto-inform.com.ua', url: 'https://auto-inform.com.ua/search/{plate}' }
     ],
+    nz: [{ name: 'Carjam', url: 'https://www.carjam.co.nz/car/?plate={plate}' }],
     uk: [
+      { name: 'GOV.UK MOT history', url: 'https://www.check-mot.service.gov.uk/results?registration={plate}' },
       { name: 'checkcardetails', url: 'https://www.checkcardetails.co.uk/cardetails/{plate}' },
       { name: 'totalcarcheck', url: 'https://totalcarcheck.co.uk/FreeCheck?regno={plate}' },
       { name: 'checkhistory', url: 'https://checkhistory.uk/vehicle/{plate}' },
