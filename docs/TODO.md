@@ -4,7 +4,7 @@
 
 ## Identité visuelle
 
-- **Logo** : fait. Le logo SVG (`logo_nextplaate.svg`) est en `#3781c5`, et l'interface utilise maintenant la même couleur (commit `fc69004`). La forme est identique, seule la couleur a changé.
+- **Logo** : fait. Le logo SVG (`logo_nextplaate.svg`) est en `#4765a0`, le bleu de PlatesMania, comme toute l'interface (voir `docs/STYLE.md`). La forme est identique, seule la couleur a changé.
 - **Couleurs du site** : **info nécessaire**. Les pages sauvegardées renvoient vers des feuilles de style que je n'ai pas. Pour reprendre les vraies couleurs du site, il me faut le CSS (ou une capture d'écran de la couleur principale).
 
 ## Développement et logs

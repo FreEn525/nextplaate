@@ -25,6 +25,8 @@ Le texte secondaire (`--mute`, `#626a70`) est **plus foncé** que le gris du sit
 - **Les mêmes composants partout** : bouton `.btn` (plein) / `.btn.ghost` (blanc) / `.btn.danger`, choix `.chip` (`.best` = le choix principal, `.on` = le choix en vigueur), étiquette `.cat`. Le panneau, la carte Lens et la fenêtre d'envoi s'en servent tous.
 - **Reprise des signes du site** : filet de 2 px en `--primary` sur le haut des blocs et sous le titre du tiroir, comme les `.headline` et `.tag-box-v1` du site ; titres de bloc en petites capitales.
 
+- **Le logo** est aux couleurs du site : son bleu est `--primary` (`#4765a0`), dans le panneau (via `SITE_BLUE`), dans `logo_nextplaate.svg` et dans l'icône du script (`@icon`).
+
 ## États
 
 | État | Fond | Bordure | Texte |
@@ -42,5 +44,4 @@ Le texte secondaire (`--mute`, `#626a70`) est **plus foncé** que le gris du sit
 ## Ce qui n'est pas repris du site
 
 - **La police** : le site utilise son thème Bootstrap (`style.css`, non récupéré). Le script garde la police du système.
-- **Le logo** : il reste bleu `#3781c5`, c'est son identité (`logo_nextplaate.svg` et l'icône du script). Si vous voulez le logo à la couleur du site, c'est un changement d'une ligne.
 - **Les formes du reste du site** (en-têtes, onglets, cartes de portfolio) : le script n'en a pas besoin.
