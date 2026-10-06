@@ -2,6 +2,9 @@
 
 ## 5.9
 
+**What's new window and signature**
+- After an update the script opens a *What's new* window once, in plain words (what each new thing does and where it is); it is also in Settings > About, which carries the signature © 2026 NextEnzzo with a link to the author's profile. A first install shows nothing. The text is in `src/lib/whatsnew.js`, and a test fails if `@version` is bumped without its entry.
+
 **New logo**
 - A round camera with a plus, in three blues, in the panel and as the script's icon.
 

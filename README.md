@@ -2,6 +2,10 @@
 
 Tampermonkey userscript (**NextPlaate**) that makes posting and browsing on [PlatesMania](https://platesmania.com) faster: a docked panel with twenty-two features; every one of them but Settings itself can be switched off in Settings.
 
+Made by [NextEnzzo](https://platesmania.com/user121559). © 2026 NextEnzzo, MIT license.
+
+After an update the script shows a *What's new* window once (also in Settings > About).
+
 ## Features, one by one
 
 Where a key is given, it can be changed in the Shortcuts drawer.

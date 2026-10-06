@@ -33,6 +33,9 @@ const ordered = GROUPS.flatMap(g =>
 let out = ordered.map(p => readFileSync(join(root, 'src', p), 'utf8')).join('')
   .replace(/\r\n/g, '\n');   // same output on Windows (CRLF checkout) and in the CI
 const target = DEV ? 'nextplaate.dev.user.js' : 'nextplaate.user.js';
+const version = (readFileSync(join(root, 'src/meta/00-header.txt'), 'utf8').match(/@version\s+(\S+)/) || [])[1];
+if (!version) throw new Error('No @version in src/meta/00-header.txt');
+out = out.replaceAll("'__VERSION__'", JSON.stringify(version));   // the version, for the "What's new" window (the sandbox of the tests has no GM_info)
 out = out.replaceAll("'__DEBUG__'", DEV ? "'1'" : "'0'");   // logs: on in the dev build, off in the public one
 if (DEV) {
   // its own script in Tampermonkey, so it never replaces the published one

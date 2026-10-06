@@ -62,6 +62,8 @@
     .pill.removable:hover{background:var(--danger-soft);border-color:var(--danger-line);color:var(--danger-ink)}
     .cardbox{display:flex;flex-direction:column;gap:10px;padding:12px}
     .cardbox textarea{width:100%;min-height:180px;padding:10px;resize:vertical;line-height:1.5}
+    .wn-section{margin:0 0 14px}
+    .wn-item{margin:4px 0;font-size:13px;line-height:1.45}
     .stats{display:flex;flex-wrap:wrap;gap:12px 28px}
     .stat{display:flex;flex-direction:column}
     .stat b{font-size:18px;color:var(--primary-h)}

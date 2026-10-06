@@ -32,7 +32,7 @@ Elle est dans `src/meta/00-header.txt` (`@description`, et `@description:fr` pou
 (En anglais, Markdown : choisir « Markdown » comme format.)
 
 ```markdown
-**NextPlaate** adds a panel to PlatesMania that makes posting photos and browsing faster. Twenty-two features, each with a switch in Settings (except Settings itself).
+**NextPlaate** adds a panel to PlatesMania that makes posting photos and browsing faster. Twenty-two features, each with a switch in Settings (except Settings itself). Made by [NextEnzzo](https://platesmania.com/user121559).
 
 ## Posting photos
 1. **Photo pair selection** (`S`) - pick the front and the rear photo of a vehicle from a gallery.
