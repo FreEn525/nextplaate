@@ -168,6 +168,12 @@
   const isTextField = el => !!el && (el.isContentEditable || el.tagName === 'TEXTAREA' ||
     (el.tagName === 'INPUT' && /^(text|number|search|url|email|password)$/i.test(el.type)));
 
+  // The focused control: from the event target, down through every shadow root that holds the focus
+  function deepActive(el) {
+    while (el && el.shadowRoot && el.shadowRoot.activeElement) el = el.shadowRoot.activeElement;
+    return el;
+  }
+
   // Capture phase on window: we see the key before the site does, so a site script cannot swallow it
   window.addEventListener('keydown', e => {
     log('key', e.code, 'target', e.target.tagName, e.target.id || '', 'modal', !!app.modal, 'capture', !!app.capture);
@@ -183,8 +189,9 @@
     if (e.code === 'KeyA' && /^[a-z]$/i.test(e.key || '') && e.key.toUpperCase() !== prevKey) {
       prevKey = e.key.toUpperCase();
     }
-    // Focus inside the panel: the event target is the panel itself, so look at the focused control
-    const field = e.target === host ? host.shadowRoot.activeElement : e.target;
+    // Focus inside the panel or inside a card of the script (each is a shadow root): the event target is the host of that root, so
+    // look at the control that has the focus, however deep
+    const field = deepActive(e.target);
     if (isTextField(field)) return;
     const k = keyMap[e.code];
     log('  action for', e.code, '=', k ? k.id : 'none');

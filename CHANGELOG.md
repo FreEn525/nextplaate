@@ -2,6 +2,9 @@
 
 ## 5.9
 
+**Fix**
+- Typing in a text field that sits in a card or bar of the script (the country search of the flag bar, for example) no longer triggers the shortcut keys: `U` no longer opens the Batch upload drawer while you type. The key handler now looks at the control that has the focus through every shadow root.
+
 **Developer build**
 - New tool *Series collection* (dev drawer, not in the published script): for the 55 countries whose pages link a table of series, it reads the table, one series page and the site's own wildcard search with your member number, through the shared queue (about three requests per country, it carries on where it stopped), keeps them in the browser and writes them to a folder, to build the series feature for more countries offline.
 

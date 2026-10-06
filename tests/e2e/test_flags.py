@@ -216,3 +216,14 @@ def test_a_member_profile_on_a_narrow_screen_has_the_bar_under_the_avatar(ctx):
 def test_the_bar_is_not_on_the_other_pages(ctx):
     page = open_page(ctx, "https://platesmania.com/fr/gallery.php")
     assert page.evaluate("() => !document.getElementById('pmg-flags')")
+
+
+def test_typing_in_the_country_search_of_the_flag_bar_does_not_trigger_the_keys(ctx):
+    page = open_page(ctx, "https://platesmania.com/fr/add")
+    find = page.evaluate_handle(f"() => {BAR}.querySelector('input[type=text]')")
+    if find.as_element() is None or not page.evaluate(f"() => !{BAR}.querySelector('input[type=text]').hidden"):
+        pytest.skip("the bar has few countries: no search field")
+    page.evaluate(f"() => {BAR}.querySelector('input[type=text]').focus()")
+    page.keyboard.type("uU")
+    assert page.evaluate(f"() => {BAR}.querySelector('input[type=text]').value") == "uU"        # written in the field
+    assert page.evaluate(f"() => !{PANEL}.querySelector('.dsec[data-drawer=\"upload\"]:not([hidden])') || {PANEL}.querySelector('.dsec[data-drawer=\"upload\"]').hidden")
