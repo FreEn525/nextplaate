@@ -134,7 +134,9 @@ UPLOAD_PAGE = (
     + ' document.getElementById("informer-preview-btn").style.display = ""; document.getElementById("informer-preview-result").style.display = "none"; });'
     + '</script>'
     + '<div id="zoomimgid" class="hidden"><img id="zoomimg" width="260" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="></div>'
-    + '<button type="button" id="pm-photo-editor-open">Upload through editor</button></form>'
+    + '<button type="button" id="pm-photo-editor-open">Upload through editor</button>'
+    + '<div style="height:2400px"></div>'
+    + '<button class="btn-u" type="submit" onclick="window.__uploads = (window.__uploads || 0) + 1; return false">Upload</button></form>'
     + "</div></body></html>"
 )
 
