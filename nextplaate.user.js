@@ -1064,6 +1064,103 @@
   PLATE_RULES.vn = () => shownVal('moto') || (['2', '6'].includes(fieldVal('ctype')) ? joinParts([menu('region'), shownVal('mm') + menu('spec'), shownVal('digit')]) : '') || joinParts([menu('region') + shownVal('mm') + menu('spec'), shownVal('digit')]);
   const plateForForm = () => (PLATE_RULES[here.country] || genericPlate)();   // a country without a rule uses the plain visible fields
   /* =====================================================================
+   *  REGION SHAPES  (the boundaries of the regions of a country, from geoBoundaries, loaded when a map asks for them)
+   *    geoBoundaries (CC-BY 4.0, an open public API) gives, for a country (ISO 3166 alpha-3) and a level (ADM1 regions, ADM2
+   *    departments or districts, ADM3...), the shapes as GeoJSON. Nothing is shipped in the script: the API names the file of the
+   *    simplified shapes, the file is fetched once per visit, then drawn: equirectangular projection corrected for the latitude of
+   *    the country, 1000 units wide, points closer than a tolerance dropped (the files hold far more points than a screen shows).
+   *      const geo = await regionShapes('FRA', 'ADM2');   // { w, h, shapes: [{ name, iso, d }] }
+   * ===================================================================== */
+  const REGION_API = 'https://www.geoboundaries.org/api/current/gbOpen/';
+  const regionGeoCache = new Map();
+
+  async function regionFetchJson(url) {
+    const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), 60000);
+    try {
+      const res = await fetch(url, { signal: ctrl.signal });
+      if (!res.ok) throw new Error('geoBoundaries answered ' + res.status);
+      return await res.json();
+    } finally { clearTimeout(timer); }
+  }
+
+  // The rings of a feature, as [[lon, lat], ...] lists
+  const regionRings = geometry => (geometry.type === 'Polygon' ? [geometry.coordinates] : geometry.coordinates).flat();
+
+  // A path in map units for the rings, keeping a point only when it is farther than `tol` from the last one kept
+  function regionPath(rings, project, tol) {
+    let d = '';
+    for (const ring of rings) {
+      let last = null, pts = [];
+      for (const [lon, lat] of ring) {
+        const p = project(lon, lat);
+        if (last && Math.hypot(p[0] - last[0], p[1] - last[1]) < tol) continue;
+        pts.push(p[0].toFixed(1) + ' ' + p[1].toFixed(1));
+        last = p;
+      }
+      if (pts.length > 2) d += 'M' + pts.join('L') + 'Z';          // a ring that shrinks to a point or a line is dropped
+    }
+    return d;
+  }
+
+  async function regionShapes(iso3, level) {
+    const key = iso3 + level;
+    if (regionGeoCache.has(key)) return regionGeoCache.get(key);
+    const meta = await regionFetchJson(`${REGION_API}${iso3}/${level}/`);
+    const geo = await regionFetchJson(meta.simplifiedGeometryGeoJSON);
+    let x0 = 180, x1 = -180, y0 = 90, y1 = -90;
+    for (const f of geo.features) for (const ring of regionRings(f.geometry)) for (const [lon, lat] of ring) { x0 = Math.min(x0, lon); x1 = Math.max(x1, lon); y0 = Math.min(y0, lat); y1 = Math.max(y1, lat); }
+    const k = 1000 / ((x1 - x0) * Math.cos((y0 + y1) / 2 * Math.PI / 180));
+    const project = (lon, lat) => [(lon - x0) * Math.cos((y0 + y1) / 2 * Math.PI / 180) * k, (y1 - lat) * k];
+    const h_ = Math.ceil((y1 - y0) * k) + 2;
+    const shapes = geo.features.map(f => ({ name: f.properties.shapeName || '', iso: f.properties.shapeISO || '', d: regionPath(regionRings(f.geometry), project, 0.6) })).filter(s => s.d);
+    const result = { w: 1000, h: h_, shapes, license: meta.boundaryLicense || '', year: meta.boundaryYearRepresented || '' };
+    regionGeoCache.set(key, result);
+    return result;
+  }
+  /* =====================================================================
+   *  REGION MAPS: WHICH COUNTRIES, AT WHICH LEVEL  (measured, see tools/measure-regions.py)
+   *    For each country of the site that has regions: its ISO 3166 alpha-3 code and the geoBoundaries level whose shapes the site's regions
+   *    fall on best. A country is listed only when at least three regions in four were placed on the shapes in the last measure
+   *    (6 October 2026); the others show the table of their regions without a map until their matching is worked out.
+   * ===================================================================== */
+  const REGION_MAPS = {
+    ae: ['ARE', 'ADM1'], al: ['ALB', 'ADM2'], au: ['AUS', 'ADM1'], az: ['AZE', 'ADM2'], br: ['BRA', 'ADM1'], by: ['BLR', 'ADM1'],
+    ca: ['CAN', 'ADM1'], ch: ['CHE', 'ADM1'], fr: ['FRA', 'ADM2'], md: ['MDA', 'ADM1'], me: ['MNE', 'ADM1'],
+    rs: ['SRB', 'ADM2'], ru: ['RUS', 'ADM1'], si: ['SVN', 'ADM2'], tr: ['TUR', 'ADM1'], ua: ['UKR', 'ADM1'], us: ['USA', 'ADM1'],
+    uz: ['UZB', 'ADM1'], vn: ['VNM', 'ADM1']
+  };
+  /* =====================================================================
+   *  REGION MATCHING  (the regions of the site, to the shapes of a map)
+   *    The site names a region by a code and a name ("01 - Ain", "AC - Aleksandrovac"), sometimes several at once ("Augsburg City,
+   *    Augsburg Dist"), and a region can group several ids (Moscow: 10077_10097_10099...). The shapes have a name and, for some countries,
+   *    an ISO 3166-2 code. A region is placed on the shapes whose normalised name equals one of its names, or whose ISO code ends with
+   *    its code. What cannot be placed is listed beside the map, never dropped.
+   *      regionMatch(regions, shapes) -> { placed: Map(regionId -> [shape index]), missing: [region] }
+   * ===================================================================== */
+  const REGION_WORDS = /\b(city|town|district|dist|region|oblast|republic|krai|kray|autonomous|okrug|municipality|county|kreis|landkreis|stadt|of|the|and|rural|urban|prefecture|province|department|departement|canton|commune)\b/g;
+
+  function regionNorm(text) {
+    return String(text || '').normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(REGION_WORDS, ' ').replace(/[^a-z0-9]+/g, ' ').trim();
+  }
+
+  function regionMatch(regions, shapes) {
+    const byName = new Map(), byCode = new Map();
+    shapes.forEach((s, i) => {
+      const n = regionNorm(s.name);
+      if (n) byName.set(n, [...(byName.get(n) || []), i]);
+      const code = s.iso.includes('-') ? s.iso.split('-').pop().toLowerCase() : '';
+      if (code) byCode.set(code, [...(byCode.get(code) || []), i]);
+    });
+    const placed = new Map(), missing = [];
+    for (const r of regions) {
+      const found = new Set();
+      String(r.name).split(/[,;/]|\bor\b/).concat([r.name]).map(regionNorm).filter(Boolean).forEach(n => (byName.get(n) || []).forEach(i => found.add(i)));
+      if (!found.size && r.code) (byCode.get(r.code.toLowerCase()) || []).forEach(i => found.add(i));
+      if (found.size) placed.set(r.id, [...found]); else missing.push(r);
+    }
+    return { placed, missing };
+  }
+  /* =====================================================================
    *  OFFICIAL REGISTERS WITH OPEN DATA  (the only ones that answer a plate, free, with no key, to a page of another site)
    *    A register is { name, plate(plate) -> the plate as it asks for it or '', url(plate), read(json) -> the facts or null }.
    *    The facts: { make, model, year, colour, until } (all optional text). The plate leaves the page only when the user clicks.
@@ -1444,7 +1541,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
       else if (k === 'class') el.className = v;
       else if (k === 'for') el.htmlFor = v;
       else if (/^on[a-z]+$/.test(k)) el.addEventListener(k.slice(2), v);
-      else if (k.startsWith('data-')) el.setAttribute(k, v);
+      else if (k.startsWith('data-') || k.startsWith('aria-') || k === 'role') el.setAttribute(k, v);   // attributes with no property of the same name
       else el[k] = v;                      // id, value, checked, disabled, hidden, title, min, max, step, placeholder...
     }
     kids.flat().forEach(c => { if (c !== null && c !== undefined && c !== false) el.append(c); });
@@ -3878,7 +3975,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     const systems = [...doc.querySelectorAll('select[name="gallery"] option')].map(o => ({ code: o.value.replace(/-\d+$/, ''), name: o.textContent.trim(), selected: o.hasAttribute('selected') }));
     const rows = [...doc.querySelectorAll('#example tbody tr')].map(tr => {
       const td = tr.querySelectorAll('td'), link = td[4] && td[4].querySelector('a');
-      return td.length >= 5 ? { code: td[2].textContent.trim(), name: td[3].textContent.trim(), count: link ? profileNumber(link.textContent) : 0, href: link ? link.getAttribute('href') : '' } : null;
+      return td.length >= 5 ? { id: td[1].textContent.trim(), code: td[2].textContent.trim(), name: td[3].textContent.trim(), count: link ? profileNumber(link.textContent) : 0, href: link ? link.getAttribute('href') : '' } : null;
     }).filter(Boolean);
     return { systems, rows };
   }
@@ -4153,7 +4250,15 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     const who = [...(me ? [{ id: me.id, name: 'Me (' + me.name + ')' }] : []), ...membersGet().filter(m => !me || m.id !== me.id).slice(0, 8)];
     who.forEach(m => chips.append(h('button', { type: 'button', class: 'pill', text: m.name, onclick: () => go(m.id) })));
     input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); go(input.value); } });
-    let run = 0;
+    let run = 0, current = null;
+    // a country chosen under the map: its regions (83-regionmap.js), with a way back to the world
+    view.addEventListener('pmg-regions', async e => {
+      const mine = ++run, cc = e.detail;
+      const back = h('button', { type: 'button', class: 'btn ghost sm', text: '← World map', onclick: () => view.replaceChildren(worldView(current)) });
+      view.replaceChildren(back, h('p', { class: 'hint', text: `Reading the regions of ${cName(cc)}… (the site’s lists, then the shapes)` }));
+      try { const v = await regionMapView(cc, current); if (mine === run) view.replaceChildren(back, v); }
+      catch (err) { if (mine === run) view.replaceChildren(back, h('p', { class: 'hint', text: 'Not drawn: ' + err.message + '.' })); }
+    });
     async function go(text) {
       const member = memberIdOf(text);
       if (!member) { view.replaceChildren(h('p', { class: 'hint', text: 'Type a member number (121559) or paste the link of a profile.' })); return; }
@@ -4165,6 +4270,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
         const data = await worldData(member);
         if (mine !== run) return;
         modal.message(`${data.name} · ID ${data.id}`);
+        current = data;
         view.replaceChildren(worldView(data));
       } catch (e) { if (mine === run) view.replaceChildren(h('p', { class: 'hint', text: 'Not read: ' + e.message + '.' })); }
     }
@@ -4219,12 +4325,83 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     const views = pz.toolbar([{ label: 'Europe', title: 'Europe close up', view: WORLD_MAP.views.europe }]);
     return h('div', null,
       h('div', { class: 'sum' }, h('b', { text: `${have.length} countr${have.length === 1 ? 'y' : 'ies'}` }), ` of ${Object.keys(data.countries).length}, ${total} photo${total === 1 ? '' : 's'}`),
-      views, svg, legend,
+      views, svg, legend, regionPicker(data),
       unmapped.length ? h('p', { class: 'extra' }, 'Not on the map: ', unmapped.flatMap((cc, i) => [i ? ', ' : null, h('a', { class: 'lnk', href: gallery(cc), target: '_blank', rel: 'noopener noreferrer', text: `${cName(cc)} (${data.countries[cc].photos})` })])) : null,
       have.length ? h('details', { class: 'fold' }, h('summary', { text: `All the countries (${have.length})` }),
         h('table', null, h('tr', null, h('th', { text: 'Country' }), h('th', { text: 'Photos' }), h('th', { text: 'Likes' })),
           have.map(cc => h('tr', null, h('td', null, h('a', { class: 'lnk', href: gallery(cc), target: '_blank', rel: 'noopener noreferrer', text: cName(cc) })),
             h('td', { class: 'n', text: String(data.countries[cc].photos) }), h('td', { class: 'n', text: String(data.countries[cc].likes) }))))) : h('p', { class: 'hint', text: 'No photo yet.' }));
+  }
+  /* =====================================================================
+   *  REGION MAP  (the regions of one country, in the window of the world map: departments, districts, states...)
+   *    Three things are put together: the list of the regions of the country (the site's search page, /<cc>/search: id, code, name), the
+   *    member's photos per region (the site's region statistics, the page of the "system" of the country, one row per region id) and the
+   *    shapes (geoBoundaries, src/lib/regions-geo.js), matched by name or code (src/lib/regions-match.js). Only the countries of
+   *    REGION_MAPS (src/lib/regions-levels.js) have a map; the regions that find no shape are listed under it, with their photos.
+   * ===================================================================== */
+  const regionListCache = new Map();
+
+  // The regions of a country as the site's search page lists them: [{ id, code, name }]; an id can hold several ("10077_10097")
+  async function regionList(cc) {
+    if (regionListCache.has(cc)) return regionListCache.get(cc);
+    const doc = new DOMParser().parseFromString(await siteFetch(`/${cc}/search`), 'text/html');
+    const list = [...doc.querySelectorAll('select#region option, select[name="aregions[]"] option')].map(o => {
+      const label = o.textContent.replace(/\s+/g, ' ').trim(), at = label.indexOf(' - ');                  // "01 - Ain", or "- Without code" when there is no code
+      return { id: o.value, code: at > 0 ? label.slice(0, at).trim() : '', name: (at >= 0 ? label.slice(at + 3) : label.replace(/^-\s*/, '')).trim() };
+    }).filter(r => r.name);
+    regionListCache.set(cc, list);
+    return list;
+  }
+
+  // The member's photos per region id, from the statistics pages of the country's systems (fr1 and fr2 for France...)
+  async function regionPhotos(cc, memberId) {
+    const menu = (await regionsAsk('fr1', memberId)).systems.filter(s => s.code.replace(/\d$/, '') === cc);
+    const counts = new Map(), links = new Map();
+    for (const s of menu.length ? menu : [{ code: cc }]) {
+      let page;
+      try { page = await regionsAsk(s.code, memberId); } catch (e) { continue; }
+      page.rows.forEach(r => { if (r.count) { counts.set(r.id, (counts.get(r.id) || 0) + r.count); links.set(r.id, r.href); } });
+    }
+    return { counts, links };
+  }
+
+  async function regionMapView(cc, data) {
+    const [iso, level] = REGION_MAPS[cc];
+    const [regions, photos, geo] = await Promise.all([regionList(cc), regionPhotos(cc, data.id), regionShapes(iso, level)]);
+    const { placed, missing } = regionMatch(regions, geo.shapes);
+    const count = r => String(r.id).split('_').reduce((n, id) => n + (photos.counts.get(id) || 0), 0);
+    const link = r => photos.links.get(String(r.id).split('_').find(id => photos.links.get(id)) || '') || `/${cc}/gallery.php?usr=${data.id}`;
+    const svg = svgEl('svg', { viewBox: `0 0 ${geo.w} ${geo.h}`, role: 'img', 'aria-label': `${cName(cc)}: the regions of ${data.name}` });
+    const tierOf = new Array(geo.shapes.length).fill(null);                      // the region each shape belongs to
+    regions.forEach(r => (placed.get(r.id) || []).forEach(i => { if (!tierOf[i] || count(r) > count(tierOf[i])) tierOf[i] = r; }));
+    geo.shapes.forEach((s, i) => {
+      const r = tierOf[i], n = r ? count(r) : 0;
+      const shape = svgEl('path', { d: s.d, class: 'c t' + worldTier(n) });
+      const title = svgEl('title', null);
+      title.textContent = r ? `${r.code ? r.code + ' ' : ''}${r.name}: ${n ? n + ' photo' + (n > 1 ? 's' : '') : 'no photo yet'}` : s.name;
+      svg.append(r && n ? svgEl('a', { href: link(r), target: '_blank', rel: 'noopener noreferrer' }, title, shape) : svgEl('g', null, title, shape));
+    });
+    const pz = panZoom(svg, { w: geo.w, h: geo.h });
+    const seen = regions.filter(r => count(r) > 0).sort((a, b) => count(b) - count(a));
+    const lost = missing.filter(r => count(r) > 0);
+    const total = seen.reduce((n, r) => n + count(r), 0);
+    return h('div', null,
+      h('div', { class: 'sum' }, h('b', { text: `${cName(cc)}: ${seen.length} of ${regions.length} regions` }), `, ${total} photo${total === 1 ? '' : 's'}`),
+      pz.toolbar(), svg,
+      h('p', { class: 'hint', text: `${placed.size} of ${regions.length} regions are on the map. Shapes: geoBoundaries (${geo.license}, ${geo.year}).` }),
+      lost.length ? h('p', { class: 'extra' }, 'Not on the map: ', lost.flatMap((r, i) => [i ? ', ' : null, h('a', { class: 'lnk', href: link(r), target: '_blank', rel: 'noopener noreferrer', text: `${r.name} (${count(r)})` })])) : null,
+      seen.length ? h('details', { class: 'fold' }, h('summary', { text: `All the regions with photos (${seen.length})` }),
+        h('table', null, h('tr', null, h('th', { text: 'Region' }), h('th', { text: 'Photos' })),
+          seen.map(r => h('tr', null, h('td', null, h('a', { class: 'lnk', href: link(r), target: '_blank', rel: 'noopener noreferrer', text: `${r.code ? r.code + ' ' : ''}${r.name}` })), h('td', { class: 'n', text: String(count(r)) }))))) : h('p', { class: 'hint', text: 'No photo in a region of this country yet.' }));
+  }
+
+  // The row under the map of the world: the countries that have a map of their regions. The choice goes up as an event, to the window.
+  function regionPicker(data) {
+    const options = Object.keys(REGION_MAPS).filter(cc => (data.countries[cc] || {}).photos > 0).sort((a, b) => data.countries[b].photos - data.countries[a].photos);
+    if (!options.length) return null;
+    const menu = h('select', { 'aria-label': 'Regions of a country' }, h('option', { value: '', text: 'Choose a country…' }), options.map(cc => h('option', { value: cc, text: cName(cc) })));
+    menu.onchange = () => { if (menu.value) menu.dispatchEvent(new CustomEvent('pmg-regions', { bubbles: true, detail: menu.value })); };
+    return h('div', { class: 'who' }, h('span', { class: 'mute', text: 'Regions of:' }), menu);
   }
   /* =====================================================================
    *  ABOUT  (Settings drawer: who made it, which version, what is new)

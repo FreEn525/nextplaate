@@ -10,7 +10,7 @@
       else if (k === 'class') el.className = v;
       else if (k === 'for') el.htmlFor = v;
       else if (/^on[a-z]+$/.test(k)) el.addEventListener(k.slice(2), v);
-      else if (k.startsWith('data-')) el.setAttribute(k, v);
+      else if (k.startsWith('data-') || k.startsWith('aria-') || k === 'role') el.setAttribute(k, v);   // attributes with no property of the same name
       else el[k] = v;                      // id, value, checked, disabled, hidden, title, min, max, step, placeholder...
     }
     kids.flat().forEach(c => { if (c !== null && c !== undefined && c !== false) el.append(c); });

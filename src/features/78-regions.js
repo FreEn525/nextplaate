@@ -13,7 +13,7 @@
     const systems = [...doc.querySelectorAll('select[name="gallery"] option')].map(o => ({ code: o.value.replace(/-\d+$/, ''), name: o.textContent.trim(), selected: o.hasAttribute('selected') }));
     const rows = [...doc.querySelectorAll('#example tbody tr')].map(tr => {
       const td = tr.querySelectorAll('td'), link = td[4] && td[4].querySelector('a');
-      return td.length >= 5 ? { code: td[2].textContent.trim(), name: td[3].textContent.trim(), count: link ? profileNumber(link.textContent) : 0, href: link ? link.getAttribute('href') : '' } : null;
+      return td.length >= 5 ? { id: td[1].textContent.trim(), code: td[2].textContent.trim(), name: td[3].textContent.trim(), count: link ? profileNumber(link.textContent) : 0, href: link ? link.getAttribute('href') : '' } : null;
     }).filter(Boolean);
     return { systems, rows };
   }

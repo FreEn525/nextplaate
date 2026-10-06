@@ -195,6 +195,10 @@ def route_site(context):
             GALLERY_USR.append(query)
             html = HEAD.format(title="Search") + '<div class="breadcrumbs"><h1 class="pull-left">License plates found <b>2</b></h1></div></body></html>'
             return route.fulfill(status=200, content_type="text/html; charset=utf-8", body=html)
+        if path == "/fr/search":
+            opts = [("2103", "- Without code of department"), ("21000", "01 - Ain"), ("21001", "02 - Aisne"), ("21002", "03 - Allier"), ("21003", "04 - Alpes-de-Haute-Provence")]
+            html = HEAD.format(title="Search") + '<select multiple name="aregions[]" id="region">' + "".join(f'<option value="{i}">{n}</option>' for i, n in opts) + '</select></body></html>'
+            return route.fulfill(status=200, content_type="text/html; charset=utf-8", body=html)
         if path == "/userreg.php":
             system, uid = query.get("gallery", ["fr1-0"])[0].rsplit("-", 1)
             USERREG.append(system)

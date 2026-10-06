@@ -29,7 +29,7 @@
     const views = pz.toolbar([{ label: 'Europe', title: 'Europe close up', view: WORLD_MAP.views.europe }]);
     return h('div', null,
       h('div', { class: 'sum' }, h('b', { text: `${have.length} countr${have.length === 1 ? 'y' : 'ies'}` }), ` of ${Object.keys(data.countries).length}, ${total} photo${total === 1 ? '' : 's'}`),
-      views, svg, legend,
+      views, svg, legend, regionPicker(data),
       unmapped.length ? h('p', { class: 'extra' }, 'Not on the map: ', unmapped.flatMap((cc, i) => [i ? ', ' : null, h('a', { class: 'lnk', href: gallery(cc), target: '_blank', rel: 'noopener noreferrer', text: `${cName(cc)} (${data.countries[cc].photos})` })])) : null,
       have.length ? h('details', { class: 'fold' }, h('summary', { text: `All the countries (${have.length})` }),
         h('table', null, h('tr', null, h('th', { text: 'Country' }), h('th', { text: 'Photos' }), h('th', { text: 'Likes' })),
