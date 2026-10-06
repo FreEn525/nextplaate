@@ -81,7 +81,7 @@ UPLOAD_PAGE = (
     + '<select name="markaavto" onchange="changeBrand(this.value)"><option value="200">I don`t know...</option><option value="7">Volkswagen</option><option value="8">Audi</option></select>'
     + '<select id="model" name="model" onchange="changeModel(this.value)"></select>'
     + '<select id="modgen" name="modgen"></select></div></div>'
-    + '<script>var bmObject = {"7": [70, 71], "8": [80]}, modelObject = {"70": "Golf", "71": "Polo", "80": "RS 6"},'
+    + '<script>var bmObject = {"7": [70, 71, 72], "8": [80]}, modelObject = {"70": "Golf", "71": "Polo", "72": "Gol", "80": "RS 6"},'
     + ' bmgObject = {"70": [700, 701]}, modgenObject = {"700": "Mk7, 2012–2019", "701": "Mk8, 2019–"};'
     + ' function changeBrand(b) { var m = document.getElementById("model"); m.options.length = 0; m.options[0] = new Option("I don`t know", "");'
     + '   (bmObject[b] || []).forEach(function (id) { m.options[m.options.length] = new Option(modelObject[id], id); }); }'

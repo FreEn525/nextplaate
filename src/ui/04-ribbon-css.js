@@ -29,8 +29,12 @@
     .gbody textarea{width:100%;box-sizing:border-box;min-height:64px;resize:vertical;padding:8px;border:1px solid var(--line2);border-radius:var(--r);font:inherit;font-size:13px}
     .lens-out{display:flex;flex-direction:column;gap:6px;min-width:0}
     .lens-cat{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
-    .lens-cands{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
-    .lens-cand{padding:6px 4px;border:1px solid var(--line);border-radius:4px;background:#fff;font-size:12px;text-align:center;overflow-wrap:anywhere}
+    .lens-cands{display:flex;flex-direction:column;gap:6px}
+    .lens-cand{width:100%;min-height:34px;padding:6px 10px;border:1px solid var(--line2);border-radius:var(--r);background:#fff;color:var(--ink);font:inherit;font-size:13px;text-align:left;cursor:pointer;overflow-wrap:anywhere}
+    .lens-cand:hover{background:var(--tint);border-color:var(--brand-b)}
+    .lens-cand.best{border-color:var(--brand-b);background:var(--brand);color:var(--brand-t);font-weight:600}
+    .lens-cand.on{border-color:var(--brand-l);box-shadow:inset 0 0 0 1px var(--brand-l)}
+    .lens-none{font-size:13px;color:var(--mute)}
     .chk{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer}
     .chk input{width:16px;height:16px;margin:0;flex:none}
     .slots{display:flex;flex-direction:column;gap:8px}

@@ -893,9 +893,10 @@
   // A text near the top of a list counts more than one far down
   const vehicleWeight = i => 1 / (1 + i / 10);
 
-  // names: [[id, name]] -> [[id, score]] best first. loose: a name written without spaces also counts inside a longer word (RS6 in
-  // RS6Avant); brands are whole words only ("ogle" is in "Google"). A candidate far behind the first one is page noise, not a second
-  // guess: it needs a quarter of the best score.
+  // names: [[id, name]] -> [[id, score]] best first. A whole word counts 1. loose: a name written without spaces also counts 0.5
+  // inside a longer word (RS6 in RS6Avant, but also Gol in Golf); brands are whole words only ("ogle" is in "Google"). A name that is
+  // part of a longer candidate which scores as well (Gol, Golf) is that candidate's echo: dropped. A candidate far behind the first
+  // one is page noise, not a second guess: it needs a quarter of the best score.
   function vehicleScore(texts, names, minLength, loose) {
     const padded = texts.map(t => ' ' + vehicleNorm(t) + ' ');
     const compact = padded.map(t => t.replace(/ /g, ''));
@@ -904,11 +905,12 @@
       const n = vehicleNorm(name), c = n.replace(/ /g, '');
       if (!n || c.length < minLength || /^\d+$/.test(c)) continue;
       let score = 0;
-      padded.forEach((t, i) => { if (t.includes(' ' + n + ' ') || (loose && c.length >= 3 && compact[i].includes(c))) score += vehicleWeight(i); });
-      if (score) found.set(id, score);
+      padded.forEach((t, i) => { score += vehicleWeight(i) * (t.includes(' ' + n + ' ') ? 1 : loose && c.length >= 3 && compact[i].includes(c) ? 0.5 : 0); });
+      if (score) found.set(id, [score, c]);
     }
-    const sorted = [...found].sort((a, b) => b[1] - a[1]);
-    return sorted.filter(f => f[1] >= sorted[0][1] / 4);
+    const all = [...found].map(([id, [score, c]]) => [id, score, c]).sort((a, b) => b[1] - a[1]);
+    const kept = all.filter(a => !all.some(b => b !== a && b[2].length > a[2].length && b[2].includes(a[2]) && b[1] >= a[1] * 0.8));
+    return kept.filter(f => f[1] >= kept[0][1] / 4).map(f => [f[0], f[1]]);
   }
 
   // The year range of a generation name: "4th gen (C8/4K5), 2019–" -> [2019, 9999]; "Mk7, 2012–2019" -> [2012, 2019]
@@ -917,20 +919,24 @@
     return m ? [+m[1], m[2] ? +m[2] : (/[–—-]\s*$/.test(name) ? 9999 : +m[1])] : null;
   }
 
-  function vehicleGuess(texts, d) {
+  // pin: { brand, model } the user chose: the models are those of that brand, the generations those of that model (a click on a
+  // generation must never change the model the user picked)
+  function vehicleGuess(texts, d, pin) {
+    pin = pin || {};
     const brandNames = d.brands.map(b => [b.id, b.name.replace(/\s*\(.*\)\s*$/, '')]);
     const brands = vehicleScore(texts, brandNames, 3);
-    const top = brands[0] && brands[0][0];
+    const top = pin.brand || (brands[0] && brands[0][0]);
     const out = [{ category: 'Brand', level: 0, candidates: brands.slice(0, 3).map(([id]) => ({ id, path: [id], name: d.brands.find(b => b.id === id).name })) }];
     const models = vehicleScore(texts, (top ? d.models[top] || [] : []).map(id => [String(id), d.modelNames[id]]), 2, true);
     out.push({ category: 'Model', level: 1, candidates: models.slice(0, 3).map(([id]) => ({ id, path: [top, id], name: d.modelNames[id] })) });
-    // the generations of the best model whose years are the ones named in the texts
+    const model = pin.model || (models[0] && models[0][0]);
+    // the generations of that model (the best one unless pinned) whose years are the ones named in the texts
     const years = texts.join(' ').match(/\b(19[2-9]\d|20[0-3]\d)\b/g) || [];
-    const gens = (models[0] ? d.gens[models[0][0]] || [] : []).filter(id => String(d.genNames[id]) !== '0').map(id => {
+    const gens = (model ? d.gens[model] || [] : []).filter(id => String(d.genNames[id]) !== '0').map(id => {
       const r = vehicleYears(d.genNames[id]);
       return [String(id), r ? years.filter(y => +y >= r[0] && +y <= r[1]).length : 0];
     }).filter(g => g[1]).sort((x, y) => y[1] - x[1]);
-    out.push({ category: 'Generation', level: 2, candidates: gens.slice(0, 3).map(([id]) => ({ id, path: [top, models[0][0], id], name: d.genNames[id] })) });
+    out.push({ category: 'Generation', level: 2, candidates: gens.slice(0, 3).map(([id]) => ({ id, path: [top, model, id], name: d.genNames[id] })) });
     return out;
   }
   /* =====================================================================
@@ -1042,8 +1048,12 @@
     .gbody textarea{width:100%;box-sizing:border-box;min-height:64px;resize:vertical;padding:8px;border:1px solid var(--line2);border-radius:var(--r);font:inherit;font-size:13px}
     .lens-out{display:flex;flex-direction:column;gap:6px;min-width:0}
     .lens-cat{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
-    .lens-cands{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
-    .lens-cand{padding:6px 4px;border:1px solid var(--line);border-radius:4px;background:#fff;font-size:12px;text-align:center;overflow-wrap:anywhere}
+    .lens-cands{display:flex;flex-direction:column;gap:6px}
+    .lens-cand{width:100%;min-height:34px;padding:6px 10px;border:1px solid var(--line2);border-radius:var(--r);background:#fff;color:var(--ink);font:inherit;font-size:13px;text-align:left;cursor:pointer;overflow-wrap:anywhere}
+    .lens-cand:hover{background:var(--tint);border-color:var(--brand-b)}
+    .lens-cand.best{border-color:var(--brand-b);background:var(--brand);color:var(--brand-t);font-weight:600}
+    .lens-cand.on{border-color:var(--brand-l);box-shadow:inset 0 0 0 1px var(--brand-l)}
+    .lens-none{font-size:13px;color:var(--mute)}
     .chk{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer}
     .chk input{width:16px;height:16px;margin:0;flex:none}
     .slots{display:flex;flex-direction:column;gap:8px}
@@ -1182,9 +1192,9 @@
   const INLINE_CARD_CSS = `
     :host{display:block;margin:0 0 12px}
     .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-    .top{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+    .top{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:8px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
     .top b{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--brand-t)}
-    .top .msg{flex:1;min-width:0;font-size:12px;color:var(--mute);overflow-wrap:anywhere}
+    .top .msg{flex:1 1 150px;min-width:0;font-size:12px;color:var(--mute);overflow-wrap:anywhere}
     .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;padding:12px}   /* three side by side where there is room, stacked under a photo */
     .col{display:flex;flex-direction:column;gap:6px;min-width:0}
     .cat{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
@@ -1888,23 +1898,37 @@
         const first = [];
         for (const r of rows) { if (!r.candidates[0]) break; first.push(r.candidates[0].id); }
         cardChoices(card, rows.map(r => ({ label: r.category, level: r.level, choices: r.candidates })),
-          { pick: vehicleFill, current: vehicleCurrent, action: { label: 'Fill with the first choices', path: first } });
+          { pick: lensPick, current: vehicleCurrent, action: { label: 'Fill with the first choices', path: first } });
       }
     }
     $('lensMsg').textContent = message;
     const out = $('lensOut');
     out.textContent = '';
     if (!rows) return;
+    // the same choices as the card, stacked (the drawer is narrow), and clickable the same way
     for (const r of rows) {
       out.appendChild(h('div', { class: 'lens-cat', text: r.category }));
-      out.appendChild(h('div', { class: 'lens-cands' }, ...[0, 1, 2].map(i => h('span', { class: 'lens-cand', text: r.candidates[i] ? r.candidates[i].name : '—' }))));
+      out.appendChild(h('div', { class: 'lens-cands' }, r.candidates.length
+        ? r.candidates.map((c, i) => h('button', { class: 'lens-cand' + (i === 0 ? ' best' : ''), text: c.name, 'data-id': String(c.id), 'data-level': String(r.level), onclick: () => lensPick(c.path) }))
+        : h('div', { class: 'lens-none', text: 'No choice' })));
     }
+    const now = vehicleCurrent();
+    out.querySelectorAll('.lens-cand').forEach(c => c.classList.toggle('on', now[+c.dataset.level] === c.dataset.id));
+  }
+
+  // A click on a choice fills the menus, then the guess is redone around what was picked: the models of the picked brand, the
+  // generations of the picked model
+  let lensTitles = [];
+  function lensPick(path) {
+    vehicleFill(path);
+    lensShow('Lens results compared with PlatesMania. Click a choice to fill the menu.', vehicleGuess(lensTitles, vehicleData(), { brand: path[0], model: path[1] }));
   }
 
   // The search: the photo goes to the Google side, the titles of the results come back
   function lensStart(photo, background) {
     lensShow('Searching on Google Lens…', null);
     bridgeAsk('lens', { photo }, lensMarkedUrl(), { background, timeout: 120 }).then(titles => {
+      lensTitles = titles;
       const rows = vehicleGuess(titles, vehicleData());
       lensShow(rows[0].candidates.length ? 'Lens results compared with PlatesMania. Click a choice to fill the menu.' : 'Lens answered, but no PlatesMania brand was found in the results.', rows);
       setStatus('Google Lens results are ready.', 3500);

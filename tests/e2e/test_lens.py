@@ -237,3 +237,66 @@ def test_the_card_sits_right_under_the_photo_and_the_panel_shows_the_answer_too(
     assert page.evaluate("() => document.getElementById('zoomimgid').nextElementSibling.id") == "pmg-lens-card"
     panel = page.evaluate(f"() => [...{PANEL}.querySelectorAll('.lens-cat, .lens-cand')].map(e => e.textContent)")
     assert panel[:2] == ["Brand", "Volkswagen"]
+
+
+def test_a_short_model_inside_a_longer_one_is_not_a_second_choice(page, ctx):
+    google_fake(ctx)
+    open_at(page, ADD)
+    choose_photo(page)
+    lens_answer(page, ["Volkswagen Golf 2019", "Volkswagen Golf GTI", "Volkswagen Golf Mk8"])
+    cands = card_choices(page)
+    models = cands[cands.index("Model") + 1:cands.index("Generation")]
+    assert models == ["Golf"]                                             # "Gol" is in "Golf": its echo, dropped
+
+
+def test_a_generation_never_changes_the_model_that_was_picked(page, ctx):
+    google_fake(ctx)
+    open_at(page, ADD)
+    choose_photo(page)
+    # Polo is named most, Golf second: the generations of the best model (none) must not stay when Golf is picked
+    lens_answer(page, ["Volkswagen Polo 2019", "Volkswagen Polo 2020", "Volkswagen Polo", "Volkswagen Golf 2019 Mk7"])
+    cands = card_choices(page)
+    assert cands[cands.index("Generation") + 1:] == [] or "Mk7, 2012–2019" not in cands
+    page.evaluate(f"() => [...{CARD}.querySelectorAll('.chip')].find(c => c.textContent === 'Golf').click()")
+    page.wait_for_function(f"() => [...{CARD}.querySelectorAll('.chip')].some(c => c.textContent.startsWith('Mk7'))")
+    page.evaluate(f"() => [...{CARD}.querySelectorAll('.chip')].find(c => c.textContent.startsWith('Mk7')).click()")
+    assert page.evaluate("() => [document.querySelector('[name=markaavto]').value, document.getElementById('model').value, document.getElementById('modgen').value]") == ["7", "70", "700"]
+    assert page.evaluate("() => document.getElementById('pmg-host').shadowRoot.querySelectorAll('.lens-cand.on').length") == 3     # the drawer follows
+
+
+LONG = ["2019 Volkswagen Golf 8", "Volkswagen Golf Mk7 2012", "Volkswagen Golf 2013 Mk7 five door hatchback"]
+
+
+def test_the_card_fits_a_narrow_column(page, ctx):
+    google_fake(ctx)
+    open_at(page, ADD)
+    page.evaluate("() => { document.getElementById('zoomimgid').parentElement.style.width = '260px'; }")
+    choose_photo(page)
+    lens_answer(page, LONG)
+    card_choices(page)
+    wide = page.evaluate(f"() => [{CARD}.querySelector('.card').scrollWidth, {CARD}.querySelector('.card').clientWidth, document.getElementById('pmg-lens-card').getBoundingClientRect().width]")
+    assert wide[0] <= wide[1] and wide[2] <= 260                             # no sideways overflow, never wider than the column
+    cols = page.evaluate(f"() => new Set([...{CARD}.querySelectorAll('.col')].map(c => Math.round(c.getBoundingClientRect().left))).size")
+    assert cols == 1                                                          # stacked: one column in 260 px
+
+
+def test_the_card_uses_three_columns_where_there_is_room(page, ctx):
+    google_fake(ctx)
+    open_at(page, ADD)
+    choose_photo(page)
+    lens_answer(page, LONG)
+    card_choices(page)
+    page.set_viewport_size({"width": 1200, "height": 800})
+    assert page.evaluate(f"() => new Set([...{CARD}.querySelectorAll('.col')].map(c => Math.round(c.getBoundingClientRect().left))).size") == 3
+
+
+def test_the_panel_answer_fits_a_phone_width(page, ctx):
+    google_fake(ctx)
+    page.set_viewport_size({"width": 360, "height": 740})
+    open_at(page, ADD)
+    choose_photo(page)
+    lens_answer(page, LONG)
+    card_choices(page)
+    page.evaluate(f"() => {PANEL}.getElementById('lensMsg').scrollIntoView()")
+    over = page.evaluate(f"() => {{ const o = {PANEL}.getElementById('lensOut'); return [o.scrollWidth, o.clientWidth]; }}")
+    assert over[0] <= over[1]

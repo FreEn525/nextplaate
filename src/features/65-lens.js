@@ -29,23 +29,37 @@
         const first = [];
         for (const r of rows) { if (!r.candidates[0]) break; first.push(r.candidates[0].id); }
         cardChoices(card, rows.map(r => ({ label: r.category, level: r.level, choices: r.candidates })),
-          { pick: vehicleFill, current: vehicleCurrent, action: { label: 'Fill with the first choices', path: first } });
+          { pick: lensPick, current: vehicleCurrent, action: { label: 'Fill with the first choices', path: first } });
       }
     }
     $('lensMsg').textContent = message;
     const out = $('lensOut');
     out.textContent = '';
     if (!rows) return;
+    // the same choices as the card, stacked (the drawer is narrow), and clickable the same way
     for (const r of rows) {
       out.appendChild(h('div', { class: 'lens-cat', text: r.category }));
-      out.appendChild(h('div', { class: 'lens-cands' }, ...[0, 1, 2].map(i => h('span', { class: 'lens-cand', text: r.candidates[i] ? r.candidates[i].name : '—' }))));
+      out.appendChild(h('div', { class: 'lens-cands' }, r.candidates.length
+        ? r.candidates.map((c, i) => h('button', { class: 'lens-cand' + (i === 0 ? ' best' : ''), text: c.name, 'data-id': String(c.id), 'data-level': String(r.level), onclick: () => lensPick(c.path) }))
+        : h('div', { class: 'lens-none', text: 'No choice' })));
     }
+    const now = vehicleCurrent();
+    out.querySelectorAll('.lens-cand').forEach(c => c.classList.toggle('on', now[+c.dataset.level] === c.dataset.id));
+  }
+
+  // A click on a choice fills the menus, then the guess is redone around what was picked: the models of the picked brand, the
+  // generations of the picked model
+  let lensTitles = [];
+  function lensPick(path) {
+    vehicleFill(path);
+    lensShow('Lens results compared with PlatesMania. Click a choice to fill the menu.', vehicleGuess(lensTitles, vehicleData(), { brand: path[0], model: path[1] }));
   }
 
   // The search: the photo goes to the Google side, the titles of the results come back
   function lensStart(photo, background) {
     lensShow('Searching on Google Lens…', null);
     bridgeAsk('lens', { photo }, lensMarkedUrl(), { background, timeout: 120 }).then(titles => {
+      lensTitles = titles;
       const rows = vehicleGuess(titles, vehicleData());
       lensShow(rows[0].candidates.length ? 'Lens results compared with PlatesMania. Click a choice to fill the menu.' : 'Lens answered, but no PlatesMania brand was found in the results.', rows);
       setStatus('Google Lens results are ready.', 3500);

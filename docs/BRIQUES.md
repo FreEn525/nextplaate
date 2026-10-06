@@ -36,7 +36,7 @@ La page d'ajout contient tout le catalogue de PlatesMania (3 659 marques, leurs 
 | Fonction | Rôle |
 |---|---|
 | `vehicleData()` | le catalogue de la page : marques, modèles, générations |
-| `vehicleGuess(textes, data)` | la marque, le modèle et la génération les plus cités dans des textes (titres, légendes, descriptions…). Trois candidats chacun, le premier est le plus probable |
+| `vehicleGuess(textes, data, choix)` | la marque, le modèle et la génération les plus cités dans des textes (titres, légendes, descriptions…). Trois candidats chacun, le premier est le plus probable. `choix = { brand, model }` : ce que l'utilisateur a choisi ; les modèles sont alors ceux de cette marque et les générations celles de ce modèle |
 | `vehicleFill(chemin)` | choisit marque, puis modèle, puis génération dans les menus, comme le ferait l'utilisateur (la page remplit elle-même le menu suivant) |
 | `vehicleCurrent()` | les valeurs actuelles des trois menus |
 

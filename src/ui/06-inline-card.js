@@ -11,9 +11,9 @@
   const INLINE_CARD_CSS = `
     :host{display:block;margin:0 0 12px}
     .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-    .top{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+    .top{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:8px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
     .top b{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--brand-t)}
-    .top .msg{flex:1;min-width:0;font-size:12px;color:var(--mute);overflow-wrap:anywhere}
+    .top .msg{flex:1 1 150px;min-width:0;font-size:12px;color:var(--mute);overflow-wrap:anywhere}
     .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;padding:12px}   /* three side by side where there is room, stacked under a photo */
     .col{display:flex;flex-direction:column;gap:6px;min-width:0}
     .cat{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}

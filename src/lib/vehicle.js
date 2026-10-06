@@ -35,9 +35,10 @@
   // A text near the top of a list counts more than one far down
   const vehicleWeight = i => 1 / (1 + i / 10);
 
-  // names: [[id, name]] -> [[id, score]] best first. loose: a name written without spaces also counts inside a longer word (RS6 in
-  // RS6Avant); brands are whole words only ("ogle" is in "Google"). A candidate far behind the first one is page noise, not a second
-  // guess: it needs a quarter of the best score.
+  // names: [[id, name]] -> [[id, score]] best first. A whole word counts 1. loose: a name written without spaces also counts 0.5
+  // inside a longer word (RS6 in RS6Avant, but also Gol in Golf); brands are whole words only ("ogle" is in "Google"). A name that is
+  // part of a longer candidate which scores as well (Gol, Golf) is that candidate's echo: dropped. A candidate far behind the first
+  // one is page noise, not a second guess: it needs a quarter of the best score.
   function vehicleScore(texts, names, minLength, loose) {
     const padded = texts.map(t => ' ' + vehicleNorm(t) + ' ');
     const compact = padded.map(t => t.replace(/ /g, ''));
@@ -46,11 +47,12 @@
       const n = vehicleNorm(name), c = n.replace(/ /g, '');
       if (!n || c.length < minLength || /^\d+$/.test(c)) continue;
       let score = 0;
-      padded.forEach((t, i) => { if (t.includes(' ' + n + ' ') || (loose && c.length >= 3 && compact[i].includes(c))) score += vehicleWeight(i); });
-      if (score) found.set(id, score);
+      padded.forEach((t, i) => { score += vehicleWeight(i) * (t.includes(' ' + n + ' ') ? 1 : loose && c.length >= 3 && compact[i].includes(c) ? 0.5 : 0); });
+      if (score) found.set(id, [score, c]);
     }
-    const sorted = [...found].sort((a, b) => b[1] - a[1]);
-    return sorted.filter(f => f[1] >= sorted[0][1] / 4);
+    const all = [...found].map(([id, [score, c]]) => [id, score, c]).sort((a, b) => b[1] - a[1]);
+    const kept = all.filter(a => !all.some(b => b !== a && b[2].length > a[2].length && b[2].includes(a[2]) && b[1] >= a[1] * 0.8));
+    return kept.filter(f => f[1] >= kept[0][1] / 4).map(f => [f[0], f[1]]);
   }
 
   // The year range of a generation name: "4th gen (C8/4K5), 2019–" -> [2019, 9999]; "Mk7, 2012–2019" -> [2012, 2019]
@@ -59,19 +61,23 @@
     return m ? [+m[1], m[2] ? +m[2] : (/[–—-]\s*$/.test(name) ? 9999 : +m[1])] : null;
   }
 
-  function vehicleGuess(texts, d) {
+  // pin: { brand, model } the user chose: the models are those of that brand, the generations those of that model (a click on a
+  // generation must never change the model the user picked)
+  function vehicleGuess(texts, d, pin) {
+    pin = pin || {};
     const brandNames = d.brands.map(b => [b.id, b.name.replace(/\s*\(.*\)\s*$/, '')]);
     const brands = vehicleScore(texts, brandNames, 3);
-    const top = brands[0] && brands[0][0];
+    const top = pin.brand || (brands[0] && brands[0][0]);
     const out = [{ category: 'Brand', level: 0, candidates: brands.slice(0, 3).map(([id]) => ({ id, path: [id], name: d.brands.find(b => b.id === id).name })) }];
     const models = vehicleScore(texts, (top ? d.models[top] || [] : []).map(id => [String(id), d.modelNames[id]]), 2, true);
     out.push({ category: 'Model', level: 1, candidates: models.slice(0, 3).map(([id]) => ({ id, path: [top, id], name: d.modelNames[id] })) });
-    // the generations of the best model whose years are the ones named in the texts
+    const model = pin.model || (models[0] && models[0][0]);
+    // the generations of that model (the best one unless pinned) whose years are the ones named in the texts
     const years = texts.join(' ').match(/\b(19[2-9]\d|20[0-3]\d)\b/g) || [];
-    const gens = (models[0] ? d.gens[models[0][0]] || [] : []).filter(id => String(d.genNames[id]) !== '0').map(id => {
+    const gens = (model ? d.gens[model] || [] : []).filter(id => String(d.genNames[id]) !== '0').map(id => {
       const r = vehicleYears(d.genNames[id]);
       return [String(id), r ? years.filter(y => +y >= r[0] && +y <= r[1]).length : 0];
     }).filter(g => g[1]).sort((x, y) => y[1] - x[1]);
-    out.push({ category: 'Generation', level: 2, candidates: gens.slice(0, 3).map(([id]) => ({ id, path: [top, models[0][0], id], name: d.genNames[id] })) });
+    out.push({ category: 'Generation', level: 2, candidates: gens.slice(0, 3).map(([id]) => ({ id, path: [top, model, id], name: d.genNames[id] })) });
     return out;
   }
