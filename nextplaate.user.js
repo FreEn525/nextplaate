@@ -1694,7 +1694,9 @@
   // A title is a result of Lens ("2019 Audi RS6 Avant - Wikipedia"); a result near the top counts more than one far down
   const lensWeight = i => 1 / (1 + i / 10);
 
-  function lensScore(titles, names, minLength) {
+  // loose: a name written without spaces also counts inside a longer word (RS6 in RS6Avant); brands are whole words only
+  // ("ogle" is in "Google"). A candidate far behind the first one is page noise, not a second guess: it needs a quarter of its score.
+  function lensScore(titles, names, minLength, loose) {
     const padded = titles.map(t => ' ' + lensNorm(t) + ' ');
     const compact = padded.map(t => t.replace(/ /g, ''));
     const found = new Map();
@@ -1702,10 +1704,11 @@
       const n = lensNorm(name), c = n.replace(/ /g, '');
       if (!n || c.length < minLength || /^\d+$/.test(c)) continue;
       let score = 0;
-      padded.forEach((t, i) => { if (t.includes(' ' + n + ' ') || (c.length >= 3 && compact[i].includes(c))) score += lensWeight(i); });
+      padded.forEach((t, i) => { if (t.includes(' ' + n + ' ') || (loose && c.length >= 3 && compact[i].includes(c))) score += lensWeight(i); });
       if (score) found.set(id, score);
     }
-    return [...found].sort((a, b) => b[1] - a[1]);
+    const sorted = [...found].sort((a, b) => b[1] - a[1]);
+    return sorted.filter(f => f[1] >= sorted[0][1] / 4);
   }
 
   // The year range of a generation name: "4th gen (C8/4K5), 2019–" -> [2019, 9999]; "Mk7, 2012–2019" -> [2012, 2019]
@@ -1721,7 +1724,7 @@
     const out = [{ category: 'Brand', candidates: brands.slice(0, 3).map(([id]) => d.brands.find(b => b.id === id).name) }];
     const top = brands[0] && brands[0][0];
     const modelIds = top ? d.models[top] || [] : [];
-    const models = lensScore(titles, modelIds.map(id => [id, d.modelNames[id]]), 2);
+    const models = lensScore(titles, modelIds.map(id => [id, d.modelNames[id]]), 2, true);
     out.push({ category: 'Model', candidates: models.slice(0, 3).map(([id]) => d.modelNames[id]) });
     // the generations of the best model whose years are the ones named in the titles
     const years = titles.join(' ').match(/\b(19[2-9]\d|20[0-3]\d)\b/g) || [];

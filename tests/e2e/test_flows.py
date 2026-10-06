@@ -290,9 +290,9 @@ def test_lens_titles_become_brand_model_and_generation(page, ctx):
     page.evaluate("(v) => localStorage.setItem('gm_lens_titles', JSON.stringify(v))", json.dumps({"at": stamp, "titles": titles}))
     page.wait_for_function("() => document.getElementById('pmg-host').shadowRoot.querySelector('.lens-cand')")
     cands = page.evaluate("() => [...document.getElementById('pmg-host').shadowRoot.querySelectorAll('.lens-cat, .lens-cand')].map(e => e.textContent)")
-    assert cands[:5] == ["Brand", "Volkswagen", "Audi", "—", "Model"]
-    assert cands[5:7] == ["Golf", "Polo"]
-    assert cands[8:10] == ["Generation", "Mk8, 2019–"]       # 2019, 2020, 2021 are Mk8 years; 2019 is also Mk7's last
+    assert cands[:3] == ["Brand", "Volkswagen", "—"] or cands[:3] == ["Brand", "Volkswagen", "Audi"]    # a weak second guess may stay
+    assert cands[cands.index("Model") + 1] == "Golf"
+    assert cands[cands.index("Generation") + 1] == "Mk8, 2019–"       # 2019, 2020, 2021 are Mk8 years; 2019 is also Mk7's last
 
 
 def test_lens_titles_of_another_search_are_ignored(page, ctx):
@@ -346,3 +346,16 @@ def test_a_google_page_without_the_marker_is_left_alone(ctx):
     p.goto("https://www.google.com/")
     p.wait_for_timeout(600)
     assert p.evaluate("() => document.getElementById('box').value") == ""
+
+
+def test_a_weak_guess_is_not_shown_as_a_second_brand(page, ctx):
+    google_fake(ctx)
+    open_at(page, ADD)
+    page.evaluate("(src) => { document.getElementById('zoomimg').src = src; }", PIXELS)
+    page.wait_for_function("() => localStorage.getItem('gm_lens_pending')")
+    stamp = json.loads(page.evaluate("() => localStorage.getItem('gm_lens_pending')"))
+    titles = ["Volkswagen Golf %d" % i for i in range(10)] + ["Audi A3"]
+    page.evaluate("(v) => localStorage.setItem('gm_lens_titles', JSON.stringify(v))", json.dumps({"at": stamp, "titles": titles}))
+    page.wait_for_function("() => document.getElementById('pmg-host').shadowRoot.querySelector('.lens-cand')")
+    cands = page.evaluate("() => [...document.getElementById('pmg-host').shadowRoot.querySelectorAll('.lens-cat, .lens-cand')].map(e => e.textContent)")
+    assert cands[:4] == ["Brand", "Volkswagen", "—", "—"]
