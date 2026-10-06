@@ -157,10 +157,12 @@
     init: () => {
       if (here.addAny && !here.add && countryPageCard()) return;          // /add: the card of large flags replaces the site's box, no side bar
       if (!here.addAny && !here.profile) return;
-      document.body.appendChild(flagsBar());
-      flagsPlace();
-      window.addEventListener('resize', flagsPlace);
-      window.addEventListener('scroll', flagsPlace, { passive: true });
+      // the bar of 96 flags is built when the browser is idle (the page and the panel come first), and placed at once
+      (window.requestIdleCallback || (f => setTimeout(f, 30)))(() => { if (!document.getElementById('pmg-flags')) document.body.appendChild(flagsBar()); flagsPlace(); }, { timeout: 300 });
+      let queued = false;
+      const later = () => { if (queued) return; queued = true; requestAnimationFrame(() => { queued = false; flagsPlace(); }); };       // one placement per frame, however many scroll events
+      window.addEventListener('resize', later);
+      window.addEventListener('scroll', later, { passive: true });
       window.addEventListener('load', flagsPlace);
       window.addEventListener('pmg-drawer', flagsPlace);                       // a drawer opened or closed: the room changed
     }

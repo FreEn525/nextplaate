@@ -9,6 +9,7 @@
    *    one click. The figures are the ones of the member's profile, one page read through the shared queue (the page itself when you are
    *    on it), kept for the visit. Open it from Browse > World map, the key G (globe: the same place on QWERTY, AZERTY and QWERTZ), or the button of a profile.
    * ===================================================================== */
+  const WORLD_CHIPS = 5;             // you and four favourites as buttons, the rest in a menu
   const worldCache = new Map();      // member number -> { id, name, countries: { cc: { photos, likes, comments } } }
 
   // What a profile page says: the member and, per country, the photos, likes and comments (the table of the profile)
@@ -49,8 +50,21 @@
       h('span', { class: 'gap' }), h('span', { class: 'lbl', text: 'Map', hidden: true }), menu);
     const body = h('div', { class: 'wm' }, h('style', { text: MAP_CSS }), bar, view);
     const modal = modalOpen({ id: 'pmg-worldmap', title: 'World map', body, fill: true });
-    const who = [...(me ? [{ id: me.id, name: 'Me (' + me.name + ')' }] : []), ...membersGet().filter(m => !me || m.id !== me.id).slice(0, 6)];
-    who.forEach(m => chips.append(h('button', { type: 'button', class: 'pill', text: m.name, onclick: () => go(m.id) })));
+    // You and your first favourites as buttons; the others (when there are many) in a menu. It follows the favourites while the window is open.
+    const fillWho = () => {
+      const all = [...(me ? [{ id: me.id, name: 'Me (' + me.name + ')' }] : []), ...membersGet().filter(m => !me || m.id !== me.id)];
+      const shown = all.slice(0, WORLD_CHIPS), rest = all.slice(WORLD_CHIPS);
+      chips.replaceChildren(...shown.map(m => h('button', { type: 'button', class: 'pill', text: m.name, onclick: () => go(m.id) })));
+      if (rest.length) {
+        const more = h('select', { 'aria-label': 'More members' }, h('option', { value: '', text: `${rest.length} more…` }), ...rest.map(m => h('option', { value: m.id, text: m.name })));
+        more.onchange = () => { if (more.value) go(more.value); };
+        chips.append(more);
+      }
+    };
+    fillWho();
+    window.addEventListener('pmg-members', fillWho);
+    const closeMap = modal.close;
+    modal.close = () => { window.removeEventListener('pmg-members', fillWho); closeMap(); };
     input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); go(input.value); } });
     const say = text => view.replaceChildren(h('p', { class: 'msg', text }));
     let run = 0, current = null;

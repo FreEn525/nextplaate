@@ -225,6 +225,7 @@
 
   // Everything that shows the list follows a change (the panel and the bar). focus: a member whose grip gets the keyboard focus back
   function membersRefresh(where, focus) {
+    window.dispatchEvent(new Event('pmg-members'));                           // what shows the favourites elsewhere (the world map) follows
     membersRail();
     const host = document.getElementById('pmg-members');
     if (host) host.shadowRoot.querySelector('.box').replaceChildren(...membersView('bar'));

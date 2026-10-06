@@ -6,6 +6,8 @@
    *                               and each country's flag before its name
    *      profileLast(root)        the last photos as cards: the plate's picture over the photo, the country's flag before its name
    * ===================================================================== */
+  // The flag of a country, as the site draws its own: in a 3:2 box, contained, with an edge (a white and red flag stays a flag, not a bar)
+  const PM_FLAG_CSS = '.pm-flag{display:inline-block;flex:none;width:22px;height:15px;margin-right:8px;border:1px solid color-mix(in srgb,var(--pm-ink) 45%,#fff);background:#fff;object-fit:contain;vertical-align:-3px}';
   const profileText = el => (el ? el.textContent.replace(/\s+/g, ' ').trim() : '');
 
   function profileTiles(root) {
@@ -54,7 +56,7 @@
 
   // A country's flag, the site's own picture; a country it has none for shows nothing
   function profileFlag(code) {
-    const img = h('img', { class: 'pm-flag', src: flagUrl(code), alt: '', width: 20, height: 14, loading: 'lazy' });
+    const img = h('img', { class: 'pm-flag', src: flagUrl(code), alt: '', width: 22, height: 15, loading: 'lazy' });
     img.addEventListener('error', () => img.remove());
     return img;
   }

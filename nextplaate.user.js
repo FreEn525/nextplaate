@@ -138,8 +138,16 @@
     active.forEach(f => Object.assign(actions, f.keys || {}));
     rebuildKeys();
     log('actions', Object.entries(actions).map(([id, a]) => id + '=' + a.bound).join(' '));
+    let t = performance.now();
     mountRibbon(active);
-    active.forEach(f => f.init && f.init());
+    log('ribbon', Math.round(performance.now() - t) + ' ms');
+    active.forEach(f => {
+      if (!f.init) return;
+      t = performance.now();
+      f.init();
+      const spent = performance.now() - t;
+      if (spent > 5) log('slow init', f.id, Math.round(spent) + ' ms');          // what costs time at start (dev log)
+    });
     escapeChain = active.filter(f => f.onEscape).sort((a, b) => (a.escOrder || 0) - (b.escOrder || 0));
   }
   /* =====================================================================
@@ -1160,6 +1168,8 @@
    *                               and each country's flag before its name
    *      profileLast(root)        the last photos as cards: the plate's picture over the photo, the country's flag before its name
    * ===================================================================== */
+  // The flag of a country, as the site draws its own: in a 3:2 box, contained, with an edge (a white and red flag stays a flag, not a bar)
+  const PM_FLAG_CSS = '.pm-flag{display:inline-block;flex:none;width:22px;height:15px;margin-right:8px;border:1px solid color-mix(in srgb,var(--pm-ink) 45%,#fff);background:#fff;object-fit:contain;vertical-align:-3px}';
   const profileText = el => (el ? el.textContent.replace(/\s+/g, ' ').trim() : '');
 
   function profileTiles(root) {
@@ -1208,7 +1218,7 @@
 
   // A country's flag, the site's own picture; a country it has none for shows nothing
   function profileFlag(code) {
-    const img = h('img', { class: 'pm-flag', src: flagUrl(code), alt: '', width: 20, height: 14, loading: 'lazy' });
+    const img = h('img', { class: 'pm-flag', src: flagUrl(code), alt: '', width: 22, height: 15, loading: 'lazy' });
     img.addEventListener('error', () => img.remove());
     return img;
   }
@@ -2409,7 +2419,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     .pm-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:40px;padding:0 12px;border-bottom:1px solid var(--pm-line);background:var(--pm-paper)}
     .pm-chk{display:inline-flex;align-items:center;gap:6px;margin:0;font-size:12px;font-weight:400;color:var(--pm-mute);cursor:pointer}
     .pm-chk input{margin:0}
-    .pm-flag{display:inline-block;width:20px;height:14px;margin-right:8px;border:1px solid var(--pm-line2);object-fit:cover;vertical-align:-2px}
+    ${PM_FLAG_CSS}
     .profile .panel-blue:not(.pm-all) tr.pm-empty{display:none}
     .profile .dataTables_wrapper > .row:first-child,.profile .dataTables_info{display:none}
     .profile .panel-blue .table{width:100%!important;margin:0;font-size:13px;table-layout:fixed}
@@ -3658,10 +3668,12 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     init: () => {
       if (here.addAny && !here.add && countryPageCard()) return;          // /add: the card of large flags replaces the site's box, no side bar
       if (!here.addAny && !here.profile) return;
-      document.body.appendChild(flagsBar());
-      flagsPlace();
-      window.addEventListener('resize', flagsPlace);
-      window.addEventListener('scroll', flagsPlace, { passive: true });
+      // the bar of 96 flags is built when the browser is idle (the page and the panel come first), and placed at once
+      (window.requestIdleCallback || (f => setTimeout(f, 30)))(() => { if (!document.getElementById('pmg-flags')) document.body.appendChild(flagsBar()); flagsPlace(); }, { timeout: 300 });
+      let queued = false;
+      const later = () => { if (queued) return; queued = true; requestAnimationFrame(() => { queued = false; flagsPlace(); }); };       // one placement per frame, however many scroll events
+      window.addEventListener('resize', later);
+      window.addEventListener('scroll', later, { passive: true });
       window.addEventListener('load', flagsPlace);
       window.addEventListener('pmg-drawer', flagsPlace);                       // a drawer opened or closed: the room changed
     }
@@ -4231,6 +4243,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
 
   // Everything that shows the list follows a change (the panel and the bar). focus: a member whose grip gets the keyboard focus back
   function membersRefresh(where, focus) {
+    window.dispatchEvent(new Event('pmg-members'));                           // what shows the favourites elsewhere (the world map) follows
     membersRail();
     const host = document.getElementById('pmg-members');
     if (host) host.shadowRoot.querySelector('.box').replaceChildren(...membersView('bar'));
@@ -4779,6 +4792,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
    *    one click. The figures are the ones of the member's profile, one page read through the shared queue (the page itself when you are
    *    on it), kept for the visit. Open it from Browse > World map, the key G (globe: the same place on QWERTY, AZERTY and QWERTZ), or the button of a profile.
    * ===================================================================== */
+  const WORLD_CHIPS = 5;             // you and four favourites as buttons, the rest in a menu
   const worldCache = new Map();      // member number -> { id, name, countries: { cc: { photos, likes, comments } } }
 
   // What a profile page says: the member and, per country, the photos, likes and comments (the table of the profile)
@@ -4819,8 +4833,21 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
       h('span', { class: 'gap' }), h('span', { class: 'lbl', text: 'Map', hidden: true }), menu);
     const body = h('div', { class: 'wm' }, h('style', { text: MAP_CSS }), bar, view);
     const modal = modalOpen({ id: 'pmg-worldmap', title: 'World map', body, fill: true });
-    const who = [...(me ? [{ id: me.id, name: 'Me (' + me.name + ')' }] : []), ...membersGet().filter(m => !me || m.id !== me.id).slice(0, 6)];
-    who.forEach(m => chips.append(h('button', { type: 'button', class: 'pill', text: m.name, onclick: () => go(m.id) })));
+    // You and your first favourites as buttons; the others (when there are many) in a menu. It follows the favourites while the window is open.
+    const fillWho = () => {
+      const all = [...(me ? [{ id: me.id, name: 'Me (' + me.name + ')' }] : []), ...membersGet().filter(m => !me || m.id !== me.id)];
+      const shown = all.slice(0, WORLD_CHIPS), rest = all.slice(WORLD_CHIPS);
+      chips.replaceChildren(...shown.map(m => h('button', { type: 'button', class: 'pill', text: m.name, onclick: () => go(m.id) })));
+      if (rest.length) {
+        const more = h('select', { 'aria-label': 'More members' }, h('option', { value: '', text: `${rest.length} more…` }), ...rest.map(m => h('option', { value: m.id, text: m.name })));
+        more.onchange = () => { if (more.value) go(more.value); };
+        chips.append(more);
+      }
+    };
+    fillWho();
+    window.addEventListener('pmg-members', fillWho);
+    const closeMap = modal.close;
+    modal.close = () => { window.removeEventListener('pmg-members', fillWho); closeMap(); };
     input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); go(input.value); } });
     const say = text => view.replaceChildren(h('p', { class: 'msg', text }));
     let run = 0, current = null;
@@ -5022,13 +5049,17 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     if (!me) return;
     const now = Date.now(), every = Math.max(1, +settings.get('notify_every') || 5) * 60000;
     if (!force && now - +store.get('notify_last_list', '0') < every * 0.9) return;                 // another tab has just looked
+    if (!force && document.visibilityState === 'hidden' && !settings.on('notify_system')) return;  // nobody is looking: no request (it looks again when the tab comes back)
     store.set('notify_last_list', String(now));
     const seen = notifyLoad('notify_seen', { keys: [] });
     let fresh = [];
     try { fresh = fresh.concat(notifyFresh(notifyParseList(await siteFetch(`/action2.php?num=0&user=${me.id}`)), seen, 'list')); } catch (e) { /* the site is busy: next time */ }
     if (force || now - +store.get('notify_last_msgs', '0') >= Math.max(every * 2, 600000)) {         // the profile page is heavy: less often
       store.set('notify_last_msgs', String(now));
-      try { fresh = fresh.concat(notifyFresh(notifyParseMessages(await siteFetch('/user' + me.id)), seen, 'msgs')); } catch (e) { /* idem */ }
+      try {
+        const mine = here.profile && location.pathname.replace(/\/$/, '') === '/user' + me.id;               // on your own profile the cards are already here
+        fresh = fresh.concat(notifyFresh(notifyParseMessages(mine ? document.documentElement.outerHTML : await siteFetch('/user' + me.id)), seen, 'msgs'));
+      } catch (e) { /* idem */ }
     }
     store.set('notify_seen', JSON.stringify(seen));
     if (fresh.length) store.set('notify_unseen', JSON.stringify([...notifyLoad('notify_unseen', []), ...fresh]));
@@ -5081,7 +5112,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
       $('notifyNow').onclick = () => notifyPoll(true);
       $('notifyTest').onclick = () => toast({ title: 'This is how a notification looks', body: 'It goes by itself, or with the cross', kind: 'like' });
       window.addEventListener('pmg-notify-poll', () => notifyPoll(true));
-      document.addEventListener('visibilitychange', notifyShow);
+      document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') notifyPoll(false); notifyShow(); });
       window.addEventListener('storage', e => { if (e.key === 'pmg_notify_unseen') notifyShow(); });
       setTimeout(() => notifyPoll(false), 4000);
       setInterval(() => notifyPoll(false), 60000);
@@ -5090,16 +5121,16 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
   /* =====================================================================
    *  THE LAST PLATES STRIP  (the line of the latest uploads that every page of the site carries under its header)
    *    The site writes it as a small line of text, "last | AB 123 | CD 456 | ...", at the very left of the window. Here it becomes a slim
-   *    strip as wide as the page, with a flag and a chip per plate (scrolling sideways if they do not fit). The links are the site's own;
+   *    strip as wide as the page, with a flag and a chip per plate (all of them, on a second line if they do not fit: no scrollbar). The links are the site's own;
    *    its line stays in the page, hidden. Switch it off in Settings to get the site's line back.
    * ===================================================================== */
   const STRIP_CSS = `
-    .pm-last{${PAGE_TOKENS};display:flex;align-items:center;gap:12px;width:min(1170px,calc(100% - 30px));min-height:44px;margin:8px auto;padding:0 12px;border:1px solid var(--pm-line);background:#fff;overflow:hidden}
-    .pm-last-label{flex:none;font:700 11px/1 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--pm)}
-    .pm-last-list{display:flex;gap:6px;min-width:0;padding:6px 0;overflow-x:auto;scrollbar-width:thin}
+    .pm-last{${PAGE_TOKENS};display:flex;align-items:flex-start;gap:12px;width:min(1170px,calc(100% - 30px));margin:8px auto;padding:7px 12px;border:1px solid var(--pm-line);background:#fff}
+    .pm-last-label{flex:none;line-height:30px;font:700 11px/30px system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--pm)}
+    .pm-last-list{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
     .pm-chip{display:inline-flex;align-items:center;flex:none;height:30px;padding:0 10px;border:1px solid var(--pm-line2);background:var(--pm-paper);color:var(--pm-ink);font:600 12px/1 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;text-decoration:none;white-space:nowrap}
     .pm-chip:hover{background:var(--pm-tint);border-color:var(--pm-soft);color:var(--pm-ink);text-decoration:none}
-    .pm-chip .pm-flag{margin-right:8px}
+    ${PM_FLAG_CSS}
   `;
 
   registerFeature({

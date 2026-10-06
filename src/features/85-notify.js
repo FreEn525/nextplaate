@@ -34,13 +34,17 @@
     if (!me) return;
     const now = Date.now(), every = Math.max(1, +settings.get('notify_every') || 5) * 60000;
     if (!force && now - +store.get('notify_last_list', '0') < every * 0.9) return;                 // another tab has just looked
+    if (!force && document.visibilityState === 'hidden' && !settings.on('notify_system')) return;  // nobody is looking: no request (it looks again when the tab comes back)
     store.set('notify_last_list', String(now));
     const seen = notifyLoad('notify_seen', { keys: [] });
     let fresh = [];
     try { fresh = fresh.concat(notifyFresh(notifyParseList(await siteFetch(`/action2.php?num=0&user=${me.id}`)), seen, 'list')); } catch (e) { /* the site is busy: next time */ }
     if (force || now - +store.get('notify_last_msgs', '0') >= Math.max(every * 2, 600000)) {         // the profile page is heavy: less often
       store.set('notify_last_msgs', String(now));
-      try { fresh = fresh.concat(notifyFresh(notifyParseMessages(await siteFetch('/user' + me.id)), seen, 'msgs')); } catch (e) { /* idem */ }
+      try {
+        const mine = here.profile && location.pathname.replace(/\/$/, '') === '/user' + me.id;               // on your own profile the cards are already here
+        fresh = fresh.concat(notifyFresh(notifyParseMessages(mine ? document.documentElement.outerHTML : await siteFetch('/user' + me.id)), seen, 'msgs'));
+      } catch (e) { /* idem */ }
     }
     store.set('notify_seen', JSON.stringify(seen));
     if (fresh.length) store.set('notify_unseen', JSON.stringify([...notifyLoad('notify_unseen', []), ...fresh]));
@@ -93,7 +97,7 @@
       $('notifyNow').onclick = () => notifyPoll(true);
       $('notifyTest').onclick = () => toast({ title: 'This is how a notification looks', body: 'It goes by itself, or with the cross', kind: 'like' });
       window.addEventListener('pmg-notify-poll', () => notifyPoll(true));
-      document.addEventListener('visibilitychange', notifyShow);
+      document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') notifyPoll(false); notifyShow(); });
       window.addEventListener('storage', e => { if (e.key === 'pmg_notify_unseen') notifyShow(); });
       setTimeout(() => notifyPoll(false), 4000);
       setInterval(() => notifyPoll(false), 60000);

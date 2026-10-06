@@ -46,7 +46,15 @@
     active.forEach(f => Object.assign(actions, f.keys || {}));
     rebuildKeys();
     log('actions', Object.entries(actions).map(([id, a]) => id + '=' + a.bound).join(' '));
+    let t = performance.now();
     mountRibbon(active);
-    active.forEach(f => f.init && f.init());
+    log('ribbon', Math.round(performance.now() - t) + ' ms');
+    active.forEach(f => {
+      if (!f.init) return;
+      t = performance.now();
+      f.init();
+      const spent = performance.now() - t;
+      if (spent > 5) log('slow init', f.id, Math.round(spent) + ' ms');          // what costs time at start (dev log)
+    });
     escapeChain = active.filter(f => f.onEscape).sort((a, b) => (a.escOrder || 0) - (b.escOrder || 0));
   }

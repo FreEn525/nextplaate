@@ -226,3 +226,24 @@ def test_the_map_has_a_shape_for_most_countries_and_a_dot_for_the_small_ones(ctx
     open_map(page)
     n = page.evaluate(f"() => [{MODAL}.querySelectorAll('path[data-cc]').length, {MODAL}.querySelectorAll('circle[data-cc]').length]")
     assert n[0] >= 70 and n[1] >= 12                                                         # shapes, and dots (Monaco, Malta, Singapore...)
+
+
+def chips_and_more(page):
+    return page.evaluate(f"() => [[...{MODAL}.querySelectorAll('.who .pill')].map(b => b.textContent), [...{MODAL}.querySelectorAll('.who select option')].map(o => o.textContent)]")
+
+
+def test_the_favourites_of_the_map_follow_a_new_favourite_while_it_is_open(ctx):
+    page = open_page(ctx)
+    open_map(page)
+    assert chips_and_more(page) == [["Me (freen525)"], []]
+    page.evaluate("() => { localStorage.setItem('pmg_members', JSON.stringify([{ id: '101605', name: 'Aurel', avatar: '' }])); window.dispatchEvent(new Event('pmg-members')); }")
+    assert chips_and_more(page) == [["Me (freen525)", "Aurel"], []]
+
+
+def test_many_favourites_are_four_buttons_and_a_menu_for_the_rest(ctx):
+    page = open_page(ctx)
+    open_map(page)
+    page.evaluate("() => { localStorage.setItem('pmg_members', JSON.stringify(Array.from({ length: 9 }, (_, i) => ({ id: String(200000 + i), name: 'Member' + i, avatar: '' })))); window.dispatchEvent(new Event('pmg-members')); }")
+    chips, more = chips_and_more(page)
+    assert chips == ["Me (freen525)", "Member0", "Member1", "Member2", "Member3"]
+    assert more == ["5 more\u2026", "Member4", "Member5", "Member6", "Member7", "Member8"]

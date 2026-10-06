@@ -66,7 +66,7 @@
     .pm-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:40px;padding:0 12px;border-bottom:1px solid var(--pm-line);background:var(--pm-paper)}
     .pm-chk{display:inline-flex;align-items:center;gap:6px;margin:0;font-size:12px;font-weight:400;color:var(--pm-mute);cursor:pointer}
     .pm-chk input{margin:0}
-    .pm-flag{display:inline-block;width:20px;height:14px;margin-right:8px;border:1px solid var(--pm-line2);object-fit:cover;vertical-align:-2px}
+    ${PM_FLAG_CSS}
     .profile .panel-blue:not(.pm-all) tr.pm-empty{display:none}
     .profile .dataTables_wrapper > .row:first-child,.profile .dataTables_info{display:none}
     .profile .panel-blue .table{width:100%!important;margin:0;font-size:13px;table-layout:fixed}

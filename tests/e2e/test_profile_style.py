@@ -132,3 +132,18 @@ def test_the_line_of_the_latest_plates_becomes_a_strip_of_chips_with_flags(brows
         ["V0 P CATVR", "/it/nomer1", "/assets/img/profile-flags/it.svg"], ["HM-137-WT", "/fr/nomer2", "/assets/img/profile-flags/fr.svg"]]
     assert p.evaluate("() => getComputedStyle(document.querySelector('.wrapper > small')).display") == "none"
     c.close()
+
+
+def test_the_strip_shows_every_plate_without_a_scrollbar(browser):
+    c = browser.new_context(viewport={"width": 700, "height": 900})
+    route_site(c)
+    flags(c)
+    links = " | ".join(f'<a href="/de/nomer{i}">HH AB {i} 9999</a>' for i in range(30))
+    c.route("https://platesmania.com/fr/gallery.php", lambda r: r.fulfill(status=200, content_type="text/html", body=inject(f'<html><body><div class="wrapper"><small><span class="text-highlights">last</span> | {links}</small><div class="container content">x</div></div></body></html>')))
+    p = c.new_page()
+    p.goto("https://platesmania.com/fr/gallery.php")
+    p.wait_for_selector(".pm-last")
+    got = p.evaluate("() => { const l = document.querySelector('.pm-last-list'); return [l.querySelectorAll('.pm-chip').length, l.scrollWidth <= l.clientWidth, getComputedStyle(l).overflowX, l.getBoundingClientRect().height > 40]; }")
+    assert got == [30, True, "visible", True]                                   # all thirty, on several lines, nothing to scroll
+    assert p.evaluate("() => getComputedStyle(document.querySelector('.pm-flag')).objectFit") == "contain"
+    c.close()
