@@ -5,6 +5,9 @@
 **Floating upload button**
 - New feature *Floating upload button* (switch in Settings): the form is long and its Upload button is at the very end. While that button is out of view, a button of ours stands at the bottom of the window and presses the site's own, so the form's checks and options apply as before; it goes away when the real button is on the screen.
 
+**Google Lens**
+- The Google side now also reads what Google itself calls the vehicle (the "similar searches" chips of Lens, read from their addresses, so in any language), next to the titles of the results. What Google names counts as five titles when the card guesses the brand, model and generation, and a *Google says* line shows the names: a click types one in the site's own "brand and model" box, which finds the vehicle itself (the way out when the page's menus do not name it). Without such chips, the titles decide as before. The dev build logs what was found on the Google page.
+
 **Plate check**
 - The vehicle of the photos already on the site is offered above the vehicle menus: the page that counts the photos of a plate also names the vehicle of each one (as the numbers of the form's menus); the most common is shown with the names of the menus themselves (*Volkswagen › Golf › Mk8, 2019–*, *2 of 3 photos*) and one click fills the menus. Nothing is filled before the click, and no request is made for it. A vehicle the menus do not know is not offered.
 
