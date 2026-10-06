@@ -17,6 +17,8 @@ PNG = base64.b64decode(
     "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gAAAABJRU5ErkJggg=="
 )
 
+SEARCHES = []     # the plates searched in the gallery, in order (a test reads it)
+
 HEAD = """<!doctype html><html><head><meta charset="utf-8"><title>{title}</title></head><body>
 <div class="header"><div class="topbar"><ul class="loginbar"><li><a href="/user121559">freen525</a></li></ul></div></div>
 <h1 class="pull-left">PlatesMania</h1>"""
@@ -167,8 +169,13 @@ def route_site(context):
             return route.fulfill(status=200, content_type="text/html", body=inject(photo_page(pid)))
 
         if path == "/fr/gallery.php" and "nomer" in query:
-            n = 2 if re.sub(r"[\s-]+", "", query["nomer"][0]).upper() == "AB123CD" else 0
-            html = HEAD.format(title="Search") + f'<div class="breadcrumbs"><h1 class="pull-left">License plates found <b>{n}</b></h1></div></body></html>'
+            plate = re.sub(r"[\s-]+", "", query["nomer"][0]).upper()
+            SEARCHES.append(plate)
+            # the photos of a plate, each with the catalogue link of its vehicle: AB123CD is two Golf Mk8 and a Polo, ZZ999ZZ a brand the menus do not know
+            cars = {"AB123CD": ["markaavto=7&model=70&modgen=701", "markaavto=7&model=70&modgen=701", "markaavto=7&model=71"], "ZZ999ZZ": ["markaavto=9999&model=1"]}.get(plate, [])
+            n = 2 if plate == "AB123CD" else len(cars)
+            cards = "".join(f'<div class="panel-body"><h4 class="text-center"><a href="/fr/nomer{i}">car</a></h4><small><p class="text-center"><a href="/gallery.php?{c}">gen</a></p></small></div>' for i, c in enumerate(cars))
+            html = HEAD.format(title="Search") + f'<div class="breadcrumbs"><h1 class="pull-left">License plates found <b>{n}</b></h1></div>{cards}</body></html>'
             return route.fulfill(status=200, content_type="text/html; charset=utf-8", body=html)
         if path in ("/fr/gallery.php",):
             html = gallery_page(query.get("start", ["0"])[0])
