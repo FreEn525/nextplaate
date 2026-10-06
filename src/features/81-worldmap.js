@@ -93,7 +93,7 @@
   registerFeature({
     id: 'worldmap', label: 'World map',
     groups: [{
-      drawer: 'gallery', title: 'World map', about: 'The countries a member has photos from, on a map of the world. Yours, or another member’s.',
+      drawer: 'gallery', rank: 10, title: 'World map', about: 'The countries a member has photos from, on a map of the world. Yours, or another member’s.',
       build: () => [h('button', { id: 'wmOpen', type: 'button', class: 'btn', text: 'Open the world map' })]
     }],
     keys: {

@@ -1726,6 +1726,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     .gbody{display:flex;flex-direction:column;gap:8px;padding:10px}
     .gtitle{order:-1;padding:7px 10px;border-bottom:1px solid var(--line);background:#fff;color:var(--primary-h);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
     .gbody .btn:not(.sm):not(.fit){width:100%;height:auto;min-height:var(--h);padding-top:6px;padding-bottom:6px;line-height:1.25;white-space:normal}   /* a long label wraps instead of widening the drawer */
+    .gbody.idle .live{display:none}                                  /* a control that does nothing off its page (the note says where it works) */
     .pnote{margin:0;padding:6px 8px;border-radius:var(--r);background:var(--primary-tint);color:var(--mute);font-size:12px}
     .btnrow{display:flex;flex-wrap:wrap;gap:8px}
     .btnrow .btn{flex:1 1 110px;min-width:0}
@@ -1792,7 +1793,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
    *  RIBBON  (the NextPlaate panel: a vertical bar of icons on the right edge of the page;
    *           an icon opens its drawer, which slides over the page)
    * ===================================================================== */
-  // The drawers, in bar order. A feature joins one of them with groups: [{ drawer: 'pair', title, build }].
+  // The drawers, in bar order. A feature joins one of them with groups: [{ drawer: 'pair', title, build, rank }]; rank (default 50) puts a box higher (small) or lower (large) in its drawer.
   const DRAWERS = [
     // In the order of use: check what you are about to send, send it, describe the pair, browse. The ids stay (keys, tests, memory).
     // keys: the actions of the drawer, whose current keys the tooltip tells (they follow what the user chose in Shortcuts)
@@ -1857,9 +1858,9 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
       if (d.id === 'keys') $('rail').append(h('div', { class: 'rsep' }));
       $('rail').append(btn);
       $('dbody').append(h('section', { class: 'dsec', 'data-drawer': d.id, hidden: true },
-        byDrawer[d.id].map(g => {
+        byDrawer[d.id].slice().sort((a, b) => (a.rank || 50) - (b.rank || 50)).map(g => {
           // a group with lazy: true is built when its drawer is first opened (long lists nobody sees until then: no cost at page load)
-          const body = h('div', { class: 'gbody' }, g.about ? h('p', { class: 'gabout', text: g.about }) : null, pageNote(g));
+          const body = h('div', { class: 'gbody' + (pageNote(g) ? ' idle' : '') }, g.about ? h('p', { class: 'gabout', text: g.about }) : null, pageNote(g));
           if (g.lazy) lazyGroups.push({ drawer: d.id, g, body }); else body.append(...[].concat(g.build()).filter(Boolean));
           return h('div', { class: 'group' }, body, h('div', { class: 'gtitle', text: g.title }));
         })));
@@ -2735,12 +2736,12 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     groups: [{
       drawer: 'search', title: 'Plate check', about: "Type a plate on the upload page: how many photos of it are already on the site.", pages: ['add'],
       build: () => [
-        h('div', { class: 'row' }, h('span', { class: 'lbl', text: 'Plate' }), h('b', { id: 'plateNow', text: '—' })),
-        h('p', { id: 'plateResult', class: 'presult', text: 'Type the plate in the form to check it.' }),
+        h('div', { class: 'row live' }, h('span', { class: 'lbl', text: 'Plate' }), h('b', { id: 'plateNow', text: '—' })),
+        h('p', { id: 'plateResult', class: 'presult live', text: 'Type the plate in the form to check it.' }),
         h('div', { class: 'btnrow' },
-          h('button', { id: 'plateCheck', class: 'btn ghost', text: 'Check now' }),
+          h('button', { id: 'plateCheck', class: 'btn ghost live', text: 'Check now' }),
           h('button', { id: 'plateOpen', class: 'btn ghost', text: 'Open the search' })),
-        h('label', { class: 'chk' }, h('input', { type: 'checkbox', id: 'autoCheck' }), 'Check as I type')
+        h('label', { class: 'chk live' }, h('input', { type: 'checkbox', id: 'autoCheck' }), 'Check as I type')
       ]
     }],
     init: () => {
@@ -3281,7 +3282,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
       drawer: 'upload', title: 'Add a photo in a country', about: "Choose the country of the photo you are about to send.", lazy: true,
       build: () => [h('p', { class: 'presult', text: 'Click a country to open its upload page.' }), flagBlock(null)]
     }, {
-      drawer: 'settings', title: 'Country flags: the side bar', lazy: true,
+      drawer: 'settings', rank: 80, title: 'Country flags: the side bar', lazy: true,
       build: () => [h('p', { class: 'presult', text: 'Choose the countries shown on the side of the upload pages. The panel always lists all of them.' }), flagsPicker()]
     }],
     init: () => {
@@ -3373,7 +3374,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
   registerFeature({
     id: 'settings', locked: true,
     groups: [{
-      drawer: 'settings', title: 'Features', about: "Every feature, what it does and where it works. Switch off what you do not use.",
+      drawer: 'settings', rank: 10, title: 'Features', about: "Every feature, what it does and where it works. Switch off what you do not use.",
       build: () => [
         h('p', { class: 'presult', text: 'Switch a feature off to remove its controls and keys. The page reloads to apply the change.' }),
         h('div', { id: 'setList', class: 'chklist' }),
@@ -3992,7 +3993,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     id: 'lookup', label: 'Plate lookup links',
     groups: [{
       drawer: 'search', title: 'Look up the plate', about: "Links to public lookup sites for the plate you typed. Nothing is sent before you click.", pages: ['add'],
-      build: () => [h('div', { id: 'lookupBox' })]
+      build: () => [h('div', { id: 'lookupBox', class: 'live' })]
     }, {
       drawer: 'settings', title: 'Lookup sites',
       build: () => [h('p', { class: 'presult', text: 'Untick the sites you never use. They are only links: nothing is sent before you click.' }), lookupPicker()]
@@ -4484,7 +4485,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
   registerFeature({
     id: 'worldmap', label: 'World map',
     groups: [{
-      drawer: 'gallery', title: 'World map', about: 'The countries a member has photos from, on a map of the world. Yours, or another member’s.',
+      drawer: 'gallery', rank: 10, title: 'World map', about: 'The countries a member has photos from, on a map of the world. Yours, or another member’s.',
       build: () => [h('button', { id: 'wmOpen', type: 'button', class: 'btn', text: 'Open the world map' })]
     }],
     keys: {
@@ -4630,7 +4631,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
 
   registerFeature({
     groups: [{
-      drawer: 'settings', title: 'About',
+      drawer: 'settings', rank: 99, title: 'About',
       build: () => [
         h('p', { class: 'presult' }, `NextPlaate ${SCRIPT_VERSION} © 2026 `, h('a', { href: AUTHOR.profile, target: '_blank', rel: 'noopener noreferrer', text: AUTHOR.name })),
         h('button', { id: 'aboutNew', type: 'button', class: 'btn ghost', text: 'What’s new' })

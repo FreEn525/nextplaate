@@ -2,7 +2,7 @@
    *  RIBBON  (the NextPlaate panel: a vertical bar of icons on the right edge of the page;
    *           an icon opens its drawer, which slides over the page)
    * ===================================================================== */
-  // The drawers, in bar order. A feature joins one of them with groups: [{ drawer: 'pair', title, build }].
+  // The drawers, in bar order. A feature joins one of them with groups: [{ drawer: 'pair', title, build, rank }]; rank (default 50) puts a box higher (small) or lower (large) in its drawer.
   const DRAWERS = [
     // In the order of use: check what you are about to send, send it, describe the pair, browse. The ids stay (keys, tests, memory).
     // keys: the actions of the drawer, whose current keys the tooltip tells (they follow what the user chose in Shortcuts)
@@ -67,9 +67,9 @@
       if (d.id === 'keys') $('rail').append(h('div', { class: 'rsep' }));
       $('rail').append(btn);
       $('dbody').append(h('section', { class: 'dsec', 'data-drawer': d.id, hidden: true },
-        byDrawer[d.id].map(g => {
+        byDrawer[d.id].slice().sort((a, b) => (a.rank || 50) - (b.rank || 50)).map(g => {
           // a group with lazy: true is built when its drawer is first opened (long lists nobody sees until then: no cost at page load)
-          const body = h('div', { class: 'gbody' }, g.about ? h('p', { class: 'gabout', text: g.about }) : null, pageNote(g));
+          const body = h('div', { class: 'gbody' + (pageNote(g) ? ' idle' : '') }, g.about ? h('p', { class: 'gabout', text: g.about }) : null, pageNote(g));
           if (g.lazy) lazyGroups.push({ drawer: d.id, g, body }); else body.append(...[].concat(g.build()).filter(Boolean));
           return h('div', { class: 'group' }, body, h('div', { class: 'gtitle', text: g.title }));
         })));

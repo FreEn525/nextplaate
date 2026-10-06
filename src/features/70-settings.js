@@ -25,7 +25,7 @@
   registerFeature({
     id: 'settings', locked: true,
     groups: [{
-      drawer: 'settings', title: 'Features', about: "Every feature, what it does and where it works. Switch off what you do not use.",
+      drawer: 'settings', rank: 10, title: 'Features', about: "Every feature, what it does and where it works. Switch off what you do not use.",
       build: () => [
         h('p', { class: 'presult', text: 'Switch a feature off to remove its controls and keys. The page reloads to apply the change.' }),
         h('div', { id: 'setList', class: 'chklist' }),

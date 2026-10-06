@@ -154,12 +154,12 @@
     groups: [{
       drawer: 'search', title: 'Plate check', about: "Type a plate on the upload page: how many photos of it are already on the site.", pages: ['add'],
       build: () => [
-        h('div', { class: 'row' }, h('span', { class: 'lbl', text: 'Plate' }), h('b', { id: 'plateNow', text: '—' })),
-        h('p', { id: 'plateResult', class: 'presult', text: 'Type the plate in the form to check it.' }),
+        h('div', { class: 'row live' }, h('span', { class: 'lbl', text: 'Plate' }), h('b', { id: 'plateNow', text: '—' })),
+        h('p', { id: 'plateResult', class: 'presult live', text: 'Type the plate in the form to check it.' }),
         h('div', { class: 'btnrow' },
-          h('button', { id: 'plateCheck', class: 'btn ghost', text: 'Check now' }),
+          h('button', { id: 'plateCheck', class: 'btn ghost live', text: 'Check now' }),
           h('button', { id: 'plateOpen', class: 'btn ghost', text: 'Open the search' })),
-        h('label', { class: 'chk' }, h('input', { type: 'checkbox', id: 'autoCheck' }), 'Check as I type')
+        h('label', { class: 'chk live' }, h('input', { type: 'checkbox', id: 'autoCheck' }), 'Check as I type')
       ]
     }],
     init: () => {

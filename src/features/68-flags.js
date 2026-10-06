@@ -149,7 +149,7 @@
       drawer: 'upload', title: 'Add a photo in a country', about: "Choose the country of the photo you are about to send.", lazy: true,
       build: () => [h('p', { class: 'presult', text: 'Click a country to open its upload page.' }), flagBlock(null)]
     }, {
-      drawer: 'settings', title: 'Country flags: the side bar', lazy: true,
+      drawer: 'settings', rank: 80, title: 'Country flags: the side bar', lazy: true,
       build: () => [h('p', { class: 'presult', text: 'Choose the countries shown on the side of the upload pages. The panel always lists all of them.' }), flagsPicker()]
     }],
     init: () => {

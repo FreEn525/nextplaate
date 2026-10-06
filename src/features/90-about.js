@@ -44,7 +44,7 @@
 
   registerFeature({
     groups: [{
-      drawer: 'settings', title: 'About',
+      drawer: 'settings', rank: 99, title: 'About',
       build: () => [
         h('p', { class: 'presult' }, `NextPlaate ${SCRIPT_VERSION} © 2026 `, h('a', { href: AUTHOR.profile, target: '_blank', rel: 'noopener noreferrer', text: AUTHOR.name })),
         h('button', { id: 'aboutNew', type: 'button', class: 'btn ghost', text: 'What’s new' })
