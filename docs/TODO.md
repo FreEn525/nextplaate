@@ -1,6 +1,6 @@
 # PlatesMania - NextPlaate : todo
 
-État au 6 octobre 2026 (version 5.7). Le bilan est dans `ETAT-ET-PLAN.md`. Légende : **fait**, **en cours**, **à faire**, **info nécessaire** (il me faut une précision de ta part).
+État au 6 octobre 2026 (version 5.8). Le bilan est dans `ETAT-ET-PLAN.md`. Légende : **fait**, **en cours**, **à faire**, **info nécessaire** (il me faut une précision de ta part).
 
 ## Identité visuelle
 
@@ -15,16 +15,17 @@
 
 ## Fonctionnalités
 
+Faites (5.8, voir `FONCTIONNALITES.md`) : Google Lens automatique avec marque / modèle / génération, sélecteur de tags (page d'ajout et page d'une photo), information complémentaire, aperçu de plaque en direct, drapeaux des pays (avec le choix des pays), raccourcis vers les membres (vous en premier, ordre au choix, votre photo dans la barre).
+
 - **Statut du site** : à faire. Une indication (en ligne, bloqué, en pause après un blocage) visible dans la barre, à partir de la file de requêtes existante (`http.js`).
-- **Recherche Google Lens** : **fait** (version 5.8) : recherche automatique d'une photo choisie, résultats comparés aux menus de PlatesMania (marque, modèle, génération). À vérifier sur le vrai site : la lecture des résultats dépend de la page de Google.
-- **Génération de modèle** : **info nécessaire**. Je ne sais pas ce que tu entends : une génération par rapport à l'année, au code châssis, ou une suggestion par IA ? Ça change tout.
-- **Ajout simplifié** : à faire. Un mode « simple » avec un indicateur (flag) à la place du menu déroulant, pour l'ajout de photo.
-- **Remplissage marque, modèle, génération** : à faire. Quand la plaque existe déjà sur le site, pré-remplir les menus avec les photos existantes. Dépend de la lecture de la galerie de recherche (déjà utilisée par la vérification de plaque).
-- **Compteur par marque et modèle** : à faire. À côté des menus, le nombre de tes photos correspondantes. Ça demande de lire ton profil ou ta galerie.
+- **Génération de modèle** : **info nécessaire**. Le Lens propose déjà une génération d'après les années des résultats ; dites si vous voulez autre chose (code châssis, suggestion par IA).
+- **Suggestion de tags** : à faire. Proposer des tags d'après la catégorie de plaque (par exemple « police »), sans rien cocher sans clic.
+- **Ajout simplifié** : à faire. Un mode « simple » avec un indicateur (flag) à la place du menu déroulant du pays pour l'ajout de photo (les drapeaux sont déjà là).
+- **Compteur par marque et modèle** : à faire. À côté des menus, le nombre de vos photos correspondantes. Ça demande de lire votre profil ou votre galerie.
 - **Vrai total d'uploads** : à faire. Le nombre réel de photos publiées depuis la galerie, et le total du jour. Même source que le compteur.
-- **Améliorations de la page d'ajout par pays** : à faire. Bouton flottant, champs réorganisés. Commencer par un pays test (par exemple la France), puis généraliser.
-- **Boîte à outils de recherche** : à faire. Boutons de recherche (Google Lens et d'autres sites) sur la page d'ajout. Dépend de la fonction Google Lens ci-dessus.
-- **Platesmania Plus** : **info nécessaire**. Je ne sais pas ce qu'il y a dedans. Peux-tu me dire les fonctionnalités, ou coller la description ?
+- **Boîte à outils de recherche** : à faire. Boutons de recherche (d'autres sites que Lens) sur la page d'ajout.
+- **Ajout d'un membre depuis n'importe quel lien** : à faire si besoin (une étoile sur chaque pseudo des galeries et des commentaires).
+- **Platesmania Plus** : **info nécessaire**. Un des scripts de la liste (`reference/platesmania-scripts/597418`) n'est qu'un faux menu d'abonnement ; dites ce que vous attendez de ce nom.
 
 ## Ce qui est déjà en place (pas dans la todo, mais utile)
 

@@ -1,10 +1,12 @@
 # NextPlaate : état des lieux et plan
 
-Au 6 octobre 2026, version **5.7** (publiée sur GitHub). Le détail du chemin parcouru est dans `HISTORIQUE.md`.
+Au 6 octobre 2026. Le détail du chemin parcouru est dans `HISTORIQUE.md`.
 
 ## 1. Où on en est
 
-**Livré et testé** : sélection de paire, description avant/arrière, likes, pages, raccourcis modifiables, envoi par lots (IndexedDB, un onglet par photo, pause Cloudflare), registre de réglages (un interrupteur par fonction), vérification de plaque.
+Au 6 octobre 2026, version **5.8** (en cours de publication). La 5.7 était la version de la vérification de plaque ; la 5.8 ajoute six fonctions et un style commun.
+
+**Les quinze fonctions** (le tableau complet, avec leur réglage, leur emplacement et leur touche, est en tête de `FONCTIONNALITES.md`) : sélection d'une paire, lieu et hashtags, descriptions, envoi par lots, vérification de plaque, aperçu de plaque en direct, Google Lens, sélecteur de tags, information complémentaire, likes, touches de page, drapeaux des pays, raccourcis vers les membres, éditeur de raccourcis, réglages. Chacune (sauf les réglages) a un interrupteur dans Settings.
 
 **Vérification de plaque** : 96 pays, 829 catégories (voir `COUVERTURE.md`, généré).
 
@@ -17,9 +19,13 @@ Au 6 octobre 2026, version **5.7** (publiée sur GitHub). Le détail du chemin p
 
 Les cinq « pays » sans catégories (ae, au, ca, us, xx) ont un formulaire à menu de région : leur règle est `region-menu.js`.
 
-**Preuves** : `check_db` (2 376 plaques relues dans les pages sauvegardées), `check_known` (39 plaques tapées à la main sur le vrai site, 0 échec), 77 tests Playwright sur le script public et 83 sur le build dev. La CI (`.github/workflows/tests.yml`) les lance à chaque push et refuse un changement du script public sans nouveau `@version`.
+**Preuves** : `check_db` (2 376 plaques relues dans les pages sauvegardées), `check_known` (39 plaques tapées à la main sur le vrai site, 0 échec), et **225 tests Playwright sur le script public, 231 avec le build dev** (une quinzaine de fichiers dans `tests/e2e/` : un par fonction, plus le style et le responsive). La CI (`.github/workflows/tests.yml`) les lance à chaque push et refuse un changement du script public sans nouveau `@version`.
 
-**Ce qui n'est pas prouvé** : que le site *trouve* la plaque lue pour chaque catégorie. Le test hors ligne prouve la lecture du formulaire ; l'acceptation par le site est confirmée par la main (une cinquantaine de plaques) et par « Verify the reads » (123 plaques, qui ont conduit aux règles d'espacement). Une vérification d'une plaque par catégorie sur le site (environ 795 requêtes, 40 minutes) est possible mais n'a pas été faite : décision du 6 octobre.
+**Style** : un seul système (`STYLE.md`), les couleurs de PlatesMania, angles droits, une échelle de textes et de hauteurs ; des tests le vérifient (aucune couleur ni rayon hors des jetons, tailles mesurées dans le navigateur, aucun débordement de 320 à 1280 px).
+
+**Pièces réutilisables** (`BRIQUES.md`) : un pont vers un autre site, un catalogue de véhicules, une carte dans la page, une fenêtre, les drapeaux.
+
+**Ce qui n'est pas prouvé** : (1) que le site *trouve* la plaque lue pour chaque catégorie (le test hors ligne prouve la lecture du formulaire ; le site a répondu pour une cinquantaine de plaques à la main et 123 lectures de « Verify the reads ») ; (2) le Lens sur le vrai Google : les tests utilisent une fausse page Google, et la lecture des résultats dépend de la page de Google, qui peut changer ; (3) l'enregistrement des tags par le site : notre fenêtre presse le bouton Save du site, qui l'envoie lui-même.
 
 ## 2. Ce que le site nous a appris (à retenir)
 
@@ -50,12 +56,13 @@ Briques réutilisables (pont vers un autre site, catalogue de véhicules, carte 
 
 ## 5. Suite
 
-Par ordre de valeur, voir `TODO.md` pour le détail :
+Voir `TODO.md` pour le détail. Par ordre de valeur :
 
 1. Migrer les derniers réglages libres (`autoCheck`, `delay`, `qDelay`, `pages`) vers le registre.
-2. Saisie d'une plaque en un seul champ (le script remplit le formulaire), puis avertissement de forme.
-3. Statut du site, lecture de la galerie comme source unique (pré-remplissage marque/modèle, compteurs).
-4. Page d'ajout améliorée, pays test d'abord.
+2. Suggestion automatique de tags d'après la catégorie de plaque (par exemple « police »), et des tags les plus utilisés par catégorie.
+3. Statut du site (en ligne, problème, pause) à partir de la file de requêtes.
+4. Compteurs par marque et modèle, vrai total d'uploads (même source : la galerie).
 5. Quand une galerie vide reçoit une plaque : nouvelle collecte (`Collect only`) pour la faire entrer dans les vérifiées.
+6. Si le Lens change : le test du côté Google (`test_lens.py`) et les journaux du build dev (`[NextPlaate] Lens (Google side)`) disent où ça s'arrête.
 
-Informations encore nécessaires de votre part : couleurs du site (CSS ou capture), sens de « génération de modèle », contenu de « PlatesMania Plus ».
+Informations encore nécessaires de votre part : sens de « génération de modèle » pour d'éventuelles suggestions, contenu de « PlatesMania Plus » (un script de la liste n'est qu'un faux menu).

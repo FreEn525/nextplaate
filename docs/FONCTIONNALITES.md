@@ -2,6 +2,30 @@
 
 NextPlaate est un script Tampermonkey (userscript) pour [PlatesMania](https://platesmania.com). Il accélère la publication de photos : sélection, description, likes, navigation, envoi par lots et vérification de plaque. Il ne contacte aucun autre service que le site lui-même.
 
+## Toutes les fonctions, une par une
+
+Chaque fonction a un interrupteur dans Settings (sauf Settings elle-même) : éteinte, elle n'ajoute ni contrôle, ni touche. La colonne « Réglage » donne son nom dans Settings. Le détail de chacune est plus bas.
+
+| # | Fonction | Réglage | Où | Ce qu'elle fait | Touche |
+|---|---|---|---|---|---|
+| 1 | Sélection d'une paire | Photo pair selection | tiroir Photos | choisir la photo avant et la photo arrière | `S` |
+| 2 | Lieu et hashtags | Location and hashtags | tiroir Photos | écrits une fois, en tête de chaque description | |
+| 3 | Descriptions | Descriptions and auto-fill | page d'édition | remplit la description de chaque photo de la paire, enregistre, retourne à la galerie | `F` |
+| 4 | Envoi par lots | Batch upload | tiroir Envoi, fenêtre de lot | file de photos, pays et catégorie par photo, un onglet par photo | `U`, `N`, `R` |
+| 5 | Vérification de plaque | Plate check | page d'ajout | combien de photos de cette plaque sont déjà sur le site, 96 pays, 829 catégories | |
+| 6 | Aperçu de la plaque en direct | Plate preview as you type | page d'ajout | presse « Generate preview » du site quand la frappe s'arrête | |
+| 7 | Google Lens | Google Lens | page d'ajout, tiroir Search | cherche la photo choisie sur Lens, propose marque, modèle et génération | |
+| 8 | Sélecteur de tags | Tag picker | page d'ajout, page d'une photo | remplace la section « Add tags » du site et son pop-up | |
+| 9 | Information complémentaire | Extra information box | page d'ajout | grande carte à la place de la petite boîte du site | |
+| 10 | Likes | Likes | tiroir Galerie | like une page ou plusieurs pages avec un délai | `L` |
+| 11 | Touches de page | Gallery page keys | galeries | page précédente et suivante au clavier | `A`, `D` |
+| 12 | Drapeaux des pays | Country flags | tiroir Envoi, pages d'ajout, profils | un lien par pays vers sa page d'ajout ; pays de la barre au choix | |
+| 13 | Raccourcis vers les membres | Member shortcuts | tiroir Galerie, profils, barre d'icônes | photo et pseudo des membres, un clic vers leur page ; vous d'abord | |
+| 14 | Éditeur de raccourcis | Shortcut editor | tiroir Raccourcis | change chaque touche | |
+| 15 | Réglages | (verrouillée) | tiroir Settings | un interrupteur par fonction ; choix des pays de la barre | |
+
+Autour de ces fonctions : la barre d'icônes (avec votre photo de profil sous le logo), le message d'état en bas, et pour le développement le tiroir Developer du build dev (capture, test de plaques, vérification des lectures, base).
+
 ## Installation et version
 
 - Fichier public : `nextplaate.user.js` (généré par `node scripts/build.mjs`).
@@ -130,10 +154,10 @@ Chaque fonction s'enregistre avec `registerFeature({ groups, keys, onEscape, ini
 
 ## Tests (`tests/`)
 
-- `python -m pytest tests -q` (dossier `tests/e2e/`) : 77 tests (83 avec le build dev) sur une version simulée du site (`fake_site.py`). Pas d'accès réel à PlatesMania.
+- `python -m pytest -q` (dossier `tests/e2e/`) : 225 tests (231 avec le build dev, `NEXTPLAATE_SCRIPT=nextplaate.dev.user.js`) sur une version simulée du site (`fake_site.py`, avec une fausse page Google pour le Lens). Un fichier par fonction (`test_lens.py`, `test_tags.py`, `test_members.py`, `test_flags.py`, `test_extra.py`, `test_preview.py`…), plus `test_style.py` (couleurs, rayons, tailles, hauteurs) et `test_responsive.py` (aucun débordement de 320 à 1280 px). Pas d'accès réel à PlatesMania ni à Google.
 - `python tests/offline/check_known.py` : 39 plaques validées à la main, tapées dans les pages sauvegardées.
 - `python tests/offline/check_db.py` : toutes les plaques de la base, dans la catégorie correspondante, en parallèle. Hors ligne.
-- `scripts/extract-fields.cjs` (données dérivées : `node scripts/build-data.mjs` → `data/`, voir `data/README.md`)
+- Les données dérivées : `node scripts/refresh-data.mjs` → `data/` et `docs/COUVERTURE.md` (voir `data/README.md`).
 - `scripts/extract-fields.cjs` : lit, pour chaque pays et catégorie, les champs visibles, à partir du JavaScript des pages.
 
 ## Limites connues

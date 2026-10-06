@@ -66,3 +66,21 @@ Source : les pages sauvegardées du 4 au 5 octobre 2026 (`reference/real/countri
 - Les comptes sont des options de menu, pas des catégories vérifiées une par une : certaines options sont des variantes d'une même catégorie (2001, 1960…).
 - Les formats de plaque changent d'une catégorie à l'autre dans un même pays ; le détail est dans `reference/real/countries/fields-table.json` et dans les règles de `src/lib/plate.js`.
 - Les pages sont une photo du site à une date : à remettre à jour si le site change.
+
+## Ce que le script lit ou touche sur les pages du site
+
+Si le site change une de ces choses, la fonction correspondante cesse de marcher ; c'est ici qu'il faut regarder en premier.
+
+| Fonction | Élément du site | Où |
+|---|---|---|
+| Vérification de plaque | champs du formulaire d'ajout (`nomer`, `digit*`, `region*`, `b*`…, menu de type `ctype` ou `drop_2`) ; recherche `/<pays>/gallery.php?gal=<pays>&nomer=<plaque>`, nombre dans `.breadcrumbs h1 b` | pages d'ajout |
+| Aperçu de plaque | bouton `#informer-preview-btn` et résultat `#informer-preview-result` ; le site efface l'aperçu à chaque changement des champs avant `#filename` | pages d'ajout |
+| Google Lens | aperçu de la photo `#zoomimg` (une image vide d'un pixel avant le choix) ; côté Google : la case `input[jsname="W7hAGe"]` et le bouton `div[role="button"][jsname="ZtOxCb"]`, la page de résultats `google.*/search` ou `lens.google.com` | pages d'ajout et Google |
+| Marque, modèle, génération | menus `select[name="markaavto"]`, `#model`, `#modgen` ; tables `bmObject`, `modelObject`, `bmgObject`, `modgenObject` du script de la page ; fonctions `changeBrand`, `changeModel` (le site remplit lui-même le menu suivant à l'événement `change`) | pages d'ajout |
+| Tags (page d'ajout) | `#add-tags-picker`, ses cases `input[name="CheckBox[<id>]"]`, ses groupes `.pm-tag-type1-group` ; le compteur `#add-tags-summary` écoute `change` | pages d'ajout |
+| Tags (page d'une photo) | lien `#tags-edit-link` (`data-toggle="modal"`), fenêtre `#tagedit`, bouton `#submit` qui envoie les tags | pages d'une photo |
+| Information complémentaire | `textarea[name="dop"]` dans `#frm` | pages d'ajout |
+| Membres | barre du haut `.header .topbar .loginbar a[href^="/user"]` (vous), profil `/user<id>` : `.container.content.profile`, `.profile-img`, `h1 a`, `small` « ID: n » | toutes les pages, profils |
+| Drapeaux | images `/assets/img/profile-flags/<code>.svg` ; contenu `.container.content` ou `.content .container` pour la place | pages d'ajout, `/add`, profils |
+| Descriptions, likes, pages, paire | `textarea[name="dop"]`, `form input[name="id"]`, `.headline h2`, `i.rating`, liens de pagination | pages d'édition, de photo, de galerie |
+

@@ -24,6 +24,8 @@ Le script déclare aujourd'hui seulement `GM_openInTab` et `unsafeWindow`. Chaqu
 - Greasy Fork retire `@updateURL`, `@installURL` et `@downloadURL`, puis les remplace par les siens : un script installé depuis Greasy Fork ne se met à jour que depuis Greasy Fork. Il ajoute `@version` et `@namespace` s'ils manquent. Source : [Greasy Fork, réécriture](https://greasyfork.org/help/rewriting).
 - Donc : **sans nouveau `@version`, aucune mise à jour** (déjà noté dans le README). Pas vérifié : les règles de code de Greasy Fork sur les bibliothèques (`@require` de `libheif-js`), à relire sur [leurs règles](https://greasyfork.org/help/code-rules) avant une publication.
 
+Un dépôt privé casserait la synchronisation (Greasy Fork relit le fichier sans identifiants) : voir `GREASYFORK.md`.
+
 ## Ce que ça change pour le projet
 
 1. **Réglages** : `GM_setValue` + `GM_registerMenuCommand` peuvent servir de base au registre de réglages. Choix à faire : rester sur `localStorage` (simple, déjà en place, testé par Playwright) ou passer à `GM_*` (partagé entre sous-domaines, mais non testable dans le faux site sans simulation). Je recommande de **garder `store` comme seule porte** (déjà le cas) pour pouvoir changer de moteur plus tard sans toucher aux fonctions.

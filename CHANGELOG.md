@@ -2,6 +2,12 @@
 
 ## 5.8
 
+The biggest release since the panel: **six new features** and a new look.
+
+New features: Google Lens (now automatic, with the answer as brand, model and generation), Tag picker, Extra information box, Plate preview as you type, Country flags, and Member shortcuts (with your own picture in the bar). Settings gains the choice of the countries of the flag bar. All of them have a switch in Settings.
+
+Behind them: one design system taken from PlatesMania's own colours (square corners, one scale of sizes), and reusable parts (a bridge to another site, a vehicle catalogue, an inline card, a window). New permissions: `GM_setValue`, `GM_getValue`, and the script also runs on `www.google.*` and `lens.google.com` (it only acts there for a search the panel asked for): Tampermonkey may ask you to confirm the update.
+
 **Member shortcuts**
 - New feature *Member shortcuts* (switch in Settings): the profiles of members you go to often, each with its picture and name; a click goes to the member's page. You are always the first line (read from the site's top bar; your picture is kept from your own page), which cannot be moved or removed. On a member's profile the list stands to the left of the content, level with the profile picture (the flags are on the right); on a narrower screen it moves under the picture. The same list is in the Gallery drawer of the panel.
 - Looking stays clean: only the lines. A star in the title saves the member of the page (or takes them off; not offered on your own page), and with more than eight members a box finds one by typing. *Edit* (then *Done*) adds a grip to each line to drag it (a bar shows where it lands, never above you; or focus the grip and press Up / Down), a cross to remove it, and a box to add a member by number or by the link of their page (read once through the script's own queue). Editing is the same in the panel and on the page. A shortcut's picture and name are refreshed when you visit the member.
