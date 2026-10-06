@@ -2,6 +2,9 @@
 
 ## 5.9
 
+**New logo**
+- A round camera with a plus, in three blues, in the panel and as the script's icon.
+
 **Fix**
 - Typing in a text field that sits in a card or bar of the script (the country search of the flag bar, for example) no longer triggers the shortcut keys: `U` no longer opens the Batch upload drawer while you type. The key handler now looks at the control that has the focus through every shadow root.
 

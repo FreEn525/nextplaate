@@ -14,7 +14,7 @@ Notes prises pendant la collecte des séries. On les fait au fur et à mesure, d
 6. **Page https://platesmania.com/add** : **à faire**. Refaire la boîte « Select a country » et y déplacer « Add flags » en plus grand, seulement sur cette page (plus propre, plus simple).
 7. **Fluidité** : **à faire**. Vérifier que tout est fluide, sans bug ni lag pour les utilisateurs (mesurer le coût du script au chargement et à l'usage).
 8. **UX et UI du menu U** : **à faire**. À revoir.
-9. **Nouveau logo** : **info nécessaire** (le fichier du nouveau logo).
+9. **Nouveau logo** : **fait** (version 5.9, appareil photo rond avec un plus ; panneau, `logo_nextplaate.svg` et `@icon`).
 10. **Plate check** : **à faire**. Pouvoir ouvrir depuis la carte la recherche de la plaque (la page du site qui liste les photos déjà présentes).
 11. **Remplissage automatique par site d'informations** : **à faire**. Pour les plaques qui ont un site où toutes les informations sont trouvables, remplir automatiquement (étendre le registre officiel NL, IL ; voir `src/lib/registries.js`).
 12. **Design de Google Lens sur la page d'ajout** : **à faire**. Encore un peu étrange ; à revoir.
