@@ -40,7 +40,7 @@ tools/        diagnostics pour corriger une règle (diag_*, fails, fields, hand_
 reference/    pages brutes (270 Mo), local seulement, jamais dans le dépôt
 ```
 
-Règles de cohérence : une fonction = un fichier = un `registerFeature({...})` ; tout réglage passe par le registre `settings` ; une seule porte vers le site (`siteFetch`, une requête toutes les 3 s) ; un fichier par pays dans `src/lib/plate/`.
+Briques réutilisables (pont vers un autre site, catalogue de véhicules, carte dans la page) : `BRIQUES.md`. Règles de cohérence : une fonction = un fichier = un `registerFeature({...})` ; tout réglage passe par le registre `settings` ; une seule porte vers le site (`siteFetch`, une requête toutes les 3 s) ; un fichier par pays dans `src/lib/plate/`.
 
 ## 4. Flux de travail
 

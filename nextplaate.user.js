@@ -191,6 +191,56 @@
     }
   }, true);
   /* =====================================================================
+   *  BRIDGE  (ask a job of another site, in another tab, and wait for the answer)
+   *    The browser keeps sites apart: a PlatesMania page cannot read what a Google page holds. The script runs on both and shares
+   *    one small memory (GM_setValue / GM_getValue), so a job is a request left there and an answer left back:
+   *
+   *      this side      bridgeAsk('lens', { photo }, 'https://www.google.com/?x', { background: true }).then(titles => ...)
+   *      other side     const request = bridgePending('lens');               // null when nobody asked
+   *                     ... do the work on that page ...
+   *                     bridgeAnswer('lens', request, titles);
+   *
+   *    A job has a name ('lens'); a new request replaces the old one; an answer carries the stamp of its request, so an answer to an
+   *    older request is never taken for the new one. Only function declarations: the other side starts from core/00-open.js,
+   *    before the rest of the script is set up. Needs GM_setValue, GM_getValue (and GM_openInTab) in the header.
+   * ===================================================================== */
+  function bridgeKey(job, part) { return 'br_' + job + '_' + part; }
+
+  // Leaves the request, opens the page of the other site, resolves with the answer (rejects after opts.timeout seconds, default 120)
+  function bridgeAsk(job, payload, url, opts) {
+    const o = Object.assign({ background: false, timeout: 120 }, opts);
+    const stamp = Date.now();
+    GM_setValue(bridgeKey(job, 'req'), JSON.stringify({ stamp, payload }));
+    GM_setValue(bridgeKey(job, 'res'), '');
+    let opened = false;
+    try { if (typeof GM_openInTab === 'function') { GM_openInTab(url, { active: !o.background, insert: true, setParent: true }); opened = true; } } catch (e) { /* the popup below */ }
+    if (!opened && !window.open(url, '_blank')) return Promise.reject(new Error('could not open the tab'));
+    return new Promise((ok, no) => {
+      let waited = 0;
+      const timer = setInterval(() => {
+        const raw = GM_getValue(bridgeKey(job, 'res'), '');
+        const got = raw ? JSON.parse(raw) : null;
+        if (got && got.stamp === stamp) { clearInterval(timer); ok(got.data); }
+        else if (++waited > o.timeout) { clearInterval(timer); no(new Error('no answer')); }
+      }, 1000);
+    });
+  }
+
+  // The other side: the request that waits, { stamp, payload }; null when there is none, when it is older than maxAge seconds
+  // (default 180) or when it was answered already
+  function bridgePending(job, maxAge) {
+    const raw = GM_getValue(bridgeKey(job, 'req'), '');
+    if (!raw) return null;
+    const request = JSON.parse(raw);
+    if (Date.now() - request.stamp > (maxAge || 180) * 1000 || GM_getValue(bridgeKey(job, 'done'), 0) === request.stamp) return null;
+    return request;
+  }
+
+  function bridgeAnswer(job, request, data) {
+    GM_setValue(bridgeKey(job, 'res'), JSON.stringify({ stamp: request.stamp, data }));
+    GM_setValue(bridgeKey(job, 'done'), request.stamp);
+  }
+  /* =====================================================================
    *  CODE GENERATION
    * ===================================================================== */
   function block(title, o, alt) {
@@ -807,6 +857,83 @@
   PLATE_RULES.vn = () => shownVal('moto') || (['2', '6'].includes(fieldVal('ctype')) ? joinParts([menu('region'), shownVal('mm') + menu('spec'), shownVal('digit')]) : '') || joinParts([menu('region') + shownVal('mm') + menu('spec'), shownVal('digit')]);
   const plateForForm = () => (PLATE_RULES[here.country] || genericPlate)();   // a country without a rule uses the plain visible fields
   /* =====================================================================
+   *  VEHICLE  (what PlatesMania knows about brands, models and generations, and how to use it)
+   *    The upload page carries the whole catalogue: the brand menu (markaavto) and four tables of its script (bmObject: brand ->
+   *    models, modelObject: model -> name, bmgObject: model -> generations, modgenObject: generation -> name and years).
+   *      vehicleData()                      the catalogue of the page
+   *      vehicleGuess(texts, data)          the likely brand, model and generation named in some texts (titles, captions...)
+   *      vehicleFill(path)                  chooses brand, model, generation in the menus of the page
+   *      vehicleCurrent()                   the values the menus have now
+   *    A guess is [{ category, level, candidates: [{ id, path, name }] }]: level 0 brand, 1 model, 2 generation; path = the menu
+   *    values from the brand down to the candidate, which is what vehicleFill takes.
+   * ===================================================================== */
+  const vehicleMenus = () => [document.querySelector('select[name="markaavto"]'), document.getElementById('model'), document.getElementById('modgen')];
+  const vehicleCurrent = () => vehicleMenus().map(el => (el ? el.value : ''));
+  const vehiclePage = () => (typeof unsafeWindow !== 'undefined' ? unsafeWindow : window);
+
+  function vehicleData() {
+    const w = vehiclePage();
+    const brands = [...document.querySelectorAll('select[name="markaavto"] option')].filter(o => +o.value > 0 && +o.value !== 200).map(o => ({ id: o.value, name: o.textContent.trim() }));
+    return { brands, models: w.bmObject || {}, modelNames: w.modelObject || {}, gens: w.bmgObject || {}, genNames: w.modgenObject || {} };
+  }
+
+  // Fills the menus the way the page fills them: a change event runs the page's own onchange (changeBrand, changeModel), which
+  // fills the next menu. path: [brandId, modelId, generationId], as far as it goes.
+  function vehicleFill(path) {
+    const menus = vehicleMenus();
+    path.forEach((id, i) => {
+      const el = menus[i];
+      if (!el || id === undefined || el.value === String(id)) return;
+      el.value = String(id);
+      el.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+  }
+
+  const vehicleNorm = s => String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+  // A text near the top of a list counts more than one far down
+  const vehicleWeight = i => 1 / (1 + i / 10);
+
+  // names: [[id, name]] -> [[id, score]] best first. loose: a name written without spaces also counts inside a longer word (RS6 in
+  // RS6Avant); brands are whole words only ("ogle" is in "Google"). A candidate far behind the first one is page noise, not a second
+  // guess: it needs a quarter of the best score.
+  function vehicleScore(texts, names, minLength, loose) {
+    const padded = texts.map(t => ' ' + vehicleNorm(t) + ' ');
+    const compact = padded.map(t => t.replace(/ /g, ''));
+    const found = new Map();
+    for (const [id, name] of names) {
+      const n = vehicleNorm(name), c = n.replace(/ /g, '');
+      if (!n || c.length < minLength || /^\d+$/.test(c)) continue;
+      let score = 0;
+      padded.forEach((t, i) => { if (t.includes(' ' + n + ' ') || (loose && c.length >= 3 && compact[i].includes(c))) score += vehicleWeight(i); });
+      if (score) found.set(id, score);
+    }
+    const sorted = [...found].sort((a, b) => b[1] - a[1]);
+    return sorted.filter(f => f[1] >= sorted[0][1] / 4);
+  }
+
+  // The year range of a generation name: "4th gen (C8/4K5), 2019–" -> [2019, 9999]; "Mk7, 2012–2019" -> [2012, 2019]
+  function vehicleYears(name) {
+    const m = String(name).match(/(\d{4})\s*[–—-]\s*(\d{4})?\s*$/) || String(name).match(/(\d{4})\s*$/);
+    return m ? [+m[1], m[2] ? +m[2] : (/[–—-]\s*$/.test(name) ? 9999 : +m[1])] : null;
+  }
+
+  function vehicleGuess(texts, d) {
+    const brandNames = d.brands.map(b => [b.id, b.name.replace(/\s*\(.*\)\s*$/, '')]);
+    const brands = vehicleScore(texts, brandNames, 3);
+    const top = brands[0] && brands[0][0];
+    const out = [{ category: 'Brand', level: 0, candidates: brands.slice(0, 3).map(([id]) => ({ id, path: [id], name: d.brands.find(b => b.id === id).name })) }];
+    const models = vehicleScore(texts, (top ? d.models[top] || [] : []).map(id => [String(id), d.modelNames[id]]), 2, true);
+    out.push({ category: 'Model', level: 1, candidates: models.slice(0, 3).map(([id]) => ({ id, path: [top, id], name: d.modelNames[id] })) });
+    // the generations of the best model whose years are the ones named in the texts
+    const years = texts.join(' ').match(/\b(19[2-9]\d|20[0-3]\d)\b/g) || [];
+    const gens = (models[0] ? d.gens[models[0][0]] || [] : []).filter(id => String(d.genNames[id]) !== '0').map(id => {
+      const r = vehicleYears(d.genNames[id]);
+      return [String(id), r ? years.filter(y => +y >= r[0] && +y <= r[1]).length : 0];
+    }).filter(g => g[1]).sort((x, y) => y[1] - x[1]);
+    out.push({ category: 'Generation', level: 2, candidates: gens.slice(0, 3).map(([id]) => ({ id, path: [top, models[0][0], id], name: d.genNames[id] })) });
+    return out;
+  }
+  /* =====================================================================
    *  ICONS  (Lucide, ISC licence, https://lucide.dev: see THIRD_PARTY.md)
    * ===================================================================== */
   const ICON = {
@@ -1042,6 +1169,76 @@
     if (ms) statusTimer = setTimeout(() => { $('status').innerHTML = ''; }, ms);
   }
 
+  /* =====================================================================
+   *  INLINE CARD  (a block of the script, inside the site's page, in the look of the panel)
+   *    For what is used right where it appears (the answer of Google Lens above the vehicle menus) instead of in a drawer.
+   *      const card = inlineCard({ id: 'pmg-lens-card', title: 'Google Lens', before: someElement });   // null if no element
+   *      card.message('Searching…');        a short line in the title bar
+   *      card.body                          the element to fill (card.clear() empties it)
+   *      cardChoices(card, columns, opts)   columns of choices to click (see below)
+   *    The card is in a shadow root: the site's CSS does not reach it and the panel's tokens (UI_BASE) apply. The same id gives
+   *    the same card back, so a feature can call inlineCard() every time it needs it.
+   * ===================================================================== */
+  const INLINE_CARD_CSS = `
+    :host{display:block;margin:0 0 12px}
+    .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+    .top{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
+    .top b{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--brand-t)}
+    .top .msg{flex:1;min-width:0;font-size:12px;color:var(--mute);overflow-wrap:anywhere}
+    .cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:12px}
+    .col{display:flex;flex-direction:column;gap:6px;min-width:0}
+    .cat{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
+    .chip{width:100%;min-height:34px;padding:6px 10px;border:1px solid var(--line2);border-radius:var(--r);background:#fff;color:var(--ink);font:inherit;font-size:13px;text-align:left;cursor:pointer;overflow-wrap:anywhere}
+    .chip:hover{background:var(--tint);border-color:var(--brand-b)}
+    .chip.best{border-color:var(--brand-b);background:var(--brand);color:var(--brand-t);font-weight:600}
+    .chip.on{border-color:var(--brand-l);box-shadow:inset 0 0 0 1px var(--brand-l)}
+    .none{font-size:13px;color:var(--mute)}
+    .bar{display:flex;gap:8px;padding:0 12px 12px}
+    @media (max-width:640px){.cols{grid-template-columns:1fr}}
+  `;
+
+  // opts: { id, title, before: the element the card goes in front of }; null when there is no such element
+  function inlineCard(opts) {
+    let host = document.getElementById(opts.id);
+    if (!host) {
+      if (!opts.before || !opts.before.parentNode) return null;
+      host = h('div', { id: opts.id });
+      opts.before.parentNode.insertBefore(host, opts.before);
+      const root = host.attachShadow({ mode: 'open' });
+      root.append(h('style', { text: UI_BASE + INLINE_CARD_CSS }), h('div', { class: 'card' },
+        h('div', { class: 'top' }, h('b', { text: opts.title }), h('span', { class: 'msg' }),
+          h('button', { class: 'iconbtn', title: 'Hide', text: '×', onclick: () => { host.hidden = true; } })),
+        h('div', { class: 'cbody' })));
+    }
+    const root = host.shadowRoot;
+    host.hidden = false;
+    return {
+      host, root, body: root.querySelector('.cbody'),
+      message: text => { root.querySelector('.msg').textContent = text; },
+      clear: () => { root.querySelector('.cbody').textContent = ''; }
+    };
+  }
+
+  // Columns of choices to click. columns: [{ label, level, choices: [{ id, name, path }] }]. The first choice of a column is
+  // highlighted. opts.pick(path) runs on a click; opts.current() returns the values now in force, one per level, and the choices
+  // equal to them are marked; opts.action = { label, path } adds a button that picks that path at once.
+  function cardChoices(card, columns, opts) {
+    const mark = () => {
+      const now = opts.current ? opts.current() : [];
+      card.root.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', now[+c.dataset.level] === c.dataset.id));
+    };
+    const pick = path => { opts.pick(path); mark(); };
+    card.clear();
+    card.body.append(h('div', { class: 'cols' }, columns.map(col => h('div', { class: 'col' },
+      h('div', { class: 'cat', text: col.label }),
+      col.choices.length
+        ? col.choices.map((c, i) => h('button', { class: 'chip' + (i === 0 ? ' best' : ''), text: c.name, 'data-id': String(c.id), 'data-level': String(col.level), onclick: () => pick(c.path) }))
+        : h('div', { class: 'none', text: 'No choice' })))));
+    if (opts.action && opts.action.path.length) {
+      card.body.append(h('div', { class: 'bar' }, h('button', { class: 'btn', text: opts.action.label, onclick: () => pick(opts.action.path) })));
+    }
+    mark();
+  }
   /* =====================================================================
    *  PAIR  (choose the front and rear photos of a car by clicking them on the site)
    * ===================================================================== */
@@ -1661,207 +1858,56 @@
     init: () => renderShortcuts()
   });
   /* =====================================================================
-   *  GOOGLE LENS CARD  (on the upload page, right above the brand / model / generation menus)
-   *    The answer of the Lens group (65-lens.js), shown where it is used: three columns of up to three choices. A click on a
-   *    choice fills the site's own menus (brand, then model, then generation, the way the page's functions fill each other).
-   *    "Fill with the first choices" does the three at once. Nothing is filled until the user clicks.
-   *    The card is in a shadow root (the site's CSS cannot reach it) and uses the same look as the panel.
-   * ===================================================================== */
-  const LENS_CARD_CSS = `
-    :host{display:block;margin:0 0 12px}
-    .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-    .top{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
-    .top b{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--brand-t)}
-    .top .msg{flex:1;min-width:0;font-size:12px;color:var(--mute);overflow-wrap:anywhere}
-    .cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:12px}
-    .col{display:flex;flex-direction:column;gap:6px;min-width:0}
-    .cat{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
-    .chip{width:100%;min-height:34px;padding:6px 10px;border:1px solid var(--line2);border-radius:var(--r);background:#fff;color:var(--ink);font:inherit;font-size:13px;text-align:left;cursor:pointer;overflow-wrap:anywhere}
-    .chip:hover{background:var(--tint);border-color:var(--brand-b)}
-    .chip.best{border-color:var(--brand-b);background:var(--brand);color:var(--brand-t);font-weight:600}
-    .chip.on{border-color:var(--brand-l);box-shadow:inset 0 0 0 1px var(--brand-l)}
-    .none{font-size:13px;color:var(--mute)}
-    .bar{display:flex;gap:8px;padding:0 12px 12px}
-    @media (max-width:640px){.cols{grid-template-columns:1fr}}
-  `;
-
-  const lensMenus = () => [document.querySelector('select[name="markaavto"]'), document.getElementById('model'), document.getElementById('modgen')];
-
-  // The card, created once above the vehicle menus; null on a page without them
-  function lensCard() {
-    let host = document.getElementById('pmg-lens-card');
-    if (host) return host.shadowRoot;
-    const row = document.querySelector('.pm-vehicle-fields-row');
-    if (!row) return null;
-    host = h('div', { id: 'pmg-lens-card' });
-    row.parentNode.insertBefore(host, row);
-    const root = host.attachShadow({ mode: 'open' });
-    root.append(h('style', { text: UI_BASE + LENS_CARD_CSS }), h('div', { class: 'card' },
-      h('div', { class: 'top' }, h('b', { text: 'Google Lens' }), h('span', { class: 'msg', id: 'cardMsg' }),
-        h('button', { class: 'iconbtn', id: 'cardClose', title: 'Hide', text: '×' })),
-      h('div', { id: 'cardBody' })));
-    root.getElementById('cardClose').onclick = () => { host.hidden = true; };
-    return root;
-  }
-
-  // The menus of the page, filled the way the page fills them: a change event runs the page's own onchange (changeBrand, changeModel)
-  function lensFill(path) {
-    const menus = lensMenus();
-    path.forEach((id, i) => {
-      const el = menus[i];
-      if (!el || id === undefined || el.value === String(id)) return;
-      el.value = String(id);
-      el.dispatchEvent(new Event('change', { bubbles: true }));
-    });
-    lensCardMark();
-  }
-
-  // The choices that are the menus' current values are marked
-  function lensCardMark() {
-    const root = lensCard();
-    if (!root) return;
-    const now = lensMenus().map(el => el && el.value);
-    root.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', now[+c.dataset.level] === c.dataset.id));
-  }
-
-  // message: a short line (searching, nothing found); rows: [{ category, level, candidates: [{ id, path, name }] }] or null.
-  // Returns false when the page has no place for the card (the panel shows the answer then).
-  function lensCardShow(message, rows) {
-    const root = lensCard();
-    if (!root) return false;
-    root.host.hidden = false;
-    root.getElementById('cardMsg').textContent = message;
-    const body = root.getElementById('cardBody');
-    body.textContent = '';
-    if (!rows) return true;
-    body.append(h('div', { class: 'cols' }, rows.map(r => h('div', { class: 'col' },
-      h('div', { class: 'cat', text: r.category }),
-      r.candidates.length
-        ? r.candidates.map((c, i) => h('button', { class: 'chip' + (i === 0 ? ' best' : ''), text: c.name, 'data-id': String(c.id), 'data-level': String(r.level), onclick: () => lensFill(c.path) }))
-        : h('div', { class: 'none', text: 'No choice' })))));
-    const first = rows.map(r => r.candidates[0] && r.candidates[0].id);
-    if (first[0] !== undefined) {
-      const path = [];
-      for (const id of first) { if (id === undefined) break; path.push(id); }
-      body.append(h('div', { class: 'bar' }, h('button', { class: 'btn', text: 'Fill with the first choices', onclick: () => lensFill(path) })));
-    }
-    lensCardMark();
-    return true;
-  }
-  /* =====================================================================
-   *  GOOGLE LENS  (in the panel: the photo is searched on Google Lens, the answer is shown as brand / model / generation)
-   *    1. The panel saves the photo for the Google side (66-lens-google.js) and opens Google in a tab. On the upload page this
-   *       happens by itself as soon as a photo is chosen.
-   *    2. The Google side puts the photo in Google's "paste an image link" box, then, on the results page, writes down the titles
-   *       of the results (GM storage: the two tabs are on different sites).
-   *    3. This file reads those titles and compares them with the brands, models and generations of PlatesMania's own menus
-   *       (bmObject, modelObject, bmgObject, modgenObject of the upload page): three candidates for each of the three.
-   *    The answer is only shown here: nothing is typed into the form.
+   *  GOOGLE LENS  (the photo is searched on Google Lens; the answer is the brand, model and generation it names)
+   *    Built from the shared parts:
+   *      bridge (lib/bridge.js)         asks Google, in another tab, for the titles of the Lens results of the photo
+   *      vehicle (lib/vehicle.js)       compares those titles with the brands, models and generations of PlatesMania's menus
+   *      inlineCard (ui/06-inline-card) shows the answer above the vehicle menus, where it is used
+   *    The Google side is 66-lens-google.js. On the upload page the search starts by itself as soon as a photo is chosen.
+   *    Nothing is filled in the menus until the user clicks a choice.
    * ===================================================================== */
   settings.define('lens_auto', '1', 'Search each new photo on Google Lens', 'lens');
 
-  // ---- the photo
-  // On the upload page the preview #zoomimg (a 1-pixel placeholder until a photo is chosen; its address is the photo itself while
-  // it is not published), on another page the main photo. '' when there is none.
+  // The photo to search: on the upload page the preview #zoomimg (a 1-pixel placeholder until a photo is chosen; its address is the
+  // photo itself while it is not published), on another page the main photo. '' when there is none.
   const LENS_PLACEHOLDER = /^data:image\/gif/i;
   function lensPhoto() {
     const img = here.add ? document.getElementById('zoomimg') : [...document.images].find(i => /\/\/img\d+\.platesmania\.com\/\d+\/m\/\d+\.jpg/i.test(i.src));
     return img && img.src && !LENS_PLACEHOLDER.test(img.src) ? img.src.replace(/\/s\/(\d+\.jpg)/, '/m/$1') : '';
   }
 
-  // ---- what PlatesMania knows (the menus and the data of the upload page)
-  const lensPage = () => (typeof unsafeWindow !== 'undefined' ? unsafeWindow : window);
-  function lensData() {
-    const w = lensPage();
-    const brands = [...document.querySelectorAll('select[name="markaavto"] option')].filter(o => +o.value > 0 && +o.value !== 200).map(o => ({ id: o.value, name: o.textContent.trim() }));
-    return { brands, models: w.bmObject || {}, modelNames: w.modelObject || {}, gens: w.bmgObject || {}, genNames: w.modgenObject || {} };
-  }
-
-  // ---- the comparison
-  const lensNorm = s => String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
-  // A title is a result of Lens ("2019 Audi RS6 Avant - Wikipedia"); a result near the top counts more than one far down
-  const lensWeight = i => 1 / (1 + i / 10);
-
-  // loose: a name written without spaces also counts inside a longer word (RS6 in RS6Avant); brands are whole words only
-  // ("ogle" is in "Google"). A candidate far behind the first one is page noise, not a second guess: it needs a quarter of its score.
-  function lensScore(titles, names, minLength, loose) {
-    const padded = titles.map(t => ' ' + lensNorm(t) + ' ');
-    const compact = padded.map(t => t.replace(/ /g, ''));
-    const found = new Map();
-    for (const [id, name] of names) {
-      const n = lensNorm(name), c = n.replace(/ /g, '');
-      if (!n || c.length < minLength || /^\d+$/.test(c)) continue;
-      let score = 0;
-      padded.forEach((t, i) => { if (t.includes(' ' + n + ' ') || (loose && c.length >= 3 && compact[i].includes(c))) score += lensWeight(i); });
-      if (score) found.set(id, score);
-    }
-    const sorted = [...found].sort((a, b) => b[1] - a[1]);
-    return sorted.filter(f => f[1] >= sorted[0][1] / 4);
-  }
-
-  // The year range of a generation name: "4th gen (C8/4K5), 2019–" -> [2019, 9999]; "Mk7, 2012–2019" -> [2012, 2019]
-  function lensYears(name) {
-    const m = String(name).match(/(\d{4})\s*[–—-]\s*(\d{4})?\s*$/) || String(name).match(/(\d{4})\s*$/);
-    return m ? [+m[1], m[2] ? +m[2] : (/[–—-]\s*$/.test(name) ? 9999 : +m[1])] : null;
-  }
-
-  // titles -> [{ category, level, candidates: [{ id, path, name }] }]; path = the menu values to set, from the brand down to this choice
-  function lensGuess(titles, d) {
-    const brandNames = d.brands.map(b => [b.id, b.name.replace(/\s*\(.*\)\s*$/, '')]);
-    const brands = lensScore(titles, brandNames, 3);
-    const top = brands[0] && brands[0][0];
-    const out = [{ category: 'Brand', level: 0, candidates: brands.slice(0, 3).map(([id]) => ({ id, path: [id], name: d.brands.find(b => b.id === id).name })) }];
-    const models = lensScore(titles, (top ? d.models[top] || [] : []).map(id => [String(id), d.modelNames[id]]), 2, true);
-    out.push({ category: 'Model', level: 1, candidates: models.slice(0, 3).map(([id]) => ({ id, path: [top, id], name: d.modelNames[id] })) });
-    // the generations of the best model whose years are the ones named in the titles
-    const years = titles.join(' ').match(/\b(19[2-9]\d|20[0-3]\d)\b/g) || [];
-    const gens = (models[0] ? d.gens[models[0][0]] || [] : []).filter(id => String(d.genNames[id]) !== '0').map(id => {
-      const r = lensYears(d.genNames[id]);
-      return [String(id), r ? years.filter(y => +y >= r[0] && +y <= r[1]).length : 0];
-    }).filter(g => g[1]).sort((x, y) => y[1] - x[1]);
-    out.push({ category: 'Generation', level: 2, candidates: gens.slice(0, 3).map(([id]) => ({ id, path: [top, models[0][0], id], name: d.genNames[id] })) });
-    return out;
-  }
-
-  // Where the answer goes: the card above the menus of the upload page, else the panel
+  // Where the answer goes: the card above the vehicle menus of the upload page, else the panel
   function lensShow(message, rows) {
-    $('lensMsg').textContent = lensCardShow(message, rows) ? 'The answer is above the brand, model and generation menus.' : message;
+    const card = inlineCard({ id: 'pmg-lens-card', title: 'Google Lens', before: document.querySelector('.pm-vehicle-fields-row') });
+    if (card) {
+      card.message(message);
+      card.clear();
+      if (rows) {
+        const first = [];
+        for (const r of rows) { if (!r.candidates[0]) break; first.push(r.candidates[0].id); }
+        cardChoices(card, rows.map(r => ({ label: r.category, level: r.level, choices: r.candidates })),
+          { pick: vehicleFill, current: vehicleCurrent, action: { label: 'Fill with the first choices', path: first } });
+      }
+    }
+    $('lensMsg').textContent = card ? 'The answer is above the brand, model and generation menus.' : message;
     const out = $('lensOut');
     out.textContent = '';
-    if (!rows || document.getElementById('pmg-lens-card')) return;
+    if (!rows || card) return;
     for (const r of rows) {
       out.appendChild(h('div', { class: 'lens-cat', text: r.category }));
       out.appendChild(h('div', { class: 'lens-cands' }, ...[0, 1, 2].map(i => h('span', { class: 'lens-cand', text: r.candidates[i] ? r.candidates[i].name : '—' }))));
     }
   }
 
-  // ---- the search
-  let lensStamp = 0, lensTimer = null;
-  // Hands the photo to the Google side and opens Google; in the background when the search starts by itself
+  // The search: the photo goes to the Google side, the titles of the results come back
   function lensStart(photo, background) {
-    lensStamp = Date.now();
-    GM_setValue('lens_image', photo);
-    GM_setValue('lens_pending', lensStamp);
-    GM_setValue('lens_titles', '');
     lensShow('Searching on Google Lens…', null);
-    clearInterval(lensTimer);
-    let waited = 0;
-    lensTimer = setInterval(() => {                       // the titles come from the other tab
-      const raw = GM_getValue('lens_titles', '');
-      const got = raw ? JSON.parse(raw) : null;
-      if (got && got.at === lensStamp) {
-        clearInterval(lensTimer);
-        const rows = lensGuess(got.titles, lensData());
-        lensShow(rows[0].candidates.length ? 'Lens results compared with PlatesMania. Click a choice to fill the menu.' : 'Lens answered, but no PlatesMania brand was found in the results.', rows);
-        setStatus('Google Lens results are ready.', 3500);
-      } else if (++waited > 120) {
-        clearInterval(lensTimer);
-        lensShow('No result came back from Google Lens. Open its tab to see the page.', null);
-      }
-    }, 1000);
-    const url = lensMarkedUrl();
-    try { if (typeof GM_openInTab === 'function') { GM_openInTab(url, { active: !background, insert: true, setParent: true }); return true; } } catch (e) { /* the popup below */ }
-    return !!window.open(url, '_blank');
+    bridgeAsk('lens', { photo }, lensMarkedUrl(), { background, timeout: 120 }).then(titles => {
+      const rows = vehicleGuess(titles, vehicleData());
+      lensShow(rows[0].candidates.length ? 'Lens results compared with PlatesMania. Click a choice to fill the menu.' : 'Lens answered, but no PlatesMania brand was found in the results.', rows);
+      setStatus('Google Lens results are ready.', 3500);
+    }, e => lensShow(e.message === 'no answer' ? 'No result came back from Google Lens. Open its tab to see the page.' : 'Could not open Google Lens: ' + e.message + '.', null));
+    return true;
   }
 
   // A photo chosen on the upload page changes the address of #zoomimg: search it at once (not at load: a photo already there was seen)
@@ -1900,18 +1946,18 @@
     }
   });
   /* =====================================================================
-   *  GOOGLE LENS, ON THE GOOGLE SIDE  (the same script, opened by the Lens group of the panel)
-   *    The panel saves the photo (a public address, or the photo itself for one not published yet) with GM_setValue and opens
-   *    https://www.google.com/?olud&src=pm. This code runs on that Google page only: it puts the photo in the "paste an image
-   *    link" box of Google's search by image and starts the search, the way the box is used by hand.
-   *    Then, on the results page that follows (within three minutes of the panel's search), it writes down the titles of the results
-   *    (links, headings, image descriptions) for the panel, which compares them with its brand and model menus. A Google page the
-   *    panel did not ask for is left alone. On any Google page the script stops here: no panel, no other feature.
+   *  GOOGLE LENS, ON THE GOOGLE SIDE  (the same script, opened by the Lens group of the panel; the job 'lens' of lib/bridge.js)
+   *    Two steps, on the two pages Google shows:
+   *      1. the page the panel opened (the marker in the address): the photo of the request goes into the "paste an image link" box
+   *         of Google's search by image, and the search starts, the way the box is used by hand;
+   *      2. the results page that follows (within three minutes of the request): the titles of the results (links, headings, image
+   *         descriptions) are the answer to the request. The panel compares them with its menus.
+   *    A Google page the panel did not ask for is left alone. On any Google page the script stops here: no panel, no other feature.
+   *    Only function declarations: this runs from core/00-open.js, before the rest of the script is set up.
    * ===================================================================== */
-  // Only function declarations here: they run from core/00-open.js, before the rest of the script has set anything up
   function lensMarkedUrl() { return 'https://www.google.com/?olud&src=pm'; }
 
-  // Logs of the dev build only; a function declaration like the others here (the script has not set up its own log yet)
+  // Logs of the dev build only
   function lensLog(...args) { if ('0' === '1') console.log('[NextPlaate] Lens (Google side)', ...args); }
 
   function onLensPage() {
@@ -1921,13 +1967,12 @@
     } catch (e) { return false; }
   }
 
-  // Google's own markup: the jsname values are the ones of the box and the search button today, the others are a fallback
-  // The results of the search the panel asked for: the titles, once the page has them (it fills in after loading)
+  // Step 2: the titles of the results, once the page has them (it fills in after loading)
   function lensReadResults() {
-    const asked = GM_getValue('lens_pending', 0);
+    const request = bridgePending('lens', 180);
     const results = /^lens\.google\./.test(location.hostname) || /^\/search/.test(location.pathname);
-    lensLog('results page?', { results, asked: !!asked, ageSeconds: asked ? Math.round((Date.now() - asked) / 1000) : null, done: GM_getValue('lens_done', 0) === asked, url: location.href });
-    if (!results || !asked || Date.now() - asked > 180000 || GM_getValue('lens_done', 0) === asked) return;
+    lensLog('results page?', { results, asked: !!request, url: location.href });
+    if (!results || !request) return;
     const collect = () => {
       const out = [];
       document.querySelectorAll('a[href], [role="heading"], h1, h2, h3, img[alt]').forEach(el => {
@@ -1942,12 +1987,12 @@
       if (titles.length < 12 && ++tries <= 40) return;      // up to about 20 s for the results to appear
       clearInterval(timer);
       lensLog('titles found', titles.length, titles.slice(0, 5));
-      if (!titles.length) return;
-      GM_setValue('lens_titles', JSON.stringify({ at: asked, titles }));
-      GM_setValue('lens_done', asked);
+      if (titles.length) bridgeAnswer('lens', request, titles);
     }, 500);
   }
 
+  // Step 1 (and the entry for both): Google's own markup. The jsname values are the ones of the box and the search button today,
+  // the other selectors are a fallback.
   function lensOnGoogle() {
     lensLog('Google page', location.href, 'asked by the panel:', onLensPage());
     if (!onLensPage()) { lensReadResults(); return; }
@@ -1955,13 +2000,14 @@
     const first = (...sel) => sel.map(s => document.querySelector(s)).find(Boolean);
     const attempt = () => {
       if (done) return;
-      const photo = GM_getValue('lens_image', '');
+      const request = bridgePending('lens', 180);
+      const photo = request ? request.payload.photo : '';
       const box = first('input[jsname="W7hAGe"]', 'input.cB9M7', 'input[type="text"]');
       const go = first('div[role="button"][jsname="ZtOxCb"]', 'button[type="submit"]', 'button, div[role="button"]');
       if (tries % 20 === 0) lensLog('looking for the box', { photo: photo.length, box: !!box, button: !!go, tries });
       if (!photo || !box || !go) return;
       done = true;
-      lensLog('photo put in the box, search started', { photo: photo.slice(0, 40) + '…', box: box.outerHTML.slice(0, 120) });
+      lensLog('photo put in the box, search started', { box: box.outerHTML.slice(0, 120) });
       box.focus();
       box.value = photo;
       box.dispatchEvent(new Event('input', { bubbles: true }));
