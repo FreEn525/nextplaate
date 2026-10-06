@@ -7,7 +7,7 @@
    * ===================================================================== */
   function panZoom(svg, { w: W, h: H, max = 40, home = 'World', onChange = () => {} }) {
     let box = [0, 0, W];
-    const label = h('span', { class: 'mute zl', text: home });
+    const label = h('div', { class: 'zl', text: home });
     const set = (x, y, w) => {
       w = Math.min(W, Math.max(W / max, w));
       const hh = w * H / W;
@@ -30,17 +30,17 @@
       const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
       if (!moved && Math.hypot(dx, dy) < 4) return;            // a click is not a drag
       if (!moved) { moved = true; svg.setPointerCapture(e.pointerId); svg.classList.add('drag'); }
-      const k = drag.box[2] / svg.getBoundingClientRect().width;
+      const k = 1 / svg.getScreenCTM().a;                      // map units per pixel (the map is centred in its frame: the frame's width is not the scale)
       set(drag.box[0] - dx * k, drag.box[1] - dy * k, drag.box[2]);
     });
     const end = () => { drag = null; svg.classList.remove('drag'); };
     svg.addEventListener('pointerup', end);
     svg.addEventListener('pointercancel', end);
     svg.addEventListener('click', e => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
-    const tool = (text, title, run) => h('button', { type: 'button', class: 'pill', text, title, onclick: run });
-    const toolbar = (presets = []) => h('div', { class: 'views' },
-      tool('+', 'Zoom in', () => zoomAt(1.5, ...centre())), tool('\u2212', 'Zoom out', () => zoomAt(1 / 1.5, ...centre())),
-      tool(home, 'The whole map', () => set(0, 0, W)), presets.map(p => tool(p.label, p.title, () => set(...p.view))),
-      label, h('span', { class: 'mute', text: 'Scroll to zoom, drag to move' }));
+    const tool = (text, title, run) => h('button', { type: 'button', text, title, onclick: run });
+    // The buttons that lie over the map (top right): zoom in and out, the whole map, the preset views, the zoom level
+    const toolbar = (presets = []) => h('div', { class: 'tools' },
+      tool('+', 'Zoom in', () => zoomAt(1.5, ...centre())), tool('−', 'Zoom out', () => zoomAt(1 / 1.5, ...centre())),
+      tool('Fit', 'The whole map', () => set(0, 0, W)), presets.map(p => tool(p.label, p.title, () => set(...p.view))), label);
     return { set, zoomAt, reset: () => set(0, 0, W), toolbar };
   }

@@ -583,7 +583,7 @@
    * ===================================================================== */
   function panZoom(svg, { w: W, h: H, max = 40, home = 'World', onChange = () => {} }) {
     let box = [0, 0, W];
-    const label = h('span', { class: 'mute zl', text: home });
+    const label = h('div', { class: 'zl', text: home });
     const set = (x, y, w) => {
       w = Math.min(W, Math.max(W / max, w));
       const hh = w * H / W;
@@ -606,18 +606,18 @@
       const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
       if (!moved && Math.hypot(dx, dy) < 4) return;            // a click is not a drag
       if (!moved) { moved = true; svg.setPointerCapture(e.pointerId); svg.classList.add('drag'); }
-      const k = drag.box[2] / svg.getBoundingClientRect().width;
+      const k = 1 / svg.getScreenCTM().a;                      // map units per pixel (the map is centred in its frame: the frame's width is not the scale)
       set(drag.box[0] - dx * k, drag.box[1] - dy * k, drag.box[2]);
     });
     const end = () => { drag = null; svg.classList.remove('drag'); };
     svg.addEventListener('pointerup', end);
     svg.addEventListener('pointercancel', end);
     svg.addEventListener('click', e => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
-    const tool = (text, title, run) => h('button', { type: 'button', class: 'pill', text, title, onclick: run });
-    const toolbar = (presets = []) => h('div', { class: 'views' },
-      tool('+', 'Zoom in', () => zoomAt(1.5, ...centre())), tool('\u2212', 'Zoom out', () => zoomAt(1 / 1.5, ...centre())),
-      tool(home, 'The whole map', () => set(0, 0, W)), presets.map(p => tool(p.label, p.title, () => set(...p.view))),
-      label, h('span', { class: 'mute', text: 'Scroll to zoom, drag to move' }));
+    const tool = (text, title, run) => h('button', { type: 'button', text, title, onclick: run });
+    // The buttons that lie over the map (top right): zoom in and out, the whole map, the preset views, the zoom level
+    const toolbar = (presets = []) => h('div', { class: 'tools' },
+      tool('+', 'Zoom in', () => zoomAt(1.5, ...centre())), tool('−', 'Zoom out', () => zoomAt(1 / 1.5, ...centre())),
+      tool('Fit', 'The whole map', () => set(0, 0, W)), presets.map(p => tool(p.label, p.title, () => set(...p.view))), label);
     return { set, zoomAt, reset: () => set(0, 0, W), toolbar };
   }
   /* =====================================================================
@@ -1970,9 +1970,10 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
   /* =====================================================================
    *  MODAL  (a window over the page, in the look of the panel)
    *    For what needs the whole screen for a moment (the tags of a photo) instead of the site's own pop-up.
-   *      const modal = modalOpen({ id: 'pmg-tags-modal', title: 'Tags', body: element, actions: [{ label: 'Save', run }, ...], onDismiss });
+   *      const modal = modalOpen({ id: 'pmg-tags-modal', title: 'Tags', body: element, actions: [{ label: 'Save', run }, ...], onDismiss, fill: true });
    *      modal.close()      closes it;  modal.dismiss()  closes it as a cancel (onDismiss runs first)
    *    The cross, the Esc key and a click outside the window dismiss it. An action closes nothing by itself: it calls modal.close().
+   *    fill: true makes it almost the whole screen, with a body that does not scroll (the map: it lays out its own scrolling parts).
    *    It is in a shadow root (the site's CSS does not reach it) and uses the panel's tokens. One modal of an id at a time.
    * ===================================================================== */
   const MODAL_CSS = `
@@ -1982,6 +1983,10 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     .mh h2{margin:0;font-size:16px;font-weight:700;color:var(--primary-h)}
     .mh .sub{flex:1;min-width:0;font-size:12px;color:var(--mute);overflow-wrap:anywhere}
     .mb{flex:1;min-height:0;overflow:auto}
+    .ov.fill{align-items:center;padding:2vh 72px 2vh 16px}
+    .dlg.fill{width:min(1280px,100%);height:min(860px,100%);max-height:none}
+    .dlg.fill .mb{overflow:hidden;display:flex;flex-direction:column}
+    @media (max-width:640px){.ov.fill{padding:0 56px 0 0}.dlg.fill{height:100%;border:0}}
     .mf{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px;padding:12px 16px;border-top:1px solid var(--line);background:var(--paper)}
   `;
 
@@ -2006,8 +2011,8 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
       dismiss() { if (done) return; if (opts.onDismiss) opts.onDismiss(); modal.close(); }
     };
     const onKey = e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); modal.dismiss(); } };
-    const ov = h('div', { class: 'ov', onclick: e => { if (e.target === ov) modal.dismiss(); } },
-      h('div', { class: 'dlg', role: 'dialog' },
+    const ov = h('div', { class: 'ov' + (opts.fill ? ' fill' : ''), onclick: e => { if (e.target === ov) modal.dismiss(); } },
+      h('div', { class: 'dlg' + (opts.fill ? ' fill' : ''), role: 'dialog' },
         h('div', { class: 'mh' }, h('h2', { text: opts.title }), sub, h('button', { class: 'iconbtn', title: 'Close', text: '×', onclick: () => modal.dismiss() })),
         modal.body = h('div', { class: 'mb' }, opts.body),
         opts.actions && opts.actions.length
@@ -2020,21 +2025,27 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     return modal;
   }
   /* =====================================================================
-   *  MAP STYLE  (the world map and the maps of regions: sea, land, the five shades, legend, tables; tokens only)
+   *  MAP STYLE  (the world map and the maps of regions: the window's layout, sea, land, the five shades, legend; tokens only)
+   *    Layout: a bar (who, which map), then the map on the left filling the height with its tools laid over it, and a column on the
+   *    right (summary, ranked list, notes). Under 760 px the column goes under the map. Nothing scrolls but the list.
    * ===================================================================== */
   const MAP_CSS = `
-    .wm{display:flex;flex-direction:column;gap:12px;padding:16px}
-    .wm .who{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
-    .wm .who input{flex:1 1 240px;min-width:0}
-    .wm .sum{font-size:14px}
-    .wm path,.wm circle{vector-effect:non-scaling-stroke}
-    .wm .views{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
-    .wm .views .zl{min-width:40px}
-    .wm svg{display:block;width:100%;height:auto;background:var(--primary-tint);border:1px solid var(--line2);cursor:grab;touch-action:none}
+    .wm{display:flex;flex-direction:column;flex:1;min-height:0}
+    .wm .bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--paper)}
+    .wm .bar input{flex:0 1 190px;min-width:0;height:var(--h-sm)}
+    .wm .bar select{height:var(--h-sm);max-width:100%}
+    .wm .bar .btn{height:var(--h-sm)}
+    .wm .bar .gap{flex:1}
+    .wm .bar .lbl{font-size:12px;color:var(--mute)}
+    .wm .view{display:flex;flex-direction:column;flex:1;min-height:0}
+    .wm .msg{margin:0;padding:24px 16px;font-size:14px;color:var(--mute)}
+    .wm .main{display:flex;flex:1;min-height:0}
+    .wm .stage{position:relative;flex:1;min-width:0;background:var(--primary-tint)}
+    .wm svg{display:block;width:100%;height:100%;cursor:grab;touch-action:none}
     .wm svg.drag{cursor:grabbing}
-    .wm .rest{fill:var(--land);stroke:#fff;stroke-width:.6}
-    .wm .c{fill:var(--land);stroke:#fff;stroke-width:.6}
-    .wm a:hover .c,.wm a:focus .c{stroke:var(--ink);stroke-width:1.5}
+    .wm path,.wm circle{vector-effect:non-scaling-stroke}
+    .wm .rest,.wm .c{fill:var(--land);stroke:#fff;stroke-width:.6}
+    .wm a:hover .c,.wm a:focus .c,.wm .c.hl{stroke:var(--ink);stroke-width:1.8}
     .wm .t1{fill:color-mix(in srgb,var(--primary) 50%,#fff)}
     .wm .t2{fill:color-mix(in srgb,var(--primary) 63%,#fff)}
     .wm .t3{fill:color-mix(in srgb,var(--primary) 76%,#fff)}
@@ -2042,8 +2053,11 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     .wm .t5{fill:color-mix(in srgb,var(--primary-h) 80%,#000)}
     .wm .dot{stroke:var(--ink);stroke-width:1}
     .wm .dot.t0{fill:var(--land)}
-    .wm .none{fill:none;stroke:var(--line2);stroke-width:1}
-    .wm .legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:12px;color:var(--mute)}
+    .wm .tools{position:absolute;top:12px;right:12px;display:flex;flex-direction:column;gap:4px}
+    .wm .tools button{min-width:var(--h-sm);height:var(--h-sm);padding:0 8px;border:1px solid var(--line2);border-radius:var(--r);background:#fff;color:var(--ink);font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+    .wm .tools button:hover{background:var(--primary-tint);border-color:var(--primary-soft)}
+    .wm .tools .zl{font-size:11px;color:var(--mute);text-align:center;background:rgba(255,255,255,.85)}
+    .wm .legend{position:absolute;left:12px;bottom:12px;max-width:calc(100% - 24px);display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;padding:6px 10px;border:1px solid var(--line2);background:rgba(255,255,255,.92);font-size:12px;color:var(--mute)}
     .wm .legend span{display:inline-flex;align-items:center;gap:6px}
     .wm .legend i{display:inline-block;width:16px;height:12px;border:1px solid var(--line2)}
     .wm .legend .t1{background:color-mix(in srgb,var(--primary) 50%,#fff)}
@@ -2052,13 +2066,60 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     .wm .legend .t4{background:color-mix(in srgb,var(--primary) 88%,#000)}
     .wm .legend .t5{background:color-mix(in srgb,var(--primary-h) 80%,#000)}
     .wm .legend .t0{background:var(--land)}
-    .wm .extra{font-size:13px}
-    .wm table{width:100%;border-collapse:collapse;font-size:13px}
-    .wm td,.wm th{padding:5px 8px;border-bottom:1px solid var(--line);text-align:left}
-    .wm th{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
-    .wm td.n{text-align:right;font-variant-numeric:tabular-nums}
+    .wm .tip{position:absolute;right:12px;bottom:12px;padding:2px 6px;font-size:11px;color:var(--mute);background:rgba(255,255,255,.85)}
+    .wm .side{display:flex;flex-direction:column;flex:none;width:320px;min-height:0;border-left:1px solid var(--line);background:#fff}
+    .wm .sum{padding:14px 16px;border-bottom:1px solid var(--line)}
+    .wm .sum b{display:block;font-size:18px;color:var(--primary-h)}
+    .wm .sum span{font-size:12px;color:var(--mute)}
+    .wm .rows{flex:1;min-height:0;margin:0;padding:0;list-style:none;overflow:auto}
+    .wm .row{position:relative;display:flex;align-items:center;gap:8px;min-height:36px;padding:0 16px;border-bottom:1px solid var(--line);font-size:13px}
+    .wm .row .share{position:absolute;left:0;top:0;bottom:0;background:var(--primary-tint)}
+    .wm .row.on{outline:1px solid var(--primary-soft);outline-offset:-1px}
+    .wm .row a.lnk,.wm .row .n,.wm .row .go{position:relative}
+    .wm .row a.lnk{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--primary-h);font-weight:600}
+    .wm .row .n{font-variant-numeric:tabular-nums;font-weight:600}
+    .wm .row .go{height:24px;padding:0 8px;border:1px solid var(--line2);border-radius:var(--r);background:#fff;color:var(--ink);font:inherit;font-size:12px;cursor:pointer}
+    .wm .row .go:hover{background:var(--primary-tint);border-color:var(--primary-soft)}
+    .wm .foot{max-height:34%;overflow:auto;padding:10px 16px;border-top:1px solid var(--line);font-size:12px;color:var(--mute)}
+    .wm .foot p{margin:0 0 6px}
     .wm a.lnk{color:var(--primary-h);font-weight:600}
+    @media (max-width:760px){
+      .wm .main{flex-direction:column}
+      .wm .stage{flex:none;height:46%;min-height:230px}
+      .wm .side{flex:1;width:auto;border-left:0;border-top:1px solid var(--line)}
+      .wm .bar input{flex:1 1 140px}
+      .wm .tip{display:none}
+      .wm .tools{flex-direction:row;top:8px;right:8px}
+      .wm .tools .zl{display:none}
+      .wm .legend span:nth-child(2){display:none}
+      .wm .legend{left:8px;bottom:8px;gap:2px 8px;padding:4px 8px;font-size:11px}
+    }
   `;
+  /* =====================================================================
+   *  MAP LAYOUT  (the pieces the world map and the maps of regions share: the frame and the ranked list)
+   *      mapLayout({ svg, tools, legend, tip, side })   the map with its tools, legend and tip laid over it, and the column on its right
+   *      mapRow({ key, label, href, n, max, go })       a line of the ranked list: a bar for its share, the name (a link), the figure,
+   *                                                     and a "Regions" button when go is given
+   *    Pointing at a line lights its shape on the map (the shapes carry the same data-key).
+   * ===================================================================== */
+  function mapLayout({ svg, tools, legend, tip, side }) {
+    const light = (key, on) => {
+      const shape = key && svg.querySelector(`[data-key="${CSS.escape(key)}"]`);
+      if (shape) shape.classList.toggle('hl', on);
+    };
+    const column = h('aside', { class: 'side' }, side);
+    column.addEventListener('mouseover', e => { const row = e.target.closest('[data-key]'); if (row) light(row.dataset.key, true); });
+    column.addEventListener('mouseout', e => { const row = e.target.closest('[data-key]'); if (row) light(row.dataset.key, false); });
+    return h('div', { class: 'main' }, h('div', { class: 'stage' }, svg, tools, legend, tip ? h('div', { class: 'tip', text: tip }) : null), column);
+  }
+
+  function mapRow({ key, label, href, n, max, go }) {
+    return h('li', { class: 'row', 'data-key': key },
+      h('span', { class: 'share', style: `width:${Math.max(2, Math.round(100 * n / Math.max(1, max)))}%` }),
+      h('a', { class: 'lnk', href, target: '_blank', rel: 'noopener noreferrer', text: label }),
+      h('span', { class: 'n', text: String(n) }),
+      go ? h('button', { type: 'button', class: 'go', text: 'Regions', title: 'The regions of this country on a map', onclick: go }) : null);
+  }
   /* =====================================================================
    *  PAIR  (choose the front and rear photos of a car by clicking them on the site)
    * ===================================================================== */
@@ -4370,40 +4431,53 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
   function worldMapOpen(id) {
     const me = membersMe();
     const start = id || (here.profile && (location.pathname.match(/\/user(\d+)/) || [])[1]) || (me && me.id) || '';
-    const view = h('div', { class: 'wmview' });
-    const input = h('input', { type: 'text', placeholder: 'Member number or the link of a profile', 'aria-label': 'Member', autocomplete: 'off' });
-    const chips = h('div', { class: 'who' });
-    const body = h('div', { class: 'wm' }, h('style', { text: MAP_CSS }),
-      h('div', { class: 'who' }, input, h('button', { type: 'button', class: 'btn', text: 'Show', onclick: () => go(input.value) })), chips, view);
-    const modal = modalOpen({ id: 'pmg-worldmap', title: 'World map', body, actions: [{ label: 'Close', kind: 'ghost', run: () => modal.close() }] });
-    const who = [...(me ? [{ id: me.id, name: 'Me (' + me.name + ')' }] : []), ...membersGet().filter(m => !me || m.id !== me.id).slice(0, 8)];
+    if (typeof closeDrawer === 'function') closeDrawer();                       // the panel must not lie over the map
+    const view = h('div', { class: 'view' });
+    const input = h('input', { type: 'text', placeholder: 'Member number or profile link', 'aria-label': 'Member', autocomplete: 'off' });
+    const chips = h('span', { class: 'who' });
+    const menu = h('select', { 'aria-label': 'Map to show', hidden: true });
+    const bar = h('div', { class: 'bar' }, input, h('button', { type: 'button', class: 'btn', text: 'Show', onclick: () => go(input.value) }), chips,
+      h('span', { class: 'gap' }), h('span', { class: 'lbl', text: 'Map' }), menu);
+    const body = h('div', { class: 'wm' }, h('style', { text: MAP_CSS }), bar, view);
+    const modal = modalOpen({ id: 'pmg-worldmap', title: 'World map', body, fill: true });
+    const who = [...(me ? [{ id: me.id, name: 'Me (' + me.name + ')' }] : []), ...membersGet().filter(m => !me || m.id !== me.id).slice(0, 6)];
     who.forEach(m => chips.append(h('button', { type: 'button', class: 'pill', text: m.name, onclick: () => go(m.id) })));
     input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); go(input.value); } });
+    const say = text => view.replaceChildren(h('p', { class: 'msg', text }));
     let run = 0, current = null;
-    // a country chosen under the map: its regions (83-regionmap.js), with a way back to the world
-    view.addEventListener('pmg-regions', async e => {
-      const mine = ++run, cc = e.detail;
-      const back = h('button', { type: 'button', class: 'btn ghost sm', text: '← World map', onclick: () => view.replaceChildren(worldView(current)) });
-      view.replaceChildren(back, h('p', { class: 'hint', text: `Reading the regions of ${cName(cc)}… (the site’s lists, then the shapes)` }));
-      try { const v = await regionMapView(cc, current); if (mine === run) view.replaceChildren(back, v); }
-      catch (err) { if (mine === run) view.replaceChildren(back, h('p', { class: 'hint', text: 'Not drawn: ' + err.message + '.' })); }
-    });
+    // the choice of map: the world, or a country that has a map of its regions (83-regionmap.js)
+    async function showMap(cc) {
+      const mine = ++run;
+      menu.value = cc;
+      if (!cc) { view.replaceChildren(worldView(current, showMap)); return; }
+      say(`Reading the regions of ${cName(cc)}… (the site’s lists, then the shapes)`);
+      try { const v = await regionMapView(cc, current); if (mine === run) view.replaceChildren(v); }
+      catch (err) { if (mine === run) say('Not drawn: ' + err.message + '.'); }
+    }
+    menu.onchange = () => showMap(menu.value);
+    function fillMenu(data) {
+      const options = Object.keys(REGION_MAPS).filter(cc => (data.countries[cc] || {}).photos > 0).sort((a, b) => data.countries[b].photos - data.countries[a].photos);
+      menu.replaceChildren(h('option', { value: '', text: 'World' }), ...options.map(cc => h('option', { value: cc, text: `${cName(cc)} (regions)` })));
+      menu.hidden = !options.length;
+      bar.querySelector('.lbl').hidden = !options.length;
+    }
     async function go(text) {
       const member = memberIdOf(text);
-      if (!member) { view.replaceChildren(h('p', { class: 'hint', text: 'Type a member number (121559) or paste the link of a profile.' })); return; }
+      if (!member) { say('Type a member number (121559) or paste the link of a profile.'); return; }
       const mine = ++run;
       input.value = member;
       modal.message(`member ${member}`);
-      view.replaceChildren(h('p', { class: 'hint', text: 'Reading the profile…' }));
+      say('Reading the profile…');
       try {
         const data = await worldData(member);
         if (mine !== run) return;
         modal.message(`${data.name} · ID ${data.id}`);
         current = data;
-        view.replaceChildren(worldView(data));
-      } catch (e) { if (mine === run) view.replaceChildren(h('p', { class: 'hint', text: 'Not read: ' + e.message + '.' })); }
+        fillMenu(data);
+        showMap('');
+      } catch (e) { if (mine === run) say('Not read: ' + e.message + '.'); }
     }
-    if (start) go(start); else view.replaceChildren(h('p', { class: 'hint', text: 'Type a member number or paste the link of a profile.' }));
+    if (start) go(start); else say('Type a member number or paste the link of a profile.');
     return modal;
   }
 
@@ -4424,13 +4498,16 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     }
   });
   /* =====================================================================
-   *  WORLD MAP, THE VIEW  (the countries of one member's data on the map of the world: shades, links, list)
-   *    The data and the window are in 81-worldmap.js; the shapes in src/lib/worldmap.js; pan and zoom in src/lib/panzoom.js.
+   *  WORLD MAP, THE VIEW  (the countries of one member's data on the map of the world: shades, links, ranked list)
+   *    The data and the window are in 81-worldmap.js; the frame and the list lines in src/ui/09-map-layout.js; the shapes in
+   *    src/lib/worldmap.js; pan and zoom in src/lib/panzoom.js.
    * ===================================================================== */
   // 1 photo, 2-9, 10-49, 50-199, 200 and more -> 1..5; none -> 0
   const worldTier = n => (n >= 200 ? 5 : n >= 50 ? 4 : n >= 10 ? 3 : n >= 2 ? 2 : n >= 1 ? 1 : 0);
-  // The map and everything under it, for one member's data
-  function worldView(data) {
+  const mapLegend = () => h('div', { class: 'legend' }, h('span', null, 'Photos'), [['t0', 'no photo'], ['t1', '1'], ['t2', '2–9'], ['t3', '10–49'], ['t4', '50–199'], ['t5', '200 +']].map(([c, t]) => h('span', null, h('i', { class: c }), t)));
+
+  // The map, with its column, for one member's data. openRegions(cc): what the "Regions" button of a country does.
+  function worldView(data, openRegions) {
     const gallery = cc => `/${cc}/gallery.php?usr=${data.id}`;
     const stats = cc => data.countries[cc] || { photos: 0, likes: 0, comments: 0 };
     const text = cc => `${cName(cc)}: ${stats(cc).photos ? `${stats(cc).photos} photo${stats(cc).photos > 1 ? 's' : ''}, ${stats(cc).likes} like${stats(cc).likes === 1 ? '' : 's'}` : 'no photo yet'}`;
@@ -4442,24 +4519,23 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
       a.append(shape);
       return a;
     };
-    for (const [cc, d] of Object.entries(WORLD_MAP.shapes)) svg.append(link(cc, svgEl('path', { d, class: 'c t' + worldTier(stats(cc).photos), 'data-cc': cc })));
-    for (const [cc, [x, y]] of Object.entries(WORLD_MAP.dots)) svg.append(link(cc, svgEl('circle', { cx: x, cy: y, r: 5, class: 'c dot t' + worldTier(stats(cc).photos), 'data-cc': cc })));
+    for (const [cc, d] of Object.entries(WORLD_MAP.shapes)) svg.append(link(cc, svgEl('path', { d, class: 'c t' + worldTier(stats(cc).photos), 'data-cc': cc, 'data-key': cc })));
+    for (const [cc, [x, y]] of Object.entries(WORLD_MAP.dots)) svg.append(link(cc, svgEl('circle', { cx: x, cy: y, r: 5, class: 'c dot t' + worldTier(stats(cc).photos), 'data-cc': cc, 'data-key': cc })));
 
     const have = Object.keys(data.countries).filter(cc => data.countries[cc].photos > 0).sort((a, b) => data.countries[b].photos - data.countries[a].photos || cName(a).localeCompare(cName(b)));
     const total = have.reduce((n, cc) => n + data.countries[cc].photos, 0);
     const unmapped = have.filter(cc => !WORLD_MAP.shapes[cc] && !WORLD_MAP.dots[cc]);
-    const legend = h('div', { class: 'legend' }, [['t0', 'none'], ['t1', '1'], ['t2', '2–9'], ['t3', '10–49'], ['t4', '50–199'], ['t5', '200 +']].map(([c, t]) => h('span', null, h('i', { class: c }), t === 'none' ? 'no photo' : t + (t === '1' ? ' photo' : ' photos'))));
+    const max = have.length ? data.countries[have[0]].photos : 1;
     // Zoom and move (src/lib/panzoom.js); the dots keep the same size on screen
     const pz = panZoom(svg, { w: WORLD_MAP.w, h: WORLD_MAP.h, onChange: zoom => svg.querySelectorAll('circle').forEach(c => c.setAttribute('r', String(5 / zoom))) });
-    const views = pz.toolbar([{ label: 'Europe', title: 'Europe close up', view: WORLD_MAP.views.europe }]);
-    return h('div', null,
-      h('div', { class: 'sum' }, h('b', { text: `${have.length} countr${have.length === 1 ? 'y' : 'ies'}` }), ` of ${Object.keys(data.countries).length}, ${total} photo${total === 1 ? '' : 's'}`),
-      views, svg, legend, regionPicker(data),
-      unmapped.length ? h('p', { class: 'extra' }, 'Not on the map: ', unmapped.flatMap((cc, i) => [i ? ', ' : null, h('a', { class: 'lnk', href: gallery(cc), target: '_blank', rel: 'noopener noreferrer', text: `${cName(cc)} (${data.countries[cc].photos})` })])) : null,
-      have.length ? h('details', { class: 'fold' }, h('summary', { text: `All the countries (${have.length})` }),
-        h('table', null, h('tr', null, h('th', { text: 'Country' }), h('th', { text: 'Photos' }), h('th', { text: 'Likes' })),
-          have.map(cc => h('tr', null, h('td', null, h('a', { class: 'lnk', href: gallery(cc), target: '_blank', rel: 'noopener noreferrer', text: cName(cc) })),
-            h('td', { class: 'n', text: String(data.countries[cc].photos) }), h('td', { class: 'n', text: String(data.countries[cc].likes) }))))) : h('p', { class: 'hint', text: 'No photo yet.' }));
+    const side = [
+      h('div', { class: 'sum' }, h('b', { text: `${have.length} countr${have.length === 1 ? 'y' : 'ies'}` }), h('span', { text: `of ${Object.keys(data.countries).length} · ${total} photo${total === 1 ? '' : 's'}` })),
+      have.length
+        ? h('ul', { class: 'rows' }, have.map(cc => mapRow({ key: cc, label: cName(cc), href: gallery(cc), n: data.countries[cc].photos, max, go: REGION_MAPS[cc] ? () => openRegions(cc) : null })))
+        : h('p', { class: 'msg', text: 'No photo yet.' }),
+      unmapped.length ? h('div', { class: 'foot' }, h('p', null, 'Not on the map: ', unmapped.flatMap((cc, i) => [i ? ', ' : null, h('a', { class: 'lnk', href: gallery(cc), target: '_blank', rel: 'noopener noreferrer', text: `${cName(cc)} (${data.countries[cc].photos})` })]))) : null
+    ];
+    return mapLayout({ svg, tools: pz.toolbar([{ label: 'Europe', title: 'Europe close up', view: WORLD_MAP.views.europe }]), legend: mapLegend(), tip: 'Scroll to zoom · drag to move', side });
   }
   /* =====================================================================
    *  REGION MAP  (the regions of one country, in the window of the world map: departments, districts, states...)
@@ -4490,7 +4566,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     regions.forEach(r => (placed.get(r.id) || []).forEach(i => { if (!tierOf[i] || count(r) > count(tierOf[i])) tierOf[i] = r; }));
     geo.shapes.forEach((s, i) => {
       const r = tierOf[i], n = r ? count(r) : 0;
-      const shape = svgEl('path', { d: s.d, class: 'c t' + worldTier(n) });
+      const shape = svgEl('path', { d: s.d, class: 'c t' + worldTier(n), 'data-key': r ? r.id : '' });
       const title = svgEl('title', null);
       title.textContent = r ? `${r.code ? r.code + ' ' : ''}${r.name}: ${n ? n + ' photo' + (n > 1 ? 's' : '') : 'no photo yet'}` : s.name;
       svg.append(r && n ? svgEl('a', { href: link(r), target: '_blank', rel: 'noopener noreferrer' }, title, shape) : svgEl('g', null, title, shape));
@@ -4499,23 +4575,14 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     const seen = regions.filter(r => count(r) > 0).sort((a, b) => count(b) - count(a));
     const lost = missing.filter(r => count(r) > 0);
     const total = seen.reduce((n, r) => n + count(r), 0);
-    return h('div', null,
-      h('div', { class: 'sum' }, h('b', { text: `${cName(cc)}: ${seen.length} of ${regions.length} regions` }), `, ${total} photo${total === 1 ? '' : 's'}`),
-      pz.toolbar(), svg,
-      h('p', { class: 'hint', text: `${placed.size} of ${regions.length} regions are on the map. Shapes: geoBoundaries (${geo.license}, ${geo.year}).` }),
-      lost.length ? h('p', { class: 'extra' }, 'Not on the map: ', lost.flatMap((r, i) => [i ? ', ' : null, h('a', { class: 'lnk', href: link(r), target: '_blank', rel: 'noopener noreferrer', text: `${r.name} (${count(r)})` })])) : null,
-      seen.length ? h('details', { class: 'fold' }, h('summary', { text: `All the regions with photos (${seen.length})` }),
-        h('table', null, h('tr', null, h('th', { text: 'Region' }), h('th', { text: 'Photos' })),
-          seen.map(r => h('tr', null, h('td', null, h('a', { class: 'lnk', href: link(r), target: '_blank', rel: 'noopener noreferrer', text: `${r.code ? r.code + ' ' : ''}${r.name}` })), h('td', { class: 'n', text: String(count(r)) }))))) : h('p', { class: 'hint', text: 'No photo in a region of this country yet.' }));
-  }
-
-  // The row under the map of the world: the countries that have a map of their regions. The choice goes up as an event, to the window.
-  function regionPicker(data) {
-    const options = Object.keys(REGION_MAPS).filter(cc => (data.countries[cc] || {}).photos > 0).sort((a, b) => data.countries[b].photos - data.countries[a].photos);
-    if (!options.length) return null;
-    const menu = h('select', { 'aria-label': 'Regions of a country' }, h('option', { value: '', text: 'Choose a country…' }), options.map(cc => h('option', { value: cc, text: cName(cc) })));
-    menu.onchange = () => { if (menu.value) menu.dispatchEvent(new CustomEvent('pmg-regions', { bubbles: true, detail: menu.value })); };
-    return h('div', { class: 'who' }, h('span', { class: 'mute', text: 'Regions of:' }), menu);
+    const side = [
+      h('div', { class: 'sum' }, h('b', { text: `${seen.length} of ${regions.length} regions` }), h('span', { text: `${cName(cc)} · ${total} photo${total === 1 ? '' : 's'}` })),
+      seen.length ? h('ul', { class: 'rows' }, seen.map(r => mapRow({ key: r.id, label: `${r.code ? r.code + ' ' : ''}${r.name}`, href: link(r), n: count(r), max: count(seen[0]) }))) : h('p', { class: 'msg', text: 'No photo in a region yet.' }),
+      h('div', { class: 'foot' },
+        lost.length ? h('p', null, 'Not on the map: ', lost.flatMap((r, i) => [i ? ', ' : null, h('a', { class: 'lnk', href: link(r), target: '_blank', rel: 'noopener noreferrer', text: `${r.name} (${count(r)})` })])) : null,
+        h('p', { text: `${placed.size} of ${regions.length} regions are on the map. Shapes: geoBoundaries (${geo.license}, ${geo.year}).` }))
+    ];
+    return mapLayout({ svg, tools: pz.toolbar(), legend: mapLegend(), tip: 'Scroll to zoom · drag to move', side });
   }
   /* =====================================================================
    *  ABOUT  (Settings drawer: who made it, which version, what is new)

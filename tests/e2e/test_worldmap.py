@@ -47,7 +47,7 @@ def test_the_browse_drawer_opens_my_map(ctx):
     open_map(page)
     assert page.evaluate(f"() => {MODAL}.querySelector('h2').textContent") == "World map"
     assert page.evaluate(f"() => {MODAL}.querySelector('.sub').textContent") == "member121559 · ID 121559"              # you: the member of the top bar
-    assert page.evaluate(f"() => {MODAL}.querySelector('.sum').textContent") == "5 countries of 6, 495 photos"
+    assert page.evaluate(f"() => [...{MODAL}.querySelector('.sum').children].map(c => c.textContent).join(' ')") == "5 countries of 6 · 495 photos"
 
 
 def test_countries_are_shaded_by_how_many_photos(ctx):
@@ -66,15 +66,15 @@ def test_a_country_is_a_link_to_the_members_photos_with_its_figures_as_hover_tex
 def test_a_country_without_a_shape_or_a_dot_is_listed_under_the_map(ctx):
     page = open_page(ctx)
     open_map(page)
-    assert page.evaluate(f"() => {MODAL}.querySelector('.extra').textContent") == "Not on the map: USSR (12)"
+    assert page.evaluate(f"() => {MODAL}.querySelector('.foot p').textContent") == "Not on the map: USSR (12)"
     assert page.evaluate(f"() => !!{MODAL}.querySelector('circle[data-cc=\"mc\"]')")                                            # a small country is a dot
 
 
-def test_the_list_of_all_the_countries_is_there_for_the_keyboard(ctx):
+def test_the_ranked_list_of_the_countries_is_beside_the_map(ctx):
     page = open_page(ctx)
     open_map(page)
-    rows = page.evaluate(f"() => [...{MODAL}.querySelectorAll('details.fold tr')].slice(1).map(r => [...r.querySelectorAll('td')].map(t => t.textContent))")
-    assert rows[0] == ["Luxembourg", "233", "699"] and len(rows) == 5
+    rows = page.evaluate(f"() => [...{MODAL}.querySelectorAll('.rows .row')].map(r => [r.querySelector('a').textContent, r.querySelector('.n').textContent])")
+    assert rows[0] == ["Luxembourg", "233"] and len(rows) == 5
 
 
 def test_another_member_is_a_number_or_the_link_of_a_profile(ctx):
@@ -100,7 +100,7 @@ def test_a_page_that_is_not_a_profile_says_so_and_a_wrong_input_too(ctx):
     show(page, "99999999")
     page.wait_for_function(f"() => {MODAL}.textContent.includes('Not read')", timeout=20000)
     show(page, "hello")
-    assert "member number" in page.evaluate(f"() => {MODAL}.querySelector('.wmview').textContent")
+    assert "member number" in page.evaluate(f"() => {MODAL}.querySelector('.view').textContent")
 
 
 def test_the_key_g_opens_it_but_not_while_typing(ctx):
@@ -153,7 +153,7 @@ def view(page):
 
 
 def button(page, text):
-    return f"() => [...{MODAL}.querySelectorAll('.views button')].find(b => b.textContent === {json.dumps(text)}).click()"
+    return f"() => [...{MODAL}.querySelectorAll('.tools button')].find(b => b.textContent === {json.dumps(text)}).click()"
 
 
 def test_the_buttons_zoom_and_go_to_europe_or_back_to_the_world(ctx):
@@ -168,7 +168,7 @@ def test_the_buttons_zoom_and_go_to_europe_or_back_to_the_world(ctx):
     assert abs(view(page)[2] - 1000) < 1
     page.evaluate(button(page, "Europe"))
     assert view(page)[2] < 300
-    page.evaluate(button(page, "World"))
+    page.evaluate(button(page, "Fit"))
     assert view(page) == full
 
 
@@ -218,7 +218,7 @@ def test_the_dots_keep_their_size_on_screen_when_zooming(ctx):
 def test_the_map_has_a_legend_with_no_photo_and_the_five_shades(ctx):
     page = open_page(ctx)
     open_map(page)
-    assert page.evaluate(f"() => [...{MODAL}.querySelectorAll('.legend span')].map(s => s.textContent)") == ["no photo", "1 photo", "2–9 photos", "10–49 photos", "50–199 photos", "200 + photos"]
+    assert page.evaluate(f"() => [...{MODAL}.querySelectorAll('.legend span')].map(s => s.textContent)") == ["Photos", "no photo", "1", "2–9", "10–49", "50–199", "200 +"]
 
 
 def test_the_map_has_a_shape_for_most_countries_and_a_dot_for_the_small_ones(ctx):

@@ -27,7 +27,7 @@
     regions.forEach(r => (placed.get(r.id) || []).forEach(i => { if (!tierOf[i] || count(r) > count(tierOf[i])) tierOf[i] = r; }));
     geo.shapes.forEach((s, i) => {
       const r = tierOf[i], n = r ? count(r) : 0;
-      const shape = svgEl('path', { d: s.d, class: 'c t' + worldTier(n) });
+      const shape = svgEl('path', { d: s.d, class: 'c t' + worldTier(n), 'data-key': r ? r.id : '' });
       const title = svgEl('title', null);
       title.textContent = r ? `${r.code ? r.code + ' ' : ''}${r.name}: ${n ? n + ' photo' + (n > 1 ? 's' : '') : 'no photo yet'}` : s.name;
       svg.append(r && n ? svgEl('a', { href: link(r), target: '_blank', rel: 'noopener noreferrer' }, title, shape) : svgEl('g', null, title, shape));
@@ -36,21 +36,12 @@
     const seen = regions.filter(r => count(r) > 0).sort((a, b) => count(b) - count(a));
     const lost = missing.filter(r => count(r) > 0);
     const total = seen.reduce((n, r) => n + count(r), 0);
-    return h('div', null,
-      h('div', { class: 'sum' }, h('b', { text: `${cName(cc)}: ${seen.length} of ${regions.length} regions` }), `, ${total} photo${total === 1 ? '' : 's'}`),
-      pz.toolbar(), svg,
-      h('p', { class: 'hint', text: `${placed.size} of ${regions.length} regions are on the map. Shapes: geoBoundaries (${geo.license}, ${geo.year}).` }),
-      lost.length ? h('p', { class: 'extra' }, 'Not on the map: ', lost.flatMap((r, i) => [i ? ', ' : null, h('a', { class: 'lnk', href: link(r), target: '_blank', rel: 'noopener noreferrer', text: `${r.name} (${count(r)})` })])) : null,
-      seen.length ? h('details', { class: 'fold' }, h('summary', { text: `All the regions with photos (${seen.length})` }),
-        h('table', null, h('tr', null, h('th', { text: 'Region' }), h('th', { text: 'Photos' })),
-          seen.map(r => h('tr', null, h('td', null, h('a', { class: 'lnk', href: link(r), target: '_blank', rel: 'noopener noreferrer', text: `${r.code ? r.code + ' ' : ''}${r.name}` })), h('td', { class: 'n', text: String(count(r)) }))))) : h('p', { class: 'hint', text: 'No photo in a region of this country yet.' }));
-  }
-
-  // The row under the map of the world: the countries that have a map of their regions. The choice goes up as an event, to the window.
-  function regionPicker(data) {
-    const options = Object.keys(REGION_MAPS).filter(cc => (data.countries[cc] || {}).photos > 0).sort((a, b) => data.countries[b].photos - data.countries[a].photos);
-    if (!options.length) return null;
-    const menu = h('select', { 'aria-label': 'Regions of a country' }, h('option', { value: '', text: 'Choose a country…' }), options.map(cc => h('option', { value: cc, text: cName(cc) })));
-    menu.onchange = () => { if (menu.value) menu.dispatchEvent(new CustomEvent('pmg-regions', { bubbles: true, detail: menu.value })); };
-    return h('div', { class: 'who' }, h('span', { class: 'mute', text: 'Regions of:' }), menu);
+    const side = [
+      h('div', { class: 'sum' }, h('b', { text: `${seen.length} of ${regions.length} regions` }), h('span', { text: `${cName(cc)} · ${total} photo${total === 1 ? '' : 's'}` })),
+      seen.length ? h('ul', { class: 'rows' }, seen.map(r => mapRow({ key: r.id, label: `${r.code ? r.code + ' ' : ''}${r.name}`, href: link(r), n: count(r), max: count(seen[0]) }))) : h('p', { class: 'msg', text: 'No photo in a region yet.' }),
+      h('div', { class: 'foot' },
+        lost.length ? h('p', null, 'Not on the map: ', lost.flatMap((r, i) => [i ? ', ' : null, h('a', { class: 'lnk', href: link(r), target: '_blank', rel: 'noopener noreferrer', text: `${r.name} (${count(r)})` })])) : null,
+        h('p', { text: `${placed.size} of ${regions.length} regions are on the map. Shapes: geoBoundaries (${geo.license}, ${geo.year}).` }))
+    ];
+    return mapLayout({ svg, tools: pz.toolbar(), legend: mapLegend(), tip: 'Scroll to zoom · drag to move', side });
   }

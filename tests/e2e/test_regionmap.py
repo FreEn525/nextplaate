@@ -54,14 +54,14 @@ def open_map(ctx):
 
 
 def choose(page, cc="fr"):
-    page.evaluate(f"() => {{ const s = {MODAL}.querySelector('select[aria-label=\"Regions of a country\"]'); s.value = '{cc}'; s.dispatchEvent(new Event('change')); }}")
+    page.evaluate(f"() => {{ const s = {MODAL}.querySelector('select[aria-label=\"Map to show\"]'); s.value = '{cc}'; s.dispatchEvent(new Event('change')); }}")
     page.wait_for_function(f"() => {MODAL}.querySelectorAll('svg path.c').length === 4 || {MODAL}.textContent.includes('Not drawn')", timeout=40000)
 
 
 def test_the_picker_offers_the_countries_that_have_a_map_and_that_the_member_has_photos_in(ctx):
     page = open_map(ctx)
-    options = page.evaluate(f"() => [...{MODAL}.querySelectorAll('select[aria-label=\"Regions of a country\"] option')].map(o => o.textContent)")
-    assert options == ["Choose a country…", "Germany", "France"]                  # by photos; Luxembourg has photos but no regions to map
+    options = page.evaluate(f"() => [...{MODAL}.querySelectorAll('select[aria-label=\"Map to show\"] option')].map(o => o.textContent)")
+    assert options == ["World", "Germany (regions)", "France (regions)"]                  # by photos; Luxembourg has photos but no regions to map
 
 
 def test_nothing_is_downloaded_until_a_country_is_chosen(ctx):
@@ -75,7 +75,7 @@ def test_a_country_shows_its_regions_shaded_by_the_photos(ctx):
     choose(page)
     tiers = page.evaluate(f"() => [...{MODAL}.querySelectorAll('svg path.c')].map(p => [...p.classList].find(c => /^t[0-9]$/.test(c)))")
     assert tiers == ["t0", "t2", "t0", "t0"]                                                    # Aisne 4 photos: the 2-9 shade; the others none
-    assert "France: 2 of 4 regions, 6 photos" == page.evaluate(f"() => {MODAL}.querySelector('.sum').textContent")
+    assert "2 of 4 regions France · 6 photos" == page.evaluate(f"() => [...{MODAL}.querySelector('.sum').children].map(c => c.textContent).join(' ')")
 
 
 def test_a_region_is_a_link_to_the_members_photos_of_it(ctx):
@@ -88,8 +88,8 @@ def test_a_region_is_a_link_to_the_members_photos_of_it(ctx):
 def test_the_regions_without_a_shape_are_listed_with_their_photos(ctx):
     page = open_map(ctx)
     choose(page)
-    assert page.evaluate(f"() => {MODAL}.querySelector('.extra').textContent") == "Not on the map: Alpes (2)"
-    assert "3 of 4 regions are on the map" in page.evaluate(f"() => {MODAL}.querySelector('.hint:not(.wmview .hint:first-child)') && [...{MODAL}.querySelectorAll('.hint')].map(h => h.textContent).join('|')")
+    assert page.evaluate(f"() => {MODAL}.querySelector('.foot p').textContent") == "Not on the map: Alpes (2)"
+    assert "3 of 4 regions are on the map" in page.evaluate(f"() => {MODAL}.querySelector('.foot').textContent")
 
 
 def test_the_licence_of_the_shapes_is_shown(ctx):
@@ -101,7 +101,7 @@ def test_the_licence_of_the_shapes_is_shown(ctx):
 def test_the_way_back_returns_to_the_map_of_the_world(ctx):
     page = open_map(ctx)
     choose(page)
-    page.evaluate(f"() => [...{MODAL}.querySelectorAll('button')].find(b => b.textContent.includes('World map')).click()")
+    page.evaluate(f"() => {{ const s = {MODAL}.querySelector('select[aria-label=\"Map to show\"]'); s.value = ''; s.dispatchEvent(new Event('change')); }}")
     page.wait_for_function(f"() => {MODAL}.querySelector('svg [data-cc=\"lu\"]')", timeout=10000)
 
 
@@ -109,7 +109,7 @@ def test_the_region_map_zooms_like_the_world(ctx):
     page = open_map(ctx)
     choose(page)
     before = page.evaluate(f"() => {MODAL}.querySelector('svg').getAttribute('viewBox')")
-    page.evaluate(f"() => [...{MODAL}.querySelectorAll('.views button')].find(b => b.textContent === '+').click()")
+    page.evaluate(f"() => [...{MODAL}.querySelectorAll('.tools button')].find(b => b.textContent === '+').click()")
     assert page.evaluate(f"() => {MODAL}.querySelector('svg').getAttribute('viewBox')") != before
 
 

@@ -40,40 +40,53 @@
   function worldMapOpen(id) {
     const me = membersMe();
     const start = id || (here.profile && (location.pathname.match(/\/user(\d+)/) || [])[1]) || (me && me.id) || '';
-    const view = h('div', { class: 'wmview' });
-    const input = h('input', { type: 'text', placeholder: 'Member number or the link of a profile', 'aria-label': 'Member', autocomplete: 'off' });
-    const chips = h('div', { class: 'who' });
-    const body = h('div', { class: 'wm' }, h('style', { text: MAP_CSS }),
-      h('div', { class: 'who' }, input, h('button', { type: 'button', class: 'btn', text: 'Show', onclick: () => go(input.value) })), chips, view);
-    const modal = modalOpen({ id: 'pmg-worldmap', title: 'World map', body, actions: [{ label: 'Close', kind: 'ghost', run: () => modal.close() }] });
-    const who = [...(me ? [{ id: me.id, name: 'Me (' + me.name + ')' }] : []), ...membersGet().filter(m => !me || m.id !== me.id).slice(0, 8)];
+    if (typeof closeDrawer === 'function') closeDrawer();                       // the panel must not lie over the map
+    const view = h('div', { class: 'view' });
+    const input = h('input', { type: 'text', placeholder: 'Member number or profile link', 'aria-label': 'Member', autocomplete: 'off' });
+    const chips = h('span', { class: 'who' });
+    const menu = h('select', { 'aria-label': 'Map to show', hidden: true });
+    const bar = h('div', { class: 'bar' }, input, h('button', { type: 'button', class: 'btn', text: 'Show', onclick: () => go(input.value) }), chips,
+      h('span', { class: 'gap' }), h('span', { class: 'lbl', text: 'Map' }), menu);
+    const body = h('div', { class: 'wm' }, h('style', { text: MAP_CSS }), bar, view);
+    const modal = modalOpen({ id: 'pmg-worldmap', title: 'World map', body, fill: true });
+    const who = [...(me ? [{ id: me.id, name: 'Me (' + me.name + ')' }] : []), ...membersGet().filter(m => !me || m.id !== me.id).slice(0, 6)];
     who.forEach(m => chips.append(h('button', { type: 'button', class: 'pill', text: m.name, onclick: () => go(m.id) })));
     input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); go(input.value); } });
+    const say = text => view.replaceChildren(h('p', { class: 'msg', text }));
     let run = 0, current = null;
-    // a country chosen under the map: its regions (83-regionmap.js), with a way back to the world
-    view.addEventListener('pmg-regions', async e => {
-      const mine = ++run, cc = e.detail;
-      const back = h('button', { type: 'button', class: 'btn ghost sm', text: '← World map', onclick: () => view.replaceChildren(worldView(current)) });
-      view.replaceChildren(back, h('p', { class: 'hint', text: `Reading the regions of ${cName(cc)}… (the site’s lists, then the shapes)` }));
-      try { const v = await regionMapView(cc, current); if (mine === run) view.replaceChildren(back, v); }
-      catch (err) { if (mine === run) view.replaceChildren(back, h('p', { class: 'hint', text: 'Not drawn: ' + err.message + '.' })); }
-    });
+    // the choice of map: the world, or a country that has a map of its regions (83-regionmap.js)
+    async function showMap(cc) {
+      const mine = ++run;
+      menu.value = cc;
+      if (!cc) { view.replaceChildren(worldView(current, showMap)); return; }
+      say(`Reading the regions of ${cName(cc)}… (the site’s lists, then the shapes)`);
+      try { const v = await regionMapView(cc, current); if (mine === run) view.replaceChildren(v); }
+      catch (err) { if (mine === run) say('Not drawn: ' + err.message + '.'); }
+    }
+    menu.onchange = () => showMap(menu.value);
+    function fillMenu(data) {
+      const options = Object.keys(REGION_MAPS).filter(cc => (data.countries[cc] || {}).photos > 0).sort((a, b) => data.countries[b].photos - data.countries[a].photos);
+      menu.replaceChildren(h('option', { value: '', text: 'World' }), ...options.map(cc => h('option', { value: cc, text: `${cName(cc)} (regions)` })));
+      menu.hidden = !options.length;
+      bar.querySelector('.lbl').hidden = !options.length;
+    }
     async function go(text) {
       const member = memberIdOf(text);
-      if (!member) { view.replaceChildren(h('p', { class: 'hint', text: 'Type a member number (121559) or paste the link of a profile.' })); return; }
+      if (!member) { say('Type a member number (121559) or paste the link of a profile.'); return; }
       const mine = ++run;
       input.value = member;
       modal.message(`member ${member}`);
-      view.replaceChildren(h('p', { class: 'hint', text: 'Reading the profile…' }));
+      say('Reading the profile…');
       try {
         const data = await worldData(member);
         if (mine !== run) return;
         modal.message(`${data.name} · ID ${data.id}`);
         current = data;
-        view.replaceChildren(worldView(data));
-      } catch (e) { if (mine === run) view.replaceChildren(h('p', { class: 'hint', text: 'Not read: ' + e.message + '.' })); }
+        fillMenu(data);
+        showMap('');
+      } catch (e) { if (mine === run) say('Not read: ' + e.message + '.'); }
     }
-    if (start) go(start); else view.replaceChildren(h('p', { class: 'hint', text: 'Type a member number or paste the link of a profile.' }));
+    if (start) go(start); else say('Type a member number or paste the link of a profile.');
     return modal;
   }
 
