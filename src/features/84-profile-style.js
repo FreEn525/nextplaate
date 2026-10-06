@@ -1,16 +1,22 @@
   /* =====================================================================
    *  PROFILE LOOK  (a member's profile page, in the look of the script)
-   *    The figures, the badges, the private messages, the notifications, the countries and the last photos keep the site's own elements and
-   *    scripts; only their style changes (src/ui/10-profile-css.js). Switch it off in the settings to get the site's own look back.
+   *    The site's elements and scripts stay; the style changes (src/ui/10-profile-css.js), the loose figures become four tiles, the
+   *    countries table shows the countries with photos (a box brings back the others), and the notifications get the plate as a picture
+   *    and load as the list is scrolled (src/lib/profile-parts.js, src/lib/profile-notify.js). Switch it off in the settings to get the
+   *    site's own look back.
    * ===================================================================== */
   registerFeature({
     id: 'profilestyle', label: 'Profile page look',
     groups: [],
     init: () => {
-      if (!here.profile || !document.querySelector('.container.profile')) return;
+      const root = here.profile && document.querySelector('.container.profile');
+      if (!root) return;
       const style = document.createElement('style');
       style.id = 'pmg-profile-style';
       style.textContent = PROFILE_CSS;
       document.head.appendChild(style);
+      if (profileTiles(root)) root.classList.add('pm-built');
+      profileCountries(root);
+      profileNotifications(root, (location.pathname.match(/\/user(\d+)/) || [])[1]);
     }
   });

@@ -1101,6 +1101,129 @@
   PLATE_RULES.vn = () => shownVal('moto') || (['2', '6'].includes(fieldVal('ctype')) ? joinParts([menu('region'), shownVal('mm') + menu('spec'), shownVal('digit')]) : '') || joinParts([menu('region') + shownVal('mm') + menu('spec'), shownVal('digit')]);
   const plateForForm = () => (PLATE_RULES[here.country] || genericPlate)();   // a country without a rule uses the plain visible fields
   /* =====================================================================
+   *  PROFILE NOTIFICATIONS  (the site's list of likes and comments: the plate as a picture, and the rest loaded as you scroll)
+   *    Each line names a photo by its plate in text. The picture of the plate is on the photo's own page (the "inf" image, whose name
+   *    cannot be guessed): it is read there, through the shared queue, for the lines in view only, kept in the browser, and put in place of
+   *    the text (the text stays as the picture's alternative and hover). The site's "Load more" button is replaced by loading the next ten
+   *    when the end of the list comes in view; the button stays in the page, hidden, with its own script.
+   *      profileNotifications(root, memberId)
+   * ===================================================================== */
+  const PLATE_PICTURES = 'plate_pictures';
+  const PLATE_PICTURES_KEEP = 500;
+
+  function profileNotifications(root, memberId) {
+    const list = root.querySelector('ul.mCustomScrollbar');
+    if (!list || list.dataset.pmDone) return;
+    list.dataset.pmDone = '1';
+    const holder = root.querySelector('#content') || list;
+    let known = {};
+    try { known = JSON.parse(store.get(PLATE_PICTURES, '{}')); } catch (e) { known = {}; }
+    const keep = (id, src) => { known[id] = src; const ids = Object.keys(known); if (ids.length > PLATE_PICTURES_KEEP) delete known[ids[0]]; store.set(PLATE_PICTURES, JSON.stringify(known)); };
+    const show = (link, src) => { const text = link.textContent.trim(); link.title = text; link.replaceChildren(h('img', { class: 'pm-plate', src, alt: text })); };
+
+    const plateOf = async (link) => {
+      const id = (link.getAttribute('href').match(/nomer(\d+)/) || [])[1];
+      if (!id) return;
+      if (!known[id]) {
+        try {
+          const doc = new DOMParser().parseFromString(await siteFetch(link.getAttribute('href')), 'text/html');
+          const img = doc.querySelector('img[src*="/inf/"]');
+          if (img) keep(id, img.getAttribute('src'));
+        } catch (e) { return; }                                                   // the text stays
+      }
+      if (known[id]) show(link, known[id]);
+    };
+    const seen = new IntersectionObserver(entries => entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      seen.unobserve(e.target);
+      const link = e.target.querySelector('a[href*="/nomer"]');
+      if (link) plateOf(link);
+    }), { rootMargin: '80px' });
+    const watch = scope => scope.querySelectorAll('li').forEach(li => {
+      if (li.querySelector('a[href*="/nomer"]')) seen.observe(li);
+    });
+    watch(list);
+
+    // The rest of the list, ten by ten, when its end comes in view
+    const more = root.querySelector('#load');
+    if (more) more.style.display = 'none';
+    const end = h('div', { class: 'pm-end', text: 'Loading more\u2026' });
+    holder.append(end);
+    let busy = false, done = false;
+    const next = async () => {
+      if (busy || done) return;
+      busy = true;
+      try {
+        const html = await siteFetch(`/action2.php?num=${list.querySelectorAll('li').length}&user=${memberId}`);
+        const items = [...new DOMParser().parseFromString(html, 'text/html').querySelectorAll('li')];
+        if (!items.length) { done = true; end.textContent = 'That is all.'; return; }
+        const added = document.createDocumentFragment();
+        items.forEach(li => {
+          const when = li.querySelector('time[datetime]');
+          const span = when && when.querySelector('span');
+          if (span) span.textContent = new Date(when.getAttribute('datetime')).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' });
+          if (when) when.style.visibility = 'visible';
+          added.append(li);
+        });
+        end.before(added);
+        watch(holder);
+      } catch (e) { done = true; end.textContent = 'Could not load more.'; }
+      finally {
+        busy = false;
+        if (!done) { tail.unobserve(end); tail.observe(end); }                     // still in view after the batch: look again (an observer only speaks on a change)
+      }
+    };
+    const tail = new IntersectionObserver(entries => { if (entries.some(e => e.isIntersecting)) next(); }, { rootMargin: '120px' });
+    tail.observe(end);
+  }
+  /* =====================================================================
+   *  PROFILE PARTS  (what the profile look builds in place of the site's loose figures and its 96-row table)
+   *    The site's elements stay in the page, hidden or restyled; these read them and build the clean version beside them.
+   *      profileTiles(root)       four tiles (plates, likes, comments, rating) from the site's figures, put before the first of them
+   *      profileCountries(root)   a bar over the countries table: the title and a box to show the countries with no photo (hidden by default)
+   * ===================================================================== */
+  const profileText = el => (el ? el.textContent.replace(/\s+/g, ' ').trim() : '');
+
+  function profileTiles(root) {
+    const uploads = root.querySelector('.service-block-v3');
+    if (!uploads || root.querySelector('.pm-tiles')) return null;
+    const total = uploads.querySelector('.counter a'), box = root.querySelector('.tag-box-v7');
+    const cells = box ? [...box.querySelectorAll('h4.counter')] : [];
+    const value = h4 => profileText(h4 && h4.querySelector('b'));
+    const rate = root.querySelector('a[href^="/aktivuserall"]');
+    const rating = rate && rate.parentElement.querySelector('.badge');
+    const delta = rating && rating.querySelector('font');
+    const tile = ({ label, main, sub, href, extra, tone }) => h(href ? 'a' : 'div', { class: 'pm-tile' + (href ? ' link' : ''), href: href || undefined },
+      h('span', { class: 'pm-label', text: label }),
+      h('span', { class: 'pm-main' }, main, extra ? h('span', { class: 'pm-delta ' + (tone || ''), text: extra }) : null),
+      h('span', { class: 'pm-sub', text: sub || '\u00a0' }));
+    const plus = h4 => profileText(h4 && h4.querySelector('.badge'));
+    const link = h4 => { const a = h4 && h4.querySelector('b a'); return a ? a.getAttribute('href') : ''; };
+    const sign = text => (/^\(?-/.test(text) ? 'down' : 'up');
+    const tiles = h('div', { class: 'pm-tiles' },
+      tile({ label: 'Plates', main: profileText(total) || '-', sub: 'uploaded', href: total ? total.getAttribute('href') : '' }),
+      tile({ label: 'Likes', main: value(cells[0]) || '-', sub: `received \u00b7 posted ${value(cells[1]) || '-'}` }),
+      tile({ label: 'Comments', main: value(cells[2]) || '-', sub: `received \u00b7 posted ${value(cells[3]) || '-'}`, extra: plus(cells[2]), tone: 'up', href: link(cells[2]) }),
+      tile({ label: 'Rating', main: rating ? '#' + profileText(rating).replace(/\s*\(.*$/, '') : '-', sub: 'place among members', extra: delta ? profileText(delta) : '', tone: delta ? sign(profileText(delta)) : '', href: rate ? rate.getAttribute('href') : '' }));
+    uploads.parentNode.insertBefore(tiles, uploads);
+    return tiles;
+  }
+
+  function profileCountries(root) {
+    const panel = root.querySelector('.panel-blue'), table = panel && panel.querySelector('table');
+    if (!table || panel.querySelector('.pm-bar')) return null;
+    const rows = [...table.querySelectorAll('tbody tr')];
+    const empty = rows.filter(tr => ![...tr.querySelectorAll('td')].slice(1).some(td => /\d/.test(td.textContent)));
+    empty.forEach(tr => tr.classList.add('pm-empty'));
+    const box = h('input', { type: 'checkbox' });
+    box.onchange = () => panel.classList.toggle('pm-all', box.checked);
+    const bar = h('div', { class: 'pm-bar' },
+      h('span', { class: 'pm-title', text: `Countries (${rows.length - empty.length} with photos)` }),
+      empty.length ? h('label', { class: 'pm-chk' }, box, `Show the ${empty.length} without`) : null);
+    panel.insertBefore(bar, panel.firstChild);
+    return bar;
+  }
+  /* =====================================================================
    *  REGION ALIASES  (names the site writes differently from the shapes, per country: normalised name -> normalised shape name)
    *    Only what neither the exact names, the codes nor the near names settle (tools/measure-regions.py --suggest prints the nearest shape
    *    names of what found none). Normalised: no accent, lower case, without words such as region, oblast, city (see regionNorm).
@@ -2168,44 +2291,44 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
   }
   /* =====================================================================
    *  PROFILE STYLE  (the site's own profile page, brought into the look of the script: flat rectangles, one blue, the greys, the type scale)
-   *    Nothing is rebuilt: the site's elements stay where they are with their own scripts (sort, filter and delete of the messages, load more
-   *    of the notifications, the table's sort), only their look changes. The colours are the page-level constants (SITE_BLUE, PAGE_GREY):
-   *    this CSS lives on the page, where the panel's tokens do not reach. Scoped to the profile container.
+   *    The site's elements stay where they are with their own scripts (sort, filter and delete of the messages, the table's sort); only
+   *    their look changes, and the loose figures are replaced by tiles built from them (src/lib/profile-parts.js: the originals stay in the
+   *    page, hidden). The colours are PAGE_TOKENS (01-tokens.js): this CSS lives on the page, where the panel's tokens do not reach.
+   *    Every box has the same frame: a 40 px band with a small blue title, then its content. Scoped to the profile container.
    * ===================================================================== */
   const PROFILE_CSS = `
     .container.profile{${PAGE_TOKENS}}
     .profile .panel,.profile .tag-box,.profile .service-block-v3{border-radius:0;box-shadow:none}
-    /* the member: picture and badges on the left, name and figures on the right, in one box */
+    /* the member: picture and badges (with the member shortcuts under them) on the left, name, tiles and cards on the right */
     .profile > .row:first-child{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 16px;padding:16px;border:1px solid var(--pm-line);background:#fff}
     .profile > .row:first-child > [class*=col-md]{float:none;width:auto;padding:0}
-    .profile > .row:first-child > .col-md-3{flex:0 0 150px}
-    .profile > .row:first-child > .col-md-9{flex:1 1 320px;min-width:0}
+    .profile > .row:first-child > .col-md-3{flex:0 0 200px;display:flex;flex-direction:column;align-items:stretch}
+    .profile > .row:first-child > .col-md-9{flex:1 1 360px;min-width:0}
     .profile .profile-img{width:120px;height:120px;margin:0 auto 12px;object-fit:cover;border:1px solid var(--pm-line2)}
     .profile .devider{display:none}
-    .profile .badge-lists{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 6px;margin:0;padding:0}
+    .profile .badge-lists{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 12px;margin:0 0 4px;padding:0}
     .profile .badge-lists li{display:flex;align-items:center;gap:4px;padding:0}
     .profile .badge-lists li a{display:grid;place-items:center;width:32px;height:32px;border:1px solid var(--pm-line2);background:#fff;color:var(--pm-ink)}
     .profile .badge-lists li a:hover{background:var(--pm-tint);border-color:var(--pm-soft);color:var(--pm)}
-    .profile .badge-lists .badge{border-radius:0;font-size:11px;line-height:1.6;background:var(--pm)}
+    .profile .badge-lists .badge{min-width:20px;border-radius:0;font-size:11px;line-height:1.6;background:var(--pm)}
     .profile h1{display:flex;align-items:baseline;gap:8px;margin:0 0 12px;font-size:18px;font-weight:700;line-height:1.3;color:var(--pm)}
     .profile h1 a{color:var(--pm)}
     .profile h1 small{margin-left:auto;font-size:12px;font-weight:400;color:var(--pm-mute)}
-    /* the figures: the uploads, then the likes and the comments, as tiles */
-    .profile .service-block-v3{display:flex;align-items:center;gap:10px;margin:0 0 8px;padding:10px 12px;border:1px solid var(--pm-line);background:var(--pm-paper);text-align:left}
-    .profile .service-block-v3 i{font-size:16px;color:var(--pm);margin:0}
-    .profile .service-block-v3 .service-heading{flex:1;min-width:0;margin:0;font-size:13px;font-weight:400;color:var(--pm-mute)}
-    .profile .service-block-v3 .counter{margin:0;font-size:18px;font-weight:700}
-    .profile .service-block-v3 .counter a{color:var(--pm-ink)}
-    .profile .tag-box-v7{display:flex;flex-wrap:wrap;margin:0;padding:0;border:1px solid var(--pm-line);background:#fff}
-    .profile .tag-box-v7 .service-in{float:none;flex:1 1 200px;width:auto;padding:10px 12px}
-    .profile .tag-box-v7 .service-in + .service-in{border-left:1px solid var(--pm-line)}
-    .profile h4.counter{margin:0;padding:3px 0;font-size:13px;font-weight:400;color:var(--pm-mute)}
-    .profile h4.counter b,.profile h4.counter b a{font-size:16px;font-weight:700;color:var(--pm-ink)}
-    .profile h4.counter .badge{border-radius:0;font-size:11px}
-    /* the two panels: the same box, the same header, the same height */
+    /* the figures: four tiles (built from the site's own, which are hidden once the tiles stand) */
+    .profile.pm-built .service-block-v3,.profile.pm-built .tag-box-v7,.profile.pm-built .badge-lists li:last-child{display:none}
+    .pm-tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0 0 12px}
+    .pm-tile{display:flex;flex-direction:column;gap:2px;min-width:0;padding:10px 12px;border:1px solid var(--pm-line);background:#fff;color:var(--pm-ink);text-decoration:none}
+    .pm-tile.link:hover{background:var(--pm-tint);border-color:var(--pm-soft);color:var(--pm-ink);text-decoration:none}
+    .pm-label{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--pm-mute)}
+    .pm-main{display:flex;align-items:baseline;gap:6px;font-size:18px;font-weight:700;line-height:1.3;overflow-wrap:anywhere}
+    .pm-delta{font-size:12px;font-weight:600;color:var(--pm-mute)}
+    .pm-delta.up{color:color-mix(in srgb,var(--pm-ok) 55%,#000)}
+    .pm-delta.down{color:color-mix(in srgb,var(--pm-danger) 80%,#000)}
+    .pm-sub{font-size:12px;color:var(--pm-mute)}
+    /* the boxes: the same frame, the same band, the same height for the two panels */
     .profile .panel{margin:0 0 16px;border:1px solid var(--pm-line);background:#fff}
     .profile .panel-heading{display:flex;align-items:center;justify-content:space-between;min-height:40px;padding:0 12px;border:0;border-bottom:1px solid var(--pm-line);background:var(--pm-paper)!important}
-    .profile .panel-title{float:none!important;margin:0;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--pm)}
+    .profile .panel-title,.pm-title{float:none!important;margin:0;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--pm)}
     .profile .panel-title i{margin-right:4px}
     .profile .profile-notification-title-count{font-weight:400;color:var(--pm-mute)}
     .profile .profile-notification-actions{float:none;display:flex;gap:2px}
@@ -2219,29 +2342,46 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     .profile .profile-notification-card-type{font-size:12px;color:var(--pm-mute)}
     .profile .profile-notification-card-title a{font-size:14px;font-weight:700;color:var(--pm)}
     .profile .profile-notification-card-meta{font-size:12px;color:var(--pm-mute)}
-    .profile ul.mCustomScrollbar li > div{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0;padding:8px 12px;border-bottom:1px solid var(--pm-line);background:transparent!important;font-size:13px}
+    /* the notifications: one line each, the plate as its picture, the time on the right; the rest comes as the list is scrolled */
+    .profile ul.mCustomScrollbar li > div{display:flex;align-items:center;gap:8px;min-height:44px;margin:0;padding:6px 12px;border-bottom:1px solid var(--pm-line);background:transparent!important;font-size:13px}
     .profile ul.mCustomScrollbar li > div:hover{background:var(--pm-tint)!important}
     .profile ul.mCustomScrollbar li a{color:var(--pm);font-weight:600}
-    .profile ul.mCustomScrollbar li .pull-right{margin:0 0 0 auto;font-size:12px;color:var(--pm-mute)}
-    .profile #load{display:block;width:100%;height:38px;border:1px solid var(--pm);border-radius:0;background:var(--pm);color:#fff;font-weight:600;cursor:pointer}
-    .profile #load:hover{background:var(--pm-h);border-color:var(--pm-h)}
-    /* the countries: the table, quiet */
-    .profile .panel-blue .table{margin:0;font-size:13px}
-    .profile .panel-blue .table th{padding:10px 12px;border-bottom:1px solid var(--pm-line2);font-size:13px;color:var(--pm-mute)}
-    .profile .panel-blue .table td{padding:8px 12px;border-top:1px solid var(--pm-line);vertical-align:middle;color:var(--pm-ink)}
+    .profile ul.mCustomScrollbar li .fa-hand-o-right{color:var(--pm-mute)}
+    .profile ul.mCustomScrollbar li .pull-right{margin:0 0 0 auto;font-size:12px;white-space:nowrap;color:var(--pm-mute)}
+    .profile ul.mCustomScrollbar li .pull-right small{font-size:12px}
+    .profile .pm-plate{display:block;height:26px;width:auto;border:1px solid var(--pm-line2)}
+    .profile .pm-end{padding:10px 12px;font-size:12px;text-align:center;color:var(--pm-mute)}
+    /* the countries: a band, then a table that lines up (names left, the three figures right, in columns of one width) */
+    .profile .panel-blue{margin:0 0 16px}
+    .pm-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:40px;padding:0 12px;border-bottom:1px solid var(--pm-line);background:var(--pm-paper)}
+    .pm-chk{display:inline-flex;align-items:center;gap:6px;margin:0;font-size:12px;font-weight:400;color:var(--pm-mute);cursor:pointer}
+    .pm-chk input{margin:0}
+    .profile .panel-blue:not(.pm-all) tr.pm-empty{display:none}
+    .profile .dataTables_wrapper > .row:first-child,.profile .dataTables_info{display:none}
+    .profile .panel-blue .table{width:100%!important;margin:0;font-size:13px;table-layout:fixed}
+    .profile .panel-blue .table th,.profile .panel-blue .table td{padding:0 12px;height:38px;vertical-align:middle;border-top:1px solid var(--pm-line);color:var(--pm-ink)}
+    .profile .panel-blue .table thead th{height:36px;border-top:0;border-bottom:1px solid var(--pm-line2);font-weight:400;color:var(--pm-mute)}
+    .profile .panel-blue .table th:not(:first-child),.profile .panel-blue .table td:not(:first-child){width:88px!important;text-align:right;font-variant-numeric:tabular-nums}
+    .profile .panel-blue .table td:not(:first-child) i{display:none}
+    .profile .panel-blue .table td:not(:first-child) a{color:var(--pm-ink);font-weight:400}
+    .profile .panel-blue .table td:not(:first-child) a:hover{color:var(--pm);text-decoration:underline}
+    .profile .panel-blue .table td font{font-size:12px;color:color-mix(in srgb,var(--pm-ok) 55%,#000)!important}
+    .profile .panel-blue .table thead .fa-lg{font-size:14px}
+    .profile .panel-blue .table td:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .profile .panel-blue .table td:first-child b a{color:var(--pm-ink)}
+    .profile .panel-blue .table td:first-child .fa-cloud-upload{color:var(--pm-line2)!important}
     .profile .panel-blue .table tbody tr:hover td{background:var(--pm-tint)}
-    .profile .panel-blue .table .fa-lg{font-size:14px}
-    /* the last photos: an even grid */
-    .profile h3{margin:0 0 8px;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--pm)}
-    .profile .portfolio-box-v1{margin:0 -6px 16px}
+    /* the last photos: the same band, then an even grid; each photo framed so a pale one does not melt into the page */
+    .profile .col-md-5 > h3{display:flex;align-items:center;min-height:40px;margin:0;padding:0 12px;border:1px solid var(--pm-line);background:var(--pm-paper);font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--pm)}
+    .profile .portfolio-box-v1{margin:0 0 16px;padding:12px 6px 0;border:1px solid var(--pm-line);border-top:0;background:#fff}
     .profile .portfolio-box-v1 li{padding:0 6px 12px}
-    .profile .portfolio-box-v1 li > img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border:1px solid var(--pm-line2)}
-    .profile .portfolio-box-v1-in{position:relative;padding:6px 0 0}
-    .profile .portfolio-box-v1-in h3{margin:0;font-size:14px;letter-spacing:0;text-transform:none;color:var(--pm-ink)}
+    .profile .portfolio-box-v1 li > img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border:1px solid var(--pm-line2);background:var(--pm-soft);box-shadow:0 1px 2px rgba(0,0,0,.15)}
+    .profile .portfolio-box-v1-in{position:relative;min-height:38px;padding:6px 40px 0 0}
+    .profile .portfolio-box-v1-in h3{margin:0;font-size:14px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--pm-ink)}
     .profile .portfolio-box-v1-in p{margin:0;font-size:12px;color:var(--pm-mute)}
-    .profile .portfolio-box-v1-in .btn-u{position:absolute;right:0;top:6px;display:grid;place-items:center;width:32px;height:32px;padding:0;border:1px solid var(--pm-line2);border-radius:0;background:#fff;color:var(--pm)}
+    .profile .portfolio-box-v1-in .btn-u{position:absolute;right:0;top:4px;display:grid;place-items:center;width:32px;height:32px;padding:0;border:1px solid var(--pm-line2);border-radius:0;background:#fff;color:var(--pm)}
     .profile .portfolio-box-v1-in .btn-u:hover{background:var(--pm-tint);border-color:var(--pm-soft)}
+    @media (max-width:760px){.pm-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.profile > .row:first-child > .col-md-3{flex:1 1 100%}}
   `;
   /* =====================================================================
    *  TOAST  (a small notice that comes up in a corner and goes by itself, like a phone's)
@@ -2278,7 +2418,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
       h('span', { class: 'k', text: TOAST_WORDS[kind] || TOAST_WORDS.other }),
       href ? h('a', { class: 'ti', href, target: '_blank', rel: 'noopener noreferrer', text: title }) : h('span', { class: 'ti', text: title }),
       body ? h('span', { class: 'b', text: body }) : null,
-      h('button', { type: 'button', class: 'x', title: 'Close', 'aria-label': 'Close', text: '×', onclick: () => el.remove() }));
+      h('button', { type: 'button', class: 'x', title: 'Close', 'aria-label': 'Close', text: '\u00d7', onclick: () => el.remove() }));
     let timer = 0;
     const arm = () => { clearTimeout(timer); timer = setTimeout(() => el.remove(), ms); };
     el.addEventListener('mouseenter', () => clearTimeout(timer));
@@ -3410,7 +3550,9 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
       host.style.cssText = `position:absolute;z-index:50;top:${Math.max(0, top)}px;left:${right + window.scrollX + FLAGS_GAP}px;width:${Math.min(room, FLAGS_MAX)}px`;
     } else {
       host.classList.add('dock');
-      host.style.cssText = `position:fixed;z-index:50;top:96px;right:${panel + 8}px;width:min(${FLAGS_MAX + 20}px,calc(100vw - ${panel + 24}px))`;
+      const header = document.querySelector('.header');                          // the handle lies under the site's header, and follows it away when the page scrolls
+      const top = Math.max(8, Math.round(header ? header.getBoundingClientRect().bottom : 88) + 8);
+      host.style.cssText = `position:fixed;z-index:50;top:${top}px;right:${panel + 8}px;width:min(${FLAGS_MAX + 20}px,calc(100vw - ${panel + 24}px))`;
     }
   }
 
@@ -3458,6 +3600,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
       document.body.appendChild(flagsBar());
       flagsPlace();
       window.addEventListener('resize', flagsPlace);
+      window.addEventListener('scroll', flagsPlace, { passive: true });
       window.addEventListener('load', flagsPlace);
       window.addEventListener('pmg-drawer', flagsPlace);                       // a drawer opened or closed: the room changed
     }
@@ -4100,7 +4243,8 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     // out of view = ours is shown (a button under the fold, or above it after a scroll)
     const place = () => {
       const content = document.querySelector('.content .container, .container.content') || document.querySelector('.container');
-      const left = content ? Math.max(16, Math.round(content.getBoundingClientRect().left)) : 16;
+      // at the edge of the form's text, not of the page's container (its padding)
+      const left = content ? Math.max(16, Math.round(content.getBoundingClientRect().left + (parseFloat(getComputedStyle(content).paddingLeft) || 0))) : 16;
       host.style.left = left + 'px';
     };
     const watch = new IntersectionObserver(entries => { host.hidden = entries[entries.length - 1].isIntersecting; }, { threshold: 0.2 });
@@ -4754,18 +4898,24 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
   }
   /* =====================================================================
    *  PROFILE LOOK  (a member's profile page, in the look of the script)
-   *    The figures, the badges, the private messages, the notifications, the countries and the last photos keep the site's own elements and
-   *    scripts; only their style changes (src/ui/10-profile-css.js). Switch it off in the settings to get the site's own look back.
+   *    The site's elements and scripts stay; the style changes (src/ui/10-profile-css.js), the loose figures become four tiles, the
+   *    countries table shows the countries with photos (a box brings back the others), and the notifications get the plate as a picture
+   *    and load as the list is scrolled (src/lib/profile-parts.js, src/lib/profile-notify.js). Switch it off in the settings to get the
+   *    site's own look back.
    * ===================================================================== */
   registerFeature({
     id: 'profilestyle', label: 'Profile page look',
     groups: [],
     init: () => {
-      if (!here.profile || !document.querySelector('.container.profile')) return;
+      const root = here.profile && document.querySelector('.container.profile');
+      if (!root) return;
       const style = document.createElement('style');
       style.id = 'pmg-profile-style';
       style.textContent = PROFILE_CSS;
       document.head.appendChild(style);
+      if (profileTiles(root)) root.classList.add('pm-built');
+      profileCountries(root);
+      profileNotifications(root, (location.pathname.match(/\/user(\d+)/) || [])[1]);
     }
   });
   /* =====================================================================

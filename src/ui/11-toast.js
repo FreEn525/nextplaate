@@ -33,7 +33,7 @@
       h('span', { class: 'k', text: TOAST_WORDS[kind] || TOAST_WORDS.other }),
       href ? h('a', { class: 'ti', href, target: '_blank', rel: 'noopener noreferrer', text: title }) : h('span', { class: 'ti', text: title }),
       body ? h('span', { class: 'b', text: body }) : null,
-      h('button', { type: 'button', class: 'x', title: 'Close', 'aria-label': 'Close', text: '×', onclick: () => el.remove() }));
+      h('button', { type: 'button', class: 'x', title: 'Close', 'aria-label': 'Close', text: '\u00d7', onclick: () => el.remove() }));
     let timer = 0;
     const arm = () => { clearTimeout(timer); timer = setTimeout(() => el.remove(), ms); };
     el.addEventListener('mouseenter', () => clearTimeout(timer));

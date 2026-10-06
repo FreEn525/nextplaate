@@ -21,7 +21,8 @@
     // out of view = ours is shown (a button under the fold, or above it after a scroll)
     const place = () => {
       const content = document.querySelector('.content .container, .container.content') || document.querySelector('.container');
-      const left = content ? Math.max(16, Math.round(content.getBoundingClientRect().left)) : 16;
+      // at the edge of the form's text, not of the page's container (its padding)
+      const left = content ? Math.max(16, Math.round(content.getBoundingClientRect().left + (parseFloat(getComputedStyle(content).paddingLeft) || 0))) : 16;
       host.style.left = left + 'px';
     };
     const watch = new IntersectionObserver(entries => { host.hidden = entries[entries.length - 1].isIntersecting; }, { threshold: 0.2 });

@@ -211,7 +211,11 @@ La barre suit l'ordre d'usage : **Check a plate** (vérifier ce qu'on va envoyer
 - Presque tout l'écran (même cadre que le gestionnaire d'envoi `U` : le logo, le nom de la fenêtre, *Close*), rien ne défile sauf la liste : la barre (le membre, *Show*, vos raccourcis, le menu *Map*), la carte à gauche qui remplit la hauteur et se voit toujours en entier (monde ou pays), ses boutons (+, −, *Fit*, *Europe*) posés dessus, la légende en bas à gauche ; à droite, le résumé, le classement (une barre par part, le nom en lien vers les photos, un bouton *Regions* pour les pays qui ont une carte) et les notes. Passer sur une ligne allume sa forme. Sous 760 px la colonne passe sous la carte.
 - Un seul menu *Map* : *World* ou un pays (*Germany (regions)*). Le panneau se ferme à l'ouverture.
 
-### Apparence du profil (`84-profile-style.js`, `ui/10-profile-css.js`)
+### Apparence du profil (`84-profile-style.js`, `ui/10-profile-css.js`, `lib/profile-parts.js`, `lib/profile-notify.js`)
+- **Tuiles** : les chiffres épars du site (envois, likes, commentaires, place au classement) sont lus et refaits en quatre tuiles alignées ; les éléments d'origine restent dans la page, cachés (`pm-built`). La colonne de gauche (200 px) garde la photo, les badges et la barre des membres, à sa largeur.
+- **Pays** : une barre au-dessus du tableau (« Countries (21 with photos) ») et une case pour montrer les pays sans photo (cachés par défaut) ; chiffres alignés à droite en colonnes de largeur égale, icônes seulement dans l'en-tête.
+- **Derniers posts** : même bandeau que les autres boîtes, grille régulière 4:3, photos encadrées (bordure et ombre légère : une photo claire ne se fond plus dans la page).
+- **Notifications** : la plaque en image (le fichier `inf` de la page de la photo, lu par la file commune pour les lignes visibles seulement, gardé dans le navigateur), et le bouton *Load more* remplacé par le chargement des dix suivantes quand la fin de la liste entre dans la vue (le bouton reste, caché, avec son script).
 - Une feuille de style appliquée à la page de profil du site (celui du membre qu'on regarde) : la fiche (photo, badges, nom, identifiant) dans un cadre, les compteurs (envois, likes, commentaires) en tuiles, les messages privés et les notifications dans deux panneaux identiques (même en-tête, même hauteur, plus de fonds jaune et bleu ciel), le tableau des pays plus calme, les dernières photos en grille régulière. Rien n'est reconstruit : tri, filtre et suppression des messages, *Load more*, tri du tableau gardent leurs scripts. Les couleurs sont les jetons de page (`PAGE_TOKENS`). Un interrupteur (*Profile page look*) rend l'apparence du site.
 
 ### Notifications (`85-notify.js`, `lib/notify-parse.js`, `ui/11-toast.js`)
@@ -269,7 +273,7 @@ Chaque fonction s'enregistre avec `registerFeature({ groups, keys, onEscape, ini
 
 ## Tests (`tests/`)
 
-- `python -m pytest -q` (dossier `tests/e2e/`) : 434 tests (448 avec le build dev, `NEXTPLAATE_SCRIPT=nextplaate.dev.user.js`) sur une version simulée du site (`fake_site.py`, avec une fausse page Google pour le Lens). Un fichier par fonction (`test_lens.py`, `test_tags.py`, `test_members.py`, `test_flags.py`, `test_extra.py`, `test_preview.py`…), plus `test_style.py` (couleurs, rayons, tailles, hauteurs) et `test_responsive.py` (aucun débordement de 320 à 1280 px). Pas d'accès réel à PlatesMania ni à Google.
+- `python -m pytest -q` (dossier `tests/e2e/`) : 437 tests (451 avec le build dev, `NEXTPLAATE_SCRIPT=nextplaate.dev.user.js`) sur une version simulée du site (`fake_site.py`, avec une fausse page Google pour le Lens). Un fichier par fonction (`test_lens.py`, `test_tags.py`, `test_members.py`, `test_flags.py`, `test_extra.py`, `test_preview.py`…), plus `test_style.py` (couleurs, rayons, tailles, hauteurs) et `test_responsive.py` (aucun débordement de 320 à 1280 px). Pas d'accès réel à PlatesMania ni à Google.
 - `python tests/offline/check_known.py` : 39 plaques validées à la main, tapées dans les pages sauvegardées.
 - `python tests/offline/check_db.py` : toutes les plaques de la base, dans la catégorie correspondante, en parallèle. Hors ligne.
 - Les données dérivées : `node scripts/refresh-data.mjs` → `data/` et `docs/COUVERTURE.md` (voir `data/README.md`).

@@ -110,7 +110,9 @@
       host.style.cssText = `position:absolute;z-index:50;top:${Math.max(0, top)}px;left:${right + window.scrollX + FLAGS_GAP}px;width:${Math.min(room, FLAGS_MAX)}px`;
     } else {
       host.classList.add('dock');
-      host.style.cssText = `position:fixed;z-index:50;top:96px;right:${panel + 8}px;width:min(${FLAGS_MAX + 20}px,calc(100vw - ${panel + 24}px))`;
+      const header = document.querySelector('.header');                          // the handle lies under the site's header, and follows it away when the page scrolls
+      const top = Math.max(8, Math.round(header ? header.getBoundingClientRect().bottom : 88) + 8);
+      host.style.cssText = `position:fixed;z-index:50;top:${top}px;right:${panel + 8}px;width:min(${FLAGS_MAX + 20}px,calc(100vw - ${panel + 24}px))`;
     }
   }
 
@@ -158,6 +160,7 @@
       document.body.appendChild(flagsBar());
       flagsPlace();
       window.addEventListener('resize', flagsPlace);
+      window.addEventListener('scroll', flagsPlace, { passive: true });
       window.addEventListener('load', flagsPlace);
       window.addEventListener('pmg-drawer', flagsPlace);                       // a drawer opened or closed: the room changed
     }
