@@ -61,7 +61,7 @@ def choose(page, cc="fr"):
 def test_the_picker_offers_the_countries_that_have_a_map_and_that_the_member_has_photos_in(ctx):
     page = open_map(ctx)
     options = page.evaluate(f"() => [...{MODAL}.querySelectorAll('select[aria-label=\"Regions of a country\"] option')].map(o => o.textContent)")
-    assert options == ["Choose a country…", "France"]                                    # de and lu have photos but no map yet
+    assert options == ["Choose a country…", "Germany", "France"]                  # by photos; Luxembourg has photos but no regions to map
 
 
 def test_nothing_is_downloaded_until_a_country_is_chosen(ctx):

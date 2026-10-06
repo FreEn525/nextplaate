@@ -3,11 +3,14 @@ src/lib/regions-levels.js with the countries where at least THRESHOLD of the reg
 
     python tools/measure-regions.py            # downloads the shapes once into a cache folder (reference/real/regions/shapes/)
     python tools/measure-regions.py --table    # only prints the table
+    python tools/measure-regions.py ru kz --why   # only these countries, and the regions that found no shape
+    python tools/measure-regions.py de uk --pairs # a sample of what was placed where, to check by eye
+    python tools/measure-regions.py ru --suggest  # for what found no shape, the nearest shape names (to write an alias)
 
 Input: the region pages of the site, written by the developer tool "Regions collection" into reference/real/regions/ (one per system).
-The matching rule is the one of src/lib/regions-match.js (normalised names, then ISO 3166-2 codes).
+The matching is done by node tools/match-regions.mjs, which runs src/lib/regions-match.js itself (names, aliases, codes, near names).
 """
-import glob, json, os, re, sys, unicodedata, urllib.request
+import glob, json, os, re, subprocess, sys, urllib.request
 from pathlib import Path
 
 from bs4 import BeautifulSoup
@@ -18,12 +21,6 @@ CACHE = PAGES / "shapes"
 THRESHOLD = 0.70
 LEVELS = ("ADM1", "ADM2", "ADM3")
 MAX_SHAPES = 600                                  # a map with more shapes than this is too heavy to draw: not offered
-WORDS = re.compile(r"\b(city|town|district|dist|region|oblast|republic|krai|kray|autonomous|okrug|municipality|county|kreis|landkreis|stadt|of|the|and|rural|urban|prefecture|province|department|departement|canton|commune)\b")
-
-
-def norm(text):
-    text = unicodedata.normalize("NFKD", text or "").encode("ascii", "ignore").decode().lower()
-    return re.sub(r"[^a-z0-9]+", " ", WORDS.sub(" ", text)).strip()
 
 
 def rows(path):
@@ -55,44 +52,55 @@ def shapes(iso, level):
     return [x["properties"] for x in json.loads(f.read_text(encoding="utf-8"))["features"]]
 
 
-def placed(regions, props):
-    names, codes = {}, {}
-    for i, p in enumerate(props):
-        names.setdefault(norm(p.get("shapeName")), []).append(i)
-        if "-" in (p.get("shapeISO") or ""):
-            codes.setdefault(p["shapeISO"].split("-")[-1].lower(), []).append(i)
-    n = 0
-    for r in regions:
-        parts = [norm(x) for x in re.split(r"[,;/]|\bor\b", r["name"])] + [norm(r["name"])]
-        if any(p in names for p in parts if p) or (r["code"] and r["code"].lower() in codes):
-            n += 1
-    return n
-
-
 def main():
     iso3 = json.loads((Path(__file__).with_name("iso3.json")).read_text())
     by_country = {}
     for f in sorted(glob.glob(str(PAGES / "regions-*.html"))):
         system = os.path.basename(f)[8:-5]
         by_country.setdefault(re.sub(r"\d$", "", system), []).extend(rows(Path(f)))
-    table, chosen = [], {}
+    only = [a for a in sys.argv[1:] if not a.startswith("--")]
+    data = {}
     for cc, regions in sorted(by_country.items()):
-        iso = iso3.get(cc)
-        best = None
-        for level in (LEVELS if iso else ()):
+        if only and cc not in only:
+            continue
+        levels = {}
+        for level in (LEVELS if iso3.get(cc) else ()):
             try:
-                props = shapes(iso, level)
+                props = shapes(iso3[cc], level)
             except Exception:
                 continue
-            n = placed(regions, props)
-            if len(props) <= MAX_SHAPES and (not best or n > best[1]):
-                best = (level, n, len(props))
-        table.append((cc, len(regions), best))
-        if best and regions and best[1] / len(regions) >= THRESHOLD:
-            chosen[cc] = (iso, best[0])
-    for cc, n, best in sorted(table, key=lambda x: -((x[2][1] / x[1]) if x[2] and x[1] else -1)):
-        print(f"{cc:3} regions {n:4}  " + (f"{best[0]} shapes {best[2]:4} placed {best[1]:4} ({100 * best[1] // max(n, 1)}%)" if best else "no shapes"))
-    if "--table" not in sys.argv:
+            if len(props) <= MAX_SHAPES:
+                levels[level] = [{"name": p.get("shapeName") or "", "iso": p.get("shapeISO") or ""} for p in props]
+        data[cc] = {"regions": regions, "levels": levels}
+    tmp = CACHE / "measure-input.json"
+    tmp.write_text(json.dumps(data), encoding="utf-8")
+    env = dict(os.environ, **({**({"PAIRS": "1"} if "--pairs" in sys.argv else {}), **({"SUGGEST": "1"} if "--suggest" in sys.argv else {})}))
+    result = json.loads(subprocess.run(["node", str(ROOT / "tools" / "match-regions.mjs"), str(tmp)], capture_output=True, text=True, check=True, encoding="utf-8", env=env).stdout)
+    table, chosen = [], {}
+    for cc, res in result.items():
+        n = len(by_country[cc])
+        # a region that is not an area (mopeds, historic vehicles...) is not counted: it has no place on a map
+        best = max(((v["placed"], lv, v) for lv, v in res.items()), default=None, key=lambda x: x[0])
+        area = max(1, n - (best[2]["special"] if best else 0))
+        table.append((cc, n, best, area))
+        if best and best[0] / area >= THRESHOLD:
+            chosen[cc] = (iso3[cc], best[1])
+    for cc, n, best, area in sorted(table, key=lambda x: -((x[2][0] / x[3]) if x[2] else -1)):
+        if best:
+            print(f"{cc:3} regions {n:4} (areas {area:4})  {best[1]} shapes {best[2]['shapes']:4} placed {best[0]:4} ({100 * best[0] // area}%)")
+            if "--why" in sys.argv and best[0] / area < 1:
+                print("      not placed:", best[2]["missing"])
+            if "--suggest" in sys.argv:
+                for line in best[2].get("suggest", [])[:30]:
+                    print("      ?", line)
+            if "--pairs" in sys.argv:
+                import random
+                random.seed(1)
+                for pair in random.sample(best[2]["pairs"], min(14, len(best[2]["pairs"]))):
+                    print("      ", pair)
+        else:
+            print(f"{cc:3} regions {n:4}  no shapes")
+    if "--table" not in sys.argv and not only:
         body = ", ".join(f"{cc}: ['{iso}', '{lv}']" for cc, (iso, lv) in sorted(chosen.items()))
         (ROOT / "src" / "lib" / "regions-levels.js").write_text(HEADER.format(n=len(chosen), body=body), encoding="utf-8")
         print(f"\nsrc/lib/regions-levels.js: {len(chosen)} countries")

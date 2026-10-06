@@ -196,3 +196,59 @@ def test_regions_collection_reads_the_menu_then_one_page_per_country(browser):
     page.evaluate(f"() => {SHADOW}.getElementById('rcCheck').click()")
     page.wait_for_function(f"() => {SHADOW}.getElementById('rcMsg').textContent.includes('4 of 4 systems collected')", timeout=10000)
     c.close()
+
+
+MATCH_JS = """([regions, shapes, cc]) => {
+  const r = nextplaateDev.regionMatch(regions.map((x, i) => ({ id: String(i), code: '', ...x })), shapes.map(n => ({ name: n, iso: '' })), cc);
+  return { placed: [...r.placed].map(([id, v]) => [regions[+id].name, v.map(i => shapes[i])]), missing: r.missing.map(x => x.name), special: r.special.map(x => x.name) };
+}"""
+
+
+def match(page, regions, shapes, cc="xx"):
+    return page.evaluate(MATCH_JS, [[{"name": r} if isinstance(r, str) else r for r in regions], shapes, cc])
+
+
+@needs_dev
+def test_the_matcher_places_by_name_then_by_near_name_then_by_prefix(browser):
+    c, page = _dev_page(browser)
+    r = match(page, ["Ain", "Mangistau Province", "Chuvash Republic", "Aachen Urban District"], ["Ain", "Mangystau Region", "Chuvashia", "Aachen, Staedteregion"])
+    assert [p[1] for p in r["placed"]] == [["Ain"], ["Mangystau Region"], ["Chuvashia"], ["Aachen, Staedteregion"]]
+    c.close()
+
+
+@needs_dev
+def test_the_matcher_reads_several_names_and_puts_the_bracketed_ones_last(browser):
+    c, page = _dev_page(browser)
+    r = match(page, ["Augsburg City, Augsburg Dist", "Saale District (Querfurt)", "Munich and Rosenheim Districts (Bad Aibling)"], ["Augsburg, Kreisfreie Stadt", "Augsburg, Landkreis", "Halle (Saale), Kreisfreie Stadt", "Saalekreis", "Rosenheim"])
+    placed = dict((a, b) for a, b in r["placed"])
+    assert placed["Augsburg City, Augsburg Dist"] == ["Augsburg, Kreisfreie Stadt", "Augsburg, Landkreis"]        # both names, both shapes
+    assert placed["Saale District (Querfurt)"] == ["Saalekreis"]                                                  # not Halle (Saale): a bracket is read last
+    assert placed["Munich and Rosenheim Districts (Bad Aibling)"] == ["Rosenheim"]
+    c.close()
+
+
+@needs_dev
+def test_the_matcher_puts_a_city_on_all_its_districts_and_reads_letters_that_have_no_accent_form(browser):
+    c, page = _dev_page(browser)
+    r = match(page, ["Bratislava City", "Ørsta", "Łódź City"], ["District of Bratislava I", "District of Bratislava II", "Orsta nor", "Lodz"])
+    placed = dict((a, b) for a, b in r["placed"])
+    assert placed["Bratislava City"] == ["District of Bratislava I", "District of Bratislava II"]
+    assert placed["Ørsta"] == ["Orsta nor"] and placed["Łódź City"] == ["Lodz"]
+    c.close()
+
+
+@needs_dev
+def test_the_matcher_sets_apart_what_is_not_an_area_and_never_guesses_from_a_code_outside_the_iso_countries(browser):
+    c, page = _dev_page(browser)
+    r = match(page, ["Mopeds", "Historic vehicles", "Germany", "Ministry of Defence", {"name": "Bishkek City", "code": "B"}], ["Batken"], "kg")
+    assert r["special"] == ["Mopeds", "Historic vehicles", "Germany", "Ministry of Defence"]
+    assert r["missing"] == ["Bishkek City"] and r["placed"] == []                                                # B is Batken in ISO, not the plate code of Bishkek
+    c.close()
+
+
+@needs_dev
+def test_the_matcher_uses_the_alias_table_of_the_country(browser):
+    c, page = _dev_page(browser)
+    r = match(page, ["Chechen Republic", "Primorye (Maritime) Krai"], ["Chechnya", "Primorsky Krai"], "ru")
+    assert [p[1] for p in r["placed"]] == [["Chechnya"], ["Primorsky Krai"]]
+    c.close()
