@@ -78,6 +78,7 @@ UPLOAD_PAGE = (
     + '<input type="text" id="nomer" name="nomer">'
     + '<select id="ctype" name="ctype"><option value="1">Car</option><option value="2">Motorbike</option></select>'
     + '<input type="file" id="filename" name="filename">'
+    + '<div class="row"><section class="col-xs-12"><label>Extra information:</label><br><textarea name="dop" rows="3" class="form-control" placeholder="Specify the place of the spot"></textarea></section></div>'
     + '<fieldset><div class="panel-group acc-v1" id="accordion-1"><div class="panel panel-default"><div class="panel-heading"><span id="add-tags-summary" data-tags-label="Tags" data-add-label="Add tags">Add tags</span></div>'
     + '<div class="panel-body"><div class="pm-tag-type1" id="add-tags-picker">'
     + '<section class="pm-tag-type1-group" data-group-id="3"><button type="button" class="pm-tag-type1-toggle"><span>Vehicle category</span></button></section>'

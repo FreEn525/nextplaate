@@ -9,7 +9,7 @@
    *    the same card back, so a feature can call inlineCard() every time it needs it.
    * ===================================================================== */
   const INLINE_CARD_CSS = `
-    :host{display:block;margin:0 0 12px}
+    :host{display:block;margin:0 0 20px}   /* a clear space under every card: two cards one above the other do not touch */
     .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
     .top{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:8px 12px;background:#fff;border-bottom:1px solid var(--line)}
     .top b{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--primary-h)}

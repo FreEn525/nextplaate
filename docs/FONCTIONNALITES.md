@@ -52,6 +52,11 @@ NextPlaate est un script Tampermonkey (userscript) pour [PlatesMania](https://pl
 - Les raccourcis ne s'activent pas quand on tape dans un champ de texte.
 - Compatible AZERTY : `Ctrl+A` se lit sur la touche `a` (`e.key`), pas sur la position physique.
 
+### Information complémentaire (page d'ajout, `src/features/72-extra.js`)
+- La petite boîte de trois lignes du site (« Extra information ») devient une grande carte au style du panneau : haute dès le départ, elle grandit avec le texte, rappelle l'indication du site, compte les caractères et propose « Use my location » (le lieu enregistré dans Détails, jamais sa valeur par défaut).
+- Elle est au-dessus de la carte des tags, avec un espace net entre les deux (toutes les cartes laissent maintenant 20 px dessous).
+- La boîte du site reste la source de vérité : masquée, remplie à chaque frappe (avec son événement `input`), donc le formulaire part comme avant. Ce qu'écrit le site dans sa boîte apparaît dans la carte. Interrupteur dans Settings.
+
 ### Tags (page d'ajout, `src/features/71-tags.js`)
 - La section « Add tags » du site (accordéon fermé, 52 tags à faire défiler, un « + » par tag) est remplacée par une carte : chaque tag est un bouton, rangé dans les 7 groupes du site ; une case de recherche trouve un tag en tapant (Entrée choisit le premier) ; les tags choisis sont des pastilles qu'on retire d'un clic, avec « Clear » ; les plus utilisés et ceux du dernier envoi sont à un clic (« Use again »).
 - Les cases du site restent la source de vérité : un clic coche ou décoche la vraie case et déclenche son événement `change`, donc le formulaire part comme avant et le compteur du site (« Tags (3) ») continue de marcher. La section du site est seulement masquée ; l'interrupteur de Settings la rend.

@@ -2,6 +2,9 @@
 
 ## 5.8
 
+**Extra information**
+- New feature *Extra information box* (switch in Settings): the site's small three-line box becomes a tall card in the look of the panel, large from the start, growing with what you type, with the site's own hint, a character count, and a button to insert the location saved in Details (*Use my location*). It sits above the tags card with a clear space between the two (every card now has one). The site's own box stays the source of truth (hidden, and filled as you type), so the form is sent as before; switching the feature off brings it back.
+
 **Tags**
 - New feature *Tag picker* (switch in Settings): the site's "Add tags" section (a closed accordion with a list to scroll and a + to press for each of the 52 tags) is replaced by a card: every tag is a button, grouped like the site groups them; a search box finds a tag by typing (Enter chooses the first match); what is chosen shows as chips you remove with one click, with a Clear button; the tags you use most and the ones of your last upload are one click away (*Use again*). The site's own check boxes stay the source of truth, so the form is sent exactly as before and the site's own counter keeps working. Switching the feature off brings the site's section back.
 

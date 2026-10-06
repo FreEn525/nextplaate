@@ -56,6 +56,11 @@
     .pill:hover{background:var(--primary-tint);border-color:var(--primary-soft)}
     .pill.on{border-color:var(--primary);background:var(--primary-soft);color:var(--primary-h);font-weight:600}
     .pill.removable:hover{background:var(--danger-soft);border-color:var(--danger-line);color:var(--danger-ink)}
+    .cardbox{display:flex;flex-direction:column;gap:10px;padding:12px}
+    .cardbox textarea{width:100%;min-height:180px;padding:10px;resize:vertical;line-height:1.5}
+    .cardrow{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+    .hint{margin:0;font-size:12px;color:var(--mute)}
+    .count{margin-left:auto;font-size:12px;color:var(--mute)}
     .tagbox{display:flex;flex-direction:column;gap:12px;padding:12px}
     .tagbox input[type=text]{width:100%}
     .tagrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
