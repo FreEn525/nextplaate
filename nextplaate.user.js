@@ -435,6 +435,15 @@
     return new Promise((resolve, reject) => { siteQueue.push({ url, resolve, reject }); pumpSite(); });
   }
 
+  // The number a gallery page announces in its title ("License plates found 38.723"): the site writes thousands with a dot (or a
+  // comma, or a space, depending on the language of the account). Throws when the page has no such number.
+  function siteCount(doc) {
+    const num = doc.querySelector('.breadcrumbs h1 b');
+    const t = num ? num.textContent.trim() : '';
+    if (!/^\d{1,3}(?:[.,\s  ]\d{3})+$|^\d+$/.test(t)) throw new Error('no count on the page');
+    return +t.replace(/\D/g, '');
+  }
+
   async function pumpSite() {
     if (siteBusy) return;
     siteBusy = true;
@@ -1358,7 +1367,8 @@
     .side{display:flex;justify-content:flex-end;height:100%;align-items:stretch;pointer-events:none}
     .side>*{pointer-events:auto}
     .rail{width:56px;flex:none;display:flex;flex-direction:column;align-items:center;gap:8px;padding:10px 0;background:#fff;border-left:1px solid var(--line2);box-shadow:-6px 0 20px rgba(0,0,0,.08)}
-    .rail .logo{align-self:stretch;display:flex;justify-content:center;padding:4px 0 12px;margin-bottom:4px;border-bottom:1px solid var(--line)}   /* the brand: its own cell, a line under it */
+    .rail .logo{align-self:stretch;display:flex;justify-content:center;padding:4px 0 12px;margin-bottom:4px;border:0;border-bottom:1px solid var(--line);background:none;cursor:pointer}   /* a button: a click checks for an update */
+    .rail .logo:hover svg{filter:brightness(1.08)}   /* the brand: its own cell, a line under it */
     .rme{flex:none;width:var(--h-rail);height:var(--h-rail);display:grid;place-items:center;overflow:hidden;border:2px solid var(--primary-soft);border-radius:var(--r-round);background:var(--primary-soft);color:var(--primary-h);font-size:16px;font-weight:700;text-decoration:none}
     .rme img{display:block;width:100%;height:100%;object-fit:cover}
     .rme:hover{border-color:var(--primary)}
@@ -1466,7 +1476,7 @@
         <header class="dhead"><h2 id="dtitle"></h2><button class="iconbtn" id="dclose" title="Close (Esc)">${icon('close')}</button></header>
         <div class="dbody" id="dbody"></div>
       </aside>
-      <nav class="rail" id="rail"><div class="logo">${LOGO(36)}</div></nav>
+      <nav class="rail" id="rail"><button class="logo" id="logo" title="NextPlaate: check for an update" aria-label="NextPlaate: check for an update">${LOGO(36)}</button></nav>
     </div>
     <div class="toast" id="status"></div>`;
   document.body.appendChild(host);
@@ -1523,11 +1533,13 @@
     $('drawer').hidden = !openId;
     $('dtitle').textContent = openId ? DRAWERS.find(d => d.id === openId).title : '';
     store.set('drawer', openId || '');
+    window.dispatchEvent(new Event('pmg-drawer'));
   }
   function closeDrawer() {
     openId = null; store.set('drawer', '');
     root.querySelectorAll('.rbtn').forEach(b => b.setAttribute('aria-pressed', 'false'));
     root.querySelectorAll('.dsec').forEach(s => { s.hidden = true; });
+    window.dispatchEvent(new Event('pmg-drawer'));
     $('drawer').hidden = true;
   }
   // While a selection runs, the drawer stays visible but lets clicks reach the site
@@ -2151,10 +2163,9 @@
     const text = await siteFetch(url);
     const doc = new DOMParser().parseFromString(text, 'text/html');
     // the title reads "License plates found <b>N</b>" (the text depends on the account language)
-    const num = doc.querySelector('.breadcrumbs h1 b');
-    if (!num || !/^\s*\d+\s*$/.test(num.textContent)) throw new Error('no count on the page');
-    log('plate count', url, '=' + num.textContent.trim());
-    return { count: +num.textContent, vehicle: +num.textContent ? plateVehicle(doc) : null };
+    const count = siteCount(doc);
+    log('plate count', url, '=' + count);
+    return { count, vehicle: count ? plateVehicle(doc) : null };
   }
 
   function plateInfo(plate) {
@@ -2681,13 +2692,33 @@
     .box{background:#fff;border:1px solid var(--line);padding:10px;display:flex;flex-direction:column;gap:8px}
     .t{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--primary-h)}
     .flags{max-height:70vh;overflow-y:auto}
+    .dtab{display:none}
+    /* no room beside the content: a tab at the right edge, next to the panel, that opens the same box (the same place on every screen) */
+    :host(.dock) .dtab{display:flex;align-items:center;gap:8px;margin-left:auto;height:var(--h);padding:0 12px;border:1px solid var(--line2);background:#fff;color:var(--primary-h);font:inherit;font-size:13px;font-weight:600;cursor:pointer;box-shadow:-2px 2px 10px rgba(0,0,0,.12)}
+    :host(.dock) .dtab:hover{background:var(--primary-tint);border-color:var(--primary)}
+    :host(.dock) .box{display:none;margin-top:6px;box-shadow:-2px 4px 18px rgba(0,0,0,.18)}
+    :host(.dock.open) .box{display:flex}
   `;
   const flagsBarContent = () => [h('div', { class: 't', text: 'Add a photo in…' }), flagBlock(flagsChosen())];
+
+  function flagsDockToggle(open) {
+    const host = document.getElementById('pmg-flags');
+    if (!host) return false;
+    const was = host.classList.contains('open');
+    host.classList.toggle('open', open === undefined ? !was : open);
+    host.shadowRoot.querySelector('.dtab').setAttribute('aria-expanded', String(host.classList.contains('open')));
+    return was;
+  }
 
   function flagsBar() {
     const host = h('div', { id: 'pmg-flags' });
     const root = host.attachShadow({ mode: 'open' });
-    root.append(h('style', { text: UI_BASE + FLAGS_CSS }), h('div', { class: 'box' }, flagsBarContent()));
+    const tab = h('button', { type: 'button', class: 'dtab', 'aria-expanded': 'false', onclick: () => flagsDockToggle() });
+    tab.innerHTML = icon('upload');                                          // our own SVG constant
+    tab.append(h('span', { text: 'Add a photo in…' }));
+    root.append(h('style', { text: UI_BASE + FLAGS_CSS }), tab, h('div', { class: 'box' }, flagsBarContent()));
+    // a click elsewhere closes the open tab
+    document.addEventListener('click', e => { if (host.classList.contains('open') && !e.composedPath().includes(host)) flagsDockToggle(false); });
     return host;
   }
 
@@ -2697,28 +2728,26 @@
     if (host) host.shadowRoot.querySelector('.box').replaceChildren(...flagsBarContent());
   }
 
-  // Beside the content when there is room for it, else under the photo. Called at start, on resize and when the page has loaded.
+  // Beside the content when there is room for it, else a tab at the right edge, next to the panel (the same place whatever the screen,
+  // the profile and the upload pages alike). Called at start, on resize, when the page has loaded and when a drawer opens or closes
+  // (the drawer takes 340 px of the right edge, the rail 56 px).
   function flagsPlace() {
     const host = document.getElementById('pmg-flags');
     if (!host) return;
     const content = document.querySelector('.content .container, .container.content') || document.querySelector('.container');
     const vw = document.documentElement.clientWidth;
-    const panel = 56 + Math.min(340, vw - 56);                       // the rail, and the drawer when it is open
+    const panel = 56 + (openId ? Math.min(340, vw - 56) : 0);
     const right = content ? content.getBoundingClientRect().right : vw;
     const room = vw - panel - right - 2 * FLAGS_GAP;
-    const photo = (document.getElementById('zoomimgid') || {}).parentElement;
+    if (host.parentNode !== document.body) document.body.appendChild(host);
     if (room >= FLAGS_MIN) {
+      const photo = (document.getElementById('zoomimgid') || {}).parentElement;
       const top = (photo || content || document.body).getBoundingClientRect().top + window.scrollY;
-      if (host.parentNode !== document.body) document.body.appendChild(host);
+      host.classList.remove('dock', 'open');
       host.style.cssText = `position:absolute;z-index:50;top:${Math.max(0, top)}px;left:${right + window.scrollX + FLAGS_GAP}px;width:${Math.min(room, FLAGS_MAX)}px`;
     } else {
-      const after = document.getElementById('informer-preview-wrap') || document.getElementById('zoomimgid');
-      const side = here.profile && content && content.querySelector('.col-md-3');      // a profile: under the avatar, in the left column
-      host.style.cssText = 'position:static;margin-top:10px';
-      if (after) after.parentNode.insertBefore(host, after.nextSibling);
-      else if (side) side.appendChild(host);
-      else if (content) content.insertBefore(host, content.firstChild);
-      else document.body.appendChild(host);
+      host.classList.add('dock');
+      host.style.cssText = `position:fixed;z-index:50;top:96px;right:${panel + 8}px;width:min(${FLAGS_MAX + 20}px,calc(100vw - ${panel + 24}px))`;
     }
   }
 
@@ -2752,6 +2781,7 @@
 
   registerFeature({
     id: 'flags', label: 'Country flags',
+    onEscape: () => flagsDockToggle(false), escOrder: 40,                      // Esc closes the open tab (true only if it was open)
     groups: [{
       drawer: 'upload', title: 'Add a photo in a country', about: "Choose the country of the photo you are about to send.", lazy: true,
       build: () => [h('p', { class: 'presult', text: 'Click a country to open its upload page.' }), flagBlock(null)]
@@ -2766,6 +2796,7 @@
       flagsPlace();
       window.addEventListener('resize', flagsPlace);
       window.addEventListener('load', flagsPlace);
+      window.addEventListener('pmg-drawer', flagsPlace);                       // a drawer opened or closed: the room changed
     }
   });
   /* =====================================================================
@@ -3360,7 +3391,7 @@
     } else {
       const side = content && content.querySelector('.col-md-3');
       host.style.cssText = 'position:static;margin-top:10px';
-      if (side) side.insertBefore(host, document.getElementById('pmg-flags') || null);
+      if (side) side.appendChild(host);
       else if (content) content.insertBefore(host, content.firstChild);
       else document.body.appendChild(host);
     }
@@ -3506,9 +3537,7 @@
   // The count a gallery page announces ("License plates found N")
   async function profileCount(url) {
     const doc = new DOMParser().parseFromString(await siteFetch(url), 'text/html');
-    const num = doc.querySelector('.breadcrumbs h1 b');
-    if (!num || !/^\s*\d+\s*$/.test(num.textContent)) throw new Error('no count on the page');
-    return +num.textContent;
+    return siteCount(doc);
   }
 
   const profileNumber = text => +String(text).replace(/\D/g, '') || 0;
@@ -3886,6 +3915,62 @@
       ]
     }],
     init: () => { $('aboutNew').onclick = () => whatsNewOpen(''); whatsNewOnUpdate(); }
+  });
+  /* =====================================================================
+   *  UPDATE  (a click on the logo of the panel: is there a newer version of the script?)
+   *    Asks Greasy Fork for the header of the published script (one small file, only when the logo is clicked) and compares its
+   *    @version with this one. A newer one: a button opens the install page, where Tampermonkey offers the update. Greasy Fork
+   *    answers with access-control-allow-origin: *, so a plain fetch works and no extra permission is needed.
+   *    The dev build is never compared with the published script: it is updated by building it again.
+   * ===================================================================== */
+  const UPDATE_META = 'https://update.greasyfork.org/scripts/598722/NextPlaate.meta.js';
+  const UPDATE_INSTALL = 'https://update.greasyfork.org/scripts/598722/NextPlaate.user.js';
+
+  // true when version a is newer than b, comparing the numbers one by one: 5.10 is newer than 5.9.1
+  function versionNewer(a, b) {
+    const x = String(a).split('.').map(n => +n || 0), y = String(b).split('.').map(n => +n || 0);
+    for (let i = 0; i < Math.max(x.length, y.length); i++) { const d = (x[i] || 0) - (y[i] || 0); if (d) return d > 0; }
+    return false;
+  }
+
+  // The version of the published script, from its header; rejects when it cannot be read in 10 s
+  async function updateLatest() {
+    const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), 10000);
+    try {
+      const res = await fetch(UPDATE_META, { signal: ctrl.signal, cache: 'no-store' });
+      if (!res.ok) throw new Error('Greasy Fork answered ' + res.status);
+      const m = /@version\s+(\S+)/.exec(await res.text());
+      if (!m) throw new Error('no version in the answer');
+      return m[1];
+    } finally { clearTimeout(timer); }
+  }
+
+  function updateOpen() {
+    const status = h('p', { class: 'hint', text: 'Checking Greasy Fork…' });
+    const install = h('button', { type: 'button', class: 'btn', text: 'Update now', hidden: true, onclick: () => {
+      try { if (typeof GM_openInTab === 'function') { GM_openInTab(UPDATE_INSTALL, { active: true }); return; } } catch (e) { /* the plain way below */ }
+      window.open(UPDATE_INSTALL, '_blank', 'noopener');
+    } });
+    const again = h('button', { type: 'button', class: 'btn ghost', text: 'Check again', onclick: () => check() });
+    const modal = modalOpen({ id: 'pmg-update', title: 'NextPlaate ' + SCRIPT_VERSION,
+      body: h('div', { class: 'cardbox' }, status, h('div', { class: 'cardrow' }, install, again)),
+      actions: [{ label: 'Close', kind: 'ghost', run: () => modal.close() }] });
+    modal.message(`by ${AUTHOR.name}`);
+    async function check() {
+      install.hidden = true;
+      if ('0' === '1') { status.textContent = 'This is the dev build: it is updated by building it again, not from Greasy Fork.'; return; }
+      status.textContent = 'Checking Greasy Fork…';
+      try {
+        const latest = await updateLatest();
+        if (versionNewer(latest, SCRIPT_VERSION)) { status.textContent = `Version ${latest} is available (you have ${SCRIPT_VERSION}). Update now opens the install page: Tampermonkey offers the update there.`; install.hidden = false; }
+        else status.textContent = `You have the latest version (${SCRIPT_VERSION}).`;
+      } catch (e) { status.textContent = 'Could not check: ' + (e.name === 'AbortError' ? 'no answer in 10 s' : e.message) + '.'; }
+    }
+    check();
+  }
+
+  registerFeature({
+    init: () => { const logo = $('logo'); if (logo) logo.onclick = updateOpen; }
   });
   /* =====================================================================
    *  BATCH UPLOAD

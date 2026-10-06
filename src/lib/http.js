@@ -22,6 +22,15 @@
     return new Promise((resolve, reject) => { siteQueue.push({ url, resolve, reject }); pumpSite(); });
   }
 
+  // The number a gallery page announces in its title ("License plates found 38.723"): the site writes thousands with a dot (or a
+  // comma, or a space, depending on the language of the account). Throws when the page has no such number.
+  function siteCount(doc) {
+    const num = doc.querySelector('.breadcrumbs h1 b');
+    const t = num ? num.textContent.trim() : '';
+    if (!/^\d{1,3}(?:[.,\s  ]\d{3})+$|^\d+$/.test(t)) throw new Error('no count on the page');
+    return +t.replace(/\D/g, '');
+  }
+
   async function pumpSite() {
     if (siteBusy) return;
     siteBusy = true;

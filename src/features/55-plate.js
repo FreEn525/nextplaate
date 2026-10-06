@@ -36,10 +36,9 @@
     const text = await siteFetch(url);
     const doc = new DOMParser().parseFromString(text, 'text/html');
     // the title reads "License plates found <b>N</b>" (the text depends on the account language)
-    const num = doc.querySelector('.breadcrumbs h1 b');
-    if (!num || !/^\s*\d+\s*$/.test(num.textContent)) throw new Error('no count on the page');
-    log('plate count', url, '=' + num.textContent.trim());
-    return { count: +num.textContent, vehicle: +num.textContent ? plateVehicle(doc) : null };
+    const count = siteCount(doc);
+    log('plate count', url, '=' + count);
+    return { count, vehicle: count ? plateVehicle(doc) : null };
   }
 
   function plateInfo(plate) {

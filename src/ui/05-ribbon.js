@@ -25,7 +25,7 @@
         <header class="dhead"><h2 id="dtitle"></h2><button class="iconbtn" id="dclose" title="Close (Esc)">${icon('close')}</button></header>
         <div class="dbody" id="dbody"></div>
       </aside>
-      <nav class="rail" id="rail"><div class="logo">${LOGO(36)}</div></nav>
+      <nav class="rail" id="rail"><button class="logo" id="logo" title="NextPlaate: check for an update" aria-label="NextPlaate: check for an update">${LOGO(36)}</button></nav>
     </div>
     <div class="toast" id="status"></div>`;
   document.body.appendChild(host);
@@ -82,11 +82,13 @@
     $('drawer').hidden = !openId;
     $('dtitle').textContent = openId ? DRAWERS.find(d => d.id === openId).title : '';
     store.set('drawer', openId || '');
+    window.dispatchEvent(new Event('pmg-drawer'));
   }
   function closeDrawer() {
     openId = null; store.set('drawer', '');
     root.querySelectorAll('.rbtn').forEach(b => b.setAttribute('aria-pressed', 'false'));
     root.querySelectorAll('.dsec').forEach(s => { s.hidden = true; });
+    window.dispatchEvent(new Event('pmg-drawer'));
     $('drawer').hidden = true;
   }
   // While a selection runs, the drawer stays visible but lets clicks reach the site

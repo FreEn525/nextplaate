@@ -54,15 +54,24 @@ def test_on_a_wide_screen_the_bar_stands_beside_the_content_and_never_under_the_
     b = box(page)
     content_right = page.evaluate("() => document.querySelector('.container').getBoundingClientRect().right")
     assert b["left"] >= content_right + 10                            # beside the content, with some space
-    assert b["right"] <= width - PANEL_WIDTH                          # still clear of the rail and the drawer, even open
+    assert b["right"] <= width - 56                                   # clear of the rail (the drawer closed: it reserves no room)
+    page.evaluate(f"() => {PANEL}.querySelector('.rbtn[data-drawer=\"settings\"]').click()")
+    assert box(page)["right"] <= width - PANEL_WIDTH                  # and of the drawer once open (the bar follows)
     assert 150 <= b["width"] <= 320
 
 
-def test_on_a_narrow_screen_the_bar_moves_under_the_photo_and_the_page_is_not_widened(ctx):
+def tab_open(page):
+    """Opens the tab of the docked bar (a no-op where the bar stands beside the content)."""
+    if page.evaluate("() => document.getElementById('pmg-flags').classList.contains('dock')"):
+        page.evaluate(f"() => {BAR}.querySelector('.dtab').click()")
+
+
+def test_on_a_screen_without_room_the_bar_is_a_tab_at_the_right_edge_next_to_the_panel(ctx):
     page = open_page(ctx, "https://platesmania.com/fr/add", 1280)
-    in_the_page = page.evaluate("() => document.getElementById('pmg-flags').parentNode !== document.body || getComputedStyle(document.getElementById('pmg-flags')).position === 'static'")
-    assert in_the_page
-    assert page.evaluate("() => document.documentElement.scrollWidth <= window.innerWidth + 1")
+    assert page.evaluate("() => { const h = document.getElementById('pmg-flags'); return h.classList.contains('dock') && getComputedStyle(h).position === 'fixed'; }")
+    assert page.evaluate("() => document.documentElement.scrollWidth <= window.innerWidth + 1")        # the page is not widened
+    tab = page.evaluate(f"() => {{ const r = {BAR}.querySelector('.dtab').getBoundingClientRect(); return [Math.round(r.right), Math.round(r.height), getComputedStyle({BAR}.querySelector('.box')).display]; }}")
+    assert tab == [1280 - 56 - 8, 38, "none"]                                                         # next to the rail, the box closed
 
 
 def test_the_bar_follows_a_resize(ctx):
@@ -70,7 +79,7 @@ def test_the_bar_follows_a_resize(ctx):
     assert page.evaluate("() => getComputedStyle(document.getElementById('pmg-flags')).position") == "absolute"
     page.set_viewport_size({"width": 1100, "height": 900})
     page.wait_for_timeout(300)
-    assert page.evaluate("() => getComputedStyle(document.getElementById('pmg-flags')).position") == "static"
+    assert page.evaluate("() => getComputedStyle(document.getElementById('pmg-flags')).position") == "fixed"
 
 
 def test_the_panel_lists_the_flags_too(ctx):
@@ -95,6 +104,7 @@ def test_switching_the_feature_off_removes_the_bar_and_the_panel_group(ctx):
 
 def test_a_flag_that_does_not_load_shows_its_code(ctx):
     page = open_page(ctx, "https://platesmania.com/fr/add")
+    tab_open(page)
     page.wait_for_function(f"() => {BAR}.querySelector('.flagcode')", timeout=5000)      # the simulated site has no flag images
     assert page.evaluate(f"() => {BAR}.querySelector('.flagcode').textContent.length") == 2
 
@@ -196,14 +206,14 @@ def test_a_member_profile_has_the_bar_beside_the_content_on_a_wide_screen(ctx):
     assert page.evaluate("() => !!document.getElementById('pmg-flags')")
     b = box(page)
     content_right = page.evaluate("() => document.querySelector('.container.content').getBoundingClientRect().right")
-    assert b["left"] >= content_right + 10 and b["right"] <= width - PANEL_WIDTH
+    assert b["left"] >= content_right + 10 and b["right"] <= width - 56
     content_top = page.evaluate("() => document.querySelector('.container.content').getBoundingClientRect().top + scrollY")
     assert abs(b["top"] - content_top) < 2                              # level with the top of the profile
 
 
-def test_a_member_profile_on_a_narrow_screen_has_the_bar_under_the_avatar(ctx):
+def test_a_member_profile_on_a_narrow_screen_has_the_tab_not_a_box_under_the_avatar(ctx):
     page = open_page(ctx, "https://platesmania.com/user121559", 1280)
-    assert page.evaluate("() => document.getElementById('pmg-flags').parentNode.classList.contains('col-md-3')")
+    assert page.evaluate("() => document.getElementById('pmg-flags').parentNode === document.body && document.getElementById('pmg-flags').classList.contains('dock')")
     assert page.evaluate("() => document.documentElement.scrollWidth <= window.innerWidth + 1")
     assert page.evaluate(f"() => {BAR}.querySelectorAll('a.flag').length") >= 90
 
@@ -215,6 +225,7 @@ def test_the_bar_is_not_on_the_other_pages(ctx):
 
 def test_typing_in_the_country_search_of_the_flag_bar_does_not_trigger_the_keys(ctx):
     page = open_page(ctx, "https://platesmania.com/fr/add")
+    tab_open(page)
     find = page.evaluate_handle(f"() => {BAR}.querySelector('input[type=text]')")
     if find.as_element() is None or not page.evaluate(f"() => !{BAR}.querySelector('input[type=text]').hidden"):
         pytest.skip("the bar has few countries: no search field")
@@ -231,3 +242,33 @@ def test_the_panel_lists_are_built_when_their_drawer_is_opened_not_at_load(ctx):
     assert page.evaluate(f"() => {PANEL}.querySelectorAll('.flagblock').length") == 1
     page.evaluate(f"() => {PANEL}.querySelector('.rbtn[data-drawer=\"settings\"]').click()")
     assert page.evaluate(f"() => {PANEL}.querySelectorAll('.flagpick .pickrows label').length") >= 90
+
+
+def test_the_tab_opens_the_box_and_escape_or_a_click_elsewhere_closes_it(ctx):
+    page = open_page(ctx, "https://platesmania.com/fr/add", 1280)
+    page.evaluate(f"() => {BAR}.querySelector('.dtab').click()")
+    assert page.evaluate(f"() => getComputedStyle({BAR}.querySelector('.box')).display") == "flex"
+    page.keyboard.press("Escape")
+    assert page.evaluate(f"() => getComputedStyle({BAR}.querySelector('.box')).display") == "none"
+    page.evaluate(f"() => {BAR}.querySelector('.dtab').click()")
+    page.mouse.click(300, 600)
+    assert page.evaluate(f"() => getComputedStyle({BAR}.querySelector('.box')).display") == "none"
+
+
+def test_the_tab_is_in_the_same_place_on_the_profile_and_on_the_upload_page_whatever_the_width(ctx):
+    for width in (700, 1024, 1280, 1500):
+        a = open_page(ctx, "https://platesmania.com/user121559", width)
+        b = open_page(ctx, "https://platesmania.com/fr/add", width)
+        ra = a.evaluate(f"() => {{ const r = {BAR}.querySelector('.dtab').getBoundingClientRect(); return [Math.round(r.right), Math.round(r.top)]; }}") if a.evaluate("() => document.getElementById('pmg-flags').classList.contains('dock')") else None
+        rb = b.evaluate(f"() => {{ const r = {BAR}.querySelector('.dtab').getBoundingClientRect(); return [Math.round(r.right), Math.round(r.top)]; }}") if b.evaluate("() => document.getElementById('pmg-flags').classList.contains('dock')") else None
+        if ra and rb:
+            assert ra == rb, width                                                                     # the same place on both pages
+
+
+def test_opening_a_drawer_changes_the_room_and_the_bar_follows(ctx):
+    page = open_page(ctx, "https://platesmania.com/fr/add", 1700)
+    assert page.evaluate("() => document.getElementById('pmg-flags').classList.contains('dock')") is False        # room beside the content
+    page.evaluate(f"() => {PANEL}.querySelector('.rbtn[data-drawer=\"settings\"]').click()")
+    assert page.evaluate("() => document.getElementById('pmg-flags').classList.contains('dock')") is True        # the drawer took the room: a tab
+    right = page.evaluate(f"() => Math.round({BAR}.querySelector('.dtab').getBoundingClientRect().right)")
+    assert right == 1700 - 56 - 340 - 8                                                              # next to the open drawer, not under it

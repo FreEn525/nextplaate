@@ -32,9 +32,7 @@
   // The count a gallery page announces ("License plates found N")
   async function profileCount(url) {
     const doc = new DOMParser().parseFromString(await siteFetch(url), 'text/html');
-    const num = doc.querySelector('.breadcrumbs h1 b');
-    if (!num || !/^\s*\d+\s*$/.test(num.textContent)) throw new Error('no count on the page');
-    return +num.textContent;
+    return siteCount(doc);
   }
 
   const profileNumber = text => +String(text).replace(/\D/g, '') || 0;

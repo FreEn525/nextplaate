@@ -178,7 +178,7 @@ def route_site(context):
             SEARCHES.append(plate)
             # the photos of a plate, each with the catalogue link of its vehicle: AB123CD is two Golf Mk8 and a Polo, ZZ999ZZ a brand the menus do not know
             cars = {"AB123CD": ["markaavto=7&model=70&modgen=701", "markaavto=7&model=70&modgen=701", "markaavto=7&model=71"], "ZZ999ZZ": ["markaavto=9999&model=1"]}.get(plate, [])
-            n = 2 if plate == "AB123CD" else len(cars)
+            n = 2 if plate == "AB123CD" else "1.234" if plate == "TT111TT" else len(cars)           # the site writes thousands with a dot
             cards = "".join(f'<div class="panel-body"><h4 class="text-center"><a href="/fr/nomer{i}">car</a></h4><small><p class="text-center"><a href="/gallery.php?{c}">gen</a></p></small></div>' for i, c in enumerate(cars))
             html = HEAD.format(title="Search") + f'<div class="breadcrumbs"><h1 class="pull-left">License plates found <b>{n}</b></h1></div>{cards}</body></html>'
             return route.fulfill(status=200, content_type="text/html; charset=utf-8", body=html)
@@ -210,7 +210,7 @@ def route_site(context):
         if path == "/gallery.php" and "usr" in query:
             # a member's gallery: the real total, or the count inside a window of dates
             GALLERY_USR.append(query)
-            n = 2 if "date1" in query else 1 if "modgen" in query else 3 if "model" in query else 5 if "markaavto" in query else 731
+            n = 2 if "date1" in query else 1 if "modgen" in query else 3 if "model" in query else 5 if "markaavto" in query else "38.723" if query.get("usr") == ["101605"] else 731
             html = HEAD.format(title="Gallery") + f'<div class="breadcrumbs"><h1 class="pull-left">License plates found <b>{n}</b></h1></div></body></html>'
             return route.fulfill(status=200, content_type="text/html; charset=utf-8", body=html)
         if path in ("/fr/gallery.php",):
@@ -228,7 +228,7 @@ def route_site(context):
             html = (HEAD.format(title="Profile") + '<div class="container content profile" style="max-width:1170px;width:100%;margin:0 auto"><div class="row"><div class="col-md-3 text-center">'
                     + f'<img class="img-responsive profile-img" width="120" height="120" alt="" src="https://forum.platesmania.com/data/avatars/l/121/{uid}.jpg"></div>'
                     + f'<div class="col-md-9"><h1><a href="https://forum.platesmania.com/members/member{uid}.{uid}/">member{uid}</a> <small class="pull-right">ID: {uid}</small></h1></div></div>'
-                    + f'<div class="service-block-v3"><a href="/userreg.php?gallery=fr1-{uid}" class="tooltips"><i class="fa fa-globe"></i></a><span class="counter"><a href="/gallery.php?usr={uid}">715 </a>  <font style="color:green">(+28)</font></span></div></div></body></html>')
+                    + f'<div class="service-block-v3"><a href="/userreg.php?gallery=fr1-{uid}" class="tooltips"><i class="fa fa-globe"></i></a><span class="counter"><a href="/gallery.php?usr={uid}">{"38.723" if uid == "101605" else "715"} </a>  <font style="color:green">(+61)</font></span></div></div></body></html>')
         elif path == "/add":
             # the real page of the site: a form with the menu of countries, and the right column with the photo placeholders
             options = "".join(f'<option value="/{c}/add">{n}</option>' for c, n in [("al", "Albania"), ("be", "Belgium"), ("fr", "France"), ("de", "Germany"), ("it", "Italy"), ("lu", "Luxembourg"), ("nl", "Netherlands"), ("uk", "United Kingdom"), ("xx", "Non-recognized and partially recognized states")])

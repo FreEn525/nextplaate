@@ -252,7 +252,7 @@
     } else {
       const side = content && content.querySelector('.col-md-3');
       host.style.cssText = 'position:static;margin-top:10px';
-      if (side) side.insertBefore(host, document.getElementById('pmg-flags') || null);
+      if (side) side.appendChild(host);
       else if (content) content.insertBefore(host, content.firstChild);
       else document.body.appendChild(host);
     }

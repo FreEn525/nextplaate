@@ -55,13 +55,33 @@
     .box{background:#fff;border:1px solid var(--line);padding:10px;display:flex;flex-direction:column;gap:8px}
     .t{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--primary-h)}
     .flags{max-height:70vh;overflow-y:auto}
+    .dtab{display:none}
+    /* no room beside the content: a tab at the right edge, next to the panel, that opens the same box (the same place on every screen) */
+    :host(.dock) .dtab{display:flex;align-items:center;gap:8px;margin-left:auto;height:var(--h);padding:0 12px;border:1px solid var(--line2);background:#fff;color:var(--primary-h);font:inherit;font-size:13px;font-weight:600;cursor:pointer;box-shadow:-2px 2px 10px rgba(0,0,0,.12)}
+    :host(.dock) .dtab:hover{background:var(--primary-tint);border-color:var(--primary)}
+    :host(.dock) .box{display:none;margin-top:6px;box-shadow:-2px 4px 18px rgba(0,0,0,.18)}
+    :host(.dock.open) .box{display:flex}
   `;
   const flagsBarContent = () => [h('div', { class: 't', text: 'Add a photo in…' }), flagBlock(flagsChosen())];
+
+  function flagsDockToggle(open) {
+    const host = document.getElementById('pmg-flags');
+    if (!host) return false;
+    const was = host.classList.contains('open');
+    host.classList.toggle('open', open === undefined ? !was : open);
+    host.shadowRoot.querySelector('.dtab').setAttribute('aria-expanded', String(host.classList.contains('open')));
+    return was;
+  }
 
   function flagsBar() {
     const host = h('div', { id: 'pmg-flags' });
     const root = host.attachShadow({ mode: 'open' });
-    root.append(h('style', { text: UI_BASE + FLAGS_CSS }), h('div', { class: 'box' }, flagsBarContent()));
+    const tab = h('button', { type: 'button', class: 'dtab', 'aria-expanded': 'false', onclick: () => flagsDockToggle() });
+    tab.innerHTML = icon('upload');                                          // our own SVG constant
+    tab.append(h('span', { text: 'Add a photo in…' }));
+    root.append(h('style', { text: UI_BASE + FLAGS_CSS }), tab, h('div', { class: 'box' }, flagsBarContent()));
+    // a click elsewhere closes the open tab
+    document.addEventListener('click', e => { if (host.classList.contains('open') && !e.composedPath().includes(host)) flagsDockToggle(false); });
     return host;
   }
 
@@ -71,28 +91,26 @@
     if (host) host.shadowRoot.querySelector('.box').replaceChildren(...flagsBarContent());
   }
 
-  // Beside the content when there is room for it, else under the photo. Called at start, on resize and when the page has loaded.
+  // Beside the content when there is room for it, else a tab at the right edge, next to the panel (the same place whatever the screen,
+  // the profile and the upload pages alike). Called at start, on resize, when the page has loaded and when a drawer opens or closes
+  // (the drawer takes 340 px of the right edge, the rail 56 px).
   function flagsPlace() {
     const host = document.getElementById('pmg-flags');
     if (!host) return;
     const content = document.querySelector('.content .container, .container.content') || document.querySelector('.container');
     const vw = document.documentElement.clientWidth;
-    const panel = 56 + Math.min(340, vw - 56);                       // the rail, and the drawer when it is open
+    const panel = 56 + (openId ? Math.min(340, vw - 56) : 0);
     const right = content ? content.getBoundingClientRect().right : vw;
     const room = vw - panel - right - 2 * FLAGS_GAP;
-    const photo = (document.getElementById('zoomimgid') || {}).parentElement;
+    if (host.parentNode !== document.body) document.body.appendChild(host);
     if (room >= FLAGS_MIN) {
+      const photo = (document.getElementById('zoomimgid') || {}).parentElement;
       const top = (photo || content || document.body).getBoundingClientRect().top + window.scrollY;
-      if (host.parentNode !== document.body) document.body.appendChild(host);
+      host.classList.remove('dock', 'open');
       host.style.cssText = `position:absolute;z-index:50;top:${Math.max(0, top)}px;left:${right + window.scrollX + FLAGS_GAP}px;width:${Math.min(room, FLAGS_MAX)}px`;
     } else {
-      const after = document.getElementById('informer-preview-wrap') || document.getElementById('zoomimgid');
-      const side = here.profile && content && content.querySelector('.col-md-3');      // a profile: under the avatar, in the left column
-      host.style.cssText = 'position:static;margin-top:10px';
-      if (after) after.parentNode.insertBefore(host, after.nextSibling);
-      else if (side) side.appendChild(host);
-      else if (content) content.insertBefore(host, content.firstChild);
-      else document.body.appendChild(host);
+      host.classList.add('dock');
+      host.style.cssText = `position:fixed;z-index:50;top:96px;right:${panel + 8}px;width:min(${FLAGS_MAX + 20}px,calc(100vw - ${panel + 24}px))`;
     }
   }
 
@@ -126,6 +144,7 @@
 
   registerFeature({
     id: 'flags', label: 'Country flags',
+    onEscape: () => flagsDockToggle(false), escOrder: 40,                      // Esc closes the open tab (true only if it was open)
     groups: [{
       drawer: 'upload', title: 'Add a photo in a country', about: "Choose the country of the photo you are about to send.", lazy: true,
       build: () => [h('p', { class: 'presult', text: 'Click a country to open its upload page.' }), flagBlock(null)]
@@ -140,5 +159,6 @@
       flagsPlace();
       window.addEventListener('resize', flagsPlace);
       window.addEventListener('load', flagsPlace);
+      window.addEventListener('pmg-drawer', flagsPlace);                       // a drawer opened or closed: the room changed
     }
   });

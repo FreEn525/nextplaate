@@ -98,3 +98,8 @@ def test_the_card_links_to_the_sites_own_search_of_the_plate(ctx):
     card_text(page)                                                                                      # waits for the answer
     link = page.evaluate(f"() => {{ const a = [...{CARD}.querySelectorAll('a.btn')].find(x => x.textContent.startsWith('See the')); return a && [a.textContent, a.getAttribute('href'), a.target, a.rel]; }}")
     assert link == ["See the 2 photos of this plate on the site", "/fr/gallery.php?gal=fr&nomer=AB-123-CD", "_blank", "noopener noreferrer"]
+
+
+def test_a_plate_with_thousands_of_photos_is_counted(ctx):
+    page = open_add(ctx, "TT 111 TT")
+    assert "1234 photos of this plate" in card_text(page).replace("1 234", "1234")

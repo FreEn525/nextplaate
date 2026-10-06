@@ -33,6 +33,12 @@ Chaque fonction a un interrupteur dans Settings (sauf Settings elle-même) : ét
 
 Autour de ces fonctions : la barre d'icônes (avec votre photo de profil sous le logo), le message d'état en bas, et pour le développement le tiroir Developer du build dev (capture, test de plaques, vérification des lectures, base).
 
+## Autour des fonctions
+
+- **Logo du panneau** (5.10, `src/features/91-update.js`) : un clic demande à Greasy Fork l'en-tête du script publié (`update.greasyfork.org/.../NextPlaate.meta.js`, CORS ouvert, donc un `fetch` simple), compare les versions chiffre par chiffre et propose *Update now* (page d'installation, où Tampermonkey propose la mise à jour). Rien n'est demandé avant le clic ; le build dev n'est pas comparé.
+- **Barre de drapeaux** (5.10) : à côté du contenu s'il y a la place (le tiroir n'est compté que s'il est ouvert) ; sinon un onglet *Add a photo in…* au bord droit, à côté du panneau, qui ouvre la même boîte (Échap ou un clic ailleurs la ferme). Même endroit sur le profil et sur les pages d'ajout, à toute largeur.
+- **Compteurs de galerie** : `siteCount` (`src/lib/http.js`) lit le nombre du titre de la page, y compris avec un point de milliers (`38.723`).
+
 ## Où chaque fonction marche (le même texte est dans Settings, `src/lib/featureinfo.js`)
 
 La barre suit l'ordre d'usage : **Check a plate** (vérifier ce qu'on va envoyer), **Send photos**, **Describe a pair**, **Browse**, puis Shortcuts et Settings. Chaque case dit en une phrase à quoi elle sert, et Settings donne pour chaque fonction ce qu'elle fait et où elle marche.
@@ -230,7 +236,7 @@ Chaque fonction s'enregistre avec `registerFeature({ groups, keys, onEscape, ini
 
 ## Tests (`tests/`)
 
-- `python -m pytest -q` (dossier `tests/e2e/`) : 347 tests (356 avec le build dev, `NEXTPLAATE_SCRIPT=nextplaate.dev.user.js`) sur une version simulée du site (`fake_site.py`, avec une fausse page Google pour le Lens). Un fichier par fonction (`test_lens.py`, `test_tags.py`, `test_members.py`, `test_flags.py`, `test_extra.py`, `test_preview.py`…), plus `test_style.py` (couleurs, rayons, tailles, hauteurs) et `test_responsive.py` (aucun débordement de 320 à 1280 px). Pas d'accès réel à PlatesMania ni à Google.
+- `python -m pytest -q` (dossier `tests/e2e/`) : 357 tests (362 avec le build dev, `NEXTPLAATE_SCRIPT=nextplaate.dev.user.js`) sur une version simulée du site (`fake_site.py`, avec une fausse page Google pour le Lens). Un fichier par fonction (`test_lens.py`, `test_tags.py`, `test_members.py`, `test_flags.py`, `test_extra.py`, `test_preview.py`…), plus `test_style.py` (couleurs, rayons, tailles, hauteurs) et `test_responsive.py` (aucun débordement de 320 à 1280 px). Pas d'accès réel à PlatesMania ni à Google.
 - `python tests/offline/check_known.py` : 39 plaques validées à la main, tapées dans les pages sauvegardées.
 - `python tests/offline/check_db.py` : toutes les plaques de la base, dans la catégorie correspondante, en parallèle. Hors ligne.
 - Les données dérivées : `node scripts/refresh-data.mjs` → `data/` et `docs/COUVERTURE.md` (voir `data/README.md`).

@@ -8,9 +8,7 @@
 
   async function ptSearchCount(cc, plate) {
     const text = await siteFetch(`/${cc}/gallery.php?gal=${cc}&nomer=${encodeURIComponent(plate).replace(/%20/g, '+')}`);
-    const num = new DOMParser().parseFromString(text, 'text/html').querySelector('.breadcrumbs h1 b');
-    if (!num || !/^\s*\d+\s*$/.test(num.textContent)) throw new Error('no count on the page');
-    return +num.textContent;
+    return siteCount(new DOMParser().parseFromString(text, 'text/html'));
   }
 
   async function ptVerifyReads(rows) {

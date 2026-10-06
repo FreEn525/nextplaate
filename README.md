@@ -60,6 +60,7 @@ Where a key is given, it can be changed in the Shortcuts drawer.
 - It works on `platesmania.com`. Everything it reads from the site goes through one queue (one request at a time, three seconds apart, a pause after a block).
 - **Google Lens only**: the script also runs on `www.google.*` and `lens.google.com`, but there it does something only for a search that the panel asked for, and it stops at once on any other Google page. It needs `GM_setValue` and `GM_getValue` to pass the photo to that page and the results back.
 - **Official register** (Netherlands, Israel): only when you click its button, the plate is sent to that country's open register (`opendata.rdw.nl`, `data.gov.il`), whose data is public and free.
+- **Update check**: only when you click the logo of the panel, the script reads the header of the published script on Greasy Fork (`update.greasyfork.org`) to compare versions.
 - **Lookup links** are plain links: they open a public lookup site in a new tab only when you click one, and the script reads nothing from those sites.
 - `GM_openInTab` opens the tabs of the batch upload and of the Lens search. Nothing is sent to any server of ours: there is none.
 
