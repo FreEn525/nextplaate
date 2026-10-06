@@ -68,7 +68,12 @@
     .tagquick,.taggroup{display:flex;flex-direction:column;gap:6px}
     .taggroups{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px 18px}
     .flags{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:6px}
+    .mhead{display:flex;align-items:center;gap:8px;min-height:var(--h-sm)}
+    .mactions{margin-left:auto;display:flex;align-items:center;gap:6px}
+    .star{font-size:18px;line-height:1}
+    .star.on{color:var(--primary);border-color:var(--primary-soft);background:var(--primary-tint)}
     .members{display:flex;flex-direction:column;gap:6px}
+    .mlines{display:flex;flex-direction:column}
     .mrow{display:flex;align-items:stretch;gap:6px;position:relative}
     .mrow.dragging{opacity:.4}
     .mrow.before::before,.mrow.after::after{content:'';position:absolute;left:0;right:0;height:3px;background:var(--primary)}
@@ -77,16 +82,15 @@
     .grip{flex:none;width:22px;padding:0;border:0;background:none;color:var(--off-ink);font:inherit;font-weight:700;letter-spacing:-2px;cursor:grab}
     .grip:hover,.grip:focus-visible{color:var(--primary-h)}
     .grip.off{cursor:default;color:transparent}
-    .mrow.pinned .member{background:var(--primary-tint);border-color:var(--primary-soft)}
-    .member .mtag{flex:none;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--primary-h)}
-    .member{flex:1;min-width:0;display:flex;align-items:center;gap:10px;padding:6px;border:1px solid var(--line2);background:#fff;color:var(--ink);text-decoration:none}
+    .member{flex:1;min-width:0;display:flex;align-items:center;gap:12px;padding:6px 8px;border:1px solid var(--line);background:#fff;color:var(--ink);text-decoration:none}
     .member:hover{background:var(--primary-tint);border-color:var(--primary-soft)}
     .member.on{border-color:var(--primary);box-shadow:inset 0 0 0 1px var(--primary)}
-    .member img,.member .mav{flex:none;width:36px;height:36px;object-fit:cover;background:var(--soft)}
-    .member .mav{display:grid;place-items:center;font-weight:700;color:var(--primary-h);background:var(--primary-soft)}
-    .member .mname{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
-    .mrow .iconbtn{height:auto;min-height:48px}
-    .mrow:not(.pinned) .member{cursor:pointer}
+    .mrow.pinned .member{background:var(--primary-tint);border-color:var(--primary-soft)}
+    .member img,.member .mav{flex:none;width:40px;height:40px;object-fit:cover;background:var(--soft)}
+    .member .mav{display:grid;place-items:center;font-weight:700;font-size:16px;color:var(--primary-h);background:var(--primary-soft)}
+    .member .mname{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px;font-weight:600}
+    .member .mtag{flex:none;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--primary-h)}
+    .mrow .iconbtn{height:auto;min-height:52px}
     .flagpick{display:flex;flex-direction:column;gap:8px}
     .flagpick input[type=text]{width:100%}
     .pickrows{display:flex;flex-direction:column;gap:6px;max-height:340px;overflow-y:auto;padding:2px}

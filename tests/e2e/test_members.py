@@ -43,6 +43,11 @@ def ids(page, root=BAR):
     return page.evaluate(f"() => [...{root}.querySelectorAll('.mrow')].map(r => r.dataset.id)")
 
 
+def edit(page, root=BAR):
+    """Presses Edit (or Done) in the title line of the list."""
+    page.evaluate(f"() => {root}.querySelector('.mhead .btn').click()")
+
+
 def member(i, name=None, avatar=""):
     return {"id": str(i), "name": name or f"member{i}", "avatar": avatar}
 
@@ -55,9 +60,9 @@ THREE = [member(101), member(102), member(103)]
 
 def test_add_this_member_keeps_the_picture_the_name_and_the_number(ctx):
     page = open_page(ctx, OTHER)
-    page.evaluate(f"() => {BAR}.querySelector('.box > .btn').click()")
+    page.evaluate(f"() => {BAR}.querySelector('.mhead .star').click()")
     assert stored(page) == [{"id": "121546", "name": "member121546", "avatar": "https://forum.platesmania.com/data/avatars/l/121/121546.jpg"}]
-    assert page.evaluate(f"() => {BAR}.querySelector('.box > .btn').textContent") == "Remove this member"
+    assert page.evaluate(f"() => [{BAR}.querySelector('.mhead .star').textContent, {BAR}.querySelector('.mhead .star').classList.contains('on')]") == ["\u2605", True]   # a filled star
 
 
 def test_a_shortcut_is_the_picture_and_the_name_and_leads_to_the_member_page(ctx):
@@ -75,6 +80,7 @@ def test_the_member_of_the_page_is_marked(ctx):
 
 def test_a_shortcut_can_be_removed_and_the_list_keeps_you(ctx):
     page = open_page(ctx, OTHER, members=SAMPLE)
+    edit(page)
     page.evaluate(f"() => {BAR}.querySelector('.mrow:not(.pinned) .iconbtn').click()")
     assert [m["id"] for m in stored(page)] == ["67996"]
     page.evaluate(f"() => {BAR}.querySelector('.mrow:not(.pinned) .iconbtn').click()")
@@ -85,7 +91,7 @@ def test_a_shortcut_can_be_removed_and_the_list_keeps_you(ctx):
 def test_adding_the_same_member_twice_keeps_one(ctx):
     page = open_page(ctx, OTHER)
     for _ in range(3):
-        page.evaluate(f"() => {BAR}.querySelector('.box > .btn').click()")                          # add, remove, add
+        page.evaluate(f"() => {BAR}.querySelector('.mhead .star').click()")                         # add, remove, add
     assert len(stored(page)) == 1
 
 
@@ -94,6 +100,7 @@ def test_adding_the_same_member_twice_keeps_one(ctx):
 def test_you_are_the_first_line_and_cannot_be_moved_or_removed(ctx):
     page = open_page(ctx, OTHER, members=SAMPLE)
     assert ids(page) == ["121559", "121546", "67996"]
+    edit(page)                                                                                         # even when editing, you have no grip and no cross
     first = page.evaluate(f"() => {{ const r = {BAR}.querySelector('.mrow'); return [r.classList.contains('pinned'), r.getAttribute('draggable'), !!r.querySelector('.iconbtn'), !!r.querySelector('button.grip'), r.querySelector('.mtag').textContent, r.querySelector('.mname').textContent]; }}")
     assert first == [True, None, False, False, "You", "freen525"]
 
@@ -105,9 +112,9 @@ def test_you_are_first_in_the_panel_too_and_not_listed_twice(ctx):
 
 def test_the_add_button_is_not_offered_on_your_own_page(ctx):
     page = open_page(ctx, ME)
-    assert page.evaluate(f"() => !{BAR}.querySelector('.box > .btn')")
+    assert page.evaluate(f"() => !{BAR}.querySelector('.mhead .star')")
     page = open_page(ctx, OTHER)
-    assert page.evaluate(f"() => !!{BAR}.querySelector('.box > .btn')")                             # another member: offered
+    assert page.evaluate(f"() => !!{BAR}.querySelector('.mhead .star')")                            # another member: offered
 
 
 def test_your_picture_is_kept_from_your_own_page(ctx):
@@ -125,6 +132,8 @@ def test_your_picture_is_read_once_from_your_page_when_it_is_not_known(ctx):
 # ---------------------------------------------------------------- the order
 
 def drag(page, source_id, target_id, where="bottom", root="#pmg-members"):
+    if not page.locator(f"{root} .mrow[data-id='{source_id}'] .grip").count():
+        edit(page, BAR if root == "#pmg-members" else PANEL)
     src = page.locator(f"{root} .mrow[data-id='{source_id}'] .grip")
     dst = page.locator(f"{root} .mrow[data-id='{target_id}']")
     box = dst.bounding_box()
@@ -165,6 +174,7 @@ def test_the_panel_list_can_be_dragged_too(ctx):
 
 def test_the_grip_moves_a_line_with_the_arrow_keys_and_keeps_the_focus(ctx):
     page = open_page(ctx, OTHER, members=THREE)
+    edit(page)
     page.evaluate(f"() => {BAR}.querySelector('.mrow[data-id=\"103\"] .grip').focus()")
     page.keyboard.press("ArrowUp")
     assert [m["id"] for m in stored(page)] == ["101", "103", "102"]
@@ -186,6 +196,8 @@ def test_the_panel_lists_the_same_shortcuts_on_any_page(ctx):
 
 
 def add_by(page, text):
+    if not page.evaluate(f"() => !!{PANEL}.querySelector('.membersadd')"):
+        edit(page, PANEL)                                                                             # the box to add is there while editing
     page.evaluate(f"(t) => {{ const i = {PANEL}.querySelector('.membersadd input'); i.value = t; {PANEL}.querySelector('.membersadd .btn').click(); }}", text)
 
 
@@ -259,3 +271,52 @@ def test_switching_the_feature_off_removes_the_bar_and_the_panel_group(ctx):
     page.wait_for_timeout(200)
     assert page.evaluate("() => !document.getElementById('pmg-members')")
     assert page.evaluate(f"() => !{PANEL}.getElementById('membersPanel')")
+
+
+# ---------------------------------------------------------------- the way it is used
+
+def test_nothing_says_null_when_the_list_is_only_you(ctx):
+    for url in (ME, OTHER, GALLERY):
+        page = open_page(ctx, url)
+        texts = [page.evaluate(f"() => {PANEL}.getElementById('membersPanel').textContent")]
+        if url != GALLERY:
+            texts.append(page.evaluate(f"() => {BAR}.textContent"))
+        assert all("null" not in t for t in texts), (url, texts)
+
+
+def test_looking_is_clean_and_editing_adds_the_grips_the_crosses_and_the_box(ctx):
+    page = open_page(ctx, OTHER, members=SAMPLE)
+    assert page.evaluate(f"() => [{BAR}.querySelectorAll('.grip').length, {BAR}.querySelectorAll('.mrow .iconbtn').length, !!{BAR}.querySelector('.membersadd')]") == [0, 0, False]
+    assert page.evaluate(f"() => {BAR}.querySelector('.mhead .btn').textContent") == "Edit"
+    edit(page)
+    assert page.evaluate(f"() => [{BAR}.querySelectorAll('.grip:not(.off)').length, {BAR}.querySelectorAll('.mrow .iconbtn').length, !!{BAR}.querySelector('.membersadd')]") == [2, 2, True]
+    assert page.evaluate(f"() => {BAR}.querySelector('.mhead .btn').textContent") == "Done"
+    edit(page)
+    assert page.evaluate(f"() => {BAR}.querySelectorAll('.grip').length") == 0
+
+
+def test_editing_in_one_place_is_editing_in_the_other(ctx):
+    page = open_page(ctx, OTHER, members=SAMPLE)
+    edit(page)
+    assert page.evaluate(f"() => !!{PANEL}.querySelector('#membersPanel .membersadd')")
+
+
+def test_with_many_members_a_box_finds_one_by_typing(ctx):
+    many = [member(200 + i, f"name{i}") for i in range(10)]
+    page = open_page(ctx, OTHER, members=many)
+    page.evaluate(f"() => {{ const i = {BAR}.querySelector('.box > input'); i.value = 'name7'; i.dispatchEvent(new Event('input')); }}")
+    shown = page.evaluate(f"() => [...{BAR}.querySelectorAll('.mrow:not(.pinned) .mname')].map(e => e.textContent)")
+    assert shown == ["name7"]
+    assert page.evaluate(f"() => !!{BAR}.querySelector('.mrow.pinned')")                              # you stay
+
+
+def test_with_few_members_there_is_no_find_box(ctx):
+    page = open_page(ctx, OTHER, members=THREE)
+    assert page.evaluate(f"() => !{BAR}.querySelector('.box > input')")
+
+
+def test_an_empty_list_says_what_to_do(ctx):
+    page = open_page(ctx, OTHER)
+    assert "Press the star" in page.evaluate(f"() => {BAR}.querySelector('.hint').textContent")
+    page = open_page(ctx, GALLERY)
+    assert "press Edit" in page.evaluate(f"() => {PANEL}.querySelector('#membersPanel .hint').textContent")

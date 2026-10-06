@@ -1037,7 +1037,12 @@
     .tagquick,.taggroup{display:flex;flex-direction:column;gap:6px}
     .taggroups{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px 18px}
     .flags{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:6px}
+    .mhead{display:flex;align-items:center;gap:8px;min-height:var(--h-sm)}
+    .mactions{margin-left:auto;display:flex;align-items:center;gap:6px}
+    .star{font-size:18px;line-height:1}
+    .star.on{color:var(--primary);border-color:var(--primary-soft);background:var(--primary-tint)}
     .members{display:flex;flex-direction:column;gap:6px}
+    .mlines{display:flex;flex-direction:column}
     .mrow{display:flex;align-items:stretch;gap:6px;position:relative}
     .mrow.dragging{opacity:.4}
     .mrow.before::before,.mrow.after::after{content:'';position:absolute;left:0;right:0;height:3px;background:var(--primary)}
@@ -1046,16 +1051,15 @@
     .grip{flex:none;width:22px;padding:0;border:0;background:none;color:var(--off-ink);font:inherit;font-weight:700;letter-spacing:-2px;cursor:grab}
     .grip:hover,.grip:focus-visible{color:var(--primary-h)}
     .grip.off{cursor:default;color:transparent}
-    .mrow.pinned .member{background:var(--primary-tint);border-color:var(--primary-soft)}
-    .member .mtag{flex:none;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--primary-h)}
-    .member{flex:1;min-width:0;display:flex;align-items:center;gap:10px;padding:6px;border:1px solid var(--line2);background:#fff;color:var(--ink);text-decoration:none}
+    .member{flex:1;min-width:0;display:flex;align-items:center;gap:12px;padding:6px 8px;border:1px solid var(--line);background:#fff;color:var(--ink);text-decoration:none}
     .member:hover{background:var(--primary-tint);border-color:var(--primary-soft)}
     .member.on{border-color:var(--primary);box-shadow:inset 0 0 0 1px var(--primary)}
-    .member img,.member .mav{flex:none;width:36px;height:36px;object-fit:cover;background:var(--soft)}
-    .member .mav{display:grid;place-items:center;font-weight:700;color:var(--primary-h);background:var(--primary-soft)}
-    .member .mname{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
-    .mrow .iconbtn{height:auto;min-height:48px}
-    .mrow:not(.pinned) .member{cursor:pointer}
+    .mrow.pinned .member{background:var(--primary-tint);border-color:var(--primary-soft)}
+    .member img,.member .mav{flex:none;width:40px;height:40px;object-fit:cover;background:var(--soft)}
+    .member .mav{display:grid;place-items:center;font-weight:700;font-size:16px;color:var(--primary-h);background:var(--primary-soft)}
+    .member .mname{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px;font-weight:600}
+    .member .mtag{flex:none;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--primary-h)}
+    .mrow .iconbtn{height:auto;min-height:52px}
     .flagpick{display:flex;flex-direction:column;gap:8px}
     .flagpick input[type=text]{width:100%}
     .pickrows{display:flex;flex-direction:column;gap:6px;max-height:340px;overflow-y:auto;padding:2px}
@@ -2629,17 +2633,21 @@
    *  MEMBER SHORTCUTS  (the profiles of members you go to often, one click away)
    *    A shortcut is a member's picture and name; a click goes to the member's page (/user<id>). The list is yours (kept in the
    *    browser) and starts with you: the member who is logged in (read from the site's top bar) is always the first line, which
-   *    cannot be moved or removed, and the members you added come after, in the order you choose: drag a line by its grip, or focus
-   *    the grip and press the Up / Down arrow keys.
+   *    cannot be moved or removed.
+   *    Two ways of using it, so the everyday one stays clean:
+   *      - looking: only the lines, nothing else. On a member's profile a star in the title saves that member (or takes them off);
+   *        with more than eight members a box finds one by typing;
+   *      - editing (the Edit button, Done to leave): each line gets a grip to drag it (a bar shows where it lands, never above you;
+   *        or focus the grip and press Up / Down), a cross to remove it, and a box adds a member by number or by the link of
+   *        their page (the page is read once, through the script's own queue, for the picture and the name).
    *    The list is in the panel (Gallery drawer) and, on a member's profile, right on the site, to the LEFT of the content, level with
    *    the profile picture (the flags are on the right); on a narrower screen it moves under the picture, in the left column.
-   *    A member is added from their profile ("Add this member", not offered on your own page), or from anywhere with their number or
-   *    the link of their page: the page is read once, through the script's own queue of requests (one at a time), for the picture and
-   *    the name.
    * ===================================================================== */
   const MEMBERS_GAP = 16;
   const MEMBERS_MIN = 170;        // narrower than this, the list goes under the picture
   const MEMBERS_MAX = 300;
+  const MEMBERS_FIND_FROM = 9;    // from this many members, a box to find one
+  let membersEditing = false;     // editing or looking (the same in the panel and on the page)
 
   const membersGet = () => { try { const v = JSON.parse(store.get('members', '[]')); return Array.isArray(v) ? v : []; } catch (e) { return []; } };
   const membersSet = list => store.set('members', JSON.stringify(list));
@@ -2709,77 +2717,70 @@
   // The page we are on, when it is a profile
   const memberHere = () => (here.profile ? memberInfo(document, (location.pathname.match(/\d+/) || [])[0]) : null);
 
-  // ---- one list, used in the panel and on the page
-  function memberLine(m, opts) {
+  // ---- the parts of the view
+  function memberLine(m, me) {
     const initial = h('span', { class: 'mav', text: (m.name[0] || '?').toUpperCase() });
-    const img = h('img', { src: m.avatar, alt: '', width: 36, height: 36 });
+    const img = h('img', { src: m.avatar, alt: '', width: 40, height: 40 });
     img.addEventListener('error', () => img.replaceWith(initial));
     const now = memberHere();
-    const link = h('a', { class: 'member' + (now && now.id === m.id ? ' on' : '') + (opts.me ? ' me' : ''), href: `/user${m.id}`, title: m.name },
-      m.avatar ? img : initial, h('span', { class: 'mname', text: m.name }), opts.me ? h('span', { class: 'mtag', text: 'You' }) : null);
-    return link;
+    return h('a', { class: 'member' + (now && now.id === m.id ? ' on' : '') + (me ? ' me' : ''), href: `/user${m.id}`, title: m.name },
+      m.avatar ? img : initial, h('span', { class: 'mname', text: m.name }), me ? h('span', { class: 'mtag', text: 'You' }) : null);
   }
 
-  function membersList(where) {
-    const { me, others } = membersAll();
-    membersMeAvatar(me);
-    if (!me && !others.length) return h('p', { class: 'presult', text: 'No shortcut yet. Open a member’s page and press Add, or add one by its number.' });
+  // The lines. Looking: links only. Editing: a grip and a cross on each added member, and the lines can be dragged.
+  function membersLines(where, others, me, filter) {
     const box = h('div', { class: 'members', 'data-where': where });
-    if (me) box.append(h('div', { class: 'mrow pinned', 'data-id': me.id }, h('span', { class: 'grip off', title: 'You are always first' }), memberLine(me, { me: true })));
-    others.forEach((m, i) => {
-      const grip = h('button', { type: 'button', class: 'grip', title: 'Drag to move (or press the Up and Down arrows here)', text: '⋮⋮' });
-      grip.addEventListener('keydown', e => {
-        if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
-        e.preventDefault();
-        memberMove(m.id, i + (e.key === 'ArrowUp' ? -1 : 1));
-        membersRefresh(where, m.id);
-      });
-      const row = h('div', { class: 'mrow', 'data-id': m.id, draggable: 'true' }, grip, memberLine(m, {}),
-        h('button', { type: 'button', class: 'iconbtn', title: 'Remove ' + m.name, text: '×', onclick: () => memberRemove(m.id) }));
-      row.addEventListener('dragstart', e => { e.dataTransfer.setData('text/plain', m.id); e.dataTransfer.effectAllowed = 'move'; row.classList.add('dragging'); });
-      row.addEventListener('dragend', () => box.querySelectorAll('.dragging, .before, .after').forEach(x => x.classList.remove('dragging', 'before', 'after')));
+    if (me) box.append(h('div', { class: 'mrow pinned', 'data-id': me.id }, membersEditing ? h('span', { class: 'grip off', title: 'You are always first' }) : null, memberLine(me, true)));
+    others.filter(m => !filter || m.name.toLowerCase().includes(filter)).forEach(m => {
+      const i = others.indexOf(m);
+      const row = h('div', { class: 'mrow', 'data-id': m.id }, memberLine(m, false));
+      if (membersEditing) {
+        const grip = h('button', { type: 'button', class: 'grip', title: 'Drag to move (or press the Up and Down arrows here)', text: '⋮⋮' });
+        grip.addEventListener('keydown', e => {
+          if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
+          e.preventDefault();
+          memberMove(m.id, i + (e.key === 'ArrowUp' ? -1 : 1));
+          membersRefresh(where, m.id);
+        });
+        row.prepend(grip);
+        row.append(h('button', { type: 'button', class: 'iconbtn', title: 'Remove ' + m.name, text: '×', onclick: () => memberRemove(m.id) }));
+        row.draggable = true;
+        row.addEventListener('dragstart', e => { e.dataTransfer.setData('text/plain', m.id); e.dataTransfer.effectAllowed = 'move'; row.classList.add('dragging'); });
+        row.addEventListener('dragend', () => box.querySelectorAll('.dragging, .before, .after').forEach(x => x.classList.remove('dragging', 'before', 'after')));
+      }
       box.append(row);
     });
-    // dropping: the line goes before or after the one under the pointer, by the half of it the pointer is in; never above you
-    box.addEventListener('dragover', e => {
-      const over = e.target.closest && e.target.closest('.mrow');
-      if (!over || !box.querySelector('.dragging')) return;
-      e.preventDefault();
-      box.querySelectorAll('.before, .after').forEach(x => x.classList.remove('before', 'after'));
-      const r = over.getBoundingClientRect();
-      over.classList.add(over.classList.contains('pinned') || e.clientY < r.top + r.height / 2 ? 'before' : 'after');
-      if (over.classList.contains('pinned')) { over.classList.remove('before'); over.classList.add('after'); }
-    });
-    box.addEventListener('drop', e => {
-      const over = e.target.closest && e.target.closest('.mrow');
-      const id = e.dataTransfer.getData('text/plain');
-      if (!over || !id) return;
-      e.preventDefault();
-      const list = membersAll().others;
-      const target = list.findIndex(x => x.id === over.dataset.id);                // -1 when it is you: the first place
-      const after = over.classList.contains('after');
-      const from = list.findIndex(x => x.id === id);
-      if (from < 0) return;
-      let to = target < 0 ? 0 : target + (after ? 1 : 0);
-      if (from < to) to -= 1;                                                       // the line leaves its place before it lands
-      memberMove(id, to);
-      membersRefresh();
-    });
+    if (membersEditing) {
+      // dropping: the line goes before or after the one under the pointer, by the half of it the pointer is in; never above you
+      box.addEventListener('dragover', e => {
+        const over = e.target.closest && e.target.closest('.mrow');
+        if (!over || !box.querySelector('.dragging')) return;
+        e.preventDefault();
+        box.querySelectorAll('.before, .after').forEach(x => x.classList.remove('before', 'after'));
+        const r = over.getBoundingClientRect();
+        over.classList.add(!over.classList.contains('pinned') && e.clientY < r.top + r.height / 2 ? 'before' : 'after');
+      });
+      box.addEventListener('drop', e => {
+        const over = e.target.closest && e.target.closest('.mrow');
+        const id = e.dataTransfer.getData('text/plain');
+        if (!over || !id) return;
+        e.preventDefault();
+        const list = membersAll().others;
+        const target = list.findIndex(x => x.id === over.dataset.id);              // -1 when it is you: the first place
+        const from = list.findIndex(x => x.id === id);
+        if (from < 0) return;
+        let to = target < 0 ? 0 : target + (over.classList.contains('after') ? 1 : 0);
+        if (from < to) to -= 1;                                                     // the line leaves its place before it lands
+        memberMove(id, to);
+        membersRefresh();
+      });
+    }
     return box;
   }
 
-  // "Add this member" on a profile, "Remove this member" when it is in the list; nothing on your own page
-  function membersHere() {
-    const now = memberHere();
-    const { me } = membersAll();
-    if (!now || (me && me.id === now.id)) return null;
-    const has = membersGet().some(x => x.id === now.id);
-    return h('button', { type: 'button', class: 'btn' + (has ? ' ghost' : ''), text: has ? 'Remove this member' : 'Add this member (' + now.name + ')', onclick: () => (has ? memberRemove(now.id) : memberAdd(now)) });
-  }
-
-  // Add by number or link, from any page
+  // Add by number or link (editing only)
   function membersAddBox() {
-    const input = h('input', { type: 'text', placeholder: 'Member number or page link' });
+    const input = h('input', { type: 'text', placeholder: 'Number or link' });
     const msg = h('p', { class: 'presult', hidden: true });
     const say = (text, warn) => { msg.hidden = !text; msg.textContent = text || ''; msg.className = 'presult' + (warn ? ' warn' : ''); };
     const go = async () => {
@@ -2792,13 +2793,36 @@
         const doc = new DOMParser().parseFromString(await siteFetch('/user' + id), 'text/html');
         const m = memberInfo(doc, id);
         if (!m) { say('No member with this number.', true); return; }
-        memberAdd(m);
-        input.value = '';
-        say('');
+        memberAdd(m);                                                                // the view is drawn again: this box with it
       } catch (e) { say('Could not read the page: ' + e.message + '.', true); }
     };
     input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); go(); } });
-    return h('div', { class: 'field membersadd' }, input, h('button', { type: 'button', class: 'btn ghost', text: 'Add by number', onclick: go }), msg);
+    return h('div', { class: 'field membersadd' }, input, h('button', { type: 'button', class: 'btn ghost sm', text: 'Add', onclick: go }), msg);
+  }
+
+  // The whole view: the buttons of the title line, the lines, the box to add (editing), the hint
+  function membersView(where) {
+    const { me, others } = membersAll();
+    membersMeAvatar(me);
+    const now = memberHere();
+    const here_ = now && !(me && me.id === now.id) ? now : null;                        // not offered on your own page
+    const saved = !!(here_ && membersGet().some(x => x.id === here_.id));
+    const star = here_ ? h('button', { type: 'button', class: 'iconbtn star' + (saved ? ' on' : ''), text: saved ? '★' : '☆',
+      title: saved ? `Take ${here_.name} off the shortcuts` : `Save ${here_.name} in the shortcuts`, onclick: () => (saved ? memberRemove(here_.id) : memberAdd(here_)) }) : null;
+    const edit = h('button', { type: 'button', class: 'btn ghost sm', text: membersEditing ? 'Done' : 'Edit', title: membersEditing ? 'Leave editing' : 'Reorder, remove or add members',
+      onclick: () => { membersEditing = !membersEditing; membersRefresh(); } });
+    const head = h('div', { class: 'mhead' }, where === 'bar' ? h('span', { class: 't', text: 'Member shortcuts' }) : h('span', { class: 'mute', text: others.length ? `${others.length} saved` : '' }),
+      h('span', { class: 'mactions' }, star, edit));
+    const kids = [head];
+    if (!membersEditing && others.length >= MEMBERS_FIND_FROM) {
+      const find = h('input', { type: 'text', placeholder: 'Find a member…' });
+      const lines = h('div', { class: 'mlines' }, membersLines(where, others, me, ''));
+      find.addEventListener('input', () => lines.replaceChildren(membersLines(where, others, me, find.value.trim().toLowerCase())));
+      kids.push(find, lines);
+    } else kids.push(membersLines(where, others, me, ''));
+    if (!others.length) kids.push(h('p', { class: 'hint', text: here_ ? 'Press the star to save this member.' : 'Open a member’s page and press the star, or press Edit to add one by number.' }));
+    if (membersEditing) kids.push(membersAddBox());
+    return kids.filter(Boolean);                                                            // replaceChildren would write a null as the word "null"
   }
 
   // ---- the bar on a profile page, to the left of the content
@@ -2806,23 +2830,21 @@
     :host{display:block}
     .box{background:#fff;border:1px solid var(--line);padding:10px;display:flex;flex-direction:column;gap:8px}
     .t{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--primary-h)}
+    .members,.mlines{max-height:60vh;overflow-y:auto}
   `;
-  const membersBarContent = () => [h('div', { class: 't', text: 'Member shortcuts' }), membersHere(), membersList('bar')];
-  const membersPanelContent = () => [membersHere(), membersList('panel')];
-
   function membersBar() {
     const host = h('div', { id: 'pmg-members' });
     const root = host.attachShadow({ mode: 'open' });
-    root.append(h('style', { text: UI_BASE + MEMBERS_CSS }), h('div', { class: 'box' }, membersBarContent()));
+    root.append(h('style', { text: UI_BASE + MEMBERS_CSS }), h('div', { class: 'box' }, membersView('bar')));
     return host;
   }
 
   // Everything that shows the list follows a change (the panel and the bar). focus: a member whose grip gets the keyboard focus back
   function membersRefresh(where, focus) {
     const host = document.getElementById('pmg-members');
-    if (host) host.shadowRoot.querySelector('.box').replaceChildren(...membersBarContent());
+    if (host) host.shadowRoot.querySelector('.box').replaceChildren(...membersView('bar'));
     const slot = $('membersPanel');
-    if (slot) slot.replaceChildren(...membersPanelContent());
+    if (slot) slot.replaceChildren(...membersView('panel'));
     if (focus) {
       const root = where === 'bar' && host ? host.shadowRoot : slot;
       const grip = root && root.querySelector(`.mrow[data-id="${focus}"] .grip`);
@@ -2855,7 +2877,7 @@
     id: 'members', label: 'Member shortcuts',
     groups: [{
       drawer: 'gallery', title: 'Member shortcuts',
-      build: () => [h('div', { id: 'membersPanel', class: 'members-panel' }, membersPanelContent()), membersAddBox()]
+      build: () => [h('div', { id: 'membersPanel', class: 'members-panel' }, membersView('panel'))]
     }],
     init: () => {
       const now = memberHere();
