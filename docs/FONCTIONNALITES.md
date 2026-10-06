@@ -53,7 +53,7 @@ NextPlaate est un script Tampermonkey (userscript) pour [PlatesMania](https://pl
 - Compatible AZERTY : `Ctrl+A` se lit sur la touche `a` (`e.key`), pas sur la position physique.
 
 ### Drapeaux des pays (tiroir `upload`, et sur les pages d'ajout)
-- Un drapeau par pays (96), chacun mène à la page d'ajout du pays (`/xx/add`) ; le pays de la page est encadré. Un drapeau dont l'image ne charge pas affiche le code du pays.
+- Un drapeau et le nom de chaque pays (96), chacun mène à la page d'ajout du pays (`/xx/add`) ; le pays de la page est encadré. Une case « Find a country… » filtre par nom ou par code. Les colonnes s'adaptent à la place (deux dans la barre ou le tiroir) ; dans la page, la liste défile au-delà de 70 % de la hauteur de l'écran. Un drapeau dont l'image ne charge pas affiche le code du pays.
 - **Dans la page** (`/add` et `/xx/add`, `src/features/68-flags.js`) : à droite du contenu quand l'écran a la place, sans jamais passer sous le panneau même ouvert (la barre et le tiroir prennent 56 + 340 px à droite) ; sur un écran plus étroit, sous la photo dans la colonne de droite. Elle suit le redimensionnement.
 - **Dans le panneau** : le même groupe dans le tiroir d'envoi. Un interrupteur (Settings) retire les deux.
 - Les drapeaux sont les images du site (`/assets/img/profile-flags/<code>.svg`) : rien n'est chargé ailleurs.

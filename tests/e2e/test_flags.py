@@ -103,3 +103,27 @@ def test_a_flag_that_does_not_load_shows_its_code(ctx):
     page = open_page(ctx, "https://platesmania.com/fr/add")
     page.wait_for_function(f"() => {BAR}.querySelector('.flagcode')", timeout=5000)      # the simulated site has no flag images
     assert page.evaluate(f"() => {BAR}.querySelector('.flagcode').textContent.length") == 2
+
+
+def test_each_flag_shows_the_name_of_its_country(ctx):
+    page = open_page(ctx, "https://platesmania.com/fr/add")
+    names = page.evaluate(f"() => [...{BAR}.querySelectorAll('a.flag .fname')].map(e => e.textContent)")
+    assert "Germany" in names and "France" in names and "Bosnia and Herzegovina" in names
+    assert len(names) == page.evaluate(f"() => {BAR}.querySelectorAll('a.flag').length")
+
+
+def test_the_find_box_keeps_the_countries_that_match(ctx):
+    page = open_page(ctx, "https://platesmania.com/fr/add")
+    page.evaluate(f"() => {{ const i = {BAR}.querySelector('input'); i.value = 'ger'; i.dispatchEvent(new Event('input')); }}")
+    shown = page.evaluate(f"() => [...{BAR}.querySelectorAll('a.flag:not([hidden]) .fname')].map(e => e.textContent)")
+    assert "Germany" in shown and "France" not in shown and len(shown) < 8
+    page.evaluate(f"() => {{ const i = {BAR}.querySelector('input'); i.value = 'it'; i.dispatchEvent(new Event('input')); }}")   # a code, or part of a name
+    assert "Italy" in page.evaluate(f"() => [...{BAR}.querySelectorAll('a.flag:not([hidden]) .fname')].map(e => e.textContent)")
+    page.evaluate(f"() => {{ const i = {BAR}.querySelector('input'); i.value = ''; i.dispatchEvent(new Event('input')); }}")
+    assert page.evaluate(f"() => {BAR}.querySelectorAll('a.flag[hidden]').length") == 0
+
+
+def test_the_names_do_not_widen_the_bar_or_the_panel(ctx):
+    page = open_page(ctx, "https://platesmania.com/fr/add", 2560)
+    over = page.evaluate(f"() => {{ const b = {BAR}.querySelector('.box'); return [b.scrollWidth, b.clientWidth]; }}")
+    assert over[0] <= over[1]

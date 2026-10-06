@@ -1019,11 +1019,15 @@
     .chip:hover{background:var(--primary-tint);border-color:var(--primary-soft)}
     .chip.best{border-color:var(--primary-soft);background:var(--primary-soft);color:var(--primary-h);font-weight:600}
     .chip.on{border-color:var(--primary);box-shadow:inset 0 0 0 1px var(--primary)}
-    .flags{display:grid;grid-template-columns:repeat(auto-fill,minmax(34px,1fr));gap:6px}
-    .flag{height:30px;display:grid;place-items:center;border:1px solid var(--line2);background:#fff;color:var(--ink);font-size:11px;font-weight:700;text-decoration:none}
+    .flags{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:6px}
+    .flagblock{display:flex;flex-direction:column;gap:8px}
+    .flagblock input{width:100%}
+    .flag{height:30px;min-width:0;display:flex;align-items:center;gap:8px;padding:0 8px;border:1px solid var(--line2);background:#fff;color:var(--ink);font-size:12px;text-decoration:none}
+    .flag .fname{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .flag .flagcode{font-weight:700}
     .flag:hover{background:var(--primary-tint);border-color:var(--primary)}
     .flag.on{border-color:var(--primary);box-shadow:inset 0 0 0 1px var(--primary)}
-    .flag img{display:block;width:22px;height:15px;object-fit:contain}
+    .flag img{display:block;flex:none;width:22px;height:15px;object-fit:contain}
     .cat{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
   `;
 
@@ -2078,7 +2082,7 @@
   }
   /* =====================================================================
    *  COUNTRY FLAGS  (one click to the upload page of a country)
-   *    The flags of the 96 countries, each a link to /<country>/add. They are in the panel (Batch upload drawer) and, on the upload
+   *    The flags of the 96 countries with their names, each a link to /<country>/add, and a box to find one by name or code. They are in the panel (Batch upload drawer) and, on the upload
    *    pages (/add and /<country>/add), right on the site, to the right of the page content:
    *      - where the screen has room beside the content, the bar stands there, wide enough for the flags but never under the
    *        panel, even with its drawer open (the rail and the drawer take 56 px + 340 px of the right edge);
@@ -2087,13 +2091,26 @@
    * ===================================================================== */
   const flagUrl = code => `/assets/img/profile-flags/${code}.svg`;
 
-  // The flags as links; the country of the page is marked. An image that fails shows the code instead.
+  // The flags as links, each with the name of its country; the country of the page is marked. An image that fails shows the code
+  // instead.
   function flagLinks() {
     return h('nav', { class: 'flags' }, COUNTRIES.map(c => {
-      const img = h('img', { src: flagUrl(c.code), alt: c.name, width: 22, height: 15 });
+      const img = h('img', { src: flagUrl(c.code), alt: '', width: 22, height: 15 });
       img.addEventListener('error', () => img.replaceWith(h('span', { class: 'flagcode', text: c.code.toUpperCase() })));
-      return h('a', { class: 'flag' + (c.code === here.country ? ' on' : ''), href: `/${c.code}/add`, title: c.name }, img);
+      return h('a', { class: 'flag' + (c.code === here.country ? ' on' : ''), href: `/${c.code}/add`, title: c.name, 'data-find': (c.name + ' ' + c.code).toLowerCase() },
+        img, h('span', { class: 'fname', text: c.name }));
     }));
+  }
+
+  // The flags with a box to find a country by its name or its code (96 of them: a name is faster than looking for a flag)
+  function flagBlock() {
+    const list = flagLinks();
+    const find = h('input', { type: 'text', placeholder: 'Find a country\u2026' });
+    find.addEventListener('input', () => {
+      const q = find.value.trim().toLowerCase();
+      list.querySelectorAll('a.flag').forEach(a => { a.hidden = !!q && !a.dataset.find.includes(q); });
+    });
+    return h('div', { class: 'flagblock' }, find, list);
   }
 
   // ---- the bar on the page
@@ -2104,12 +2121,13 @@
     :host{display:block}
     .box{background:#fff;border:1px solid var(--line);padding:10px;display:flex;flex-direction:column;gap:8px}
     .t{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--primary-h)}
+    .flags{max-height:70vh;overflow-y:auto}
   `;
 
   function flagsBar() {
     const host = h('div', { id: 'pmg-flags' });
     const root = host.attachShadow({ mode: 'open' });
-    root.append(h('style', { text: UI_BASE + FLAGS_CSS }), h('div', { class: 'box' }, h('div', { class: 't', text: 'Add a photo in…' }), flagLinks()));
+    root.append(h('style', { text: UI_BASE + FLAGS_CSS }), h('div', { class: 'box' }, h('div', { class: 't', text: 'Add a photo in…' }), flagBlock()));
     return host;
   }
 
@@ -2140,7 +2158,7 @@
     id: 'flags', label: 'Country flags',
     groups: [{
       drawer: 'upload', title: 'Add a photo in a country',
-      build: () => [h('p', { class: 'presult', text: 'Click a flag to open the upload page of that country.' }), flagLinks()]
+      build: () => [h('p', { class: 'presult', text: 'Click a country to open its upload page.' }), flagBlock()]
     }],
     init: () => {
       if (!here.addAny) return;
