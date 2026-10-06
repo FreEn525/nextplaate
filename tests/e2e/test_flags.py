@@ -73,13 +73,6 @@ def test_the_bar_follows_a_resize(ctx):
     assert page.evaluate("() => getComputedStyle(document.getElementById('pmg-flags')).position") == "static"
 
 
-def test_the_generic_add_page_has_the_bar_too(ctx):
-    page = open_page(ctx, "https://platesmania.com/add", 2560)
-    assert page.evaluate("() => !!document.getElementById('pmg-flags')")
-    assert page.evaluate(f"() => {BAR}.querySelectorAll('a.flag').length") >= 90
-    assert page.evaluate(f"() => {BAR}.querySelectorAll('a.flag.on').length") == 0      # no country on that page
-
-
 def test_the_panel_lists_the_flags_too(ctx):
     page = open_page(ctx, "https://platesmania.com/fr/gallery.php")
     assert page.evaluate("() => !document.getElementById('pmg-flags')")                 # no bar on a gallery page

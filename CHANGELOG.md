@@ -7,6 +7,7 @@
 - Settings gives, for each feature, what it does and where it works (every country, 84 countries, Netherlands and Israel...); the text is in `src/lib/featureinfo.js` and a test checks every feature has one.
 - *Fill description* now works without a chosen pair: it writes your place and hashtags, never over a text that is already there, and never by itself (the automatic fill still needs a pair).
 - Lighter at load: the long lists of the drawers nobody sees until they open it (the country flags of the panel, the flags picker of Settings) are now built on the first opening instead of at page load: half the elements of the panel (1141 to 553), the build of the bar twice as fast, and 190 flag images no longer requested at load. A card that plays on the upload page costs about 45 ms in all (2 ms on a gallery), with no work while idle.
+- **The page /add** (choose a country): the site's drop-down and button become a card of large flags (40 px) with a search box by name or code (Enter opens the first match) and the countries you opened last at the top. The list is the site's own menu, so a country without a page is never offered; the site's box is only hidden. The other upload pages keep the side bar of flags.
 - *See the N photos of this plate on the site*: a link in the plate card to the site's own search of the plate, to see the photos already there.
 - The *What's new* window shows everything newer than the version you last saw, newest first.
 

@@ -230,7 +230,12 @@ def route_site(context):
                     + f'<div class="col-md-9"><h1><a href="https://forum.platesmania.com/members/member{uid}.{uid}/">member{uid}</a> <small class="pull-right">ID: {uid}</small></h1></div></div>'
                     + f'<div class="service-block-v3"><a href="/userreg.php?gallery=fr1-{uid}" class="tooltips"><i class="fa fa-globe"></i></a><span class="counter"><a href="/gallery.php?usr={uid}">715 </a>  <font style="color:green">(+28)</font></span></div></div></body></html>')
         elif path == "/add":
-            html = HEAD.format(title="Add") + '<div class="content"><div class="container" style="max-width:1170px;width:100%;margin:0 auto"><h2>Choose a country</h2></div></div></body></html>'
+            # the real page of the site: a form with the menu of countries, and the right column with the photo placeholders
+            options = "".join(f'<option value="/{c}/add">{n}</option>' for c, n in [("al", "Albania"), ("be", "Belgium"), ("fr", "France"), ("de", "Germany"), ("it", "Italy"), ("lu", "Luxembourg"), ("nl", "Netherlands"), ("uk", "United Kingdom"), ("xx", "Non-recognized and partially recognized states")])
+            html = (HEAD.format(title="Add") + '<div class="container content" style="max-width:1170px;width:100%;margin:0 auto"><div class="row blog-page"><div class="col-md-9">'
+                    + '<form class="sky-form" id="sky-form"><header>Select a country</header><fieldset><div class="row"><section class="col-xs-8"><label class="select">'
+                    + f'<select id="mySelect" name="country">{options}</select><i></i></label></section><section class="col-xs-4"><button class="btn-u" id="checkbutton" type="button">go</button></section></div></fieldset></form></div>'
+                    + '<div class="col-md-3"><div class="hidden" id="zoomimgid"><img id="zoomimg" width="260"><div id="fotodiv"></div></div></div></div></div></body></html>')
         else:
             return route.fulfill(status=404, content_type="text/html", body="<h1>404</h1>")
         # a page the script reads with fetch() is the site's page alone; the script is added only to the pages that are opened

@@ -397,7 +397,7 @@
     plate: { about: 'As you type a plate on the upload page: how many photos of it are already on the site, the vehicle of those photos, and your photos of its series.', scope: 'all 96 countries and 829 plate categories (795 checked exactly on real plates)' },
     shortcuts: { about: 'Change any key of the script. Safe for AZERTY keyboards.', scope: 'everywhere' },
     lens: { about: 'Searches the photo you chose on Google Lens by itself and suggests brand, model and generation; a click fills the menus.', scope: 'every country' },
-    flags: { about: 'A flag and a name for every country, each a link to its upload page. Pick which ones the side bar shows.', scope: 'every country' },
+    flags: { about: 'A flag and a name for every country, each a link to its upload page. On the page /add the site’s drop-down becomes large flags with a search box (Enter opens the first match). Elsewhere a side bar; pick which countries it shows.', scope: 'every country' },
     preview: { about: 'Presses the site’s Generate preview button for you when you stop typing the plate.', scope: 'every country' },
     tags: { about: 'Replaces the closed Add tags box (and the pop-up on a photo) with buttons by group, search, your most used tags and the ones of your last upload.', scope: 'every country' },
     extra: { about: 'A tall card for the extra information, with your saved place and the date of the photo one click away.', scope: 'every country' },
@@ -1315,6 +1315,16 @@
     .flag:hover{background:var(--primary-tint);border-color:var(--primary)}
     .flag.on{border-color:var(--primary);box-shadow:inset 0 0 0 1px var(--primary)}
     .flag img{display:block;flex:none;width:22px;height:15px;object-fit:contain}
+    .csearch{display:flex;align-items:center;gap:12px}
+    .csearch input{flex:1;min-width:0}
+    .cgroup{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+    .cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+    .ctile{height:var(--h-rail);min-width:0;display:flex;align-items:center;gap:10px;padding:0 10px;border:1px solid var(--line2);background:#fff;color:var(--ink);font-size:14px;text-decoration:none}
+    .ctile:hover,.ctile:focus-visible{background:var(--primary-tint);border-color:var(--primary)}
+    .ctile.first{border-color:var(--primary);box-shadow:inset 0 0 0 1px var(--primary)}
+    .ctile img{display:block;flex:none;width:40px;height:27px;object-fit:contain}
+    .ctile .flagcode{flex:none;width:40px;text-align:center;font-weight:700;font-size:12px}
+    .ctile .cname{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .cat{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
   `;
 
@@ -2553,6 +2563,68 @@
     attempt();
   }
   /* =====================================================================
+   *  SELECT A COUNTRY  (the page /add, before a country is chosen)
+   *    The site's own box is a drop-down list of about 90 countries and a button. Here it becomes a card with the flags in large
+   *    tiles, a box to find a country by name or code (Enter opens the first one), and the countries you opened last at the top.
+   *    The list is the site's own (the options of its menu, so a country the site has no page for is never offered); the flags are the
+   *    site's images. The site's box is hidden, not removed. Only on /add: the other upload pages keep the side bar of flags.
+   * ===================================================================== */
+  const RECENT_COUNTRIES = 6;
+
+  function countryPageCard() {
+    const form = document.getElementById('sky-form'), menu = document.getElementById('mySelect');
+    if (!form || !menu) return false;
+    const countries = [...menu.options].map(o => {
+      const m = /^\/([a-z]{2})\/add$/i.exec(o.value);
+      return m ? { code: m[1].toLowerCase(), name: o.textContent.trim(), href: o.value } : null;
+    }).filter(Boolean);
+    if (!countries.length) return false;
+    const card = inlineCard({ id: 'pmg-country-card', title: 'Select a country', before: form, closable: false });
+    if (!card) return false;
+    form.hidden = true;
+    form.style.display = 'none';
+
+    const recent = () => { try { return JSON.parse(store.get('recent_countries', '[]')); } catch (e) { return []; } };
+    const remember = code => store.set('recent_countries', JSON.stringify([code, ...recent().filter(c => c !== code)].slice(0, RECENT_COUNTRIES)));
+    const tile = c => {
+      const img = h('img', { src: flagUrl(c.code), alt: '', width: 40, height: 27, loading: 'lazy' });
+      img.addEventListener('error', () => img.replaceWith(h('span', { class: 'flagcode', text: c.code.toUpperCase() })));
+      return h('a', { class: 'ctile', href: c.href, 'data-find': (c.name + ' ' + c.code).toLowerCase(), onclick: () => remember(c.code) }, img, h('span', { class: 'cname', text: c.name }));
+    };
+
+    const find = h('input', { type: 'text', placeholder: 'Find a country by name or code…', 'aria-label': 'Find a country', autocomplete: 'off' });
+    const last = recent().map(code => countries.find(c => c.code === code)).filter(Boolean);
+    const recentRow = last.length ? h('div', { class: 'cgroup' }, h('div', { class: 'cat', text: 'Opened last' }), h('div', { class: 'cgrid' }, last.map(tile))) : null;
+    const tiles = countries.map(tile);
+    const none = h('p', { class: 'hint', text: 'No country matches.', hidden: true });
+    const count = h('span', { class: 'mute' });
+    const grid = h('div', { class: 'cgrid' }, tiles);
+
+    const refresh = () => {
+      const q = find.value.trim().toLowerCase();
+      let shown = 0;
+      tiles.forEach(t => { const on = !q || t.dataset.find.includes(q); t.hidden = !on; t.classList.remove('first'); if (on) shown++; });
+      const first = tiles.find(t => !t.hidden);
+      if (q && first) first.classList.add('first');                          // the one Enter opens
+      none.hidden = shown > 0;
+      if (recentRow) recentRow.hidden = !!q;                                 // searching: the full list only
+      count.textContent = q ? `${shown} of ${countries.length}` : `${countries.length} countries`;
+    };
+    find.addEventListener('input', refresh);
+    find.addEventListener('keydown', e => {
+      if (e.key !== 'Enter') return;
+      const first = tiles.find(t => !t.hidden);
+      if (!first) return;
+      e.preventDefault();
+      first.click();                                                         // remembers it
+      location.href = first.getAttribute('href');
+    });
+
+    card.body.append(h('div', { class: 'cardbox' }, h('div', { class: 'csearch' }, find, count), recentRow, h('div', { class: 'cgroup' }, recentRow ? h('div', { class: 'cat', text: 'All countries' }) : null, grid, none)));
+    refresh();
+    return true;
+  }
+  /* =====================================================================
    *  COUNTRY FLAGS  (one click to the upload page of a country)
    *    The flags of the 96 countries with their names, each a link to /<country>/add, and a box to find one by name or code.
    *    Two places:
@@ -2688,6 +2760,7 @@
       build: () => [h('p', { class: 'presult', text: 'Choose the countries shown on the side of the upload pages. The panel always lists all of them.' }), flagsPicker()]
     }],
     init: () => {
+      if (here.addAny && !here.add && countryPageCard()) return;          // /add: the card of large flags replaces the site's box, no side bar
       if (!here.addAny && !here.profile) return;
       document.body.appendChild(flagsBar());
       flagsPlace();

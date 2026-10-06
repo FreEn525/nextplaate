@@ -12,7 +12,7 @@
     plate: { about: 'As you type a plate on the upload page: how many photos of it are already on the site, the vehicle of those photos, and your photos of its series.', scope: 'all 96 countries and 829 plate categories (795 checked exactly on real plates)' },
     shortcuts: { about: 'Change any key of the script. Safe for AZERTY keyboards.', scope: 'everywhere' },
     lens: { about: 'Searches the photo you chose on Google Lens by itself and suggests brand, model and generation; a click fills the menus.', scope: 'every country' },
-    flags: { about: 'A flag and a name for every country, each a link to its upload page. Pick which ones the side bar shows.', scope: 'every country' },
+    flags: { about: 'A flag and a name for every country, each a link to its upload page. On the page /add the site’s drop-down becomes large flags with a search box (Enter opens the first match). Elsewhere a side bar; pick which countries it shows.', scope: 'every country' },
     preview: { about: 'Presses the site’s Generate preview button for you when you stop typing the plate.', scope: 'every country' },
     tags: { about: 'Replaces the closed Add tags box (and the pop-up on a photo) with buttons by group, search, your most used tags and the ones of your last upload.', scope: 'every country' },
     extra: { about: 'A tall card for the extra information, with your saved place and the date of the photo one click away.', scope: 'every country' },

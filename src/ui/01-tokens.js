@@ -124,6 +124,16 @@
     .flag:hover{background:var(--primary-tint);border-color:var(--primary)}
     .flag.on{border-color:var(--primary);box-shadow:inset 0 0 0 1px var(--primary)}
     .flag img{display:block;flex:none;width:22px;height:15px;object-fit:contain}
+    .csearch{display:flex;align-items:center;gap:12px}
+    .csearch input{flex:1;min-width:0}
+    .cgroup{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+    .cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+    .ctile{height:var(--h-rail);min-width:0;display:flex;align-items:center;gap:10px;padding:0 10px;border:1px solid var(--line2);background:#fff;color:var(--ink);font-size:14px;text-decoration:none}
+    .ctile:hover,.ctile:focus-visible{background:var(--primary-tint);border-color:var(--primary)}
+    .ctile.first{border-color:var(--primary);box-shadow:inset 0 0 0 1px var(--primary)}
+    .ctile img{display:block;flex:none;width:40px;height:27px;object-fit:contain}
+    .ctile .flagcode{flex:none;width:40px;text-align:center;font-weight:700;font-size:12px}
+    .ctile .cname{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .cat{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
   `;
 

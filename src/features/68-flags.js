@@ -134,6 +134,7 @@
       build: () => [h('p', { class: 'presult', text: 'Choose the countries shown on the side of the upload pages. The panel always lists all of them.' }), flagsPicker()]
     }],
     init: () => {
+      if (here.addAny && !here.add && countryPageCard()) return;          // /add: the card of large flags replaces the site's box, no side bar
       if (!here.addAny && !here.profile) return;
       document.body.appendChild(flagsBar());
       flagsPlace();
