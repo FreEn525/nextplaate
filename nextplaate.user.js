@@ -418,6 +418,7 @@
     profile: { about: 'On a member’s profile: the real total of the gallery and today’s uploads, next to the figure the site only updates from time to time.', scope: 'every member' },
     profilestyle: { about: 'A member’s profile page in the look of the script: the figures, the private messages, the notifications, the countries and the last photos in one style. The site’s own elements and buttons stay.', scope: 'every profile' },
     notify: { about: 'A notice in the corner for a new like, comment or private message, on any PlatesMania page, like a phone. It works while a PlatesMania tab is open; you choose the kinds and how often.', scope: 'everywhere you are logged in' },
+    laststrip: { about: 'The line of the latest uploads that every page carries under its header, as a slim strip with a flag and a chip per plate.', scope: 'every page' },
     mine: { about: 'Under the vehicle menus: how many photos of that brand, model and generation you already have.', scope: 'every country' },
     regions: { about: 'On a member’s profile: which regions of a country the member has a photo from, and which are missing.', scope: 'every country the site has regions for' },
     series: { about: 'How many of your photos are in the series of the plate you type (HF-137-QQ is in HF-*-QQ); on a series page, the numbers already on the site.', scope: '84 countries (checked on the real site)' },
@@ -1102,45 +1103,20 @@
   const plateForForm = () => (PLATE_RULES[here.country] || genericPlate)();   // a country without a rule uses the plain visible fields
   /* =====================================================================
    *  PROFILE NOTIFICATIONS  (the site's list of likes and comments: the plate as a picture, and the rest loaded as you scroll)
-   *    Each line names a photo by its plate in text. The picture of the plate is on the photo's own page (the "inf" image, whose name
-   *    cannot be guessed): it is read there, through the shared queue, for the lines in view only, kept in the browser, and put in place of
-   *    the text (the text stays as the picture's alternative and hover). The site's "Load more" button is replaced by loading the next ten
+   *    Each line names a photo by its plate in text; the picture comes from src/lib/profile-plates.js and is put in place of the text (the
+   *    text stays as the picture's alternative and hover). The site's "Load more" button is replaced by loading the next ten
    *    when the end of the list comes in view; the button stays in the page, hidden, with its own script.
    *      profileNotifications(root, memberId)
    * ===================================================================== */
-  const PLATE_PICTURES = 'plate_pictures';
-  const PLATE_PICTURES_KEEP = 500;
-
   function profileNotifications(root, memberId) {
     const list = root.querySelector('ul.mCustomScrollbar');
     if (!list || list.dataset.pmDone) return;
     list.dataset.pmDone = '1';
     const holder = root.querySelector('#content') || list;
-    let known = {};
-    try { known = JSON.parse(store.get(PLATE_PICTURES, '{}')); } catch (e) { known = {}; }
-    const keep = (id, src) => { known[id] = src; const ids = Object.keys(known); if (ids.length > PLATE_PICTURES_KEEP) delete known[ids[0]]; store.set(PLATE_PICTURES, JSON.stringify(known)); };
     const show = (link, src) => { const text = link.textContent.trim(); link.title = text; link.replaceChildren(h('img', { class: 'pm-plate', src, alt: text })); };
-
-    const plateOf = async (link) => {
-      const id = (link.getAttribute('href').match(/nomer(\d+)/) || [])[1];
-      if (!id) return;
-      if (!known[id]) {
-        try {
-          const doc = new DOMParser().parseFromString(await siteFetch(link.getAttribute('href')), 'text/html');
-          const img = doc.querySelector('img[src*="/inf/"]');
-          if (img) keep(id, img.getAttribute('src'));
-        } catch (e) { return; }                                                   // the text stays
-      }
-      if (known[id]) show(link, known[id]);
-    };
-    const seen = new IntersectionObserver(entries => entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      seen.unobserve(e.target);
-      const link = e.target.querySelector('a[href*="/nomer"]');
-      if (link) plateOf(link);
-    }), { rootMargin: '80px' });
     const watch = scope => scope.querySelectorAll('li').forEach(li => {
-      if (li.querySelector('a[href*="/nomer"]')) seen.observe(li);
+      const link = li.querySelector('a[href*="/nomer"]');
+      if (link && !link.querySelector('.pm-plate')) plateWatch(li, link, src => show(link, src));
     });
     watch(list);
 
@@ -1180,7 +1156,9 @@
    *  PROFILE PARTS  (what the profile look builds in place of the site's loose figures and its 96-row table)
    *    The site's elements stay in the page, hidden or restyled; these read them and build the clean version beside them.
    *      profileTiles(root)       four tiles (plates, likes, comments, rating) from the site's figures, put before the first of them
-   *      profileCountries(root)   a bar over the countries table: the title and a box to show the countries with no photo (hidden by default)
+   *      profileCountries(root)   a bar over the countries table: the title and a box to show the countries with no photo (hidden by default),
+   *                               and each country's flag before its name
+   *      profileLast(root)        the last photos as cards: the plate's picture over the photo, the country's flag before its name
    * ===================================================================== */
   const profileText = el => (el ? el.textContent.replace(/\s+/g, ' ').trim() : '');
 
@@ -1217,11 +1195,84 @@
     empty.forEach(tr => tr.classList.add('pm-empty'));
     const box = h('input', { type: 'checkbox' });
     box.onchange = () => panel.classList.toggle('pm-all', box.checked);
+    rows.forEach(tr => {                                                             // the flag of each country, from the link of its name
+      const name = tr.querySelector('td:first-child b'), code = (tr.innerHTML.match(/usercountry-([a-z]{2})-/) || [])[1];
+      if (name && code) name.before(profileFlag(code));
+    });
     const bar = h('div', { class: 'pm-bar' },
       h('span', { class: 'pm-title', text: `Countries (${rows.length - empty.length} with photos)` }),
       empty.length ? h('label', { class: 'pm-chk' }, box, `Show the ${empty.length} without`) : null);
     panel.insertBefore(bar, panel.firstChild);
     return bar;
+  }
+
+  // A country's flag, the site's own picture; a country it has none for shows nothing
+  function profileFlag(code) {
+    const img = h('img', { class: 'pm-flag', src: flagUrl(code), alt: '', width: 20, height: 14, loading: 'lazy' });
+    img.addEventListener('error', () => img.remove());
+    return img;
+  }
+
+  function profileLast(root) {
+    const items = [...root.querySelectorAll('.portfolio-box-v1 > li')];
+    items.forEach(li => {
+      const photo = li.querySelector(':scope > img'), box = li.querySelector('.portfolio-box-v1-in'), go = box && box.querySelector('a[href*="/nomer"]');
+      if (!photo || !go || li.dataset.pmDone) return;
+      li.dataset.pmDone = '1';
+      const code = (go.getAttribute('href').match(/^\/([a-z]{2})\//) || [])[1];
+      const country = box.querySelector('p');
+      if (code && country) country.prepend(profileFlag(code));
+      const tag = h('div', { class: 'pm-tag', hidden: true });                       // the plate, over the corner of the photo, when its picture is known
+      const wrap = h('div', { class: 'pm-shot' });
+      photo.before(wrap);
+      wrap.append(photo, tag);
+      plateWatch(li, go, src => { tag.replaceChildren(h('img', { src, alt: (box.querySelector('h3') || {}).textContent || '' })); tag.hidden = false; });
+    });
+    return items.length;
+  }
+  /* =====================================================================
+   *  PLATE PICTURES  (the picture of a plate, for the lines of a profile that name a photo)
+   *    The site shows a plate as text in its lists, and as a picture ("inf" image) only on the photo's own page, under a name that cannot
+   *    be guessed. It is read there through the shared queue, for what is in view only, and kept in the browser (the same photo twice
+   *    costs nothing, even a week later).
+   *      plateWatch(el, link, show)   when el comes in view, reads the plate picture of the photo link points to, then show(src)
+   * ===================================================================== */
+  const PLATE_PICTURES = 'plate_pictures';
+  const PLATE_PICTURES_KEEP = 500;
+  const platePictures = (() => { try { return JSON.parse(store.get(PLATE_PICTURES, '{}')); } catch (e) { return {}; } })();
+
+  async function plateRead(href) {
+    const id = (String(href).match(/nomer(\d+)/) || [])[1];
+    if (!id) return '';
+    if (!platePictures[id]) {
+      try {
+        const img = new DOMParser().parseFromString(await siteFetch(href), 'text/html').querySelector('img[src*="/inf/"]');
+        if (img) {
+          platePictures[id] = img.getAttribute('src');
+          const ids = Object.keys(platePictures);
+          if (ids.length > PLATE_PICTURES_KEEP) delete platePictures[ids[0]];
+          store.set(PLATE_PICTURES, JSON.stringify(platePictures));
+        }
+      } catch (e) { return ''; }                                               // the text stays
+    }
+    return platePictures[id] || '';
+  }
+
+  const plateWatching = new Map();                                             // element -> { link, show }
+  const plateEyes = typeof IntersectionObserver === 'function' ? new IntersectionObserver(entries => entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    plateEyes.unobserve(e.target);
+    const job = plateWatching.get(e.target);
+    plateWatching.delete(e.target);
+    if (job) plateRead(job.link.getAttribute('href')).then(src => { if (src) job.show(src); });
+  }), { rootMargin: '80px' }) : null;
+
+  function plateWatch(el, link, show) {
+    if (!plateEyes || !link) return;
+    const id = (link.getAttribute('href').match(/nomer(\d+)/) || [])[1];
+    if (id && platePictures[id]) { show(platePictures[id]); return; }          // known: at once, no request
+    plateWatching.set(el, { link, show });
+    plateEyes.observe(el);
   }
   /* =====================================================================
    *  REGION ALIASES  (names the site writes differently from the shapes, per country: normalised name -> normalised shape name)
@@ -1749,6 +1800,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     .stats{display:flex;flex-wrap:wrap;gap:12px 28px}
     .stat{display:flex;flex-direction:column}
     .stat b{font-size:18px;color:var(--primary-h)}
+    .stat b.blank{color:transparent;background:var(--soft);user-select:none}                /* a figure still to come: its place is kept, so nothing moves when it arrives */
     .stat a{font-size:18px;font-weight:700;color:var(--primary-h);text-decoration:none}
     .stat a:hover{text-decoration:underline}
     .stat span{font-size:12px}
@@ -2300,17 +2352,18 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     .container.profile{${PAGE_TOKENS}}
     .profile .panel,.profile .tag-box,.profile .service-block-v3{border-radius:0;box-shadow:none}
     /* the member: picture and badges (with the member shortcuts under them) on the left, name, tiles and cards on the right */
-    .profile > .row:first-child{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 16px;padding:16px;border:1px solid var(--pm-line);background:#fff}
+    .profile > .row:first-child{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 16px;padding:16px;border:1px solid var(--pm-line);border-top:3px solid var(--pm);background:#fff}
     .profile > .row:first-child > [class*=col-md]{float:none;width:auto;padding:0}
     .profile > .row:first-child > .col-md-3{flex:0 0 200px;display:flex;flex-direction:column;align-items:stretch}
     .profile > .row:first-child > .col-md-9{flex:1 1 360px;min-width:0}
-    .profile .profile-img{width:120px;height:120px;margin:0 auto 12px;object-fit:cover;border:1px solid var(--pm-line2)}
+    .profile .profile-img{display:block;width:136px;height:136px;margin:4px auto 16px;padding:4px;border:1px solid var(--pm-line2)!important;border-radius:0!important;background:#fff;outline:4px solid var(--pm-tint);object-fit:cover}
     .profile .devider{display:none}
-    .profile .badge-lists{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 12px;margin:0 0 4px;padding:0}
-    .profile .badge-lists li{display:flex;align-items:center;gap:4px;padding:0}
-    .profile .badge-lists li a{display:grid;place-items:center;width:32px;height:32px;border:1px solid var(--pm-line2);background:#fff;color:var(--pm-ink)}
+    .profile .badge-lists{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 14px;margin:0 0 4px;padding:0}
+    .profile .badge-lists li{display:flex;align-items:center;gap:6px;margin:0;padding:0}
+    .profile .badge-lists li a{display:flex;align-items:center;justify-content:center;width:32px;height:32px;margin:0;padding:0;border:1px solid var(--pm-line2);border-radius:0!important;background:#fff;color:var(--pm-ink);line-height:1;box-shadow:none}
+    .profile .badge-lists li a i{display:block;width:auto;height:auto;margin:0;font-size:14px;line-height:1}
     .profile .badge-lists li a:hover{background:var(--pm-tint);border-color:var(--pm-soft);color:var(--pm)}
-    .profile .badge-lists .badge{min-width:20px;border-radius:0;font-size:11px;line-height:1.6;background:var(--pm)}
+    .profile .badge-lists .badge{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;margin:0;padding:0 6px;border:0;border-radius:0!important;background:var(--pm);font-size:11px;font-weight:700;line-height:1}
     .profile h1{display:flex;align-items:baseline;gap:8px;margin:0 0 12px;font-size:18px;font-weight:700;line-height:1.3;color:var(--pm)}
     .profile h1 a{color:var(--pm)}
     .profile h1 small{margin-left:auto;font-size:12px;font-weight:400;color:var(--pm-mute)}
@@ -2351,35 +2404,43 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     .profile ul.mCustomScrollbar li .pull-right small{font-size:12px}
     .profile .pm-plate{display:block;height:26px;width:auto;border:1px solid var(--pm-line2)}
     .profile .pm-end{padding:10px 12px;font-size:12px;text-align:center;color:var(--pm-mute)}
-    /* the countries: a band, then a table that lines up (names left, the three figures right, in columns of one width) */
+    /* the countries: a band, then a table that lines up (flag and name left, the three figures right, in columns of one width) */
     .profile .panel-blue{margin:0 0 16px}
     .pm-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:40px;padding:0 12px;border-bottom:1px solid var(--pm-line);background:var(--pm-paper)}
     .pm-chk{display:inline-flex;align-items:center;gap:6px;margin:0;font-size:12px;font-weight:400;color:var(--pm-mute);cursor:pointer}
     .pm-chk input{margin:0}
+    .pm-flag{display:inline-block;width:20px;height:14px;margin-right:8px;border:1px solid var(--pm-line2);object-fit:cover;vertical-align:-2px}
     .profile .panel-blue:not(.pm-all) tr.pm-empty{display:none}
     .profile .dataTables_wrapper > .row:first-child,.profile .dataTables_info{display:none}
     .profile .panel-blue .table{width:100%!important;margin:0;font-size:13px;table-layout:fixed}
-    .profile .panel-blue .table th,.profile .panel-blue .table td{padding:0 12px;height:38px;vertical-align:middle;border-top:1px solid var(--pm-line);color:var(--pm-ink)}
-    .profile .panel-blue .table thead th{height:36px;border-top:0;border-bottom:1px solid var(--pm-line2);font-weight:400;color:var(--pm-mute)}
+    .profile .panel-blue .table th,.profile .panel-blue .table td{padding:0 12px!important;height:38px;vertical-align:middle;border-top:1px solid var(--pm-line);color:var(--pm-ink)}
+    .profile .panel-blue .table thead th{height:36px;border-top:0;border-bottom:1px solid var(--pm-line2);font-weight:400;color:var(--pm-mute);background-image:none!important}
     .profile .panel-blue .table th:not(:first-child),.profile .panel-blue .table td:not(:first-child){width:88px!important;text-align:right;font-variant-numeric:tabular-nums}
     .profile .panel-blue .table td:not(:first-child) i{display:none}
     .profile .panel-blue .table td:not(:first-child) a{color:var(--pm-ink);font-weight:400}
     .profile .panel-blue .table td:not(:first-child) a:hover{color:var(--pm);text-decoration:underline}
     .profile .panel-blue .table td font{font-size:12px;color:color-mix(in srgb,var(--pm-ok) 55%,#000)!important}
-    .profile .panel-blue .table thead .fa-lg{font-size:14px}
+    .profile .panel-blue .table thead .fa-lg{font-size:14px;vertical-align:middle}
+    .profile table.dataTable thead .sorting:before,.profile table.dataTable thead .sorting:after,.profile table.dataTable thead .sorting_asc:before,.profile table.dataTable thead .sorting_desc:before,.profile table.dataTable thead .sorting_asc_disabled:before,.profile table.dataTable thead .sorting_desc_disabled:before{content:none!important;display:none!important}
+    .profile table.dataTable thead .sorting_asc:after,.profile table.dataTable thead .sorting_desc:after{content:''!important;position:static!important;display:inline-block!important;width:0;height:0;margin-left:6px;border:4px solid transparent;opacity:1!important;vertical-align:middle}
+    .profile table.dataTable thead .sorting_asc:after{border-top:0;border-bottom:5px solid var(--pm)}
+    .profile table.dataTable thead .sorting_desc:after{border-bottom:0;border-top:5px solid var(--pm)}
     .profile .panel-blue .table td:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .profile .panel-blue .table td:first-child b a{color:var(--pm-ink)}
     .profile .panel-blue .table td:first-child .fa-cloud-upload{color:var(--pm-line2)!important}
     .profile .panel-blue .table tbody tr:hover td{background:var(--pm-tint)}
-    /* the last photos: the same band, then an even grid; each photo framed so a pale one does not melt into the page */
+    /* the last photos: the same band, then an even grid of cards: the photo framed, the plate's picture on its corner, the caption on white */
     .profile .col-md-5 > h3{display:flex;align-items:center;min-height:40px;margin:0;padding:0 12px;border:1px solid var(--pm-line);background:var(--pm-paper);font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--pm)}
     .profile .portfolio-box-v1{margin:0 0 16px;padding:12px 6px 0;border:1px solid var(--pm-line);border-top:0;background:#fff}
-    .profile .portfolio-box-v1 li{padding:0 6px 12px}
-    .profile .portfolio-box-v1 li > img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border:1px solid var(--pm-line2);background:var(--pm-soft);box-shadow:0 1px 2px rgba(0,0,0,.15)}
-    .profile .portfolio-box-v1-in{position:relative;min-height:38px;padding:6px 40px 0 0}
+    .profile .portfolio-box-v1 li{padding:0 6px 12px;background:none}
+    .profile .portfolio-box-v1 li > img,.pm-shot > img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border:0;background:var(--pm-soft)}
+    .pm-shot{position:relative;border:1px solid var(--pm-line2);background:var(--pm-soft);overflow:hidden}
+    .pm-tag{position:absolute;left:8px;bottom:8px;max-width:calc(100% - 16px);padding:3px;border:1px solid var(--pm-line2);background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+    .pm-tag img{display:block;width:auto;max-width:100%;height:26px}
+    .profile .portfolio-box-v1-in,.profile .portfolio-box-v1 li:hover .portfolio-box-v1-in{position:relative!important;min-height:44px;padding:8px 40px 0 0!important;background:transparent!important;color:var(--pm-ink)!important;opacity:1!important}
     .profile .portfolio-box-v1-in h3{margin:0;font-size:14px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--pm-ink)}
     .profile .portfolio-box-v1-in p{margin:0;font-size:12px;color:var(--pm-mute)}
-    .profile .portfolio-box-v1-in .btn-u{position:absolute;right:0;top:4px;display:grid;place-items:center;width:32px;height:32px;padding:0;border:1px solid var(--pm-line2);border-radius:0;background:#fff;color:var(--pm)}
+    .profile .portfolio-box-v1-in .btn-u{position:absolute;right:0;top:6px;display:grid;place-items:center;width:32px;height:32px;padding:0;border:1px solid var(--pm-line2);border-radius:0;background:#fff;color:var(--pm)}
     .profile .portfolio-box-v1-in .btn-u:hover{background:var(--pm-tint);border-color:var(--pm-soft)}
     @media (max-width:760px){.pm-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.profile > .row:first-child > .col-md-3{flex:1 1 100%}}
   `;
@@ -4358,21 +4419,27 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     const card = id && link && anchor && inlineCard({ id: 'pmg-profile-card', title: 'Uploads', after: anchor, closable: false });
     if (!card) return;
     const shown = profileNumber(link.textContent);
-    card.message('Counting the gallery…');
     const day = profileDay(new Date());
-    Promise.all([profileCount(profileGallery(id)), profileCount(profileGallery(id, day))]).then(([total, today]) => {
-      card.message('');
-      card.clear();
-      const gap = total - shown;
-      const at = `${String(DAY_STARTS.h).padStart(2, '0')}:${String(DAY_STARTS.m).padStart(2, '0')}`;
-      card.body.append(h('div', { class: 'cardbox' },
-        h('div', { class: 'stats' },
-          h('div', { class: 'stat' }, h('b', { text: profileFormat(total) }), h('span', { class: 'mute', text: 'photos in the gallery now' })),
-          h('div', { class: 'stat' }, h('b', { text: '+' + today }), h('span', { class: 'mute', text: `today (since ${at})` }))),
-        h('p', { class: 'hint', text: gap === 0 ? 'The profile figure is up to date.' : `The profile says ${profileFormat(shown)}: ${Math.abs(gap)} ${gap > 0 ? 'more' : 'fewer'} in the gallery, the site has not recalculated yet.` }),
-        h('div', { class: 'cardrow' }, h('a', { class: 'btn ghost sm', href: profileGallery(id, day), target: '_blank', rel: 'noopener noreferrer', text: 'See today’s photos' }),
-          featureOn('worldmap') ? h('button', { type: 'button', class: 'btn ghost sm', text: 'World map of this member', onclick: () => worldMapOpen(id) }) : null)));
-    }).catch(e => card.message('Not counted: ' + e.message));
+    const at = `${String(DAY_STARTS.h).padStart(2, '0')}:${String(DAY_STARTS.m).padStart(2, '0')}`;
+    // The card stands at its final size at once: the figures are blanks that fill in, so nothing moves when they arrive
+    const total = h('b', { class: 'blank', text: '0 000' }), today = h('b', { class: 'blank', text: '+0' });
+    const hint = h('p', { class: 'hint', text: 'Counting the gallery…' });
+    hint.style.minHeight = '3em';
+    card.body.append(h('div', { class: 'cardbox' },
+      h('div', { class: 'stats' },
+        h('div', { class: 'stat' }, total, h('span', { class: 'mute', text: 'photos in the gallery now' })),
+        h('div', { class: 'stat' }, today, h('span', { class: 'mute', text: `today (since ${at})` }))),
+      hint,
+      h('div', { class: 'cardrow' }, h('a', { class: 'btn ghost sm', href: profileGallery(id, day), target: '_blank', rel: 'noopener noreferrer', text: 'See today’s photos' }),
+        featureOn('worldmap') ? h('button', { type: 'button', class: 'btn ghost sm', text: 'World map of this member', onclick: () => worldMapOpen(id) }) : null)));
+    Promise.all([profileCount(profileGallery(id)), profileCount(profileGallery(id, day))]).then(([count, now]) => {
+      const gap = count - shown;
+      total.textContent = profileFormat(count);
+      today.textContent = '+' + now;
+      total.classList.remove('blank');
+      today.classList.remove('blank');
+      hint.textContent = gap === 0 ? 'The profile figure is up to date.' : `The profile says ${profileFormat(shown)}: ${Math.abs(gap)} ${gap > 0 ? 'more' : 'fewer'} in the gallery, the site has not recalculated yet.`;
+    }).catch(e => { hint.textContent = ''; card.message('Not counted: ' + e.message); });
   }
 
   registerFeature({
@@ -4915,6 +4982,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
       document.head.appendChild(style);
       if (profileTiles(root)) root.classList.add('pm-built');
       profileCountries(root);
+      profileLast(root);
       profileNotifications(root, (location.pathname.match(/\/user(\d+)/) || [])[1]);
     }
   });
@@ -5017,6 +5085,40 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
       window.addEventListener('storage', e => { if (e.key === 'pmg_notify_unseen') notifyShow(); });
       setTimeout(() => notifyPoll(false), 4000);
       setInterval(() => notifyPoll(false), 60000);
+    }
+  });
+  /* =====================================================================
+   *  THE LAST PLATES STRIP  (the line of the latest uploads that every page of the site carries under its header)
+   *    The site writes it as a small line of text, "last | AB 123 | CD 456 | ...", at the very left of the window. Here it becomes a slim
+   *    strip as wide as the page, with a flag and a chip per plate (scrolling sideways if they do not fit). The links are the site's own;
+   *    its line stays in the page, hidden. Switch it off in Settings to get the site's line back.
+   * ===================================================================== */
+  const STRIP_CSS = `
+    .pm-last{${PAGE_TOKENS};display:flex;align-items:center;gap:12px;width:min(1170px,calc(100% - 30px));min-height:44px;margin:8px auto;padding:0 12px;border:1px solid var(--pm-line);background:#fff;overflow:hidden}
+    .pm-last-label{flex:none;font:700 11px/1 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--pm)}
+    .pm-last-list{display:flex;gap:6px;min-width:0;padding:6px 0;overflow-x:auto;scrollbar-width:thin}
+    .pm-chip{display:inline-flex;align-items:center;flex:none;height:30px;padding:0 10px;border:1px solid var(--pm-line2);background:var(--pm-paper);color:var(--pm-ink);font:600 12px/1 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;text-decoration:none;white-space:nowrap}
+    .pm-chip:hover{background:var(--pm-tint);border-color:var(--pm-soft);color:var(--pm-ink);text-decoration:none}
+    .pm-chip .pm-flag{margin-right:8px}
+  `;
+
+  registerFeature({
+    id: 'laststrip', label: 'Latest plates strip',
+    groups: [],
+    init: () => {
+      const mark = document.querySelector('.text-highlights'), small = mark && mark.closest('small');
+      const links = small ? [...small.querySelectorAll('a[href*="/nomer"]')] : [];
+      if (!links.length || document.querySelector('.pm-last')) return;
+      const style = document.createElement('style');
+      style.id = 'pmg-last-strip-style';
+      style.textContent = STRIP_CSS;
+      document.head.appendChild(style);
+      const chips = links.map(a => {
+        const code = (a.getAttribute('href').match(/^\/([a-z]{2})\//) || [])[1];
+        return h('a', { class: 'pm-chip', href: a.getAttribute('href'), title: code ? cName(code) : '' }, code ? profileFlag(code) : null, a.textContent.trim());
+      });
+      small.after(h('div', { class: 'pm-last' }, h('span', { class: 'pm-last-label', text: 'Last' }), h('div', { class: 'pm-last-list' }, chips)));
+      small.style.display = 'none';
     }
   });
   /* =====================================================================

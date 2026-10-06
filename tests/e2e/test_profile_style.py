@@ -46,11 +46,16 @@ PROFILE = """<html><body><div class="container content profile"><div class="row"
 <div class="service-in"><h4 class="counter">received: <b><a href="/c">10</a></b> <span class="badge">+7</span></h4><h4 class="counter">posted: <b><a href="/d">27</a></b></h4></div></div></div></div>
 <div class="row"><div class="col-md-6"><div class="panel"><ul class="mCustomScrollbar"><div id="content"><li><div><i class="fa fa-heart"></i> <strong><a href="/user1">Aurel</a></strong> <a href="/de/nomer1">MZ HG 950</a><p class="pull-right"><small><time datetime="2026-10-05T01:09:38+03:00"><span>x</span></time></small></p></div></li></div></ul><button id="load">Load more</button></div></div></div>
 <div class="row"><div class="col-md-7"><div class="panel panel-blue"><div class="table-responsive"><table id="example"><thead><tr><th></th><th>a</th><th>b</th><th>c</th></tr></thead><tbody>
-<tr><td><b><a href="/lu">Luxembourg:</a></b></td><td><a href="/x">223</a></td><td>727</td><td>-</td></tr>
-<tr><td><b><a href="/de">Germany:</a></b></td><td><a href="/x">53</a></td><td>118</td><td>-</td></tr>
-<tr><td><b><a href="/be">Belgium:</a></b></td><td>-</td><td>-</td><td>-</td></tr></tbody></table></div></div></div></div>
+<tr><td><b><a href="/usercountry-lu-121559">Luxembourg:</a></b></td><td><a href="/x">223</a></td><td>727</td><td>-</td></tr>
+<tr><td><b><a href="/usercountry-de-121559">Germany:</a></b></td><td><a href="/x">53</a></td><td>118</td><td>-</td></tr>
+<tr><td><b><a href="/be">Belgium:</a></b></td><td>-</td><td>-</td><td>-</td></tr></tbody></table></div></div></div><div class="col-md-5"><h3>last:</h3><ul class="portfolio-box-v1"><li><img class="img-responsive" src="x.png"><div class="portfolio-box-v1-in"><h3>RI 7030-D</h3><p>Croatia, <small>26-10-03</small></p><a class="btn-u" href="/hr/nomer7"><i class="fa fa-arrow"></i></a></div></li></ul></div></div>
 </div></body></html>"""
 INF = "https://img03.platesmania.com/261003/inf/abc.png"
+FLAG = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="14"><rect width="20" height="14" fill="#c00"/></svg>'
+
+
+def flags(context):
+    context.route("https://platesmania.com/assets/img/profile-flags/*.svg", lambda r: r.fulfill(status=200, content_type="image/svg+xml", body=FLAG))
 
 
 @pytest.fixture
@@ -65,9 +70,10 @@ def prof(browser):
         body = '<li><div><i class="fa fa-heart"></i> <strong><a href="/user2">Xenoore4</a></strong> <a href="/de/nomer2">VW 8372</a></div></li>' if num == 1 else "0"
         r.fulfill(status=200, content_type="text/html", body=body)
 
+    flags(c)
     c.route("https://platesmania.com/user121559", lambda r: r.fulfill(status=200, content_type="text/html", body=inject(PROFILE)))
     c.route("https://platesmania.com/action2.php**", action)
-    c.route("https://platesmania.com/de/nomer**", lambda r: r.fulfill(status=200, content_type="text/html", body=f'<html><body><img src="{INF}"></body></html>'))
+    c.route("https://platesmania.com/*/nomer*", lambda r: r.fulfill(status=200, content_type="text/html", body=f'<html><body><img src="{INF}"></body></html>'))
     p = c.new_page()
     p.goto(URL)
     p.wait_for_selector("#pmg-host")
@@ -96,3 +102,33 @@ def test_a_plate_is_shown_as_its_picture_and_the_list_loads_as_it_is_scrolled(pr
     assert prof.evaluate("() => { const i = document.querySelector('img.pm-plate'); return [i.getAttribute('src'), i.alt]; }") == [INF, "MZ HG 950"]
     prof.wait_for_function("() => document.querySelectorAll('ul.mCustomScrollbar li').length === 2 && document.querySelector('.pm-end').textContent === 'That is all.'", timeout=30000)
     assert prof.evaluate("() => document.getElementById('load').style.display") == "none"            # the site's button is out of the way
+
+
+def test_each_country_of_the_table_has_its_flag(prof):
+    prof.wait_for_selector(".pm-bar")
+    assert prof.evaluate("() => [...document.querySelectorAll('#example tbody tr .pm-flag')].map(i => i.getAttribute('src'))") == ["/assets/img/profile-flags/lu.svg", "/assets/img/profile-flags/de.svg"]
+
+
+def test_a_last_photo_is_a_card_with_the_country_flag_and_the_plate_on_its_corner(prof):
+    prof.wait_for_selector(".pm-shot")
+    prof.evaluate("() => document.querySelector('.pm-shot').scrollIntoView()")                       # the plate is read when the photo comes in view
+    assert prof.evaluate("() => document.querySelector('.portfolio-box-v1-in .pm-flag').getAttribute('src')") == "/assets/img/profile-flags/hr.svg"
+    prof.wait_for_function("() => { const t = document.querySelector('.pm-tag'); return t && !t.hidden && t.querySelector('img'); }", timeout=30000)
+    assert prof.evaluate("() => document.querySelector('.pm-tag img').getAttribute('src')") == "https://img03.platesmania.com/261003/inf/abc.png"
+    assert prof.evaluate("() => getComputedStyle(document.querySelector('.portfolio-box-v1-in')).backgroundColor") == "rgba(0, 0, 0, 0)"      # no dark overlay: the caption is on white
+
+
+def test_the_line_of_the_latest_plates_becomes_a_strip_of_chips_with_flags(browser):
+    c = browser.new_context(viewport={"width": 1280, "height": 900})
+    route_site(c)
+    flags(c)
+    page_html = ('<html><body><div class="wrapper"><small><span class="text-highlights">last</span> | <a href="/it/nomer1">V0 P CATVR</a> | <a href="/fr/nomer2">HM-137-WT</a></small>'
+                 '<div class="container content">x</div></div></body></html>')
+    c.route("https://platesmania.com/fr/gallery.php", lambda r: r.fulfill(status=200, content_type="text/html", body=inject(page_html)))
+    p = c.new_page()
+    p.goto("https://platesmania.com/fr/gallery.php")
+    p.wait_for_selector(".pm-last")
+    assert p.evaluate("() => [...document.querySelectorAll('.pm-chip')].map(a => [a.textContent, a.getAttribute('href'), a.querySelector('.pm-flag').getAttribute('src')])") == [
+        ["V0 P CATVR", "/it/nomer1", "/assets/img/profile-flags/it.svg"], ["HM-137-WT", "/fr/nomer2", "/assets/img/profile-flags/fr.svg"]]
+    assert p.evaluate("() => getComputedStyle(document.querySelector('.wrapper > small')).display") == "none"
+    c.close()

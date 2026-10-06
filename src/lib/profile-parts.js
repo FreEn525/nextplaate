@@ -2,7 +2,9 @@
    *  PROFILE PARTS  (what the profile look builds in place of the site's loose figures and its 96-row table)
    *    The site's elements stay in the page, hidden or restyled; these read them and build the clean version beside them.
    *      profileTiles(root)       four tiles (plates, likes, comments, rating) from the site's figures, put before the first of them
-   *      profileCountries(root)   a bar over the countries table: the title and a box to show the countries with no photo (hidden by default)
+   *      profileCountries(root)   a bar over the countries table: the title and a box to show the countries with no photo (hidden by default),
+   *                               and each country's flag before its name
+   *      profileLast(root)        the last photos as cards: the plate's picture over the photo, the country's flag before its name
    * ===================================================================== */
   const profileText = el => (el ? el.textContent.replace(/\s+/g, ' ').trim() : '');
 
@@ -39,9 +41,38 @@
     empty.forEach(tr => tr.classList.add('pm-empty'));
     const box = h('input', { type: 'checkbox' });
     box.onchange = () => panel.classList.toggle('pm-all', box.checked);
+    rows.forEach(tr => {                                                             // the flag of each country, from the link of its name
+      const name = tr.querySelector('td:first-child b'), code = (tr.innerHTML.match(/usercountry-([a-z]{2})-/) || [])[1];
+      if (name && code) name.before(profileFlag(code));
+    });
     const bar = h('div', { class: 'pm-bar' },
       h('span', { class: 'pm-title', text: `Countries (${rows.length - empty.length} with photos)` }),
       empty.length ? h('label', { class: 'pm-chk' }, box, `Show the ${empty.length} without`) : null);
     panel.insertBefore(bar, panel.firstChild);
     return bar;
+  }
+
+  // A country's flag, the site's own picture; a country it has none for shows nothing
+  function profileFlag(code) {
+    const img = h('img', { class: 'pm-flag', src: flagUrl(code), alt: '', width: 20, height: 14, loading: 'lazy' });
+    img.addEventListener('error', () => img.remove());
+    return img;
+  }
+
+  function profileLast(root) {
+    const items = [...root.querySelectorAll('.portfolio-box-v1 > li')];
+    items.forEach(li => {
+      const photo = li.querySelector(':scope > img'), box = li.querySelector('.portfolio-box-v1-in'), go = box && box.querySelector('a[href*="/nomer"]');
+      if (!photo || !go || li.dataset.pmDone) return;
+      li.dataset.pmDone = '1';
+      const code = (go.getAttribute('href').match(/^\/([a-z]{2})\//) || [])[1];
+      const country = box.querySelector('p');
+      if (code && country) country.prepend(profileFlag(code));
+      const tag = h('div', { class: 'pm-tag', hidden: true });                       // the plate, over the corner of the photo, when its picture is known
+      const wrap = h('div', { class: 'pm-shot' });
+      photo.before(wrap);
+      wrap.append(photo, tag);
+      plateWatch(li, go, src => { tag.replaceChildren(h('img', { src, alt: (box.querySelector('h3') || {}).textContent || '' })); tag.hidden = false; });
+    });
+    return items.length;
   }

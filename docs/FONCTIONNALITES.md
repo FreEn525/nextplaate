@@ -31,8 +31,9 @@ Chaque fonction a un interrupteur dans Settings (sauf Settings elle-même) : ét
 | 21 | Carte du monde | World map | tiroir Browse, profils, touche `G` | les pays dont un membre a des photos sur une carte du monde, nuancés selon le nombre de photos, chacun un lien vers ses photos ; vue Europe ; vous ou n'importe quel membre | `G` |
 | 22 | Apparence du profil | Profile page look | profils | la page de profil d'un membre dans le style du script : fiche, tuiles, deux panneaux identiques pour messages et notifications, tableau et dernières photos ; seul le style change | |
 | 23 | Notifications | Notification pop-ups | partout (connecté) | une pastille en coin pour un nouveau like, commentaire ou message privé, tant qu'un onglet PlatesMania est ouvert | |
-| 24 | Éditeur de raccourcis | Shortcut editor | tiroir Raccourcis | change chaque touche | |
-| 25 | Réglages | (verrouillée) | tiroir Settings | un interrupteur par fonction ; choix des pays de la barre | |
+| 24 | Bande des dernières plaques | Latest plates strip | toutes les pages | la ligne des derniers envois du site en bande fine, drapeau et pastille par plaque | |
+| 25 | Éditeur de raccourcis | Shortcut editor | tiroir Raccourcis | change chaque touche | |
+| 26 | Réglages | (verrouillée) | tiroir Settings | un interrupteur par fonction ; choix des pays de la barre | |
 
 Autour de ces fonctions : la barre d'icônes (avec votre photo de profil sous le logo), le message d'état en bas, et pour le développement le tiroir Developer du build dev (capture, test de plaques, vérification des lectures, base).
 
@@ -71,6 +72,7 @@ La barre suit l'ordre d'usage : **Check a plate** (vérifier ce qu'on va envoyer
 | World map | every member |
 | Profile page look | every profile |
 | Notification pop-ups | everywhere you are logged in |
+| Latest plates strip | every page |
 | Shortcut editor | everywhere |
 
 ## Installation et version
@@ -214,6 +216,8 @@ La barre suit l'ordre d'usage : **Check a plate** (vérifier ce qu'on va envoyer
 ### Apparence du profil (`84-profile-style.js`, `ui/10-profile-css.js`, `lib/profile-parts.js`, `lib/profile-notify.js`)
 - **Tuiles** : les chiffres épars du site (envois, likes, commentaires, place au classement) sont lus et refaits en quatre tuiles alignées ; les éléments d'origine restent dans la page, cachés (`pm-built`). La colonne de gauche (200 px) garde la photo, les badges et la barre des membres, à sa largeur.
 - **Pays** : une barre au-dessus du tableau (« Countries (21 with photos) ») et une case pour montrer les pays sans photo (cachés par défaut) ; chiffres alignés à droite en colonnes de largeur égale, icônes seulement dans l'en-tête.
+- **Finitions** : badges carrés aux icônes centrées, cadre autour de la photo et filet bleu en haut de la fiche, carte *Uploads* à sa taille finale dès l'affichage (les chiffres se remplissent sans rien déplacer), drapeaux dans le tableau des pays, flèches de tri propres (celles de DataTables sont remplacées).
+- **Bande des dernières plaques** (`86-last-strip.js`, toutes les pages) : la ligne « last | … » du site devient une bande fine, à la largeur de la page, avec un drapeau et une pastille par plaque ; la ligne d'origine reste, cachée (*Latest plates strip*).
 - **Derniers posts** : même bandeau que les autres boîtes, grille régulière 4:3, photos encadrées (bordure et ombre légère : une photo claire ne se fond plus dans la page).
 - **Notifications** : la plaque en image (le fichier `inf` de la page de la photo, lu par la file commune pour les lignes visibles seulement, gardé dans le navigateur), et le bouton *Load more* remplacé par le chargement des dix suivantes quand la fin de la liste entre dans la vue (le bouton reste, caché, avec son script).
 - Une feuille de style appliquée à la page de profil du site (celui du membre qu'on regarde) : la fiche (photo, badges, nom, identifiant) dans un cadre, les compteurs (envois, likes, commentaires) en tuiles, les messages privés et les notifications dans deux panneaux identiques (même en-tête, même hauteur, plus de fonds jaune et bleu ciel), le tableau des pays plus calme, les dernières photos en grille régulière. Rien n'est reconstruit : tri, filtre et suppression des messages, *Load more*, tri du tableau gardent leurs scripts. Les couleurs sont les jetons de page (`PAGE_TOKENS`). Un interrupteur (*Profile page look*) rend l'apparence du site.
@@ -273,7 +277,7 @@ Chaque fonction s'enregistre avec `registerFeature({ groups, keys, onEscape, ini
 
 ## Tests (`tests/`)
 
-- `python -m pytest -q` (dossier `tests/e2e/`) : 437 tests (451 avec le build dev, `NEXTPLAATE_SCRIPT=nextplaate.dev.user.js`) sur une version simulée du site (`fake_site.py`, avec une fausse page Google pour le Lens). Un fichier par fonction (`test_lens.py`, `test_tags.py`, `test_members.py`, `test_flags.py`, `test_extra.py`, `test_preview.py`…), plus `test_style.py` (couleurs, rayons, tailles, hauteurs) et `test_responsive.py` (aucun débordement de 320 à 1280 px). Pas d'accès réel à PlatesMania ni à Google.
+- `python -m pytest -q` (dossier `tests/e2e/`) : 444 tests (458 avec le build dev, `NEXTPLAATE_SCRIPT=nextplaate.dev.user.js`) sur une version simulée du site (`fake_site.py`, avec une fausse page Google pour le Lens). Un fichier par fonction (`test_lens.py`, `test_tags.py`, `test_members.py`, `test_flags.py`, `test_extra.py`, `test_preview.py`…), plus `test_style.py` (couleurs, rayons, tailles, hauteurs) et `test_responsive.py` (aucun débordement de 320 à 1280 px). Pas d'accès réel à PlatesMania ni à Google.
 - `python tests/offline/check_known.py` : 39 plaques validées à la main, tapées dans les pages sauvegardées.
 - `python tests/offline/check_db.py` : toutes les plaques de la base, dans la catégorie correspondante, en parallèle. Hors ligne.
 - Les données dérivées : `node scripts/refresh-data.mjs` → `data/` et `docs/COUVERTURE.md` (voir `data/README.md`).

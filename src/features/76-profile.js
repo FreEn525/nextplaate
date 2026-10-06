@@ -45,21 +45,27 @@
     const card = id && link && anchor && inlineCard({ id: 'pmg-profile-card', title: 'Uploads', after: anchor, closable: false });
     if (!card) return;
     const shown = profileNumber(link.textContent);
-    card.message('Counting the gallery…');
     const day = profileDay(new Date());
-    Promise.all([profileCount(profileGallery(id)), profileCount(profileGallery(id, day))]).then(([total, today]) => {
-      card.message('');
-      card.clear();
-      const gap = total - shown;
-      const at = `${String(DAY_STARTS.h).padStart(2, '0')}:${String(DAY_STARTS.m).padStart(2, '0')}`;
-      card.body.append(h('div', { class: 'cardbox' },
-        h('div', { class: 'stats' },
-          h('div', { class: 'stat' }, h('b', { text: profileFormat(total) }), h('span', { class: 'mute', text: 'photos in the gallery now' })),
-          h('div', { class: 'stat' }, h('b', { text: '+' + today }), h('span', { class: 'mute', text: `today (since ${at})` }))),
-        h('p', { class: 'hint', text: gap === 0 ? 'The profile figure is up to date.' : `The profile says ${profileFormat(shown)}: ${Math.abs(gap)} ${gap > 0 ? 'more' : 'fewer'} in the gallery, the site has not recalculated yet.` }),
-        h('div', { class: 'cardrow' }, h('a', { class: 'btn ghost sm', href: profileGallery(id, day), target: '_blank', rel: 'noopener noreferrer', text: 'See today’s photos' }),
-          featureOn('worldmap') ? h('button', { type: 'button', class: 'btn ghost sm', text: 'World map of this member', onclick: () => worldMapOpen(id) }) : null)));
-    }).catch(e => card.message('Not counted: ' + e.message));
+    const at = `${String(DAY_STARTS.h).padStart(2, '0')}:${String(DAY_STARTS.m).padStart(2, '0')}`;
+    // The card stands at its final size at once: the figures are blanks that fill in, so nothing moves when they arrive
+    const total = h('b', { class: 'blank', text: '0 000' }), today = h('b', { class: 'blank', text: '+0' });
+    const hint = h('p', { class: 'hint', text: 'Counting the gallery…' });
+    hint.style.minHeight = '3em';
+    card.body.append(h('div', { class: 'cardbox' },
+      h('div', { class: 'stats' },
+        h('div', { class: 'stat' }, total, h('span', { class: 'mute', text: 'photos in the gallery now' })),
+        h('div', { class: 'stat' }, today, h('span', { class: 'mute', text: `today (since ${at})` }))),
+      hint,
+      h('div', { class: 'cardrow' }, h('a', { class: 'btn ghost sm', href: profileGallery(id, day), target: '_blank', rel: 'noopener noreferrer', text: 'See today’s photos' }),
+        featureOn('worldmap') ? h('button', { type: 'button', class: 'btn ghost sm', text: 'World map of this member', onclick: () => worldMapOpen(id) }) : null)));
+    Promise.all([profileCount(profileGallery(id)), profileCount(profileGallery(id, day))]).then(([count, now]) => {
+      const gap = count - shown;
+      total.textContent = profileFormat(count);
+      today.textContent = '+' + now;
+      total.classList.remove('blank');
+      today.classList.remove('blank');
+      hint.textContent = gap === 0 ? 'The profile figure is up to date.' : `The profile says ${profileFormat(shown)}: ${Math.abs(gap)} ${gap > 0 ? 'more' : 'fewer'} in the gallery, the site has not recalculated yet.`;
+    }).catch(e => { hint.textContent = ''; card.message('Not counted: ' + e.message); });
   }
 
   registerFeature({

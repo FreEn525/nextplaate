@@ -17,6 +17,7 @@
       document.head.appendChild(style);
       if (profileTiles(root)) root.classList.add('pm-built');
       profileCountries(root);
+      profileLast(root);
       profileNotifications(root, (location.pathname.match(/\/user(\d+)/) || [])[1]);
     }
   });

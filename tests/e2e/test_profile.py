@@ -19,7 +19,7 @@ def ctx(browser):
 def open_profile(ctx):
     page = ctx.new_page()
     page.goto("https://platesmania.com/user121559")
-    page.wait_for_function(f"() => document.getElementById('pmg-profile-card') && {CARD}.querySelector('.stat')", timeout=15000)
+    page.wait_for_function(f"() => document.getElementById('pmg-profile-card') && {CARD}.querySelector('.stat b:not(.blank)')", timeout=15000)
     return page
 
 
@@ -68,7 +68,7 @@ def test_a_gallery_with_thousands_written_with_a_dot_is_counted(ctx):
     """The site writes 38.723 for a big gallery: the card must read it as 38723, not fail (member 101605)."""
     page = ctx.new_page()
     page.goto("https://platesmania.com/user101605")
-    page.wait_for_function(f"() => document.getElementById('pmg-profile-card') && {CARD}.querySelector('.stat b')", timeout=15000)
+    page.wait_for_function(f"() => document.getElementById('pmg-profile-card') && {CARD}.querySelector('.stat b:not(.blank)')", timeout=15000)
     assert page.evaluate(f"() => {CARD}.querySelector('.stat b').textContent") == "38 723"
     assert "38 723" in page.evaluate(f"() => {CARD}.querySelector('.hint').textContent") or "up to date" in page.evaluate(f"() => {CARD}.querySelector('.hint').textContent")
     assert "Not counted" not in page.evaluate(f"() => {CARD}.textContent")
