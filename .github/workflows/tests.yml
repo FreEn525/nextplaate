@@ -1,0 +1,57 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Build the public and the dev script
+        run: |
+          node scripts/build.mjs
+          node scripts/build.mjs --dev
+          node --check nextplaate.user.js
+          node --check nextplaate.dev.user.js
+
+      - name: Install the test tools
+        run: |
+          pip install playwright pytest pytest-xdist
+          playwright install --with-deps chromium
+
+      # the public script, then the dev script (the dev tests are skipped without it)
+      - name: Tests (public script)
+        run: python -m pytest -q
+      - name: Tests (dev script)
+        run: NEXTPLAATE_SCRIPT=nextplaate.dev.user.js python -m pytest -q
+
+      # Tampermonkey and Greasy Fork only update when @version changes: a change in src/ needs a new version
+      - name: The version changed with src/
+        if: github.event_name == 'push' || github.event_name == 'pull_request'
+        run: |
+          base="${{ github.event.pull_request.base.sha || github.event.before }}"
+          if [ -z "$base" ] || [ "$base" = "0000000000000000000000000000000000000000" ]; then exit 0; fi
+          if git diff --quiet "$base" HEAD -- 'src/lib' 'src/core' 'src/features'; then
+            echo "No change in the public script"; exit 0
+          fi
+          old=$(git show "$base:src/meta/00-header.txt" | grep '@version' | head -1)
+          new=$(grep '@version' src/meta/00-header.txt | head -1)
+          if [ "$old" = "$new" ]; then
+            echo "::error::The public script changed ($new) but @version did not: users would not get the update"
+            exit 1
+          fi
