@@ -4,8 +4,9 @@
 
 **Google Lens**
 - A photo chosen on the upload page is searched on Google Lens by itself, in a background tab (option *Search each new photo by itself*, on by default). The button *Search this photo on Google Lens* does the same on demand, also on a photo page.
-- How: the panel saves the photo (its address, or the photo itself while it is not published) and opens Google; on that page only, the script puts the photo in Google's "paste an image link" box and starts the search, as the box is used by hand. Nothing is read from Google. This needs two new permissions, `GM_setValue` / `GM_getValue`, and the script now also runs on `www.google.*` (and stops at once there unless the panel opened the page): Tampermonkey may ask to confirm the update.
-- The prompt is now in English and no longer shown in the panel: one button copies it. The answer table accepts `Category | 1 | 2 | 3`. The panel fits its drawer.
+- The answer appears in the panel as brand, model and generation, three candidates each: the titles of the Lens results are compared with PlatesMania's own menus (brands, models, generations of the upload page). No paste box, no prompt to copy.
+- How: the panel saves the photo (its address, or the photo itself while it is not published) and opens Google; there the script puts the photo in Google's "paste an image link" box, starts the search, then writes down the titles of the results for the panel. It only does this for a search the panel asked for. This needs `GM_setValue` / `GM_getValue`, and the script now also runs on `www.google.*` and `lens.google.com` (it stops at once there unless the panel asked): Tampermonkey may ask to confirm the update.
+- The panel fits its drawer.
 
 ## 5.7
 

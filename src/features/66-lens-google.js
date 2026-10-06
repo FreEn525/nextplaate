@@ -3,8 +3,9 @@
    *    The panel saves the photo (a public address, or the photo itself for one not published yet) with GM_setValue and opens
    *    https://www.google.com/?olud&src=pm. This code runs on that Google page only: it puts the photo in the "paste an image
    *    link" box of Google's search by image and starts the search, the way the box is used by hand.
-   *    It runs only on the pages the panel opened (the marker in the address) and reads nothing from Google. On any Google page the
-   *    script stops here: no panel, no other feature.
+   *    Then, on the results page that follows (within three minutes of the panel's search), it writes down the titles of the results
+   *    (links, headings, image descriptions) for the panel, which compares them with its brand and model menus. A Google page the
+   *    panel did not ask for is left alone. On any Google page the script stops here: no panel, no other feature.
    * ===================================================================== */
   // Only function declarations here: they run from core/00-open.js, before the rest of the script has set anything up
   function lensMarkedUrl() { return 'https://www.google.com/?olud&src=pm'; }
@@ -17,8 +18,32 @@
   }
 
   // Google's own markup: the jsname values are the ones of the box and the search button today, the others are a fallback
+  // The results of the search the panel asked for: the titles, once the page has them (it fills in after loading)
+  function lensReadResults() {
+    const asked = GM_getValue('lens_pending', 0);
+    const results = /^lens\.google\./.test(location.hostname) || /^\/search/.test(location.pathname);
+    if (!results || !asked || Date.now() - asked > 180000 || GM_getValue('lens_done', 0) === asked) return;
+    const collect = () => {
+      const out = [];
+      document.querySelectorAll('a[href], [role="heading"], h1, h2, h3, img[alt]').forEach(el => {
+        const t = (el.getAttribute('aria-label') || el.getAttribute('alt') || el.textContent || '').replace(/\s+/g, ' ').trim();
+        if (t.length >= 8 && t.length <= 200 && !out.includes(t) && out.length < 150) out.push(t);
+      });
+      return out;
+    };
+    let tries = 0;
+    const timer = setInterval(() => {
+      const titles = collect();
+      if (titles.length < 12 && ++tries <= 40) return;      // up to about 20 s for the results to appear
+      clearInterval(timer);
+      if (!titles.length) return;
+      GM_setValue('lens_titles', JSON.stringify({ at: asked, titles }));
+      GM_setValue('lens_done', asked);
+    }, 500);
+  }
+
   function lensOnGoogle() {
-    if (!onLensPage()) return;
+    if (!onLensPage()) { lensReadResults(); return; }
     let done = false, tries = 0;
     const first = (...sel) => sel.map(s => document.querySelector(s)).find(Boolean);
     const attempt = () => {

@@ -16,7 +16,7 @@
 ## Fonctionnalités
 
 - **Statut du site** : à faire. Une indication (en ligne, bloqué, en pause après un blocage) visible dans la barre, à partir de la file de requêtes existante (`http.js`).
-- **Recherche Google Lens** : **fait** (version 5.8) : recherche automatique d'une photo choisie, bouton à la demande, prompt copié. Reste à décider : comment afficher les résultats au format marque / modèle / génération sans coller de réponse (voir `ETAT-ET-PLAN.md`).
+- **Recherche Google Lens** : **fait** (version 5.8) : recherche automatique d'une photo choisie, résultats comparés aux menus de PlatesMania (marque, modèle, génération). À vérifier sur le vrai site : la lecture des résultats dépend de la page de Google.
 - **Génération de modèle** : **info nécessaire**. Je ne sais pas ce que tu entends : une génération par rapport à l'année, au code châssis, ou une suggestion par IA ? Ça change tout.
 - **Ajout simplifié** : à faire. Un mode « simple » avec un indicateur (flag) à la place du menu déroulant, pour l'ajout de photo.
 - **Remplissage marque, modèle, génération** : à faire. Quand la plaque existe déjà sur le site, pré-remplir les menus avec les photos existantes. Dépend de la lecture de la galerie de recherche (déjà utilisée par la vérification de plaque).

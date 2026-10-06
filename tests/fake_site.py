@@ -77,6 +77,9 @@ UPLOAD_PAGE = (
     + '<input type="text" id="nomer" name="nomer">'
     + '<select id="ctype" name="ctype"><option value="1">Car</option><option value="2">Motorbike</option></select>'
     + '<input type="file" id="filename" name="filename">'
+    + '<select name="markaavto"><option value="200">I don`t know...</option><option value="7">Volkswagen</option><option value="8">Audi</option></select>'
+    + '<script>var bmObject = {"7": [70, 71], "8": [80]}, modelObject = {"70": "Golf", "71": "Polo", "80": "RS 6"},'
+    + ' bmgObject = {"70": [700, 701]}, modgenObject = {"700": "Mk7, 2012\u20132019", "701": "Mk8, 2019\u2013"};</script>'
     + '<div id="zoomimgid" class="hidden"><img id="zoomimg" width="260" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="></div>'
     + '<button type="button" id="pm-photo-editor-open">Upload through editor</button></form>'
     + "</body></html>"

@@ -280,9 +280,53 @@ def test_google_lens_button_says_when_there_is_no_photo(page):
     assert "No photo on this page yet" in lens_status(page)
 
 
-def test_the_lens_prompt_is_not_shown_in_the_panel(page):
+def test_lens_titles_become_brand_model_and_generation(page, ctx):
+    google_fake(ctx)
     open_at(page, ADD)
-    assert "You are a car expert" not in lens_status(page)
+    page.evaluate("(src) => { document.getElementById('zoomimg').src = src; }", PIXELS)
+    page.wait_for_function("() => localStorage.getItem('gm_lens_pending')")
+    stamp = json.loads(page.evaluate("() => localStorage.getItem('gm_lens_pending')"))
+    titles = ["2019 Volkswagen Golf 8 - Wikipedia", "Volkswagen Golf Mk8 2020 review", "Golf GTI 2021", "Volkswagen Polo", "Audi RS 6 Avant"]
+    page.evaluate("(v) => localStorage.setItem('gm_lens_titles', JSON.stringify(v))", json.dumps({"at": stamp, "titles": titles}))
+    page.wait_for_function("() => document.getElementById('pmg-host').shadowRoot.querySelector('.lens-cand')")
+    cands = page.evaluate("() => [...document.getElementById('pmg-host').shadowRoot.querySelectorAll('.lens-cat, .lens-cand')].map(e => e.textContent)")
+    assert cands[:5] == ["Brand", "Volkswagen", "Audi", "—", "Model"]
+    assert cands[5:7] == ["Golf", "Polo"]
+    assert cands[8:10] == ["Generation", "Mk8, 2019–"]       # 2019, 2020, 2021 are Mk8 years; 2019 is also Mk7's last
+
+
+def test_lens_titles_of_another_search_are_ignored(page, ctx):
+    google_fake(ctx)
+    open_at(page, ADD)
+    page.evaluate("(src) => { document.getElementById('zoomimg').src = src; }", PIXELS)
+    page.wait_for_function("() => localStorage.getItem('gm_lens_pending')")
+    page.evaluate("(v) => localStorage.setItem('gm_lens_titles', JSON.stringify(v))", json.dumps({"at": 1, "titles": ["Volkswagen Golf"]}))
+    page.wait_for_timeout(1500)
+    assert page.evaluate("() => document.getElementById('pmg-host').shadowRoot.querySelectorAll('.lens-cand').length") == 0
+
+
+def google_results(ctx):
+    from fake_site import inject
+    links = "".join(f'<a href="/x{i}">2019 Volkswagen Golf result number {i}</a>' for i in range(15))
+    ctx.route("https://www.google.com/search**", lambda r: r.fulfill(status=200, content_type="text/html", body=inject(f"<html><body>{links}</body></html>")))
+
+
+def test_the_google_side_writes_down_the_results_it_was_asked_for(ctx):
+    google_results(ctx)
+    p = ctx.new_page()
+    p.add_init_script("localStorage.setItem('gm_lens_pending', String(Date.now()))")
+    p.goto("https://www.google.com/search?q=lens")
+    p.wait_for_function("() => localStorage.getItem('gm_lens_titles')")
+    got = json.loads(json.loads(p.evaluate("() => localStorage.getItem('gm_lens_titles')")))
+    assert got["at"] > 0 and len(got["titles"]) == 15 and got["titles"][0].startswith("2019 Volkswagen Golf")
+
+
+def test_the_google_side_leaves_a_search_nobody_asked_for(ctx):
+    google_results(ctx)
+    p = ctx.new_page()
+    p.goto("https://www.google.com/search?q=lens")
+    p.wait_for_timeout(1200)
+    assert p.evaluate("() => localStorage.getItem('gm_lens_titles')") is None
 
 
 def test_the_google_side_puts_the_photo_in_the_box_and_starts_the_search(ctx):

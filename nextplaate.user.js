@@ -8,6 +8,7 @@
 // @match        https://platesmania.com/*
 // @match        https://*.platesmania.com/*
 // @match        https://www.google.*/*
+// @match        https://lens.google.com/*
 // @require      https://cdn.jsdelivr.net/npm/libheif-js@1.19.8/libheif-wasm/libheif-bundle.js
 // @grant        GM_openInTab
 // @grant        GM_setValue
@@ -1659,37 +1660,115 @@
     init: () => renderShortcuts()
   });
   /* =====================================================================
-   *  GOOGLE LENS  (in the panel: search the photo, copy the prompt, paste the answer shown in 3 columns)
-   *    The panel saves the photo for the Google side (66-lens-google.js) and opens Google in a tab: the photo goes into Google's
-   *    "paste an image link" box and the search starts. On the upload page this happens by itself as soon as a photo is chosen.
-   *    The prompt is not shown: the user copies it with one button.
-   *    The answer is a table: one row per category (brand, model, generation), three candidates each. It is only read and shown
-   *    here: nothing is typed into the form.
+   *  GOOGLE LENS  (in the panel: the photo is searched on Google Lens, the answer is shown as brand / model / generation)
+   *    1. The panel saves the photo for the Google side (66-lens-google.js) and opens Google in a tab. On the upload page this
+   *       happens by itself as soon as a photo is chosen.
+   *    2. The Google side puts the photo in Google's "paste an image link" box, then, on the results page, writes down the titles
+   *       of the results (GM storage: the two tabs are on different sites).
+   *    3. This file reads those titles and compares them with the brands, models and generations of PlatesMania's own menus
+   *       (bmObject, modelObject, bmgObject, modgenObject of the upload page): three candidates for each of the three.
+   *    The answer is only shown here: nothing is typed into the form.
    * ===================================================================== */
-  const LENS_PROMPT = [
-    'You are a car expert. In this photo of a car, identify the vehicle and give three hypotheses, ranked by probability,',
-    'for each of the three categories below. For every hypothesis, add a confidence level (high, medium, low).',
-    '',
-    '1. Brand: three proposals.',
-    '2. Model: three proposals, taking the most likely brand into account.',
-    '3. Generation: three proposals, with the production years if you know them.',
-    '',
-    'If the photo does not show enough detail for a category, write "unknown" instead of guessing.',
-    'Answer only with a table, no text around it, with the columns: Category | 1 | 2 | 3.'
-  ].join('\n');
   settings.define('lens_auto', '1', 'Search each new photo on Google Lens', 'lens');
 
-  // The photo to search: on the upload page the preview #zoomimg (a 1-pixel placeholder until a photo is chosen; its address is the
-  // photo itself while it is not published), on another page the main photo. '' when there is none.
+  // ---- the photo
+  // On the upload page the preview #zoomimg (a 1-pixel placeholder until a photo is chosen; its address is the photo itself while
+  // it is not published), on another page the main photo. '' when there is none.
   const LENS_PLACEHOLDER = /^data:image\/gif/i;
   function lensPhoto() {
     const img = here.add ? document.getElementById('zoomimg') : [...document.images].find(i => /\/\/img\d+\.platesmania\.com\/\d+\/m\/\d+\.jpg/i.test(i.src));
     return img && img.src && !LENS_PLACEHOLDER.test(img.src) ? img.src.replace(/\/s\/(\d+\.jpg)/, '/m/$1') : '';
   }
 
+  // ---- what PlatesMania knows (the menus and the data of the upload page)
+  const lensPage = () => (typeof unsafeWindow !== 'undefined' ? unsafeWindow : window);
+  function lensData() {
+    const w = lensPage();
+    const brands = [...document.querySelectorAll('select[name="markaavto"] option')].filter(o => +o.value > 0 && +o.value !== 200).map(o => ({ id: o.value, name: o.textContent.trim() }));
+    return { brands, models: w.bmObject || {}, modelNames: w.modelObject || {}, gens: w.bmgObject || {}, genNames: w.modgenObject || {} };
+  }
+
+  // ---- the comparison
+  const lensNorm = s => String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+  // A title is a result of Lens ("2019 Audi RS6 Avant - Wikipedia"); a result near the top counts more than one far down
+  const lensWeight = i => 1 / (1 + i / 10);
+
+  function lensScore(titles, names, minLength) {
+    const padded = titles.map(t => ' ' + lensNorm(t) + ' ');
+    const compact = padded.map(t => t.replace(/ /g, ''));
+    const found = new Map();
+    for (const [id, name] of names) {
+      const n = lensNorm(name), c = n.replace(/ /g, '');
+      if (!n || c.length < minLength || /^\d+$/.test(c)) continue;
+      let score = 0;
+      padded.forEach((t, i) => { if (t.includes(' ' + n + ' ') || (c.length >= 3 && compact[i].includes(c))) score += lensWeight(i); });
+      if (score) found.set(id, score);
+    }
+    return [...found].sort((a, b) => b[1] - a[1]);
+  }
+
+  // The year range of a generation name: "4th gen (C8/4K5), 2019–" -> [2019, 9999]; "Mk7, 2012–2019" -> [2012, 2019]
+  function lensYears(name) {
+    const m = String(name).match(/(\d{4})\s*[–—-]\s*(\d{4})?\s*$/) || String(name).match(/(\d{4})\s*$/);
+    return m ? [+m[1], m[2] ? +m[2] : (/[–—-]\s*$/.test(name) ? 9999 : +m[1])] : null;
+  }
+
+  // titles -> [{ category, candidates: [name, name, name] }]
+  function lensGuess(titles, d) {
+    const brandNames = d.brands.map(b => [b.id, b.name.replace(/\s*\(.*\)\s*$/, '')]);
+    const brands = lensScore(titles, brandNames, 3);
+    const out = [{ category: 'Brand', candidates: brands.slice(0, 3).map(([id]) => d.brands.find(b => b.id === id).name) }];
+    const top = brands[0] && brands[0][0];
+    const modelIds = top ? d.models[top] || [] : [];
+    const models = lensScore(titles, modelIds.map(id => [id, d.modelNames[id]]), 2);
+    out.push({ category: 'Model', candidates: models.slice(0, 3).map(([id]) => d.modelNames[id]) });
+    // the generations of the best model whose years are the ones named in the titles
+    const years = titles.join(' ').match(/\b(19[2-9]\d|20[0-3]\d)\b/g) || [];
+    const gens = (models[0] ? d.gens[models[0][0]] || [] : []).filter(id => String(d.genNames[id]) !== '0').map(id => {
+      const r = lensYears(d.genNames[id]);
+      return [d.genNames[id], r ? years.filter(y => +y >= r[0] && +y <= r[1]).length : 0];
+    }).filter(g => g[1]).sort((a, b) => b[1] - a[1]);
+    out.push({ category: 'Generation', candidates: gens.slice(0, 3).map(g => g[0]) });
+    return out;
+  }
+
+  function lensShow(rows) {
+    const out = $('lensOut');
+    out.textContent = '';
+    for (const r of rows) {
+      out.appendChild(h('div', { class: 'lens-cat', text: r.category }));
+      out.appendChild(h('div', { class: 'lens-cands' }, ...[0, 1, 2].map(i => h('span', { class: 'lens-cand', text: r.candidates[i] || '—' }))));
+    }
+  }
+
+  // ---- the search
+  let lensStamp = 0, lensTimer = null;
+  const lensSay = text => { const el = $('lensMsg'); if (el) el.textContent = text; };
+
   // Hands the photo to the Google side and opens Google; in the background when the search starts by itself
   function lensStart(photo, background) {
+    lensStamp = Date.now();
     GM_setValue('lens_image', photo);
+    GM_setValue('lens_pending', lensStamp);
+    GM_setValue('lens_titles', '');
+    lensSay('Searching on Google Lens…');
+    $('lensOut').textContent = '';
+    clearInterval(lensTimer);
+    let waited = 0;
+    lensTimer = setInterval(() => {                       // the titles come from the other tab
+      const raw = GM_getValue('lens_titles', '');
+      const got = raw ? JSON.parse(raw) : null;
+      if (got && got.at === lensStamp) {
+        clearInterval(lensTimer);
+        const rows = lensGuess(got.titles, lensData());
+        lensShow(rows);
+        lensSay(rows[0].candidates.length ? 'Lens results compared with PlatesMania.' : 'Lens answered, but no PlatesMania brand was found in the results.');
+        setStatus('Google Lens results are ready (Search drawer).', 4000);
+      } else if (++waited > 120) {
+        clearInterval(lensTimer);
+        lensSay('No result came back from Google Lens. Open its tab to see the page.');
+      }
+    }, 1000);
     const url = lensMarkedUrl();
     try { if (typeof GM_openInTab === 'function') { GM_openInTab(url, { active: !background, insert: true, setParent: true }); return true; } } catch (e) { /* the popup below */ }
     return !!window.open(url, '_blank');
@@ -1708,29 +1787,6 @@
     }, 300)).observe(img, { attributes: true, attributeFilter: ['src'] });
   }
 
-  // "| Brand | Peugeot | Citroën | Renault |" -> { category: 'Brand', candidates: ['Peugeot', 'Citroën', 'Renault'] }
-  const LENS_HEADERS = ['category', 'catégorie', 'categorie'];
-  function lensRows(text) {
-    return text.split('\n')
-      .map(l => l.trim())
-      .filter(l => l.startsWith('|') && !/^\|\s*:?-{2,}/.test(l))
-      .map(l => l.split('|').slice(1, -1).map(c => c.trim()))
-      .filter(cells => cells.length >= 2 && !LENS_HEADERS.includes(cells[0].toLowerCase()))
-      .map(cells => ({ category: cells[0], candidates: cells.slice(1, 4) }));
-  }
-
-  function lensShow() {
-    const out = $('lensOut');
-    const rows = lensRows($('lensIn').value || '');
-    out.textContent = '';
-    if (!rows.length) { out.appendChild(h('p', { class: 'presult', text: 'No table found. Paste the answer as a markdown table.' })); return; }
-    // one block per category, its three candidates side by side
-    for (const r of rows) {
-      out.appendChild(h('div', { class: 'lens-cat', text: r.category }));
-      out.appendChild(h('div', { class: 'lens-cands' }, ...r.candidates.map(c => h('span', { class: 'lens-cand', text: c || '—' }))));
-    }
-  }
-
   registerFeature({
     id: 'lens', label: 'Google Lens',
     groups: [{
@@ -1738,11 +1794,7 @@
       build: () => [
         h('button', { id: 'lensSearch', class: 'btn', text: 'Search this photo on Google Lens' }),
         h('label', { class: 'chk' }, h('input', { type: 'checkbox', id: 'lensAuto' }), 'Search each new photo by itself'),
-        h('div', { class: 'btnrow' },
-          h('button', { id: 'lensCopy', class: 'btn ghost', text: 'Copy the prompt' }),
-          h('button', { id: 'lensOpen', class: 'btn ghost', text: 'Open Lens' })),
-        h('textarea', { id: 'lensIn', rows: 4, placeholder: 'Paste the answer here (| Category | 1 | 2 | 3 |)' }),
-        h('button', { id: 'lensShow', class: 'btn ghost', text: 'Show the answer' }),
+        h('p', { id: 'lensMsg', class: 'presult', text: 'Choose a photo: it is searched on Google Lens and the likely brand, model and generation appear here.' }),
         h('div', { id: 'lensOut', class: 'lens-out' })
       ]
     }],
@@ -1755,11 +1807,6 @@
       $('lensAuto').checked = settings.on('lens_auto');
       $('lensAuto').onchange = () => settings.set('lens_auto', $('lensAuto').checked ? '1' : '0');
       lensWatch();
-      $('lensCopy').onclick = () => {
-        navigator.clipboard.writeText(LENS_PROMPT).then(() => setStatus('Prompt copied.', 2500), () => setStatus('Could not copy the prompt.', 4000));
-      };
-      $('lensOpen').onclick = () => window.open('https://lens.google.com/', '_blank', 'noopener');
-      $('lensShow').onclick = lensShow;
     }
   });
   /* =====================================================================
@@ -1767,8 +1814,9 @@
    *    The panel saves the photo (a public address, or the photo itself for one not published yet) with GM_setValue and opens
    *    https://www.google.com/?olud&src=pm. This code runs on that Google page only: it puts the photo in the "paste an image
    *    link" box of Google's search by image and starts the search, the way the box is used by hand.
-   *    It runs only on the pages the panel opened (the marker in the address) and reads nothing from Google. On any Google page the
-   *    script stops here: no panel, no other feature.
+   *    Then, on the results page that follows (within three minutes of the panel's search), it writes down the titles of the results
+   *    (links, headings, image descriptions) for the panel, which compares them with its brand and model menus. A Google page the
+   *    panel did not ask for is left alone. On any Google page the script stops here: no panel, no other feature.
    * ===================================================================== */
   // Only function declarations here: they run from core/00-open.js, before the rest of the script has set anything up
   function lensMarkedUrl() { return 'https://www.google.com/?olud&src=pm'; }
@@ -1781,8 +1829,32 @@
   }
 
   // Google's own markup: the jsname values are the ones of the box and the search button today, the others are a fallback
+  // The results of the search the panel asked for: the titles, once the page has them (it fills in after loading)
+  function lensReadResults() {
+    const asked = GM_getValue('lens_pending', 0);
+    const results = /^lens\.google\./.test(location.hostname) || /^\/search/.test(location.pathname);
+    if (!results || !asked || Date.now() - asked > 180000 || GM_getValue('lens_done', 0) === asked) return;
+    const collect = () => {
+      const out = [];
+      document.querySelectorAll('a[href], [role="heading"], h1, h2, h3, img[alt]').forEach(el => {
+        const t = (el.getAttribute('aria-label') || el.getAttribute('alt') || el.textContent || '').replace(/\s+/g, ' ').trim();
+        if (t.length >= 8 && t.length <= 200 && !out.includes(t) && out.length < 150) out.push(t);
+      });
+      return out;
+    };
+    let tries = 0;
+    const timer = setInterval(() => {
+      const titles = collect();
+      if (titles.length < 12 && ++tries <= 40) return;      // up to about 20 s for the results to appear
+      clearInterval(timer);
+      if (!titles.length) return;
+      GM_setValue('lens_titles', JSON.stringify({ at: asked, titles }));
+      GM_setValue('lens_done', asked);
+    }, 500);
+  }
+
   function lensOnGoogle() {
-    if (!onLensPage()) return;
+    if (!onLensPage()) { lensReadResults(); return; }
     let done = false, tries = 0;
     const first = (...sel) => sel.map(s => document.querySelector(s)).find(Boolean);
     const attempt = () => {
