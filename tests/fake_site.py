@@ -173,7 +173,7 @@ def route_site(context):
             pid = body.get("id", ["101"])[0]
             return route.fulfill(status=200, content_type="text/html", body=inject(photo_page(pid)))
 
-        if path == "/fr/gallery.php" and "nomer" in query:
+        if re.fullmatch(r"/[a-z]{2}/gallery\.php", path) and "nomer" in query:
             plate = re.sub(r"[\s-]+", "", query["nomer"][0]).upper()
             SEARCHES.append(plate)
             # the photos of a plate, each with the catalogue link of its vehicle: AB123CD is two Golf Mk8 and a Polo, ZZ999ZZ a brand the menus do not know

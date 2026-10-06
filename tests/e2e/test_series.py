@@ -30,16 +30,16 @@ def type_plate(ctx, plate):
 
 def test_the_plate_card_counts_your_photos_of_the_series(ctx):
     page = type_plate(ctx, "AB 123 CD")
-    page.wait_for_function(f"() => document.getElementById('pmg-plate-card') && {PLATE}.querySelector('.stat a') && {PLATE}.querySelector('.stat a').textContent === '2'", timeout=15000)
-    assert page.evaluate(f"() => {PLATE}.querySelector('.stat span').textContent") == "your photos in the series AB-*-CD"
+    page.wait_for_function(f"() => document.getElementById('pmg-plate-card') && {PLATE}.querySelector('.ln a.mine-n') && {PLATE}.querySelector('.ln a.mine-n').textContent === '2'", timeout=15000)
+    assert page.evaluate(f"() => [...{PLATE}.querySelectorAll('.sec .ln span')].find(x => x.textContent.startsWith('In the series')).textContent") == "In the series AB-*-CD: you have 2 photos"
     asked = [q for q in fake_site.GALLERY_USR if "fastsearch" in q]
     assert asked == [{"fastsearch": ["AB * CD"], "usr": ["121559"]}]
 
 
 def test_the_count_links_to_those_photos_in_a_new_tab(ctx):
     page = type_plate(ctx, "AB 123 CD")
-    page.wait_for_function(f"() => document.getElementById('pmg-plate-card') && {PLATE}.querySelector('.stat a')", timeout=15000)
-    a = page.evaluate(f"() => {{ const a = {PLATE}.querySelector('.stat a'); return [a.target, a.rel, a.getAttribute('href')]; }}")
+    page.wait_for_function(f"() => document.getElementById('pmg-plate-card') && {PLATE}.querySelector('.ln a.mine-n')", timeout=15000)
+    a = page.evaluate(f"() => {{ const a = {PLATE}.querySelector('.ln a.mine-n'); return [a.target, a.rel, a.getAttribute('href')]; }}")
     assert a == ["_blank", "noopener noreferrer", "/fr/gallery.php?fastsearch=AB%20*%20CD&usr=121559"]
 
 
@@ -47,7 +47,7 @@ def test_a_plate_with_only_digits_has_no_series_line(ctx):
     page = type_plate(ctx, "9999")
     page.wait_for_function("() => document.getElementById('pmg-plate-card')", timeout=15000)
     page.wait_for_timeout(500)
-    assert page.evaluate(f"() => !{PLATE}.querySelector('.stat')")
+    assert page.evaluate(f"() => !{PLATE}.querySelector('.mine-n')")
 
 
 def test_the_series_page_gives_the_numbers_on_the_site(ctx):
@@ -76,7 +76,7 @@ def test_with_the_feature_off_there_is_nothing(ctx):
     page.dispatch_event("#nomer", "blur")
     page.wait_for_function("() => document.getElementById('pmg-plate-card')", timeout=15000)
     page.wait_for_timeout(500)
-    assert page.evaluate(f"() => !{PLATE}.querySelector('.stat')")
+    assert page.evaluate(f"() => !{PLATE}.querySelector('.mine-n')")
     page.goto("https://platesmania.com/fr/series-HF-QQ-1")
     page.wait_for_selector("#pmg-host")
     page.wait_for_timeout(500)
@@ -89,9 +89,9 @@ def test_other_countries_checked_on_the_real_site_have_the_series_line_too(ctx):
     page.wait_for_selector("#pmg-host")
     page.fill("#nomer", "GT-123-B")
     page.dispatch_event("#nomer", "blur")
-    page.wait_for_function(f"() => document.getElementById('pmg-plate-card') && {PLATE}.querySelector('.stat a') && {PLATE}.querySelector('.stat a').textContent === '2'", timeout=15000)
-    assert page.evaluate(f"() => {PLATE}.querySelector('.stat span').textContent") == "your photos in the series GT-*-B"
-    assert page.evaluate(f"() => {PLATE}.querySelector('.stat a').getAttribute('href')") == "/nl/gallery.php?fastsearch=GT%20*%20B&usr=121559"
+    page.wait_for_function(f"() => document.getElementById('pmg-plate-card') && {PLATE}.querySelector('.ln a.mine-n') && {PLATE}.querySelector('.ln a.mine-n').textContent === '2'", timeout=15000)
+    assert page.evaluate(f"() => [...{PLATE}.querySelectorAll('.sec .ln span')].find(x => x.textContent.startsWith('In the series')).textContent") == "In the series GT-*-B: you have 2 photos"
+    assert page.evaluate(f"() => {PLATE}.querySelector('.ln a.mine-n').getAttribute('href')") == "/nl/gallery.php?fastsearch=GT%20*%20B&usr=121559"
 
 
 def test_a_country_not_checked_has_no_series_line(ctx):
@@ -102,11 +102,11 @@ def test_a_country_not_checked_has_no_series_line(ctx):
     page.dispatch_event("#nomer", "blur")
     page.wait_for_function("() => document.getElementById('pmg-plate-card')", timeout=15000)
     page.wait_for_timeout(500)
-    assert page.evaluate(f"() => !{PLATE}.querySelector('.stat')")
+    assert page.evaluate(f"() => !{PLATE}.querySelector('.mine-n')")
 
 
 def test_a_single_letter_glued_after_the_digits_gets_no_series(ctx):
     page = type_plate(ctx, "DZN 1390A")
     page.wait_for_function("() => document.getElementById('pmg-plate-card')", timeout=15000)
     page.wait_for_timeout(500)
-    assert page.evaluate(f"() => !{PLATE}.querySelector('.stat')")
+    assert page.evaluate(f"() => !{PLATE}.querySelector('.mine-n')")

@@ -64,10 +64,24 @@ def test_the_dutch_register_answers_with_the_vehicle(ctx):
     assert "GOLF" in text and "2019" in text and "WIT" in text and "inspection until 2027-03-10" in text
 
 
-def test_the_dutch_answer_can_fill_the_menus(ctx):
+def test_the_dutch_answer_fills_the_empty_menus_and_says_so(ctx):
     page = plate_page(ctx, "nl", "GT-123-B")
     click_ask(page)
+    page.wait_for_function(f"() => {CARD}.textContent.includes('menus filled')", timeout=10000)
+    assert page.evaluate("() => document.querySelector('select[name=markaavto]').selectedOptions[0].textContent") == "Volkswagen"
+
+
+def test_with_a_menu_already_chosen_the_answer_offers_the_button_instead(ctx):
+    page = ctx.new_page()
+    page.goto("https://platesmania.com/nl/add")
+    page.wait_for_selector("#pmg-host")
+    page.evaluate("() => { const s = document.querySelector('select[name=markaavto]'); s.value = '8'; s.dispatchEvent(new Event('change')); }")
+    page.fill("#nomer", "GT-123-B")
+    page.dispatch_event("#nomer", "blur")
+    page.wait_for_function(f"() => document.getElementById('pmg-plate-card') && {CARD}.querySelector('.lookups')", timeout=15000)
+    click_ask(page)
     page.wait_for_function(f"() => [...{CARD}.querySelectorAll('button')].some(b => b.textContent === 'Fill the menus')", timeout=10000)
+    assert page.evaluate("() => document.querySelector('select[name=markaavto]').selectedOptions[0].textContent") == "Audi"       # untouched
     page.evaluate(f"() => [...{CARD}.querySelectorAll('button')].find(b => b.textContent === 'Fill the menus').click()")
     assert page.evaluate("() => document.querySelector('select[name=markaavto]').selectedOptions[0].textContent") == "Volkswagen"
 
@@ -75,7 +89,7 @@ def test_the_dutch_answer_can_fill_the_menus(ctx):
 def test_a_plate_the_register_does_not_have_says_so(ctx):
     page = plate_page(ctx, "nl", "XX-999-X")
     click_ask(page)
-    page.wait_for_function(f"() => {CARD}.textContent.includes('No such plate')", timeout=10000)
+    page.wait_for_function(f"() => {CARD}.textContent.includes('not in that register')", timeout=10000)
 
 
 def test_the_answer_is_kept_for_the_visit(ctx):
@@ -148,7 +162,7 @@ def brand(page):
 
 def test_by_default_the_register_is_asked_without_a_click_and_the_empty_menus_are_filled(auto):
     page = typed(auto, "GT-123-B")
-    page.wait_for_function(f"() => document.getElementById('pmg-plate-card') && {CARD}.textContent.includes('Menus filled from the register')", timeout=15000)
+    page.wait_for_function(f"() => document.getElementById('pmg-plate-card') && {CARD}.textContent.includes('menus filled')", timeout=15000)
     assert ASKED == ["https://opendata.rdw.nl/resource/m9d7-ebf2.json?kenteken=GT123B"]
     assert brand(page) == "Volkswagen"
     assert page.evaluate(f"() => ![...{CARD}.querySelectorAll('button')].some(b => b.textContent.startsWith('Ask') && !b.hidden)")      # no button to press
@@ -158,12 +172,12 @@ def test_a_menu_you_chose_is_never_overwritten(auto):
     page = typed(auto, "GT-123-B", "() => { const s = document.querySelector('select[name=markaavto]'); s.value = '8'; s.dispatchEvent(new Event('change')); }")
     page.wait_for_function(f"() => document.getElementById('pmg-plate-card') && {CARD}.textContent.includes('VOLKSWAGEN')", timeout=15000)
     assert brand(page) == "Audi"                                                                  # still your choice
-    assert "Menus filled" not in page.evaluate(f"() => {CARD}.textContent")
+    assert "menus filled" not in page.evaluate(f"() => {CARD}.textContent")
 
 
 def test_the_menus_are_filled_once_per_plate(auto):
     page = typed(auto, "GT-123-B")
-    page.wait_for_function(f"() => {CARD}.textContent.includes('Menus filled')", timeout=15000)
+    page.wait_for_function(f"() => {CARD}.textContent.includes('menus filled')", timeout=15000)
     page.evaluate("() => { const s = document.querySelector('select[name=markaavto]'); s.value = '8'; s.dispatchEvent(new Event('change')); }")
     page.fill("#nomer", "GT-123-B ")
     page.dispatch_event("#nomer", "blur")
@@ -191,3 +205,11 @@ def test_the_fill_switch_off_asks_but_does_not_fill(auto):
     page.dispatch_event("#nomer", "blur")
     page.wait_for_function(f"() => document.getElementById('pmg-plate-card') && {CARD}.textContent.includes('VOLKSWAGEN')", timeout=15000)
     assert brand(page) != "Volkswagen"
+
+
+def test_the_register_has_its_own_labelled_section_and_no_stray_null(auto):
+    page = typed(auto, "GT-123-B")
+    page.wait_for_function(f"() => document.getElementById('pmg-plate-card') && {CARD}.textContent.includes('menus filled')", timeout=15000)
+    labels = page.evaluate(f"() => [...{CARD}.querySelectorAll('.sec > .cat')].map(e => e.textContent)")
+    assert "Official register (RDW open data)" in labels
+    assert "null" not in page.evaluate(f"() => {CARD}.textContent")

@@ -100,6 +100,7 @@ La barre suit l'ordre d'usage : **Check a plate** (vérifier ce qu'on va envoyer
 - Quand un envoi par lot est en cours, le résultat est gardé sur la photo et affiché en avertissement dans la fenêtre de lot.
 - La recherche du site garde les espaces de la plaque (un tiret vaut un espace) : la plaque est lue avec l'espacement de la galerie. Couverture : `COUVERTURE.md`.
 - **Le véhicule des photos déjà sur le site** (5.9) : la même page de résultats donne les liens de catalogue (`gallery.php?markaavto=&model=&modgen=`) des photos de la plaque ; le véhicule le plus fréquent est proposé dans la carte, et *Fill the menus* remplit marque, modèle et génération (`vehicleFill`).
+- **La carte en sections** (5.10) : *On the site* (le véhicule des photos, *Fill the menus*, le lien vers les photos), *Official register* (NL, IL), *Your photos* (une phrase : *In the series HF-*-QQ: you have 2 photos*), et les sites de recherche repliés sous une ligne (*Look up this plate on other sites (13)*).
 - **La carte** (`pmg-plate-card`, au-dessus des menus du véhicule) réunit : le compte, le véhicule, **votre nombre de photos de la série** (voir Compteur de série), le bouton du registre officiel (NL, IL) et les liens de recherche.
 
 ### Send photos (tiroir `upload`) : un pays pour la photo, l'envoi par lots
@@ -237,7 +238,7 @@ Chaque fonction s'enregistre avec `registerFeature({ groups, keys, onEscape, ini
 
 ## Tests (`tests/`)
 
-- `python -m pytest -q` (dossier `tests/e2e/`) : 365 tests (370 avec le build dev, `NEXTPLAATE_SCRIPT=nextplaate.dev.user.js`) sur une version simulée du site (`fake_site.py`, avec une fausse page Google pour le Lens). Un fichier par fonction (`test_lens.py`, `test_tags.py`, `test_members.py`, `test_flags.py`, `test_extra.py`, `test_preview.py`…), plus `test_style.py` (couleurs, rayons, tailles, hauteurs) et `test_responsive.py` (aucun débordement de 320 à 1280 px). Pas d'accès réel à PlatesMania ni à Google.
+- `python -m pytest -q` (dossier `tests/e2e/`) : 369 tests (374 avec le build dev, `NEXTPLAATE_SCRIPT=nextplaate.dev.user.js`) sur une version simulée du site (`fake_site.py`, avec une fausse page Google pour le Lens). Un fichier par fonction (`test_lens.py`, `test_tags.py`, `test_members.py`, `test_flags.py`, `test_extra.py`, `test_preview.py`…), plus `test_style.py` (couleurs, rayons, tailles, hauteurs) et `test_responsive.py` (aucun débordement de 320 à 1280 px). Pas d'accès réel à PlatesMania ni à Google.
 - `python tests/offline/check_known.py` : 39 plaques validées à la main, tapées dans les pages sauvegardées.
 - `python tests/offline/check_db.py` : toutes les plaques de la base, dans la catégorie correspondante, en parallèle. Hors ligne.
 - Les données dérivées : `node scripts/refresh-data.mjs` → `data/` et `docs/COUVERTURE.md` (voir `data/README.md`).

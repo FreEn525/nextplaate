@@ -96,10 +96,28 @@ def test_with_the_plate_check_off_there_is_no_card(ctx):
 def test_the_card_links_to_the_sites_own_search_of_the_plate(ctx):
     page = open_add(ctx, "AB 123 CD")
     card_text(page)                                                                                      # waits for the answer
-    link = page.evaluate(f"() => {{ const a = [...{CARD}.querySelectorAll('a.btn')].find(x => x.textContent.startsWith('See the')); return a && [a.textContent, a.getAttribute('href'), a.target, a.rel]; }}")
+    link = page.evaluate(f"() => {{ const a = [...{CARD}.querySelectorAll('.sec a')].find(x => x.textContent.startsWith('See the')); return a && [a.textContent, a.getAttribute('href'), a.target, a.rel]; }}")
     assert link == ["See the 2 photos of this plate on the site", "/fr/gallery.php?gal=fr&nomer=AB-123-CD", "_blank", "noopener noreferrer"]
 
 
 def test_a_plate_with_thousands_of_photos_is_counted(ctx):
     page = open_add(ctx, "TT 111 TT")
     assert "1234 photos of this plate" in card_text(page).replace("1 234", "1234")
+
+
+def test_the_card_is_in_labelled_sections_and_the_lookups_are_folded(ctx):
+    page = open_add(ctx, "AB 123 CD")
+    card_text(page)
+    page.wait_for_function(f"() => {CARD}.querySelector('.sec .mine-n') && {CARD}.querySelector('.sec .mine-n').textContent !== '…'", timeout=15000)
+    labels = page.evaluate(f"() => [...{CARD}.querySelectorAll('.sec > .cat')].map(e => e.textContent)")
+    assert labels == ["On the site", "Your photos"]                                           # the register has no section outside NL and IL
+    fold = page.evaluate(f"() => {{ const d = {CARD}.querySelector('details.fold'); return [d.open, d.querySelector('summary').textContent]; }}")
+    assert fold[0] is False and fold[1].startswith("Look up this plate on other sites (")      # folded: a dozen links are not shown at once
+    assert page.evaluate(f"() => {CARD}.querySelectorAll('details.fold a.pill').length") >= 5
+
+
+def test_nothing_in_the_card_is_written_as_the_word_null(ctx):
+    page = open_add(ctx, "AB 123 CD")
+    card_text(page)
+    page.wait_for_timeout(500)
+    assert "null" not in page.evaluate(f"() => {CARD}.textContent").lower().replace("nullable", "")

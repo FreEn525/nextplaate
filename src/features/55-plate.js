@@ -78,18 +78,21 @@
     if (!plate) { card.host.hidden = true; return; }
     card.message(message);
     const v = info && info.vehicle && plateVehicleNames(info.vehicle);
-    const links = lookupLinks(plate);                                           // public lookup pages, plain links (75-lookups.js)
-    const series = seriesLine(plate);                                           // your photos of the series of the plate (79-series.js)
-    const register = registryLine(plate);                                       // the country's open register, on a click (80-registry.js)
-    // the site's own search for this plate, to see the photos that are already there (a plain link, a new tab)
-    const open = info && info.count > 0 ? h('div', { class: 'cardrow' }, h('a', { class: 'btn ghost sm', href: searchUrl(plate), target: '_blank', rel: 'noopener noreferrer', text: `See the ${info.count} photo${info.count > 1 ? 's' : ''} of this plate on the site`, title: 'Opens the site’s own search in a new tab' })) : null;
-    if (!v && !links && !series && !register && !open) return;
+    // Four sections, each with its label and sentences, nothing without words: what the site knows, the official register, your photos,
+    // and the lookup sites (folded: there can be a dozen)
+    const sec = (label, ...lines) => h('div', { class: 'sec' }, h('div', { class: 'cat', text: label }), ...lines);
     const agree = v && info.vehicle.of > 1 ? ` (${info.vehicle.photos} of ${info.vehicle.of} photos)` : '';
-    card.body.append(h('div', { class: 'cardbox' },
-      v ? h('p', { class: 'hint', text: 'The photos of this plate on the site show:' }) : null,
-      v ? h('div', { class: 'vehline' }, h('b', { text: v.text }), h('span', { class: 'mute', text: agree })) : null,
-      v ? h('div', { class: 'cardrow' }, h('button', { type: 'button', class: 'btn', text: 'Fill the menus', onclick: () => { vehicleFill(v.path); card.message('Menus filled.'); } })) : null,
-      open, series, register, links));
+    const site = v || (info && info.count > 0) ? sec('On the site',
+      v ? h('div', { class: 'ln' }, h('b', { text: v.text }), h('span', { class: 'mute', text: 'shown by the photos of this plate' + agree }),
+        h('button', { type: 'button', class: 'btn sm', text: 'Fill the menus', onclick: () => { vehicleFill(v.path); card.message('Menus filled.'); } })) : null,
+      info && info.count > 0 ? h('div', { class: 'ln' }, h('a', { href: searchUrl(plate), target: '_blank', rel: 'noopener noreferrer', text: `See the ${info.count} photo${info.count > 1 ? 's' : ''} of this plate on the site`, title: 'Opens the site\u2019s own search in a new tab' })) : null) : null;
+    const register = registryLine(plate);                                       // the open register of the country (80-registry.js): its own section
+    const series = seriesLine(plate);                                           // your photos of the series of the plate (79-series.js)
+    const mine = series ? sec('Your photos', series) : null;
+    const links = lookupLinks(plate, true);                                     // public lookup pages, plain links (75-lookups.js)
+    const fold = links ? h('details', { class: 'fold' }, h('summary', { text: `Look up this plate on other sites (${links.querySelectorAll('a').length})` }), links) : null;
+    if (!site && !register && !mine && !fold) return;
+    card.body.append(h('div', { class: 'cardbox secs' }, site, register, mine, fold));
   }
 
   // The result goes to the photo this tab is loading, if the batch is running

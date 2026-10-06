@@ -27,7 +27,7 @@ def choose(page, brand=None, model=None, gen=None):
 
 
 def numbers(page):
-    return page.evaluate(f"() => [...{CARD}.querySelectorAll('.stat')].map(s => [s.querySelector('a').textContent, s.querySelector('span').textContent])")
+    return page.evaluate(f"() => [...{CARD}.querySelectorAll('.mine-item')].map(s => [s.querySelector('a').textContent, s.firstChild.textContent + s.querySelector('b').textContent])")
 
 
 def open_add(ctx):
@@ -46,8 +46,8 @@ def test_no_card_until_a_brand_is_chosen(ctx):
 def test_a_brand_gives_its_count(ctx):
     page = open_add(ctx)
     choose(page, brand="7")
-    page.wait_for_function(f"() => document.getElementById('pmg-mine-card') && !document.getElementById('pmg-mine-card').hidden && {CARD}.querySelector('.stat a').textContent === '5'", timeout=10000)
-    assert numbers(page) == [["5", "brand: Volkswagen"]]
+    page.wait_for_function(f"() => document.getElementById('pmg-mine-card') && !document.getElementById('pmg-mine-card').hidden && {CARD}.querySelector('.mine-item a').textContent === '5'", timeout=10000)
+    assert numbers(page) == [["5", "Brand Volkswagen"]]
 
 
 def test_brand_model_and_generation_each_have_a_count_most_precise_first(ctx):
@@ -57,28 +57,28 @@ def test_brand_model_and_generation_each_have_a_count_most_precise_first(ctx):
     choose(page, model=page.eval_on_selector_all("#model option", "o => o.map(x => x.value).filter(v => +v > 0)[0]"))
     page.wait_for_function("() => document.querySelector('#modgen').options.length > 1")
     choose(page, gen=page.eval_on_selector_all("#modgen option", "o => o.map(x => x.value).filter(v => +v > 0)[0]"))
-    page.wait_for_function(f"() => {CARD}.querySelectorAll('.stat a').length === 3 && [...{CARD}.querySelectorAll('.stat a')].every(a => a.textContent !== '…')", timeout=20000)
-    assert [n for n, _ in numbers(page)] == ["1", "3", "5"]
-    assert [t.split(":")[0] for _, t in numbers(page)] == ["generation", "model", "brand"]
+    page.wait_for_function(f"() => {CARD}.querySelectorAll('.mine-item a').length === 3 && [...{CARD}.querySelectorAll('.mine-item a')].every(a => a.textContent !== '…')", timeout=20000)
+    assert [n for n, _ in numbers(page)] == ["5", "3", "1"]                                      # brand, model, generation
+    assert [t.split(" ")[0] for _, t in numbers(page)] == ["Brand", "Model", "Generation"]
 
 
 def test_each_number_links_to_those_photos_in_a_new_tab(ctx):
     page = open_add(ctx)
     choose(page, brand="7")
-    page.wait_for_function(f"() => document.getElementById('pmg-mine-card') && {CARD}.querySelector('.stat a') && {CARD}.querySelector('.stat a').textContent === '5'", timeout=10000)
-    a = page.evaluate(f"() => {{ const a = {CARD}.querySelector('.stat a'); return [a.target, a.rel, a.getAttribute('href')]; }}")
+    page.wait_for_function(f"() => document.getElementById('pmg-mine-card') && {CARD}.querySelector('.mine-item a') && {CARD}.querySelector('.mine-item a').textContent === '5'", timeout=10000)
+    a = page.evaluate(f"() => {{ const a = {CARD}.querySelector('.mine-item a'); return [a.target, a.rel, a.getAttribute('href')]; }}")
     assert a == ["_blank", "noopener noreferrer", "/gallery.php?usr=121559&markaavto=7"]
 
 
 def test_the_same_vehicle_again_asks_nothing(ctx):
     page = open_add(ctx)
     choose(page, brand="7")
-    page.wait_for_function(f"() => document.getElementById('pmg-mine-card') && {CARD}.querySelector('.stat a') && {CARD}.querySelector('.stat a').textContent === '5'", timeout=10000)
+    page.wait_for_function(f"() => document.getElementById('pmg-mine-card') && {CARD}.querySelector('.mine-item a') && {CARD}.querySelector('.mine-item a').textContent === '5'", timeout=10000)
     choose(page, brand="8")
-    page.wait_for_function(f"() => {CARD}.querySelector('.stat span').textContent.includes('Audi')", timeout=10000)
+    page.wait_for_function(f"() => {CARD}.querySelector('.mine-item b').textContent.includes('Audi')", timeout=10000)
     asked = len(fake_site.GALLERY_USR)
     choose(page, brand="7")
-    page.wait_for_function(f"() => {CARD}.querySelector('.stat span').textContent.includes('Volkswagen') && {CARD}.querySelector('.stat a').textContent === '5'", timeout=10000)
+    page.wait_for_function(f"() => {CARD}.querySelector('.mine-item b').textContent.includes('Volkswagen') && {CARD}.querySelector('.mine-item a').textContent === '5'", timeout=10000)
     assert len(fake_site.GALLERY_USR) == asked
 
 

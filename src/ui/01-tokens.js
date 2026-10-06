@@ -64,6 +64,16 @@
     .cardbox textarea{width:100%;min-height:180px;padding:10px;resize:vertical;line-height:1.5}
     .wn-section{margin:0 0 14px}
     .wn-item{margin:4px 0;font-size:13px;line-height:1.45}
+    .secs{gap:0}
+    .sec{display:flex;flex-direction:column;gap:6px;padding:10px 0;border-top:1px solid var(--line)}
+    .secs > .sec:first-child{border-top:0;padding-top:0}
+    .ln{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font-size:13px;color:var(--ink)}
+    .ln b{font-weight:600}
+    .ln a,.mine-n{color:var(--primary-h);font-weight:600}
+    .mine-item{white-space:nowrap}
+    details.fold{border-top:1px solid var(--line);padding-top:10px}
+    details.fold summary{cursor:pointer;font-size:13px;color:var(--primary-h);font-weight:600}
+    details.fold[open] summary{margin-bottom:8px}
     .stats{display:flex;flex-wrap:wrap;gap:12px 28px}
     .stat{display:flex;flex-direction:column}
     .stat b{font-size:18px;color:var(--primary-h)}

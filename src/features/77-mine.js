@@ -32,7 +32,7 @@
 
   function mineCard(me) {
     const row = document.querySelector('.pm-vehicle-fields-row');
-    const card = row && inlineCard({ id: 'pmg-mine-card', title: 'Your photos', after: row, closable: false });
+    const card = row && inlineCard({ id: 'pmg-mine-card', title: 'Your photos of this vehicle', after: row, closable: false });
     if (!card) return;
     card.host.hidden = true;
     let shown = '', run = 0;
@@ -44,13 +44,13 @@
       card.host.hidden = !levels.length;
       card.clear();
       if (!levels.length) return;
-      const where = { markaavto: 'brand', model: 'model', modgen: 'generation' };
+      const where = { markaavto: 'Brand', model: 'Model', modgen: 'Generation' };
       const items = levels.map(l => {
-        const num = h('a', { class: 'mine-n', href: l.url, target: '_blank', rel: 'noopener noreferrer', text: '…', title: 'Opens your photos of this in a new tab' });
-        return { l, num, el: h('div', { class: 'stat' }, num, h('span', { class: 'mute', text: `${where[l.key]}: ${l.name}` })) };
+        const num = h('a', { class: 'mine-n', href: l.url, target: '_blank', rel: 'noopener noreferrer', text: '\u2026', title: 'Opens your photos of this in a new tab' });
+        return { l, num, el: h('span', { class: 'mine-item' }, `${where[l.key]} `, h('b', { text: l.name }), ': ', num) };
       });
       card.message('');
-      card.body.append(h('div', { class: 'cardbox' }, h('div', { class: 'stats' }, items.map(i => i.el))));
+      card.body.append(h('div', { class: 'cardbox' }, h('p', { class: 'hint', text: 'How many photos you already have on the site:' }), h('div', { class: 'ln' }, items.slice().reverse().map(i => i.el))));
       (async () => {
         for (const i of items) {
           try {

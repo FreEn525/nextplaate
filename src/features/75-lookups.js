@@ -7,12 +7,13 @@
   const lookupHidden = () => new Set((store.get('lookup_hidden', '') || '').split(',').filter(Boolean));
 
   // The links for a plate, minus the sites the user hid; null when there is no plate or nothing to show
-  function lookupLinks(plate) {
+  // bare: without its heading (the card folds it under its own summary)
+  function lookupLinks(plate, bare) {
     if (!plate || !featureOn('lookup')) return null;
     const hidden = lookupHidden();
     const sites = lookupFor(here.country, plate).filter(s => !hidden.has(s.key));
     if (!sites.length) return null;
-    return h('div', { class: 'lookups' }, h('div', { class: 'cat', text: 'Look up this plate' }),
+    return h('div', { class: 'lookups' }, bare ? null : h('div', { class: 'cat', text: 'Look up this plate' }),
       h('div', { class: 'pills' }, sites.map(s => h('a', { class: 'pill', href: s.href, target: '_blank', rel: 'noopener noreferrer', text: s.name, title: 'Opens ' + s.name + ' in a new tab' }))));
   }
 

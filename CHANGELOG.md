@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.10.1
+
+**The plate card, calmer**
+- **The plate card in labelled sections**: *On the site* (the vehicle the photos show, with its *Fill the menus*, and the link to the photos), *Official register* (NL, IL, with the source in its title), *Your photos* (a sentence: *In the series HF-*-QQ: you have 2 photos*) and the lookup sites folded under one line (*Look up this plate on other sites (13)*) instead of thirteen buttons at once. *Your photos of this vehicle* reads *Brand Nissan: 4 · Model Qashqai: 2*, brand first. A stray word *null* after the register answer is gone.
+
 ## 5.10
 
 **The panel in the order of use, every feature explained**

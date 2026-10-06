@@ -2,7 +2,7 @@
 // @name         NextPlaate
 // @namespace    nextplaate
 // @icon         data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20201.1%20201.7%22%3E%3Cstyle%3E.a%7Bfill:%233781c5%7D.b%7Bfill:%23529bde%7D.c%7Bfill:%2382c3ff%7D.w%7Bfill:%23fff%7D%3C/style%3E%3Cg%20transform=%22translate%28-551%20-180.5%29%22%3E%3Ccircle%20cx=%22651.5%22%20cy=%22281.4%22%20r=%2296%22%20class=%22w%22/%3E%3Cpath%20d=%22M650.7%20188.5a101%20101%200%200%200-20.4%202.2%2086%2086%200%200%200-23.5%209%2089%2089%200%200%200-34.8%2033.8%2088%2088%200%200%200-9.6%2023%20100%20100%200%200%200-3.3%2026.8%2091%2091%200%200%200%207.2%2033.4l2.3-1.8a71%2071%200%200%201%2016.2-8.7%2070%2070%200%200%201%2012.3-3.6v-52l.9-2a12%2012%200%200%201%202.8-4%2012%2012%200%200%201%204-2.4%209%209%200%200%201%203.9-.6q.4%200%20.7-.2l.4-.4.5-.8q.4-.8%201-1.5l2.2-2.2%202-1%201.4-.2q1.5-.3%204-.3a156%20156%200%200%201%2015%20.5l1.2.5%202.3%201.7a9%209%200%200%201%201.7%202.4l.8%201.4h13v-4.7l.3-1.8q0-1.5.3-2.8l.2-1%20.8-3.5v-.4l1.3-4%201.6-4.3%201.8-4%202-3.9%202-3.6.6-.9%203.5-5.4.7-.9%202.8-4%202.6-3%20.9-1-4-1.3a91%2091%200%200%200-14-2.3z%22%20class=%22a%22/%3E%3Cpath%20d=%22m676.3%20192.2-.9%201-2.5%203.2q-1.4%201.6-3%204l-.6.8-3.5%205.4-.6.9a101%20101%200%200%200-7.4%2015.8l-1.2%204-.1.4-.8%203.4-.2%201.1-.3%202.7-.3%202v4.6H690l3.8.3q1%200%201.7.4.9.3%201.8%201t1.7%201.4a15%2015%200%200%201%202.7%203.6l1%202v35l-.4%2035.3-.4%201.6a13%2013%200%200%201-2.4%203.4q-.7.8-1.5%201.3-.7.6-1.8%201L694%20329h-11.2l.6%201.4a246%20246%200%200%200%2011.4%2020.7%2065%2065%200%200%200%207%208.4%2077%2077%200%200%200%2017.3-14.9%2098%2098%200%200%200%2016.5-25%2090%2090%200%200%200%206.8-21.9%20114%20114%200%200%200%201.2-9.5%20131%20131%200%200%200-.5-19.2%20121%20121%200%200%200-6.7-24.3l-1-2-.6-.2h-2.1l-.2%204.6a34%2034%200%200%201-.6%205.4l-1.2%202.5a13%2013%200%200%201-4%203.9%2012%2012%200%200%201-6.3%201.7%2012%2012%200%200%201-9.4-5%209%209%200%200%201-1.9-4.7l-.3-3.7-.2-5-4.7-.2-4.3-.3q-.7%200-1.3-.4L696%20240a12%2012%200%200%201-3-3.2%2011%2011%200%200%201-1.5-4.1%2015%2015%200%200%201%20.5-7l1.2-2.2a15%2015%200%200%201%205.2-4.3l1.1-.5%202.7-.5q1.5-.2%203.4-.2h3.4v-8.6l-1.8-1.6a50%2050%200%200%200-9-6.1%2093%2093%200%200%200-18.4-8.4z%22%20class=%22c%22/%3E%3Cpath%20d=%22M701.8%20359.5a26%2026%200%200%201-3.3-3.5%2064%2064%200%200%201-7.3-10.9%20179%20179%200%200%201-7.6-14.7l-.7-1.4h-63.2c-8%200-13.2-.1-13.5-.2l-1.3-.4-1.2-.6-1.2-.7-1.1-.8-1-1a14%2014%200%200%201-2.4-3.4l-1-2v-17.4a59%2059%200%200%200-12.2%203.6%2078%2078%200%200%200-16.2%208.8l-2.3%201.7a92%2092%200%200%200%2031.3%2039.8%2095%2095%200%200%200%2053.3%2018.3l7-.4a88%2088%200%200%200%2029.2-7%2088%2088%200%200%200%2014.7-7.8%22%20class=%22b%22/%3E%3Cpath%20d=%22M720.3%20202.8a8%208%200%200%201%205%201.4%207%207%200%200%201%203%205.3v12.8h6.5l7.3.5%202%20.8.8.7%201.7%202.1a8%208%200%200%201%201%202.9v1.5a8%208%200%200%201-1.4%204.2l-1%201.2q-.8.8-1.6%201.2l-1.9.7q-1%20.3-2.7.3l-4.3.1h-6.3v6.1l-.5%207.2-.6%201.2a8%208%200%200%201-2.2%202.2l-1.3.8a7%207%200%200%201-7-.4%208%208%200%200%201-3.8-5.8V238h-6l-6.7-.4-1.7-.7-1.4-1.3-1-1.2a6%206%200%200%201-1-2.7V229a8%208%200%200%201%201.3-3.4%209%209%200%200%201%202.5-2.4l1-.5%202.5-.3%204.5-.1h6v-6.7l.4-7.4.8-1.9a8%208%200%200%201%204.4-3.2zm-68.5%2073.3a21%2021%200%200%200-4.4.6%2012%2012%200%200%200-3.5%202%2014%2014%200%200%200-4.5%206.6v1.1l.8%201.2.5.3.5.1h.4q.3%200%20.5-.3.3%200%20.5-.4l.9-1.3a10%2010%200%200%201%201.6-2.5%209%209%200%200%201%205-2.6%2011%2011%200%200%201%203.2-.1h1.8q.3%200%20.5-.3.2%200%20.4-.5l.5-.9.1-.7q0-.4-.3-.8l-.7-.7-1.4-.6z%22%20class=%22a%22/%3E%3Cpath%20d=%22M649.2%20255.6a27%2027%200%200%200-11.7%203%2032%2032%200%200%200-8.2%206%2032%2032%200%200%200-6%209%2029%2029%200%200%200-1.7%204.9l-.4%203a42%2042%200%200%200%20.4%2010%2025%2025%200%200%200%202.6%206.7%2034%2034%200%200%200%207.4%209.4%2031%2031%200%200%200%2012%206%2028%2028%200%200%200%2013.3-.1%2024%2024%200%200%200%207-3%2031%2031%200%200%200%2012.3-13.7%2030%2030%200%200%200-1.9-27.5%2029%2029%200%200%200-11.2-10.5%2028%2028%200%200%200-13.8-3.2zm1.5%209.4a19%2019%200%200%201%2012.6%205.3%2020%2020%200%200%201%205.7%209.8%2019%2019%200%200%201-2.2%2014.8%2021%2021%200%200%201-12%209.3l-1.6.2a54%2054%200%200%201-8.1-.2%2013%2013%200%200%201-3.6-1.4%2023%2023%200%200%201-9-8.4%2020%2020%200%200%201-1.5-15.1%2020%2020%200%200%201%204.8-8.2%2021%2021%200%200%201%208.1-5.2%2019%2019%200%200%201%206.8-1m28.9-10.2h13.9v9.1h-13.9z%22%20class=%22a%22/%3E%3Cpath%20d=%22M649.9%20180.5a173%20173%200%200%200-12.5.7%20113%20113%200%200%200-27.2%207.5%2097%2097%200%200%200-26.7%2017.5%20165%20165%200%200%200-11%2012%20103%20103%200%200%200-15.8%2029.2%20107%20107%200%200%200-5.4%2025%20128%20128%200%200%200%201%2025%20109%20109%200%200%200%208.4%2027%2099%2099%200%200%200%2035.7%2041%20106%20106%200%200%200%2035.1%2014.9%2096%2096%200%200%200%2031.7%201.4%2097%2097%200%200%200%2044.8-17%20104%20104%200%200%200%2027.8-28.6%20100%20100%200%200%200%2016.3-56.2%20106%20106%200%200%200-3.5-24.8l-2.5-7.8-2-5.3-1.2.2-1.6.3-.9.1-.2.3v.4l.3%201.5%201%202.6a98%2098%200%200%201%201.9%2062%20102%20102%200%200%201-23.6%2039.8%20103%20103%200%200%201-33.3%2022%2097%2097%200%200%201-28.5%206.5%20127%20127%200%200%201-21.8-1%2092%2092%200%200%201-29.9-10.5%20101%20101%200%200%201-30.3-25.6%2097%2097%200%200%201-5.9-111.1%2096%2096%200%200%201%2028-29%2091%2091%200%200%201%2029.4-12.8%20119%20119%200%200%201%2012.9-2.2%20151%20151%200%200%201%2020.3-.1%20110%20110%200%200%201%2023.6%205.6%2091%2091%200%200%201%2021%2011.1l4.6%203.1%201.2-1.6.8-1.5v-.4l-.4-.5q-.5-.6-2.2-1.7a125%20125%200%200%200-20.5-11.6%20102%20102%200%200%200-39-7.4z%22%20class=%22a%22/%3E%3Cpath%20d=%22m720.8%20199.7-2.7.3a12%2012%200%200%200-5.9%203.1l-1.7%202.2a12%2012%200%200%200-1.6%203.8l-.3%204.2-.2%204.6h4.5v-2.2l.4-7.2.6-1.2a8%208%200%200%201%202.2-2.1l1.3-.8a8%208%200%200%201%203-.7%207%207%200%200%201%202.8.5%208%208%200%200%201%202.5%201.5l1%201.1a8%208%200%200%201%201.5%203.8l.1%205.5v6.2h6l6.6.4%201.7.7%201.4%201.3%201%201.3a6%206%200%200%201%201%202.6v2.8a8%208%200%200%201-1.3%203.4%208%208%200%200%201-3.4%203l-2.6.2-4.5.1h-5.9v4.4h7.4a29%2029%200%200%200%206-.7l2.3-1.1a15%2015%200%200%200%205.3-6l.6-2.4a16%2016%200%200%200-1-7.4l-1.4-2.4a10%2010%200%200%200-2.2-2l-2.5-1.4-1.3-.4-1.7-.2-2.6-.2-4.7-.2-.2-5-.6-5-.9-2.4-.7-1a15%2015%200%200%200-4.2-3.6%2011%2011%200%200%200-3.9-1.3zm10.7%2050.2.8%201.2v-1.2z%22%20class=%22w%22/%3E%3C/g%3E%3C/svg%3E
-// @version      5.10
+// @version      5.10.1
 // @author       NextEnzzo (https://platesmania.com/user121559)
 // @copyright    2026, NextEnzzo
 // @license      MIT
@@ -1275,6 +1275,16 @@
     .cardbox textarea{width:100%;min-height:180px;padding:10px;resize:vertical;line-height:1.5}
     .wn-section{margin:0 0 14px}
     .wn-item{margin:4px 0;font-size:13px;line-height:1.45}
+    .secs{gap:0}
+    .sec{display:flex;flex-direction:column;gap:6px;padding:10px 0;border-top:1px solid var(--line)}
+    .secs > .sec:first-child{border-top:0;padding-top:0}
+    .ln{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font-size:13px;color:var(--ink)}
+    .ln b{font-weight:600}
+    .ln a,.mine-n{color:var(--primary-h);font-weight:600}
+    .mine-item{white-space:nowrap}
+    details.fold{border-top:1px solid var(--line);padding-top:10px}
+    details.fold summary{cursor:pointer;font-size:13px;color:var(--primary-h);font-weight:600}
+    details.fold[open] summary{margin-bottom:8px}
     .stats{display:flex;flex-wrap:wrap;gap:12px 28px}
     .stat{display:flex;flex-direction:column}
     .stat b{font-size:18px;color:var(--primary-h)}
@@ -2217,18 +2227,21 @@
     if (!plate) { card.host.hidden = true; return; }
     card.message(message);
     const v = info && info.vehicle && plateVehicleNames(info.vehicle);
-    const links = lookupLinks(plate);                                           // public lookup pages, plain links (75-lookups.js)
-    const series = seriesLine(plate);                                           // your photos of the series of the plate (79-series.js)
-    const register = registryLine(plate);                                       // the country's open register, on a click (80-registry.js)
-    // the site's own search for this plate, to see the photos that are already there (a plain link, a new tab)
-    const open = info && info.count > 0 ? h('div', { class: 'cardrow' }, h('a', { class: 'btn ghost sm', href: searchUrl(plate), target: '_blank', rel: 'noopener noreferrer', text: `See the ${info.count} photo${info.count > 1 ? 's' : ''} of this plate on the site`, title: 'Opens the site’s own search in a new tab' })) : null;
-    if (!v && !links && !series && !register && !open) return;
+    // Four sections, each with its label and sentences, nothing without words: what the site knows, the official register, your photos,
+    // and the lookup sites (folded: there can be a dozen)
+    const sec = (label, ...lines) => h('div', { class: 'sec' }, h('div', { class: 'cat', text: label }), ...lines);
     const agree = v && info.vehicle.of > 1 ? ` (${info.vehicle.photos} of ${info.vehicle.of} photos)` : '';
-    card.body.append(h('div', { class: 'cardbox' },
-      v ? h('p', { class: 'hint', text: 'The photos of this plate on the site show:' }) : null,
-      v ? h('div', { class: 'vehline' }, h('b', { text: v.text }), h('span', { class: 'mute', text: agree })) : null,
-      v ? h('div', { class: 'cardrow' }, h('button', { type: 'button', class: 'btn', text: 'Fill the menus', onclick: () => { vehicleFill(v.path); card.message('Menus filled.'); } })) : null,
-      open, series, register, links));
+    const site = v || (info && info.count > 0) ? sec('On the site',
+      v ? h('div', { class: 'ln' }, h('b', { text: v.text }), h('span', { class: 'mute', text: 'shown by the photos of this plate' + agree }),
+        h('button', { type: 'button', class: 'btn sm', text: 'Fill the menus', onclick: () => { vehicleFill(v.path); card.message('Menus filled.'); } })) : null,
+      info && info.count > 0 ? h('div', { class: 'ln' }, h('a', { href: searchUrl(plate), target: '_blank', rel: 'noopener noreferrer', text: `See the ${info.count} photo${info.count > 1 ? 's' : ''} of this plate on the site`, title: 'Opens the site\u2019s own search in a new tab' })) : null) : null;
+    const register = registryLine(plate);                                       // the open register of the country (80-registry.js): its own section
+    const series = seriesLine(plate);                                           // your photos of the series of the plate (79-series.js)
+    const mine = series ? sec('Your photos', series) : null;
+    const links = lookupLinks(plate, true);                                     // public lookup pages, plain links (75-lookups.js)
+    const fold = links ? h('details', { class: 'fold' }, h('summary', { text: `Look up this plate on other sites (${links.querySelectorAll('a').length})` }), links) : null;
+    if (!site && !register && !mine && !fold) return;
+    card.body.append(h('div', { class: 'cardbox secs' }, site, register, mine, fold));
   }
 
   // The result goes to the photo this tab is loading, if the batch is running
@@ -3482,12 +3495,13 @@
   const lookupHidden = () => new Set((store.get('lookup_hidden', '') || '').split(',').filter(Boolean));
 
   // The links for a plate, minus the sites the user hid; null when there is no plate or nothing to show
-  function lookupLinks(plate) {
+  // bare: without its heading (the card folds it under its own summary)
+  function lookupLinks(plate, bare) {
     if (!plate || !featureOn('lookup')) return null;
     const hidden = lookupHidden();
     const sites = lookupFor(here.country, plate).filter(s => !hidden.has(s.key));
     if (!sites.length) return null;
-    return h('div', { class: 'lookups' }, h('div', { class: 'cat', text: 'Look up this plate' }),
+    return h('div', { class: 'lookups' }, bare ? null : h('div', { class: 'cat', text: 'Look up this plate' }),
       h('div', { class: 'pills' }, sites.map(s => h('a', { class: 'pill', href: s.href, target: '_blank', rel: 'noopener noreferrer', text: s.name, title: 'Opens ' + s.name + ' in a new tab' }))));
   }
 
@@ -3627,7 +3641,7 @@
 
   function mineCard(me) {
     const row = document.querySelector('.pm-vehicle-fields-row');
-    const card = row && inlineCard({ id: 'pmg-mine-card', title: 'Your photos', after: row, closable: false });
+    const card = row && inlineCard({ id: 'pmg-mine-card', title: 'Your photos of this vehicle', after: row, closable: false });
     if (!card) return;
     card.host.hidden = true;
     let shown = '', run = 0;
@@ -3639,13 +3653,13 @@
       card.host.hidden = !levels.length;
       card.clear();
       if (!levels.length) return;
-      const where = { markaavto: 'brand', model: 'model', modgen: 'generation' };
+      const where = { markaavto: 'Brand', model: 'Model', modgen: 'Generation' };
       const items = levels.map(l => {
-        const num = h('a', { class: 'mine-n', href: l.url, target: '_blank', rel: 'noopener noreferrer', text: '…', title: 'Opens your photos of this in a new tab' });
-        return { l, num, el: h('div', { class: 'stat' }, num, h('span', { class: 'mute', text: `${where[l.key]}: ${l.name}` })) };
+        const num = h('a', { class: 'mine-n', href: l.url, target: '_blank', rel: 'noopener noreferrer', text: '\u2026', title: 'Opens your photos of this in a new tab' });
+        return { l, num, el: h('span', { class: 'mine-item' }, `${where[l.key]} `, h('b', { text: l.name }), ': ', num) };
       });
       card.message('');
-      card.body.append(h('div', { class: 'cardbox' }, h('div', { class: 'stats' }, items.map(i => i.el))));
+      card.body.append(h('div', { class: 'cardbox' }, h('p', { class: 'hint', text: 'How many photos you already have on the site:' }), h('div', { class: 'ln' }, items.slice().reverse().map(i => i.el))));
       (async () => {
         for (const i of items) {
           try {
@@ -3798,15 +3812,16 @@
     return n;
   }
 
-  // The line of the plate card; it fills itself when the count comes. null when the plate has no series or you are not known
+  // The sentence of the plate card; the number fills itself when the count comes. null when the plate has no series or you are not known
   function seriesLine(plate) {
     const me = membersMe(), series = featureOn('series') && me && seriesOf(here.country, plate);
     if (!series) return null;
     const url = seriesGallery(here.country, series.query, me.id);
-    const num = h('a', { class: 'mine-n', href: url, target: '_blank', rel: 'noopener noreferrer', text: '…', title: 'Opens your photos of this series in a new tab' });
-    const line = h('div', { class: 'stat' }, num, h('span', { class: 'mute', text: `your photos in the series ${series.label}` }));
-    seriesMine(url).then(n => { num.textContent = String(n); }, e => { line.replaceChildren(h('span', { class: 'mute', text: 'Series not counted: ' + e.message })); });
-    return h('div', { class: 'stats' }, line);
+    const num = h('a', { class: 'mine-n', href: url, target: '_blank', rel: 'noopener noreferrer', text: '\u2026', title: 'Opens your photos of this series in a new tab' });
+    const line = h('div', { class: 'ln' }, h('span', null, 'In the series ', h('b', { text: series.label }), ': you have ', num, h('span', { class: 'plural' }, ' photos')));
+    seriesMine(url).then(n => { num.textContent = String(n); line.querySelector('.plural').textContent = n === 1 ? ' photo' : ' photos'; },
+      e => { line.replaceChildren(h('span', { class: 'mute', text: 'Series not counted: ' + e.message })); });
+    return line;
   }
 
   // A series page: the numbers on the site are the cells with a photo (the others offer to upload that number)
@@ -3876,26 +3891,27 @@
     const reg = REGISTRIES[here.country];
     const asked = reg && featureOn('registry') && reg.plate(plate);
     if (!asked) return null;
-    const out = h('div', { class: 'cardrow' });
+    const out = h('div', { class: 'ln' });
     const menusEmpty = () => vehicleCurrent().every(v => !(+v > 0 && +v !== 200));
     const ask = h('button', { type: 'button', class: 'btn ghost sm', text: `Ask ${reg.name}`, title: 'Sends this plate to that open register', onclick: () => run() });
+    const show = (...kids) => out.replaceChildren(...kids.filter(Boolean));       // a null child would be written as the word "null"
     async function run() {
       ask.disabled = true;
-      out.replaceChildren(h('span', { class: 'mute', text: 'Asking…' }));
+      show(h('span', { class: 'mute', text: 'Asking\u2026' }));
       try {
         const facts = await registryAsk(reg, asked);
-        if (!facts) { out.replaceChildren(h('span', { class: 'mute', text: 'No such plate in that register.' })); return; }
+        if (!facts) { show(h('span', { class: 'mute', text: 'This plate is not in that register.' })); return; }
         const path = registryPath(facts);
-        const text = [facts.make, facts.model, facts.year, facts.colour, facts.until ? 'inspection until ' + facts.until : ''].filter(Boolean).join(' · ');
+        const text = [facts.make, facts.model, facts.year, facts.colour, facts.until ? 'inspection until ' + facts.until : ''].filter(Boolean).join(' \u00b7 ');
         const filled = path.length && settings.on('registry_fill') && out.isConnected && !registryFilled.has(asked) && menusEmpty();
         if (filled) { registryFilled.add(asked); vehicleFill(path); }
-        out.replaceChildren(h('b', { text }), path.length ? h('button', { type: 'button', class: 'btn sm', text: 'Fill the menus', onclick: () => vehicleFill(path) }) : null,
-          filled ? h('span', { class: 'mute', text: 'Menus filled from the register.' }) : null);
-      } catch (e) { out.replaceChildren(h('span', { class: 'mute', text: 'Not read: ' + (e.name === 'AbortError' ? 'no answer in 15 s' : e.message) })); ask.hidden = false; ask.disabled = false; }
+        show(h('b', { text }), filled ? h('span', { class: 'mute', text: 'menus filled' }) : null,
+          path.length && !filled ? h('button', { type: 'button', class: 'btn sm', text: 'Fill the menus', onclick: () => vehicleFill(path) }) : null);
+      } catch (e) { show(h('span', { class: 'mute', text: 'Not read: ' + (e.name === 'AbortError' ? 'no answer in 15 s' : e.message) })); ask.hidden = false; ask.disabled = false; }
     }
     ask.hidden = settings.on('registry_auto');                                // by itself: the button only comes back if the asking fails
     if (settings.on('registry_auto')) run();
-    return h('div', { class: 'cardrow' }, ask, out);
+    return h('div', { class: 'sec' }, h('div', { class: 'cat', text: 'Official register (' + reg.name + ')' }), out, ask);
   }
 
   registerFeature({
@@ -3916,7 +3932,7 @@
    *    just been chosen; not after a fix such as 5.9 -> 5.9.1),
    *    and any time from the button in Settings. It reads WHATS_NEW (src/lib/whatsnew.js).
    * ===================================================================== */
-  const SCRIPT_VERSION = "5.10";
+  const SCRIPT_VERSION = "5.10.1";
 
   // One block per version: its title, then its sections. Several versions are stacked, the newest first.
   function whatsNewBody(entries) {

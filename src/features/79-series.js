@@ -43,15 +43,16 @@
     return n;
   }
 
-  // The line of the plate card; it fills itself when the count comes. null when the plate has no series or you are not known
+  // The sentence of the plate card; the number fills itself when the count comes. null when the plate has no series or you are not known
   function seriesLine(plate) {
     const me = membersMe(), series = featureOn('series') && me && seriesOf(here.country, plate);
     if (!series) return null;
     const url = seriesGallery(here.country, series.query, me.id);
-    const num = h('a', { class: 'mine-n', href: url, target: '_blank', rel: 'noopener noreferrer', text: '…', title: 'Opens your photos of this series in a new tab' });
-    const line = h('div', { class: 'stat' }, num, h('span', { class: 'mute', text: `your photos in the series ${series.label}` }));
-    seriesMine(url).then(n => { num.textContent = String(n); }, e => { line.replaceChildren(h('span', { class: 'mute', text: 'Series not counted: ' + e.message })); });
-    return h('div', { class: 'stats' }, line);
+    const num = h('a', { class: 'mine-n', href: url, target: '_blank', rel: 'noopener noreferrer', text: '\u2026', title: 'Opens your photos of this series in a new tab' });
+    const line = h('div', { class: 'ln' }, h('span', null, 'In the series ', h('b', { text: series.label }), ': you have ', num, h('span', { class: 'plural' }, ' photos')));
+    seriesMine(url).then(n => { num.textContent = String(n); line.querySelector('.plural').textContent = n === 1 ? ' photo' : ' photos'; },
+      e => { line.replaceChildren(h('span', { class: 'mute', text: 'Series not counted: ' + e.message })); });
+    return line;
   }
 
   // A series page: the numbers on the site are the cells with a photo (the others offer to upload that number)

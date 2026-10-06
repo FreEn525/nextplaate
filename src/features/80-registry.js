@@ -39,26 +39,27 @@
     const reg = REGISTRIES[here.country];
     const asked = reg && featureOn('registry') && reg.plate(plate);
     if (!asked) return null;
-    const out = h('div', { class: 'cardrow' });
+    const out = h('div', { class: 'ln' });
     const menusEmpty = () => vehicleCurrent().every(v => !(+v > 0 && +v !== 200));
     const ask = h('button', { type: 'button', class: 'btn ghost sm', text: `Ask ${reg.name}`, title: 'Sends this plate to that open register', onclick: () => run() });
+    const show = (...kids) => out.replaceChildren(...kids.filter(Boolean));       // a null child would be written as the word "null"
     async function run() {
       ask.disabled = true;
-      out.replaceChildren(h('span', { class: 'mute', text: 'Asking…' }));
+      show(h('span', { class: 'mute', text: 'Asking\u2026' }));
       try {
         const facts = await registryAsk(reg, asked);
-        if (!facts) { out.replaceChildren(h('span', { class: 'mute', text: 'No such plate in that register.' })); return; }
+        if (!facts) { show(h('span', { class: 'mute', text: 'This plate is not in that register.' })); return; }
         const path = registryPath(facts);
-        const text = [facts.make, facts.model, facts.year, facts.colour, facts.until ? 'inspection until ' + facts.until : ''].filter(Boolean).join(' · ');
+        const text = [facts.make, facts.model, facts.year, facts.colour, facts.until ? 'inspection until ' + facts.until : ''].filter(Boolean).join(' \u00b7 ');
         const filled = path.length && settings.on('registry_fill') && out.isConnected && !registryFilled.has(asked) && menusEmpty();
         if (filled) { registryFilled.add(asked); vehicleFill(path); }
-        out.replaceChildren(h('b', { text }), path.length ? h('button', { type: 'button', class: 'btn sm', text: 'Fill the menus', onclick: () => vehicleFill(path) }) : null,
-          filled ? h('span', { class: 'mute', text: 'Menus filled from the register.' }) : null);
-      } catch (e) { out.replaceChildren(h('span', { class: 'mute', text: 'Not read: ' + (e.name === 'AbortError' ? 'no answer in 15 s' : e.message) })); ask.hidden = false; ask.disabled = false; }
+        show(h('b', { text }), filled ? h('span', { class: 'mute', text: 'menus filled' }) : null,
+          path.length && !filled ? h('button', { type: 'button', class: 'btn sm', text: 'Fill the menus', onclick: () => vehicleFill(path) }) : null);
+      } catch (e) { show(h('span', { class: 'mute', text: 'Not read: ' + (e.name === 'AbortError' ? 'no answer in 15 s' : e.message) })); ask.hidden = false; ask.disabled = false; }
     }
     ask.hidden = settings.on('registry_auto');                                // by itself: the button only comes back if the asking fails
     if (settings.on('registry_auto')) run();
-    return h('div', { class: 'cardrow' }, ask, out);
+    return h('div', { class: 'sec' }, h('div', { class: 'cat', text: 'Official register (' + reg.name + ')' }), out, ask);
   }
 
   registerFeature({
