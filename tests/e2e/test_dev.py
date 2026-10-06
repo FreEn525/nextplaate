@@ -262,3 +262,22 @@ def test_the_matcher_puts_a_town_on_the_unit_wikidata_says_it_lies_in(browser):
     r = match(page, ["Caernarfon"], ["Gwynedd"], "uk")
     assert [p[1] for p in r["placed"]] == [["Gwynedd"]]
     c.close()
+
+
+@needs_dev
+def test_the_matcher_reads_a_federal_territory_by_its_city_and_sets_apart_countries_and_blank_lines(browser):
+    c, page = _dev_page(browser)
+    r = match(page, ["Federal Territory of Kuala Lumpur", "Cuba", "Ivory Coast", "UN High Commissioner for Refugees (UNHCR)", ""], ["Kuala Lumpur"], "my")
+    assert [p[1] for p in r["placed"]] == [["Kuala Lumpur"]]
+    assert r["special"] == ["Cuba", "Ivory Coast", "UN High Commissioner for Refugees (UNHCR)", ""] and r["missing"] == []
+    c.close()
+
+
+@needs_dev
+def test_the_matcher_ignores_de_du_des_in_names_and_splits_on_and(browser):
+    c, page = _dev_page(browser)
+    r = match(page, ["Province de Khemisset", "Skhirat-Temara Prefecture"], ["Province de Khemisset", "Prefecture de Skhirate-Temara"], "ma")
+    assert [p[1] for p in r["placed"]] == [["Province de Khemisset"], ["Prefecture de Skhirate-Temara"]]
+    r = match(page, ["Dalasysla and Akureyri Town"], ["Akureyri"], "xx")
+    assert [p[1] for p in r["placed"]] == [["Akureyri"]]
+    c.close()

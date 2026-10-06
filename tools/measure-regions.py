@@ -21,6 +21,7 @@ PAGES = ROOT / "reference" / "real" / "regions"
 CACHE = PAGES / "shapes"
 THRESHOLD = 0.70
 LEVELS = ("ADM1", "ADM2", "ADM3")
+FORCE_LEVEL = {"my": "ADM1", "ie": "ADM1", "is": "ADM1"}   # the regions are states, counties: a finer level would colour one small shape for a whole region
 MAX_SHAPES = 600                                  # a map with more shapes than this is too heavy to draw: not offered
 
 
@@ -53,6 +54,37 @@ def shapes(iso, level):
     return [x["properties"] for x in json.loads(f.read_text(encoding="utf-8"))["features"]]
 
 
+def features(iso, level):
+    shapes(iso, level)                                 # fetches the file when it is not cached
+    return json.loads((CACHE / f"{iso}-{level}.geojson").read_text(encoding="utf-8"))["features"]
+
+
+def inside(ring, x, y):
+    """Ray casting: is the point inside the ring?"""
+    hit = False
+    for (x1, y1), (x2, y2) in zip(ring, ring[1:] + ring[:1]):
+        if (y1 > y) != (y2 > y) and x < (x2 - x1) * (y - y1) / (y2 - y1) + x1:
+            hit = not hit
+    return hit
+
+
+def shape_at(feats, lon, lat):
+    """The name of the shape that holds the point, or the nearest one within about 0.5 degree (a town on a coast the simplified shape misses)."""
+    def polygons(g):
+        return g["coordinates"] if g["type"] == "MultiPolygon" else [g["coordinates"]]
+    best, best_d = None, 0.5
+    for f in feats:
+        for poly in polygons(f["geometry"]):
+            ring = [(p[0], p[1]) for p in poly[0]]
+            xs, ys = [p[0] for p in ring], [p[1] for p in ring]
+            if min(xs) <= lon <= max(xs) and min(ys) <= lat <= max(ys) and inside(ring, lon, lat) and not any(inside([(p[0], p[1]) for p in hole], lon, lat) for hole in poly[1:]):
+                return f["properties"].get("shapeName")
+            d = max(min(xs) - lon, lon - max(xs), min(ys) - lat, lat - max(ys), 0)
+            if d < best_d:
+                best, best_d = f["properties"].get("shapeName"), d
+    return best
+
+
 def main():
     iso3 = json.loads((Path(__file__).with_name("iso3.json")).read_text())
     by_country = {}
@@ -82,6 +114,8 @@ def main():
         n = len(by_country[cc])
         # a region that is not an area (mopeds, historic vehicles...) is not counted: it has no place on a map
         best = max(((v["placed"], lv, v) for lv, v in res.items()), default=None, key=lambda x: x[0])
+        if cc in FORCE_LEVEL and FORCE_LEVEL[cc] in res:
+            best = (res[FORCE_LEVEL[cc]]["placed"], FORCE_LEVEL[cc], res[FORCE_LEVEL[cc]])
         area = max(1, n - (best[2]["special"] if best else 0))
         table.append((cc, n, best, area))
         if best and best[0] / area >= THRESHOLD:
@@ -113,22 +147,32 @@ def write_code_names(by_country, result, iso3):
     """Names of plate codes and parent units of towns, from Wikidata (tools/wikidata-*.py), kept when they find a shape: src/lib/regions-codes.js."""
     wd = ROOT / "reference" / "real" / "regions" / "wikidata"
     data = {}
+    cf = wd / "countries.json"
+    if cf.exists():
+        data["_countries"] = json.loads(cf.read_text(encoding="utf-8"))
     for cc, res in result.items():
         files = {k: wd / name for k, name in (("labels", f"{cc}.json"), ("parents", f"parents-{cc}.json"))}
         best = max(((v["placed"], lv) for lv, v in res.items()), default=None)
+        if cc in FORCE_LEVEL and FORCE_LEVEL[cc] in res:
+            best = (res[FORCE_LEVEL[cc]]["placed"], FORCE_LEVEL[cc])
         if best and any(f.exists() for f in files.values()):
             props = shapes(iso3[cc], best[1])
             data[cc] = {"regions": by_country[cc], "shapes": [{"name": p.get("shapeName") or "", "iso": p.get("shapeISO") or ""} for p in props]}
             for k, f in files.items():
                 data[cc][k] = json.loads(f.read_text(encoding="utf-8")) if f.exists() else {}
+            pts = wd / f"coords-{cc}.json"
+            if pts.exists():
+                feats = features(iso3[cc], best[1])
+                data[cc]["geo"] = {n: shape_at(feats, *xy) for n, xy in json.loads(pts.read_text(encoding="utf-8")).items()}
     tmp = CACHE / "code-names-input.json"
     tmp.write_text(json.dumps(data), encoding="utf-8")
     out = json.loads(subprocess.run(["node", str(ROOT / "tools" / "code-names.mjs"), str(tmp)], capture_output=True, text=True, check=True, encoding="utf-8").stdout)
     sep = "," + chr(10) + "    "
+    countries = out.pop("_countries", [])
     def table(key):
         return sep.join(f"{cc}: {json.dumps(t[key])}" for cc, t in sorted(out.items()) if t[key])
-    (ROOT / "src" / "lib" / "regions-codes.js").write_text(CODES_HEADER.format(codes=table("codes"), parents=table("parents")), encoding="utf-8")
-    print(chr(10) + "src/lib/regions-codes.js:", {cc: (len(t["codes"]), len(t["parents"])) for cc, t in out.items()})
+    (ROOT / "src" / "lib" / "regions-codes.js").write_text(CODES_HEADER.format(codes=table("codes"), parents=table("parents"), countries=json.dumps(sorted(countries))), encoding="utf-8")
+    print(chr(10) + "src/lib/regions-codes.js:", {cc: (len(t["codes"]), len(t["parents"])) for cc, t in out.items()}, len(countries), "country names")
 
 
 CODES_HEADER = """  /* =====================================================================
@@ -136,7 +180,8 @@ CODES_HEADER = """  /* =========================================================
    *    REGION_CODE_NAMES: for countries whose regions are plate codes (Germany: AE, AL...), the name Wikidata (CC0) gives to the code, when it
    *    finds a shape: country -> plate code -> name.
    *    REGION_PARENTS: for countries whose regions are towns or offices (Norwich, Kobe...), the unit that Wikidata says the place lies in and
-   *    that has a shape (Norfolk, Hyogo): country -> normalised place name -> unit.
+   *    that has a shape (Norfolk, Hyogo), or else the shape that holds its point: country -> normalised place name -> unit.
+   *    REGION_COUNTRY_NAMES: the normalised names of countries found among regions that have no shape (the countries of diplomatic plates).
    * ===================================================================== */
   const REGION_CODE_NAMES = {{
     {codes}
@@ -144,6 +189,7 @@ CODES_HEADER = """  /* =========================================================
   const REGION_PARENTS = {{
     {parents}
   }};
+  const REGION_COUNTRY_NAMES = new Set({countries});
 """
 
 

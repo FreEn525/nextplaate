@@ -14,10 +14,10 @@
    *    place on a map.
    *      regionMatch(regions, shapes, cc) -> { placed: Map(regionId -> [shape index]), missing: [region], special: [region] }
    * ===================================================================== */
-  const REGION_WORDS = /\b(city|town|district|districts|dist|region|oblast|republic|krai|kray|autonomous|okrug|municipality|county|kreis|landkreis|stadt|stadtkreis|kreisfreie|of|the|and|rural|urban|prefecture|province|department|departement|canton|commune|powiat|miasto|gmina|okres|raion|rayon|former|capital|governorate|state)\b/g;
-  const REGION_ARTICLES = /\b(la|las|el|los|le|les|al)\b/g;
+  const REGION_WORDS = /\b(city|town|district|districts|dist|region|oblast|republic|krai|kray|autonomous|okrug|municipality|county|kreis|landkreis|stadt|stadtkreis|kreisfreie|of|the|and|rural|urban|prefecture|province|department|departement|canton|commune|powiat|miasto|gmina|okres|raion|rayon|former|capital|governorate|state|federal|territory)\b/g;
+  const REGION_ARTICLES = /\b(la|las|el|los|le|les|al|d|de|du|des)\b/g;
   // not an area: the plates of a kind of vehicle or of an office
-  const REGION_SPECIAL = /\b(moped|mopeds|vehicles?|plates?|trailers?|dealers?|tax.?exempt|offshore|ministry|nationwide|diplomatic|military|army|forces|police|guard|temporary|historic|tourist\w*|export|transit|special|motorcycles?|taxi|official|government|consulates?|vanity|provisional|agricultural|electric|test|administration|zones?|series|senate|assembly|council|ministers|bank|organi[sz]ation|secretariat|authority|union|programme|fund|institute|agency|commission|court|embassy|united nations|european)\b/i;
+  const REGION_SPECIAL = /\b(moped|mopeds|vehicles?|plates?|trailers?|dealers?|tax.?exempt|offshore|ministry|nationwide|diplomatic|military|army|forces|police|guard|temporary|historic|tourist\w*|export|transit|special|motorcycles?|taxi|official|government|consulates?|vanity|provisional|agricultural|electric|test|administration|zones?|series|senate|assembly|council|ministers|bank|organi[sz]ation|secretariat|authority|union|programme|fund|institute|agency|commission|court|embassy|united nations|european|commissioner|league|corporation)\b/i;
   // the countries whose plate codes are the ISO 3166-2 codes of their regions (elsewhere a code that looks alike is another place: B is Batken, not Bishkek)
   const REGION_CODE_COUNTRIES = ['us', 'ca', 'au', 'it', 'br', 'ch'];
   // the combining marks that normalize('NFKD') leaves after the letters, written without a non-ASCII character in the source
@@ -53,7 +53,9 @@
   }
 
   // The names of the countries (the site's own list): the regions of diplomatic plates are named after them, and are no area
-  const regionIsCountry = text => typeof COUNTRIES !== 'undefined' && COUNTRIES.some(c => regionNorm(c.name) === regionNorm(text));
+  const regionIsCountry = text => (typeof REGION_COUNTRY_NAMES !== 'undefined' && regionNames(text).main.some(n => REGION_COUNTRY_NAMES.has(n))) || (typeof COUNTRIES !== 'undefined' && COUNTRIES.some(c => regionNorm(c.name) === regionNorm(text)));
+  // nothing to place: a line without a name
+  const regionIsBlank = r => !regionNorm(r.name);
 
   function regionMatch(regions, shapes, cc) {
     const byName = new Map(), byCode = new Map();
@@ -91,7 +93,7 @@
         if (found.size) break;
       }
       if (found.size) placed.set(r.id, [...found]);
-      else if (REGION_SPECIAL.test(r.name) || regionIsCountry(r.name)) special.push(r);
+      else if (REGION_SPECIAL.test(r.name) || regionIsBlank(r) || regionIsCountry(r.name)) special.push(r);
       else missing.push(r);
     }
     return { placed, missing, special };
