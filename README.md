@@ -51,6 +51,6 @@ Build locally with `node scripts/build.mjs`. Test with `python -m pytest -q` (ne
 
 Two GitHub Actions run on `main`: `build` rebuilds `nextplaate.user.js` on every push that touches `src/` (Greasy Fork picks the new version up from the repository), and `tests` runs the public and dev test suites and fails when the public script changed without a new `@version`. The dev build (`node scripts/build.mjs --dev`, not versioned) adds a Developer drawer for collecting data.
 
-Where to start: `docs/ETAT-ET-PLAN.md` (state and plan), `docs/BRIQUES.md` (the reusable parts: bridge to another site, vehicle catalogue, inline card), `docs/REGLES.md` (fixing a plate rule), `docs/TODO.md` (what is left).
+Where to start: `docs/ETAT-ET-PLAN.md` (state and plan), `docs/BRIQUES.md` (the reusable parts: bridge to another site, vehicle catalogue, inline card), `docs/STYLE.md` (design tokens, taken from the site's palette), `docs/REGLES.md` (fixing a plate rule), `docs/TODO.md` (what is left).
 
 Remember to raise `@version` in `src/meta/00-header.txt` before pushing a release. Without a new version number, installed copies do not update.

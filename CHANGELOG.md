@@ -2,6 +2,9 @@
 
 ## 5.8
 
+**Look**
+- The panel, the Lens card and the batch window now use the colours of PlatesMania itself (its blue `#4765a0`, hover `#324c80`, light `#cad9f6`) through one set of design tokens, with one button height scale, one radius and one focus ring. Blocks and the drawer title carry the site's 2 px blue rule. No colour is written outside the tokens (a test checks it). See `docs/STYLE.md`.
+
 **Google Lens**
 - A photo chosen on the upload page is searched on Google Lens by itself, in a background tab (option *Search each new photo by itself*, on by default). The button *Search this photo on Google Lens* does the same on demand, also on a photo page.
 - The answer appears in a card right under the photo of the upload page, and in the Search drawer at the same time (so you do not have to keep the drawer open): three choices for each, the first one highlighted. A click on a choice fills the site's menus, and *Fill with the first choices* fills the three at once. Nothing is filled until you click. The titles of the Lens results are compared with PlatesMania's own menus (brands, models, generations). No paste box, no prompt to copy.

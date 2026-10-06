@@ -10,7 +10,7 @@ Ce que le script offre déjà pour construire une nouvelle fonction sans réécr
 | **Pont entre deux sites** | `src/lib/bridge.js` | demander un travail à un autre site, dans un autre onglet, et attendre la réponse |
 | **Véhicule** | `src/lib/vehicle.js` | marques, modèles, générations de PlatesMania : lire, deviner à partir de textes, remplir les menus |
 | **Carte dans la page** | `src/ui/06-inline-card.js` | afficher un bloc au bon endroit du site, au style du panneau, avec des choix à cliquer |
-| Interface du panneau | `src/ui/` (`h`, `UI_BASE`, `setStatus`) | construire des contrôles sans `innerHTML` |
+| Interface du panneau | `src/ui/` (`h`, `UI_BASE`, `setStatus`) | construire des contrôles sans `innerHTML` ; style : jetons et composants communs (`docs/STYLE.md`) |
 
 ## Le pont (`bridgeAsk`, `bridgePending`, `bridgeAnswer`)
 

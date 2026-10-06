@@ -38,13 +38,13 @@
     if (!rows) return;
     // the same choices as the card, stacked (the drawer is narrow), and clickable the same way
     for (const r of rows) {
-      out.appendChild(h('div', { class: 'lens-cat', text: r.category }));
+      out.appendChild(h('div', { class: 'cat', text: r.category }));
       out.appendChild(h('div', { class: 'lens-cands' }, r.candidates.length
-        ? r.candidates.map((c, i) => h('button', { class: 'lens-cand' + (i === 0 ? ' best' : ''), text: c.name, 'data-id': String(c.id), 'data-level': String(r.level), onclick: () => lensPick(c.path) }))
+        ? r.candidates.map((c, i) => h('button', { class: 'chip' + (i === 0 ? ' best' : ''), text: c.name, 'data-id': String(c.id), 'data-level': String(r.level), onclick: () => lensPick(c.path) }))
         : h('div', { class: 'lens-none', text: 'No choice' })));
     }
     const now = vehicleCurrent();
-    out.querySelectorAll('.lens-cand').forEach(c => c.classList.toggle('on', now[+c.dataset.level] === c.dataset.id));
+    out.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', now[+c.dataset.level] === c.dataset.id));
   }
 
   // A click on a choice fills the menus, then the guess is redone around what was picked: the models of the picked brand, the

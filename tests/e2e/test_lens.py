@@ -235,7 +235,7 @@ def test_the_card_sits_right_under_the_photo_and_the_panel_shows_the_answer_too(
     lens_answer(page, ["2019 Volkswagen Golf 8", "Volkswagen Golf Mk8 2020"])
     card_choices(page)
     assert page.evaluate("() => document.getElementById('zoomimgid').nextElementSibling.id") == "pmg-lens-card"
-    panel = page.evaluate(f"() => [...{PANEL}.querySelectorAll('.lens-cat, .lens-cand')].map(e => e.textContent)")
+    panel = page.evaluate(f"() => [...{PANEL}.querySelectorAll('.cat, .chip')].map(e => e.textContent)")
     assert panel[:2] == ["Brand", "Volkswagen"]
 
 
@@ -261,7 +261,7 @@ def test_a_generation_never_changes_the_model_that_was_picked(page, ctx):
     page.wait_for_function(f"() => [...{CARD}.querySelectorAll('.chip')].some(c => c.textContent.startsWith('Mk7'))")
     page.evaluate(f"() => [...{CARD}.querySelectorAll('.chip')].find(c => c.textContent.startsWith('Mk7')).click()")
     assert page.evaluate("() => [document.querySelector('[name=markaavto]').value, document.getElementById('model').value, document.getElementById('modgen').value]") == ["7", "70", "700"]
-    assert page.evaluate("() => document.getElementById('pmg-host').shadowRoot.querySelectorAll('.lens-cand.on').length") == 3     # the drawer follows
+    assert page.evaluate("() => document.getElementById('pmg-host').shadowRoot.querySelectorAll('.chip.on').length") == 3     # the drawer follows
 
 
 LONG = ["2019 Volkswagen Golf 8", "Volkswagen Golf Mk7 2012", "Volkswagen Golf 2013 Mk7 five door hatchback"]

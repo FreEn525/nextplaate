@@ -10,17 +10,12 @@
    * ===================================================================== */
   const INLINE_CARD_CSS = `
     :host{display:block;margin:0 0 12px}
-    .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-    .top{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:8px 12px;background:var(--tint);border-bottom:1px solid var(--line)}
-    .top b{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--brand-t)}
+    .card{background:#fff;border:1px solid var(--line);border-top:2px solid var(--primary);border-radius:var(--r);overflow:hidden}
+    .top{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:8px 12px;background:#fff;border-bottom:1px solid var(--line)}
+    .top b{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--primary-h)}
     .top .msg{flex:1 1 150px;min-width:0;font-size:12px;color:var(--mute);overflow-wrap:anywhere}
     .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;padding:12px}   /* three side by side where there is room, stacked under a photo */
     .col{display:flex;flex-direction:column;gap:6px;min-width:0}
-    .cat{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
-    .chip{width:100%;min-height:34px;padding:6px 10px;border:1px solid var(--line2);border-radius:var(--r);background:#fff;color:var(--ink);font:inherit;font-size:13px;text-align:left;cursor:pointer;overflow-wrap:anywhere}
-    .chip:hover{background:var(--tint);border-color:var(--brand-b)}
-    .chip.best{border-color:var(--brand-b);background:var(--brand);color:var(--brand-t);font-weight:600}
-    .chip.on{border-color:var(--brand-l);box-shadow:inset 0 0 0 1px var(--brand-l)}
     .none{font-size:13px;color:var(--mute)}
     .bar{display:flex;gap:8px;padding:0 12px 12px}
   `;
