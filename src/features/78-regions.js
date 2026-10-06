@@ -7,20 +7,23 @@
    * ===================================================================== */
   const regionsCache = new Map();      // system -> parsed page
 
-  // What a userreg page holds: the systems of its menu and the rows of its table (the region code is empty for the line that
-  // gathers photos without a region)
+  // What a userreg page holds: the systems of its menu and the rows of its table. Two layouts: with a code column (flag, id, code, name,
+  // photos, likes, comments: Germany, France...) and without (flag, id, name, photos, likes, comments: Serbia, Turkey...). The line that
+  // gathers the photos with no region has an empty code in the first layout: it is not a region (region: false).
   function regionsParse(doc) {
     const systems = [...doc.querySelectorAll('select[name="gallery"] option')].map(o => ({ code: o.value.replace(/-\d+$/, ''), name: o.textContent.trim(), selected: o.hasAttribute('selected') }));
     const rows = [...doc.querySelectorAll('#example tbody tr')].map(tr => {
-      const td = tr.querySelectorAll('td'), link = td[4] && td[4].querySelector('a');
-      return td.length >= 5 ? { id: td[1].textContent.trim(), code: td[2].textContent.trim(), name: td[3].textContent.trim(), count: link ? profileNumber(link.textContent) : 0, href: link ? link.getAttribute('href') : '' } : null;
+      const td = tr.querySelectorAll('td');
+      if (td.length < 6) return null;
+      const coded = td.length >= 7, name = td[coded ? 3 : 2], code = coded ? td[2].textContent.trim() : '', link = td[coded ? 4 : 3].querySelector('a');
+      return { id: td[1].textContent.trim(), code, name: name.textContent.trim(), region: !coded || !!code, count: link ? profileNumber(link.textContent) : 0, href: link ? link.getAttribute('href') : '' };
     }).filter(Boolean);
     return { systems, rows };
   }
 
-  // The figures of a table: regions with a code are the ones to collect; photos with no region count in the photos only
+  // The figures of a table: the regions are the ones to collect; photos with no region count in the photos only
   function regionsFigures(rows) {
-    const regions = rows.filter(r => r.code);
+    const regions = rows.filter(r => r.region);
     const seen = regions.filter(r => r.count > 0).sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
     const missing = regions.filter(r => !r.count);
     const photos = rows.reduce((sum, r) => sum + r.count, 0);

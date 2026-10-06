@@ -58,7 +58,7 @@ def test_the_menu_comes_from_the_page_and_another_country_is_asked_once(ctx):
     page = profile(ctx)
     start(page)
     opts = page.evaluate(f"() => [...{CARD}.querySelectorAll('select option')].map(o => o.textContent)")
-    assert opts == ["France (SIV)", "Germany", "Luxembourg"]
+    assert opts == ["France (SIV)", "Germany", "Luxembourg", "Serbia"]
     page.evaluate(f"() => {{ const s = {CARD}.querySelector('select'); s.value = 'de'; s.dispatchEvent(new Event('change')); }}")
     page.wait_for_function(f"() => {CARD}.querySelector('.stat b').textContent === '0 / 2'", timeout=15000)
     page.evaluate(f"() => {{ const s = {CARD}.querySelector('select'); s.value = 'fr1'; s.dispatchEvent(new Event('change')); }}")
@@ -81,3 +81,12 @@ def test_with_the_feature_off_there_is_no_card(ctx):
     page.wait_for_selector("#pmg-host")
     page.wait_for_timeout(500)
     assert page.evaluate("() => !document.getElementById('pmg-regions-card')")
+
+
+def test_a_table_without_the_code_column_is_read_with_the_names_in_the_right_place(ctx):
+    page = profile(ctx)
+    start(page)
+    page.evaluate(f"() => {{ const s = {CARD}.querySelector('select'); s.value = 'rs'; s.dispatchEvent(new Event('change')); }}")
+    page.wait_for_function(f"() => {CARD}.querySelector('.stat b').textContent === '2 / 3'", timeout=15000)
+    pills = page.evaluate(f"() => [...{CARD}.querySelectorAll('.pill')].map(a => a.textContent)")
+    assert pills == ["Aleksinac · 5", "Arađelovac · 1".replace("Arađelovac", "Aranđelovac")]

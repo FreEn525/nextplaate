@@ -18,7 +18,7 @@ def square(x, y):
 
 SHAPES = {"type": "FeatureCollection", "features": [
     {"type": "Feature", "properties": {"shapeName": n, "shapeISO": ""}, "geometry": square(i * 1.5, 0)}
-    for i, n in enumerate(["Ain", "Aisne", "Allier", "Alpes-de-Haute-Provence", "Paris"])]}
+    for i, n in enumerate(["Ain", "Aisne", "Allier", "Paris"])]}
 
 
 @pytest.fixture
@@ -53,7 +53,7 @@ def open_map(ctx):
 
 def choose(page, cc="fr"):
     page.evaluate(f"() => {{ const s = {MODAL}.querySelector('select[aria-label=\"Regions of a country\"]'); s.value = '{cc}'; s.dispatchEvent(new Event('change')); }}")
-    page.wait_for_function(f"() => {MODAL}.querySelectorAll('svg path.c').length === 5 || {MODAL}.textContent.includes('Not drawn')", timeout=40000)
+    page.wait_for_function(f"() => {MODAL}.querySelectorAll('svg path.c').length === 4 || {MODAL}.textContent.includes('Not drawn')", timeout=40000)
 
 
 def test_the_picker_offers_the_countries_that_have_a_map_and_that_the_member_has_photos_in(ctx):
@@ -72,8 +72,8 @@ def test_a_country_shows_its_regions_shaded_by_the_photos(ctx):
     page = open_map(ctx)
     choose(page)
     tiers = page.evaluate(f"() => [...{MODAL}.querySelectorAll('svg path.c')].map(p => [...p.classList].find(c => /^t[0-9]$/.test(c)))")
-    assert tiers == ["t0", "t2", "t0", "t2", "t0"]                                              # Aisne 4 photos, Alpes 2: the 2-9 shade; the others none
-    assert "France: 3 of 5 regions, 9 photos" == page.evaluate(f"() => {MODAL}.querySelector('.sum').textContent")
+    assert tiers == ["t0", "t2", "t0", "t0"]                                                    # Aisne 4 photos: the 2-9 shade; the others none
+    assert "France: 2 of 4 regions, 6 photos" == page.evaluate(f"() => {MODAL}.querySelector('.sum').textContent")
 
 
 def test_a_region_is_a_link_to_the_members_photos_of_it(ctx):
@@ -86,8 +86,8 @@ def test_a_region_is_a_link_to_the_members_photos_of_it(ctx):
 def test_the_regions_without_a_shape_are_listed_with_their_photos(ctx):
     page = open_map(ctx)
     choose(page)
-    assert page.evaluate(f"() => {MODAL}.querySelector('.extra').textContent") == "Not on the map: Without code of department (3)"
-    assert "4 of 5 regions are on the map" in page.evaluate(f"() => {MODAL}.querySelector('.hint:not(.wmview .hint:first-child)') && [...{MODAL}.querySelectorAll('.hint')].map(h => h.textContent).join('|')")
+    assert page.evaluate(f"() => {MODAL}.querySelector('.extra').textContent") == "Not on the map: Alpes (2)"
+    assert "3 of 4 regions are on the map" in page.evaluate(f"() => {MODAL}.querySelector('.hint:not(.wmview .hint:first-child)') && [...{MODAL}.querySelectorAll('.hint')].map(h => h.textContent).join('|')")
 
 
 def test_the_licence_of_the_shapes_is_shown(ctx):

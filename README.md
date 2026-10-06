@@ -45,7 +45,7 @@ Where a key is given, it can be changed in the Shortcuts drawer.
 19. **Profile: real uploads**: on a member's profile, the real total of the gallery and the uploads of the day (from 03:30 local time), and how far the profile's own figure is: that figure is a statistic the site recalculates from time to time.
 20. **Profile: regions**: on a member's profile, a button reads the site's region statistics and shows how many regions (departments, districts, states...) of a country the member has a photo from, with a bar, the regions seen as links and the missing ones. The country menu comes from the site's page.
 
-21. **World map** (`G`, for globe): the countries a member has photos from on a map of the world, shaded by how many photos, each country a link to the member's photos of it; a Europe view; yours or anyone's (a member number or the link of a profile, or one of the members you saved).
+21. **World map** (`G`, for globe): the countries a member has photos from on a map of the world, shaded by how many photos, each country a link to the member's photos of it; a Europe view; yours or anyone's (a member number or the link of a profile, or one of the members you saved); and, for 28 countries, a map of the regions (France's departments, the US states, Russia's regions...) with the same zoom.
 
 **The panel itself**
 
@@ -72,7 +72,7 @@ Updates are delivered through Greasy Fork. Tampermonkey checks for a new version
 
 ## Credits
 
-The world map is [Natural Earth](https://www.naturalearthdata.com/) data (public domain), through the [world-atlas](https://github.com/topojson/world-atlas) package.
+The world map is [Natural Earth](https://www.naturalearthdata.com/) data (public domain), through the [world-atlas](https://github.com/topojson/world-atlas) package. The maps of regions use the shapes of [geoBoundaries](https://www.geoboundaries.org/) (CC-BY 4.0 and the licence of each country's source, shown under the map), loaded when you choose a country.
 
 ## License
 

@@ -206,9 +206,12 @@ def route_site(context):
             def row(rid, code, name, n):
                 photos = f'<a href="/fr/gallery.php?region={rid}&amp;usr={uid}"><i class="fa fa-camera-retro color-blue"></i> {n}</a>' if n else "-"
                 return f'<tr class="odd" role="row">{flag}<td class="sorting_1"><span>{rid}</span></td><td><b>{code}</b></td><td align="left"><b>{name}</b></td><td>{photos}</td><td>-</td><td>-</td></tr>'
-            rows = {"fr1": [row(2103, "", "Without code of department", 3), row(21000, "01", "Ain", 0), row(21001, "02", "Aisne", 4), row(21002, "03", "Allier", 0), row(21003, "04", "Alpes", 2)],
+            def row6(rid, name, n):
+                photos = f'<a href="/rs/gallery.php?region={rid}&amp;usr={uid}"><i></i> {n}</a>' if n else "-"
+                return f'<tr class="odd" role="row">{flag}<td class="sorting_1"><span>{rid}</span></td><td align="left"><b>{name}</b></td><td>{photos}</td><td>-</td><td>-</td></tr>'
+            rows = {"rs": [row6(25501, "Aleksandrovac", 0), row6(25502, "Aleksinac", 5), row6(25503, "Aranđelovac", 1)], "fr1": [row(2103, "", "Without code of department", 3), row(21000, "01", "Ain", 0), row(21001, "02", "Aisne", 4), row(21002, "03", "Allier", 0), row(21003, "04", "Alpes", 2)],
                     "de": [row(20001, "A", "Augsburg", 0), row(20002, "AA", "Ostalbkreis", 0)], "lu": []}.get(system, [])
-            menu = "".join(f'<option value="{c}-{uid}"{" selected" if c == system else ""}>{n}</option>' for c, n in [("fr1", "France (SIV)"), ("de", "Germany"), ("lu", "Luxembourg")])
+            menu = "".join(f'<option value="{c}-{uid}"{" selected" if c == system else ""}>{n}</option>' for c, n in [("fr1", "France (SIV)"), ("de", "Germany"), ("lu", "Luxembourg"), ("rs", "Serbia")])
             html = HEAD.format(title="Statistics by regions") + f'<select name="gallery">{menu}</select><table id="example"><thead><tr><th></th><th></th><th>#</th><th>region</th><th></th><th></th><th></th></tr></thead><tbody>{"".join(rows)}</tbody></table></body></html>'
             return route.fulfill(status=200, content_type="text/html; charset=utf-8", body=html)
         if path == "/gallery.php" and "usr" in query:

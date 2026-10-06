@@ -12,7 +12,7 @@
     sections: [{
       title: 'New',
       items: [
-        { title: 'World map', text: 'The countries a member has photos from, on a map of the world, shaded by how many photos. Yours, or anyone’s: type a number or paste a profile link. Open it with G (globe), from Browse, or from a profile. Scroll to zoom, drag to move, or use the Europe view.' },
+        { title: 'World map', text: 'The countries a member has photos from, on a map of the world, shaded by how many photos. Yours, or anyone’s: type a number or paste a profile link. Open it with G (globe), from Browse, or from a profile. Scroll to zoom, drag to move, or use the Europe view. Under the map, pick a country to see its regions (France’s departments, Russia’s regions, the US states...).' },
         { title: 'The brand and model box', text: 'The site’s text box is clearer: a short label, a field with an example, a clear button and nicer suggestions. The plate card is also in labelled sections now.' }
       ]
     }]

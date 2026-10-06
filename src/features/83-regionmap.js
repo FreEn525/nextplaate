@@ -5,38 +5,23 @@
    *    shapes (geoBoundaries, src/lib/regions-geo.js), matched by name or code (src/lib/regions-match.js). Only the countries of
    *    REGION_MAPS (src/lib/regions-levels.js) have a map; the regions that find no shape are listed under it, with their photos.
    * ===================================================================== */
-  const regionListCache = new Map();
-
-  // The regions of a country as the site's search page lists them: [{ id, code, name }]; an id can hold several ("10077_10097")
-  async function regionList(cc) {
-    if (regionListCache.has(cc)) return regionListCache.get(cc);
-    const doc = new DOMParser().parseFromString(await siteFetch(`/${cc}/search`), 'text/html');
-    const list = [...doc.querySelectorAll('select#region option, select[name="aregions[]"] option')].map(o => {
-      const label = o.textContent.replace(/\s+/g, ' ').trim(), at = label.indexOf(' - ');                  // "01 - Ain", or "- Without code" when there is no code
-      return { id: o.value, code: at > 0 ? label.slice(0, at).trim() : '', name: (at >= 0 ? label.slice(at + 3) : label.replace(/^-\s*/, '')).trim() };
-    }).filter(r => r.name);
-    regionListCache.set(cc, list);
-    return list;
-  }
-
-  // The member's photos per region id, from the statistics pages of the country's systems (fr1 and fr2 for France...)
-  async function regionPhotos(cc, memberId) {
+  // The regions of a country with the member's photos, from the site's region statistics: the page of each system of the country (fr1 and
+  // fr2 for France...). A row is { id, code, name, count, href }; an id can hold several ("10077_10097"), the sum of their photos is the count.
+  async function regionRows(cc, memberId) {
     const menu = (await regionsAsk('fr1', memberId)).systems.filter(s => s.code.replace(/\d$/, '') === cc);
-    const counts = new Map(), links = new Map();
+    const rows = [];
     for (const s of menu.length ? menu : [{ code: cc }]) {
-      let page;
-      try { page = await regionsAsk(s.code, memberId); } catch (e) { continue; }
-      page.rows.forEach(r => { if (r.count) { counts.set(r.id, (counts.get(r.id) || 0) + r.count); links.set(r.id, r.href); } });
+      try { (await regionsAsk(s.code, memberId)).rows.filter(r => r.region).forEach(r => rows.push(r)); } catch (e) { /* a system the site does not answer for */ }
     }
-    return { counts, links };
+    return rows;
   }
 
   async function regionMapView(cc, data) {
     const [iso, level] = REGION_MAPS[cc];
-    const [regions, photos, geo] = await Promise.all([regionList(cc), regionPhotos(cc, data.id), regionShapes(iso, level)]);
+    const [regions, geo] = await Promise.all([regionRows(cc, data.id), regionShapes(iso, level)]);
     const { placed, missing } = regionMatch(regions, geo.shapes);
-    const count = r => String(r.id).split('_').reduce((n, id) => n + (photos.counts.get(id) || 0), 0);
-    const link = r => photos.links.get(String(r.id).split('_').find(id => photos.links.get(id)) || '') || `/${cc}/gallery.php?usr=${data.id}`;
+    const count = r => r.count;
+    const link = r => r.href || `/${cc}/gallery.php?usr=${data.id}`;
     const svg = svgEl('svg', { viewBox: `0 0 ${geo.w} ${geo.h}`, role: 'img', 'aria-label': `${cName(cc)}: the regions of ${data.name}` });
     const tierOf = new Array(geo.shapes.length).fill(null);                      // the region each shape belongs to
     regions.forEach(r => (placed.get(r.id) || []).forEach(i => { if (!tierOf[i] || count(r) > count(tierOf[i])) tierOf[i] = r; }));

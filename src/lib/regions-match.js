@@ -9,7 +9,7 @@
   const REGION_WORDS = /\b(city|town|district|dist|region|oblast|republic|krai|kray|autonomous|okrug|municipality|county|kreis|landkreis|stadt|of|the|and|rural|urban|prefecture|province|department|departement|canton|commune)\b/g;
 
   function regionNorm(text) {
-    return String(text || '').normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(REGION_WORDS, ' ').replace(/[^a-z0-9]+/g, ' ').trim();
+    return String(text || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(REGION_WORDS, ' ').replace(/[^a-z0-9]+/g, ' ').trim();
   }
 
   function regionMatch(regions, shapes) {

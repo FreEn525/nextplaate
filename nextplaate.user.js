@@ -420,7 +420,7 @@
     regions: { about: 'On a member’s profile: which regions of a country the member has a photo from, and which are missing.', scope: 'every country the site has regions for' },
     series: { about: 'How many of your photos are in the series of the plate you type (HF-137-QQ is in HF-*-QQ); on a series page, the numbers already on the site.', scope: '84 countries (checked on the real site)' },
     registry: { about: 'Asks the country’s open register (public data) for make, model, year and colour, and fills the menus that are still empty. Only the plate is sent; two switches in Settings turn it off.', scope: 'Netherlands and Israel' },
-    worldmap: { about: 'The countries a member has photos from on a map of the world, shaded by how many photos. Yours, or anyone’s: type a number or paste a profile link.', scope: 'every member' },
+    worldmap: { about: 'The countries a member has photos from on a map of the world, shaded by how many photos. Yours, or anyone’s: type a number or paste a profile link. For many countries, the regions too (departments, districts, states).', scope: 'every member (the regions: 28 countries)' },
     upload: { about: 'Queue many photos (or a folder), give each a country and a plate category, and send them one tab per photo with a pause between.', scope: 'every country' }
   };
   /* =====================================================================
@@ -1118,16 +1118,13 @@
     return result;
   }
   /* =====================================================================
-   *  REGION MAPS: WHICH COUNTRIES, AT WHICH LEVEL  (measured, see tools/measure-regions.py)
+   *  REGION MAPS: WHICH COUNTRIES, AT WHICH LEVEL  (written by tools/measure-regions.py: do not edit by hand)
    *    For each country of the site that has regions: its ISO 3166 alpha-3 code and the geoBoundaries level whose shapes the site's regions
-   *    fall on best. A country is listed only when at least three regions in four were placed on the shapes in the last measure
-   *    (6 October 2026); the others show the table of their regions without a map until their matching is worked out.
+   *    fall on best. A country is listed only when at least seven regions in ten are placed on the shapes; the others show the table of
+   *    their regions, without a map, until their matching is worked out. 28 countries.
    * ===================================================================== */
   const REGION_MAPS = {
-    ae: ['ARE', 'ADM1'], al: ['ALB', 'ADM2'], au: ['AUS', 'ADM1'], az: ['AZE', 'ADM2'], br: ['BRA', 'ADM1'], by: ['BLR', 'ADM1'],
-    ca: ['CAN', 'ADM1'], ch: ['CHE', 'ADM1'], fr: ['FRA', 'ADM2'], md: ['MDA', 'ADM1'], me: ['MNE', 'ADM1'],
-    rs: ['SRB', 'ADM2'], ru: ['RUS', 'ADM1'], si: ['SVN', 'ADM2'], tr: ['TUR', 'ADM1'], ua: ['UKR', 'ADM1'], us: ['USA', 'ADM1'],
-    uz: ['UZB', 'ADM1'], vn: ['VNM', 'ADM1']
+    ae: ['ARE', 'ADM1'], al: ['ALB', 'ADM2'], az: ['AZE', 'ADM2'], bg: ['BGR', 'ADM1'], by: ['BLR', 'ADM1'], ca: ['CAN', 'ADM1'], ch: ['CHE', 'ADM1'], cn: ['CHN', 'ADM1'], cz: ['CZE', 'ADM2'], fr: ['FRA', 'ADM2'], it: ['ITA', 'ADM3'], kg: ['KGZ', 'ADM1'], la: ['LAO', 'ADM1'], md: ['MDA', 'ADM1'], me: ['MNE', 'ADM1'], mx: ['MEX', 'ADM1'], pt: ['PRT', 'ADM2'], ro: ['ROU', 'ADM1'], rs: ['SRB', 'ADM2'], ru: ['RUS', 'ADM1'], si: ['SVN', 'ADM2'], th: ['THA', 'ADM1'], tj: ['TJK', 'ADM1'], tr: ['TUR', 'ADM1'], ua: ['UKR', 'ADM1'], us: ['USA', 'ADM1'], uz: ['UZB', 'ADM1'], vn: ['VNM', 'ADM1']
   };
   /* =====================================================================
    *  REGION MATCHING  (the regions of the site, to the shapes of a map)
@@ -1140,7 +1137,7 @@
   const REGION_WORDS = /\b(city|town|district|dist|region|oblast|republic|krai|kray|autonomous|okrug|municipality|county|kreis|landkreis|stadt|of|the|and|rural|urban|prefecture|province|department|departement|canton|commune)\b/g;
 
   function regionNorm(text) {
-    return String(text || '').normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(REGION_WORDS, ' ').replace(/[^a-z0-9]+/g, ' ').trim();
+    return String(text || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(REGION_WORDS, ' ').replace(/[^a-z0-9]+/g, ' ').trim();
   }
 
   function regionMatch(regions, shapes) {
@@ -1301,7 +1298,7 @@
     sections: [{
       title: 'New',
       items: [
-        { title: 'World map', text: 'The countries a member has photos from, on a map of the world, shaded by how many photos. Yours, or anyone’s: type a number or paste a profile link. Open it with G (globe), from Browse, or from a profile. Scroll to zoom, drag to move, or use the Europe view.' },
+        { title: 'World map', text: 'The countries a member has photos from, on a map of the world, shaded by how many photos. Yours, or anyone’s: type a number or paste a profile link. Open it with G (globe), from Browse, or from a profile. Scroll to zoom, drag to move, or use the Europe view. Under the map, pick a country to see its regions (France’s departments, Russia’s regions, the US states...).' },
         { title: 'The brand and model box', text: 'The site’s text box is clearer: a short label, a field with an example, a clear button and nicer suggestions. The plate card is also in labelled sections now.' }
       ]
     }]
@@ -3969,20 +3966,23 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
    * ===================================================================== */
   const regionsCache = new Map();      // system -> parsed page
 
-  // What a userreg page holds: the systems of its menu and the rows of its table (the region code is empty for the line that
-  // gathers photos without a region)
+  // What a userreg page holds: the systems of its menu and the rows of its table. Two layouts: with a code column (flag, id, code, name,
+  // photos, likes, comments: Germany, France...) and without (flag, id, name, photos, likes, comments: Serbia, Turkey...). The line that
+  // gathers the photos with no region has an empty code in the first layout: it is not a region (region: false).
   function regionsParse(doc) {
     const systems = [...doc.querySelectorAll('select[name="gallery"] option')].map(o => ({ code: o.value.replace(/-\d+$/, ''), name: o.textContent.trim(), selected: o.hasAttribute('selected') }));
     const rows = [...doc.querySelectorAll('#example tbody tr')].map(tr => {
-      const td = tr.querySelectorAll('td'), link = td[4] && td[4].querySelector('a');
-      return td.length >= 5 ? { id: td[1].textContent.trim(), code: td[2].textContent.trim(), name: td[3].textContent.trim(), count: link ? profileNumber(link.textContent) : 0, href: link ? link.getAttribute('href') : '' } : null;
+      const td = tr.querySelectorAll('td');
+      if (td.length < 6) return null;
+      const coded = td.length >= 7, name = td[coded ? 3 : 2], code = coded ? td[2].textContent.trim() : '', link = td[coded ? 4 : 3].querySelector('a');
+      return { id: td[1].textContent.trim(), code, name: name.textContent.trim(), region: !coded || !!code, count: link ? profileNumber(link.textContent) : 0, href: link ? link.getAttribute('href') : '' };
     }).filter(Boolean);
     return { systems, rows };
   }
 
-  // The figures of a table: regions with a code are the ones to collect; photos with no region count in the photos only
+  // The figures of a table: the regions are the ones to collect; photos with no region count in the photos only
   function regionsFigures(rows) {
-    const regions = rows.filter(r => r.code);
+    const regions = rows.filter(r => r.region);
     const seen = regions.filter(r => r.count > 0).sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
     const missing = regions.filter(r => !r.count);
     const photos = rows.reduce((sum, r) => sum + r.count, 0);
@@ -4339,38 +4339,23 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
    *    shapes (geoBoundaries, src/lib/regions-geo.js), matched by name or code (src/lib/regions-match.js). Only the countries of
    *    REGION_MAPS (src/lib/regions-levels.js) have a map; the regions that find no shape are listed under it, with their photos.
    * ===================================================================== */
-  const regionListCache = new Map();
-
-  // The regions of a country as the site's search page lists them: [{ id, code, name }]; an id can hold several ("10077_10097")
-  async function regionList(cc) {
-    if (regionListCache.has(cc)) return regionListCache.get(cc);
-    const doc = new DOMParser().parseFromString(await siteFetch(`/${cc}/search`), 'text/html');
-    const list = [...doc.querySelectorAll('select#region option, select[name="aregions[]"] option')].map(o => {
-      const label = o.textContent.replace(/\s+/g, ' ').trim(), at = label.indexOf(' - ');                  // "01 - Ain", or "- Without code" when there is no code
-      return { id: o.value, code: at > 0 ? label.slice(0, at).trim() : '', name: (at >= 0 ? label.slice(at + 3) : label.replace(/^-\s*/, '')).trim() };
-    }).filter(r => r.name);
-    regionListCache.set(cc, list);
-    return list;
-  }
-
-  // The member's photos per region id, from the statistics pages of the country's systems (fr1 and fr2 for France...)
-  async function regionPhotos(cc, memberId) {
+  // The regions of a country with the member's photos, from the site's region statistics: the page of each system of the country (fr1 and
+  // fr2 for France...). A row is { id, code, name, count, href }; an id can hold several ("10077_10097"), the sum of their photos is the count.
+  async function regionRows(cc, memberId) {
     const menu = (await regionsAsk('fr1', memberId)).systems.filter(s => s.code.replace(/\d$/, '') === cc);
-    const counts = new Map(), links = new Map();
+    const rows = [];
     for (const s of menu.length ? menu : [{ code: cc }]) {
-      let page;
-      try { page = await regionsAsk(s.code, memberId); } catch (e) { continue; }
-      page.rows.forEach(r => { if (r.count) { counts.set(r.id, (counts.get(r.id) || 0) + r.count); links.set(r.id, r.href); } });
+      try { (await regionsAsk(s.code, memberId)).rows.filter(r => r.region).forEach(r => rows.push(r)); } catch (e) { /* a system the site does not answer for */ }
     }
-    return { counts, links };
+    return rows;
   }
 
   async function regionMapView(cc, data) {
     const [iso, level] = REGION_MAPS[cc];
-    const [regions, photos, geo] = await Promise.all([regionList(cc), regionPhotos(cc, data.id), regionShapes(iso, level)]);
+    const [regions, geo] = await Promise.all([regionRows(cc, data.id), regionShapes(iso, level)]);
     const { placed, missing } = regionMatch(regions, geo.shapes);
-    const count = r => String(r.id).split('_').reduce((n, id) => n + (photos.counts.get(id) || 0), 0);
-    const link = r => photos.links.get(String(r.id).split('_').find(id => photos.links.get(id)) || '') || `/${cc}/gallery.php?usr=${data.id}`;
+    const count = r => r.count;
+    const link = r => r.href || `/${cc}/gallery.php?usr=${data.id}`;
     const svg = svgEl('svg', { viewBox: `0 0 ${geo.w} ${geo.h}`, role: 'img', 'aria-label': `${cName(cc)}: the regions of ${data.name}` });
     const tierOf = new Array(geo.shapes.length).fill(null);                      // the region each shape belongs to
     regions.forEach(r => (placed.get(r.id) || []).forEach(i => { if (!tierOf[i] || count(r) > count(tierOf[i])) tierOf[i] = r; }));
