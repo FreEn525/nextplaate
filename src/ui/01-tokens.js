@@ -52,6 +52,10 @@
     .chip.best{border-color:var(--primary-soft);background:var(--primary-soft);color:var(--primary-h);font-weight:600}
     .chip.on{border-color:var(--primary);box-shadow:inset 0 0 0 1px var(--primary)}
     .flags{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:6px}
+    .flagpick{display:flex;flex-direction:column;gap:8px}
+    .flagpick input[type=text]{width:100%}
+    .pickrows{display:flex;flex-direction:column;gap:6px;max-height:340px;overflow-y:auto;padding:2px}
+    .pickrows .chk img{flex:none}
     .flagblock{display:flex;flex-direction:column;gap:8px}
     .flagblock input{width:100%}
     .flag{height:30px;min-width:0;display:flex;align-items:center;gap:8px;padding:0 8px;border:1px solid var(--line2);background:#fff;color:var(--ink);font-size:12px;text-decoration:none}

@@ -127,3 +127,69 @@ def test_the_names_do_not_widen_the_bar_or_the_panel(ctx):
     page = open_page(ctx, "https://platesmania.com/fr/add", 2560)
     over = page.evaluate(f"() => {{ const b = {BAR}.querySelector('.box'); return [b.scrollWidth, b.clientWidth]; }}")
     assert over[0] <= over[1]
+
+
+def choose_countries(ctx, codes, url="https://platesmania.com/fr/add", width=1280):
+    page = ctx.new_page()
+    page.set_viewport_size({"width": width, "height": 900})
+    page.goto(url)
+    page.wait_for_selector("#pmg-host")
+    page.evaluate("(v) => localStorage.setItem('pmg_set_flags_chosen', v)", codes)
+    page.reload()
+    page.wait_for_selector("#pmg-host")
+    page.wait_for_timeout(200)
+    return page
+
+
+def bar_names(page):
+    return page.evaluate(f"() => [...{BAR}.querySelectorAll('a.flag .fname')].map(e => e.textContent)")
+
+
+def test_the_side_bar_shows_only_the_chosen_countries_and_the_panel_all_of_them(ctx):
+    page = choose_countries(ctx, "fr,de,it")
+    assert bar_names(page) == ["France", "Germany", "Italy"]
+    assert page.evaluate(f"() => {PANEL}.querySelectorAll('.flagblock a.flag').length") >= 90     # the panel keeps the full list
+    assert page.evaluate(f"() => {BAR}.querySelector('input').hidden")                       # three countries: no find box
+
+
+def test_no_country_chosen_says_so(ctx):
+    page = choose_countries(ctx, "")
+    assert bar_names(page) == []
+    assert "No country chosen" in page.evaluate(f"() => {BAR}.textContent")
+
+
+def open_settings(page):
+    page.evaluate(f"() => {{ const b = [...{PANEL}.querySelectorAll('.rbtn')].find(x => /settings/i.test(x.title || '')); b.click(); }}")
+    page.wait_for_timeout(200)
+
+
+def test_the_settings_choice_updates_the_bar_at_once_and_is_kept(ctx):
+    page = open_page(ctx, "https://platesmania.com/fr/add")
+    open_settings(page)
+    assert page.evaluate(f"() => {PANEL}.querySelectorAll('.pickrows input[type=checkbox]').length") >= 90
+    page.evaluate(f"() => {PANEL}.querySelector('.flagpick .btnrow button:last-child').click()")       # None
+    assert bar_names(page) == []
+    for code in ("be", "nl"):
+        page.evaluate(f"(c) => {PANEL}.getElementById('flag_' + c).click()", code)
+    assert bar_names(page) == ["Belgium", "Netherlands"]
+    assert page.evaluate("() => localStorage.getItem('pmg_set_flags_chosen')") == "be,nl"
+    page.reload()
+    page.wait_for_selector("#pmg-host")
+    page.wait_for_timeout(200)
+    assert bar_names(page) == ["Belgium", "Netherlands"]                                                # kept after a reload
+
+
+def test_choosing_all_again_goes_back_to_the_default(ctx):
+    page = choose_countries(ctx, "fr")
+    open_settings(page)
+    page.evaluate(f"() => {PANEL}.querySelector('.flagpick .btnrow button:first-child').click()")      # All
+    assert page.evaluate("() => localStorage.getItem('pmg_set_flags_chosen')") == "all"
+    assert len(bar_names(page)) >= 90
+
+
+def test_the_settings_list_can_be_filtered(ctx):
+    page = open_page(ctx, "https://platesmania.com/fr/add")
+    open_settings(page)
+    page.evaluate(f"() => {{ const i = {PANEL}.querySelector('.flagpick input[type=text]'); i.value = 'swe'; i.dispatchEvent(new Event('input')); }}")
+    shown = page.evaluate(f"() => [...{PANEL}.querySelectorAll('.pickrows label:not([hidden])')].map(l => l.textContent.trim())")
+    assert shown == ["Sweden"]
