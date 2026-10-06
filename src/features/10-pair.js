@@ -66,7 +66,7 @@
   registerFeature({
     id: 'selection', label: 'Photo pair selection',
     groups: [{
-      drawer: 'pair', title: 'Selection',
+      drawer: 'pair', title: 'Selection', about: "Step 1. In a gallery, choose the front photo and the rear photo of the same vehicle. They are remembered until you reset the pair.",
       build: () => [
         h('button', { id: 'sel', class: 'btn ghost', text: 'Select photos (S)' }),
         h('button', { id: 'reset', class: 'btn ghost sm', text: 'Reset the pair' }),

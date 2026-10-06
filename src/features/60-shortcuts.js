@@ -46,7 +46,7 @@
   registerFeature({
     id: 'shortcuts', label: 'Shortcut editor',
     groups: [{
-      drawer: 'keys', title: 'Keys',
+      drawer: 'keys', title: 'Keys', about: "Click a key to change it. Escape always closes what is open.",
       build: () => [
         h('div', { id: 'kbList', class: 'kblist' }),
         h('button', { class: 'btn ghost', text: 'Reset all to the defaults', onclick: resetAll })

@@ -37,7 +37,7 @@
   registerFeature({
     id: 'pages', label: 'Gallery page keys',
     groups: [{
-      drawer: 'gallery', title: 'Pages', pages: ['gallery'],
+      drawer: 'gallery', title: 'Pages', about: "Move through the gallery pages from the keyboard.", pages: ['gallery'],
       build: () => [
         h('div', { class: 'btnrow' },
           h('button', { id: 'prevPage', class: 'btn ghost half', text: '◀ Previous' }),

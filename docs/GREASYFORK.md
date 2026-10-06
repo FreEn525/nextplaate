@@ -34,6 +34,8 @@ Elle est dans `src/meta/00-header.txt` (`@description`, et `@description:fr` pou
 ```markdown
 **NextPlaate** adds a panel to PlatesMania that makes posting photos and browsing faster. Twenty-two features, each with a switch in Settings (except Settings itself). Made by [NextEnzzo](https://platesmania.com/user121559).
 
+The bar follows the order of use: Check a plate, Send photos, Describe a pair, Browse. Settings tells what each feature does and where it works: the plate check covers all 96 countries and 829 plate categories (795 checked exactly on real plates), the series counter 84 countries, the official register the Netherlands and Israel; the rest works everywhere.
+
 ## Posting photos
 1. **Photo pair selection** (`S`) - pick the front and the rear photo of a vehicle from a gallery.
 2. **Location and hashtags** - write your place and hashtags once; they head every description.

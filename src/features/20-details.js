@@ -4,7 +4,7 @@
   registerFeature({
     id: 'details', label: 'Location and hashtags',
     groups: [{
-      drawer: 'pair', title: 'Details',
+      drawer: 'pair', title: 'Details', about: "Step 2. Your place and hashtags: written at the top of every description.",
       build: () => [
         h('div', { class: 'field' }, h('label', { for: 'place', text: 'Location' }),
           h('input', { type: 'text', id: 'place', autocomplete: 'off' })),

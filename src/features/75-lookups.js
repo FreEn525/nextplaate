@@ -43,7 +43,7 @@
   registerFeature({
     id: 'lookup', label: 'Plate lookup links',
     groups: [{
-      drawer: 'search', title: 'Look up the plate', pages: ['add'],
+      drawer: 'search', title: 'Look up the plate', about: "Links to public lookup sites for the plate you typed. Nothing is sent before you click.", pages: ['add'],
       build: () => [h('div', { id: 'lookupBox' })]
     }, {
       drawer: 'settings', title: 'Lookup sites',

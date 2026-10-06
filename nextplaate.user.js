@@ -2,7 +2,7 @@
 // @name         NextPlaate
 // @namespace    nextplaate
 // @icon         data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20201.1%20201.7%22%3E%3Cstyle%3E.a%7Bfill:%233781c5%7D.b%7Bfill:%23529bde%7D.c%7Bfill:%2382c3ff%7D.w%7Bfill:%23fff%7D%3C/style%3E%3Cg%20transform=%22translate%28-551%20-180.5%29%22%3E%3Ccircle%20cx=%22651.5%22%20cy=%22281.4%22%20r=%2296%22%20class=%22w%22/%3E%3Cpath%20d=%22M650.7%20188.5a101%20101%200%200%200-20.4%202.2%2086%2086%200%200%200-23.5%209%2089%2089%200%200%200-34.8%2033.8%2088%2088%200%200%200-9.6%2023%20100%20100%200%200%200-3.3%2026.8%2091%2091%200%200%200%207.2%2033.4l2.3-1.8a71%2071%200%200%201%2016.2-8.7%2070%2070%200%200%201%2012.3-3.6v-52l.9-2a12%2012%200%200%201%202.8-4%2012%2012%200%200%201%204-2.4%209%209%200%200%201%203.9-.6q.4%200%20.7-.2l.4-.4.5-.8q.4-.8%201-1.5l2.2-2.2%202-1%201.4-.2q1.5-.3%204-.3a156%20156%200%200%201%2015%20.5l1.2.5%202.3%201.7a9%209%200%200%201%201.7%202.4l.8%201.4h13v-4.7l.3-1.8q0-1.5.3-2.8l.2-1%20.8-3.5v-.4l1.3-4%201.6-4.3%201.8-4%202-3.9%202-3.6.6-.9%203.5-5.4.7-.9%202.8-4%202.6-3%20.9-1-4-1.3a91%2091%200%200%200-14-2.3z%22%20class=%22a%22/%3E%3Cpath%20d=%22m676.3%20192.2-.9%201-2.5%203.2q-1.4%201.6-3%204l-.6.8-3.5%205.4-.6.9a101%20101%200%200%200-7.4%2015.8l-1.2%204-.1.4-.8%203.4-.2%201.1-.3%202.7-.3%202v4.6H690l3.8.3q1%200%201.7.4.9.3%201.8%201t1.7%201.4a15%2015%200%200%201%202.7%203.6l1%202v35l-.4%2035.3-.4%201.6a13%2013%200%200%201-2.4%203.4q-.7.8-1.5%201.3-.7.6-1.8%201L694%20329h-11.2l.6%201.4a246%20246%200%200%200%2011.4%2020.7%2065%2065%200%200%200%207%208.4%2077%2077%200%200%200%2017.3-14.9%2098%2098%200%200%200%2016.5-25%2090%2090%200%200%200%206.8-21.9%20114%20114%200%200%200%201.2-9.5%20131%20131%200%200%200-.5-19.2%20121%20121%200%200%200-6.7-24.3l-1-2-.6-.2h-2.1l-.2%204.6a34%2034%200%200%201-.6%205.4l-1.2%202.5a13%2013%200%200%201-4%203.9%2012%2012%200%200%201-6.3%201.7%2012%2012%200%200%201-9.4-5%209%209%200%200%201-1.9-4.7l-.3-3.7-.2-5-4.7-.2-4.3-.3q-.7%200-1.3-.4L696%20240a12%2012%200%200%201-3-3.2%2011%2011%200%200%201-1.5-4.1%2015%2015%200%200%201%20.5-7l1.2-2.2a15%2015%200%200%201%205.2-4.3l1.1-.5%202.7-.5q1.5-.2%203.4-.2h3.4v-8.6l-1.8-1.6a50%2050%200%200%200-9-6.1%2093%2093%200%200%200-18.4-8.4z%22%20class=%22c%22/%3E%3Cpath%20d=%22M701.8%20359.5a26%2026%200%200%201-3.3-3.5%2064%2064%200%200%201-7.3-10.9%20179%20179%200%200%201-7.6-14.7l-.7-1.4h-63.2c-8%200-13.2-.1-13.5-.2l-1.3-.4-1.2-.6-1.2-.7-1.1-.8-1-1a14%2014%200%200%201-2.4-3.4l-1-2v-17.4a59%2059%200%200%200-12.2%203.6%2078%2078%200%200%200-16.2%208.8l-2.3%201.7a92%2092%200%200%200%2031.3%2039.8%2095%2095%200%200%200%2053.3%2018.3l7-.4a88%2088%200%200%200%2029.2-7%2088%2088%200%200%200%2014.7-7.8%22%20class=%22b%22/%3E%3Cpath%20d=%22M720.3%20202.8a8%208%200%200%201%205%201.4%207%207%200%200%201%203%205.3v12.8h6.5l7.3.5%202%20.8.8.7%201.7%202.1a8%208%200%200%201%201%202.9v1.5a8%208%200%200%201-1.4%204.2l-1%201.2q-.8.8-1.6%201.2l-1.9.7q-1%20.3-2.7.3l-4.3.1h-6.3v6.1l-.5%207.2-.6%201.2a8%208%200%200%201-2.2%202.2l-1.3.8a7%207%200%200%201-7-.4%208%208%200%200%201-3.8-5.8V238h-6l-6.7-.4-1.7-.7-1.4-1.3-1-1.2a6%206%200%200%201-1-2.7V229a8%208%200%200%201%201.3-3.4%209%209%200%200%201%202.5-2.4l1-.5%202.5-.3%204.5-.1h6v-6.7l.4-7.4.8-1.9a8%208%200%200%201%204.4-3.2zm-68.5%2073.3a21%2021%200%200%200-4.4.6%2012%2012%200%200%200-3.5%202%2014%2014%200%200%200-4.5%206.6v1.1l.8%201.2.5.3.5.1h.4q.3%200%20.5-.3.3%200%20.5-.4l.9-1.3a10%2010%200%200%201%201.6-2.5%209%209%200%200%201%205-2.6%2011%2011%200%200%201%203.2-.1h1.8q.3%200%20.5-.3.2%200%20.4-.5l.5-.9.1-.7q0-.4-.3-.8l-.7-.7-1.4-.6z%22%20class=%22a%22/%3E%3Cpath%20d=%22M649.2%20255.6a27%2027%200%200%200-11.7%203%2032%2032%200%200%200-8.2%206%2032%2032%200%200%200-6%209%2029%2029%200%200%200-1.7%204.9l-.4%203a42%2042%200%200%200%20.4%2010%2025%2025%200%200%200%202.6%206.7%2034%2034%200%200%200%207.4%209.4%2031%2031%200%200%200%2012%206%2028%2028%200%200%200%2013.3-.1%2024%2024%200%200%200%207-3%2031%2031%200%200%200%2012.3-13.7%2030%2030%200%200%200-1.9-27.5%2029%2029%200%200%200-11.2-10.5%2028%2028%200%200%200-13.8-3.2zm1.5%209.4a19%2019%200%200%201%2012.6%205.3%2020%2020%200%200%201%205.7%209.8%2019%2019%200%200%201-2.2%2014.8%2021%2021%200%200%201-12%209.3l-1.6.2a54%2054%200%200%201-8.1-.2%2013%2013%200%200%201-3.6-1.4%2023%2023%200%200%201-9-8.4%2020%2020%200%200%201-1.5-15.1%2020%2020%200%200%201%204.8-8.2%2021%2021%200%200%201%208.1-5.2%2019%2019%200%200%201%206.8-1m28.9-10.2h13.9v9.1h-13.9z%22%20class=%22a%22/%3E%3Cpath%20d=%22M649.9%20180.5a173%20173%200%200%200-12.5.7%20113%20113%200%200%200-27.2%207.5%2097%2097%200%200%200-26.7%2017.5%20165%20165%200%200%200-11%2012%20103%20103%200%200%200-15.8%2029.2%20107%20107%200%200%200-5.4%2025%20128%20128%200%200%200%201%2025%20109%20109%200%200%200%208.4%2027%2099%2099%200%200%200%2035.7%2041%20106%20106%200%200%200%2035.1%2014.9%2096%2096%200%200%200%2031.7%201.4%2097%2097%200%200%200%2044.8-17%20104%20104%200%200%200%2027.8-28.6%20100%20100%200%200%200%2016.3-56.2%20106%20106%200%200%200-3.5-24.8l-2.5-7.8-2-5.3-1.2.2-1.6.3-.9.1-.2.3v.4l.3%201.5%201%202.6a98%2098%200%200%201%201.9%2062%20102%20102%200%200%201-23.6%2039.8%20103%20103%200%200%201-33.3%2022%2097%2097%200%200%201-28.5%206.5%20127%20127%200%200%201-21.8-1%2092%2092%200%200%201-29.9-10.5%20101%20101%200%200%201-30.3-25.6%2097%2097%200%200%201-5.9-111.1%2096%2096%200%200%201%2028-29%2091%2091%200%200%201%2029.4-12.8%20119%20119%200%200%201%2012.9-2.2%20151%20151%200%200%201%2020.3-.1%20110%20110%200%200%201%2023.6%205.6%2091%2091%200%200%201%2021%2011.1l4.6%203.1%201.2-1.6.8-1.5v-.4l-.4-.5q-.5-.6-2.2-1.7a125%20125%200%200%200-20.5-11.6%20102%20102%200%200%200-39-7.4z%22%20class=%22a%22/%3E%3Cpath%20d=%22m720.8%20199.7-2.7.3a12%2012%200%200%200-5.9%203.1l-1.7%202.2a12%2012%200%200%200-1.6%203.8l-.3%204.2-.2%204.6h4.5v-2.2l.4-7.2.6-1.2a8%208%200%200%201%202.2-2.1l1.3-.8a8%208%200%200%201%203-.7%207%207%200%200%201%202.8.5%208%208%200%200%201%202.5%201.5l1%201.1a8%208%200%200%201%201.5%203.8l.1%205.5v6.2h6l6.6.4%201.7.7%201.4%201.3%201%201.3a6%206%200%200%201%201%202.6v2.8a8%208%200%200%201-1.3%203.4%208%208%200%200%201-3.4%203l-2.6.2-4.5.1h-5.9v4.4h7.4a29%2029%200%200%200%206-.7l2.3-1.1a15%2015%200%200%200%205.3-6l.6-2.4a16%2016%200%200%200-1-7.4l-1.4-2.4a10%2010%200%200%200-2.2-2l-2.5-1.4-1.3-.4-1.7-.2-2.6-.2-4.7-.2-.2-5-.6-5-.9-2.4-.7-1a15%2015%200%200%200-4.2-3.6%2011%2011%200%200%200-3.9-1.3zm10.7%2050.2.8%201.2v-1.2z%22%20class=%22w%22/%3E%3C/g%3E%3C/svg%3E
-// @version      5.9.1
+// @version      5.10
 // @author       NextEnzzo (https://platesmania.com/user121559)
 // @copyright    2026, NextEnzzo
 // @license      MIT
@@ -262,12 +262,17 @@
   /* =====================================================================
    *  CODE GENERATION
    * ===================================================================== */
+  // The two first lines of every description: your hashtags (links to the site's search), then your place
+  function detailsHead() {
+    const tags = $('tag').value.split(',').map(t => t.trim().replace(/^#/, '')).filter(Boolean);
+    const head = tags.length ? tags.map(t => `<a href="/gallery.php?dop=${t}">#${t}</a>`).join(' ') + ' \n' : '';
+    return `${head}${$('place').value.trim()}`;
+  }
+
   function block(title, o, alt) {
     const link = `https://platesmania.com/${o.lang}/nomer${o.id}`;
     const img = `https://${o.srv}.platesmania.com/${o.folder}/m/${o.id}.jpg`;
-    const tags = $('tag').value.split(',').map(t => t.trim().replace(/^#/, '')).filter(Boolean);
-    const head = tags.length ? tags.map(t => `<a href="/gallery.php?dop=${t}">#${t}</a>`).join(' ') + ' \n' : '';
-    return `${head}${$('place').value.trim()}
+    return `${detailsHead()}
 
 <font color="#b8860b">━━━━━━ ◆ ━━━━━━</font>
 <font color="#7a1f1f"><b>${title}</b></font>
@@ -378,6 +383,34 @@
   ];
   const cName = code => { const c = COUNTRIES.find(x => x.code === code); return c ? c.name : String(code).toUpperCase(); };
   const uid = () => (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : Date.now() + '-' + Math.random().toString(36).slice(2);
+  /* =====================================================================
+   *  FEATURE INFO  (what each feature is for, and where it works: shown in Settings, one place to read and to keep true)
+   *    about: one plain sentence, for someone who has never seen the script. scope: the countries or pages it works for.
+   *    A feature with a switch in Settings must have an entry here (a test checks it).
+   * ===================================================================== */
+  const FEATURE_INFO = {
+    selection: { about: 'Pick the front photo and the rear photo of the same vehicle in a gallery. Step 1 of describing a pair.', scope: 'every gallery' },
+    details: { about: 'Your place and hashtags, written once. They head every description the script writes.', scope: 'everywhere' },
+    description: { about: 'Writes the description of a photo on its edit page: your details, then the other side of the pair as a link and a thumbnail. Without a pair it writes your details only.', scope: 'every country' },
+    likes: { about: 'Likes a gallery page, or several pages in a row, with a pause between likes.', scope: 'every gallery' },
+    pages: { about: 'Previous and next gallery page from the keyboard.', scope: 'every gallery' },
+    plate: { about: 'As you type a plate on the upload page: how many photos of it are already on the site, the vehicle of those photos, and your photos of its series.', scope: 'all 96 countries and 829 plate categories (795 checked exactly on real plates)' },
+    shortcuts: { about: 'Change any key of the script. Safe for AZERTY keyboards.', scope: 'everywhere' },
+    lens: { about: 'Searches the photo you chose on Google Lens by itself and suggests brand, model and generation; a click fills the menus.', scope: 'every country' },
+    flags: { about: 'A flag and a name for every country, each a link to its upload page. Pick which ones the side bar shows.', scope: 'every country' },
+    preview: { about: 'Presses the site’s Generate preview button for you when you stop typing the plate.', scope: 'every country' },
+    tags: { about: 'Replaces the closed Add tags box (and the pop-up on a photo) with buttons by group, search, your most used tags and the ones of your last upload.', scope: 'every country' },
+    extra: { about: 'A tall card for the extra information, with your saved place and the date of the photo one click away.', scope: 'every country' },
+    members: { about: 'The members you visit often, with picture and name, one click to their page.', scope: 'everywhere' },
+    floatupload: { about: 'The Upload button follows you at the bottom of the page while the site’s own button is out of view.', scope: 'every upload page' },
+    lookup: { about: 'For the plate you type: links to public lookup sites (open or free image searches, plus official sites by country). Nothing is sent before you click.', scope: 'every country, with their own sites for 14' },
+    profile: { about: 'On a member’s profile: the real total of the gallery and today’s uploads, next to the figure the site only updates from time to time.', scope: 'every member' },
+    mine: { about: 'Under the vehicle menus: how many photos of that brand, model and generation you already have.', scope: 'every country' },
+    regions: { about: 'On a member’s profile: which regions of a country the member has a photo from, and which are missing.', scope: 'every country the site has regions for' },
+    series: { about: 'How many of your photos are in the series of the plate you type (HF-137-QQ is in HF-*-QQ); on a series page, the numbers already on the site.', scope: '84 countries (checked on the real site)' },
+    registry: { about: 'A button asks the country’s open register for make, model, year and colour. The plate is sent only when you click.', scope: 'Netherlands and Israel' },
+    upload: { about: 'Queue many photos (or a folder), give each a country and a plate category, and send them one tab per photo with a pause between.', scope: 'every country' }
+  };
   /* =====================================================================
    *  SITE REQUESTS  (every request to PlatesMania goes through here)
    *    One request at a time, with a pause between two of them. If the site answers with a Cloudflare
@@ -1099,6 +1132,18 @@
   const AUTHOR = { name: 'NextEnzzo', profile: 'https://platesmania.com/user121559' };
 
   const WHATS_NEW = [{
+    version: '5.10',
+    title: 'The panel in the order of use, and every feature explained',
+    sections: [{
+      title: 'The panel',
+      items: [
+        { title: 'In the order you use it', text: 'The bar now reads Check a plate, Send photos, Describe a pair, Browse. Each box says in one sentence what it is for.' },
+        { title: 'Describing a pair, in four steps', text: 'Choose the front and the rear photo, set your place and hashtags, fill the description on the edit page, and let the automation do the clicks if you want. The steps are numbered.' },
+        { title: 'Settings explains everything', text: 'Each feature has its sentence and where it works (every country, 84 countries, Netherlands and Israel...), so you know what to expect.' },
+        { title: 'Description without a pair', text: 'On an edit page, Fill description now writes your place and hashtags even if no pair is chosen. It never writes over a text that is already there.' }
+      ]
+    }]
+  }, {
     version: '5.9',
     title: 'Plate check does more, and the profiles are smarter',
     sections: [{
@@ -1342,6 +1387,12 @@
     .lens-none{font-size:13px;color:var(--mute)}
     .chk{display:flex;align-items:center;flex-wrap:wrap;gap:2px 8px;min-width:0;font-size:13px;cursor:pointer}   /* a long label wraps instead of widening the drawer */
     .chk span{min-width:0;overflow-wrap:anywhere}
+    .chk.fx{align-items:flex-start}
+    .chk.fx input{margin-top:2px}
+    .ftext{display:flex;flex-direction:column;gap:2px;flex:1}
+    .fabout{font-size:12px;font-weight:400;color:var(--mute);line-height:1.4}
+    .fscope{font-size:11px;color:var(--primary-h)}
+    .gabout{margin:0 0 8px;font-size:12px;color:var(--mute);line-height:1.4}
     .chk input{width:16px;height:16px;margin:0;flex:none}
     .slots{display:flex;flex-direction:column;gap:8px}
     .slot{display:flex;align-items:center;gap:8px;min-height:52px;padding:6px 8px;border:1px solid var(--line);border-radius:var(--r);background:var(--paper)}
@@ -1384,10 +1435,11 @@
    * ===================================================================== */
   // The drawers, in bar order. A feature joins one of them with groups: [{ drawer: 'pair', title, build }].
   const DRAWERS = [
-    { id: 'pair', icon: 'photos', title: 'Photo pair', keys: 'S · F' },
-    { id: 'gallery', icon: 'gallery', title: 'Gallery', keys: 'L · ◀ ▶' },
-    { id: 'search', icon: 'search', title: 'Search', keys: '' },        // the plate check and Google Lens, one tab
-    { id: 'upload', icon: 'upload', title: 'Batch upload', keys: 'U · N' },
+    // In the order of use: check what you are about to send, send it, describe the pair, browse. The ids stay (keys, tests, memory).
+    { id: 'search', icon: 'search', title: 'Check a plate', keys: '' },       // the plate check, Google Lens and the lookups
+    { id: 'upload', icon: 'upload', title: 'Send photos', keys: 'U · N' },     // a photo in a country, the batch upload
+    { id: 'pair', icon: 'photos', title: 'Describe a pair', keys: 'S · F' },   // front and rear photo, details, description, automation
+    { id: 'gallery', icon: 'gallery', title: 'Browse', keys: 'L · ◀ ▶' },      // likes, pages, members
     { id: 'keys', icon: 'keyboard', title: 'Shortcuts', keys: 'Esc' },
     { id: 'settings', icon: 'settings', title: 'Settings', keys: '' },
     { id: 'dev', icon: 'wrench', title: 'Developer', keys: '' }        // shown only when the dev tools are built in
@@ -1430,7 +1482,7 @@
       $('rail').append(btn);
       $('dbody').append(h('section', { class: 'dsec', 'data-drawer': d.id, hidden: true },
         byDrawer[d.id].map(g => h('div', { class: 'group' },
-          h('div', { class: 'gbody' }, pageNote(g), g.build()),
+          h('div', { class: 'gbody' }, g.about ? h('p', { class: 'gabout', text: g.about }) : null, pageNote(g), g.build()),
           h('div', { class: 'gtitle', text: g.title })))));
     });
     $('dclose').onclick = () => closeDrawer();
@@ -1652,7 +1704,7 @@
   registerFeature({
     id: 'selection', label: 'Photo pair selection',
     groups: [{
-      drawer: 'pair', title: 'Selection',
+      drawer: 'pair', title: 'Selection', about: "Step 1. In a gallery, choose the front photo and the rear photo of the same vehicle. They are remembered until you reset the pair.",
       build: () => [
         h('button', { id: 'sel', class: 'btn ghost', text: 'Select photos (S)' }),
         h('button', { id: 'reset', class: 'btn ghost sm', text: 'Reset the pair' }),
@@ -1680,7 +1732,7 @@
   registerFeature({
     id: 'details', label: 'Location and hashtags',
     groups: [{
-      drawer: 'pair', title: 'Details',
+      drawer: 'pair', title: 'Details', about: "Step 2. Your place and hashtags: written at the top of every description.",
       build: () => [
         h('div', { class: 'field' }, h('label', { for: 'place', text: 'Location' }),
           h('input', { type: 'text', id: 'place', autocomplete: 'off' })),
@@ -1704,11 +1756,15 @@
 
   function fillDescription() {
     if (!here.edit) return;
+    const id = photoIdInput.value;
     if (!(state.front && state.rear)) {
-      setStatus('Select the front and rear photos first (press <b>S</b>), then come back to edit.');
+      // no pair chosen: the description is only your details (hashtags, then place), still worth writing, but never over a text that is there
+      if (descBox.value.trim()) { setStatus(`Photo <b>#${id}</b> already has a description: left as it is. Choose a front and a rear photo (<b>S</b>) to write the pair’s description.`); return; }
+      descBox.value = detailsHead();
+      descBox.dispatchEvent(new Event('input', { bubbles: true }));
+      setStatus(`Description filled for <b>#${id}</b> with your details only. Choose a front and a rear photo (<b>S</b>) to add the other side.`);
       return;
     }
-    const id = photoIdInput.value;
     // The plate shown in the page title (e.g. "MZ MZ 78") is used for the image alt text
     const h = document.querySelector('.headline h2');
     const plate = h ? h.textContent.replace(/['"<>]/g, '').trim() : '';
@@ -1786,14 +1842,14 @@
     id: 'description', label: 'Descriptions and auto-fill', requires: ['details'],
     groups: [
       {
-        drawer: 'pair', title: 'Description', pages: ['edit'],
+        drawer: 'pair', title: 'Description', about: "Step 3. On a photo’s edit page: writes the description (your details, then the other side of the pair as a link and a thumbnail). With no pair chosen it writes your details only.", pages: ['edit'],
         build: () => [
           h('button', { id: 'fillBtn', class: 'btn ghost', disabled: true, text: 'Fill description (F)' }),
           h('button', { id: 'backGallery', class: 'btn ghost', text: 'Back to my gallery', title: 'Go back to the last gallery you visited' })
         ]
       },
       {
-        drawer: 'pair', title: 'Automation',
+        drawer: 'pair', title: 'Automation', about: "Step 4, optional. Let the script do the clicks: open the edit page, fill it, save, and go back to your gallery.",
         build: () => [
           h('label', { class: 'chk' }, h('input', { type: 'checkbox', id: 'autoEdit' }), 'Auto-click “edit” on my photos'),
           h('label', { class: 'chk' }, h('input', { type: 'checkbox', id: 'autoFill' }), 'Auto-fill on the edit page'),
@@ -1949,7 +2005,7 @@
   registerFeature({
     id: 'likes', label: 'Likes',
     groups: [{
-      drawer: 'gallery', title: 'Likes', pages: ['gallery'],
+      drawer: 'gallery', title: 'Likes', about: "Like this page, or several pages in a row, with a pause between likes.", pages: ['gallery'],
       build: () => [
         h('button', { id: 'likeAll', class: 'btn ghost', disabled: true, text: 'Like this page' }),
         h('div', { class: 'row' }, h('label', { for: 'pages', text: 'Pages to like' }), h('input', { type: 'number', id: 'pages', min: 1, step: 1 })),
@@ -2018,7 +2074,7 @@
   registerFeature({
     id: 'pages', label: 'Gallery page keys',
     groups: [{
-      drawer: 'gallery', title: 'Pages', pages: ['gallery'],
+      drawer: 'gallery', title: 'Pages', about: "Move through the gallery pages from the keyboard.", pages: ['gallery'],
       build: () => [
         h('div', { class: 'btnrow' },
           h('button', { id: 'prevPage', class: 'btn ghost half', text: '◀ Previous' }),
@@ -2184,7 +2240,7 @@
   registerFeature({
     id: 'plate', label: 'Plate check',
     groups: [{
-      drawer: 'search', title: 'Plate check', pages: ['add'],
+      drawer: 'search', title: 'Plate check', about: "Type a plate on the upload page: how many photos of it are already on the site.", pages: ['add'],
       build: () => [
         h('div', { class: 'row' }, h('span', { class: 'lbl', text: 'Plate' }), h('b', { id: 'plateNow', text: '—' })),
         h('p', { id: 'plateResult', class: 'presult', text: 'Type the plate in the form to check it.' }),
@@ -2262,7 +2318,7 @@
   registerFeature({
     id: 'shortcuts', label: 'Shortcut editor',
     groups: [{
-      drawer: 'keys', title: 'Keys',
+      drawer: 'keys', title: 'Keys', about: "Click a key to change it. Escape always closes what is open.",
       build: () => [
         h('div', { id: 'kbList', class: 'kblist' }),
         h('button', { class: 'btn ghost', text: 'Reset all to the defaults', onclick: resetAll })
@@ -2368,7 +2424,7 @@
   registerFeature({
     id: 'lens', label: 'Google Lens',
     groups: [{
-      drawer: 'search', title: 'Google Lens', pages: ['add', 'edit', 'gallery'],
+      drawer: 'search', title: 'Google Lens', about: "Search the photo you chose on Google Lens to fill brand, model and generation.", pages: ['add', 'edit', 'gallery'],
       build: () => [
         h('button', { id: 'lensSearch', class: 'btn', text: 'Search this photo on Google Lens' }),
         h('label', { class: 'chk' }, h('input', { type: 'checkbox', id: 'lensAuto' }), 'Search each new photo by itself'),
@@ -2610,7 +2666,7 @@
   registerFeature({
     id: 'flags', label: 'Country flags',
     groups: [{
-      drawer: 'upload', title: 'Add a photo in a country',
+      drawer: 'upload', title: 'Add a photo in a country', about: "Choose the country of the photo you are about to send.",
       build: () => [h('p', { class: 'presult', text: 'Click a country to open its upload page.' }), flagBlock(null)]
     }, {
       drawer: 'settings', title: 'Country flags: the side bar',
@@ -2691,7 +2747,11 @@
       box.disabled = !!blocked;
       box.onchange = () => { settings.set(d.id, box.checked ? '1' : '0'); $('setApply').hidden = false; renderSettings(); };
       const note = blocked ? ' (off: it needs ' + needs.join(', ') + ')' : needs.length ? ' (needs ' + needs.join(', ') + ')' : '';
-      return h('label', { class: 'chk' + (blocked ? ' dim' : '') }, box, d.label + note);
+      const info = (f && FEATURE_INFO[f.id]) || {};
+      return h('label', { class: 'chk fx' + (blocked ? ' dim' : '') }, box,
+        h('span', { class: 'ftext' }, h('b', { text: d.label + note }),
+          info.about ? h('span', { class: 'fabout', text: info.about }) : null,
+          info.scope ? h('span', { class: 'fscope', text: 'Works for: ' + info.scope }) : null));
     });
     $('setList').replaceChildren(...rows);
   }
@@ -2699,7 +2759,7 @@
   registerFeature({
     id: 'settings', locked: true,
     groups: [{
-      drawer: 'settings', title: 'Features',
+      drawer: 'settings', title: 'Features', about: "Every feature, what it does and where it works. Switch off what you do not use.",
       build: () => [
         h('p', { class: 'presult', text: 'Switch a feature off to remove its controls and keys. The page reloads to apply the change.' }),
         h('div', { id: 'setList', class: 'chklist' }),
@@ -3221,7 +3281,7 @@
   registerFeature({
     id: 'members', label: 'Member shortcuts',
     groups: [{
-      drawer: 'gallery', title: 'Member shortcuts',
+      drawer: 'gallery', title: 'Member shortcuts', about: "The members you visit often: one click to their page.",
       build: () => [h('div', { id: 'membersPanel', class: 'members-panel' }, membersView('panel'))]
     }],
     init: () => {
@@ -3316,7 +3376,7 @@
   registerFeature({
     id: 'lookup', label: 'Plate lookup links',
     groups: [{
-      drawer: 'search', title: 'Look up the plate', pages: ['add'],
+      drawer: 'search', title: 'Look up the plate', about: "Links to public lookup sites for the plate you typed. Nothing is sent before you click.", pages: ['add'],
       build: () => [h('div', { id: 'lookupBox' })]
     }, {
       drawer: 'settings', title: 'Lookup sites',
@@ -3691,18 +3751,30 @@
    *    just been chosen; not after a fix such as 5.9 -> 5.9.1),
    *    and any time from the button in Settings. It reads WHATS_NEW (src/lib/whatsnew.js).
    * ===================================================================== */
-  const SCRIPT_VERSION = "5.9.1";
+  const SCRIPT_VERSION = "5.10";
 
-  function whatsNewBody(entry) {
-    return h('div', { class: 'cardbox' }, h('p', { class: 'hint', text: entry.title }), entry.sections.map(s =>
-      h('div', { class: 'wn-section' }, h('div', { class: 'cat', text: s.title }),
-        s.items.map(i => h('p', { class: 'wn-item' }, h('b', { text: i.title + ': ' }), h('span', { text: i.text }))))));
+  // One block per version: its title, then its sections. Several versions are stacked, the newest first.
+  function whatsNewBody(entries) {
+    return h('div', { class: 'cardbox' }, entries.map(entry => h('div', null,
+      h('p', { class: 'hint', text: (entries.length > 1 ? entry.version + ' · ' : '') + entry.title }),
+      entry.sections.map(s => h('div', { class: 'wn-section' }, h('div', { class: 'cat', text: s.title }),
+        s.items.map(i => h('p', { class: 'wn-item' }, h('b', { text: i.title + ': ' }), h('span', { text: i.text }))))))));
   }
 
-  function whatsNewOpen() {
-    const entry = WHATS_NEW[0];
-    if (!entry) return;
-    const modal = modalOpen({ id: 'pmg-whatsnew', title: `What’s new in ${entry.version}`, body: whatsNewBody(entry),
+  // "5.9.1" -> [5, 9]: a fix does not count as news
+  const minorOf = v => String(v).split('.').slice(0, 2).map(n => +n || 0);
+  const newerMinor = (a, b) => a[0] > b[0] || (a[0] === b[0] && a[1] > b[1]);
+
+  // The entries newer than the version last seen (the newest alone when there is none)
+  function whatsNewSince(seen) {
+    if (!seen) return WHATS_NEW.slice(0, 1);
+    return WHATS_NEW.filter(e => newerMinor(minorOf(e.version), minorOf(seen)));
+  }
+
+  function whatsNewOpen(seen) {
+    const entries = whatsNewSince(seen);
+    if (!entries.length) return;
+    const modal = modalOpen({ id: 'pmg-whatsnew', title: `What’s new in ${entries[0].version}`, body: whatsNewBody(entries),
       actions: [{ label: 'Got it', run: () => modal.close() }] });
     modal.message(`NextPlaate by ${AUTHOR.name}`);
   }
@@ -3713,9 +3785,8 @@
     const seen = store.get('seen_version', '');
     if (seen === SCRIPT_VERSION) return;
     store.set('seen_version', SCRIPT_VERSION);
-    // only a new minor version (5.9 -> 5.10) opens the window: a fix (5.9 -> 5.9.1) is silent
-    const minor = v => String(v).split('.').slice(0, 2).join('.');
-    if (seen && minor(seen) !== minor(SCRIPT_VERSION) && WHATS_NEW[0] && WHATS_NEW[0].version === minor(SCRIPT_VERSION)) whatsNewOpen();
+    // only a newer minor version (5.9 -> 5.10) opens the window, with everything since the version last seen: a fix (5.9 -> 5.9.1) is silent
+    if (seen && newerMinor(minorOf(SCRIPT_VERSION), minorOf(seen))) whatsNewOpen(seen);
   }
 
   registerFeature({
@@ -3726,7 +3797,7 @@
         h('button', { id: 'aboutNew', type: 'button', class: 'btn ghost', text: 'What’s new' })
       ]
     }],
-    init: () => { $('aboutNew').onclick = whatsNewOpen; whatsNewOnUpdate(); }
+    init: () => { $('aboutNew').onclick = () => whatsNewOpen(''); whatsNewOnUpdate(); }
   });
   /* =====================================================================
    *  BATCH UPLOAD
@@ -4502,7 +4573,7 @@
   registerFeature({
     id: 'upload', label: 'Batch upload',
     groups: [{
-      drawer: 'upload', title: 'Batch upload',
+      drawer: 'upload', title: 'Batch upload', about: "Send many photos at once: each gets a country and a category, then one tab per photo opens with a pause between.",
       build: () => [
         h('div', { id: 'qInfo', class: 'qinfo', text: 'No photos queued yet.' }),
         h('button', { id: 'qOpen', class: 'btn ghost', text: 'Choose photos & countries (U)' }),
@@ -4539,7 +4610,7 @@
   console.log('%c NextPlaate %c v' + SCRIPT_VERSION + ' by ' + AUTHOR.name + ' ', 'background:' + SITE_BLUE + ';color:#fff;font:bold 14px monospace;padding:2px 6px;border-radius:0', 'color:' + SITE_BLUE + ';font:12px monospace');
 mountApp();
   const describing = featureOn('description');
-  if (here.edit) { if (describing && $('autoFill').checked) fillDescription(); }
+  if (here.edit) { if (describing && $('autoFill').checked && state.front && state.rear) fillDescription(); }   // by itself only for a chosen pair
   else if (!(describing && backToGallery())) { if (describing) autoEdit(); if (featureOn('likes')) resumeLikeRun(); }
   if (featureOn('upload')) batchOnLoad().catch(() => {});
 })();

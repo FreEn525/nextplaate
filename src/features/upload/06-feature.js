@@ -18,7 +18,7 @@
   registerFeature({
     id: 'upload', label: 'Batch upload',
     groups: [{
-      drawer: 'upload', title: 'Batch upload',
+      drawer: 'upload', title: 'Batch upload', about: "Send many photos at once: each gets a country and a category, then one tab per photo opens with a pause between.",
       build: () => [
         h('div', { id: 'qInfo', class: 'qinfo', text: 'No photos queued yet.' }),
         h('button', { id: 'qOpen', class: 'btn ghost', text: 'Choose photos & countries (U)' }),

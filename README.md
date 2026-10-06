@@ -6,6 +6,12 @@ Made by [NextEnzzo](https://platesmania.com/user121559). © 2026 NextEnzzo, MIT 
 
 After an update the script shows a *What's new* window once (also in Settings > About).
 
+## Where each feature works
+
+Settings lists every feature with what it does and where it works. The short version: the plate check works for **all 96 countries and 829 plate categories** (795 checked exactly on real plates); the series counter for 84 countries (checked on the real site); the official register only for the Netherlands and Israel (the only free, open registers found); lookup links for every country, with their own sites for 14. Everything else (Lens, tags, flags, batch upload, the profile cards...) works for every country and every member.
+
+The bar follows the order of use: **Check a plate**, **Send photos**, **Describe a pair**, **Browse**.
+
 ## Features, one by one
 
 Where a key is given, it can be changed in the Shortcuts drawer.

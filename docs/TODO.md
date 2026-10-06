@@ -1,6 +1,6 @@
 # PlatesMania - NextPlaate : todo
 
-État au 6 octobre 2026 (version 5.9). Le bilan est dans `ETAT-ET-PLAN.md`. Légende : **fait**, **en cours**, **à faire**, **info nécessaire** (il me faut une précision de ta part).
+État au 6 octobre 2026 (version 5.10). Le bilan est dans `ETAT-ET-PLAN.md`. Légende : **fait**, **en cours**, **à faire**, **info nécessaire** (il me faut une précision de ta part).
 
 ## Remarques de l'utilisateur (6 octobre 2026) : à traiter une par une
 
@@ -8,9 +8,9 @@ Notes prises pendant la collecte des séries. On les fait au fur et à mesure, d
 
 1. **Bug** : **fait** (version 5.9, `deepActive` dans `src/core/40-keys.js`, test dans `test_flags.py`). Dans la recherche d'un pays de « Add photo » avec les drapeaux, taper la lettre `U` ouvre le menu U (raccourci) au lieu d'écrire dans la recherche. Les touches ne doivent jamais se déclencher quand on écrit dans un champ.
 2. **Journal des changements et fenêtre à chaque mise à jour** : **fait** (version 5.9, `src/lib/whatsnew.js` + `src/features/90-about.js`, Settings > About, test `test_about.py`). Une fenêtre qui s'ouvre après une mise à jour du script, avec ce qui est nouveau et ce qu'on peut faire avec (le changelog de l'utilisateur, pas celui du dépôt).
-3. **Réorganiser les icônes et les fonctions** : **à faire**. Ranger de façon logique ; et surtout **expliquer ce que fait chaque fonction**, car aujourd'hui seul l'auteur comprend (exemple : la sélection d'une paire sert à écrire une description automatique entre la photo avant et la photo arrière ; la description marche aussi sans la sélection ; il y a des automatisations). Repenser la logique de présentation pour que tout le monde comprenne, quitte à changer le fonctionnement ou l'enchaînement des automatisations, tant que c'est plus clair.
+3. **Réorganiser les icônes et les fonctions** : **fait** (version 5.10 : barre dans l'ordre d'usage, une phrase par case, étapes numérotées pour décrire une paire, Settings explique chaque fonction et où elle marche, description sans paire ; `featureinfo.js`). Ranger de façon logique ; et surtout **expliquer ce que fait chaque fonction**, car aujourd'hui seul l'auteur comprend (exemple : la sélection d'une paire sert à écrire une description automatique entre la photo avant et la photo arrière ; la description marche aussi sans la sélection ; il y a des automatisations). Repenser la logique de présentation pour que tout le monde comprenne, quitte à changer le fonctionnement ou l'enchaînement des automatisations, tant que c'est plus clair.
 4. **Signature** : **fait dans le script** (Settings > About, en-tête `@author`/`@copyright`, bannière de la console) ; README et texte Greasy Fork aussi. Copyright « NextEnzzo » et lien vers le profil : https://platesmania.com/user121559 (dans le script, le panneau, le README et le texte Greasy Fork, sans mentionner le dépôt).
-5. **Dire clairement ce qui marche pour tous les pays** : **à faire**. Mettre en avant les fonctions complètes et valables pour tous les pays (la vérification de plaque : 96 pays, 829 catégories, probablement jamais fait ailleurs), et dire pour lesquelles ce n'est pas sûr.
+5. **Dire clairement ce qui marche pour tous les pays** : **fait** (Settings, README, texte Greasy Fork, tableau de `FONCTIONNALITES.md`). Mettre en avant les fonctions complètes et valables pour tous les pays (la vérification de plaque : 96 pays, 829 catégories, probablement jamais fait ailleurs), et dire pour lesquelles ce n'est pas sûr.
 6. **Page https://platesmania.com/add** : **à faire**. Refaire la boîte « Select a country » et y déplacer « Add flags » en plus grand, seulement sur cette page (plus propre, plus simple).
 7. **Fluidité** : **à faire**. Vérifier que tout est fluide, sans bug ni lag pour les utilisateurs (mesurer le coût du script au chargement et à l'usage).
 8. **UX et UI du menu U** : **à faire**. À revoir.

@@ -4,7 +4,7 @@ Au 6 octobre 2026. Le détail du chemin parcouru est dans `HISTORIQUE.md`.
 
 ## 1. Où on en est
 
-Au 6 octobre 2026, version **5.9.1** (5.9 plus un correctif de mise en page). La 5.7 était la version de la vérification de plaque ; la 5.8 a ajouté six fonctions et un style commun ; la 5.9 ajoute sept fonctions (bouton d'envoi flottant, liens de recherche, vos photos de ce véhicule, registre officiel NL et IL, compteur de série pour 84 pays, vrais uploads et régions du profil), le véhicule des photos déjà sur le site, Google says, la date de la photo, la fenêtre des nouveautés, la signature et le nouveau logo.
+Au 6 octobre 2026, version **5.10** (la 5.9 puis un correctif de mise en page, puis la réorganisation de la barre dans l'ordre d'usage avec une explication par fonction). La 5.7 était la version de la vérification de plaque ; la 5.8 a ajouté six fonctions et un style commun ; la 5.9 ajoute sept fonctions (bouton d'envoi flottant, liens de recherche, vos photos de ce véhicule, registre officiel NL et IL, compteur de série pour 84 pays, vrais uploads et régions du profil), le véhicule des photos déjà sur le site, Google says, la date de la photo, la fenêtre des nouveautés, la signature et le nouveau logo.
 
 **Les vingt-deux fonctions** (le tableau complet, avec leur réglage, leur emplacement et leur touche, est en tête de `FONCTIONNALITES.md`) : sélection d'une paire, lieu et hashtags, descriptions, envoi par lots, vérification de plaque, aperçu de plaque en direct, Google Lens, sélecteur de tags, information complémentaire, likes, touches de page, drapeaux des pays, raccourcis vers les membres, bouton d'envoi flottant, liens de recherche de plaque, vos photos de ce véhicule, registre officiel (NL, IL), compteur de série, vrais uploads du profil, régions du profil, éditeur de raccourcis, réglages. Chacune (sauf les réglages) a un interrupteur dans Settings.
 
@@ -19,7 +19,7 @@ Au 6 octobre 2026, version **5.9.1** (5.9 plus un correctif de mise en page). La
 
 Les cinq « pays » sans catégories (ae, au, ca, us, xx) ont un formulaire à menu de région : leur règle est `region-menu.js`.
 
-**Preuves** : `check_db` (2 376 plaques relues dans les pages sauvegardées), `check_known` (39 plaques tapées à la main sur le vrai site, 0 échec), et **328 tests Playwright sur le script public, 337 avec le build dev** (une quinzaine de fichiers dans `tests/e2e/` : un par fonction, plus le style et le responsive). La CI (`.github/workflows/tests.yml`) les lance à chaque push et refuse un changement du script public sans nouveau `@version`.
+**Preuves** : `check_db` (2 376 plaques relues dans les pages sauvegardées), `check_known` (39 plaques tapées à la main sur le vrai site, 0 échec), et **335 tests Playwright sur le script public, 344 avec le build dev** (une quinzaine de fichiers dans `tests/e2e/` : un par fonction, plus le style et le responsive). La CI (`.github/workflows/tests.yml`) les lance à chaque push et refuse un changement du script public sans nouveau `@version`.
 
 **Style** : un seul système (`STYLE.md`), les couleurs de PlatesMania, angles droits, une échelle de textes et de hauteurs ; des tests le vérifient (aucune couleur ni rayon hors des jetons, tailles mesurées dans le navigateur, aucun débordement de 320 à 1280 px).
 

@@ -13,7 +13,11 @@
       box.disabled = !!blocked;
       box.onchange = () => { settings.set(d.id, box.checked ? '1' : '0'); $('setApply').hidden = false; renderSettings(); };
       const note = blocked ? ' (off: it needs ' + needs.join(', ') + ')' : needs.length ? ' (needs ' + needs.join(', ') + ')' : '';
-      return h('label', { class: 'chk' + (blocked ? ' dim' : '') }, box, d.label + note);
+      const info = (f && FEATURE_INFO[f.id]) || {};
+      return h('label', { class: 'chk fx' + (blocked ? ' dim' : '') }, box,
+        h('span', { class: 'ftext' }, h('b', { text: d.label + note }),
+          info.about ? h('span', { class: 'fabout', text: info.about }) : null,
+          info.scope ? h('span', { class: 'fscope', text: 'Works for: ' + info.scope }) : null));
     });
     $('setList').replaceChildren(...rows);
   }
@@ -21,7 +25,7 @@
   registerFeature({
     id: 'settings', locked: true,
     groups: [{
-      drawer: 'settings', title: 'Features',
+      drawer: 'settings', title: 'Features', about: "Every feature, what it does and where it works. Switch off what you do not use.",
       build: () => [
         h('p', { class: 'presult', text: 'Switch a feature off to remove its controls and keys. The page reloads to apply the change.' }),
         h('div', { id: 'setList', class: 'chklist' }),

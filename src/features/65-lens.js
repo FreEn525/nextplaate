@@ -96,7 +96,7 @@
   registerFeature({
     id: 'lens', label: 'Google Lens',
     groups: [{
-      drawer: 'search', title: 'Google Lens', pages: ['add', 'edit', 'gallery'],
+      drawer: 'search', title: 'Google Lens', about: "Search the photo you chose on Google Lens to fill brand, model and generation.", pages: ['add', 'edit', 'gallery'],
       build: () => [
         h('button', { id: 'lensSearch', class: 'btn', text: 'Search this photo on Google Lens' }),
         h('label', { class: 'chk' }, h('input', { type: 'checkbox', id: 'lensAuto' }), 'Search each new photo by itself'),

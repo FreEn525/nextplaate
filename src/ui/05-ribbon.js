@@ -4,10 +4,11 @@
    * ===================================================================== */
   // The drawers, in bar order. A feature joins one of them with groups: [{ drawer: 'pair', title, build }].
   const DRAWERS = [
-    { id: 'pair', icon: 'photos', title: 'Photo pair', keys: 'S · F' },
-    { id: 'gallery', icon: 'gallery', title: 'Gallery', keys: 'L · ◀ ▶' },
-    { id: 'search', icon: 'search', title: 'Search', keys: '' },        // the plate check and Google Lens, one tab
-    { id: 'upload', icon: 'upload', title: 'Batch upload', keys: 'U · N' },
+    // In the order of use: check what you are about to send, send it, describe the pair, browse. The ids stay (keys, tests, memory).
+    { id: 'search', icon: 'search', title: 'Check a plate', keys: '' },       // the plate check, Google Lens and the lookups
+    { id: 'upload', icon: 'upload', title: 'Send photos', keys: 'U · N' },     // a photo in a country, the batch upload
+    { id: 'pair', icon: 'photos', title: 'Describe a pair', keys: 'S · F' },   // front and rear photo, details, description, automation
+    { id: 'gallery', icon: 'gallery', title: 'Browse', keys: 'L · ◀ ▶' },      // likes, pages, members
     { id: 'keys', icon: 'keyboard', title: 'Shortcuts', keys: 'Esc' },
     { id: 'settings', icon: 'settings', title: 'Settings', keys: '' },
     { id: 'dev', icon: 'wrench', title: 'Developer', keys: '' }        // shown only when the dev tools are built in
@@ -50,7 +51,7 @@
       $('rail').append(btn);
       $('dbody').append(h('section', { class: 'dsec', 'data-drawer': d.id, hidden: true },
         byDrawer[d.id].map(g => h('div', { class: 'group' },
-          h('div', { class: 'gbody' }, pageNote(g), g.build()),
+          h('div', { class: 'gbody' }, g.about ? h('p', { class: 'gabout', text: g.about }) : null, pageNote(g), g.build()),
           h('div', { class: 'gtitle', text: g.title })))));
     });
     $('dclose').onclick = () => closeDrawer();

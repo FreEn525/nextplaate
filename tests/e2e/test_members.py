@@ -166,7 +166,7 @@ def test_the_order_is_kept_for_the_next_visit(ctx):
 
 def test_the_panel_list_can_be_dragged_too(ctx):
     page = open_page(ctx, GALLERY, members=THREE)
-    page.evaluate(f"() => {{ [...{PANEL}.querySelectorAll('.rbtn')].find(b => /gallery/i.test(b.title || '')).click(); }}")      # open the drawer
+    page.evaluate(f"() => {{ {PANEL}.querySelector('.rbtn[data-drawer=\"gallery\"]').click(); }}")      # open the drawer
     page.wait_for_timeout(250)
     drag(page, "103", "101", "top", root="#pmg-host")
     assert [m["id"] for m in stored(page)] == ["103", "101", "102"]
@@ -384,7 +384,7 @@ def test_with_the_feature_off_the_picture_is_not_in_the_bar(ctx):
 # ---------------------------------------------------------------- sizes and spaces
 
 def open_gallery_drawer(page):
-    page.evaluate(f"() => {{ [...{PANEL}.querySelectorAll('.rbtn')].find(b => /gallery/i.test(b.title || '')).click(); }}")
+    page.evaluate(f"() => {{ {PANEL}.querySelector('.rbtn[data-drawer=\"gallery\"]').click(); }}")
     page.wait_for_timeout(250)
 
 

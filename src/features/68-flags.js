@@ -127,7 +127,7 @@
   registerFeature({
     id: 'flags', label: 'Country flags',
     groups: [{
-      drawer: 'upload', title: 'Add a photo in a country',
+      drawer: 'upload', title: 'Add a photo in a country', about: "Choose the country of the photo you are about to send.",
       build: () => [h('p', { class: 'presult', text: 'Click a country to open its upload page.' }), flagBlock(null)]
     }, {
       drawer: 'settings', title: 'Country flags: the side bar',

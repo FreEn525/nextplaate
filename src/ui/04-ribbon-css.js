@@ -41,6 +41,12 @@
     .lens-none{font-size:13px;color:var(--mute)}
     .chk{display:flex;align-items:center;flex-wrap:wrap;gap:2px 8px;min-width:0;font-size:13px;cursor:pointer}   /* a long label wraps instead of widening the drawer */
     .chk span{min-width:0;overflow-wrap:anywhere}
+    .chk.fx{align-items:flex-start}
+    .chk.fx input{margin-top:2px}
+    .ftext{display:flex;flex-direction:column;gap:2px;flex:1}
+    .fabout{font-size:12px;font-weight:400;color:var(--mute);line-height:1.4}
+    .fscope{font-size:11px;color:var(--primary-h)}
+    .gabout{margin:0 0 8px;font-size:12px;color:var(--mute);line-height:1.4}
     .chk input{width:16px;height:16px;margin:0;flex:none}
     .slots{display:flex;flex-direction:column;gap:8px}
     .slot{display:flex;align-items:center;gap:8px;min-height:52px;padding:6px 8px;border:1px solid var(--line);border-radius:var(--r);background:var(--paper)}

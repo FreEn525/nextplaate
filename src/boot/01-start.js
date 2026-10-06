@@ -9,6 +9,6 @@
   console.log('%c NextPlaate %c v' + SCRIPT_VERSION + ' by ' + AUTHOR.name + ' ', 'background:' + SITE_BLUE + ';color:#fff;font:bold 14px monospace;padding:2px 6px;border-radius:0', 'color:' + SITE_BLUE + ';font:12px monospace');
 mountApp();
   const describing = featureOn('description');
-  if (here.edit) { if (describing && $('autoFill').checked) fillDescription(); }
+  if (here.edit) { if (describing && $('autoFill').checked && state.front && state.rear) fillDescription(); }   // by itself only for a chosen pair
   else if (!(describing && backToGallery())) { if (describing) autoEdit(); if (featureOn('likes')) resumeLikeRun(); }
   if (featureOn('upload')) batchOnLoad().catch(() => {});

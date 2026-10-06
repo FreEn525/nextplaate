@@ -8,21 +8,21 @@ Chaque fonction a un interrupteur dans Settings (sauf Settings elle-même) : ét
 
 | # | Fonction | Réglage | Où | Ce qu'elle fait | Touche |
 |---|---|---|---|---|---|
-| 1 | Sélection d'une paire | Photo pair selection | tiroir Photos | choisir la photo avant et la photo arrière | `S` |
-| 2 | Lieu et hashtags | Location and hashtags | tiroir Photos | écrits une fois, en tête de chaque description | |
+| 1 | Sélection d'une paire | Photo pair selection | tiroir Describe a pair | choisir la photo avant et la photo arrière | `S` |
+| 2 | Lieu et hashtags | Location and hashtags | tiroir Describe a pair | écrits une fois, en tête de chaque description | |
 | 3 | Descriptions | Descriptions and auto-fill | page d'édition | remplit la description de chaque photo de la paire, enregistre, retourne à la galerie | `F` |
-| 4 | Envoi par lots | Batch upload | tiroir Envoi, fenêtre de lot | file de photos, pays et catégorie par photo, un onglet par photo | `U`, `N`, `R` |
+| 4 | Envoi par lots | Batch upload | tiroir Send photos, fenêtre de lot | file de photos, pays et catégorie par photo, un onglet par photo | `U`, `N`, `R` |
 | 5 | Vérification de plaque | Plate check | page d'ajout | combien de photos de cette plaque sont déjà sur le site, 96 pays, 829 catégories | |
 | 6 | Aperçu de la plaque en direct | Plate preview as you type | page d'ajout | presse « Generate preview » du site quand la frappe s'arrête | |
-| 7 | Google Lens | Google Lens | page d'ajout, tiroir Search | cherche la photo choisie sur Lens, propose marque, modèle et génération | |
+| 7 | Google Lens | Google Lens | page d'ajout, tiroir Check a plate | cherche la photo choisie sur Lens, propose marque, modèle et génération | |
 | 8 | Sélecteur de tags | Tag picker | page d'ajout, page d'une photo | remplace la section « Add tags » du site et son pop-up | |
 | 9 | Information complémentaire | Extra information box | page d'ajout | grande carte à la place de la petite boîte du site | |
-| 10 | Likes | Likes | tiroir Galerie | like une page ou plusieurs pages avec un délai | `L` |
+| 10 | Likes | Likes | tiroir Browse | like une page ou plusieurs pages avec un délai | `L` |
 | 11 | Touches de page | Gallery page keys | galeries | page précédente et suivante au clavier | `A`, `D` |
-| 12 | Drapeaux des pays | Country flags | tiroir Envoi, pages d'ajout, profils | un lien par pays vers sa page d'ajout ; pays de la barre au choix | |
-| 13 | Raccourcis vers les membres | Member shortcuts | tiroir Galerie, profils, barre d'icônes | photo et pseudo des membres, un clic vers leur page ; vous d'abord | |
+| 12 | Drapeaux des pays | Country flags | tiroir Send photos, pages d'ajout, profils | un lien par pays vers sa page d'ajout ; pays de la barre au choix | |
+| 13 | Raccourcis vers les membres | Member shortcuts | tiroir Browse, profils, barre d'icônes | photo et pseudo des membres, un clic vers leur page ; vous d'abord | |
 | 14 | Bouton d'envoi flottant | Floating upload button | page d'ajout | suit en bas de page tant que le bouton Upload du site est hors de vue, et le presse | |
-| 15 | Liens de recherche de plaque | Plate lookup links | carte Plate check, tiroir Search | un lien par site public du pays (et recherche d'images), la plaque écrite comme ce site la veut ; liens simples, rien n'est envoyé avant le clic ; chaque site masquable | |
+| 15 | Liens de recherche de plaque | Plate lookup links | carte Plate check, tiroir Check a plate | un lien par site public du pays (et recherche d'images), la plaque écrite comme ce site la veut ; liens simples, rien n'est envoyé avant le clic ; chaque site masquable | |
 | 16 | Vos photos de ce véhicule | Your photos of this vehicle | page d'ajout | combien de photos de la marque, du modèle, de la génération vous avez déjà, chaque chiffre est un lien | |
 | 17 | Registre officiel (NL, IL) | Official register (NL, IL) | carte Plate check | un bouton interroge le registre ouvert du pays (RDW, data.gov.il) : marque, modèle, année, couleur, contrôle ; remplit les menus (NL) ; la plaque n'est envoyée qu'au clic | |
 | 18 | Compteur de série | Series counter | carte Plate check, pages de série | vos photos de la série de la plaque (84 pays vérifiés sur le vrai site : le plus long groupe de chiffres devient un joker) ; sur une page de série, les numéros présents sur le site | |
@@ -32,6 +32,34 @@ Chaque fonction a un interrupteur dans Settings (sauf Settings elle-même) : ét
 | 22 | Réglages | (verrouillée) | tiroir Settings | un interrupteur par fonction ; choix des pays de la barre | |
 
 Autour de ces fonctions : la barre d'icônes (avec votre photo de profil sous le logo), le message d'état en bas, et pour le développement le tiroir Developer du build dev (capture, test de plaques, vérification des lectures, base).
+
+## Où chaque fonction marche (le même texte est dans Settings, `src/lib/featureinfo.js`)
+
+La barre suit l'ordre d'usage : **Check a plate** (vérifier ce qu'on va envoyer), **Send photos**, **Describe a pair**, **Browse**, puis Shortcuts et Settings. Chaque case dit en une phrase à quoi elle sert, et Settings donne pour chaque fonction ce qu'elle fait et où elle marche.
+
+| Fonction | Fonctionne pour |
+|---|---|
+| Plate check | all 96 countries and 829 plate categories (795 checked exactly on real plates) |
+| Plate lookup links | every country, with their own sites for 14 |
+| Official register | Netherlands and Israel |
+| Series counter | 84 countries (checked on the real site) |
+| Your photos of this vehicle | every country |
+| Google Lens | every country |
+| Extra information | every country |
+| Tag picker | every country |
+| Plate preview | every country |
+| Floating upload button | every upload page |
+| Country flags | every country |
+| Batch upload | every country |
+| Photo pair selection | every gallery |
+| Location and hashtags | everywhere |
+| Descriptions | every country |
+| Likes | every gallery |
+| Gallery page keys | every gallery |
+| Member shortcuts | everywhere |
+| Profile: real uploads | every member |
+| Profile: regions | every country the site has regions for |
+| Shortcut editor | everywhere |
 
 ## Installation et version
 
@@ -47,13 +75,14 @@ Autour de ces fonctions : la barre d'icônes (avec votre photo de profil sous le
 
 ## Tiroirs et fonctions
 
-### Photos (tiroir `pair`)
+### Describe a pair (tiroir `pair`, en quatre étapes numérotées)
+- **Étape 1, Selection** : dans une galerie, choisir la photo avant puis la photo arrière du même véhicule (`S`). **Étape 2, Details** : lieu et hashtags, écrits en tête de chaque description. **Étape 3, Description** : sur la page d'édition d'une photo, écrit la description (vos détails, puis l'autre face de la paire en lien et vignette) (`F`) ; sans paire choisie, elle écrit vos détails seulement, et jamais par-dessus un texte déjà là ; l'écriture automatique n'a lieu que pour une paire choisie. **Étape 4, Automation** (facultative) : le script fait les clics (ouvrir l'édition, remplir, enregistrer, revenir à la galerie).
 - **Sélection** : choisir la photo de gauche et celle de droite (paire), pour les posts avant/arrière. Touche `S`.
 - **Détails** : lieu et hashtags, remplis une fois et réutilisés.
 - **Description** : remplit la description (avant/arrière) sur la page d'édition. Touche `F`. Options automatiques, retour à la galerie.
 - **Automatisation** : enchaîne sélection, description et envoi.
 
-### Galerie (tiroir `gallery`)
+### Browse (tiroir `gallery`)
 - **Likes** : like la page en cours, ou plusieurs pages, avec un délai entre chaque like. Touche `L`.
 - **Pages** : boutons précédent et suivant, touches `A` (précédent) et `D` (suivant).
 
@@ -67,7 +96,7 @@ Autour de ces fonctions : la barre d'icônes (avec votre photo de profil sous le
 - **Le véhicule des photos déjà sur le site** (5.9) : la même page de résultats donne les liens de catalogue (`gallery.php?markaavto=&model=&modgen=`) des photos de la plaque ; le véhicule le plus fréquent est proposé dans la carte, et *Fill the menus* remplit marque, modèle et génération (`vehicleFill`).
 - **La carte** (`pmg-plate-card`, au-dessus des menus du véhicule) réunit : le compte, le véhicule, **votre nombre de photos de la série** (voir Compteur de série), le bouton du registre officiel (NL, IL) et les liens de recherche.
 
-### Envoi par lots (tiroir `upload`)
+### Send photos (tiroir `upload`) : un pays pour la photo, l'envoi par lots
 - Ajouter plusieurs photos (ou un dossier), chacune avec ses options.
 - Chaque photo s'envoie dans **un onglet à part** (`GM_openInTab`, avec `#pmg=identifiant`), avec un délai aléatoire entre les ouvertures.
 - La file est dans IndexedDB (`pmg-batch`) : elle survit à un rechargement.
@@ -119,7 +148,7 @@ Autour de ces fonctions : la barre d'icônes (avec votre photo de profil sous le
 ### Google Lens (tiroir `search`, pages d'ajout, de modification et de galerie)
 - **Recherche automatique** : une photo choisie sur la page d'ajout est cherchée sur Google Lens toute seule, dans un onglet en arrière-plan (option « Search each new photo by itself »). Le bouton **Search this photo on Google Lens** le fait à la demande.
 - **Onglet Google** : il se ferme tout seul quand les résultats sont lus ; s'il ne revient rien, il reste ouvert pour que vous voyiez la page.
-- **Résultat** : une carte juste sous la photo de la page d'ajout (et le même tableau dans le tiroir Search) (`src/ui/06-inline-card.js`), trois choix pour chacun, le premier mis en avant. Un clic sur un choix remplit les menus du site ; « Fill with the first choices » remplit les trois. Rien n'est rempli sans clic. Si la page n'a pas de bloc photo, la carte se place au-dessus des menus.
+- **Résultat** : une carte juste sous la photo de la page d'ajout (et le même tableau dans le tiroir Check a plate) (`src/ui/06-inline-card.js`), trois choix pour chacun, le premier mis en avant. Un clic sur un choix remplit les menus du site ; « Fill with the first choices » remplit les trois. Rien n'est rempli sans clic. Si la page n'a pas de bloc photo, la carte se place au-dessus des menus.
 - **Google says** (5.9) : la page Google est lue aussi pour ce que Google appelle lui-même le véhicule (les pastilles « recherches similaires » : liens avec une vignette et un `kgmid` ou `lns_surface`, lus dans l'adresse donc dans toutes les langues). Ces noms comptent comme cinq titres dans la comparaison, s'affichent en une ligne *Google says*, et un clic en tape un dans la case « marque et modèle » du site (`vehicleSearchBox`, `#markamodtype`) : la sortie quand les menus ne connaissent pas le véhicule. Une page de recherche Google n'est prise comme réponse que si son adresse porte des paramètres Lens (`lns_`).
 - **Comparaison** (`src/lib/vehicle.js`) : les titres des résultats de Lens sont comparés aux menus de PlatesMania (`bmObject`, `modelObject`, `bmgObject`, `modgenObject` de la page d'ajout) : la marque la plus citée, puis ses modèles les plus cités, puis les générations dont les années sont celles des titres.
 - **Principe** : le panneau garde la photo (`GM_setValue`) et ouvre `https://www.google.com/?olud&src=pm`. Sur cette page (le marqueur est dans l'adresse), le script colle la photo dans la case « coller un lien d'image » de Google et lance la recherche ; sur la page de résultats qui suit (dans les 3 minutes), il note les titres et le panneau les lit. Une page Google non demandée par le panneau est laissée telle quelle (`src/features/66-lens-google.js`). Limite : cela dépend de la page de Google, qui peut changer.
@@ -198,7 +227,7 @@ Chaque fonction s'enregistre avec `registerFeature({ groups, keys, onEscape, ini
 
 ## Tests (`tests/`)
 
-- `python -m pytest -q` (dossier `tests/e2e/`) : 328 tests (337 avec le build dev, `NEXTPLAATE_SCRIPT=nextplaate.dev.user.js`) sur une version simulée du site (`fake_site.py`, avec une fausse page Google pour le Lens). Un fichier par fonction (`test_lens.py`, `test_tags.py`, `test_members.py`, `test_flags.py`, `test_extra.py`, `test_preview.py`…), plus `test_style.py` (couleurs, rayons, tailles, hauteurs) et `test_responsive.py` (aucun débordement de 320 à 1280 px). Pas d'accès réel à PlatesMania ni à Google.
+- `python -m pytest -q` (dossier `tests/e2e/`) : 335 tests (344 avec le build dev, `NEXTPLAATE_SCRIPT=nextplaate.dev.user.js`) sur une version simulée du site (`fake_site.py`, avec une fausse page Google pour le Lens). Un fichier par fonction (`test_lens.py`, `test_tags.py`, `test_members.py`, `test_flags.py`, `test_extra.py`, `test_preview.py`…), plus `test_style.py` (couleurs, rayons, tailles, hauteurs) et `test_responsive.py` (aucun débordement de 320 à 1280 px). Pas d'accès réel à PlatesMania ni à Google.
 - `python tests/offline/check_known.py` : 39 plaques validées à la main, tapées dans les pages sauvegardées.
 - `python tests/offline/check_db.py` : toutes les plaques de la base, dans la catégorie correspondante, en parallèle. Hors ligne.
 - Les données dérivées : `node scripts/refresh-data.mjs` → `data/` et `docs/COUVERTURE.md` (voir `data/README.md`).

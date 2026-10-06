@@ -261,7 +261,7 @@
   registerFeature({
     id: 'members', label: 'Member shortcuts',
     groups: [{
-      drawer: 'gallery', title: 'Member shortcuts',
+      drawer: 'gallery', title: 'Member shortcuts', about: "The members you visit often: one click to their page.",
       build: () => [h('div', { id: 'membersPanel', class: 'members-panel' }, membersView('panel'))]
     }],
     init: () => {

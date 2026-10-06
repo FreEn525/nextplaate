@@ -125,7 +125,7 @@
   registerFeature({
     id: 'likes', label: 'Likes',
     groups: [{
-      drawer: 'gallery', title: 'Likes', pages: ['gallery'],
+      drawer: 'gallery', title: 'Likes', about: "Like this page, or several pages in a row, with a pause between likes.", pages: ['gallery'],
       build: () => [
         h('button', { id: 'likeAll', class: 'btn ghost', disabled: true, text: 'Like this page' }),
         h('div', { class: 'row' }, h('label', { for: 'pages', text: 'Pages to like' }), h('input', { type: 'number', id: 'pages', min: 1, step: 1 })),

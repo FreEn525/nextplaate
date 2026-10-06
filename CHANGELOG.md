@@ -1,5 +1,13 @@
 # Changelog
 
+## 5.10
+
+**The panel in the order of use, every feature explained**
+- The bar now follows the order of use: *Check a plate*, *Send photos*, *Describe a pair*, *Browse*. Every box of the working drawers says in one sentence what it is for, and describing a pair is four numbered steps (choose the photos, your details, the description, the automation).
+- Settings gives, for each feature, what it does and where it works (every country, 84 countries, Netherlands and Israel...); the text is in `src/lib/featureinfo.js` and a test checks every feature has one.
+- *Fill description* now works without a chosen pair: it writes your place and hashtags, never over a text that is already there, and never by itself (the automatic fill still needs a pair).
+- The *What's new* window shows everything newer than the version you last saw, newest first.
+
 ## 5.9.1
 
 **Fix**

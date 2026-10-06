@@ -7,6 +7,18 @@
   const AUTHOR = { name: 'NextEnzzo', profile: 'https://platesmania.com/user121559' };
 
   const WHATS_NEW = [{
+    version: '5.10',
+    title: 'The panel in the order of use, and every feature explained',
+    sections: [{
+      title: 'The panel',
+      items: [
+        { title: 'In the order you use it', text: 'The bar now reads Check a plate, Send photos, Describe a pair, Browse. Each box says in one sentence what it is for.' },
+        { title: 'Describing a pair, in four steps', text: 'Choose the front and the rear photo, set your place and hashtags, fill the description on the edit page, and let the automation do the clicks if you want. The steps are numbered.' },
+        { title: 'Settings explains everything', text: 'Each feature has its sentence and where it works (every country, 84 countries, Netherlands and Israel...), so you know what to expect.' },
+        { title: 'Description without a pair', text: 'On an edit page, Fill description now writes your place and hashtags even if no pair is chosen. It never writes over a text that is already there.' }
+      ]
+    }]
+  }, {
     version: '5.9',
     title: 'Plate check does more, and the profiles are smarter',
     sections: [{

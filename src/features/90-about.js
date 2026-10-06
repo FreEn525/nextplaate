@@ -6,16 +6,28 @@
    * ===================================================================== */
   const SCRIPT_VERSION = '__VERSION__';
 
-  function whatsNewBody(entry) {
-    return h('div', { class: 'cardbox' }, h('p', { class: 'hint', text: entry.title }), entry.sections.map(s =>
-      h('div', { class: 'wn-section' }, h('div', { class: 'cat', text: s.title }),
-        s.items.map(i => h('p', { class: 'wn-item' }, h('b', { text: i.title + ': ' }), h('span', { text: i.text }))))));
+  // One block per version: its title, then its sections. Several versions are stacked, the newest first.
+  function whatsNewBody(entries) {
+    return h('div', { class: 'cardbox' }, entries.map(entry => h('div', null,
+      h('p', { class: 'hint', text: (entries.length > 1 ? entry.version + ' · ' : '') + entry.title }),
+      entry.sections.map(s => h('div', { class: 'wn-section' }, h('div', { class: 'cat', text: s.title }),
+        s.items.map(i => h('p', { class: 'wn-item' }, h('b', { text: i.title + ': ' }), h('span', { text: i.text }))))))));
   }
 
-  function whatsNewOpen() {
-    const entry = WHATS_NEW[0];
-    if (!entry) return;
-    const modal = modalOpen({ id: 'pmg-whatsnew', title: `What’s new in ${entry.version}`, body: whatsNewBody(entry),
+  // "5.9.1" -> [5, 9]: a fix does not count as news
+  const minorOf = v => String(v).split('.').slice(0, 2).map(n => +n || 0);
+  const newerMinor = (a, b) => a[0] > b[0] || (a[0] === b[0] && a[1] > b[1]);
+
+  // The entries newer than the version last seen (the newest alone when there is none)
+  function whatsNewSince(seen) {
+    if (!seen) return WHATS_NEW.slice(0, 1);
+    return WHATS_NEW.filter(e => newerMinor(minorOf(e.version), minorOf(seen)));
+  }
+
+  function whatsNewOpen(seen) {
+    const entries = whatsNewSince(seen);
+    if (!entries.length) return;
+    const modal = modalOpen({ id: 'pmg-whatsnew', title: `What’s new in ${entries[0].version}`, body: whatsNewBody(entries),
       actions: [{ label: 'Got it', run: () => modal.close() }] });
     modal.message(`NextPlaate by ${AUTHOR.name}`);
   }
@@ -26,9 +38,8 @@
     const seen = store.get('seen_version', '');
     if (seen === SCRIPT_VERSION) return;
     store.set('seen_version', SCRIPT_VERSION);
-    // only a new minor version (5.9 -> 5.10) opens the window: a fix (5.9 -> 5.9.1) is silent
-    const minor = v => String(v).split('.').slice(0, 2).join('.');
-    if (seen && minor(seen) !== minor(SCRIPT_VERSION) && WHATS_NEW[0] && WHATS_NEW[0].version === minor(SCRIPT_VERSION)) whatsNewOpen();
+    // only a newer minor version (5.9 -> 5.10) opens the window, with everything since the version last seen: a fix (5.9 -> 5.9.1) is silent
+    if (seen && newerMinor(minorOf(SCRIPT_VERSION), minorOf(seen))) whatsNewOpen(seen);
   }
 
   registerFeature({
@@ -39,5 +50,5 @@
         h('button', { id: 'aboutNew', type: 'button', class: 'btn ghost', text: 'What’s new' })
       ]
     }],
-    init: () => { $('aboutNew').onclick = whatsNewOpen; whatsNewOnUpdate(); }
+    init: () => { $('aboutNew').onclick = () => whatsNewOpen(''); whatsNewOnUpdate(); }
   });

@@ -7,11 +7,15 @@
 
   function fillDescription() {
     if (!here.edit) return;
+    const id = photoIdInput.value;
     if (!(state.front && state.rear)) {
-      setStatus('Select the front and rear photos first (press <b>S</b>), then come back to edit.');
+      // no pair chosen: the description is only your details (hashtags, then place), still worth writing, but never over a text that is there
+      if (descBox.value.trim()) { setStatus(`Photo <b>#${id}</b> already has a description: left as it is. Choose a front and a rear photo (<b>S</b>) to write the pair’s description.`); return; }
+      descBox.value = detailsHead();
+      descBox.dispatchEvent(new Event('input', { bubbles: true }));
+      setStatus(`Description filled for <b>#${id}</b> with your details only. Choose a front and a rear photo (<b>S</b>) to add the other side.`);
       return;
     }
-    const id = photoIdInput.value;
     // The plate shown in the page title (e.g. "MZ MZ 78") is used for the image alt text
     const h = document.querySelector('.headline h2');
     const plate = h ? h.textContent.replace(/['"<>]/g, '').trim() : '';
@@ -89,14 +93,14 @@
     id: 'description', label: 'Descriptions and auto-fill', requires: ['details'],
     groups: [
       {
-        drawer: 'pair', title: 'Description', pages: ['edit'],
+        drawer: 'pair', title: 'Description', about: "Step 3. On a photo’s edit page: writes the description (your details, then the other side of the pair as a link and a thumbnail). With no pair chosen it writes your details only.", pages: ['edit'],
         build: () => [
           h('button', { id: 'fillBtn', class: 'btn ghost', disabled: true, text: 'Fill description (F)' }),
           h('button', { id: 'backGallery', class: 'btn ghost', text: 'Back to my gallery', title: 'Go back to the last gallery you visited' })
         ]
       },
       {
-        drawer: 'pair', title: 'Automation',
+        drawer: 'pair', title: 'Automation', about: "Step 4, optional. Let the script do the clicks: open the edit page, fill it, save, and go back to your gallery.",
         build: () => [
           h('label', { class: 'chk' }, h('input', { type: 'checkbox', id: 'autoEdit' }), 'Auto-click “edit” on my photos'),
           h('label', { class: 'chk' }, h('input', { type: 'checkbox', id: 'autoFill' }), 'Auto-fill on the edit page'),
