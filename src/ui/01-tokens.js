@@ -51,6 +51,11 @@
     .chip:hover{background:var(--primary-tint);border-color:var(--primary-soft)}
     .chip.best{border-color:var(--primary-soft);background:var(--primary-soft);color:var(--primary-h);font-weight:600}
     .chip.on{border-color:var(--primary);box-shadow:inset 0 0 0 1px var(--primary)}
+    .flags{display:grid;grid-template-columns:repeat(auto-fill,minmax(34px,1fr));gap:6px}
+    .flag{height:30px;display:grid;place-items:center;border:1px solid var(--line2);background:#fff;color:var(--ink);font-size:11px;font-weight:700;text-decoration:none}
+    .flag:hover{background:var(--primary-tint);border-color:var(--primary)}
+    .flag.on{border-color:var(--primary);box-shadow:inset 0 0 0 1px var(--primary)}
+    .flag img{display:block;width:22px;height:15px;object-fit:contain}
     .cat{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
   `;
 

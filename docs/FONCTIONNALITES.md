@@ -52,6 +52,12 @@ NextPlaate est un script Tampermonkey (userscript) pour [PlatesMania](https://pl
 - Les raccourcis ne s'activent pas quand on tape dans un champ de texte.
 - Compatible AZERTY : `Ctrl+A` se lit sur la touche `a` (`e.key`), pas sur la position physique.
 
+### Drapeaux des pays (tiroir `upload`, et sur les pages d'ajout)
+- Un drapeau par pays (96), chacun mène à la page d'ajout du pays (`/xx/add`) ; le pays de la page est encadré. Un drapeau dont l'image ne charge pas affiche le code du pays.
+- **Dans la page** (`/add` et `/xx/add`, `src/features/68-flags.js`) : à droite du contenu quand l'écran a la place, sans jamais passer sous le panneau même ouvert (la barre et le tiroir prennent 56 + 340 px à droite) ; sur un écran plus étroit, sous la photo dans la colonne de droite. Elle suit le redimensionnement.
+- **Dans le panneau** : le même groupe dans le tiroir d'envoi. Un interrupteur (Settings) retire les deux.
+- Les drapeaux sont les images du site (`/assets/img/profile-flags/<code>.svg`) : rien n'est chargé ailleurs.
+
 ### Google Lens (tiroir `search`, pages d'ajout, de modification et de galerie)
 - **Recherche automatique** : une photo choisie sur la page d'ajout est cherchée sur Google Lens toute seule, dans un onglet en arrière-plan (option « Search each new photo by itself »). Le bouton **Search this photo on Google Lens** le fait à la demande.
 - **Onglet Google** : il se ferme tout seul quand les résultats sont lus ; s'il ne revient rien, il reste ouvert pour que vous voyiez la page.

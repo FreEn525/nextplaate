@@ -2,6 +2,9 @@
 
 ## 5.8
 
+**Country flags**
+- New feature *Country flags* (switch in Settings): the flags of the 96 countries, each a link to that country's upload page. They are in the Batch upload drawer and, on the upload pages (`/add` and `/xx/add`), right on the site: to the right of the page content when the screen has room (never under the panel, even with its drawer open), else under the photo in the right-hand column. The flags are the site's own images.
+
 **Look**
 - The panel, the Lens card and the batch window now use the colours of PlatesMania itself (its blue `#4765a0`, hover `#324c80`, light `#cad9f6`) through one set of design tokens, with one button height scale, one radius and one focus ring. Square corners like the site, and no coloured rule on the blocks. No colour is written outside the tokens (a test checks it). See `docs/STYLE.md`.
 

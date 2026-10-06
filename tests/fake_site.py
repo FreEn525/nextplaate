@@ -73,6 +73,7 @@ def edit_page(pid):
 
 UPLOAD_PAGE = (
     HEAD.format(title="Upload")
+    + '<div class="container" style="max-width:1170px;width:100%;margin:0 auto">'
     + '<form id="frm" action="/fr/add" method="post" enctype="multipart/form-data">'
     + '<input type="text" id="nomer" name="nomer">'
     + '<select id="ctype" name="ctype"><option value="1">Car</option><option value="2">Motorbike</option></select>'
@@ -89,7 +90,7 @@ UPLOAD_PAGE = (
     + '   (bmgObject[id] || []).forEach(function (x) { g.options[g.options.length] = new Option(modgenObject[x], x); }); }</script>'
     + '<div id="zoomimgid" class="hidden"><img id="zoomimg" width="260" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="></div>'
     + '<button type="button" id="pm-photo-editor-open">Upload through editor</button></form>'
-    + "</body></html>"
+    + "</div></body></html>"
 )
 
 
@@ -134,6 +135,8 @@ def route_site(context):
             html = edit_page(query.get("id", ["101"])[0])
         elif re.fullmatch(r"/[a-z]{2}/add", path):
             html = UPLOAD_PAGE
+        elif path == "/add":
+            html = HEAD.format(title="Add") + '<div class="content"><div class="container" style="max-width:1170px;width:100%;margin:0 auto"><h2>Choose a country</h2></div></div></body></html>'
         else:
             return route.fulfill(status=404, content_type="text/html", body="<h1>404</h1>")
         return route.fulfill(status=200, content_type="text/html", body=inject(html))
