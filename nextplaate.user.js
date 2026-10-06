@@ -982,7 +982,7 @@
   //             = #4765a0, #324c80, #cad9f6 (the site's "additional colour"), derived tint, derived ring
   //   neutrals  --ink (text), --mute (secondary text), --line / --line2 (borders), --bg (panel), --paper, --soft, --off
   //   states    --danger*, --ok*, --warn* : a fill, a border and a text colour each
-  //   shape     --r (radius: 0, PlatesMania is all rectangles), --h (control height), --h-sm
+  //   shape     --r (radius: 0, PlatesMania is all rectangles; --r-round only for the member's profile picture in the bar), --h (control height), --h-sm
   //   type      11 (small caps labels) 12 (help, small) 13 (controls, chips) 14 (text) 16 (titles, the cross) 18 (the star): no other size
   // Where the site and the script differ on purpose: the secondary text is darker than the site's grey (#7c8082) to stay readable at
   // 12 px; every control has the same height scale, the same square corners and the same focus ring.
@@ -991,7 +991,7 @@
           --ink:#2d2d2d;--mute:#626a70;--line:#e4e4e4;--line2:#cfcfcf;--bg:#f5f5f5;--paper:#fafafa;--soft:#f0f0f0;--off:#e8e8e8;--off-ink:#8f9498;
           --danger:#d9534f;--danger-soft:#fde2e1;--danger-line:#f3b5b2;--danger-ink:#8a1c17;
           --ok-soft:#e6f4ea;--ok-line:#b7dfc1;--ok-ink:#1e6b34;--warn-soft:#fff3cd;--warn-line:#f0dc9a;--warn-ink:#7a4f00;
-          --r:0;--h:38px;--h-sm:32px;--h-rail:40px;
+          --r:0;--r-round:50%;--h:38px;--h-sm:32px;--h-rail:40px;
           font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink)}
     *{box-sizing:border-box}
     [hidden]{display:none!important}
@@ -1107,6 +1107,10 @@
     .side>*{pointer-events:auto}
     .rail{width:56px;flex:none;display:flex;flex-direction:column;align-items:center;gap:8px;padding:10px 0;background:#fff;border-left:1px solid var(--line2);box-shadow:-6px 0 20px rgba(0,0,0,.08)}
     .rail .logo{margin-bottom:6px}
+    .rme{flex:none;width:var(--h-rail);height:var(--h-rail);display:grid;place-items:center;overflow:hidden;border:2px solid var(--primary-soft);border-radius:var(--r-round);background:var(--primary-soft);color:var(--primary-h);font-size:16px;font-weight:700;text-decoration:none}
+    .rme img{display:block;width:100%;height:100%;object-fit:cover}
+    .rme:hover{border-color:var(--primary)}
+    .rme.on{border-color:var(--primary);box-shadow:0 0 0 2px var(--ring)}
     .rsep{width:24px;height:1px;background:var(--line2);margin:auto 0 4px}
     .rbtn{width:var(--h-rail);height:var(--h-rail);display:grid;place-items:center;border:0;border-radius:var(--r);background:none;color:var(--mute);cursor:pointer}
     .rbtn:hover{background:var(--primary-tint);color:var(--primary-h)}
@@ -2641,6 +2645,7 @@
    *      - editing (the Edit button, Done to leave): each line gets a grip to drag it (a bar shows where it lands, never above you;
    *        or focus the grip and press Up / Down), a cross to remove it, and a box adds a member by number or by the link of
    *        their page (the page is read once, through the script's own queue, for the picture and the name).
+   *    Your own picture is also in the panel's bar, under the logo, in a circle: a click goes to your page.
    *    The list is in the panel (Gallery drawer) and, on a member's profile, right on the site, to the LEFT of the content, level with
    *    the profile picture (the flags are on the right); on a narrower screen it moves under the picture, in the left column.
    * ===================================================================== */
@@ -2840,8 +2845,23 @@
     return host;
   }
 
+  // Your own picture in the panel's bar, under the logo: a circle, and a click goes to your page (nothing when nobody is logged in)
+  function membersRail() {
+    const rail = $('rail');
+    const old = rail.querySelector('.rme');
+    if (old) old.remove();
+    const { me } = membersAll();
+    if (!me) return;
+    const initial = h('span', { text: (me.name[0] || '?').toUpperCase() });
+    const img = h('img', { src: me.avatar, alt: '' });
+    img.addEventListener('error', () => img.replaceWith(initial));
+    const own = memberHere();
+    rail.querySelector('.logo').after(h('a', { class: 'rme' + (own && own.id === me.id ? ' on' : ''), href: `/user${me.id}`, title: `${me.name} (your page)` }, me.avatar ? img : initial));
+  }
+
   // Everything that shows the list follows a change (the panel and the bar). focus: a member whose grip gets the keyboard focus back
   function membersRefresh(where, focus) {
+    membersRail();
     const host = document.getElementById('pmg-members');
     if (host) host.shadowRoot.querySelector('.box').replaceChildren(...membersView('bar'));
     const slot = $('membersPanel');

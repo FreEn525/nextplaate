@@ -320,3 +320,62 @@ def test_an_empty_list_says_what_to_do(ctx):
     assert "Press the star" in page.evaluate(f"() => {BAR}.querySelector('.hint').textContent")
     page = open_page(ctx, GALLERY)
     assert "press Edit" in page.evaluate(f"() => {PANEL}.querySelector('#membersPanel .hint').textContent")
+
+
+# ---------------------------------------------------------------- your picture in the bar, under the logo
+
+RAIL = "document.getElementById('pmg-host').shadowRoot.getElementById('rail')"
+
+
+def test_your_picture_is_in_the_bar_under_the_logo_and_leads_to_your_page(ctx):
+    page = open_page(ctx, GALLERY)
+    page.wait_for_selector("#pmg-host")
+    info = page.evaluate(f"() => {{ const a = {RAIL}.querySelector('.rme'); return [a.getAttribute('href'), a.title, a.previousElementSibling.className, a.nextElementSibling.className.split(' ')[0]]; }}")
+    assert info == ["/user121559", "freen525 (your page)", "logo", "rbtn"]                       # right after the logo, before the buttons
+    page.evaluate(f"() => {RAIL}.querySelector('.rme').click()")
+    page.wait_for_url(ME)
+
+
+def test_the_picture_in_the_bar_is_a_circle_the_size_of_the_bar_buttons(ctx):
+    page = open_page(ctx, GALLERY)
+    m = page.evaluate(f"() => {{ const a = {RAIL}.querySelector('.rme'), b = {RAIL}.querySelector('.rbtn'); const s = getComputedStyle(a); return [s.borderTopLeftRadius, Math.round(a.getBoundingClientRect().width), Math.round(a.getBoundingClientRect().height), Math.round(b.getBoundingClientRect().width)]; }}")
+    assert m == ["50%", 40, 40, 40]                                                                   # round, and as wide as the buttons under it
+
+
+def test_the_picture_in_the_bar_is_marked_on_your_own_page_only(ctx):
+    page = open_page(ctx, ME)
+    assert page.evaluate(f"() => {RAIL}.querySelector('.rme').classList.contains('on')")
+    page = open_page(ctx, OTHER)
+    assert page.evaluate(f"() => !{RAIL}.querySelector('.rme').classList.contains('on')")
+
+
+def test_the_picture_in_the_bar_is_your_picture_or_your_initial(ctx):
+    page = open_page(ctx, ME)                                                                         # on your page the picture is known
+    assert page.evaluate(f"() => !!{RAIL}.querySelector('.rme img')")
+    page = ctx.new_page()
+    page.add_init_script("localStorage.setItem('pmg_members_me', JSON.stringify({id: '121559', name: 'freen525', avatar: ''}));")
+    page.route("https://platesmania.com/user121559", lambda r: r.fulfill(status=404, body="no"))      # the picture cannot be read either
+    page.goto(GALLERY)
+    page.wait_for_selector("#pmg-host")
+    page.wait_for_timeout(300)
+    assert page.evaluate(f"() => {RAIL}.querySelector('.rme').textContent") == "F"
+
+
+def test_nobody_logged_in_means_no_picture_in_the_bar(ctx):
+    page = ctx.new_page()
+    page.add_init_script("new MutationObserver(() => document.querySelectorAll('.loginbar').forEach(e => e.remove())).observe(document, { childList: true, subtree: true });")
+    page.goto(GALLERY)
+    page.wait_for_selector("#pmg-host")
+    assert page.evaluate(f"() => !{RAIL}.querySelector('.rme')")
+    assert page.evaluate(f"() => !{PANEL}.querySelector('.mrow.pinned')")                              # and no pinned line either
+
+
+def test_with_the_feature_off_the_picture_is_not_in_the_bar(ctx):
+    page = ctx.new_page()
+    page.goto(GALLERY)
+    page.wait_for_selector("#pmg-host")
+    page.evaluate("() => localStorage.setItem('pmg_set_feature_members', '0')")
+    page.reload()
+    page.wait_for_selector("#pmg-host")
+    page.wait_for_timeout(200)
+    assert page.evaluate(f"() => !{RAIL}.querySelector('.rme')")

@@ -21,7 +21,7 @@ Le texte secondaire (`--mute`, `#626a70`) est **plus foncé** que le gris du sit
 
 - **Une seule palette** : aucun fichier n'écrit de couleur, sauf `01-tokens.js`. Le test `tests/e2e/test_style.py` le vérifie et échoue si une couleur apparaît ailleurs (le blanc et les ombres noires exceptés).
 - **Une échelle de tailles** : contrôles de 38 px (`--h`) ou 32 px (`--h-sm`).
-- **Angles droits** : `--r` vaut 0, comme les rectangles de PlatesMania. Aucun rayon écrit à la main : seulement `var(--r)`.
+- **Angles droits** : `--r` vaut 0, comme les rectangles de PlatesMania. Aucun rayon écrit à la main : seulement `var(--r)`. Une seule exception, demandée : la photo de profil de la barre d'icônes est ronde (`--r-round`).
 - **Un seul focus** : tout élément cliquable ou saisissable reçoit le même anneau (`--ring`) au clavier.
 - **Les mêmes composants partout** : bouton `.btn` (plein) / `.btn.ghost` (blanc) / `.btn.danger`, choix `.chip` (`.best` = le choix principal, `.on` = le choix en vigueur), étiquette `.cat`. Le panneau, la carte Lens et la fenêtre d'envoi s'en servent tous.
 - **Pas de filet de couleur** sur les blocs, la carte ou le titre du tiroir : la couleur sert aux actions (boutons, choix, case active), pas à la décoration.

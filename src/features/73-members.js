@@ -9,6 +9,7 @@
    *      - editing (the Edit button, Done to leave): each line gets a grip to drag it (a bar shows where it lands, never above you;
    *        or focus the grip and press Up / Down), a cross to remove it, and a box adds a member by number or by the link of
    *        their page (the page is read once, through the script's own queue, for the picture and the name).
+   *    Your own picture is also in the panel's bar, under the logo, in a circle: a click goes to your page.
    *    The list is in the panel (Gallery drawer) and, on a member's profile, right on the site, to the LEFT of the content, level with
    *    the profile picture (the flags are on the right); on a narrower screen it moves under the picture, in the left column.
    * ===================================================================== */
@@ -208,8 +209,23 @@
     return host;
   }
 
+  // Your own picture in the panel's bar, under the logo: a circle, and a click goes to your page (nothing when nobody is logged in)
+  function membersRail() {
+    const rail = $('rail');
+    const old = rail.querySelector('.rme');
+    if (old) old.remove();
+    const { me } = membersAll();
+    if (!me) return;
+    const initial = h('span', { text: (me.name[0] || '?').toUpperCase() });
+    const img = h('img', { src: me.avatar, alt: '' });
+    img.addEventListener('error', () => img.replaceWith(initial));
+    const own = memberHere();
+    rail.querySelector('.logo').after(h('a', { class: 'rme' + (own && own.id === me.id ? ' on' : ''), href: `/user${me.id}`, title: `${me.name} (your page)` }, me.avatar ? img : initial));
+  }
+
   // Everything that shows the list follows a change (the panel and the bar). focus: a member whose grip gets the keyboard focus back
   function membersRefresh(where, focus) {
+    membersRail();
     const host = document.getElementById('pmg-members');
     if (host) host.shadowRoot.querySelector('.box').replaceChildren(...membersView('bar'));
     const slot = $('membersPanel');

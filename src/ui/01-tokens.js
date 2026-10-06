@@ -13,7 +13,7 @@
   //             = #4765a0, #324c80, #cad9f6 (the site's "additional colour"), derived tint, derived ring
   //   neutrals  --ink (text), --mute (secondary text), --line / --line2 (borders), --bg (panel), --paper, --soft, --off
   //   states    --danger*, --ok*, --warn* : a fill, a border and a text colour each
-  //   shape     --r (radius: 0, PlatesMania is all rectangles), --h (control height), --h-sm
+  //   shape     --r (radius: 0, PlatesMania is all rectangles; --r-round only for the member's profile picture in the bar), --h (control height), --h-sm
   //   type      11 (small caps labels) 12 (help, small) 13 (controls, chips) 14 (text) 16 (titles, the cross) 18 (the star): no other size
   // Where the site and the script differ on purpose: the secondary text is darker than the site's grey (#7c8082) to stay readable at
   // 12 px; every control has the same height scale, the same square corners and the same focus ring.
@@ -22,7 +22,7 @@
           --ink:#2d2d2d;--mute:#626a70;--line:#e4e4e4;--line2:#cfcfcf;--bg:#f5f5f5;--paper:#fafafa;--soft:#f0f0f0;--off:#e8e8e8;--off-ink:#8f9498;
           --danger:#d9534f;--danger-soft:#fde2e1;--danger-line:#f3b5b2;--danger-ink:#8a1c17;
           --ok-soft:#e6f4ea;--ok-line:#b7dfc1;--ok-ink:#1e6b34;--warn-soft:#fff3cd;--warn-line:#f0dc9a;--warn-ink:#7a4f00;
-          --r:0;--h:38px;--h-sm:32px;--h-rail:40px;
+          --r:0;--r-round:50%;--h:38px;--h-sm:32px;--h-rail:40px;
           font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink)}
     *{box-sizing:border-box}
     [hidden]{display:none!important}

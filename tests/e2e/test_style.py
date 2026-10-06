@@ -48,7 +48,7 @@ def test_corners_are_square_and_come_from_one_token():
     for rel in STYLED + ["ui/01-tokens.js"]:
         for n, line in enumerate((SRC / rel).read_text(encoding="utf-8").splitlines(), 1):
             for m in re.finditer(r"border-radius:([^;}'\"]*)", line):
-                if m.group(1).strip() not in ("var(--r)", "0"):
+                if m.group(1).strip() not in ("var(--r)", "var(--r-round)", "0"):
                     found.append(f"{rel}:{n}: {m.group(0)}")
     assert found == [], "radius written outside the token:\n" + "\n".join(found)
 
@@ -91,11 +91,10 @@ MEASURE = """() => {
 }"""
 
 
-def test_controls_have_the_same_height_everywhere():
-    from playwright.sync_api import sync_playwright
+def test_controls_have_the_same_height_everywhere(browser):
     from fake_site import PNG
-    with sync_playwright() as p:
-        b = p.chromium.launch()
+    if True:
+        b = browser
         c = b.new_context(viewport={"width": 2560, "height": 1000})
         route_site(c)
         c.route("https://forum.platesmania.com/**", lambda r: r.fulfill(status=200, content_type="image/png", body=PNG))
@@ -115,7 +114,7 @@ def test_controls_have_the_same_height_everywhere():
                 page.wait_for_timeout(120)
                 for k, v in page.evaluate(MEASURE).items():
                     measured.setdefault(k, set()).update(v)
-        b.close()
+        c.close()
     assert measured["btn"] <= {38}, measured["btn"]
     assert measured["sm"] <= {32}, measured["sm"]
     assert measured["input"] <= {38}, measured["input"]
