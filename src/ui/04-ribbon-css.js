@@ -26,6 +26,19 @@
     .dsec{display:flex;flex-direction:column;gap:10px}
     .group{background:#fff;border:1px solid var(--line);border-radius:var(--r);display:flex;flex-direction:column;overflow:hidden}
     .gbody{display:flex;flex-direction:column;gap:8px;padding:10px}
+    button.gtitle{display:flex;justify-content:space-between;align-items:center;width:100%;border:0;border-bottom:1px solid var(--line);text-align:left;cursor:pointer;font-family:inherit}   /* a title that folds its box */
+    button.gtitle::after{content:'';width:0;height:0;border:4px solid transparent;border-top:5px solid var(--primary-h);border-bottom:0;transition:transform .15s}
+    .group.closed button.gtitle{border-bottom:0}
+    .group.closed button.gtitle::after{transform:rotate(-90deg)}
+    .group.closed .gbody{display:none}
+    .sgroup{border-top:1px solid var(--line)}
+    .sgroup:first-child{border-top:0}
+    .sgroup > summary{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:var(--h);padding:0 2px;cursor:pointer;list-style:none;font-size:13px;font-weight:700;color:var(--ink)}
+    .sgroup > summary::-webkit-details-marker{display:none}
+    .sgroup > summary > span:first-child::before{content:'';display:inline-block;margin-right:8px;border:4px solid transparent;border-left:5px solid var(--mute);border-right:0;vertical-align:1px;transition:transform .15s}
+    .sgroup[open] > summary > span:first-child::before{transform:rotate(90deg)}
+    .sgroup .scount{font-size:12px;font-weight:400;color:var(--mute)}
+    .sgroup > .chklist{padding:2px 0 12px 2px}
     .gtitle{order:-1;padding:7px 10px;border-bottom:1px solid var(--line);background:#fff;color:var(--primary-h);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
     .gbody .btn:not(.sm):not(.fit){width:100%;height:auto;min-height:var(--h);padding-top:6px;padding-bottom:6px;line-height:1.25;white-space:normal}   /* a long label wraps instead of widening the drawer */
     .gbody.idle .live{display:none}                                  /* a control that does nothing off its page (the note says where it works) */

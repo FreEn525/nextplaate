@@ -65,7 +65,7 @@
   registerFeature({
     id: 'registry', label: 'Official register (NL, IL)',
     groups: [{
-      drawer: 'settings', title: 'Official register', about: 'Public open data (RDW for the Netherlands, data.gov.il for Israel): the plate you typed is sent to it, nothing else.',
+      drawer: 'settings', rank: 40, title: 'Official register', about: 'Public open data (RDW for the Netherlands, data.gov.il for Israel): the plate you typed is sent to it, nothing else.',
       build: () => ['registry_auto', 'registry_fill'].map(id => {
         const box = h('input', { type: 'checkbox', checked: settings.on(id) });
         box.onchange = () => settings.set(id, box.checked ? '1' : '0');

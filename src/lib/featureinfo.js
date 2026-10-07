@@ -29,3 +29,12 @@
     worldmap: { about: 'The countries a member has photos from on a map of the world, shaded by how many photos. Yours, or anyone’s: type a number or paste a profile link. For many countries, the regions too (departments, districts, states).', scope: 'every member (the regions: 54 countries)' },
     upload: { about: 'Queue many photos (or a folder), give each a country and a plate category, and send them one tab per photo with a pause between.', scope: 'every country' }
   };
+
+  // The families of the features in Settings, in the order of use: a title, and the features (by id) that belong to it
+  const FEATURE_GROUPS = [
+    { title: 'Send and describe photos', ids: ['selection', 'details', 'description', 'upload', 'floatupload', 'tags', 'extra', 'flags'] },
+    { title: 'Check a plate', ids: ['plate', 'preview', 'lens', 'lookup', 'registry', 'mine', 'series'] },
+    { title: 'Browse', ids: ['pages', 'members', 'worldmap'] },
+    { title: 'Profiles and the site', ids: ['profile', 'regions', 'profilestyle', 'laststrip', 'notify'] },
+    { title: 'The panel', ids: ['shortcuts'] }
+  ];

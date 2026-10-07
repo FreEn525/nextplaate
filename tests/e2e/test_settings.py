@@ -31,7 +31,7 @@ def test_every_feature_is_listed_and_on_by_default(browser):
     page.goto(GALLERY)
     page.wait_for_selector("#pmg-host")
     listed = page.evaluate(f"() => [...{SHADOW}.querySelectorAll('#setList input')].map(i => [i.id, i.checked])")
-    assert [i for i, _ in listed] == ["set_feature_" + f for f in FEATURES]
+    assert sorted(i for i, _ in listed) == sorted("set_feature_" + f for f in FEATURES)               # all of them, whatever the family they are under
     assert all(on for _, on in listed)
     assert errors == []
     c.close()
@@ -77,4 +77,56 @@ def test_nothing_breaks_with_one_feature_off(browser, feature, url):
         page.keyboard.press(key)
     page.keyboard.press("Escape")
     assert errors == []
+    c.close()
+
+
+def test_the_features_are_in_five_folded_families_with_their_count(browser):
+    c, page, errors = new_page(browser)
+    page.goto(GALLERY)
+    page.wait_for_selector("#pmg-host")
+    got = page.evaluate(f"() => [...{SHADOW}.querySelectorAll('#setList details.sgroup')].map(d => [d.querySelector('summary span').textContent, d.querySelector('.scount').textContent, d.open])")
+    assert got == [["Send and describe photos", "8 of 8 on", False], ["Check a plate", "7 of 7 on", False], ["Browse", "3 of 3 on", False],
+                   ["Profiles and the site", "5 of 5 on", False], ["The panel", "1 of 1 on", False]]
+    assert page.evaluate(f"() => {SHADOW}.getElementById('setList').textContent.includes('null')") is False
+    c.close()
+
+
+def test_a_family_opens_stays_open_and_its_count_follows_a_switch(browser):
+    c, page, errors = new_page(browser)
+    page.goto(GALLERY)
+    page.wait_for_selector("#pmg-host")
+    page.evaluate(f"() => {SHADOW}.querySelector('#setList details.sgroup summary').click()")
+    page.evaluate(f"() => {SHADOW}.getElementById('set_feature_tags').click()")                          # switched off: the list is drawn again
+    got = page.evaluate(f"() => {{ const d = {SHADOW}.querySelector('#setList details.sgroup'); return [d.open, d.querySelector('.scount').textContent]; }}")
+    assert got == [True, "7 of 8 on"]                                                                    # still open, one less
+    page.reload()
+    page.wait_for_selector("#pmg-host")
+    assert page.evaluate(f"() => {SHADOW}.querySelector('#setList details.sgroup').open") is True       # remembered
+    c.close()
+
+
+def test_the_long_boxes_are_folded_by_their_title_and_it_is_remembered(browser):
+    c, page, errors = new_page(browser)
+    page.goto(GALLERY)
+    page.wait_for_selector("#pmg-host")
+    page.evaluate(f"() => {SHADOW}.querySelector('.rbtn[data-drawer=\"settings\"]').click()")
+    box = f"[...{SHADOW}.querySelectorAll('section[data-drawer=\"settings\"] .group')].find(g => g.querySelector('.gtitle').textContent.startsWith('Country flags'))"
+    assert page.evaluate(f"() => {{ const g = {box}; return [g.classList.contains('closed'), g.querySelector('.gbody').getClientRects().length]; }}") == [True, 0]       # folded by default
+    page.evaluate(f"() => {box}.querySelector('.gtitle').click()")
+    assert page.evaluate(f"() => {box}.classList.contains('closed')") is False
+    page.reload()
+    page.wait_for_selector("#pmg-host")
+    page.evaluate(f"() => {SHADOW}.querySelector('.rbtn[data-drawer=\"settings\"]').click()")
+    assert page.evaluate(f"() => {box}.classList.contains('closed')") is False                            # remembered
+    c.close()
+
+
+def test_the_boxes_of_settings_are_in_the_order_of_use_and_the_drawer_is_short(browser):
+    c, page, errors = new_page(browser)
+    page.goto(GALLERY)
+    page.wait_for_selector("#pmg-host")
+    page.evaluate(f"() => {SHADOW}.querySelector('.rbtn[data-drawer=\"settings\"]').click()")
+    titles = page.evaluate(f"() => [...{SHADOW}.querySelectorAll('section[data-drawer=\"settings\"] .gtitle')].map(t => t.textContent)")
+    assert titles == ["Features", "Notifications", "Lookup sites", "Official register", "Country flags: the side bar", "About"]
+    assert page.evaluate(f"() => {SHADOW}.querySelector('.dbody').scrollHeight") < 1800                       # it was 4400 px
     c.close()

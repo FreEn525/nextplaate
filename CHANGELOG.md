@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.11.7
+
+- **Settings reorganised**: the drawer was 4 400 px tall (the 24 features in one flat list, the 96 flags in the middle). The features are now in five folded families, in the order of use (Send and describe photos, Check a plate, Browse, Profiles and the site, The panel), each with its count ("7 of 8 on"); the family you open stays open. The long boxes (Lookup sites, Country flags) fold by their title and start folded; the boxes follow the order of use (Features, Notifications, Lookup sites, Official register, Country flags, About). The drawer is about 1 250 px tall. Any box of the panel can ask to be foldable (`fold`).
+
 ## 5.11.6
 
 - The Update, What's new and Tags windows had two ways to close (the *Close* of the header and a *Close*, *Got it* or *Cancel* at the foot): only the one of the header is left, and the foot of a window holds only what does something else (*Save*, *Update now*). Closing the Tags window still gives the boxes back as they were.

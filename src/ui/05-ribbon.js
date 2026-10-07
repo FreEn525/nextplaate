@@ -71,7 +71,15 @@
           // a group with lazy: true is built when its drawer is first opened (long lists nobody sees until then: no cost at page load)
           const body = h('div', { class: 'gbody' + (pageNote(g) ? ' idle' : '') }, g.about ? h('p', { class: 'gabout', text: g.about }) : null, pageNote(g));
           if (g.lazy) lazyGroups.push({ drawer: d.id, g, body }); else body.append(...[].concat(g.build()).filter(Boolean));
-          return h('div', { class: 'group' }, body, h('div', { class: 'gtitle', text: g.title }));
+          if (!g.fold) return h('div', { class: 'group' }, body, h('div', { class: 'gtitle', text: g.title }));
+          // fold: 'closed' | 'open': the title is a button that folds the box; the choice is kept (a long list nobody needs open all the time)
+          const key = 'fold_' + g.title, group = h('div', { class: 'group foldable' });
+          const title = h('button', { type: 'button', class: 'gtitle', 'aria-expanded': 'true', text: g.title });
+          const set = closed => { group.classList.toggle('closed', closed); title.setAttribute('aria-expanded', String(!closed)); };
+          set(store.get(key, g.fold === 'closed' ? '1' : '0') === '1');
+          title.onclick = () => { const closed = !group.classList.contains('closed'); set(closed); store.set(key, closed ? '1' : '0'); };
+          group.append(body, title);
+          return group;
         })));
     });
     // the version, at the foot of the rail (the dev build says so); a click opens the update window like the logo does (91-update.js)
