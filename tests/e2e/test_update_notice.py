@@ -138,3 +138,53 @@ def test_with_the_switch_off_nothing_is_asked(ctx):
     page = join(ctx, "localStorage.setItem('pmg_set_feature_updatenotice', '0')")
     page.wait_for_timeout(2500)
     assert ASKED == [] and notices(page) == []
+
+
+INSTALL = "https://update.greasyfork.org/scripts/598722/NextPlaate.user.js"
+
+
+@public_only
+def test_a_page_still_on_the_old_version_offers_to_reload_when_another_tab_runs_a_newer_one(ctx):
+    serve(ctx, VERSION)
+    old = join(ctx)
+    old.evaluate("() => { window.__same_page = 1; }")
+    newer = join(ctx)                                                                        # a page opened after the update runs the new version and says so
+    newer.evaluate("() => localStorage.setItem('pmg_running_version', '99.0')")
+    toast_shown(old)
+    assert notices(old)[0][0] == "NextPlaate 99.0 is installed"
+    old.evaluate(f"() => {TOASTS}.querySelector('.t.update .ti').click()")
+    old.wait_for_function("() => window.__same_page === undefined", timeout=15000)           # it reloaded: the page is a new one
+    old.wait_for_selector("#pmg-host")
+
+
+@public_only
+def test_every_page_writes_the_version_it_runs_and_never_lowers_it(ctx):
+    serve(ctx, VERSION)
+    page = join(ctx)
+    assert page.evaluate("() => localStorage.getItem('pmg_running_version')") == VERSION
+    page.evaluate("() => localStorage.setItem('pmg_running_version', '99.0')")
+    page.reload()
+    page.wait_for_selector("#pmg-host")
+    assert page.evaluate("() => localStorage.getItem('pmg_running_version')") == "99.0"
+
+
+@public_only
+def test_after_the_install_link_the_page_offers_to_reload_when_it_comes_back_into_view(ctx):
+    serve(ctx, "99.0")
+    ctx.route(INSTALL, lambda r: r.fulfill(status=200, content_type="text/plain", body=""))
+    page = join(ctx)
+    toast_shown(page)
+    page.evaluate(f"() => {TOASTS}.querySelector('.t.update .ti').click()")                  # the install page opens in a new tab
+    page.evaluate("() => document.dispatchEvent(new Event('visibilitychange'))")             # the person comes back to this one
+    page.wait_for_function(f"() => [...{TOASTS}.querySelectorAll('.t.update .ti')].some(t => t.textContent === 'Updated NextPlaate?')", timeout=15000)
+
+
+@public_only
+def test_the_cross_does_not_count_as_an_install(ctx):
+    serve(ctx, "99.0")
+    page = join(ctx)
+    toast_shown(page)
+    page.evaluate(f"() => {TOASTS}.querySelector('.t.update .x').click()")
+    page.evaluate("() => document.dispatchEvent(new Event('visibilitychange'))")
+    page.wait_for_timeout(1500)
+    assert notices(page) == []

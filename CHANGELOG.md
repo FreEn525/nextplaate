@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.11.12
+
+- **Reload after an update**: Tampermonkey does not reload the open pages, which keep the old version. A page still on the old version now offers "Reload" when another tab runs a newer one, or when you come back to it after using the install link. Never reloaded by itself, so a description being typed or an upload is not lost. The cross is not counted as an install.
+
 ## 5.11.11
 
 - **Update notice, more often**: about every 20 minutes (a time 15 to 25 minutes ahead is kept, so the tabs share it and the users do not all ask together) instead of 3 hours, and a page that stays open looks again by itself (a timer asks every 5 minutes if it is time). A version published meanwhile, or several in a row, is announced; the cross or the link says "not again for this version". A failed look is tried again in 10 minutes. The request is the 1.3 KB header of the published script.

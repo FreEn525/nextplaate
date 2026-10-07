@@ -2,7 +2,7 @@
 // @name         NextPlaate
 // @namespace    nextplaate
 // @icon         data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20201.1%20201.7%22%3E%3Cstyle%3E.a%7Bfill:%233781c5%7D.b%7Bfill:%23529bde%7D.c%7Bfill:%2382c3ff%7D.w%7Bfill:%23fff%7D%3C/style%3E%3Cg%20transform=%22translate%28-551%20-180.5%29%22%3E%3Ccircle%20cx=%22651.5%22%20cy=%22281.4%22%20r=%2296%22%20class=%22w%22/%3E%3Cpath%20d=%22M650.7%20188.5a101%20101%200%200%200-20.4%202.2%2086%2086%200%200%200-23.5%209%2089%2089%200%200%200-34.8%2033.8%2088%2088%200%200%200-9.6%2023%20100%20100%200%200%200-3.3%2026.8%2091%2091%200%200%200%207.2%2033.4l2.3-1.8a71%2071%200%200%201%2016.2-8.7%2070%2070%200%200%201%2012.3-3.6v-52l.9-2a12%2012%200%200%201%202.8-4%2012%2012%200%200%201%204-2.4%209%209%200%200%201%203.9-.6q.4%200%20.7-.2l.4-.4.5-.8q.4-.8%201-1.5l2.2-2.2%202-1%201.4-.2q1.5-.3%204-.3a156%20156%200%200%201%2015%20.5l1.2.5%202.3%201.7a9%209%200%200%201%201.7%202.4l.8%201.4h13v-4.7l.3-1.8q0-1.5.3-2.8l.2-1%20.8-3.5v-.4l1.3-4%201.6-4.3%201.8-4%202-3.9%202-3.6.6-.9%203.5-5.4.7-.9%202.8-4%202.6-3%20.9-1-4-1.3a91%2091%200%200%200-14-2.3z%22%20class=%22a%22/%3E%3Cpath%20d=%22m676.3%20192.2-.9%201-2.5%203.2q-1.4%201.6-3%204l-.6.8-3.5%205.4-.6.9a101%20101%200%200%200-7.4%2015.8l-1.2%204-.1.4-.8%203.4-.2%201.1-.3%202.7-.3%202v4.6H690l3.8.3q1%200%201.7.4.9.3%201.8%201t1.7%201.4a15%2015%200%200%201%202.7%203.6l1%202v35l-.4%2035.3-.4%201.6a13%2013%200%200%201-2.4%203.4q-.7.8-1.5%201.3-.7.6-1.8%201L694%20329h-11.2l.6%201.4a246%20246%200%200%200%2011.4%2020.7%2065%2065%200%200%200%207%208.4%2077%2077%200%200%200%2017.3-14.9%2098%2098%200%200%200%2016.5-25%2090%2090%200%200%200%206.8-21.9%20114%20114%200%200%200%201.2-9.5%20131%20131%200%200%200-.5-19.2%20121%20121%200%200%200-6.7-24.3l-1-2-.6-.2h-2.1l-.2%204.6a34%2034%200%200%201-.6%205.4l-1.2%202.5a13%2013%200%200%201-4%203.9%2012%2012%200%200%201-6.3%201.7%2012%2012%200%200%201-9.4-5%209%209%200%200%201-1.9-4.7l-.3-3.7-.2-5-4.7-.2-4.3-.3q-.7%200-1.3-.4L696%20240a12%2012%200%200%201-3-3.2%2011%2011%200%200%201-1.5-4.1%2015%2015%200%200%201%20.5-7l1.2-2.2a15%2015%200%200%201%205.2-4.3l1.1-.5%202.7-.5q1.5-.2%203.4-.2h3.4v-8.6l-1.8-1.6a50%2050%200%200%200-9-6.1%2093%2093%200%200%200-18.4-8.4z%22%20class=%22c%22/%3E%3Cpath%20d=%22M701.8%20359.5a26%2026%200%200%201-3.3-3.5%2064%2064%200%200%201-7.3-10.9%20179%20179%200%200%201-7.6-14.7l-.7-1.4h-63.2c-8%200-13.2-.1-13.5-.2l-1.3-.4-1.2-.6-1.2-.7-1.1-.8-1-1a14%2014%200%200%201-2.4-3.4l-1-2v-17.4a59%2059%200%200%200-12.2%203.6%2078%2078%200%200%200-16.2%208.8l-2.3%201.7a92%2092%200%200%200%2031.3%2039.8%2095%2095%200%200%200%2053.3%2018.3l7-.4a88%2088%200%200%200%2029.2-7%2088%2088%200%200%200%2014.7-7.8%22%20class=%22b%22/%3E%3Cpath%20d=%22M720.3%20202.8a8%208%200%200%201%205%201.4%207%207%200%200%201%203%205.3v12.8h6.5l7.3.5%202%20.8.8.7%201.7%202.1a8%208%200%200%201%201%202.9v1.5a8%208%200%200%201-1.4%204.2l-1%201.2q-.8.8-1.6%201.2l-1.9.7q-1%20.3-2.7.3l-4.3.1h-6.3v6.1l-.5%207.2-.6%201.2a8%208%200%200%201-2.2%202.2l-1.3.8a7%207%200%200%201-7-.4%208%208%200%200%201-3.8-5.8V238h-6l-6.7-.4-1.7-.7-1.4-1.3-1-1.2a6%206%200%200%201-1-2.7V229a8%208%200%200%201%201.3-3.4%209%209%200%200%201%202.5-2.4l1-.5%202.5-.3%204.5-.1h6v-6.7l.4-7.4.8-1.9a8%208%200%200%201%204.4-3.2zm-68.5%2073.3a21%2021%200%200%200-4.4.6%2012%2012%200%200%200-3.5%202%2014%2014%200%200%200-4.5%206.6v1.1l.8%201.2.5.3.5.1h.4q.3%200%20.5-.3.3%200%20.5-.4l.9-1.3a10%2010%200%200%201%201.6-2.5%209%209%200%200%201%205-2.6%2011%2011%200%200%201%203.2-.1h1.8q.3%200%20.5-.3.2%200%20.4-.5l.5-.9.1-.7q0-.4-.3-.8l-.7-.7-1.4-.6z%22%20class=%22a%22/%3E%3Cpath%20d=%22M649.2%20255.6a27%2027%200%200%200-11.7%203%2032%2032%200%200%200-8.2%206%2032%2032%200%200%200-6%209%2029%2029%200%200%200-1.7%204.9l-.4%203a42%2042%200%200%200%20.4%2010%2025%2025%200%200%200%202.6%206.7%2034%2034%200%200%200%207.4%209.4%2031%2031%200%200%200%2012%206%2028%2028%200%200%200%2013.3-.1%2024%2024%200%200%200%207-3%2031%2031%200%200%200%2012.3-13.7%2030%2030%200%200%200-1.9-27.5%2029%2029%200%200%200-11.2-10.5%2028%2028%200%200%200-13.8-3.2zm1.5%209.4a19%2019%200%200%201%2012.6%205.3%2020%2020%200%200%201%205.7%209.8%2019%2019%200%200%201-2.2%2014.8%2021%2021%200%200%201-12%209.3l-1.6.2a54%2054%200%200%201-8.1-.2%2013%2013%200%200%201-3.6-1.4%2023%2023%200%200%201-9-8.4%2020%2020%200%200%201-1.5-15.1%2020%2020%200%200%201%204.8-8.2%2021%2021%200%200%201%208.1-5.2%2019%2019%200%200%201%206.8-1m28.9-10.2h13.9v9.1h-13.9z%22%20class=%22a%22/%3E%3Cpath%20d=%22M649.9%20180.5a173%20173%200%200%200-12.5.7%20113%20113%200%200%200-27.2%207.5%2097%2097%200%200%200-26.7%2017.5%20165%20165%200%200%200-11%2012%20103%20103%200%200%200-15.8%2029.2%20107%20107%200%200%200-5.4%2025%20128%20128%200%200%200%201%2025%20109%20109%200%200%200%208.4%2027%2099%2099%200%200%200%2035.7%2041%20106%20106%200%200%200%2035.1%2014.9%2096%2096%200%200%200%2031.7%201.4%2097%2097%200%200%200%2044.8-17%20104%20104%200%200%200%2027.8-28.6%20100%20100%200%200%200%2016.3-56.2%20106%20106%200%200%200-3.5-24.8l-2.5-7.8-2-5.3-1.2.2-1.6.3-.9.1-.2.3v.4l.3%201.5%201%202.6a98%2098%200%200%201%201.9%2062%20102%20102%200%200%201-23.6%2039.8%20103%20103%200%200%201-33.3%2022%2097%2097%200%200%201-28.5%206.5%20127%20127%200%200%201-21.8-1%2092%2092%200%200%201-29.9-10.5%20101%20101%200%200%201-30.3-25.6%2097%2097%200%200%201-5.9-111.1%2096%2096%200%200%201%2028-29%2091%2091%200%200%201%2029.4-12.8%20119%20119%200%200%201%2012.9-2.2%20151%20151%200%200%201%2020.3-.1%20110%20110%200%200%201%2023.6%205.6%2091%2091%200%200%201%2021%2011.1l4.6%203.1%201.2-1.6.8-1.5v-.4l-.4-.5q-.5-.6-2.2-1.7a125%20125%200%200%200-20.5-11.6%20102%20102%200%200%200-39-7.4z%22%20class=%22a%22/%3E%3Cpath%20d=%22m720.8%20199.7-2.7.3a12%2012%200%200%200-5.9%203.1l-1.7%202.2a12%2012%200%200%200-1.6%203.8l-.3%204.2-.2%204.6h4.5v-2.2l.4-7.2.6-1.2a8%208%200%200%201%202.2-2.1l1.3-.8a8%208%200%200%201%203-.7%207%207%200%200%201%202.8.5%208%208%200%200%201%202.5%201.5l1%201.1a8%208%200%200%201%201.5%203.8l.1%205.5v6.2h6l6.6.4%201.7.7%201.4%201.3%201%201.3a6%206%200%200%201%201%202.6v2.8a8%208%200%200%201-1.3%203.4%208%208%200%200%201-3.4%203l-2.6.2-4.5.1h-5.9v4.4h7.4a29%2029%200%200%200%206-.7l2.3-1.1a15%2015%200%200%200%205.3-6l.6-2.4a16%2016%200%200%200-1-7.4l-1.4-2.4a10%2010%200%200%200-2.2-2l-2.5-1.4-1.3-.4-1.7-.2-2.6-.2-4.7-.2-.2-5-.6-5-.9-2.4-.7-1a15%2015%200%200%200-4.2-3.6%2011%2011%200%200%200-3.9-1.3zm10.7%2050.2.8%201.2v-1.2z%22%20class=%22w%22/%3E%3C/g%3E%3C/svg%3E
-// @version      5.11.11
+// @version      5.11.12
 // @author       NextEnzzo (https://platesmania.com/user121559)
 // @copyright    2026, NextEnzzo
 // @license      All rights reserved. Copyright 2026 NextEnzzo. Free to use; no copying, modifying or redistributing.
@@ -2637,8 +2637,9 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
   `;
   /* =====================================================================
    *  TOAST  (a small notice that comes up in a corner and goes by itself, like a phone's)
-   *      toast({ title, body, href, kind, ms, onClose })   kind: 'like' | 'comment' | 'message' | 'update' | 'other' (the colour and the word on it)
-   *                                          onClose: runs when the cross or the link is used (not when the notice goes by itself)
+   *      toast({ title, body, href, kind, ms, onClose, onClick })   kind: 'like' | 'comment' | 'message' | 'update' | 'other' (the colour and the word on it)
+   *                                          onClose('link' | 'cross'): runs when the link or the cross is used (not when the notice goes by itself)
+   *                                          onClick: without href, the title is a button that runs it (and closes the notice)
    *    They stack above the panel's rail, bottom right. Pointing at one keeps it; the cross or a click on the title closes it; a click on
    *    the line opens its link in a new tab. Under reduced motion they appear without sliding. It is in a shadow root, in the panel's tokens.
    * ===================================================================== */
@@ -2649,6 +2650,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     .t.like{border-left-color:var(--danger)}.t.comment{border-left-color:var(--ok-ink)}.t.message{border-left-color:var(--primary)}.t.update{border-left-color:var(--primary-h)}
     .t .k{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
     .t a.ti{font-size:14px;font-weight:600;color:var(--ink);text-decoration:none;overflow-wrap:anywhere}
+    .t a.ti{cursor:pointer}
     .t a.ti:hover{color:var(--primary-h);text-decoration:underline}
     .t .b{font-size:12px;color:var(--mute)}
     .t .x{position:absolute;top:4px;right:4px;width:var(--h-sm);height:var(--h-sm);display:grid;place-items:center;border:0;background:none;color:var(--mute);font:inherit;font-size:16px;cursor:pointer}
@@ -2658,7 +2660,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
   `;
   let toastStack = null;
 
-  function toast({ title, body = '', href = '', kind = 'other', ms = 9000, onClose = null }) {
+  function toast({ title, body = '', href = '', kind = 'other', ms = 9000, onClose = null, onClick = null }) {
     if (!toastStack || !toastStack.isConnected) {
       const host = h('div', { id: 'pmg-toasts' });
       host.style.cssText = 'position:fixed;inset:0;z-index:2147483646;pointer-events:none';
@@ -2669,9 +2671,11 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     }
     const el = h('div', { class: 't ' + kind },
       h('span', { class: 'k', text: TOAST_WORDS[kind] || TOAST_WORDS.other }),
-      href ? h('a', { class: 'ti', href, target: '_blank', rel: 'noopener noreferrer', text: title, onclick: () => { if (onClose) onClose(); } }) : h('span', { class: 'ti', text: title }),
+      href ? h('a', { class: 'ti', href, target: '_blank', rel: 'noopener noreferrer', text: title, onclick: () => { if (onClose) onClose('link'); } })
+        : onClick ? h('a', { class: 'ti', role: 'button', tabindex: '0', text: title, onclick: () => { el.remove(); onClick(); } })
+        : h('span', { class: 'ti', text: title }),
       body ? h('span', { class: 'b', text: body }) : null,
-      h('button', { type: 'button', class: 'x', title: 'Close', 'aria-label': 'Close', text: '\u00d7', onclick: () => { el.remove(); if (onClose) onClose(); } }));
+      h('button', { type: 'button', class: 'x', title: 'Close', 'aria-label': 'Close', text: '\u00d7', onclick: () => { el.remove(); if (onClose) onClose('cross'); } }));
     let timer = 0;
     const arm = () => { clearTimeout(timer); timer = setTimeout(() => el.remove(), ms); };
     el.addEventListener('mouseenter', () => clearTimeout(timer));
@@ -5234,7 +5238,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
    *    just been chosen; not after a fix such as 5.9 -> 5.9.1),
    *    and any time from the button in Settings. It reads WHATS_NEW (src/lib/whatsnew.js).
    * ===================================================================== */
-  const SCRIPT_VERSION = "5.11.11";
+  const SCRIPT_VERSION = "5.11.12";
 
   // One block per version: its title, then its sections. Several versions are stacked, the newest first.
   function whatsNewBody(entries) {
@@ -5363,9 +5367,31 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
    *    link to the install page, where Tampermonkey offers the update. Tampermonkey updates by itself only every few hours: a version
    *    published meanwhile, or several in a row, is announced here (the cross or the link says "not again for this version"; letting
    *    the notice go by does not). A page that stays open looks again by itself (a timer every 5 minutes asks if it is time). A look that
-   *    fails is tried again in 10 minutes. Never in the dev build (it is updated by building it again). Switch off in Settings.
+   *    fails is tried again in 10 minutes. After the update, a page still runs the old version (Tampermonkey does not reload pages): every page
+   *    writes the version it runs (pmg_running_version) and one that sees a newer one written by another tab, or that comes back into view after
+   *    the install link was used, offers "Reload" (never by itself: a description being typed or an upload must not be lost). Never in the dev build (it is updated by building it again). Switch off in Settings.
    * ===================================================================== */
   const UPDATE_EVERY_MS = 20 * 60000;
+
+  let installOpened = false;                                                                      // the install link was used from this page
+
+  function reloadNotice(title, body) {
+    toast({ title, body, kind: 'update', ms: 60000, onClick: () => location.reload() });
+  }
+
+  function watchRunningVersion() {
+    const seen = store.get('running_version', '');
+    if (!seen || versionNewer(SCRIPT_VERSION, seen)) store.set('running_version', SCRIPT_VERSION);        // this page is the newest one so far
+    window.addEventListener('storage', e => {
+      if (e.key !== 'pmg_running_version' || !e.newValue || !versionNewer(e.newValue, SCRIPT_VERSION)) return;
+      reloadNotice(`NextPlaate ${e.newValue} is installed`, `This page still runs ${SCRIPT_VERSION}. Click here to reload it.`);
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState !== 'visible' || !installOpened) return;
+      installOpened = false;
+      reloadNotice('Updated NextPlaate?', 'If you installed it, click here to reload this page and use it.');
+    });
+  }
 
   async function updateNotice() {
     if ('0' === '1') return;
@@ -5376,13 +5402,14 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     try { latest = await updateLatest(); } catch (e) { store.set('update_due', String(now + 600000)); return; }       // failed: again in 10 minutes
     if (!versionNewer(latest, SCRIPT_VERSION) || store.get('update_dismissed', '') === latest) return;
     toast({ title: `NextPlaate ${latest} is available`, body: `You have ${SCRIPT_VERSION}. Click here to install it now; Tampermonkey also updates it by itself.`, href: UPDATE_INSTALL, kind: 'update', ms: 20000,
-      onClose: () => store.set('update_dismissed', latest) });
+      onClose: how => { store.set('update_dismissed', latest); if (how === 'link') installOpened = true; } });
   }
 
   registerFeature({
     id: 'updatenotice', label: 'Update notice',
     groups: [],
     init: () => {
+      watchRunningVersion();
       const look = () => { if (document.visibilityState === 'visible') updateNotice(); };
       setTimeout(look, 3000 * siteScale());                                                       // a moment after the page, not with it
       document.addEventListener('visibilitychange', () => setTimeout(look, 1000 * siteScale()));  // a tab brought back into view looks if it is time
