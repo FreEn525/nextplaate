@@ -52,7 +52,7 @@
   function membersMeAvatar(me) {
     if (!me || me.avatar || meAvatarAsked) return;
     meAvatarAsked = true;
-    siteFetch('/user' + me.id).then(text => {
+    siteFetch('/user' + me.id, undefined, { low: true }).then(text => {
       const m = memberInfo(new DOMParser().parseFromString(text, 'text/html'), me.id);
       if (m && m.avatar) { store.set('members_me', JSON.stringify({ ...me, avatar: m.avatar })); membersRefresh(); }
     }).catch(() => { /* the line shows the initial instead */ });

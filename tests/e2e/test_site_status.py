@@ -71,3 +71,18 @@ def test_a_missing_page_is_still_an_answer(ctx):
     page = open_page(ctx)
     check(page, 2)
     assert level(page) in ("ok", "unknown")                                             # never red: the site answered
+
+
+def test_a_block_pauses_for_three_minutes_and_a_second_one_within_the_hour_for_ten(ctx):
+    ctx.route("https://platesmania.com/robots.txt", lambda r: r.fulfill(status=429, content_type="text/plain", body="slow down"))
+    page = open_page(ctx)
+    check(page, 1)
+    n, at = page.evaluate("() => [localStorage.getItem('pmg_siteBlockN'), +localStorage.getItem('pmg_siteBlock')]")
+    assert n == "1" and abs(page.evaluate("() => Date.now()") - at) < 20000
+    assert "Paused until" in title(page)
+    # the pause of 3 minutes is over; the site blocks again within the hour: the next pause is longer
+    page.evaluate("() => { localStorage.setItem('pmg_siteBlock', String(Date.now() - 4 * 60000)); }")
+    page.reload()
+    page.wait_for_selector("#pmg-host")
+    check(page, 1)
+    assert page.evaluate("() => localStorage.getItem('pmg_siteBlockN')") == "2"

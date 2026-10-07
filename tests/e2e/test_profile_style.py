@@ -160,3 +160,17 @@ def test_a_plate_picture_keeps_its_proportions_however_narrow_its_card(prof):
     prof.evaluate("() => { const w = document.querySelector('.pm-plate-well'); w.style.width = '24px'; w.style.padding = '0'; w.style.boxSizing = 'border-box'; }")
     w, h = prof.evaluate("() => { const r = document.querySelector('.pm-plate-well img').getBoundingClientRect(); return [r.width, r.height]; }")
     assert 0 < w <= 24.5 and abs(w - h) < 1                                            # narrower than the card allows: smaller, not squeezed
+
+
+def test_the_comments_tile_keeps_both_links_of_the_site_what_you_received_and_what_you_wrote(prof):
+    prof.wait_for_selector(".pm-tile")
+    got = prof.evaluate("() => { const t = [...document.querySelectorAll('.pm-tile')].find(x => x.textContent.startsWith('Comments')); return [t.querySelector('.pm-main a').getAttribute('href'), t.querySelector('.pm-sub a').getAttribute('href'), t.querySelector('.pm-sub a').textContent]; }")
+    assert got == ["/c", "/d", "27"]
+
+
+def test_each_notification_has_its_kind_and_the_picture_of_the_member_or_his_letter(prof):
+    prof.wait_for_selector("ul.mCustomScrollbar li > div[data-pm-kind]")
+    assert prof.evaluate("() => document.querySelector('ul.mCustomScrollbar li > div').dataset.pmKind") == "like"
+    prof.wait_for_function("() => document.querySelector('ul.mCustomScrollbar .pm-ava')")
+    prof.wait_for_function("() => document.querySelector('ul.mCustomScrollbar .pm-ava').textContent === 'A'", timeout=10000)        # no picture on the fake forum: the letter
+    assert prof.evaluate("() => getComputedStyle(document.querySelector('ul.mCustomScrollbar li > div')).backgroundColor") != "rgba(0, 0, 0, 0)"      # tinted

@@ -28,7 +28,9 @@
     .profile.pm-built .service-block-v3,.profile.pm-built .tag-box-v7,.profile.pm-built .badge-lists li:last-child{display:none}
     .pm-tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0 0 12px}
     .pm-tile{display:flex;flex-direction:column;gap:2px;min-width:0;padding:10px 12px;border:1px solid var(--pm-line);background:#fff;color:var(--pm-ink);text-decoration:none}
-    .pm-tile.link:hover{background:var(--pm-tint);border-color:var(--pm-soft);color:var(--pm-ink);text-decoration:none}
+    .pm-tile a{color:inherit;text-decoration:none}
+    .pm-tile a:hover{color:var(--pm);text-decoration:underline}
+    .pm-sub a{color:var(--pm);font-weight:600}
     .pm-label{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--pm-mute)}
     .pm-main{display:flex;align-items:baseline;gap:6px;font-size:18px;font-weight:700;line-height:1.3;overflow-wrap:anywhere}
     .pm-delta{font-size:12px;font-weight:600;color:var(--pm-mute)}
@@ -45,16 +47,24 @@
     .profile .profile-notification-actions .btn{display:grid;place-items:center;width:32px;height:32px;margin:0;padding:0;border:1px solid transparent;color:var(--pm-mute)}
     .profile .profile-notification-actions .btn:hover,.profile .profile-notification-actions .btn:focus{background:var(--pm-tint);border-color:var(--pm-soft);color:var(--pm)}
     .profile .panel-body.mCustomScrollbar,.profile ul.mCustomScrollbar{height:380px!important;max-height:380px;margin:0}
-    .profile .profile-notification-card{margin:0;padding:10px 12px;border:0;border-bottom:1px solid var(--pm-line);border-left:3px solid var(--pm);background:#fff!important;box-shadow:none;color:var(--pm-ink)}
-    .profile .profile-notification-card[data-notification-category=deleted]{border-left-color:var(--pm-danger)}
-    .profile .profile-notification-card[data-notification-category=comments]{border-left-color:var(--pm-ok)}
-    .profile .profile-notification-card[data-notification-category=awards]{border-left-color:var(--pm-warn)}
-    .profile .profile-notification-card-type{font-size:12px;color:var(--pm-mute)}
+    .profile .profile-notification-card{--pm-cat:var(--pm);margin:0;padding:10px 12px;border:0;border-bottom:1px solid var(--pm-line);border-left:5px solid var(--pm-cat);background:color-mix(in srgb,var(--pm-cat) 13%,#fff)!important;box-shadow:none;color:var(--pm-ink)}
+    .profile .profile-notification-card[data-notification-category=deleted]{--pm-cat:var(--pm-danger)}
+    .profile .profile-notification-card[data-notification-category=comments]{--pm-cat:var(--pm-ok)}
+    .profile .profile-notification-card[data-notification-category=awards]{--pm-cat:var(--pm-warn)}
+    .profile .profile-notification-card-type{display:inline-block;padding:3px 8px;background:color-mix(in srgb,var(--pm-cat) 70%,#000);font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#fff}
     .profile .profile-notification-card-title a{font-size:14px;font-weight:700;color:var(--pm)}
     .profile .profile-notification-card-meta{font-size:12px;color:var(--pm-mute)}
     /* the notifications: one line each, the plate as its picture, the time on the right; the rest comes as the list is scrolled */
     .profile ul.mCustomScrollbar li > div{display:flex;align-items:center;gap:8px;min-height:44px;margin:0;padding:6px 12px;border-bottom:1px solid var(--pm-line);background:transparent!important;font-size:13px}
-    .profile ul.mCustomScrollbar li > div:hover{background:var(--pm-tint)!important}
+    .profile ul.mCustomScrollbar li > div[data-pm-kind=like]{background:color-mix(in srgb,var(--pm-danger) 8%,#fff)!important;box-shadow:inset 3px 0 0 var(--pm-danger)}
+    .profile ul.mCustomScrollbar li > div[data-pm-kind=comment]{background:color-mix(in srgb,var(--pm-ok) 12%,#fff)!important;box-shadow:inset 3px 0 0 var(--pm-ok)}
+    .profile ul.mCustomScrollbar li > div[data-pm-kind=other]{background:var(--pm-tint)!important;box-shadow:inset 3px 0 0 var(--pm)}
+    .profile ul.mCustomScrollbar li > div[data-pm-kind=like]:hover{background:color-mix(in srgb,var(--pm-danger) 15%,#fff)!important}
+    .profile ul.mCustomScrollbar li > div[data-pm-kind=comment]:hover{background:color-mix(in srgb,var(--pm-ok) 20%,#fff)!important}
+    .profile ul.mCustomScrollbar li > div[data-pm-kind=other]:hover{background:color-mix(in srgb,var(--pm) 14%,#fff)!important}
+    .profile ul.mCustomScrollbar li .fa-comment,.profile ul.mCustomScrollbar li .fa-comments{color:color-mix(in srgb,var(--pm-ok) 70%,#000)}
+    .pm-ava{display:grid;place-items:center;flex:none;width:28px;height:28px;overflow:hidden;border:1px solid var(--pm-line2);background:var(--pm-soft);font-size:12px;font-weight:700;color:var(--pm)}
+    .pm-ava img{display:block;width:100%;height:100%;object-fit:cover}
     .profile ul.mCustomScrollbar li a{color:var(--pm);font-weight:600}
     .profile ul.mCustomScrollbar li .fa-hand-o-right{color:var(--pm-mute)}
     .profile ul.mCustomScrollbar li .pull-right{margin:0 0 0 auto;font-size:12px;white-space:nowrap;color:var(--pm-mute)}

@@ -19,18 +19,21 @@
     const rate = root.querySelector('a[href^="/aktivuserall"]');
     const rating = rate && rate.parentElement.querySelector('.badge');
     const delta = rating && rating.querySelector('font');
-    const tile = ({ label, main, sub, href, extra, tone }) => h(href ? 'a' : 'div', { class: 'pm-tile' + (href ? ' link' : ''), href: href || undefined },
+    // A tile: a label, the main figure (a link when the site links it) and a line under it; a figure of that line can be a link too
+    const tile = ({ label, main, href, extra, tone, sub }) => h('div', { class: 'pm-tile' },
       h('span', { class: 'pm-label', text: label }),
-      h('span', { class: 'pm-main' }, main, extra ? h('span', { class: 'pm-delta ' + (tone || ''), text: extra }) : null),
-      h('span', { class: 'pm-sub', text: sub || '\u00a0' }));
+      h('span', { class: 'pm-main' }, href ? h('a', { href, text: main }) : main, extra ? h('span', { class: 'pm-delta ' + (tone || ''), text: extra }) : null),
+      h('span', { class: 'pm-sub' }, ...(sub && sub.length ? sub : ['\u00a0'])));
     const plus = h4 => profileText(h4 && h4.querySelector('.badge'));
     const link = h4 => { const a = h4 && h4.querySelector('b a'); return a ? a.getAttribute('href') : ''; };
     const sign = text => (/^\(?-/.test(text) ? 'down' : 'up');
+    // "received \u00b7 posted 27", the 27 a link to what you wrote when the site gives one (the comments you wrote, the ones you received)
+    const both = (received, posted) => ['received \u00b7 posted ', link(posted) ? h('a', { href: link(posted), text: value(posted) || '-' }) : (value(posted) || '-')];
     const tiles = h('div', { class: 'pm-tiles' },
-      tile({ label: 'Plates', main: profileText(total) || '-', sub: 'uploaded', href: total ? total.getAttribute('href') : '' }),
-      tile({ label: 'Likes', main: value(cells[0]) || '-', sub: `received \u00b7 posted ${value(cells[1]) || '-'}` }),
-      tile({ label: 'Comments', main: value(cells[2]) || '-', sub: `received \u00b7 posted ${value(cells[3]) || '-'}`, extra: plus(cells[2]), tone: 'up', href: link(cells[2]) }),
-      tile({ label: 'Rating', main: rating ? '#' + profileText(rating).replace(/\s*\(.*$/, '') : '-', sub: 'place among members', extra: delta ? profileText(delta) : '', tone: delta ? sign(profileText(delta)) : '', href: rate ? rate.getAttribute('href') : '' }));
+      tile({ label: 'Plates', main: profileText(total) || '-', href: total ? total.getAttribute('href') : '', sub: ['uploaded'] }),
+      tile({ label: 'Likes', main: value(cells[0]) || '-', href: link(cells[0]), sub: both(cells[0], cells[1]) }),
+      tile({ label: 'Comments', main: value(cells[2]) || '-', href: link(cells[2]), extra: plus(cells[2]), tone: 'up', sub: both(cells[2], cells[3]) }),
+      tile({ label: 'Rating', main: rating ? '#' + profileText(rating).replace(/\s*\(.*$/, '') : '-', href: rate ? rate.getAttribute('href') : '', extra: delta ? profileText(delta) : '', tone: delta ? sign(profileText(delta)) : '', sub: ['place among members'] }));
     uploads.parentNode.insertBefore(tiles, uploads);
     return tiles;
   }

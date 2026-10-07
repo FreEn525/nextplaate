@@ -1,6 +1,6 @@
   /* =====================================================================
    *  UPDATE  (a click on the logo of the panel: is there a newer version of the script?)
-   *    Asks Greasy Fork for the header of the published script (one small file, only when the logo is clicked) and compares its
+   *    Asks Greasy Fork for the header of the published script (one small file, only when the logo is clicked; up to three tries) and compares its
    *    @version with this one. A newer one: a button opens the install page, where Tampermonkey offers the update. Greasy Fork
    *    answers with access-control-allow-origin: *, so a plain fetch works and no extra permission is needed.
    *    The dev build is never compared with the published script: it is updated by building it again.
@@ -15,16 +15,22 @@
     return false;
   }
 
-  // The version of the published script, from its header; rejects when it cannot be read in 10 s
+  // The version of the published script, from its header. Three tries, a pause longer each time (a first request that fails is often
+  // a hiccup), and a new address each time: a copy kept by a cache between Greasy Fork and you cannot hide a version just published.
   async function updateLatest() {
-    const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), 10000);
-    try {
-      const res = await fetch(UPDATE_META, { signal: ctrl.signal, cache: 'no-store' });
-      if (!res.ok) throw new Error('Greasy Fork answered ' + res.status);
-      const m = /@version\s+(\S+)/.exec(await res.text());
-      if (!m) throw new Error('no version in the answer');
-      return m[1];
-    } finally { clearTimeout(timer); }
+    let failure;
+    for (const pause of [0, 1500, 4000]) {
+      if (pause) await new Promise(r => setTimeout(r, pause));
+      const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), 10000);
+      try {
+        const res = await fetch(`${UPDATE_META}?t=${Date.now()}`, { signal: ctrl.signal });
+        if (!res.ok) throw new Error('Greasy Fork answered ' + res.status);
+        const m = /@version\s+(\S+)/.exec(await res.text());
+        if (!m) throw new Error('no version in the answer');
+        return m[1];
+      } catch (e) { failure = e; } finally { clearTimeout(timer); }
+    }
+    throw failure;
   }
 
   function updateOpen() {

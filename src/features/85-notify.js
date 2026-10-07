@@ -38,12 +38,12 @@
     store.set('notify_last_list', String(now));
     const seen = notifyLoad('notify_seen', { keys: [] });
     let fresh = [];
-    try { fresh = fresh.concat(notifyFresh(notifyParseList(await siteFetch(`/action2.php?num=0&user=${me.id}`)), seen, 'list')); } catch (e) { /* the site is busy: next time */ }
+    try { fresh = fresh.concat(notifyFresh(notifyParseList(await siteFetch(`/action2.php?num=0&user=${me.id}`, undefined, { low: true })), seen, 'list')); } catch (e) { /* the site is busy: next time */ }
     if (force || now - +store.get('notify_last_msgs', '0') >= Math.max(every * 2, 600000)) {         // the profile page is heavy: less often
       store.set('notify_last_msgs', String(now));
       try {
         const mine = here.profile && location.pathname.replace(/\/$/, '') === '/user' + me.id;               // on your own profile the cards are already here
-        fresh = fresh.concat(notifyFresh(notifyParseMessages(mine ? document.documentElement.outerHTML : await siteFetch('/user' + me.id)), seen, 'msgs'));
+        fresh = fresh.concat(notifyFresh(notifyParseMessages(mine ? document.documentElement.outerHTML : await siteFetch('/user' + me.id, undefined, { low: true })), seen, 'msgs'));
       } catch (e) { /* idem */ }
     }
     store.set('notify_seen', JSON.stringify(seen));

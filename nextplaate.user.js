@@ -2,7 +2,7 @@
 // @name         NextPlaate
 // @namespace    nextplaate
 // @icon         data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20201.1%20201.7%22%3E%3Cstyle%3E.a%7Bfill:%233781c5%7D.b%7Bfill:%23529bde%7D.c%7Bfill:%2382c3ff%7D.w%7Bfill:%23fff%7D%3C/style%3E%3Cg%20transform=%22translate%28-551%20-180.5%29%22%3E%3Ccircle%20cx=%22651.5%22%20cy=%22281.4%22%20r=%2296%22%20class=%22w%22/%3E%3Cpath%20d=%22M650.7%20188.5a101%20101%200%200%200-20.4%202.2%2086%2086%200%200%200-23.5%209%2089%2089%200%200%200-34.8%2033.8%2088%2088%200%200%200-9.6%2023%20100%20100%200%200%200-3.3%2026.8%2091%2091%200%200%200%207.2%2033.4l2.3-1.8a71%2071%200%200%201%2016.2-8.7%2070%2070%200%200%201%2012.3-3.6v-52l.9-2a12%2012%200%200%201%202.8-4%2012%2012%200%200%201%204-2.4%209%209%200%200%201%203.9-.6q.4%200%20.7-.2l.4-.4.5-.8q.4-.8%201-1.5l2.2-2.2%202-1%201.4-.2q1.5-.3%204-.3a156%20156%200%200%201%2015%20.5l1.2.5%202.3%201.7a9%209%200%200%201%201.7%202.4l.8%201.4h13v-4.7l.3-1.8q0-1.5.3-2.8l.2-1%20.8-3.5v-.4l1.3-4%201.6-4.3%201.8-4%202-3.9%202-3.6.6-.9%203.5-5.4.7-.9%202.8-4%202.6-3%20.9-1-4-1.3a91%2091%200%200%200-14-2.3z%22%20class=%22a%22/%3E%3Cpath%20d=%22m676.3%20192.2-.9%201-2.5%203.2q-1.4%201.6-3%204l-.6.8-3.5%205.4-.6.9a101%20101%200%200%200-7.4%2015.8l-1.2%204-.1.4-.8%203.4-.2%201.1-.3%202.7-.3%202v4.6H690l3.8.3q1%200%201.7.4.9.3%201.8%201t1.7%201.4a15%2015%200%200%201%202.7%203.6l1%202v35l-.4%2035.3-.4%201.6a13%2013%200%200%201-2.4%203.4q-.7.8-1.5%201.3-.7.6-1.8%201L694%20329h-11.2l.6%201.4a246%20246%200%200%200%2011.4%2020.7%2065%2065%200%200%200%207%208.4%2077%2077%200%200%200%2017.3-14.9%2098%2098%200%200%200%2016.5-25%2090%2090%200%200%200%206.8-21.9%20114%20114%200%200%200%201.2-9.5%20131%20131%200%200%200-.5-19.2%20121%20121%200%200%200-6.7-24.3l-1-2-.6-.2h-2.1l-.2%204.6a34%2034%200%200%201-.6%205.4l-1.2%202.5a13%2013%200%200%201-4%203.9%2012%2012%200%200%201-6.3%201.7%2012%2012%200%200%201-9.4-5%209%209%200%200%201-1.9-4.7l-.3-3.7-.2-5-4.7-.2-4.3-.3q-.7%200-1.3-.4L696%20240a12%2012%200%200%201-3-3.2%2011%2011%200%200%201-1.5-4.1%2015%2015%200%200%201%20.5-7l1.2-2.2a15%2015%200%200%201%205.2-4.3l1.1-.5%202.7-.5q1.5-.2%203.4-.2h3.4v-8.6l-1.8-1.6a50%2050%200%200%200-9-6.1%2093%2093%200%200%200-18.4-8.4z%22%20class=%22c%22/%3E%3Cpath%20d=%22M701.8%20359.5a26%2026%200%200%201-3.3-3.5%2064%2064%200%200%201-7.3-10.9%20179%20179%200%200%201-7.6-14.7l-.7-1.4h-63.2c-8%200-13.2-.1-13.5-.2l-1.3-.4-1.2-.6-1.2-.7-1.1-.8-1-1a14%2014%200%200%201-2.4-3.4l-1-2v-17.4a59%2059%200%200%200-12.2%203.6%2078%2078%200%200%200-16.2%208.8l-2.3%201.7a92%2092%200%200%200%2031.3%2039.8%2095%2095%200%200%200%2053.3%2018.3l7-.4a88%2088%200%200%200%2029.2-7%2088%2088%200%200%200%2014.7-7.8%22%20class=%22b%22/%3E%3Cpath%20d=%22M720.3%20202.8a8%208%200%200%201%205%201.4%207%207%200%200%201%203%205.3v12.8h6.5l7.3.5%202%20.8.8.7%201.7%202.1a8%208%200%200%201%201%202.9v1.5a8%208%200%200%201-1.4%204.2l-1%201.2q-.8.8-1.6%201.2l-1.9.7q-1%20.3-2.7.3l-4.3.1h-6.3v6.1l-.5%207.2-.6%201.2a8%208%200%200%201-2.2%202.2l-1.3.8a7%207%200%200%201-7-.4%208%208%200%200%201-3.8-5.8V238h-6l-6.7-.4-1.7-.7-1.4-1.3-1-1.2a6%206%200%200%201-1-2.7V229a8%208%200%200%201%201.3-3.4%209%209%200%200%201%202.5-2.4l1-.5%202.5-.3%204.5-.1h6v-6.7l.4-7.4.8-1.9a8%208%200%200%201%204.4-3.2zm-68.5%2073.3a21%2021%200%200%200-4.4.6%2012%2012%200%200%200-3.5%202%2014%2014%200%200%200-4.5%206.6v1.1l.8%201.2.5.3.5.1h.4q.3%200%20.5-.3.3%200%20.5-.4l.9-1.3a10%2010%200%200%201%201.6-2.5%209%209%200%200%201%205-2.6%2011%2011%200%200%201%203.2-.1h1.8q.3%200%20.5-.3.2%200%20.4-.5l.5-.9.1-.7q0-.4-.3-.8l-.7-.7-1.4-.6z%22%20class=%22a%22/%3E%3Cpath%20d=%22M649.2%20255.6a27%2027%200%200%200-11.7%203%2032%2032%200%200%200-8.2%206%2032%2032%200%200%200-6%209%2029%2029%200%200%200-1.7%204.9l-.4%203a42%2042%200%200%200%20.4%2010%2025%2025%200%200%200%202.6%206.7%2034%2034%200%200%200%207.4%209.4%2031%2031%200%200%200%2012%206%2028%2028%200%200%200%2013.3-.1%2024%2024%200%200%200%207-3%2031%2031%200%200%200%2012.3-13.7%2030%2030%200%200%200-1.9-27.5%2029%2029%200%200%200-11.2-10.5%2028%2028%200%200%200-13.8-3.2zm1.5%209.4a19%2019%200%200%201%2012.6%205.3%2020%2020%200%200%201%205.7%209.8%2019%2019%200%200%201-2.2%2014.8%2021%2021%200%200%201-12%209.3l-1.6.2a54%2054%200%200%201-8.1-.2%2013%2013%200%200%201-3.6-1.4%2023%2023%200%200%201-9-8.4%2020%2020%200%200%201-1.5-15.1%2020%2020%200%200%201%204.8-8.2%2021%2021%200%200%201%208.1-5.2%2019%2019%200%200%201%206.8-1m28.9-10.2h13.9v9.1h-13.9z%22%20class=%22a%22/%3E%3Cpath%20d=%22M649.9%20180.5a173%20173%200%200%200-12.5.7%20113%20113%200%200%200-27.2%207.5%2097%2097%200%200%200-26.7%2017.5%20165%20165%200%200%200-11%2012%20103%20103%200%200%200-15.8%2029.2%20107%20107%200%200%200-5.4%2025%20128%20128%200%200%200%201%2025%20109%20109%200%200%200%208.4%2027%2099%2099%200%200%200%2035.7%2041%20106%20106%200%200%200%2035.1%2014.9%2096%2096%200%200%200%2031.7%201.4%2097%2097%200%200%200%2044.8-17%20104%20104%200%200%200%2027.8-28.6%20100%20100%200%200%200%2016.3-56.2%20106%20106%200%200%200-3.5-24.8l-2.5-7.8-2-5.3-1.2.2-1.6.3-.9.1-.2.3v.4l.3%201.5%201%202.6a98%2098%200%200%201%201.9%2062%20102%20102%200%200%201-23.6%2039.8%20103%20103%200%200%201-33.3%2022%2097%2097%200%200%201-28.5%206.5%20127%20127%200%200%201-21.8-1%2092%2092%200%200%201-29.9-10.5%20101%20101%200%200%201-30.3-25.6%2097%2097%200%200%201-5.9-111.1%2096%2096%200%200%201%2028-29%2091%2091%200%200%201%2029.4-12.8%20119%20119%200%200%201%2012.9-2.2%20151%20151%200%200%201%2020.3-.1%20110%20110%200%200%201%2023.6%205.6%2091%2091%200%200%201%2021%2011.1l4.6%203.1%201.2-1.6.8-1.5v-.4l-.4-.5q-.5-.6-2.2-1.7a125%20125%200%200%200-20.5-11.6%20102%20102%200%200%200-39-7.4z%22%20class=%22a%22/%3E%3Cpath%20d=%22m720.8%20199.7-2.7.3a12%2012%200%200%200-5.9%203.1l-1.7%202.2a12%2012%200%200%200-1.6%203.8l-.3%204.2-.2%204.6h4.5v-2.2l.4-7.2.6-1.2a8%208%200%200%201%202.2-2.1l1.3-.8a8%208%200%200%201%203-.7%207%207%200%200%201%202.8.5%208%208%200%200%201%202.5%201.5l1%201.1a8%208%200%200%201%201.5%203.8l.1%205.5v6.2h6l6.6.4%201.7.7%201.4%201.3%201%201.3a6%206%200%200%201%201%202.6v2.8a8%208%200%200%201-1.3%203.4%208%208%200%200%201-3.4%203l-2.6.2-4.5.1h-5.9v4.4h7.4a29%2029%200%200%200%206-.7l2.3-1.1a15%2015%200%200%200%205.3-6l.6-2.4a16%2016%200%200%200-1-7.4l-1.4-2.4a10%2010%200%200%200-2.2-2l-2.5-1.4-1.3-.4-1.7-.2-2.6-.2-4.7-.2-.2-5-.6-5-.9-2.4-.7-1a15%2015%200%200%200-4.2-3.6%2011%2011%200%200%200-3.9-1.3zm10.7%2050.2.8%201.2v-1.2z%22%20class=%22w%22/%3E%3C/g%3E%3C/svg%3E
-// @version      5.11.2
+// @version      5.11.3
 // @author       NextEnzzo (https://platesmania.com/user121559)
 // @copyright    2026, NextEnzzo
 // @license      MIT
@@ -437,17 +437,24 @@
   };
   /* =====================================================================
    *  SITE REQUESTS  (every request to PlatesMania goes through here)
-   *    One request at a time, with a pause between two of them. If the site answers with a Cloudflare
-   *    check or the rate limit (error 1015), every request stops for a while, and the state is kept
-   *    in the browser so the next page knows it too.
+   *    One request at a time, with a pause between two of them (kept across the tabs: they share the pace). What you asked for goes
+   *    first; the background ones (plate pictures, more notifications, the look for news: opts.low) wait their turn, six seconds apart.
+   *    If the site answers with a Cloudflare check or the rate limit (error 1015), every request stops for a while (3 minutes; blocked
+   *    again within the hour: 10, then 20), and the state is kept in the browser so the next page knows it too. siteResume() lifts the
+   *    pause, for a button the user presses.
    * ===================================================================== */
   const SITE_GAP_MS = 3000;                 // between two requests to the site
-  const SITE_COOLDOWN_MS = 15 * 60 * 1000;  // after a block: no request for this long
+  const SITE_LOW_GAP_MS = 6000;             // between two background requests
+  const SITE_COOLDOWNS_MIN = [3, 10, 20];   // after a block: no request for this long; blocked again within the hour: the next one
   const SITE_TIMEOUT_MS = 15000;
   const siteQueue = [];
   let siteBusy = false, siteLast = 0;
   const siteSleep = ms => new Promise(r => setTimeout(r, ms));
-  const siteBlockedUntil = () => (+store.get('siteBlock', '0') || 0) + SITE_COOLDOWN_MS;
+  const siteBlockedUntil = () => {
+    const at = +store.get('siteBlock', '0') || 0, n = Math.min(3, Math.max(1, +store.get('siteBlockN', '1') || 1));
+    return at ? at + SITE_COOLDOWNS_MIN[n - 1] * 60000 : 0;
+  };
+  const siteResume = () => { store.set('siteBlock', '0'); window.dispatchEvent(new Event('pmg-site')); };   // the user decides to try now
   const SITE_SLOW_MS = 3000;                // a request or a page slower than this: the site is slow
   const siteLog = [];                       // what the last requests say about the site: { ms, kind: 'ok' | 'error' | 'timeout' | 'down' | 'blocked' }
   const siteNote = (began, kind) => { siteLog.push({ ms: Math.round(performance.now() - began), kind }); if (siteLog.length > 12) siteLog.shift(); window.dispatchEvent(new Event('pmg-site')); };
@@ -455,12 +462,13 @@
 
   // Resolves with the text of the page. Rejects with a clear message when the site asks to wait.
   // timeout: how long the site may take to answer (a long table, such as the regions of a country, needs more than a gallery count)
-  function siteFetch(url, timeout = SITE_TIMEOUT_MS) {
+  function siteFetch(url, timeout = SITE_TIMEOUT_MS, opts = {}) {
     if (Date.now() < siteBlockedUntil()) {
       const mins = Math.ceil((siteBlockedUntil() - Date.now()) / 60000);
       return Promise.reject(new Error(`the site asked to wait: try again in about ${mins} min`));
     }
-    return new Promise((resolve, reject) => { siteQueue.push({ url, timeout, resolve, reject }); pumpSite(); });
+    if (opts.low && siteHealth().level === 'bad') return Promise.reject(new Error('the site is struggling: left for later'));      // a background request never adds to it
+    return new Promise((resolve, reject) => { siteQueue.push({ url, timeout, low: !!opts.low, resolve, reject }); pumpSite(); });
   }
 
   // How the site is doing, from what we already see (no request of its own): paused (it asked us to wait), bad (the last requests failed),
@@ -491,10 +499,14 @@
     if (siteBusy) return;
     siteBusy = true;
     while (siteQueue.length) {
-      const job = siteQueue.shift();
-      const wait = siteLast + SITE_GAP_MS - Date.now();
+      let at = siteQueue.findIndex(j => !j.low);                                   // what the user asked for first, the background ones after
+      if (at < 0) at = 0;
+      const job = siteQueue.splice(at, 1)[0];
+      const wait = Math.max(siteLast, +store.get('siteLastAt', '0') || 0) + (job.low ? SITE_LOW_GAP_MS : SITE_GAP_MS) - Date.now();   // the pace of the other tabs counts too
       if (wait > 0) await siteSleep(wait);
+      if (job.low && siteQueue.some(j => !j.low)) { siteQueue.unshift(job); continue; }                    // something more urgent came in while waiting
       siteLast = Date.now();
+      store.set('siteLastAt', String(siteLast));
       const began = performance.now();
       try {
         const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), job.timeout);
@@ -505,7 +517,10 @@
         if (typeof devLog === 'function') devLog({ url: job.url, status: res.status, blocked, bytes: text.length });   // dev build only
         siteNote(began, blocked ? 'blocked' : res.status >= 500 ? 'error' : 'ok');         // a 404 is an answer: the site is there
         if (blocked) {
-          store.set('siteBlock', String(Date.now()));
+          const now = Date.now(), before = +store.get('siteBlock', '0') || 0;
+          store.set('siteBlockN', String(now - before < 3600000 ? Math.min(3, (+store.get('siteBlockN', '1') || 1) + 1) : 1));     // blocked again within the hour: a longer pause
+          store.set('siteBlock', String(now));
+          window.dispatchEvent(new Event('pmg-site'));                                             // the dot turns grey at once, not at the next request
           job.reject(new Error('the site asked to wait (check or rate limit)'));
           while (siteQueue.length) siteQueue.shift().reject(new Error('the site asked to wait (check or rate limit)'));
           break;
@@ -1144,7 +1159,23 @@
     list.dataset.pmDone = '1';
     const holder = root.querySelector('#content') || list;
     const show = (link, src) => { const text = link.textContent.trim(); link.title = text; link.replaceChildren(h('img', { class: 'pm-plate', src, alt: text })); };
+    // Each line: its kind (a like, a comment, other news: a tint and an edge, set by CSS from the class) and the picture of the member
+    const picture = (id, name) => {
+      const letter = h('span', { class: 'pm-ava', text: (name[0] || '?').toUpperCase() });
+      const img = h('img', { src: `https://forum.platesmania.com/data/avatars/s/${Math.floor(id / 1000)}/${id}.jpg`, alt: '', loading: 'lazy' });
+      img.addEventListener('error', () => img.parentNode && img.parentNode.replaceWith(letter));         // no picture: the letter
+      return h('span', { class: 'pm-ava' }, img);
+    };
+    const decorate = li => {
+      const row = li.querySelector(':scope > div');
+      if (!row || row.dataset.pmKind) return;
+      const icon = (row.querySelector('i.fa') || {}).className || '';
+      row.dataset.pmKind = /heart/.test(icon) ? 'like' : /comment/.test(icon) ? 'comment' : 'other';
+      const who = row.querySelector('strong a'), id = who && (who.getAttribute('href').match(/user(\d+)/) || [])[1];
+      if (id) who.closest('strong').before(picture(id, who.textContent.trim()));
+    };
     const watch = scope => scope.querySelectorAll('li').forEach(li => {
+      decorate(li);
       const link = li.querySelector('a[href*="/nomer"]');
       if (link && !link.querySelector('.pm-plate')) plateWatch(li, link, src => show(link, src));
     });
@@ -1160,7 +1191,7 @@
       if (busy || done) return;
       busy = true;
       try {
-        const html = await siteFetch(`/action2.php?num=${list.querySelectorAll('li').length}&user=${memberId}`);
+        const html = await siteFetch(`/action2.php?num=${list.querySelectorAll('li').length}&user=${memberId}`, undefined, { low: true });
         const items = [...new DOMParser().parseFromString(html, 'text/html').querySelectorAll('li')];
         if (!items.length) { done = true; end.textContent = 'That is all.'; return; }
         const added = document.createDocumentFragment();
@@ -1203,18 +1234,21 @@
     const rate = root.querySelector('a[href^="/aktivuserall"]');
     const rating = rate && rate.parentElement.querySelector('.badge');
     const delta = rating && rating.querySelector('font');
-    const tile = ({ label, main, sub, href, extra, tone }) => h(href ? 'a' : 'div', { class: 'pm-tile' + (href ? ' link' : ''), href: href || undefined },
+    // A tile: a label, the main figure (a link when the site links it) and a line under it; a figure of that line can be a link too
+    const tile = ({ label, main, href, extra, tone, sub }) => h('div', { class: 'pm-tile' },
       h('span', { class: 'pm-label', text: label }),
-      h('span', { class: 'pm-main' }, main, extra ? h('span', { class: 'pm-delta ' + (tone || ''), text: extra }) : null),
-      h('span', { class: 'pm-sub', text: sub || '\u00a0' }));
+      h('span', { class: 'pm-main' }, href ? h('a', { href, text: main }) : main, extra ? h('span', { class: 'pm-delta ' + (tone || ''), text: extra }) : null),
+      h('span', { class: 'pm-sub' }, ...(sub && sub.length ? sub : ['\u00a0'])));
     const plus = h4 => profileText(h4 && h4.querySelector('.badge'));
     const link = h4 => { const a = h4 && h4.querySelector('b a'); return a ? a.getAttribute('href') : ''; };
     const sign = text => (/^\(?-/.test(text) ? 'down' : 'up');
+    // "received \u00b7 posted 27", the 27 a link to what you wrote when the site gives one (the comments you wrote, the ones you received)
+    const both = (received, posted) => ['received \u00b7 posted ', link(posted) ? h('a', { href: link(posted), text: value(posted) || '-' }) : (value(posted) || '-')];
     const tiles = h('div', { class: 'pm-tiles' },
-      tile({ label: 'Plates', main: profileText(total) || '-', sub: 'uploaded', href: total ? total.getAttribute('href') : '' }),
-      tile({ label: 'Likes', main: value(cells[0]) || '-', sub: `received \u00b7 posted ${value(cells[1]) || '-'}` }),
-      tile({ label: 'Comments', main: value(cells[2]) || '-', sub: `received \u00b7 posted ${value(cells[3]) || '-'}`, extra: plus(cells[2]), tone: 'up', href: link(cells[2]) }),
-      tile({ label: 'Rating', main: rating ? '#' + profileText(rating).replace(/\s*\(.*$/, '') : '-', sub: 'place among members', extra: delta ? profileText(delta) : '', tone: delta ? sign(profileText(delta)) : '', href: rate ? rate.getAttribute('href') : '' }));
+      tile({ label: 'Plates', main: profileText(total) || '-', href: total ? total.getAttribute('href') : '', sub: ['uploaded'] }),
+      tile({ label: 'Likes', main: value(cells[0]) || '-', href: link(cells[0]), sub: both(cells[0], cells[1]) }),
+      tile({ label: 'Comments', main: value(cells[2]) || '-', href: link(cells[2]), extra: plus(cells[2]), tone: 'up', sub: both(cells[2], cells[3]) }),
+      tile({ label: 'Rating', main: rating ? '#' + profileText(rating).replace(/\s*\(.*$/, '') : '-', href: rate ? rate.getAttribute('href') : '', extra: delta ? profileText(delta) : '', tone: delta ? sign(profileText(delta)) : '', sub: ['place among members'] }));
     uploads.parentNode.insertBefore(tiles, uploads);
     return tiles;
   }
@@ -1288,7 +1322,7 @@
     if (!id) return '';
     if (!platePictures[id]) {
       try {
-        const img = new DOMParser().parseFromString(await siteFetch(href), 'text/html').querySelector('img[src*="/inf/"]');
+        const img = new DOMParser().parseFromString(await siteFetch(href, undefined, { low: true }), 'text/html').querySelector('img[src*="/inf/"]');
         if (img) {
           platePictures[id] = img.getAttribute('src');
           const ids = Object.keys(platePictures);
@@ -1774,7 +1808,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
   // The greys of the site's own page, for what the script restyles on the page itself (outside its shadow roots, where the tokens below do not reach)
   const PAGE_GREY = { line: '#bdbdbd', mute: '#626a70', ink: '#2d2d2d' };
   // The same palette for the site's pages themselves (the profile): the tokens of the panel, written as variables a page rule can scope
-  const PAGE_TOKENS = `--pm:${SITE_BLUE};--pm-h:color-mix(in srgb,${SITE_BLUE} 78%,#000);--pm-soft:color-mix(in srgb,${SITE_BLUE} 22%,#fff);--pm-tint:color-mix(in srgb,${SITE_BLUE} 7%,#fff);--pm-ink:${PAGE_GREY.ink};--pm-mute:${PAGE_GREY.mute};--pm-line:#e4e4e4;--pm-line2:#cfcfcf;--pm-paper:#fafafa;--pm-danger:#d9534f;--pm-ok:#72c02c;--pm-warn:#f0ad4e`;
+  const PAGE_TOKENS = `--pm:${SITE_BLUE};--pm-h:color-mix(in srgb,${SITE_BLUE} 78%,#000);--pm-soft:color-mix(in srgb,${SITE_BLUE} 22%,#fff);--pm-tint:color-mix(in srgb,${SITE_BLUE} 7%,#fff);--pm-ink:${PAGE_GREY.ink};--pm-mute:${PAGE_GREY.mute};--pm-line:#e4e4e4;--pm-line2:#cfcfcf;--pm-paper:#fafafa;--pm-danger:#d9534f;--pm-ok:#72c02c;--pm-warn:#f0ad4e;--pm-cat:var(--pm)`;   // --pm-cat: the colour of a kind of message (set by its category)
 
   // DESIGN TOKENS. Every colour of the panel, the card and the batch window comes from here: no other file writes a colour.
   //   palette   --primary, --primary-h (hover), --primary-soft (light fill and borders), --primary-tint (very light fill), --ring (focus)
@@ -1843,6 +1877,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     .stats{display:flex;flex-wrap:wrap;gap:12px 28px}
     .stat{display:flex;flex-direction:column}
     .stat b{font-size:18px;color:var(--primary-h)}
+    .stat b.stale{opacity:.55}                                                  /* the last known figure, shown while the site cannot be asked */
     .stat b.blank{color:transparent;background:var(--soft);user-select:none}                /* a figure still to come: its place is kept, so nothing moves when it arrives */
     .stat a{font-size:18px;font-weight:700;color:var(--primary-h);text-decoration:none}
     .stat a:hover{text-decoration:underline}
@@ -2426,7 +2461,9 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     .profile.pm-built .service-block-v3,.profile.pm-built .tag-box-v7,.profile.pm-built .badge-lists li:last-child{display:none}
     .pm-tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0 0 12px}
     .pm-tile{display:flex;flex-direction:column;gap:2px;min-width:0;padding:10px 12px;border:1px solid var(--pm-line);background:#fff;color:var(--pm-ink);text-decoration:none}
-    .pm-tile.link:hover{background:var(--pm-tint);border-color:var(--pm-soft);color:var(--pm-ink);text-decoration:none}
+    .pm-tile a{color:inherit;text-decoration:none}
+    .pm-tile a:hover{color:var(--pm);text-decoration:underline}
+    .pm-sub a{color:var(--pm);font-weight:600}
     .pm-label{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--pm-mute)}
     .pm-main{display:flex;align-items:baseline;gap:6px;font-size:18px;font-weight:700;line-height:1.3;overflow-wrap:anywhere}
     .pm-delta{font-size:12px;font-weight:600;color:var(--pm-mute)}
@@ -2443,16 +2480,24 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     .profile .profile-notification-actions .btn{display:grid;place-items:center;width:32px;height:32px;margin:0;padding:0;border:1px solid transparent;color:var(--pm-mute)}
     .profile .profile-notification-actions .btn:hover,.profile .profile-notification-actions .btn:focus{background:var(--pm-tint);border-color:var(--pm-soft);color:var(--pm)}
     .profile .panel-body.mCustomScrollbar,.profile ul.mCustomScrollbar{height:380px!important;max-height:380px;margin:0}
-    .profile .profile-notification-card{margin:0;padding:10px 12px;border:0;border-bottom:1px solid var(--pm-line);border-left:3px solid var(--pm);background:#fff!important;box-shadow:none;color:var(--pm-ink)}
-    .profile .profile-notification-card[data-notification-category=deleted]{border-left-color:var(--pm-danger)}
-    .profile .profile-notification-card[data-notification-category=comments]{border-left-color:var(--pm-ok)}
-    .profile .profile-notification-card[data-notification-category=awards]{border-left-color:var(--pm-warn)}
-    .profile .profile-notification-card-type{font-size:12px;color:var(--pm-mute)}
+    .profile .profile-notification-card{--pm-cat:var(--pm);margin:0;padding:10px 12px;border:0;border-bottom:1px solid var(--pm-line);border-left:5px solid var(--pm-cat);background:color-mix(in srgb,var(--pm-cat) 13%,#fff)!important;box-shadow:none;color:var(--pm-ink)}
+    .profile .profile-notification-card[data-notification-category=deleted]{--pm-cat:var(--pm-danger)}
+    .profile .profile-notification-card[data-notification-category=comments]{--pm-cat:var(--pm-ok)}
+    .profile .profile-notification-card[data-notification-category=awards]{--pm-cat:var(--pm-warn)}
+    .profile .profile-notification-card-type{display:inline-block;padding:3px 8px;background:color-mix(in srgb,var(--pm-cat) 70%,#000);font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#fff}
     .profile .profile-notification-card-title a{font-size:14px;font-weight:700;color:var(--pm)}
     .profile .profile-notification-card-meta{font-size:12px;color:var(--pm-mute)}
     /* the notifications: one line each, the plate as its picture, the time on the right; the rest comes as the list is scrolled */
     .profile ul.mCustomScrollbar li > div{display:flex;align-items:center;gap:8px;min-height:44px;margin:0;padding:6px 12px;border-bottom:1px solid var(--pm-line);background:transparent!important;font-size:13px}
-    .profile ul.mCustomScrollbar li > div:hover{background:var(--pm-tint)!important}
+    .profile ul.mCustomScrollbar li > div[data-pm-kind=like]{background:color-mix(in srgb,var(--pm-danger) 8%,#fff)!important;box-shadow:inset 3px 0 0 var(--pm-danger)}
+    .profile ul.mCustomScrollbar li > div[data-pm-kind=comment]{background:color-mix(in srgb,var(--pm-ok) 12%,#fff)!important;box-shadow:inset 3px 0 0 var(--pm-ok)}
+    .profile ul.mCustomScrollbar li > div[data-pm-kind=other]{background:var(--pm-tint)!important;box-shadow:inset 3px 0 0 var(--pm)}
+    .profile ul.mCustomScrollbar li > div[data-pm-kind=like]:hover{background:color-mix(in srgb,var(--pm-danger) 15%,#fff)!important}
+    .profile ul.mCustomScrollbar li > div[data-pm-kind=comment]:hover{background:color-mix(in srgb,var(--pm-ok) 20%,#fff)!important}
+    .profile ul.mCustomScrollbar li > div[data-pm-kind=other]:hover{background:color-mix(in srgb,var(--pm) 14%,#fff)!important}
+    .profile ul.mCustomScrollbar li .fa-comment,.profile ul.mCustomScrollbar li .fa-comments{color:color-mix(in srgb,var(--pm-ok) 70%,#000)}
+    .pm-ava{display:grid;place-items:center;flex:none;width:28px;height:28px;overflow:hidden;border:1px solid var(--pm-line2);background:var(--pm-soft);font-size:12px;font-weight:700;color:var(--pm)}
+    .pm-ava img{display:block;width:100%;height:100%;object-fit:cover}
     .profile ul.mCustomScrollbar li a{color:var(--pm);font-weight:600}
     .profile ul.mCustomScrollbar li .fa-hand-o-right{color:var(--pm-mute)}
     .profile ul.mCustomScrollbar li .pull-right{margin:0 0 0 auto;font-size:12px;white-space:nowrap;color:var(--pm-mute)}
@@ -3963,7 +4008,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
   function membersMeAvatar(me) {
     if (!me || me.avatar || meAvatarAsked) return;
     meAvatarAsked = true;
-    siteFetch('/user' + me.id).then(text => {
+    siteFetch('/user' + me.id, undefined, { low: true }).then(text => {
       const m = memberInfo(new DOMParser().parseFromString(text, 'text/html'), me.id);
       if (m && m.avatar) { store.set('members_me', JSON.stringify({ ...me, avatar: m.avatar })); membersRefresh(); }
     }).catch(() => { /* the line shows the initial instead */ });
@@ -4327,25 +4372,56 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     const shown = profileNumber(link.textContent);
     const day = profileDay(new Date());
     const at = `${String(DAY_STARTS.h).padStart(2, '0')}:${String(DAY_STARTS.m).padStart(2, '0')}`;
+    const clock = ts => new Date(ts).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const keep = 'profile_counts_' + id;                                                    // the last count, for the moments the site cannot be asked
+    const known = () => { try { return JSON.parse(store.get(keep, 'null')); } catch (e) { return null; } };
     // The card stands at its final size at once: the figures are blanks that fill in, so nothing moves when they arrive
     const total = h('b', { class: 'blank', text: '0 000' }), today = h('b', { class: 'blank', text: '+0' });
     const hint = h('p', { class: 'hint', text: 'Counting the gallery…' });
     hint.style.minHeight = '3em';
+    const retry = h('button', { type: 'button', class: 'btn ghost sm', text: 'Try again', hidden: true });
     card.body.append(h('div', { class: 'cardbox' },
       h('div', { class: 'stats' },
         h('div', { class: 'stat' }, total, h('span', { class: 'mute', text: 'photos in the gallery now' })),
         h('div', { class: 'stat' }, today, h('span', { class: 'mute', text: `today (since ${at})` }))),
       hint,
       h('div', { class: 'cardrow' }, h('a', { class: 'btn ghost sm', href: profileGallery(id, day), target: '_blank', rel: 'noopener noreferrer', text: 'See today’s photos' }),
-        featureOn('worldmap') ? h('button', { type: 'button', class: 'btn ghost sm', text: 'World map of this member', onclick: () => worldMapOpen(id) }) : null)));
-    Promise.all([profileCount(profileGallery(id)), profileCount(profileGallery(id, day))]).then(([count, now]) => {
-      const gap = count - shown;
-      total.textContent = profileFormat(count);
-      today.textContent = '+' + now;
-      total.classList.remove('blank');
-      today.classList.remove('blank');
-      hint.textContent = gap === 0 ? 'The profile figure is up to date.' : `The profile says ${profileFormat(shown)}: ${Math.abs(gap)} ${gap > 0 ? 'more' : 'fewer'} in the gallery, the site has not recalculated yet.`;
-    }).catch(e => { hint.textContent = ''; card.message('Not counted: ' + e.message); });
+        featureOn('worldmap') ? h('button', { type: 'button', class: 'btn ghost sm', text: 'World map of this member', onclick: () => worldMapOpen(id) }) : null, retry)));
+    const paint = (c, stale) => {
+      total.textContent = profileFormat(c.total);
+      today.textContent = '+' + c.today;
+      [total, today].forEach(b => { b.classList.remove('blank'); b.classList.toggle('stale', !!stale); });
+      const gap = c.total - shown;
+      hint.textContent = stale ? `Counted at ${clock(c.at)}.` : gap === 0 ? 'The profile figure is up to date.' : `The profile says ${profileFormat(shown)}: ${Math.abs(gap)} ${gap > 0 ? 'more' : 'fewer'} in the gallery, the site has not recalculated yet.`;
+    };
+    let timer = 0;
+    async function load(force) {
+      clearTimeout(timer);
+      retry.hidden = true;
+      const last = known();
+      if (last && !force && Date.now() - last.at < 300000) { paint(last, false); return; }          // counted a moment ago: nothing to ask
+      if (!last || force) hint.textContent = 'Counting the gallery…';
+      try {
+        const [count, now] = await Promise.all([profileCount(profileGallery(id)), profileCount(profileGallery(id, day))]);
+        const c = { total: count, today: now, at: Date.now() };
+        store.set(keep, JSON.stringify(c));
+        paint(c, false);
+      } catch (e) {
+        const until = siteBlockedUntil(), paused = Date.now() < until;
+        if (last) paint(last, true);
+        if (paused) {                                                                           // the site asked to wait: say until when, and look again by itself
+          hint.textContent = `${last ? `Counted at ${clock(last.at)}. ` : ''}The site asked to wait: it tries again by itself at ${clock(until)}.`;
+          timer = setTimeout(() => load(true), until - Date.now() + 1000);
+          retry.textContent = 'Try now';
+        } else {
+          hint.textContent = `${last ? `Counted at ${clock(last.at)}. ` : ''}Not counted: ${e.message}.`;
+          retry.textContent = 'Try again';
+        }
+        retry.hidden = false;
+      }
+    }
+    retry.onclick = () => { if (Date.now() < siteBlockedUntil()) siteResume(); load(true); };    // "Try now" lifts the pause: the user's own decision
+    load(false);
   }
 
   registerFeature({
@@ -4946,12 +5022,12 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     store.set('notify_last_list', String(now));
     const seen = notifyLoad('notify_seen', { keys: [] });
     let fresh = [];
-    try { fresh = fresh.concat(notifyFresh(notifyParseList(await siteFetch(`/action2.php?num=0&user=${me.id}`)), seen, 'list')); } catch (e) { /* the site is busy: next time */ }
+    try { fresh = fresh.concat(notifyFresh(notifyParseList(await siteFetch(`/action2.php?num=0&user=${me.id}`, undefined, { low: true })), seen, 'list')); } catch (e) { /* the site is busy: next time */ }
     if (force || now - +store.get('notify_last_msgs', '0') >= Math.max(every * 2, 600000)) {         // the profile page is heavy: less often
       store.set('notify_last_msgs', String(now));
       try {
         const mine = here.profile && location.pathname.replace(/\/$/, '') === '/user' + me.id;               // on your own profile the cards are already here
-        fresh = fresh.concat(notifyFresh(notifyParseMessages(mine ? document.documentElement.outerHTML : await siteFetch('/user' + me.id)), seen, 'msgs'));
+        fresh = fresh.concat(notifyFresh(notifyParseMessages(mine ? document.documentElement.outerHTML : await siteFetch('/user' + me.id, undefined, { low: true })), seen, 'msgs'));
       } catch (e) { /* idem */ }
     }
     store.set('notify_seen', JSON.stringify(seen));
@@ -5055,7 +5131,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
    *    just been chosen; not after a fix such as 5.9 -> 5.9.1),
    *    and any time from the button in Settings. It reads WHATS_NEW (src/lib/whatsnew.js).
    * ===================================================================== */
-  const SCRIPT_VERSION = "5.11.2";
+  const SCRIPT_VERSION = "5.11.3";
 
   // One block per version: its title, then its sections. Several versions are stacked, the newest first.
   function whatsNewBody(entries) {
@@ -5118,7 +5194,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
   });
   /* =====================================================================
    *  UPDATE  (a click on the logo of the panel: is there a newer version of the script?)
-   *    Asks Greasy Fork for the header of the published script (one small file, only when the logo is clicked) and compares its
+   *    Asks Greasy Fork for the header of the published script (one small file, only when the logo is clicked; up to three tries) and compares its
    *    @version with this one. A newer one: a button opens the install page, where Tampermonkey offers the update. Greasy Fork
    *    answers with access-control-allow-origin: *, so a plain fetch works and no extra permission is needed.
    *    The dev build is never compared with the published script: it is updated by building it again.
@@ -5133,16 +5209,22 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     return false;
   }
 
-  // The version of the published script, from its header; rejects when it cannot be read in 10 s
+  // The version of the published script, from its header. Three tries, a pause longer each time (a first request that fails is often
+  // a hiccup), and a new address each time: a copy kept by a cache between Greasy Fork and you cannot hide a version just published.
   async function updateLatest() {
-    const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), 10000);
-    try {
-      const res = await fetch(UPDATE_META, { signal: ctrl.signal, cache: 'no-store' });
-      if (!res.ok) throw new Error('Greasy Fork answered ' + res.status);
-      const m = /@version\s+(\S+)/.exec(await res.text());
-      if (!m) throw new Error('no version in the answer');
-      return m[1];
-    } finally { clearTimeout(timer); }
+    let failure;
+    for (const pause of [0, 1500, 4000]) {
+      if (pause) await new Promise(r => setTimeout(r, pause));
+      const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), 10000);
+      try {
+        const res = await fetch(`${UPDATE_META}?t=${Date.now()}`, { signal: ctrl.signal });
+        if (!res.ok) throw new Error('Greasy Fork answered ' + res.status);
+        const m = /@version\s+(\S+)/.exec(await res.text());
+        if (!m) throw new Error('no version in the answer');
+        return m[1];
+      } catch (e) { failure = e; } finally { clearTimeout(timer); }
+    }
+    throw failure;
   }
 
   function updateOpen() {

@@ -29,7 +29,7 @@ def serve(ctx, version=None, status=200):
     def handler(route):
         ASKED.append(route.request.url)
         route.fulfill(status=status, content_type="text/x-userscript-meta", headers={"access-control-allow-origin": "*"}, body=meta(version or "0"))
-    ctx.route(META, handler)
+    ctx.route(META + "**", handler)
 
 
 def click_logo(ctx):
@@ -107,3 +107,19 @@ def test_the_dev_build_is_not_compared_with_the_published_script(ctx):
     logo(page)
     assert "dev build" in text(page)
     assert ASKED == []
+
+
+@public_only
+def test_a_first_failure_is_tried_again_by_itself_at_a_new_address(ctx):
+    """A request that fails once is often a hiccup, and a cache must not hide a version just published: three tries, a new address each."""
+    def handler(route):
+        ASKED.append(route.request.url)
+        if len(ASKED) == 1:
+            route.abort()
+        else:
+            route.fulfill(status=200, content_type="text/x-userscript-meta", headers={"access-control-allow-origin": "*"}, body=meta("99.0"))
+    ctx.route(META + "**", handler)
+    page = click_logo(ctx)
+    logo(page)
+    assert "Version 99.0 is available" in text(page)
+    assert len(ASKED) == 2 and ASKED[0] != ASKED[1] and all("?t=" in u for u in ASKED)

@@ -47,25 +47,56 @@
     const shown = profileNumber(link.textContent);
     const day = profileDay(new Date());
     const at = `${String(DAY_STARTS.h).padStart(2, '0')}:${String(DAY_STARTS.m).padStart(2, '0')}`;
+    const clock = ts => new Date(ts).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const keep = 'profile_counts_' + id;                                                    // the last count, for the moments the site cannot be asked
+    const known = () => { try { return JSON.parse(store.get(keep, 'null')); } catch (e) { return null; } };
     // The card stands at its final size at once: the figures are blanks that fill in, so nothing moves when they arrive
     const total = h('b', { class: 'blank', text: '0 000' }), today = h('b', { class: 'blank', text: '+0' });
     const hint = h('p', { class: 'hint', text: 'Counting the gallery…' });
     hint.style.minHeight = '3em';
+    const retry = h('button', { type: 'button', class: 'btn ghost sm', text: 'Try again', hidden: true });
     card.body.append(h('div', { class: 'cardbox' },
       h('div', { class: 'stats' },
         h('div', { class: 'stat' }, total, h('span', { class: 'mute', text: 'photos in the gallery now' })),
         h('div', { class: 'stat' }, today, h('span', { class: 'mute', text: `today (since ${at})` }))),
       hint,
       h('div', { class: 'cardrow' }, h('a', { class: 'btn ghost sm', href: profileGallery(id, day), target: '_blank', rel: 'noopener noreferrer', text: 'See today’s photos' }),
-        featureOn('worldmap') ? h('button', { type: 'button', class: 'btn ghost sm', text: 'World map of this member', onclick: () => worldMapOpen(id) }) : null)));
-    Promise.all([profileCount(profileGallery(id)), profileCount(profileGallery(id, day))]).then(([count, now]) => {
-      const gap = count - shown;
-      total.textContent = profileFormat(count);
-      today.textContent = '+' + now;
-      total.classList.remove('blank');
-      today.classList.remove('blank');
-      hint.textContent = gap === 0 ? 'The profile figure is up to date.' : `The profile says ${profileFormat(shown)}: ${Math.abs(gap)} ${gap > 0 ? 'more' : 'fewer'} in the gallery, the site has not recalculated yet.`;
-    }).catch(e => { hint.textContent = ''; card.message('Not counted: ' + e.message); });
+        featureOn('worldmap') ? h('button', { type: 'button', class: 'btn ghost sm', text: 'World map of this member', onclick: () => worldMapOpen(id) }) : null, retry)));
+    const paint = (c, stale) => {
+      total.textContent = profileFormat(c.total);
+      today.textContent = '+' + c.today;
+      [total, today].forEach(b => { b.classList.remove('blank'); b.classList.toggle('stale', !!stale); });
+      const gap = c.total - shown;
+      hint.textContent = stale ? `Counted at ${clock(c.at)}.` : gap === 0 ? 'The profile figure is up to date.' : `The profile says ${profileFormat(shown)}: ${Math.abs(gap)} ${gap > 0 ? 'more' : 'fewer'} in the gallery, the site has not recalculated yet.`;
+    };
+    let timer = 0;
+    async function load(force) {
+      clearTimeout(timer);
+      retry.hidden = true;
+      const last = known();
+      if (last && !force && Date.now() - last.at < 300000) { paint(last, false); return; }          // counted a moment ago: nothing to ask
+      if (!last || force) hint.textContent = 'Counting the gallery…';
+      try {
+        const [count, now] = await Promise.all([profileCount(profileGallery(id)), profileCount(profileGallery(id, day))]);
+        const c = { total: count, today: now, at: Date.now() };
+        store.set(keep, JSON.stringify(c));
+        paint(c, false);
+      } catch (e) {
+        const until = siteBlockedUntil(), paused = Date.now() < until;
+        if (last) paint(last, true);
+        if (paused) {                                                                           // the site asked to wait: say until when, and look again by itself
+          hint.textContent = `${last ? `Counted at ${clock(last.at)}. ` : ''}The site asked to wait: it tries again by itself at ${clock(until)}.`;
+          timer = setTimeout(() => load(true), until - Date.now() + 1000);
+          retry.textContent = 'Try now';
+        } else {
+          hint.textContent = `${last ? `Counted at ${clock(last.at)}. ` : ''}Not counted: ${e.message}.`;
+          retry.textContent = 'Try again';
+        }
+        retry.hidden = false;
+      }
+    }
+    retry.onclick = () => { if (Date.now() < siteBlockedUntil()) siteResume(); load(true); };    // "Try now" lifts the pause: the user's own decision
+    load(false);
   }
 
   registerFeature({

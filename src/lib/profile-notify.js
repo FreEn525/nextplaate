@@ -11,7 +11,23 @@
     list.dataset.pmDone = '1';
     const holder = root.querySelector('#content') || list;
     const show = (link, src) => { const text = link.textContent.trim(); link.title = text; link.replaceChildren(h('img', { class: 'pm-plate', src, alt: text })); };
+    // Each line: its kind (a like, a comment, other news: a tint and an edge, set by CSS from the class) and the picture of the member
+    const picture = (id, name) => {
+      const letter = h('span', { class: 'pm-ava', text: (name[0] || '?').toUpperCase() });
+      const img = h('img', { src: `https://forum.platesmania.com/data/avatars/s/${Math.floor(id / 1000)}/${id}.jpg`, alt: '', loading: 'lazy' });
+      img.addEventListener('error', () => img.parentNode && img.parentNode.replaceWith(letter));         // no picture: the letter
+      return h('span', { class: 'pm-ava' }, img);
+    };
+    const decorate = li => {
+      const row = li.querySelector(':scope > div');
+      if (!row || row.dataset.pmKind) return;
+      const icon = (row.querySelector('i.fa') || {}).className || '';
+      row.dataset.pmKind = /heart/.test(icon) ? 'like' : /comment/.test(icon) ? 'comment' : 'other';
+      const who = row.querySelector('strong a'), id = who && (who.getAttribute('href').match(/user(\d+)/) || [])[1];
+      if (id) who.closest('strong').before(picture(id, who.textContent.trim()));
+    };
     const watch = scope => scope.querySelectorAll('li').forEach(li => {
+      decorate(li);
       const link = li.querySelector('a[href*="/nomer"]');
       if (link && !link.querySelector('.pm-plate')) plateWatch(li, link, src => show(link, src));
     });
@@ -27,7 +43,7 @@
       if (busy || done) return;
       busy = true;
       try {
-        const html = await siteFetch(`/action2.php?num=${list.querySelectorAll('li').length}&user=${memberId}`);
+        const html = await siteFetch(`/action2.php?num=${list.querySelectorAll('li').length}&user=${memberId}`, undefined, { low: true });
         const items = [...new DOMParser().parseFromString(html, 'text/html').querySelectorAll('li')];
         if (!items.length) { done = true; end.textContent = 'That is all.'; return; }
         const added = document.createDocumentFragment();

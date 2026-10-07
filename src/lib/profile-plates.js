@@ -14,7 +14,7 @@
     if (!id) return '';
     if (!platePictures[id]) {
       try {
-        const img = new DOMParser().parseFromString(await siteFetch(href), 'text/html').querySelector('img[src*="/inf/"]');
+        const img = new DOMParser().parseFromString(await siteFetch(href, undefined, { low: true }), 'text/html').querySelector('img[src*="/inf/"]');
         if (img) {
           platePictures[id] = img.getAttribute('src');
           const ids = Object.keys(platePictures);

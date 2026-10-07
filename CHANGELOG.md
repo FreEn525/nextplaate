@@ -1,5 +1,14 @@
 # Changelog
 
+## 5.11.3
+
+- **Requests to the site, calmer and smarter**: what you asked for goes first and the background ones (plate pictures, more notifications, the look for news) wait their turn, six seconds apart; the tabs share the pace; a background request is not made while the site is struggling. After a block the pause is 3 minutes (it was 15), 10 if the site blocks again within the hour, then 20.
+- **The Uploads card**: it keeps the last count (and does not ask again for 5 minutes), shows it dimmed while the site asks to wait, says until when, looks again by itself when the pause ends, and has a *Try now* button.
+- **Notifications**: a tint and an edge by kind (a like, a comment, other news) and the picture of the member (his letter when he has none). The private messages are tinted by what happened (change, deletion, comment, award) with the name of it on a coloured chip.
+- **The Comments tile** has both links of the site again: the comments you received (the figure) and the ones you wrote (the number after *posted*).
+- **Update check**: three tries, and a new address each time, so that one failed request or a cached copy no longer hides a version just published (*Could not check: Failed to fetch*).
+- The dot on the logo turns grey at once when the site asks to wait.
+
 ## 5.11.2
 
 - **How the site is doing**: a dot on the logo of the panel, from what the script already sees (no request of its own): green when the site answers (the middle of your last requests under 3 s), amber when it is slow, red when the last requests failed (server errors, no answer, no connection), grey when the site asked the script to wait (with the time it ends). The hover says what it is based on. *Settings > About > Check the site now* makes one small request on demand.
