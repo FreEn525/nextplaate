@@ -247,3 +247,16 @@ def test_many_favourites_are_four_buttons_and_a_menu_for_the_rest(ctx):
     chips, more = chips_and_more(page)
     assert chips == ["Me (freen525)", "Member0", "Member1", "Member2", "Member3"]
     assert more == ["5 more\u2026", "Member4", "Member5", "Member6", "Member7", "Member8"]
+
+
+def test_a_click_outside_the_window_does_not_close_it_but_close_and_escape_do(ctx):
+    """The same rule as the batch window and every other window of the script: a stray click must never lose what is open."""
+    page = open_page(ctx)
+    open_map(page)
+    page.evaluate(f"() => {MODAL}.querySelector('.ov').dispatchEvent(new MouseEvent('click', {{ bubbles: true }}))")
+    assert page.evaluate("() => !!document.getElementById('pmg-worldmap')")
+    page.keyboard.press("Escape")
+    assert page.evaluate("() => !document.getElementById('pmg-worldmap')")
+    open_map(page)
+    page.evaluate(f"() => [...{MODAL}.querySelectorAll('.mh .btn')].find(b => b.textContent === 'Close').click()")
+    assert page.evaluate("() => !document.getElementById('pmg-worldmap')")

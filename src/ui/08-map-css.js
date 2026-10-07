@@ -10,6 +10,9 @@
     .wm .bar select{height:var(--h-sm);max-width:100%}
     .wm .bar .btn{height:var(--h-sm)}
     .wm .bar .gap{flex:1}
+    .wm .who{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+    .wm .who .pill,.wm .who select{box-sizing:border-box;height:var(--h-sm);min-height:var(--h-sm);margin:0;padding:0 12px;font-size:13px;line-height:1}
+    .wm .who select{padding:0 8px}
     .wm .bar .lbl{font-size:12px;color:var(--mute)}
     .wm .view{display:flex;flex-direction:column;flex:1;min-height:0}
     .wm .msg{margin:0;padding:24px 16px;font-size:14px;color:var(--mute)}

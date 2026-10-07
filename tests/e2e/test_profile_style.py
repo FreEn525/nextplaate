@@ -109,13 +109,15 @@ def test_each_country_of_the_table_has_its_flag(prof):
     assert prof.evaluate("() => [...document.querySelectorAll('#example tbody tr .pm-flag')].map(i => i.getAttribute('src'))") == ["/assets/img/profile-flags/lu.svg", "/assets/img/profile-flags/de.svg"]
 
 
-def test_a_last_photo_is_a_card_with_the_country_flag_and_the_plate_on_its_corner(prof):
-    prof.wait_for_selector(".pm-shot")
-    prof.evaluate("() => document.querySelector('.pm-shot').scrollIntoView()")                       # the plate is read when the photo comes in view
-    assert prof.evaluate("() => document.querySelector('.portfolio-box-v1-in .pm-flag').getAttribute('src')") == "/assets/img/profile-flags/hr.svg"
-    prof.wait_for_function("() => { const t = document.querySelector('.pm-tag'); return t && !t.hidden && t.querySelector('img'); }", timeout=30000)
-    assert prof.evaluate("() => document.querySelector('.pm-tag img').getAttribute('src')") == "https://img03.platesmania.com/261003/inf/abc.png"
-    assert prof.evaluate("() => getComputedStyle(document.querySelector('.portfolio-box-v1-in')).backgroundColor") == "rgba(0, 0, 0, 0)"      # no dark overlay: the caption is on white
+def test_a_last_photo_is_a_card_with_the_flag_on_the_photo_the_plate_then_the_country_and_the_day(prof):
+    prof.wait_for_selector(".pm-card")
+    prof.evaluate("() => document.querySelector('.pm-card').scrollIntoView()")                       # the plate is read when the card comes in view
+    assert prof.evaluate("() => document.querySelector('.pm-badge .pm-flag').getAttribute('src')") == "/assets/img/profile-flags/hr.svg"
+    assert prof.evaluate("() => document.querySelector('.pm-plate-text').textContent") == "RI 7030-D"                 # the text, until the picture comes
+    prof.wait_for_function("() => document.querySelector('.pm-plate-well img')", timeout=30000)
+    assert prof.evaluate("() => document.querySelector('.pm-plate-well img').getAttribute('src')") == "https://img03.platesmania.com/261003/inf/abc.png"
+    assert prof.evaluate("() => [document.querySelector('.pm-meta b').textContent, document.querySelector('.pm-meta span').textContent.length > 4]") == ["Croatia", True]
+    assert prof.evaluate("() => getComputedStyle(document.querySelector('.portfolio-box-v1-in')).display") == "none"       # the site's own caption is out of the way
 
 
 def test_the_line_of_the_latest_plates_becomes_a_strip_of_chips_with_flags(browser):
@@ -134,16 +136,16 @@ def test_the_line_of_the_latest_plates_becomes_a_strip_of_chips_with_flags(brows
     c.close()
 
 
-def test_the_strip_shows_every_plate_without_a_scrollbar(browser):
+def test_the_strip_keeps_every_plate_on_one_line_without_a_scrollbar(browser):
     c = browser.new_context(viewport={"width": 700, "height": 900})
     route_site(c)
     flags(c)
-    links = " | ".join(f'<a href="/de/nomer{i}">HH AB {i} 9999</a>' for i in range(30))
+    links = " | ".join(f'<a href="/de/nomer{i}">HH AB {i} 9999</a>' for i in range(10))
     c.route("https://platesmania.com/fr/gallery.php", lambda r: r.fulfill(status=200, content_type="text/html", body=inject(f'<html><body><div class="wrapper"><small><span class="text-highlights">last</span> | {links}</small><div class="container content">x</div></div></body></html>')))
     p = c.new_page()
     p.goto("https://platesmania.com/fr/gallery.php")
     p.wait_for_selector(".pm-last")
     got = p.evaluate("() => { const l = document.querySelector('.pm-last-list'); return [l.querySelectorAll('.pm-chip').length, l.scrollWidth <= l.clientWidth, getComputedStyle(l).overflowX, l.getBoundingClientRect().height > 40]; }")
-    assert got == [30, True, "visible", True]                                   # all thirty, on several lines, nothing to scroll
+    assert got == [10, True, "visible", False]                                  # all ten, on ONE line (the chips shrink, a long plate is cut), nothing to scroll
     assert p.evaluate("() => getComputedStyle(document.querySelector('.pm-flag')).objectFit") == "contain"
     c.close()

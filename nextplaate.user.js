@@ -1223,20 +1223,30 @@
     return img;
   }
 
+  // "26-10-03" (yy-mm-dd, as the site writes the day of a photo) as a date in the reader's language
+  function lastDate(text) {
+    const m = /^(\d\d)-(\d\d)-(\d\d)$/.exec(String(text).trim());
+    return m ? new Date(2000 + +m[1], +m[2] - 1, +m[3]).toLocaleDateString([], { dateStyle: 'medium' }) : String(text).trim();
+  }
+
+  // Each last photo becomes a card of its own: the photo whole (the country's flag on its corner), under it the plate (its picture as soon
+  // as it is known, its text until then), then the country and the day. Nothing is written over the photo: every line is on white.
   function profileLast(root) {
     const items = [...root.querySelectorAll('.portfolio-box-v1 > li')];
     items.forEach(li => {
-      const photo = li.querySelector(':scope > img'), box = li.querySelector('.portfolio-box-v1-in'), go = box && box.querySelector('a[href*="/nomer"]');
+      const photo = li.querySelector(':scope > img'), box = li.querySelector('.portfolio-box-v1-in');
+      const go = box && box.querySelector('a[href*="/nomer"]');
       if (!photo || !go || li.dataset.pmDone) return;
       li.dataset.pmDone = '1';
-      const code = (go.getAttribute('href').match(/^\/([a-z]{2})\//) || [])[1];
-      const country = box.querySelector('p');
-      if (code && country) country.prepend(profileFlag(code));
-      const tag = h('div', { class: 'pm-tag', hidden: true });                       // the plate, over the corner of the photo, when its picture is known
-      const wrap = h('div', { class: 'pm-shot' });
-      photo.before(wrap);
-      wrap.append(photo, tag);
-      plateWatch(li, go, src => { tag.replaceChildren(h('img', { src, alt: (box.querySelector('h3') || {}).textContent || '' })); tag.hidden = false; });
+      const href = go.getAttribute('href'), code = (href.match(/^\/([a-z]{2})\//) || [])[1];
+      const plate = profileText(box.querySelector('h3')), meta = box.querySelector('p');
+      const country = meta ? profileText(meta.firstChild).replace(/,$/, '') : '', day = meta ? lastDate(profileText(meta.querySelector('small'))) : '';
+      const well = h('span', { class: 'pm-plate-well' }, h('span', { class: 'pm-plate-text', text: plate }));
+      const shot = h('span', { class: 'pm-photo' }, photo, code ? h('span', { class: 'pm-badge' }, profileFlag(code)) : null);
+      li.classList.add('pm-card-li');
+      li.append(h('a', { class: 'pm-card', href, title: `${plate}${country ? ' - ' + country : ''}` }, shot, well,
+        h('span', { class: 'pm-meta' }, h('b', { text: country }), h('span', { text: day }))));
+      plateWatch(li, go, src => well.replaceChildren(h('img', { src, alt: plate })));
     });
     return items.length;
   }
@@ -2199,7 +2209,8 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
    *    For what needs the whole screen for a moment (the tags of a photo) instead of the site's own pop-up.
    *      const modal = modalOpen({ id: 'pmg-tags-modal', title: 'Tags', body: element, actions: [{ label: 'Save', run }, ...], onDismiss, fill: true });
    *      modal.close()      closes it;  modal.dismiss()  closes it as a cancel (onDismiss runs first)
-   *    The cross, the Esc key and a click outside the window dismiss it. An action closes nothing by itself: it calls modal.close().
+   *    The Close button and the Esc key dismiss it; a click outside does NOT (the same in every window of the script, the batch window
+   *    included: a stray click, or a drag of the map that ends outside, must never lose what is open). An action closes nothing by itself: it calls modal.close().
    *    fill: true makes it almost the whole screen, with a body that does not scroll (the map: it lays out its own scrolling parts).
    *    It is in a shadow root (the site's CSS does not reach it) and uses the panel's tokens. One modal of an id at a time.
    * ===================================================================== */
@@ -2242,7 +2253,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
       dismiss() { if (done) return; if (opts.onDismiss) opts.onDismiss(); modal.close(); }
     };
     const onKey = e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); modal.dismiss(); } };
-    const ov = h('div', { class: 'ov' + (opts.fill ? ' fill' : ''), onclick: e => { if (e.target === ov) modal.dismiss(); } },
+    const ov = h('div', { class: 'ov' + (opts.fill ? ' fill' : '') },
       h('div', { class: 'dlg' + (opts.fill ? ' fill' : ''), role: 'dialog' },
         h('div', { class: 'mh' }, brand, h('h2', { text: opts.title }), sub, h('button', { type: 'button', class: 'btn ghost', title: 'Close (Esc)', text: 'Close', onclick: () => modal.dismiss() })),
         modal.body = h('div', { class: 'mb' }, opts.body),
@@ -2267,6 +2278,9 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     .wm .bar select{height:var(--h-sm);max-width:100%}
     .wm .bar .btn{height:var(--h-sm)}
     .wm .bar .gap{flex:1}
+    .wm .who{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+    .wm .who .pill,.wm .who select{box-sizing:border-box;height:var(--h-sm);min-height:var(--h-sm);margin:0;padding:0 12px;font-size:13px;line-height:1}
+    .wm .who select{padding:0 8px}
     .wm .bar .lbl{font-size:12px;color:var(--mute)}
     .wm .view{display:flex;flex-direction:column;flex:1;min-height:0}
     .wm .msg{margin:0;padding:24px 16px;font-size:14px;color:var(--mute)}
@@ -2439,19 +2453,24 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     .profile .panel-blue .table td:first-child b a{color:var(--pm-ink)}
     .profile .panel-blue .table td:first-child .fa-cloud-upload{color:var(--pm-line2)!important}
     .profile .panel-blue .table tbody tr:hover td{background:var(--pm-tint)}
-    /* the last photos: the same band, then an even grid of cards: the photo framed, the plate's picture on its corner, the caption on white */
+    /* the last photos: the same band, then an even grid of cards (built in profile-parts.js); nothing is written over a photo */
     .profile .col-md-5 > h3{display:flex;align-items:center;min-height:40px;margin:0;padding:0 12px;border:1px solid var(--pm-line);background:var(--pm-paper);font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--pm)}
     .profile .portfolio-box-v1{margin:0 0 16px;padding:12px 6px 0;border:1px solid var(--pm-line);border-top:0;background:#fff}
     .profile .portfolio-box-v1 li{padding:0 6px 12px;background:none}
-    .profile .portfolio-box-v1 li > img,.pm-shot > img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border:0;background:var(--pm-soft)}
-    .pm-shot{position:relative;border:1px solid var(--pm-line2);background:var(--pm-soft);overflow:hidden}
-    .pm-tag{position:absolute;left:8px;bottom:8px;max-width:calc(100% - 16px);padding:3px;border:1px solid var(--pm-line2);background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.35)}
-    .pm-tag img{display:block;width:auto;max-width:100%;height:26px}
-    .profile .portfolio-box-v1-in,.profile .portfolio-box-v1 li:hover .portfolio-box-v1-in{position:relative!important;min-height:44px;padding:8px 40px 0 0!important;background:transparent!important;color:var(--pm-ink)!important;opacity:1!important}
-    .profile .portfolio-box-v1-in h3{margin:0;font-size:14px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--pm-ink)}
-    .profile .portfolio-box-v1-in p{margin:0;font-size:12px;color:var(--pm-mute)}
-    .profile .portfolio-box-v1-in .btn-u{position:absolute;right:0;top:6px;display:grid;place-items:center;width:32px;height:32px;padding:0;border:1px solid var(--pm-line2);border-radius:0;background:#fff;color:var(--pm)}
-    .profile .portfolio-box-v1-in .btn-u:hover{background:var(--pm-tint);border-color:var(--pm-soft)}
+    .profile .pm-card-li > :not(.pm-card){display:none!important}
+    .pm-card{display:flex;flex-direction:column;border:1px solid var(--pm-line2);background:#fff;color:var(--pm-ink);text-decoration:none;transition:box-shadow .15s,transform .15s,border-color .15s}
+    .pm-card:hover,.pm-card:focus{border-color:var(--pm-soft);box-shadow:0 6px 16px rgba(0,0,0,.18);transform:translateY(-2px);color:var(--pm-ink);text-decoration:none}
+    .pm-photo{position:relative;display:block;aspect-ratio:4/3;overflow:hidden;background:var(--pm-soft)}
+    .pm-photo > img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .25s}
+    .pm-card:hover .pm-photo > img{transform:scale(1.04)}
+    .pm-badge{position:absolute;left:8px;top:8px;padding:3px;border:1px solid var(--pm-line2);background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.35);line-height:0}
+    .pm-badge .pm-flag{margin:0;vertical-align:top}
+    .pm-plate-well{display:flex;align-items:center;justify-content:center;min-height:48px;padding:6px 8px;border-top:1px solid var(--pm-line);background:var(--pm-paper)}
+    .pm-plate-text{font-size:16px;font-weight:700;line-height:1.2;letter-spacing:.04em;text-align:center;overflow-wrap:anywhere;color:var(--pm-ink)}
+    .pm-plate-well img{display:block;width:auto;max-width:100%;height:34px}
+    .pm-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-top:1px solid var(--pm-line);font-size:13px;color:var(--pm-ink)}
+    .pm-meta b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .pm-meta span{flex:none;font-size:12px;color:color-mix(in srgb,var(--pm-ink) 80%,#fff)}
     @media (max-width:760px){.pm-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.profile > .row:first-child > .col-md-3{flex:1 1 100%}}
   `;
   /* =====================================================================
@@ -5121,16 +5140,19 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
   /* =====================================================================
    *  THE LAST PLATES STRIP  (the line of the latest uploads that every page of the site carries under its header)
    *    The site writes it as a small line of text, "last | AB 123 | CD 456 | ...", at the very left of the window. Here it becomes a slim
-   *    strip as wide as the page, with a flag and a chip per plate (all of them, on a second line if they do not fit: no scrollbar). The links are the site's own;
+   *    strip as wide as the page, centred, with a flag and a chip per plate: all of them on ONE line (a long plate is cut with an ellipsis, its
+   *    full text is the hover; never a scrollbar, never a second line). The links are the site's own;
    *    its line stays in the page, hidden. Switch it off in Settings to get the site's line back.
    * ===================================================================== */
   const STRIP_CSS = `
-    .pm-last{${PAGE_TOKENS};display:flex;align-items:flex-start;gap:12px;width:min(1170px,calc(100% - 30px));margin:8px auto;padding:7px 12px;border:1px solid var(--pm-line);background:#fff}
-    .pm-last-label{flex:none;line-height:30px;font:700 11px/30px system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--pm)}
-    .pm-last-list{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
-    .pm-chip{display:inline-flex;align-items:center;flex:none;height:30px;padding:0 10px;border:1px solid var(--pm-line2);background:var(--pm-paper);color:var(--pm-ink);font:600 12px/1 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;text-decoration:none;white-space:nowrap}
+    .pm-last{${PAGE_TOKENS};display:flex;align-items:center;justify-content:center;gap:12px;width:min(1170px,calc(100% - 30px));min-height:44px;margin:8px auto;padding:7px 12px;border:1px solid var(--pm-line);background:#fff}
+    .pm-last-label{flex:none;font:700 11px/1 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--pm)}
+    .pm-last-list{display:flex;flex:0 1 auto;justify-content:center;gap:4px;min-width:0}
+    .pm-chip{display:inline-flex;align-items:center;flex:0 1 auto;min-width:0;height:30px;padding:0 8px;border:1px solid var(--pm-line2);background:var(--pm-paper);color:var(--pm-ink);font:600 12px/1 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;text-decoration:none;overflow:hidden}
     .pm-chip:hover{background:var(--pm-tint);border-color:var(--pm-soft);color:var(--pm-ink);text-decoration:none}
+    .pm-chip-text{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     ${PM_FLAG_CSS}
+    .pm-chip .pm-flag{margin-right:6px}
   `;
 
   registerFeature({
@@ -5146,7 +5168,8 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
       document.head.appendChild(style);
       const chips = links.map(a => {
         const code = (a.getAttribute('href').match(/^\/([a-z]{2})\//) || [])[1];
-        return h('a', { class: 'pm-chip', href: a.getAttribute('href'), title: code ? cName(code) : '' }, code ? profileFlag(code) : null, a.textContent.trim());
+        const text = a.textContent.trim();
+        return h('a', { class: 'pm-chip', href: a.getAttribute('href'), title: (code ? cName(code) + ': ' : '') + text }, code ? profileFlag(code) : null, h('span', { class: 'pm-chip-text', text }));
       });
       small.after(h('div', { class: 'pm-last' }, h('span', { class: 'pm-last-label', text: 'Last' }), h('div', { class: 'pm-last-list' }, chips)));
       small.style.display = 'none';

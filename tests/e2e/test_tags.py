@@ -188,7 +188,7 @@ def test_cancel_gives_the_boxes_back_as_they_were(ctx):
     assert page.evaluate("() => !document.getElementById('pmg-tags-modal')")
 
 
-def test_escape_and_the_cross_and_the_backdrop_cancel_too(ctx):
+def test_escape_and_the_close_button_cancel_but_the_backdrop_does_not(ctx):
     page = open_window(ctx)
     win_click(page, "bus")
     page.keyboard.press("Escape")
@@ -203,6 +203,8 @@ def test_escape_and_the_cross_and_the_backdrop_cancel_too(ctx):
     page.wait_for_selector("#pmg-tags-modal")
     win_click(page, "bus")
     page.evaluate(f"() => {WIN}.querySelector('.ov').dispatchEvent(new MouseEvent('click', {{ bubbles: true }}))")
+    assert page.evaluate("() => !!document.getElementById('pmg-tags-modal')")                       # a click outside leaves the window open, like the batch window
+    page.keyboard.press("Escape")
     assert page.evaluate("() => document.getElementById('CheckBox21').checked") is False
 
 

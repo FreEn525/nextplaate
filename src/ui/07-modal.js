@@ -3,7 +3,8 @@
    *    For what needs the whole screen for a moment (the tags of a photo) instead of the site's own pop-up.
    *      const modal = modalOpen({ id: 'pmg-tags-modal', title: 'Tags', body: element, actions: [{ label: 'Save', run }, ...], onDismiss, fill: true });
    *      modal.close()      closes it;  modal.dismiss()  closes it as a cancel (onDismiss runs first)
-   *    The cross, the Esc key and a click outside the window dismiss it. An action closes nothing by itself: it calls modal.close().
+   *    The Close button and the Esc key dismiss it; a click outside does NOT (the same in every window of the script, the batch window
+   *    included: a stray click, or a drag of the map that ends outside, must never lose what is open). An action closes nothing by itself: it calls modal.close().
    *    fill: true makes it almost the whole screen, with a body that does not scroll (the map: it lays out its own scrolling parts).
    *    It is in a shadow root (the site's CSS does not reach it) and uses the panel's tokens. One modal of an id at a time.
    * ===================================================================== */
@@ -46,7 +47,7 @@
       dismiss() { if (done) return; if (opts.onDismiss) opts.onDismiss(); modal.close(); }
     };
     const onKey = e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); modal.dismiss(); } };
-    const ov = h('div', { class: 'ov' + (opts.fill ? ' fill' : ''), onclick: e => { if (e.target === ov) modal.dismiss(); } },
+    const ov = h('div', { class: 'ov' + (opts.fill ? ' fill' : '') },
       h('div', { class: 'dlg' + (opts.fill ? ' fill' : ''), role: 'dialog' },
         h('div', { class: 'mh' }, brand, h('h2', { text: opts.title }), sub, h('button', { type: 'button', class: 'btn ghost', title: 'Close (Esc)', text: 'Close', onclick: () => modal.dismiss() })),
         modal.body = h('div', { class: 'mb' }, opts.body),

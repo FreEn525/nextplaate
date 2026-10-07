@@ -61,20 +61,30 @@
     return img;
   }
 
+  // "26-10-03" (yy-mm-dd, as the site writes the day of a photo) as a date in the reader's language
+  function lastDate(text) {
+    const m = /^(\d\d)-(\d\d)-(\d\d)$/.exec(String(text).trim());
+    return m ? new Date(2000 + +m[1], +m[2] - 1, +m[3]).toLocaleDateString([], { dateStyle: 'medium' }) : String(text).trim();
+  }
+
+  // Each last photo becomes a card of its own: the photo whole (the country's flag on its corner), under it the plate (its picture as soon
+  // as it is known, its text until then), then the country and the day. Nothing is written over the photo: every line is on white.
   function profileLast(root) {
     const items = [...root.querySelectorAll('.portfolio-box-v1 > li')];
     items.forEach(li => {
-      const photo = li.querySelector(':scope > img'), box = li.querySelector('.portfolio-box-v1-in'), go = box && box.querySelector('a[href*="/nomer"]');
+      const photo = li.querySelector(':scope > img'), box = li.querySelector('.portfolio-box-v1-in');
+      const go = box && box.querySelector('a[href*="/nomer"]');
       if (!photo || !go || li.dataset.pmDone) return;
       li.dataset.pmDone = '1';
-      const code = (go.getAttribute('href').match(/^\/([a-z]{2})\//) || [])[1];
-      const country = box.querySelector('p');
-      if (code && country) country.prepend(profileFlag(code));
-      const tag = h('div', { class: 'pm-tag', hidden: true });                       // the plate, over the corner of the photo, when its picture is known
-      const wrap = h('div', { class: 'pm-shot' });
-      photo.before(wrap);
-      wrap.append(photo, tag);
-      plateWatch(li, go, src => { tag.replaceChildren(h('img', { src, alt: (box.querySelector('h3') || {}).textContent || '' })); tag.hidden = false; });
+      const href = go.getAttribute('href'), code = (href.match(/^\/([a-z]{2})\//) || [])[1];
+      const plate = profileText(box.querySelector('h3')), meta = box.querySelector('p');
+      const country = meta ? profileText(meta.firstChild).replace(/,$/, '') : '', day = meta ? lastDate(profileText(meta.querySelector('small'))) : '';
+      const well = h('span', { class: 'pm-plate-well' }, h('span', { class: 'pm-plate-text', text: plate }));
+      const shot = h('span', { class: 'pm-photo' }, photo, code ? h('span', { class: 'pm-badge' }, profileFlag(code)) : null);
+      li.classList.add('pm-card-li');
+      li.append(h('a', { class: 'pm-card', href, title: `${plate}${country ? ' - ' + country : ''}` }, shot, well,
+        h('span', { class: 'pm-meta' }, h('b', { text: country }), h('span', { text: day }))));
+      plateWatch(li, go, src => well.replaceChildren(h('img', { src, alt: plate })));
     });
     return items.length;
   }

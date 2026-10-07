@@ -86,18 +86,23 @@
     .profile .panel-blue .table td:first-child b a{color:var(--pm-ink)}
     .profile .panel-blue .table td:first-child .fa-cloud-upload{color:var(--pm-line2)!important}
     .profile .panel-blue .table tbody tr:hover td{background:var(--pm-tint)}
-    /* the last photos: the same band, then an even grid of cards: the photo framed, the plate's picture on its corner, the caption on white */
+    /* the last photos: the same band, then an even grid of cards (built in profile-parts.js); nothing is written over a photo */
     .profile .col-md-5 > h3{display:flex;align-items:center;min-height:40px;margin:0;padding:0 12px;border:1px solid var(--pm-line);background:var(--pm-paper);font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--pm)}
     .profile .portfolio-box-v1{margin:0 0 16px;padding:12px 6px 0;border:1px solid var(--pm-line);border-top:0;background:#fff}
     .profile .portfolio-box-v1 li{padding:0 6px 12px;background:none}
-    .profile .portfolio-box-v1 li > img,.pm-shot > img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border:0;background:var(--pm-soft)}
-    .pm-shot{position:relative;border:1px solid var(--pm-line2);background:var(--pm-soft);overflow:hidden}
-    .pm-tag{position:absolute;left:8px;bottom:8px;max-width:calc(100% - 16px);padding:3px;border:1px solid var(--pm-line2);background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.35)}
-    .pm-tag img{display:block;width:auto;max-width:100%;height:26px}
-    .profile .portfolio-box-v1-in,.profile .portfolio-box-v1 li:hover .portfolio-box-v1-in{position:relative!important;min-height:44px;padding:8px 40px 0 0!important;background:transparent!important;color:var(--pm-ink)!important;opacity:1!important}
-    .profile .portfolio-box-v1-in h3{margin:0;font-size:14px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--pm-ink)}
-    .profile .portfolio-box-v1-in p{margin:0;font-size:12px;color:var(--pm-mute)}
-    .profile .portfolio-box-v1-in .btn-u{position:absolute;right:0;top:6px;display:grid;place-items:center;width:32px;height:32px;padding:0;border:1px solid var(--pm-line2);border-radius:0;background:#fff;color:var(--pm)}
-    .profile .portfolio-box-v1-in .btn-u:hover{background:var(--pm-tint);border-color:var(--pm-soft)}
+    .profile .pm-card-li > :not(.pm-card){display:none!important}
+    .pm-card{display:flex;flex-direction:column;border:1px solid var(--pm-line2);background:#fff;color:var(--pm-ink);text-decoration:none;transition:box-shadow .15s,transform .15s,border-color .15s}
+    .pm-card:hover,.pm-card:focus{border-color:var(--pm-soft);box-shadow:0 6px 16px rgba(0,0,0,.18);transform:translateY(-2px);color:var(--pm-ink);text-decoration:none}
+    .pm-photo{position:relative;display:block;aspect-ratio:4/3;overflow:hidden;background:var(--pm-soft)}
+    .pm-photo > img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .25s}
+    .pm-card:hover .pm-photo > img{transform:scale(1.04)}
+    .pm-badge{position:absolute;left:8px;top:8px;padding:3px;border:1px solid var(--pm-line2);background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.35);line-height:0}
+    .pm-badge .pm-flag{margin:0;vertical-align:top}
+    .pm-plate-well{display:flex;align-items:center;justify-content:center;min-height:48px;padding:6px 8px;border-top:1px solid var(--pm-line);background:var(--pm-paper)}
+    .pm-plate-text{font-size:16px;font-weight:700;line-height:1.2;letter-spacing:.04em;text-align:center;overflow-wrap:anywhere;color:var(--pm-ink)}
+    .pm-plate-well img{display:block;width:auto;max-width:100%;height:34px}
+    .pm-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-top:1px solid var(--pm-line);font-size:13px;color:var(--pm-ink)}
+    .pm-meta b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .pm-meta span{flex:none;font-size:12px;color:color-mix(in srgb,var(--pm-ink) 80%,#fff)}
     @media (max-width:760px){.pm-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.profile > .row:first-child > .col-md-3{flex:1 1 100%}}
   `;
