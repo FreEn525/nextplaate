@@ -4,7 +4,7 @@ import json
 
 import pytest
 
-from fake_site import PNG, route_site
+from fake_site import PNG, route_site, settled
 
 PANEL = "document.getElementById('pmg-host').shadowRoot"
 BAR = "document.getElementById('pmg-members').shadowRoot"
@@ -31,6 +31,7 @@ def open_page(ctx, url, width=1280, members=None):
         page.evaluate("(v) => localStorage.setItem('pmg_members', v)", json.dumps(members))
         page.reload()
         page.wait_for_selector("#pmg-host")
+    settled(page)
     page.wait_for_timeout(200)
     return page
 

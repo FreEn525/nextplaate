@@ -1,7 +1,7 @@
 """Country flags: a link to the upload page of every country, in the panel and on the upload pages (/add and /xx/add)."""
 import pytest
 
-from fake_site import route_site
+from fake_site import route_site, settled
 
 PANEL = "document.getElementById('pmg-host').shadowRoot"
 BAR = "document.getElementById('pmg-flags').shadowRoot"
@@ -21,6 +21,7 @@ def open_page(ctx, url, width=1280):
     page.set_viewport_size({"width": width, "height": 900})
     page.goto(url)
     page.wait_for_selector("#pmg-host")
+    settled(page)
     page.wait_for_timeout(200)
     return page
 

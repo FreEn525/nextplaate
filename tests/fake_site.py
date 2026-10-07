@@ -156,6 +156,11 @@ window.GM_setValue = (k, v) => localStorage.setItem('gm_' + k, JSON.stringify(v)
     return html.replace("</body>", f"{shims}<script>{SCRIPT}</script></body>")
 
 
+def settled(page):
+    """Waits until the script's idle work (the flags bar is built when the browser is idle) has run: its idle callback is queued before ours."""
+    page.evaluate("() => new Promise(r => requestIdleCallback(r, { timeout: 3000 }))")
+
+
 def route_site(context):
     """Routes every request of a test context to the simulated site."""
 

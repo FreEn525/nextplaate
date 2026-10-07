@@ -1,7 +1,7 @@
 """The page /add: the site's drop-down of countries becomes a card of large flags with a search box."""
 import pytest
 
-from fake_site import route_site
+from fake_site import route_site, settled
 
 ADD = "https://platesmania.com/add"
 CARD = "document.getElementById('pmg-country-card').shadowRoot"
@@ -86,6 +86,7 @@ def test_other_upload_pages_keep_the_side_bar_and_this_page_has_none(ctx):
     other = ctx.new_page()
     other.goto("https://platesmania.com/fr/add")
     other.wait_for_selector("#pmg-host")
+    settled(other)
     assert other.evaluate("() => !!document.getElementById('pmg-flags') && !document.getElementById('pmg-country-card')")
 
 
