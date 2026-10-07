@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.11.4
+
+- **The awards counter**: the site shows the figure beside the trophy of a profile only when there are no awards ("-"); with awards it showed nothing. The script now counts the lines of the tables of the awards page (State, region, license plate format, vehicle brand, model) and puts the total in the badge, with the detail on hover (for example 46: 1 State, 35 region, 2 License plate format, 1 Vehicle brand, 7 Model). The page is read in the background, once an hour per member; a figure the site gives is kept.
+
 ## 5.11.3
 
 - **Requests to the site, calmer and smarter**: what you asked for goes first and the background ones (plate pictures, more notifications, the look for news) wait their turn, six seconds apart; the tabs share the pace; a background request is not made while the site is struggling. After a block the pause is 3 minutes (it was 15), 10 if the site blocks again within the hour, then 20.

@@ -18,6 +18,8 @@
       if (profileTiles(root)) root.classList.add('pm-built');
       profileCountries(root);
       profileLast(root);
-      profileNotifications(root, (location.pathname.match(/\/user(\d+)/) || [])[1]);
+      const member = (location.pathname.match(/\/user(\d+)/) || [])[1];
+      profileAwards(root, member);
+      profileNotifications(root, member);
     }
   });
