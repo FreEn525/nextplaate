@@ -36,6 +36,8 @@
   function updateOpen() {
     const status = h('p', { class: 'hint', text: 'Checking Greasy Fork…' });
     const install = h('button', { type: 'button', class: 'btn', text: 'Update now', hidden: true, onclick: () => {
+      store.set('update_pending', '');                                                         // it goes to the install page: no reminder needed
+      installOpened = true;                                                                     // (92-update-notice.js: the page then offers to reload when it comes back into view)
       try { if (typeof GM_openInTab === 'function') { GM_openInTab(UPDATE_INSTALL, { active: true }); return; } } catch (e) { /* the plain way below */ }
       window.open(UPDATE_INSTALL, '_blank', 'noopener');
     } });
@@ -49,7 +51,8 @@
       status.textContent = 'Checking Greasy Fork…';
       try {
         const latest = await updateLatest();
-        if (versionNewer(latest, SCRIPT_VERSION)) { status.textContent = `Version ${latest} is available (you have ${SCRIPT_VERSION}). Update now opens the install page: Tampermonkey offers the update there.`; install.hidden = false; }
+        store.set('update_due', String(Date.now() + 20 * 60000));                                // the notice of 92-update-notice.js has no need to ask again right now
+        if (versionNewer(latest, SCRIPT_VERSION)) { store.set('update_pending', latest); status.textContent = `Version ${latest} is available (you have ${SCRIPT_VERSION}). Update now opens the install page: Tampermonkey offers the update there.`; install.hidden = false; }
         else status.textContent = `You have the latest version (${SCRIPT_VERSION}).`;
       } catch (e) { status.textContent = 'Could not check: ' + (e.name === 'AbortError' ? 'no answer in 10 s' : e.message) + '.'; }
     }

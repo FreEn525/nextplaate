@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.11.13
+
+- **Reminder**: a person who opened the Update window, saw a newer version and did not use "Update now" is reminded by the notice: for that version the cross silences it for 6 hours only, not for good. The Update window and the notice now share the result of the look (no second request right after). Without the window, the cross still silences the version for good.
+
 ## 5.11.12
 
 - **Reload after an update**: Tampermonkey does not reload the open pages, which keep the old version. A page still on the old version now offers "Reload" when another tab runs a newer one, or when you come back to it after using the install link. Never reloaded by itself, so a description being typed or an upload is not lost. The cross is not counted as an install.

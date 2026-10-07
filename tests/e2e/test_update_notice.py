@@ -188,3 +188,65 @@ def test_the_cross_does_not_count_as_an_install(ctx):
     page.evaluate("() => document.dispatchEvent(new Event('visibilitychange'))")
     page.wait_for_timeout(1500)
     assert notices(page) == []
+
+
+def open_update_window(page):
+    page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('logo').click()")
+    page.wait_for_function("() => document.getElementById('pmg-update') && !document.getElementById('pmg-update').shadowRoot.querySelector('.hint').textContent.startsWith('Checking')", timeout=10000)
+
+
+def close_toast_with_the_cross(page):
+    page.evaluate(f"() => {TOASTS}.querySelector('.t.update .x').click()")
+
+
+@public_only
+def test_seeing_the_newer_version_in_the_update_window_is_remembered_and_shared_with_the_notice(ctx):
+    serve(ctx, "99.0")
+    page = join(ctx, "localStorage.setItem('pmg_set_feature_updatenotice', '0')")
+    open_update_window(page)
+    assert page.evaluate("() => localStorage.getItem('pmg_update_pending')") == "99.0"
+    wait = page.evaluate("() => +localStorage.getItem('pmg_update_due') - Date.now()")
+    assert 15 * 60000 <= wait <= 20 * 60000 + 2000                                           # the window looked: the notice does not ask again at once
+
+
+@public_only
+def test_the_update_button_clears_the_reminder(ctx):
+    serve(ctx, "99.0")
+    ctx.route(INSTALL, lambda r: r.fulfill(status=200, content_type="text/plain", body=""))
+    page = join(ctx, "localStorage.setItem('pmg_set_feature_updatenotice', '0')")
+    open_update_window(page)
+    page.evaluate("() => document.getElementById('pmg-update').shadowRoot.querySelector('.btn:not(.ghost)').click()")
+    assert page.evaluate("() => localStorage.getItem('pmg_update_pending')") == ""
+
+
+@public_only
+def test_a_person_who_saw_the_update_and_did_not_install_is_reminded_after_six_hours_even_after_the_cross(ctx):
+    serve(ctx, "99.0")
+    page = join(ctx, "localStorage.setItem('pmg_update_pending', '99.0')")
+    toast_shown(page)
+    close_toast_with_the_cross(page)
+    wait = page.evaluate("() => +localStorage.getItem('pmg_update_remind_at') - Date.now()")
+    assert 5.9 * 3600000 <= wait <= 6 * 3600000 + 2000
+    page.evaluate("() => localStorage.setItem('pmg_update_due', '0')")
+    page.reload()
+    page.wait_for_selector("#pmg-host")
+    page.wait_for_timeout(2500)
+    assert notices(page) == []                                                               # six hours have not passed
+    page.evaluate("() => { localStorage.setItem('pmg_update_due', '0'); localStorage.setItem('pmg_update_remind_at', '1'); }")
+    page.reload()
+    toast_shown(page)
+    assert notices(page)[0][0] == "NextPlaate 99.0 is available"
+
+
+@public_only
+def test_without_the_update_window_the_cross_stays_for_good(ctx):
+    serve(ctx, "99.0")
+    page = join(ctx)
+    toast_shown(page)
+    close_toast_with_the_cross(page)
+    assert page.evaluate("() => localStorage.getItem('pmg_update_remind_at')") is None
+    page.evaluate("() => { localStorage.setItem('pmg_update_due', '0'); localStorage.setItem('pmg_update_remind_at', '1'); }")
+    page.reload()
+    page.wait_for_selector("#pmg-host")
+    page.wait_for_timeout(2500)
+    assert notices(page) == []

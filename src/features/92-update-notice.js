@@ -5,12 +5,14 @@
    *    script (the same file as a click on the logo, 1.3 KB, 91-update.js) and, if it is newer than this one, shows a notice with a
    *    link to the install page, where Tampermonkey offers the update. Tampermonkey updates by itself only every few hours: a version
    *    published meanwhile, or several in a row, is announced here (the cross or the link says "not again for this version"; letting
-   *    the notice go by does not). A page that stays open looks again by itself (a timer every 5 minutes asks if it is time). A look that
+   *    the notice go by does not). A person who opened the Update window, saw the newer version and did not use "Update now" is reminded:
+   *    for that version the cross silences the notice for 6 hours only (update_pending, update_remind_at), not for good. A page that stays open looks again by itself (a timer every 5 minutes asks if it is time). A look that
    *    fails is tried again in 10 minutes. After the update, a page still runs the old version (Tampermonkey does not reload pages): every page
    *    writes the version it runs (pmg_running_version) and one that sees a newer one written by another tab, or that comes back into view after
    *    the install link was used, offers "Reload" (never by itself: a description being typed or an upload must not be lost). Never in the dev build (it is updated by building it again). Switch off in Settings.
    * ===================================================================== */
   const UPDATE_EVERY_MS = 20 * 60000;
+  const REMIND_EVERY_MS = 6 * 3600000;
 
   let installOpened = false;                                                                      // the install link was used from this page
 
@@ -39,9 +41,11 @@
     store.set('update_due', String(now + UPDATE_EVERY_MS * (0.75 + Math.random() * 0.5)));
     let latest;
     try { latest = await updateLatest(); } catch (e) { store.set('update_due', String(now + 600000)); return; }       // failed: again in 10 minutes
-    if (!versionNewer(latest, SCRIPT_VERSION) || store.get('update_dismissed', '') === latest) return;
+    if (!versionNewer(latest, SCRIPT_VERSION)) return;
+    const pending = store.get('update_pending', '') === latest;                                  // seen in the Update window, not installed from there
+    if (store.get('update_dismissed', '') === latest && !(pending && now >= (+store.get('update_remind_at', '0') || 0))) return;
     toast({ title: `NextPlaate ${latest} is available`, body: `You have ${SCRIPT_VERSION}. Click here to install it now; Tampermonkey also updates it by itself.`, href: UPDATE_INSTALL, kind: 'update', ms: 20000,
-      onClose: how => { store.set('update_dismissed', latest); if (how === 'link') installOpened = true; } });
+      onClose: how => { store.set('update_dismissed', latest); if (pending) store.set('update_remind_at', String(Date.now() + REMIND_EVERY_MS)); if (how === 'link') installOpened = true; } });
   }
 
   registerFeature({
