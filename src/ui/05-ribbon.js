@@ -74,6 +74,9 @@
           return h('div', { class: 'group' }, body, h('div', { class: 'gtitle', text: g.title }));
         })));
     });
+    // the version, at the foot of the rail (the dev build says so); a click opens the update window like the logo does (91-update.js)
+    $('rail').append(h('button', { type: 'button', class: 'rver', id: 'rver', title: `NextPlaate ${SCRIPT_VERSION}: click to check for an update`, 'aria-label': `NextPlaate version ${SCRIPT_VERSION}: check for an update` },
+      SCRIPT_VERSION, '__DEBUG__' === '1' ? h('small', { text: 'dev' }) : null));
     $('dclose').onclick = () => closeDrawer();
     // the dot on the logo: how the site is doing, from what the script already sees (src/lib/http.js); the pause counts down by itself
     const siteDot = () => { const s = siteHealth(); $('sdot').dataset.level = s.level; $('logo').title = 'NextPlaate: check for an update' + String.fromCharCode(10) + s.text; };

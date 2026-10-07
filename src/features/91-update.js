@@ -58,5 +58,5 @@
   }
 
   registerFeature({
-    init: () => { const logo = $('logo'); if (logo) logo.onclick = updateOpen; }
+    init: () => { for (const id of ['logo', 'rver']) { const el = $(id); if (el) el.onclick = updateOpen; } }       // the logo, and the version at the foot of the rail
   });

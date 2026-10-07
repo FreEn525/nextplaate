@@ -11,6 +11,9 @@
     .rme img{display:block;width:100%;height:100%;object-fit:cover}
     .rme:hover{border-color:var(--primary)}
     .rme.on{border-color:var(--primary);box-shadow:0 0 0 2px var(--ring)}
+    .rver{align-self:stretch;flex:none;display:flex;flex-direction:column;align-items:center;gap:0;padding:4px 0 2px;border:0;background:none;font:inherit;font-size:11px;line-height:1.3;color:var(--mute);cursor:pointer}   /* the version, at the foot of the rail: a click opens the update window */
+    .rver:hover{color:var(--primary-h);text-decoration:underline}
+    .rver small{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--danger)}
     .rsep{width:24px;height:1px;background:var(--line2);margin:auto 0 4px}
     .rbtn{width:var(--h-rail);height:var(--h-rail);display:grid;place-items:center;border:0;border-radius:var(--r);background:none;color:var(--mute);cursor:pointer}
     .rbtn:hover{background:var(--primary-tint);color:var(--primary-h)}

@@ -160,3 +160,16 @@ def test_a_page_bound_group_says_where_it_works_and_keeps_its_settings(page):
     note = page.evaluate("() => document.getElementById('pmg-host').shadowRoot.querySelector('.dsec[data-drawer=\"gallery\"] .pnote').textContent")
     assert "gallery" in note
     assert page.evaluate("() => document.getElementById('pmg-host').shadowRoot.getElementById('prevPage') !== null")
+
+
+def test_the_version_is_at_the_foot_of_the_rail_and_a_click_opens_the_update_window(page):
+    open_at(page, GALLERY)
+    shadow = "document.getElementById('pmg-host').shadowRoot"
+    text = page.evaluate(f"() => {shadow}.getElementById('rver').textContent")
+    version = page.evaluate("() => (document.querySelector('meta[name=pmg-version]') || {}).content") or None
+    assert text.startswith("5.") and page.evaluate(f"() => {shadow}.getElementById('rver').getBoundingClientRect().bottom <= window.innerHeight")      # in view, last of the rail
+    last = page.evaluate(f"() => {shadow}.getElementById('rail').lastElementChild.id")
+    assert last == "rver"
+    page.evaluate(f"() => {shadow}.getElementById('rver').click()")
+    page.wait_for_function("() => document.getElementById('pmg-update')")
+    assert page.evaluate("() => document.getElementById('pmg-update').shadowRoot.querySelector('h2').textContent") == "NextPlaate " + text.replace("dev", "")

@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.11.5
+
+- **The version is shown in the panel**: at the foot of the bar of icons (the dev build adds "dev" in red under it). A click on it opens the update window, like the logo.
+
 ## 5.11.4
 
 - **The awards counter**: the site shows the figure beside the trophy of a profile only when there are no awards ("-"); with awards it showed nothing. The script now counts the lines of the tables of the awards page (State, region, license plate format, vehicle brand, model) and puts the total in the badge, with the detail on hover (for example 46: 1 State, 35 region, 2 License plate format, 1 Vehicle brand, 7 Model). The page is read in the background, once an hour per member; a figure the site gives is kept.

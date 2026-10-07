@@ -34,7 +34,7 @@ Chaque fonction a un interrupteur dans Settings (sauf Settings elle-même) : ét
 | 24 | Éditeur de raccourcis | Shortcut editor | tiroir Raccourcis | change chaque touche | |
 | 25 | Réglages | (verrouillée) | tiroir Settings | un interrupteur par fonction ; choix des pays de la barre | |
 
-Autour de ces fonctions : le point d'état du site sur le logo (vert, ambre, rouge, gris en pause ; calculé à partir des requêtes du script et du temps de la page, sans requête de plus ; le bouton *Check the site now* de Settings > About en fait une, à la demande : `lib/http.js`, `siteHealth`), la barre d'icônes (avec votre photo de profil sous le logo), le message d'état en bas, et pour le développement le tiroir Developer du build dev (capture, test de plaques, vérification des lectures, base).
+Autour de ces fonctions : la version au pied de la barre d'icônes (la version dev ajoute « dev » en rouge ; un clic ouvre la fenêtre de mise à jour, comme le logo), le point d'état du site sur le logo (vert, ambre, rouge, gris en pause ; calculé à partir des requêtes du script et du temps de la page, sans requête de plus ; le bouton *Check the site now* de Settings > About en fait une, à la demande : `lib/http.js`, `siteHealth`), la barre d'icônes (avec votre photo de profil sous le logo), le message d'état en bas, et pour le développement le tiroir Developer du build dev (capture, test de plaques, vérification des lectures, base).
 
 ## Autour des fonctions
 
