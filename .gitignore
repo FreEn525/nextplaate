@@ -8,6 +8,8 @@
 !.github/**
 !scripts/
 !scripts/**
+!addons/
+!addons/**
 !src/
 !src/**
 !tests/
