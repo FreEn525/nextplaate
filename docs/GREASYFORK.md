@@ -74,6 +74,8 @@ A click on the logo of the panel checks for a newer version. The bar follows the
 ## Permissions, in plain words
 - It works on platesmania.com. Everything it reads from the site goes through one queue: one request at a time, three seconds apart, a pause after a block.
 - For Google Lens only, it also runs on Google pages, where it acts only for a search the panel asked for. `GM_setValue` / `GM_getValue` pass the photo to that page and the results back. `GM_openInTab` opens the batch upload and Lens tabs.
+- For the maps of regions it downloads public shape files (geoBoundaries, through geoboundaries.org and media.githubusercontent.com) when you open a country: nothing about you is sent. The other open sources (the Dutch and Israeli registers) are asked only for the plate you typed.
+- The notification pop-ups and the plate pictures read PlatesMania's own pages through the same queue; nothing leaves your browser.
 - Nothing is sent to any server of ours: there is none.
 ```
 

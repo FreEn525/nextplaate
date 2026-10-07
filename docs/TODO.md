@@ -28,7 +28,12 @@ Notes prises pendant la collecte des séries. On les fait au fur et à mesure, d
 17. **Boîte « Specify brand and model of vehicle »** : **fait** (version 5.10.1).
 18. **Carte du monde d'un membre** : **fait** (version 5.11, `81-worldmap.js`). Idée suivante si tu veux : des cartes de régions pays par pays (France, Allemagne...) à partir de `userreg.php`.
 
-19. **Carte de toutes les régions (départements de la France, districts de la Serbie...)** : **fait pour 54 pays** (version 5.11) ; les autres (Allemagne, Pologne, Royaume-Uni, Japon...) gardent le tableau. Source ouverte trouvée : geoBoundaries (CC-BY 4.0), contours par pays chargés à la demande ; rapprochement des noms de régions du site avec les formes pays par pays, couverture mesurée. Étape 1 : l'outil *Regions collection* (build dev). Étape 2 : le rapprochement et la vue « régions » dans la carte, pays par pays. Voir le détail dans la réponse du 6 octobre.
+19. **Carte de toutes les régions (départements de la France, districts de la Serbie...)** : **fait pour tous les pays qui ont une liste de régions sur le site** (version 5.11, 54 pays, dont 46 avec au moins 90 % des régions placées : l'Allemagne, la Pologne, le Royaume-Uni, le Japon, l'Irlande... par noms, alias, codes de plaque et villes de Wikidata, ou par le point de l'endroit ; approximatif par nature). Reste hors données : les contours récents (Algérie, Kazakhstan 2022, Ukraine occupée), les comtés d'Irlande (l'open data n'a que les provinces), l'outre-mer français.
+
+20. **Refonte du profil dans le style du script** : **fait** (version 5.11 : tuiles, deux panneaux identiques, tableau des pays avec drapeaux, derniers posts en cartes, photo cadrée, badges carrés, carte Uploads à taille fixe ; `84-profile-style.js`, `lib/profile-parts.js`, `ui/10-profile-css.js`).
+21. **Notifications en pastille** : **fait** (version 5.11, `85-notify.js` : likes, commentaires, messages privés, tant qu'un onglet est ouvert ; la plaque en image dans la liste, chargement au fil du défilement).
+22. **Bande des dernières plaques** : **fait** (version 5.11, `86-last-strip.js` : une ligne, centrée, drapeaux).
+23. **Cohérence des fenêtres** : **fait** (version 5.11 : même cadre que le gestionnaire d'envoi, et une règle commune : un clic à côté ne ferme jamais). **Reste à faire** : la page d'ajout (carte Plate check, boîte marque et modèle) et les fenêtres « What's new » / « Update » dans le même esprit, les cartes de régions pour les contours récents.
 
 Autres demandes en cours : compteur de série pour tous les pays (attend les pages de `reference/real/series/` de l'outil Series collection) ; liens de recherche par pays (faits : liens universels ouverts, NL, IL, UK, NZ).
 

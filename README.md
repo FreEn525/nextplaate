@@ -75,7 +75,7 @@ Updates are delivered through Greasy Fork. Tampermonkey checks for a new version
 
 ## Credits
 
-The world map is [Natural Earth](https://www.naturalearthdata.com/) data (public domain), through the [world-atlas](https://github.com/topojson/world-atlas) package. The maps of regions use the shapes of [geoBoundaries](https://www.geoboundaries.org/) (CC-BY 4.0 and the licence of each country's source, shown under the map), loaded when you choose a country.
+The world map is [Natural Earth](https://www.naturalearthdata.com/) data (public domain), through the [world-atlas](https://github.com/topojson/world-atlas) package. The maps of regions use the shapes of [geoBoundaries](https://www.geoboundaries.org/) (CC-BY 4.0 and the licence of each country's source, shown under the map), loaded when you choose a country. Plate codes, towns and coordinates that place a region on its shape come from [Wikidata](https://www.wikidata.org/) (CC0).
 
 ## License
 
