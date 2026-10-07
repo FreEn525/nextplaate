@@ -143,7 +143,6 @@
         id: 'pmg-tags-modal', title: 'Tags', body: el,
         onDismiss: () => { tags.forEach((t, i) => tagToggle(t, start[i])); },
         actions: [
-          { label: 'Cancel', kind: 'ghost', run: () => modal.dismiss() },
           { label: 'Save', run: () => {
             tagsRemember(tags);
             const save = document.getElementById('submit');          // the site's own Save: it sends the tags as it always did

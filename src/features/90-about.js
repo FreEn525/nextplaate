@@ -27,8 +27,7 @@
   function whatsNewOpen(seen) {
     const entries = whatsNewSince(seen);
     if (!entries.length) return;
-    const modal = modalOpen({ id: 'pmg-whatsnew', title: `What’s new in ${entries[0].version}`, body: whatsNewBody(entries),
-      actions: [{ label: 'Got it', run: () => modal.close() }] });
+    const modal = modalOpen({ id: 'pmg-whatsnew', title: `What’s new in ${entries[0].version}`, body: whatsNewBody(entries) });                                  // the Close of the header is the only way out: no "Got it" that does the same
     modal.message(`NextPlaate by ${AUTHOR.name}`);
   }
 

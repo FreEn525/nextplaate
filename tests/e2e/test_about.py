@@ -29,7 +29,7 @@ def open_page(ctx, seen=None):
 def test_a_first_install_shows_nothing_and_remembers_the_version(ctx):
     page = open_page(ctx)
     assert page.evaluate(f"() => !{MODAL}")
-    assert page.evaluate("() => localStorage.getItem('pmg_seen_version')") == "5.11.5"
+    assert page.evaluate("() => localStorage.getItem('pmg_seen_version')") == "5.11.6"
 
 
 def test_after_an_update_the_window_opens_once(ctx):
@@ -39,7 +39,7 @@ def test_after_an_update_the_window_opens_once(ctx):
     assert title == "What’s new in 5.11"
     sections = page.evaluate(f"() => [...{MODAL}.shadowRoot.querySelectorAll('.wn-section .cat')].map(e => e.textContent)")
     assert sections == ["New", "The panel", "Clearer pages", "On the upload page", "On profiles and series", "Good to know"]          # 5.11, 5.10, then 5.9 (seen 5.8)
-    assert page.evaluate("() => localStorage.getItem('pmg_seen_version')") == "5.11.5"
+    assert page.evaluate("() => localStorage.getItem('pmg_seen_version')") == "5.11.6"
     page.reload()
     page.wait_for_selector("#pmg-host")
     page.wait_for_timeout(300)
@@ -48,7 +48,7 @@ def test_after_an_update_the_window_opens_once(ctx):
 
 def test_the_window_closes_with_the_button_and_with_escape(ctx):
     page = open_page(ctx, seen="5.8")
-    page.evaluate(f"() => [...{MODAL}.shadowRoot.querySelectorAll('button')].find(b => b.textContent === 'Got it').click()")
+    page.evaluate(f"() => [...{MODAL}.shadowRoot.querySelectorAll('button')].find(b => b.textContent === 'Close').click()")
     assert page.evaluate(f"() => !{MODAL}")
     page = open_page(ctx, seen="5.8")
     page.keyboard.press("Escape")
@@ -90,4 +90,4 @@ def test_only_what_is_newer_than_the_version_seen_is_shown(ctx):
 def test_a_fix_version_does_not_open_the_window(ctx):
     page = open_page(ctx, seen="5.11.1")                                                       # same minor version: a fix
     assert page.evaluate(f"() => !{MODAL}")
-    assert page.evaluate("() => localStorage.getItem('pmg_seen_version')") == "5.11.5"
+    assert page.evaluate("() => localStorage.getItem('pmg_seen_version')") == "5.11.6"

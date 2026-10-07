@@ -123,3 +123,13 @@ def test_a_first_failure_is_tried_again_by_itself_at_a_new_address(ctx):
     logo(page)
     assert "Version 99.0 is available" in text(page)
     assert len(ASKED) == 2 and ASKED[0] != ASKED[1] and all("?t=" in u for u in ASKED)
+
+
+@public_only
+def test_the_update_window_has_one_close_button_not_two(ctx):
+    serve(ctx, "99.0")
+    page = click_logo(ctx)
+    logo(page)
+    text(page)
+    labels = page.evaluate(f"() => [...{MODAL}.querySelectorAll('button')].map(b => b.textContent).filter(t => t === 'Close' || t === 'Got it')")
+    assert labels == ["Close"]

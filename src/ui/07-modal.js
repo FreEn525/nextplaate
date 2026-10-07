@@ -3,7 +3,7 @@
    *    For what needs the whole screen for a moment (the tags of a photo) instead of the site's own pop-up.
    *      const modal = modalOpen({ id: 'pmg-tags-modal', title: 'Tags', body: element, actions: [{ label: 'Save', run }, ...], onDismiss, fill: true });
    *      modal.close()      closes it;  modal.dismiss()  closes it as a cancel (onDismiss runs first)
-   *    The Close button and the Esc key dismiss it; a click outside does NOT (the same in every window of the script, the batch window
+   *    The Close button of its header (the only one: an action at the foot is for what does something else, Save, Update...) and the Esc key dismiss it; a click outside does NOT (the same in every window of the script, the batch window
    *    included: a stray click, or a drag of the map that ends outside, must never lose what is open). An action closes nothing by itself: it calls modal.close().
    *    fill: true makes it almost the whole screen, with a body that does not scroll (the map: it lays out its own scrolling parts).
    *    It is in a shadow root (the site's CSS does not reach it) and uses the panel's tokens. One modal of an id at a time.

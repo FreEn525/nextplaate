@@ -41,8 +41,7 @@
     } });
     const again = h('button', { type: 'button', class: 'btn ghost', text: 'Check again', onclick: () => check() });
     const modal = modalOpen({ id: 'pmg-update', title: 'NextPlaate ' + SCRIPT_VERSION,
-      body: h('div', { class: 'cardbox' }, status, h('div', { class: 'cardrow' }, install, again)),
-      actions: [{ label: 'Close', kind: 'ghost', run: () => modal.close() }] });
+      body: h('div', { class: 'cardbox' }, status, h('div', { class: 'cardrow' }, install, again)) });         // no second Close at the foot: the one of the header is the only one
     modal.message(`by ${AUTHOR.name}`);
     async function check() {
       install.hidden = true;

@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.11.6
+
+- The Update, What's new and Tags windows had two ways to close (the *Close* of the header and a *Close*, *Got it* or *Cancel* at the foot): only the one of the header is left, and the foot of a window holds only what does something else (*Save*, *Update now*). Closing the Tags window still gives the boxes back as they were.
+
 ## 5.11.5
 
 - **The version is shown in the panel**: at the foot of the bar of icons (the dev build adds "dev" in red under it). A click on it opens the update window, like the logo.

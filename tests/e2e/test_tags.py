@@ -178,11 +178,12 @@ def test_save_presses_the_sites_own_save_button_and_closes_the_window(ctx):
     assert page.evaluate("() => document.documentElement.style.overflow") != "hidden"                      # the page scrolls again
 
 
-def test_cancel_gives_the_boxes_back_as_they_were(ctx):
+def test_closing_gives_the_boxes_back_as_they_were_and_the_foot_has_only_save(ctx):
     page = open_window(ctx)
     win_click(page, "police")
     win_click(page, "truck")
-    win_button(page, "Cancel")
+    assert page.evaluate(f"() => [...{WIN}.querySelectorAll('.mf .btn')].map(b => b.textContent)") == ["Save"]      # no second way to close at the foot
+    page.evaluate(f"() => {WIN}.querySelector('.mh .btn').click()")                                                  # the Close of the header cancels
     assert page.evaluate("() => [...document.querySelectorAll('#tagedit input:checked')].map(i => i.name)") == ["CheckBox[22]"]
     assert page.evaluate("() => window.__saved === undefined")                                              # nothing was sent
     assert page.evaluate("() => !document.getElementById('pmg-tags-modal')")
