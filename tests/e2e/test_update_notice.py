@@ -1,4 +1,4 @@
-"""The notice that comes up on joining the site when the script has a newer version (at most every 12 hours, never in the dev build)."""
+"""The notice that comes up on joining the site when the script has a newer version (at most every 3 hours, never in the dev build)."""
 import os
 import re
 from pathlib import Path
@@ -61,7 +61,7 @@ def test_the_same_version_says_nothing(ctx):
 
 
 @public_only
-def test_it_looks_once_in_twelve_hours_whatever_the_number_of_pages_and_tabs(ctx):
+def test_it_looks_once_in_three_hours_whatever_the_number_of_pages_and_tabs(ctx):
     serve(ctx, "99.0")
     page = join(ctx)
     page.wait_for_function(f"() => {TOASTS} && {TOASTS}.querySelector('.t.update')", timeout=15000)
@@ -77,7 +77,7 @@ def test_the_cross_says_not_again_for_this_version_and_a_later_one_comes_back(ct
     page.wait_for_function(f"() => {TOASTS} && {TOASTS}.querySelector('.t.update')", timeout=15000)
     page.evaluate(f"() => {TOASTS}.querySelector('.t.update .x').click()")
     assert page.evaluate("() => localStorage.getItem('pmg_update_dismissed')") == "99.0"
-    page.evaluate("() => localStorage.setItem('pmg_update_checked', '0')")                  # twelve hours later
+    page.evaluate("() => localStorage.setItem('pmg_update_checked', '0')")                  # three hours later
     page.reload()
     page.wait_for_selector("#pmg-host")
     page.wait_for_timeout(2500)
@@ -93,10 +93,10 @@ def test_the_cross_says_not_again_for_this_version_and_a_later_one_comes_back(ct
 
 
 @public_only
-def test_a_failed_look_is_tried_again_in_an_hour_not_in_twelve(ctx):
+def test_a_failed_look_is_tried_again_in_half_an_hour_not_in_three_hours(ctx):
     ctx.route(META + "**", lambda r: r.abort())
     page = join(ctx)
-    page.wait_for_function("() => { const at = +localStorage.getItem('pmg_update_checked'); return at > 0 && Date.now() - at > 11 * 3600000; }", timeout=20000)
+    page.wait_for_function("() => { const at = +localStorage.getItem('pmg_update_checked'); return at > 0 && Date.now() - at > 2 * 3600000; }", timeout=20000)
     assert notices(page) == []
 
 

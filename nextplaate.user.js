@@ -428,7 +428,7 @@
     profilestyle: { about: 'A member’s profile page in the look of the script: the figures, the private messages, the notifications, the countries and the last photos in one style. The site’s own elements and buttons stay.', scope: 'every profile' },
     notify: { about: 'A notice in the corner for a new like, comment or private message, on any PlatesMania page, like a phone. It works while a PlatesMania tab is open; you choose the kinds and how often.', scope: 'everywhere you are logged in' },
     laststrip: { about: 'The line of the latest uploads that every page carries under its header, as a slim strip with a flag and a chip per plate.', scope: 'every page' },
-    updatenotice: { about: 'A notice when a newer version of the script exists, when you join the site: once every 12 hours it asks Greasy Fork for the version number (nothing about you is sent). The notice links to the install page.', scope: 'every page' },
+    updatenotice: { about: 'A notice when a newer version of the script exists, when you join the site: every 3 hours at most it asks Greasy Fork for the version number (nothing about you is sent). The notice links to the install page.', scope: 'every page' },
     mine: { about: 'Under the vehicle menus: how many photos of that brand, model and generation you already have.', scope: 'every country' },
     regions: { about: 'On a member’s profile: which regions of a country the member has a photo from, and which are missing.', scope: 'every country the site has regions for' },
     series: { about: 'How many of your photos are in the series of the plate you type (HF-137-QQ is in HF-*-QQ); on a series page, the numbers already on the site.', scope: '84 countries (checked on the real site)' },
@@ -5357,23 +5357,23 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
   });
   /* =====================================================================
    *  UPDATE NOTICE  (a notice when the script has a newer version, on joining the site)
-   *    At most once every 12 hours (the time is kept in the browser, so the tabs share it), when a PlatesMania page is open and in view,
+   *    At most once every 3 hours (the time is kept in the browser, so the tabs share it: Tampermonkey updates by itself only every few hours, so a version published meanwhile is announced here sooner), when a PlatesMania page is open and in view,
    *    the script asks Greasy Fork for the version of the published script (the same small file as a click on the logo: 91-update.js)
    *    and, if it is newer than this one, shows a notice with a link to the install page, where Tampermonkey offers the update. The cross
    *    or the link says "not again for this version"; letting it go by does not (it comes back at the next look). A look that fails is
-   *    tried again in an hour. Never in the dev build (it is updated by building it again). Switch off in Settings.
+   *    tried again in half an hour. Never in the dev build (it is updated by building it again). Switch off in Settings.
    * ===================================================================== */
-  const UPDATE_EVERY_MS = 12 * 3600000;
+  const UPDATE_EVERY_MS = 3 * 3600000;
 
   async function updateNotice() {
     if ('0' === '1') return;
     const now = Date.now();
-    if (now - (+store.get('update_checked', '0') || 0) < UPDATE_EVERY_MS) return;               // looked within 12 hours, here or in another tab
+    if (now - (+store.get('update_checked', '0') || 0) < UPDATE_EVERY_MS) return;               // looked within 3 hours, here or in another tab
     store.set('update_checked', String(now));
     let latest;
-    try { latest = await updateLatest(); } catch (e) { store.set('update_checked', String(now - UPDATE_EVERY_MS + 3600000)); return; }       // failed: again in an hour
+    try { latest = await updateLatest(); } catch (e) { store.set('update_checked', String(now - UPDATE_EVERY_MS + 1800000)); return; }       // failed: again in half an hour
     if (!versionNewer(latest, SCRIPT_VERSION) || store.get('update_dismissed', '') === latest) return;
-    toast({ title: `NextPlaate ${latest} is available`, body: `You have ${SCRIPT_VERSION}. Click here to install the update.`, href: UPDATE_INSTALL, kind: 'update', ms: 20000,
+    toast({ title: `NextPlaate ${latest} is available`, body: `You have ${SCRIPT_VERSION}. Click here to install it now; Tampermonkey also updates it by itself.`, href: UPDATE_INSTALL, kind: 'update', ms: 20000,
       onClose: () => store.set('update_dismissed', latest) });
   }
 
