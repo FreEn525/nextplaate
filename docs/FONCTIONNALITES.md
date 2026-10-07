@@ -34,7 +34,7 @@ Chaque fonction a un interrupteur dans Settings (sauf Settings elle-même) : ét
 | 24 | Éditeur de raccourcis | Shortcut editor | tiroir Raccourcis | change chaque touche | |
 | 25 | Réglages | (verrouillée) | tiroir Settings | un interrupteur par fonction ; choix des pays de la barre | |
 
-Autour de ces fonctions : la barre d'icônes (avec votre photo de profil sous le logo), le message d'état en bas, et pour le développement le tiroir Developer du build dev (capture, test de plaques, vérification des lectures, base).
+Autour de ces fonctions : le point d'état du site sur le logo (vert, ambre, rouge, gris en pause ; calculé à partir des requêtes du script et du temps de la page, sans requête de plus ; le bouton *Check the site now* de Settings > About en fait une, à la demande : `lib/http.js`, `siteHealth`), la barre d'icônes (avec votre photo de profil sous le logo), le message d'état en bas, et pour le développement le tiroir Developer du build dev (capture, test de plaques, vérification des lectures, base).
 
 ## Autour des fonctions
 
@@ -278,7 +278,7 @@ Chaque fonction s'enregistre avec `registerFeature({ groups, keys, onEscape, ini
 
 ## Tests (`tests/`)
 
-- `python -m pytest -q` (dossier `tests/e2e/`) : 449 tests (463 avec le build dev, `NEXTPLAATE_SCRIPT=nextplaate.dev.user.js`) sur une version simulée du site (`fake_site.py`, avec une fausse page Google pour le Lens). Un fichier par fonction (`test_lens.py`, `test_tags.py`, `test_members.py`, `test_flags.py`, `test_extra.py`, `test_preview.py`…), plus `test_style.py` (couleurs, rayons, tailles, hauteurs) et `test_responsive.py` (aucun débordement de 320 à 1280 px). Pas d'accès réel à PlatesMania ni à Google.
+- `python -m pytest -q` (dossier `tests/e2e/`) : 453 tests (467 avec le build dev, `NEXTPLAATE_SCRIPT=nextplaate.dev.user.js`) sur une version simulée du site (`fake_site.py`, avec une fausse page Google pour le Lens). Un fichier par fonction (`test_lens.py`, `test_tags.py`, `test_members.py`, `test_flags.py`, `test_extra.py`, `test_preview.py`…), plus `test_style.py` (couleurs, rayons, tailles, hauteurs) et `test_responsive.py` (aucun débordement de 320 à 1280 px). Pas d'accès réel à PlatesMania ni à Google.
 - `python tests/offline/check_known.py` : 39 plaques validées à la main, tapées dans les pages sauvegardées.
 - `python tests/offline/check_db.py` : toutes les plaques de la base, dans la catégorie correspondante, en parallèle. Hors ligne.
 - Les données dérivées : `node scripts/refresh-data.mjs` → `data/` et `docs/COUVERTURE.md` (voir `data/README.md`).

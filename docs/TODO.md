@@ -96,7 +96,7 @@ Ordre proposé avec ces regroupements :
 - Groupe 1 (recherche de véhicule), puis groupe 2 (compteurs).
 - Groupe 5 (page d'ajout) en dernier, pour un seul pays puis généralisation.
 
-## Statut du site (détail, à faire plus tard)
+## Statut du site : **fait** (version 5.11.2, le point sur le logo et le bouton *Check the site now*)
 
 Objectif : afficher si PlatesMania répond ou non, dans le panel.
 

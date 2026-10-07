@@ -3,6 +3,9 @@
     .side>*{pointer-events:auto}
     .rail{width:56px;flex:none;display:flex;flex-direction:column;align-items:center;gap:8px;padding:10px 0;background:#fff;border-left:1px solid var(--line2);box-shadow:-6px 0 20px rgba(0,0,0,.08)}
     .rail .logo{align-self:stretch;display:flex;justify-content:center;padding:4px 0 12px;margin-bottom:4px;border:0;border-bottom:1px solid var(--line);background:none;cursor:pointer}   /* a button: a click checks for an update */
+    .rail .logo{position:relative}
+    .sdot{position:absolute;right:9px;bottom:14px;width:12px;height:12px;border:2px solid #fff;border-radius:var(--r-round);background:var(--status-off)}   /* how the site is doing (siteHealth): green, amber, red, grey when paused; none before a first measure */
+    .sdot[data-level=unknown]{display:none}.sdot[data-level=ok]{background:var(--status-ok)}.sdot[data-level=slow]{background:var(--status-warn)}.sdot[data-level=bad]{background:var(--status-bad)}
     .rail .logo:hover svg{filter:brightness(1.08)}   /* the brand: its own cell, a line under it */
     .rme{flex:none;width:var(--h-rail);height:var(--h-rail);display:grid;place-items:center;overflow:hidden;border:2px solid var(--primary-soft);border-radius:var(--r-round);background:var(--primary-soft);color:var(--primary-h);font-size:16px;font-weight:700;text-decoration:none}
     .rme img{display:block;width:100%;height:100%;object-fit:cover}

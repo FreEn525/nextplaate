@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.11.2
+
+- **How the site is doing**: a dot on the logo of the panel, from what the script already sees (no request of its own): green when the site answers (the middle of your last requests under 3 s), amber when it is slow, red when the last requests failed (server errors, no answer, no connection), grey when the site asked the script to wait (with the time it ends). The hover says what it is based on. *Settings > About > Check the site now* makes one small request on demand.
+
 ## 5.11.1
 
 - The Likes box is no longer part of the script.

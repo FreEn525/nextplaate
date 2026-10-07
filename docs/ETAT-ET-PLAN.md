@@ -21,7 +21,7 @@ Au 7 octobre 2026, version **5.11** (la carte du monde et les cartes de régions
 
 Les cinq « pays » sans catégories (ae, au, ca, us, xx) ont un formulaire à menu de région : leur règle est `region-menu.js`.
 
-**Preuves** : `check_db` (2 376 plaques relues dans les pages sauvegardées), `check_known` (39 plaques tapées à la main sur le vrai site, 0 échec), et **449 tests Playwright sur le script public, 463 avec le build dev** (une quinzaine de fichiers dans `tests/e2e/` : un par fonction, plus le style et le responsive). La CI (`.github/workflows/tests.yml`) les lance à chaque push et refuse un changement du script public sans nouveau `@version`.
+**Preuves** : `check_db` (2 376 plaques relues dans les pages sauvegardées), `check_known` (39 plaques tapées à la main sur le vrai site, 0 échec), et **453 tests Playwright sur le script public, 467 avec le build dev** (une quinzaine de fichiers dans `tests/e2e/` : un par fonction, plus le style et le responsive). La CI (`.github/workflows/tests.yml`) les lance à chaque push et refuse un changement du script public sans nouveau `@version`.
 
 **Style** : un seul système (`STYLE.md`), les couleurs de PlatesMania, angles droits, une échelle de textes et de hauteurs ; des tests le vérifient (aucune couleur ni rayon hors des jetons, tailles mesurées dans le navigateur, aucun débordement de 320 à 1280 px).
 

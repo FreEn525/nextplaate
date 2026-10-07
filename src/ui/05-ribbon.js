@@ -26,7 +26,7 @@
         <header class="dhead"><h2 id="dtitle"></h2><button class="iconbtn" id="dclose" title="Close (Esc)">${icon('close')}</button></header>
         <div class="dbody" id="dbody"></div>
       </aside>
-      <nav class="rail" id="rail"><button class="logo" id="logo" title="NextPlaate: check for an update" aria-label="NextPlaate: check for an update">${LOGO(36)}</button></nav>
+      <nav class="rail" id="rail"><button class="logo" id="logo" title="NextPlaate: check for an update" aria-label="NextPlaate: check for an update">${LOGO(36)}<span class="sdot" id="sdot" data-level="unknown"></span></button></nav>
     </div>
     <div class="toast" id="status"></div>`;
   document.body.appendChild(host);
@@ -75,6 +75,11 @@
         })));
     });
     $('dclose').onclick = () => closeDrawer();
+    // the dot on the logo: how the site is doing, from what the script already sees (src/lib/http.js); the pause counts down by itself
+    const siteDot = () => { const s = siteHealth(); $('sdot').dataset.level = s.level; $('logo').title = 'NextPlaate: check for an update' + String.fromCharCode(10) + s.text; };
+    window.addEventListener('pmg-site', siteDot);
+    setInterval(siteDot, 30000);
+    siteDot();
     // the drawer that was open stays open after a reload or a page change
     const last = store.get('drawer', '');
     if (byDrawer[last]) openDrawer(last);

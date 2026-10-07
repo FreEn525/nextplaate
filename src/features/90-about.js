@@ -47,8 +47,21 @@
       drawer: 'settings', rank: 99, title: 'About',
       build: () => [
         h('p', { class: 'presult' }, `NextPlaate ${SCRIPT_VERSION} © 2026 `, h('a', { href: AUTHOR.profile, target: '_blank', rel: 'noopener noreferrer', text: AUTHOR.name })),
-        h('button', { id: 'aboutNew', type: 'button', class: 'btn ghost', text: 'What’s new' })
+        h('button', { id: 'aboutNew', type: 'button', class: 'btn ghost', text: 'What’s new' }),
+        h('button', { id: 'siteCheck', type: 'button', class: 'btn ghost', text: 'Check the site now' }),
+        h('p', { id: 'siteSaid', class: 'presult', hidden: true })
       ]
     }],
-    init: () => { $('aboutNew').onclick = () => whatsNewOpen(''); whatsNewOnUpdate(); }
+    init: () => {
+      $('aboutNew').onclick = () => whatsNewOpen('');
+      // one small request, on demand only (a robots.txt: a few bytes), through the shared queue; the dot on the logo follows
+      $('siteCheck').onclick = async () => {
+        const said = $('siteSaid'), began = performance.now();
+        said.hidden = false;
+        said.textContent = 'Asking the site…';
+        try { await siteFetch('/robots.txt'); said.textContent = siteHealth().text.replace(/^The site /, 'The site answered; it ') + ` (this request: ${Math.round(performance.now() - began)} ms)`; }
+        catch (e) { said.textContent = 'The site did not answer: ' + e.message + '.'; }
+      };
+      whatsNewOnUpdate();
+    }
   });
