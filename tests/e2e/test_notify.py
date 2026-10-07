@@ -62,7 +62,7 @@ def test_a_new_like_comes_up_as_a_notice_once(page):
     assert titles(page) == ["Xenoore4 liked VW 8372"]
     assert page.evaluate(f"() => {TOASTS}.querySelector('.t a.ti').getAttribute('href')") == "/de/nomer11"
     poll(page)
-    page.wait_for_timeout(8000)
+    page.wait_for_timeout(2500)
     assert titles(page) == ["Xenoore4 liked VW 8372"]                        # not shown again
 
 
@@ -72,7 +72,7 @@ def test_a_kind_you_switched_off_stays_quiet(page):
     page.evaluate("() => localStorage.setItem('pmg_set_notify_like', '0')")
     ITEMS.insert(0, like("Xenoore4", "VW 8372", 11))
     poll(page)
-    page.wait_for_timeout(9000)
+    page.wait_for_timeout(2500)
     assert titles(page) == []
 
 

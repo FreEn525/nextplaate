@@ -41,6 +41,8 @@ def plate_page(ctx, cc, plate):
     page.fill("#nomer", plate)
     page.dispatch_event("#nomer", "blur")
     page.wait_for_function(f"() => document.getElementById('pmg-plate-card') && {CARD}.querySelector('.lookups')", timeout=15000)
+    page.wait_for_timeout(700)                      # the plate is checked as it is typed and again on the blur: the card is drawn once more; let it settle before acting on it
+    page.wait_for_function(f"() => {CARD}.querySelector('.lookups')", timeout=15000)
     return page
 
 

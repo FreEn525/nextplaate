@@ -56,6 +56,8 @@
     .t{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--primary-h)}
     .flags{max-height:70vh;overflow-y:auto}
     .dtab{display:none}
+    :host(.dock){pointer-events:none}                                           /* the docked bar is a box of 340 px, mostly empty: only its tab and its open list take the mouse, or it would cover what lies under it (the last photos of a profile) */
+    :host(.dock) .dtab,:host(.dock) .box{pointer-events:auto}
     /* no room beside the content: a tab at the right edge, next to the panel, that opens the same box (the same place on every screen) */
     :host(.dock) .dtab{display:flex;align-items:center;gap:8px;margin-left:auto;height:var(--h);padding:0 12px;border:1px solid var(--line2);background:#fff;color:var(--primary-h);font:inherit;font-size:13px;font-weight:600;cursor:pointer;box-shadow:-2px 2px 10px rgba(0,0,0,.12)}
     :host(.dock) .dtab:hover{background:var(--primary-tint);border-color:var(--primary)}

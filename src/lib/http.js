@@ -7,6 +7,9 @@
    *    pause, for a button the user presses.
    * ===================================================================== */
   const SITE_GAP_MS = 3000;                 // between two requests to the site
+  // Under automation (the tests: navigator.webdriver) the pauses can be shortened by a factor kept in the browser's storage, so that a test
+  // does not wait real seconds; a real browser always keeps the full pauses.
+  const siteScale = () => (navigator.webdriver ? Math.max(0, +store.get('gapScale', '1')) : 1);
   const SITE_LOW_GAP_MS = 6000;             // between two background requests
   const SITE_COOLDOWNS_MIN = [3, 10, 20];   // after a block: no request for this long; blocked again within the hour: the next one
   const SITE_TIMEOUT_MS = 15000;
@@ -65,7 +68,7 @@
       let at = siteQueue.findIndex(j => !j.low);                                   // what the user asked for first, the background ones after
       if (at < 0) at = 0;
       const job = siteQueue.splice(at, 1)[0];
-      const wait = Math.max(siteLast, +store.get('siteLastAt', '0') || 0) + (job.low ? SITE_LOW_GAP_MS : SITE_GAP_MS) - Date.now();   // the pace of the other tabs counts too
+      const wait = Math.max(siteLast, +store.get('siteLastAt', '0') || 0) + (job.low ? SITE_LOW_GAP_MS : SITE_GAP_MS) * siteScale() - Date.now();   // the pace of the other tabs counts too
       if (wait > 0) await siteSleep(wait);
       if (job.low && siteQueue.some(j => !j.low)) { siteQueue.unshift(job); continue; }                    // something more urgent came in while waiting
       siteLast = Date.now();

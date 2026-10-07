@@ -273,3 +273,12 @@ def test_opening_a_drawer_changes_the_room_and_the_bar_follows(ctx):
     assert page.evaluate("() => document.getElementById('pmg-flags').classList.contains('dock')") is True        # the drawer took the room: a tab
     right = page.evaluate(f"() => Math.round({BAR}.querySelector('.dtab').getBoundingClientRect().right)")
     assert right == 1700 - 56 - 340 - 8                                                              # next to the open drawer, not under it
+
+
+def test_the_docked_bar_only_takes_the_mouse_on_its_tab_not_on_the_empty_part_of_its_box(ctx):
+    """Its box is 340 px wide, the tab only part of it: the rest must let the clicks through to the page (the last photos of a profile lay under it)."""
+    page = open_page(ctx, "https://platesmania.com/user121559", 1280)
+    assert page.evaluate("() => document.getElementById('pmg-flags').classList.contains('dock')")
+    r = page.evaluate("() => { const h = document.getElementById('pmg-flags'), b = h.getBoundingClientRect(), t = h.shadowRoot.querySelector('.dtab').getBoundingClientRect(); return { empty: [b.x + 8, b.y + 8], tab: [t.x + t.width / 2, t.y + t.height / 2] }; }")
+    assert page.evaluate("([x, y]) => { const e = document.elementFromPoint(x, y); return !e || e.id !== 'pmg-flags'; }", r["empty"])      # the page gets the click
+    assert page.evaluate("([x, y]) => { const e = document.elementFromPoint(x, y); return !!e && e.id === 'pmg-flags'; }", r["tab"])         # the tab keeps it

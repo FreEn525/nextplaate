@@ -8,6 +8,7 @@
 - **The Comments tile** has both links of the site again: the comments you received (the figure) and the ones you wrote (the number after *posted*).
 - **Update check**: three tries, and a new address each time, so that one failed request or a cached copy no longer hides a version just published (*Could not check: Failed to fetch*).
 - The dot on the logo turns grey at once when the site asks to wait.
+- **The docked flags bar no longer covers the page**: on a narrow screen its box (340 px, mostly empty) lay over the top right of the page and took the clicks meant for what is under it, such as the last photos of a profile. Only its tab takes the mouse now.
 
 ## 5.11.2
 

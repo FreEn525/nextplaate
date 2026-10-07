@@ -255,5 +255,7 @@ def route_site(context):
         body = inject(html) if route.request.resource_type == "document" else html
         return route.fulfill(status=200, content_type="text/html", body=body)
 
+    # the script keeps 3 s (6 s for background requests) between two requests to the site: a test does not wait them, the script shortens them under automation
+    context.add_init_script("try { if (localStorage.getItem('pmg_gapScale') === null) localStorage.setItem('pmg_gapScale', '0.1'); } catch (e) {}")
     context.route(re.compile(r"https://(platesmania\.com|img\d+\.platesmania\.com)/.*"), site)
     context.route(re.compile(r"https?://(?!platesmania\.com).*"), lambda r: r.abort())

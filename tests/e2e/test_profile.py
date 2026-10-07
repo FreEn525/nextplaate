@@ -83,7 +83,7 @@ def counting(page):
 def test_a_count_made_a_moment_ago_is_not_asked_again(ctx):
     page = ctx.new_page()
     page.goto("https://platesmania.com/user121559")
-    page.wait_for_selector("#pmg-host")
+    page.wait_for_function(f"() => document.getElementById('pmg-profile-card') && {CARD}.querySelector('.stat b:not(.blank)')", timeout=20000)      # the first count is done: it cannot overwrite what is seeded below
     page.evaluate("() => localStorage.setItem('pmg_profile_counts_121559', JSON.stringify({ total: 700, today: 3, at: Date.now() - 60000 }))")
     asked = counting(page)
     page.reload()
@@ -96,7 +96,7 @@ def test_a_count_made_a_moment_ago_is_not_asked_again(ctx):
 def test_while_the_site_asks_to_wait_the_last_count_stays_and_try_now_asks_again(ctx):
     page = ctx.new_page()
     page.goto("https://platesmania.com/user121559")
-    page.wait_for_selector("#pmg-host")
+    page.wait_for_function(f"() => document.getElementById('pmg-profile-card') && {CARD}.querySelector('.stat b:not(.blank)')", timeout=20000)
     page.evaluate("() => { localStorage.setItem('pmg_profile_counts_121559', JSON.stringify({ total: 700, today: 3, at: Date.now() - 3600000 })); localStorage.setItem('pmg_siteBlock', String(Date.now())); localStorage.setItem('pmg_siteBlockN', '1'); }")
     page.reload()
     page.wait_for_function(f"() => document.getElementById('pmg-profile-card') && /asked to wait/.test({CARD}.querySelector('.hint').textContent)", timeout=15000)

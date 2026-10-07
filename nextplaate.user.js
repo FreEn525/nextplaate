@@ -444,6 +444,9 @@
    *    pause, for a button the user presses.
    * ===================================================================== */
   const SITE_GAP_MS = 3000;                 // between two requests to the site
+  // Under automation (the tests: navigator.webdriver) the pauses can be shortened by a factor kept in the browser's storage, so that a test
+  // does not wait real seconds; a real browser always keeps the full pauses.
+  const siteScale = () => (navigator.webdriver ? Math.max(0, +store.get('gapScale', '1')) : 1);
   const SITE_LOW_GAP_MS = 6000;             // between two background requests
   const SITE_COOLDOWNS_MIN = [3, 10, 20];   // after a block: no request for this long; blocked again within the hour: the next one
   const SITE_TIMEOUT_MS = 15000;
@@ -502,7 +505,7 @@
       let at = siteQueue.findIndex(j => !j.low);                                   // what the user asked for first, the background ones after
       if (at < 0) at = 0;
       const job = siteQueue.splice(at, 1)[0];
-      const wait = Math.max(siteLast, +store.get('siteLastAt', '0') || 0) + (job.low ? SITE_LOW_GAP_MS : SITE_GAP_MS) - Date.now();   // the pace of the other tabs counts too
+      const wait = Math.max(siteLast, +store.get('siteLastAt', '0') || 0) + (job.low ? SITE_LOW_GAP_MS : SITE_GAP_MS) * siteScale() - Date.now();   // the pace of the other tabs counts too
       if (wait > 0) await siteSleep(wait);
       if (job.low && siteQueue.some(j => !j.low)) { siteQueue.unshift(job); continue; }                    // something more urgent came in while waiting
       siteLast = Date.now();
@@ -3505,6 +3508,8 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     .t{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--primary-h)}
     .flags{max-height:70vh;overflow-y:auto}
     .dtab{display:none}
+    :host(.dock){pointer-events:none}                                           /* the docked bar is a box of 340 px, mostly empty: only its tab and its open list take the mouse, or it would cover what lies under it (the last photos of a profile) */
+    :host(.dock) .dtab,:host(.dock) .box{pointer-events:auto}
     /* no room beside the content: a tab at the right edge, next to the panel, that opens the same box (the same place on every screen) */
     :host(.dock) .dtab{display:flex;align-items:center;gap:8px;margin-left:auto;height:var(--h);padding:0 12px;border:1px solid var(--line2);background:#fff;color:var(--primary-h);font:inherit;font-size:13px;font-weight:600;cursor:pointer;box-shadow:-2px 2px 10px rgba(0,0,0,.12)}
     :host(.dock) .dtab:hover{background:var(--primary-tint);border-color:var(--primary)}
