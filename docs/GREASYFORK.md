@@ -88,3 +88,13 @@ Ni le script, ni son en-tête, ni le texte à coller ci-dessus ne mentionnent le
 ## Quand le texte change
 
 À chaque nouvelle fonction : mettre à jour la liste ci-dessus, le `README.md` (« Features, one by one »), le tableau en tête de `docs/FONCTIONNALITES.md`, et coller le nouveau texte sur Greasy Fork.
+
+## Les captures d'écran de la page
+
+`python tools/screenshots.py` écrit dix images dans `shots/` (hors du dépôt, comme `reference/`) : `01-upload-page`, `02-plate-check` (montage), `03-country-flags`, `04-world-map`, `05-region-map`, `06-profile`, `07-notifications`, `08-panel` (montage), `09-settings` (montage), `10-update` (montage). Un nom en argument n'en refait qu'une (`python tools/screenshots.py profile`).
+
+- **Les pages sont celles de ton compte**, sauvegardées dans `reference/real/` : le script y est ajouté comme Tampermonkey le fait, la feuille de style et les images du site sont chargées en direct, et les réponses aux requêtes du script viennent soit de tes pages sauvegardées (tes pays, tes régions), soit du faux site des tests. **Rien n'est écrit sur le vrai site.**
+- **Données de démonstration** : la plaque `AB-123-CD` (pages d'ajout), les deux « j'aime » de la capture 7 et la version 9.9.9 de la capture 10 sont inventés. Les cartes (21 pays, 361 photos) et le profil sont tes vrais chiffres au moment de la sauvegarde des pages.
+- **Les noms et les avatars des autres membres sont floutés** (notifications du profil) et les bandeaux de la page d'ajout (photos, commentaires) sont cachés. Vérifie l'image 6 avant de la publier : les messages privés restent ceux de ton compte.
+- **Pour refaire la série** après un changement de l'interface : relancer la commande. Les pages sauvegardées ne sont pas mises à jour toutes seules ; en refaire une copie si tu veux des chiffres plus récents.
+- **À faire à la main** : sur Greasy Fork, onglet « Admin » du script, ajouter les images dans l'ordre des numéros (la première est celle que voient les visiteurs d'abord).
