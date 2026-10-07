@@ -38,7 +38,9 @@ def test_a_page_that_is_not_a_profile_is_left_alone(ctx):
     assert not page.evaluate("() => !!document.getElementById('pmg-profile-style')")
 
 
-PROFILE = """<html><body><div class="container content profile"><div class="row">
+# the dark veil the site draws over a photo of the last-photos list when it is hovered (a pseudo-element of the li: it takes the mouse and blocks the click)
+SITE_VEIL = '<style>.portfolio-box-v1 li{position:relative}.portfolio-box-v1 li:hover::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.6);z-index:50}</style>'
+PROFILE = """<html><head>""" + SITE_VEIL + """</head><body><div class="container content profile"><div class="row">
 <div class="col-md-3 text-center"><img class="profile-img" src="x.png"><ul class="badge-lists"><li><a href="/best"><i class="fa fa-camera"></i></a><span class="badge">1</span></li><li><a href="/aktivuserall?start=43"><i class="fa fa-bar-chart-o"></i></a><span class="badge">2069 <font>(+104)</font></span></li></ul></div>
 <div class="col-md-9"><h1><a href="/user121559">freen525</a></h1>
 <div class="service-block-v3"><span class="service-heading">Uploaded</span><span class="counter"><a href="/gallery.php?usr=121559">361 </a></span></div>
@@ -174,3 +176,14 @@ def test_each_notification_has_its_kind_and_the_picture_of_the_member_or_his_let
     prof.wait_for_function("() => document.querySelector('ul.mCustomScrollbar .pm-ava')")
     prof.wait_for_function("() => document.querySelector('ul.mCustomScrollbar .pm-ava').textContent === 'A'", timeout=10000)        # no picture on the fake forum: the letter
     assert prof.evaluate("() => getComputedStyle(document.querySelector('ul.mCustomScrollbar li > div')).backgroundColor") != "rgba(0, 0, 0, 0)"      # tinted
+
+
+def test_the_veil_the_site_draws_over_a_last_photo_does_not_take_the_mouse_from_its_card(prof):
+    """On the real site a dark veil appeared over the photo on hover and blocked the click: the card must stay the thing under the pointer."""
+    prof.wait_for_selector(".pm-card")
+    prof.evaluate("() => document.querySelector('.pm-card').scrollIntoView({ block: 'center' })")
+    box = prof.evaluate("() => { const r = document.querySelector('.pm-card').getBoundingClientRect(); return [r.x + r.width / 2, r.y + r.height / 2]; }")
+    prof.mouse.move(box[0], box[1])
+    prof.wait_for_timeout(300)
+    assert prof.evaluate("([x, y]) => { const e = document.elementFromPoint(x, y); return !!e && !!e.closest('.pm-card'); }", box)               # the card, not the veil
+    assert prof.evaluate("() => getComputedStyle(document.querySelector('.portfolio-box-v1 li'), '::before').content") in ("none", "normal")

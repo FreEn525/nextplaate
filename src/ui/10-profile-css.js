@@ -101,6 +101,10 @@
     .profile .portfolio-box-v1{margin:0 0 16px;padding:12px 6px 0;border:1px solid var(--pm-line);border-top:0;background:#fff}
     .profile .portfolio-box-v1 li{padding:0 6px 12px;background:none}
     .profile .pm-card-li > :not(.pm-card){display:none!important}
+    /* the site draws a dark veil over a photo of this list on hover (a pseudo-element of the li, which gets the mouse before the card under it): none, whatever it is called */
+    .profile .portfolio-box-v1 li::before,.profile .portfolio-box-v1 li::after,.profile .portfolio-box-v1 li:hover::before,.profile .portfolio-box-v1 li:hover::after,.profile .portfolio-box-v1-in::before,.profile .portfolio-box-v1-in::after{content:none!important;display:none!important;background:none!important;pointer-events:none!important}
+    .profile .portfolio-box-v1 li{position:relative;overflow:visible}
+    .pm-card{position:relative;z-index:1}
     .pm-card{display:flex;flex-direction:column;border:1px solid var(--pm-line2);background:#fff;color:var(--pm-ink);text-decoration:none;transition:box-shadow .15s,transform .15s,border-color .15s}
     .pm-card:hover,.pm-card:focus{border-color:var(--pm-soft);box-shadow:0 6px 16px rgba(0,0,0,.18);transform:translateY(-2px);color:var(--pm-ink);text-decoration:none}
     .pm-photo{position:relative;display:block;aspect-ratio:4/3;overflow:hidden;background:var(--pm-soft)}
