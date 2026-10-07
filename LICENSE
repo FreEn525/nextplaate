@@ -1,21 +1,26 @@
-MIT License
+NextPlaate - All rights reserved
 
-Copyright (c) 2026 FreEn525
+Copyright (c) 2026 NextEnzzo (https://platesmania.com/user121559)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This software is not open source. Its code can be read (on Greasy Fork and in this repository) so that anyone can check what it
+does before installing it; it is not published to be reused.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+You may:
+  - install the script published on Greasy Fork and use it for your own purposes on platesmania.com;
+  - read the code, to understand what it does and to report a problem.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+You may not, without the written permission of the author:
+  - copy, republish or redistribute the script, or any part of it, in any form (another site, another script, a repository, a
+    package, a fork);
+  - modify it, translate it, or make a derivative work from it;
+  - sell it, or include it in something that is sold;
+  - remove or change the name of the author, the copyright notice or this licence.
+
+Third-party material (the icons, a regular expression, the shapes and data listed in THIRD_PARTY.md) stays under its own licence;
+this licence does not change it.
+
+Versions of this software published before 2026-10-07 were published under the MIT licence. That licence stays with the copies
+already made from them; it does not apply to this version or to the ones after it.
+
+The software is provided "as is", without warranty of any kind, express or implied. The author is not liable for any claim or
+damage arising from its use.

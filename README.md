@@ -1,8 +1,8 @@
 # PlatesMania - NextPlaate
 
-Tampermonkey userscript (**NextPlaate**) that makes posting and browsing on [PlatesMania](https://platesmania.com) faster: a docked panel with twenty-three features; every one of them but Settings itself can be switched off in Settings.
+Tampermonkey userscript (**NextPlaate**) that makes posting and browsing on [PlatesMania](https://platesmania.com) faster: a docked panel with twenty-five features; every one of them but Settings itself can be switched off in Settings.
 
-Made by [NextEnzzo](https://platesmania.com/user121559). © 2026 NextEnzzo, MIT license.
+Made by [NextEnzzo](https://platesmania.com/user121559). © 2026 NextEnzzo. All rights reserved: free to use, not to copy, modify or redistribute (see [LICENSE](LICENSE)).
 
 After an update the script shows a *What's new* window once (also in Settings > About). A click on the logo of the panel checks for a newer version.
 
@@ -78,7 +78,7 @@ The world map is [Natural Earth](https://www.naturalearthdata.com/) data (public
 
 ## License
 
-MIT, see [LICENSE](LICENSE). Third-party material is listed in [THIRD_PARTY.md](THIRD_PARTY.md).
+All rights reserved, see [LICENSE](LICENSE): you may install and use the script and read its code; you may not copy, modify or redistribute it. Versions published before 2026-10-07 were under the MIT licence, which stays with the copies already made. Third-party material (under its own licences) is listed in [THIRD_PARTY.md](THIRD_PARTY.md).
 
 ## Development
 

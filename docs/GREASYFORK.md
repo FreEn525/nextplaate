@@ -32,7 +32,7 @@ Elle est dans `src/meta/00-header.txt` (`@description`, et `@description:fr` pou
 (En anglais, Markdown : choisir « Markdown » comme format.)
 
 ```markdown
-**NextPlaate** adds a panel to PlatesMania that makes posting photos and browsing faster. Twenty-three features, each with a switch in Settings (except Settings itself). Made by [NextEnzzo](https://platesmania.com/user121559).
+**NextPlaate** adds a panel to PlatesMania that makes posting photos and browsing faster. Twenty-five features, each with a switch in Settings (except Settings itself). Made by [NextEnzzo](https://platesmania.com/user121559).
 
 A click on the logo of the panel checks for a newer version. The bar follows the order of use: Check a plate, Send photos, Describe a pair, Browse. Settings tells what each feature does and where it works: the plate check covers all 96 countries and 829 plate categories (795 checked exactly on real plates), the series counter 84 countries, the official register the Netherlands and Israel; the rest works everywhere.
 
@@ -76,6 +76,7 @@ A click on the logo of the panel checks for a newer version. The bar follows the
 - For the maps of regions it downloads public shape files (geoBoundaries, through geoboundaries.org and media.githubusercontent.com) when you open a country: nothing about you is sent. The other open sources (the Dutch and Israeli registers) are asked only for the plate you typed.
 - The notification pop-ups and the plate pictures read PlatesMania's own pages through the same queue; nothing leaves your browser.
 - Nothing is sent to any server of ours: there is none.
+- Licence: all rights reserved. You can install it and use it; the code is readable so that you can check it, not so that it can be copied, modified or redistributed.
 ```
 
 ## Le dépôt n'est pas cité

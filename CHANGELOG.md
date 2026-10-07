@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.11.8
+
+- **Licence**: from this version NextPlaate is *all rights reserved* instead of MIT: you can install it and use it; you may not copy, modify or redistribute it (see LICENSE). Versions published before 2026-10-07 were under the MIT licence, which stays with the copies already made. Third-party material keeps its own licences (THIRD_PARTY.md).
+
 ## 5.11.7
 
 - **Settings reorganised**: the drawer was 4 400 px tall (the 24 features in one flat list, the 96 flags in the middle). The features are now in five folded families, in the order of use (Send and describe photos, Check a plate, Browse, Profiles and the site, The panel), each with its count ("7 of 8 on"); the family you open stays open. The long boxes (Lookup sites, Country flags) fold by their title and start folded; the boxes follow the order of use (Features, Notifications, Lookup sites, Official register, Country flags, About). The drawer is about 1 250 px tall. Any box of the panel can ask to be foldable (`fold`).

@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         NextPlaate Auto-like (add-on)
 // @namespace    nextplaate
-// @version      1.0.1
+// @version      1.0.2
 // @author       NextEnzzo (https://platesmania.com/user121559)
 // @copyright    2026, NextEnzzo
-// @license      MIT
+// @license      All rights reserved. Copyright 2026 NextEnzzo. Free to use; no copying, modifying or redistributing.
 // @description  Optional add-on of NextPlaate: likes the photos of a gallery page, or of several pages in a row. It joins the NextPlaate panel (Browse); it needs NextPlaate.
 // @match        https://platesmania.com/*
 // @match        https://*.platesmania.com/*
