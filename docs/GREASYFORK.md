@@ -53,23 +53,22 @@ A click on the logo of the panel checks for a newer version. The bar follows the
 14. **Series counter** - 84 countries (checked on the real site with real plates): your photos of the plate's series (HF-137-QQ is in HF-*-QQ); on a series page, the numbers on the site.
 
 ## Browsing
-15. **Likes** (`L`) - like a page, or several pages in a row, with a delay between likes.
-16. **Gallery page keys** (`A`, `D`) - previous and next page from the keyboard.
-17. **Country flags** - a flag and a name for every country, linking to its upload page: in the panel; on the page /add the drop-down becomes large flags with a search box; elsewhere a bar beside the content, or a tab at the right edge where there is no room. Choose which countries the bar shows.
-18. **Member shortcuts** - the members you go to often, with picture and name, one click to their page. You are always first; an Edit mode lets you drag the lines (or use the arrow keys), remove them and add a member by number or link; a star on a profile saves that member. Your own picture is also in the panel's bar.
+15. **Gallery page keys** (`A`, `D`) - previous and next page from the keyboard.
+16. **Country flags** - a flag and a name for every country, linking to its upload page: in the panel; on the page /add the drop-down becomes large flags with a search box; elsewhere a bar beside the content, or a tab at the right edge where there is no room. Choose which countries the bar shows.
+17. **Member shortcuts** - the members you go to often, with picture and name, one click to their page. You are always first; an Edit mode lets you drag the lines (or use the arrow keys), remove them and add a member by number or link; a star on a profile saves that member. Your own picture is also in the panel's bar.
 
 ## Profiles
-19. **Profile: real uploads** - the real total of a member's gallery and the uploads of the day (from 03:30 local time), next to the profile's own figure, which the site only recalculates from time to time.
-20. **Profile: regions** - how many regions of a country a member has a photo from, with a bar, the regions seen and the missing ones.
+18. **Profile: real uploads** - the real total of a member's gallery and the uploads of the day (from 03:30 local time), next to the profile's own figure, which the site only recalculates from time to time.
+19. **Profile: regions** - how many regions of a country a member has a photo from, with a bar, the regions seen and the missing ones.
 
-21. **World map** (`G`, globe) - the countries a member has photos from on a map of the world, shaded by how many photos, each a link to the member's photos of it; a Europe view; yours or anyone's (a member number or a profile link); for 54 countries, a map of the regions (departments, states...).
+20. **World map** (`G`, globe) - the countries a member has photos from on a map of the world, shaded by how many photos, each a link to the member's photos of it; a Europe view; yours or anyone's (a member number or a profile link); for 54 countries, a map of the regions (departments, states...).
 
 ## The panel
-22. **Profile page look** - a member's profile in the look of the script: figures as tiles, the private messages and notifications in two identical panels, the countries table and the last photos tidied. One switch gives the site's look back.
-23. **Notification pop-ups** - a notice in the corner, like a phone's, for a new like, comment or private message on any PlatesMania page while a tab is open. You choose the kinds and how often.
-24. **Latest plates strip**: the line of the latest uploads that every page carries becomes a slim strip with a flag and a chip per plate.
-25. **Shortcut editor** - every key can be changed (AZERTY-safe).
-26. **Settings** - one switch per feature.
+21. **Profile page look** - a member's profile in the look of the script: figures as tiles, the private messages and notifications in two identical panels, the countries table and the last photos tidied. One switch gives the site's look back.
+22. **Notification pop-ups** - a notice in the corner, like a phone's, for a new like, comment or private message on any PlatesMania page while a tab is open. You choose the kinds and how often.
+23. **Latest plates strip**: the line of the latest uploads that every page carries becomes a slim strip with a flag and a chip per plate.
+24. **Shortcut editor** - every key can be changed (AZERTY-safe).
+25. **Settings** - one switch per feature.
 
 ## Permissions, in plain words
 - It works on platesmania.com. Everything it reads from the site goes through one queue: one request at a time, three seconds apart, a pause after a block.

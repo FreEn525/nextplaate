@@ -4,7 +4,7 @@
   // A feature is registered when the script loads, but touches nothing on the page then:
   // mountApp() builds the panel first, and only then runs each feature's init().
   //   registerFeature({
-  //     id: 'likes', label: 'Likes',   // a feature with an id and a label can be switched off in Settings
+  //     id: 'pages', label: 'Gallery page keys',   // a feature with an id and a label can be switched off in Settings
   //     requires: ['details'],          // off when one of these is off
   //     locked: true,                   // cannot be switched off (the Settings drawer itself)
   //     groups:   [{ drawer: 'pair', title: 'Photos', build: () => nodes }], // controls, in a drawer of the bar
@@ -57,4 +57,6 @@
       if (spent > 5) log('slow init', f.id, Math.round(spent) + ' ms');          // what costs time at start (dev log)
     });
     escapeChain = active.filter(f => f.onEscape).sort((a, b) => (a.escOrder || 0) - (b.escOrder || 0));
+    host.setAttribute('data-version', SCRIPT_VERSION);
+    document.dispatchEvent(new CustomEvent('pmg-ready'));                        // the panel stands: an add-on may join it (docs/ADDONS.md)
   }

@@ -1,7 +1,7 @@
   /* =====================================================================
    *  SETTINGS  (the user's choices, in one place)
    *    A setting is defined once, with its default and the label shown in the Settings drawer:
-   *      settings.define('feature_likes', '1', 'Likes', 'features')
+   *      settings.define('feature_pages', '1', 'Gallery page keys', 'features')
    *    and read anywhere with settings.get(id) (a string) or settings.on(id) (true when '1').
    *    The value is kept in the browser (key pmg_set_<id>). Every feature that has an id and a label
    *    gets a "feature_<id>" setting from registerFeature: that is how a feature is switched off.

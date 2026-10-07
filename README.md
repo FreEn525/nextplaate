@@ -35,25 +35,24 @@ Where a key is given, it can be changed in the Shortcuts drawer.
 
 **Browsing**
 
-15. **Likes** (`L`): like a page, or several pages in a row, with a delay between likes.
-16. **Gallery page keys** (`A`, `D`): previous and next page of a gallery from the keyboard.
-17. **Country flags**: a link with a flag and a name for every country, to its upload page. In the panel; on the page `/add` the site's drop-down becomes large flags with a search box and the countries you opened last; on the other upload pages and on a member's profile a bar beside the content where there is room, otherwise a tab *Add a photo in…* at the right edge (the same place on every screen). You choose which countries the bar shows.
-18. **Member shortcuts**: the members you go to often, each with picture and name, one click to their page. You are always first; edit mode lets you drag the lines (or use the arrow keys), remove them and add a member by number or link; a star on a profile saves that member. Your own picture is also in the panel's bar.
+15. **Gallery page keys** (`A`, `D`): previous and next page of a gallery from the keyboard.
+16. **Country flags**: a link with a flag and a name for every country, to its upload page. In the panel; on the page `/add` the site's drop-down becomes large flags with a search box and the countries you opened last; on the other upload pages and on a member's profile a bar beside the content where there is room, otherwise a tab *Add a photo in…* at the right edge (the same place on every screen). You choose which countries the bar shows.
+17. **Member shortcuts**: the members you go to often, each with picture and name, one click to their page. You are always first; edit mode lets you drag the lines (or use the arrow keys), remove them and add a member by number or link; a star on a profile saves that member. Your own picture is also in the panel's bar.
 
 **Profiles**
 
-19. **Profile: real uploads**: on a member's profile, the real total of the gallery and the uploads of the day (from 03:30 local time), and how far the profile's own figure is: that figure is a statistic the site recalculates from time to time.
-20. **Profile: regions**: on a member's profile, a button reads the site's region statistics and shows how many regions (departments, districts, states...) of a country the member has a photo from, with a bar, the regions seen as links and the missing ones. The country menu comes from the site's page.
+18. **Profile: real uploads**: on a member's profile, the real total of the gallery and the uploads of the day (from 03:30 local time), and how far the profile's own figure is: that figure is a statistic the site recalculates from time to time.
+19. **Profile: regions**: on a member's profile, a button reads the site's region statistics and shows how many regions (departments, districts, states...) of a country the member has a photo from, with a bar, the regions seen as links and the missing ones. The country menu comes from the site's page.
 
-21. **World map** (`G`, for globe): the countries a member has photos from on a map of the world, shaded by how many photos, each country a link to the member's photos of it; a Europe view; yours or anyone's (a member number or the link of a profile, or one of the members you saved); and, for 54 countries, a map of the regions (France's departments, the US states, Russia's regions...) with the same zoom.
+20. **World map** (`G`, for globe): the countries a member has photos from on a map of the world, shaded by how many photos, each country a link to the member's photos of it; a Europe view; yours or anyone's (a member number or the link of a profile, or one of the members you saved); and, for 54 countries, a map of the regions (France's departments, the US states, Russia's regions...) with the same zoom.
 
 **The panel itself**
 
-22. **Profile page look**: a member's profile in the look of the script: the picture, badges and figures in one box, the uploads, likes and comments as tiles, the private messages and the notifications in two identical panels, the countries table and the last photos tidied. Only the style of the site's own elements changes (sort, filter and delete of the messages keep working); one switch gives the site's look back.
-23. **Notification pop-ups**: a notice in the corner, like a phone's, for a new like, comment or private message, on any PlatesMania page while a tab is open: you choose the kinds and how often (2 to 30 minutes), and can ask for a system notification when the tab is in the background. The first look marks what is there as seen.
-24. **Latest plates strip**: the line of the latest uploads that every page carries becomes a slim strip with a flag and a chip per plate.
-25. **Shortcut editor**: every key is yours to change (AZERTY-safe).
-26. **Settings**: one switch per feature; a switched-off feature adds no control and no key.
+21. **Profile page look**: a member's profile in the look of the script: the picture, badges and figures in one box, the uploads, likes and comments as tiles, the private messages and the notifications in two identical panels, the countries table and the last photos tidied. Only the style of the site's own elements changes (sort, filter and delete of the messages keep working); one switch gives the site's look back.
+22. **Notification pop-ups**: a notice in the corner, like a phone's, for a new like, comment or private message, on any PlatesMania page while a tab is open: you choose the kinds and how often (2 to 30 minutes), and can ask for a system notification when the tab is in the background. The first look marks what is there as seen.
+23. **Latest plates strip**: the line of the latest uploads that every page carries becomes a slim strip with a flag and a chip per plate.
+24. **Shortcut editor**: every key is yours to change (AZERTY-safe).
+25. **Settings**: one switch per feature; a switched-off feature adds no control and no key.
 
 ## Installation
 

@@ -25,7 +25,8 @@
 
   function goToPage(dir) {
     if (!document.querySelector('ul.pagination')) return false; // no pagination here: leave the key alone
-    if (liking || getRun()) { setStatus(`Auto-like is running. Press <b>${keyOf('like')}</b> or <b>Esc</b> to stop it first.`); return true; }
+    const busy = document.documentElement.getAttribute('data-pmg-busy');                 // an add-on that is working on this page says so (docs/ADDONS.md)
+    if (busy) { setStatus(`${busy} is running. Press <b>Esc</b> to stop it first.`); return true; }
     const href = pageHref(dir);
     if (!href) { setStatus(dir > 0 ? 'This is the <b>last</b> page.' : 'This is the <b>first</b> page.'); return true; }
     setStatus(dir > 0 ? 'Next page…' : 'Previous page…');

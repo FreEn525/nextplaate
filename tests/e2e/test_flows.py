@@ -142,11 +142,13 @@ def test_back_to_gallery_when_pair_is_done(page):
 # ---------------------------------------------------------------- likes and pages
 
 
-def test_like_all_hearts_on_page(page, errors):
+def test_the_main_script_has_no_like_feature_any_more(page, errors):
+    """The auto-like is a separate add-on (addons/, tests/e2e/test_autolike_addon.py): without it, L does nothing here."""
     open_at(page, GALLERY)
     page.keyboard.press("KeyL")
-    page.wait_for_function("() => document.querySelectorAll('i.rating.fa-heart-o').length === 0")
-    assert errors == []
+    page.wait_for_timeout(600)
+    assert page.evaluate("() => document.querySelectorAll('i.rating.fa-heart-o').length") == 3
+    assert page.evaluate("() => !document.getElementById('likeAll')") and errors == []
 
 
 def test_pagination_keys_move_between_pages(page):
@@ -155,18 +157,6 @@ def test_pagination_keys_move_between_pages(page):
     page.wait_for_url(GALLERY_P2)
     page.keyboard.press("KeyA")
     page.wait_for_url(GALLERY)
-
-
-def test_like_several_pages_in_a_row(page, errors):
-    open_at(page, GALLERY)
-    set_storage(page, {"pages": "2"})
-    page.reload()  # the panel reads its settings when it loads
-    page.wait_for_selector("#pmg-host")
-    page.keyboard.press("KeyL")
-    page.wait_for_url(GALLERY_P2)
-    page.wait_for_function("() => document.querySelectorAll('i.rating.fa-heart-o').length === 0", timeout=15000)
-    page.wait_for_function("() => localStorage.getItem('pmg_likeRun') === 'null'", timeout=15000)
-    assert errors == []
 
 
 # ---------------------------------------------------------------- batch upload

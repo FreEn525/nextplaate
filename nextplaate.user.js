@@ -2,7 +2,7 @@
 // @name         NextPlaate
 // @namespace    nextplaate
 // @icon         data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20201.1%20201.7%22%3E%3Cstyle%3E.a%7Bfill:%233781c5%7D.b%7Bfill:%23529bde%7D.c%7Bfill:%2382c3ff%7D.w%7Bfill:%23fff%7D%3C/style%3E%3Cg%20transform=%22translate%28-551%20-180.5%29%22%3E%3Ccircle%20cx=%22651.5%22%20cy=%22281.4%22%20r=%2296%22%20class=%22w%22/%3E%3Cpath%20d=%22M650.7%20188.5a101%20101%200%200%200-20.4%202.2%2086%2086%200%200%200-23.5%209%2089%2089%200%200%200-34.8%2033.8%2088%2088%200%200%200-9.6%2023%20100%20100%200%200%200-3.3%2026.8%2091%2091%200%200%200%207.2%2033.4l2.3-1.8a71%2071%200%200%201%2016.2-8.7%2070%2070%200%200%201%2012.3-3.6v-52l.9-2a12%2012%200%200%201%202.8-4%2012%2012%200%200%201%204-2.4%209%209%200%200%201%203.9-.6q.4%200%20.7-.2l.4-.4.5-.8q.4-.8%201-1.5l2.2-2.2%202-1%201.4-.2q1.5-.3%204-.3a156%20156%200%200%201%2015%20.5l1.2.5%202.3%201.7a9%209%200%200%201%201.7%202.4l.8%201.4h13v-4.7l.3-1.8q0-1.5.3-2.8l.2-1%20.8-3.5v-.4l1.3-4%201.6-4.3%201.8-4%202-3.9%202-3.6.6-.9%203.5-5.4.7-.9%202.8-4%202.6-3%20.9-1-4-1.3a91%2091%200%200%200-14-2.3z%22%20class=%22a%22/%3E%3Cpath%20d=%22m676.3%20192.2-.9%201-2.5%203.2q-1.4%201.6-3%204l-.6.8-3.5%205.4-.6.9a101%20101%200%200%200-7.4%2015.8l-1.2%204-.1.4-.8%203.4-.2%201.1-.3%202.7-.3%202v4.6H690l3.8.3q1%200%201.7.4.9.3%201.8%201t1.7%201.4a15%2015%200%200%201%202.7%203.6l1%202v35l-.4%2035.3-.4%201.6a13%2013%200%200%201-2.4%203.4q-.7.8-1.5%201.3-.7.6-1.8%201L694%20329h-11.2l.6%201.4a246%20246%200%200%200%2011.4%2020.7%2065%2065%200%200%200%207%208.4%2077%2077%200%200%200%2017.3-14.9%2098%2098%200%200%200%2016.5-25%2090%2090%200%200%200%206.8-21.9%20114%20114%200%200%200%201.2-9.5%20131%20131%200%200%200-.5-19.2%20121%20121%200%200%200-6.7-24.3l-1-2-.6-.2h-2.1l-.2%204.6a34%2034%200%200%201-.6%205.4l-1.2%202.5a13%2013%200%200%201-4%203.9%2012%2012%200%200%201-6.3%201.7%2012%2012%200%200%201-9.4-5%209%209%200%200%201-1.9-4.7l-.3-3.7-.2-5-4.7-.2-4.3-.3q-.7%200-1.3-.4L696%20240a12%2012%200%200%201-3-3.2%2011%2011%200%200%201-1.5-4.1%2015%2015%200%200%201%20.5-7l1.2-2.2a15%2015%200%200%201%205.2-4.3l1.1-.5%202.7-.5q1.5-.2%203.4-.2h3.4v-8.6l-1.8-1.6a50%2050%200%200%200-9-6.1%2093%2093%200%200%200-18.4-8.4z%22%20class=%22c%22/%3E%3Cpath%20d=%22M701.8%20359.5a26%2026%200%200%201-3.3-3.5%2064%2064%200%200%201-7.3-10.9%20179%20179%200%200%201-7.6-14.7l-.7-1.4h-63.2c-8%200-13.2-.1-13.5-.2l-1.3-.4-1.2-.6-1.2-.7-1.1-.8-1-1a14%2014%200%200%201-2.4-3.4l-1-2v-17.4a59%2059%200%200%200-12.2%203.6%2078%2078%200%200%200-16.2%208.8l-2.3%201.7a92%2092%200%200%200%2031.3%2039.8%2095%2095%200%200%200%2053.3%2018.3l7-.4a88%2088%200%200%200%2029.2-7%2088%2088%200%200%200%2014.7-7.8%22%20class=%22b%22/%3E%3Cpath%20d=%22M720.3%20202.8a8%208%200%200%201%205%201.4%207%207%200%200%201%203%205.3v12.8h6.5l7.3.5%202%20.8.8.7%201.7%202.1a8%208%200%200%201%201%202.9v1.5a8%208%200%200%201-1.4%204.2l-1%201.2q-.8.8-1.6%201.2l-1.9.7q-1%20.3-2.7.3l-4.3.1h-6.3v6.1l-.5%207.2-.6%201.2a8%208%200%200%201-2.2%202.2l-1.3.8a7%207%200%200%201-7-.4%208%208%200%200%201-3.8-5.8V238h-6l-6.7-.4-1.7-.7-1.4-1.3-1-1.2a6%206%200%200%201-1-2.7V229a8%208%200%200%201%201.3-3.4%209%209%200%200%201%202.5-2.4l1-.5%202.5-.3%204.5-.1h6v-6.7l.4-7.4.8-1.9a8%208%200%200%201%204.4-3.2zm-68.5%2073.3a21%2021%200%200%200-4.4.6%2012%2012%200%200%200-3.5%202%2014%2014%200%200%200-4.5%206.6v1.1l.8%201.2.5.3.5.1h.4q.3%200%20.5-.3.3%200%20.5-.4l.9-1.3a10%2010%200%200%201%201.6-2.5%209%209%200%200%201%205-2.6%2011%2011%200%200%201%203.2-.1h1.8q.3%200%20.5-.3.2%200%20.4-.5l.5-.9.1-.7q0-.4-.3-.8l-.7-.7-1.4-.6z%22%20class=%22a%22/%3E%3Cpath%20d=%22M649.2%20255.6a27%2027%200%200%200-11.7%203%2032%2032%200%200%200-8.2%206%2032%2032%200%200%200-6%209%2029%2029%200%200%200-1.7%204.9l-.4%203a42%2042%200%200%200%20.4%2010%2025%2025%200%200%200%202.6%206.7%2034%2034%200%200%200%207.4%209.4%2031%2031%200%200%200%2012%206%2028%2028%200%200%200%2013.3-.1%2024%2024%200%200%200%207-3%2031%2031%200%200%200%2012.3-13.7%2030%2030%200%200%200-1.9-27.5%2029%2029%200%200%200-11.2-10.5%2028%2028%200%200%200-13.8-3.2zm1.5%209.4a19%2019%200%200%201%2012.6%205.3%2020%2020%200%200%201%205.7%209.8%2019%2019%200%200%201-2.2%2014.8%2021%2021%200%200%201-12%209.3l-1.6.2a54%2054%200%200%201-8.1-.2%2013%2013%200%200%201-3.6-1.4%2023%2023%200%200%201-9-8.4%2020%2020%200%200%201-1.5-15.1%2020%2020%200%200%201%204.8-8.2%2021%2021%200%200%201%208.1-5.2%2019%2019%200%200%201%206.8-1m28.9-10.2h13.9v9.1h-13.9z%22%20class=%22a%22/%3E%3Cpath%20d=%22M649.9%20180.5a173%20173%200%200%200-12.5.7%20113%20113%200%200%200-27.2%207.5%2097%2097%200%200%200-26.7%2017.5%20165%20165%200%200%200-11%2012%20103%20103%200%200%200-15.8%2029.2%20107%20107%200%200%200-5.4%2025%20128%20128%200%200%200%201%2025%20109%20109%200%200%200%208.4%2027%2099%2099%200%200%200%2035.7%2041%20106%20106%200%200%200%2035.1%2014.9%2096%2096%200%200%200%2031.7%201.4%2097%2097%200%200%200%2044.8-17%20104%20104%200%200%200%2027.8-28.6%20100%20100%200%200%200%2016.3-56.2%20106%20106%200%200%200-3.5-24.8l-2.5-7.8-2-5.3-1.2.2-1.6.3-.9.1-.2.3v.4l.3%201.5%201%202.6a98%2098%200%200%201%201.9%2062%20102%20102%200%200%201-23.6%2039.8%20103%20103%200%200%201-33.3%2022%2097%2097%200%200%201-28.5%206.5%20127%20127%200%200%201-21.8-1%2092%2092%200%200%201-29.9-10.5%20101%20101%200%200%201-30.3-25.6%2097%2097%200%200%201-5.9-111.1%2096%2096%200%200%201%2028-29%2091%2091%200%200%201%2029.4-12.8%20119%20119%200%200%201%2012.9-2.2%20151%20151%200%200%201%2020.3-.1%20110%20110%200%200%201%2023.6%205.6%2091%2091%200%200%201%2021%2011.1l4.6%203.1%201.2-1.6.8-1.5v-.4l-.4-.5q-.5-.6-2.2-1.7a125%20125%200%200%200-20.5-11.6%20102%20102%200%200%200-39-7.4z%22%20class=%22a%22/%3E%3Cpath%20d=%22m720.8%20199.7-2.7.3a12%2012%200%200%200-5.9%203.1l-1.7%202.2a12%2012%200%200%200-1.6%203.8l-.3%204.2-.2%204.6h4.5v-2.2l.4-7.2.6-1.2a8%208%200%200%201%202.2-2.1l1.3-.8a8%208%200%200%201%203-.7%207%207%200%200%201%202.8.5%208%208%200%200%201%202.5%201.5l1%201.1a8%208%200%200%201%201.5%203.8l.1%205.5v6.2h6l6.6.4%201.7.7%201.4%201.3%201%201.3a6%206%200%200%201%201%202.6v2.8a8%208%200%200%201-1.3%203.4%208%208%200%200%201-3.4%203l-2.6.2-4.5.1h-5.9v4.4h7.4a29%2029%200%200%200%206-.7l2.3-1.1a15%2015%200%200%200%205.3-6l.6-2.4a16%2016%200%200%200-1-7.4l-1.4-2.4a10%2010%200%200%200-2.2-2l-2.5-1.4-1.3-.4-1.7-.2-2.6-.2-4.7-.2-.2-5-.6-5-.9-2.4-.7-1a15%2015%200%200%200-4.2-3.6%2011%2011%200%200%200-3.9-1.3zm10.7%2050.2.8%201.2v-1.2z%22%20class=%22w%22/%3E%3C/g%3E%3C/svg%3E
-// @version      5.11
+// @version      5.11.1
 // @author       NextEnzzo (https://platesmania.com/user121559)
 // @copyright    2026, NextEnzzo
 // @license      MIT
@@ -59,7 +59,7 @@
   /* =====================================================================
    *  SETTINGS  (the user's choices, in one place)
    *    A setting is defined once, with its default and the label shown in the Settings drawer:
-   *      settings.define('feature_likes', '1', 'Likes', 'features')
+   *      settings.define('feature_pages', '1', 'Gallery page keys', 'features')
    *    and read anywhere with settings.get(id) (a string) or settings.on(id) (true when '1').
    *    The value is kept in the browser (key pmg_set_<id>). Every feature that has an id and a label
    *    gets a "feature_<id>" setting from registerFeature: that is how a feature is switched off.
@@ -96,7 +96,7 @@
   // A feature is registered when the script loads, but touches nothing on the page then:
   // mountApp() builds the panel first, and only then runs each feature's init().
   //   registerFeature({
-  //     id: 'likes', label: 'Likes',   // a feature with an id and a label can be switched off in Settings
+  //     id: 'pages', label: 'Gallery page keys',   // a feature with an id and a label can be switched off in Settings
   //     requires: ['details'],          // off when one of these is off
   //     locked: true,                   // cannot be switched off (the Settings drawer itself)
   //     groups:   [{ drawer: 'pair', title: 'Photos', build: () => nodes }], // controls, in a drawer of the bar
@@ -149,6 +149,8 @@
       if (spent > 5) log('slow init', f.id, Math.round(spent) + ' ms');          // what costs time at start (dev log)
     });
     escapeChain = active.filter(f => f.onEscape).sort((a, b) => (a.escOrder || 0) - (b.escOrder || 0));
+    host.setAttribute('data-version', SCRIPT_VERSION);
+    document.dispatchEvent(new CustomEvent('pmg-ready'));                        // the panel stands: an add-on may join it (docs/ADDONS.md)
   }
   /* =====================================================================
    *  KEYBOARD  (one listener for the whole script)
@@ -411,7 +413,6 @@
     selection: { about: 'Pick the front photo and the rear photo of the same vehicle in a gallery. Step 1 of describing a pair.', scope: 'every gallery' },
     details: { about: 'Your place and hashtags, written once. They head every description the script writes.', scope: 'everywhere' },
     description: { about: 'Writes the description of a photo on its edit page: your details, then the other side of the pair as a link and a thumbnail. Without a pair it writes your details only.', scope: 'every country' },
-    likes: { about: 'Likes a gallery page, or several pages in a row, with a pause between likes.', scope: 'every gallery' },
     pages: { about: 'Previous and next gallery page from the keyboard.', scope: 'every gallery' },
     plate: { about: 'As you type a plate on the upload page: how many photos of it are already on the site, the vehicle of those photos, and your photos of its series.', scope: 'all 96 countries and 829 plate categories (795 checked exactly on real plates)' },
     shortcuts: { about: 'Change any key of the script. Safe for AZERTY keyboards.', scope: 'everywhere' },
@@ -2036,7 +2037,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     { id: 'search', icon: 'search', title: 'Check a plate', keys: [] },       // the plate check, Google Lens and the lookups
     { id: 'upload', icon: 'upload', title: 'Send photos', keys: ['open', 'start'] },     // a photo in a country, the batch upload
     { id: 'pair', icon: 'photos', title: 'Describe a pair', keys: ['select', 'fill'] },   // front and rear photo, details, description, automation
-    { id: 'gallery', icon: 'gallery', title: 'Browse', keys: ['like', 'prev', 'next', 'worldmap'] },      // likes, pages, members, the world map
+    { id: 'gallery', icon: 'gallery', title: 'Browse', keys: ['prev', 'next', 'worldmap'] },      // pages, members, the world map
     { id: 'keys', icon: 'keyboard', title: 'Shortcuts', keys: ['Esc'] },
     { id: 'settings', icon: 'settings', title: 'Settings', keys: [] },
     { id: 'dev', icon: 'wrench', title: 'Developer', keys: [] }        // shown only when the dev tools are built in
@@ -2765,164 +2766,6 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     }
   });
   /* =====================================================================
-   *  LIKE THE PHOTOS SHOWN ON THE PAGE
-   * ===================================================================== */
-  // Each photo has <i id="unit_ul{ID}" class="fa fa-heart-o rating" onclick="snd1ReqqGal(...)">.
-  // Only hearts that are still empty (fa-heart-o) are clicked, each at most once,
-  // so a photo you already liked can never be un-liked by mistake.
-  //
-  // Multi-page mode: with "Pages to like" > 1 the run is saved in localStorage ("likeRun"), the script
-  // likes the page, goes to the next one, and resumes automatically after each page load until the
-  // requested number of pages is done. A run is dropped if it goes stale (> 60 s without progress),
-  // if you leave the gallery it started on, or if you stop it (button, L or Esc).
-  const MAX_PAGES = 50;
-  const clickedLikes = new Set();
-  let liking = false, stopLiking = false;
-
-  const getRun = () => { try { return JSON.parse(store.get('likeRun', 'null')); } catch (e) { return null; } };
-  const setRun = r => store.set('likeRun', r ? JSON.stringify(r) : 'null');
-  // Same gallery = same address without the page number
-  const galleryKey = () => {
-    const p = new URLSearchParams(location.search); p.delete('start');
-    return location.pathname + '?' + [...p.entries()].map(([k, v]) => k + '=' + v).sort().join('&');
-  };
-  const pagesWanted = () => Math.min(MAX_PAGES, Math.max(1, parseInt($('pages').value, 10) || 1));
-
-
-  const unlikedHearts = () =>
-    [...document.querySelectorAll('i.rating.fa-heart-o[id^="unit_ul"]')].filter(el => !clickedLikes.has(el.id));
-
-  window.addEventListener('pmg-keys', () => { if ($('likeAll')) updateLikeBtn(); });          // a key was changed: the button says the new one
-  function updateLikeBtn() {
-    if (liking) return;
-    const b = $('likeAll'), r = getRun();
-    if (r) { b.disabled = false; b.textContent = `Stop auto-like (page ${r.done + 1}/${r.total}) (${keyOf('like')})`; return; }
-    const n = unlikedHearts().length, pages = pagesWanted();
-    if (pages > 1) {
-      b.disabled = !document.querySelector('i.rating[id^="unit_ul"]');
-      b.textContent = `Like ${pages} pages from this one (${keyOf('like')})`;
-    } else {
-      b.disabled = n === 0;
-      b.textContent = n ? `Like ${n} photo${n > 1 ? 's' : ''} on this page (${keyOf('like')})` : 'No photos to like on this page';
-    }
-  }
-
-  // Likes every empty heart of the current page; returns how many were clicked
-  async function likePage(label) {
-    const list = unlikedHearts();
-    const delay = Math.max(100, parseInt($('delay').value, 10) || 200);
-    const b = $('likeAll');
-    let done = 0;
-    for (const el of list) {
-      if (stopLiking) break;
-      b.textContent = `Stop (${label}${done + 1}/${list.length})`;
-      clickedLikes.add(el.id);
-      el.click();
-      done++;
-      await new Promise(r => setTimeout(r, delay));
-    }
-    return done;
-  }
-
-  function cancelLikeRun(msg) {
-    setRun(null);
-    if (liking) stopLiking = true;
-    updateLikeBtn();
-    if (msg) setStatus(msg);
-  }
-
-  // One step of a multi-page run: like this page, then move to the next one (or finish)
-  async function runStep() {
-    const r = getRun();
-    if (!r) return;
-    liking = true; stopLiking = false;
-    const done = await likePage(`page ${r.done + 1}/${r.total} · `);
-    const stopped = stopLiking;
-    liking = false; stopLiking = false;
-    if (stopped || !getRun()) { setRun(null); updateLikeBtn(); setStatus(`Stopped on page <b>${r.done + 1}</b>. <b>${r.liked + done}</b> photo${r.liked + done > 1 ? 's' : ''} liked.`); return; }
-
-    r.done += 1; r.liked += done; r.ts = Date.now();
-    const href = pageHref(+1);
-    if (r.done >= r.total || !href) {
-      setRun(null); updateLikeBtn();
-      setStatus(r.done >= r.total
-        ? `Done: <b>${r.liked}</b> photo${r.liked > 1 ? 's' : ''} liked over <b>${r.done}</b> page${r.done > 1 ? 's' : ''}.`
-        : `Reached the last page after <b>${r.done}</b> page${r.done > 1 ? 's' : ''}: <b>${r.liked}</b> liked.`);
-      return;
-    }
-    setRun(r);
-    updateLikeBtn();
-    setStatus(`Page <b>${r.done}/${r.total}</b> done (${r.liked} liked). Next page…`);
-    // Let the last like request finish before leaving the page
-    setTimeout(() => { if (getRun()) location.href = href; }, 700);
-  }
-
-  async function likeAll() {
-    if (liking || getRun()) { cancelLikeRun('Auto-like stopped.'); return; } // second click = stop
-    const pages = pagesWanted();
-    if (pages > 1) {
-      setRun({ total: pages, done: 0, liked: 0, key: galleryKey(), ts: Date.now() });
-      runStep();
-      return;
-    }
-    const list = unlikedHearts();
-    if (!list.length) return;
-    liking = true; stopLiking = false;
-    const done = await likePage('');
-    const stopped = stopLiking;
-    liking = false; stopLiking = false;
-    updateLikeBtn();
-    setStatus(stopped ? `Stopped after <b>${done}</b> like${done > 1 ? 's' : ''}.` : `Liked <b>${done}</b> photo${done > 1 ? 's' : ''}.`);
-  }
-
-  // A multi-page run resumes by itself after each page load
-  function resumeLikeRun() {
-    const r = getRun();
-    if (!r) return;
-    const fresh = Date.now() - (r.ts || 0) < 60000;
-    if (!fresh || r.key !== galleryKey() || !document.querySelector('i.rating[id^="unit_ul"]')) {
-      setRun(null); updateLikeBtn(); // stale, or left the gallery it started on
-      return;
-    }
-    setStatus(`Auto-like: page <b>${r.done + 1}/${r.total}</b>…`);
-    setTimeout(() => { if (getRun()) runStep(); }, 600); // short pause so the page is fully loaded
-  }
-
-
-  registerFeature({
-    id: 'likes', label: 'Likes',
-    groups: [{
-      drawer: 'gallery', title: 'Likes', about: "Like this page, or several pages in a row, with a pause between likes.", pages: ['gallery'],
-      build: () => [
-        h('button', { id: 'likeAll', class: 'btn ghost', disabled: true, text: 'Like this page' }),
-        h('div', { class: 'row' }, h('label', { for: 'pages', text: 'Pages to like' }), h('input', { type: 'number', id: 'pages', min: 1, step: 1 })),
-        h('div', { class: 'row' }, h('label', { for: 'delay', text: 'Delay between likes (ms)' }), h('input', { type: 'number', id: 'delay', min: 100, step: 50 }))
-      ]
-    }],
-    keys: {
-      like: { code: 'KeyL', label: 'Like the page',
-        run: () => { // like this page (or "Pages to like" pages); press again while running = stop
-          if (liking || getRun() || unlikedHearts().length || (pagesWanted() > 1 && document.querySelector('i.rating[id^="unit_ul"]'))) { likeAll(); return true; }
-          if (document.querySelector('i.rating[id^="unit_ul"]')) { setStatus('Nothing left to like on this page.'); return true; }
-          return false;
-        },
-        hintOrder: 30
-      }
-    },
-    onEscape: () => { if (!(liking || getRun())) return false; cancelLikeRun('Auto-like stopped.'); return true; },
-    escOrder: 30,
-    init: () => {
-      $('delay').value = store.get('delay', '200');
-      $('delay').oninput = () => store.set('delay', $('delay').value);
-      $('pages').value = store.get('pages', '1');
-      $('pages').oninput = () => { store.set('pages', $('pages').value); updateLikeBtn(); };
-      $('pages').max = MAX_PAGES;
-      $('likeAll').onclick = likeAll;
-      host.addEventListener('mouseenter', updateLikeBtn); // pages can load photos lazily
-      updateLikeBtn();
-    }
-  });
-  /* =====================================================================
    *  PAGE NAVIGATION  (previous / next page of a gallery)
    * ===================================================================== */
   // The site's pagination is <ul class="pagination"> « 1 2 3 »: the active page is <li class="active">,
@@ -2949,7 +2792,8 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
 
   function goToPage(dir) {
     if (!document.querySelector('ul.pagination')) return false; // no pagination here: leave the key alone
-    if (liking || getRun()) { setStatus(`Auto-like is running. Press <b>${keyOf('like')}</b> or <b>Esc</b> to stop it first.`); return true; }
+    const busy = document.documentElement.getAttribute('data-pmg-busy');                 // an add-on that is working on this page says so (docs/ADDONS.md)
+    if (busy) { setStatus(`${busy} is running. Press <b>Esc</b> to stop it first.`); return true; }
     const href = pageHref(dir);
     if (!href) { setStatus(dir > 0 ? 'This is the <b>last</b> page.' : 'This is the <b>first</b> page.'); return true; }
     setStatus(dir > 0 ? 'Next page…' : 'Previous page…');
@@ -5181,7 +5025,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
    *    just been chosen; not after a fix such as 5.9 -> 5.9.1),
    *    and any time from the button in Settings. It reads WHATS_NEW (src/lib/whatsnew.js).
    * ===================================================================== */
-  const SCRIPT_VERSION = "5.11";
+  const SCRIPT_VERSION = "5.11.1";
 
   // One block per version: its title, then its sections. Several versions are stacked, the newest first.
   function whatsNewBody(entries) {
@@ -6105,6 +5949,6 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
 mountApp();
   const describing = featureOn('description');
   if (here.edit) { if (describing && $('autoFill').checked && state.front && state.rear) fillDescription(); }   // by itself only for a chosen pair
-  else if (!(describing && backToGallery())) { if (describing) autoEdit(); if (featureOn('likes')) resumeLikeRun(); }
+  else if (!(describing && backToGallery())) { if (describing) autoEdit(); }
   if (featureOn('upload')) batchOnLoad().catch(() => {});
 })();

@@ -36,7 +36,7 @@ def keys_list(page):
 def test_every_action_of_the_script_is_in_the_shortcuts_list(ctx):
     page = open_page(ctx)
     labels = [l for l, _ in keys_list(page)]
-    for want in ("Select photos", "Fill the description", "Like the page", "Previous page", "Next page", "Open the batch manager", "Start uploading", "Reload the current photo", "Open the world map (globe)"):
+    for want in ("Select photos", "Fill the description", "Previous page", "Next page", "Open the batch manager", "Start uploading", "Reload the current photo", "Open the world map (globe)"):
         assert want in labels, want
     assert page.evaluate("() => Object.keys(window.nextplaateDev || {}).length >= 0") is True
 
@@ -70,7 +70,7 @@ def test_the_texts_that_name_a_key_follow_the_key_in_force(ctx):
     assert page.evaluate(f"() => {PANEL}.getElementById('sel').textContent") == "Select photos (X)"
     title = page.evaluate(f"() => {PANEL}.querySelector('.rbtn[data-drawer=\"pair\"]').title")
     assert title.startswith("Describe a pair (X")                             # the bar's tooltip too
-    assert page.evaluate(f"() => {PANEL}.querySelector('.rbtn[data-drawer=\"gallery\"]').title").startswith("Browse (L · ")
+    assert page.evaluate(f"() => {PANEL}.querySelector('.rbtn[data-drawer=\"gallery\"]').title").startswith("Browse (A · ")
 
 
 def test_the_buttons_of_the_drawers_name_their_keys(ctx):

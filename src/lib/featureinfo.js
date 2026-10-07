@@ -7,7 +7,6 @@
     selection: { about: 'Pick the front photo and the rear photo of the same vehicle in a gallery. Step 1 of describing a pair.', scope: 'every gallery' },
     details: { about: 'Your place and hashtags, written once. They head every description the script writes.', scope: 'everywhere' },
     description: { about: 'Writes the description of a photo on its edit page: your details, then the other side of the pair as a link and a thumbnail. Without a pair it writes your details only.', scope: 'every country' },
-    likes: { about: 'Likes a gallery page, or several pages in a row, with a pause between likes.', scope: 'every gallery' },
     pages: { about: 'Previous and next gallery page from the keyboard.', scope: 'every gallery' },
     plate: { about: 'As you type a plate on the upload page: how many photos of it are already on the site, the vehicle of those photos, and your photos of its series.', scope: 'all 96 countries and 829 plate categories (795 checked exactly on real plates)' },
     shortcuts: { about: 'Change any key of the script. Safe for AZERTY keyboards.', scope: 'everywhere' },

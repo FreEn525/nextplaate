@@ -7,7 +7,7 @@ GALLERY = "https://platesmania.com/fr/gallery.php"
 PHOTO = "https://platesmania.com/fr/nomer101"
 EDIT = "https://platesmania.com/fr/edit_dopol.php?id=101"
 ADD = "https://platesmania.com/fr/add"
-FEATURES = ["selection", "details", "description", "likes", "pages", "plate", "shortcuts", "lens", "flags", "preview", "tags", "extra", "members", "floatupload", "lookup", "profile", "mine", "regions", "series", "registry", "worldmap", "profilestyle", "notify", "laststrip", "upload"]
+FEATURES = ["selection", "details", "description", "pages", "plate", "shortcuts", "lens", "flags", "preview", "tags", "extra", "members", "floatupload", "lookup", "profile", "mine", "regions", "series", "registry", "worldmap", "profilestyle", "notify", "laststrip", "upload"]
 SHADOW = "document.getElementById('pmg-host').shadowRoot"
 
 
@@ -61,8 +61,8 @@ def test_the_checkbox_keeps_the_choice_and_offers_to_reload(browser):
     c, page, errors = new_page(browser)
     page.goto(GALLERY)
     page.wait_for_selector("#pmg-host")
-    page.evaluate(f"() => {SHADOW}.getElementById('set_feature_likes').click()")
-    assert page.evaluate("() => localStorage.getItem('pmg_set_feature_likes')") == "0"
+    page.evaluate(f"() => {SHADOW}.getElementById('set_feature_pages').click()")
+    assert page.evaluate("() => localStorage.getItem('pmg_set_feature_pages')") == "0"
     assert page.evaluate(f"() => !{SHADOW}.getElementById('setApply').hidden")
     c.close()
 

@@ -17,23 +17,22 @@ Chaque fonction a un interrupteur dans Settings (sauf Settings elle-même) : ét
 | 7 | Google Lens | Google Lens | page d'ajout, tiroir Check a plate | cherche la photo choisie sur Lens, propose marque, modèle et génération | |
 | 8 | Sélecteur de tags | Tag picker | page d'ajout, page d'une photo | remplace la section « Add tags » du site et son pop-up | |
 | 9 | Information complémentaire | Extra information box | page d'ajout | grande carte à la place de la petite boîte du site | |
-| 10 | Likes | Likes | tiroir Browse | like une page ou plusieurs pages avec un délai | `L` |
-| 11 | Touches de page | Gallery page keys | galeries | page précédente et suivante au clavier | `A`, `D` |
-| 12 | Drapeaux des pays | Country flags | tiroir Send photos, pages d'ajout, profils | un lien par pays vers sa page d'ajout ; pays de la barre au choix | |
-| 13 | Raccourcis vers les membres | Member shortcuts | tiroir Browse, profils, barre d'icônes | photo et pseudo des membres, un clic vers leur page ; vous d'abord | |
-| 14 | Bouton d'envoi flottant | Floating upload button | page d'ajout | suit en bas de page tant que le bouton Upload du site est hors de vue, et le presse | |
-| 15 | Liens de recherche de plaque | Plate lookup links | carte Plate check, tiroir Check a plate | un lien par site public du pays (et recherche d'images), la plaque écrite comme ce site la veut ; liens simples, rien n'est envoyé avant le clic ; chaque site masquable | |
-| 16 | Vos photos de ce véhicule | Your photos of this vehicle | page d'ajout | combien de photos de la marque, du modèle, de la génération vous avez déjà, chaque chiffre est un lien | |
-| 17 | Registre officiel (NL, IL) | Official register (NL, IL) | carte Plate check | un bouton interroge le registre ouvert du pays (RDW, data.gov.il) : marque, modèle, année, couleur, contrôle ; remplit les menus vides (NL) ; interrogé tout seul (données publiques), réglable | |
-| 18 | Compteur de série | Series counter | carte Plate check, pages de série | vos photos de la série de la plaque (84 pays vérifiés sur le vrai site : le plus long groupe de chiffres devient un joker) ; sur une page de série, les numéros présents sur le site | |
-| 19 | Vrais uploads | Profile: real uploads | profils | total réel de la galerie et uploads du jour (dès 03 h 30), écart avec le chiffre du profil | |
-| 20 | Régions | Profile: regions | profils | régions d'un pays dont vous avez une photo, barre, liste des manquantes ; menu des pays lu sur la page du site | |
-| 21 | Carte du monde | World map | tiroir Browse, profils, touche `G` | les pays dont un membre a des photos sur une carte du monde, nuancés selon le nombre de photos, chacun un lien vers ses photos ; vue Europe ; vous ou n'importe quel membre | `G` |
-| 22 | Apparence du profil | Profile page look | profils | la page de profil d'un membre dans le style du script : fiche, tuiles, deux panneaux identiques pour messages et notifications, tableau et dernières photos ; seul le style change | |
-| 23 | Notifications | Notification pop-ups | partout (connecté) | une pastille en coin pour un nouveau like, commentaire ou message privé, tant qu'un onglet PlatesMania est ouvert | |
-| 24 | Bande des dernières plaques | Latest plates strip | toutes les pages | la ligne des derniers envois du site en bande fine, drapeau et pastille par plaque | |
-| 25 | Éditeur de raccourcis | Shortcut editor | tiroir Raccourcis | change chaque touche | |
-| 26 | Réglages | (verrouillée) | tiroir Settings | un interrupteur par fonction ; choix des pays de la barre | |
+| 10 | Touches de page | Gallery page keys | galeries | page précédente et suivante au clavier | `A`, `D` |
+| 11 | Drapeaux des pays | Country flags | tiroir Send photos, pages d'ajout, profils | un lien par pays vers sa page d'ajout ; pays de la barre au choix | |
+| 12 | Raccourcis vers les membres | Member shortcuts | tiroir Browse, profils, barre d'icônes | photo et pseudo des membres, un clic vers leur page ; vous d'abord | |
+| 13 | Bouton d'envoi flottant | Floating upload button | page d'ajout | suit en bas de page tant que le bouton Upload du site est hors de vue, et le presse | |
+| 14 | Liens de recherche de plaque | Plate lookup links | carte Plate check, tiroir Check a plate | un lien par site public du pays (et recherche d'images), la plaque écrite comme ce site la veut ; liens simples, rien n'est envoyé avant le clic ; chaque site masquable | |
+| 15 | Vos photos de ce véhicule | Your photos of this vehicle | page d'ajout | combien de photos de la marque, du modèle, de la génération vous avez déjà, chaque chiffre est un lien | |
+| 16 | Registre officiel (NL, IL) | Official register (NL, IL) | carte Plate check | un bouton interroge le registre ouvert du pays (RDW, data.gov.il) : marque, modèle, année, couleur, contrôle ; remplit les menus vides (NL) ; interrogé tout seul (données publiques), réglable | |
+| 17 | Compteur de série | Series counter | carte Plate check, pages de série | vos photos de la série de la plaque (84 pays vérifiés sur le vrai site : le plus long groupe de chiffres devient un joker) ; sur une page de série, les numéros présents sur le site | |
+| 18 | Vrais uploads | Profile: real uploads | profils | total réel de la galerie et uploads du jour (dès 03 h 30), écart avec le chiffre du profil | |
+| 19 | Régions | Profile: regions | profils | régions d'un pays dont vous avez une photo, barre, liste des manquantes ; menu des pays lu sur la page du site | |
+| 20 | Carte du monde | World map | tiroir Browse, profils, touche `G` | les pays dont un membre a des photos sur une carte du monde, nuancés selon le nombre de photos, chacun un lien vers ses photos ; vue Europe ; vous ou n'importe quel membre | `G` |
+| 21 | Apparence du profil | Profile page look | profils | la page de profil d'un membre dans le style du script : fiche, tuiles, deux panneaux identiques pour messages et notifications, tableau et dernières photos ; seul le style change | |
+| 22 | Notifications | Notification pop-ups | partout (connecté) | une pastille en coin pour un nouveau like, commentaire ou message privé, tant qu'un onglet PlatesMania est ouvert | |
+| 23 | Bande des dernières plaques | Latest plates strip | toutes les pages | la ligne des derniers envois du site en bande fine, drapeau et pastille par plaque | |
+| 24 | Éditeur de raccourcis | Shortcut editor | tiroir Raccourcis | change chaque touche | |
+| 25 | Réglages | (verrouillée) | tiroir Settings | un interrupteur par fonction ; choix des pays de la barre | |
 
 Autour de ces fonctions : la barre d'icônes (avec votre photo de profil sous le logo), le message d'état en bas, et pour le développement le tiroir Developer du build dev (capture, test de plaques, vérification des lectures, base).
 
@@ -64,7 +63,6 @@ La barre suit l'ordre d'usage : **Check a plate** (vérifier ce qu'on va envoyer
 | Photo pair selection | every gallery |
 | Location and hashtags | everywhere |
 | Descriptions | every country |
-| Likes | every gallery |
 | Gallery page keys | every gallery |
 | Member shortcuts | everywhere |
 | Profile: real uploads | every member |
@@ -97,7 +95,6 @@ La barre suit l'ordre d'usage : **Check a plate** (vérifier ce qu'on va envoyer
 - **Automatisation** : enchaîne sélection, description et envoi.
 
 ### Browse (tiroir `gallery`)
-- **Likes** : like la page en cours, ou plusieurs pages, avec un délai entre chaque like. Touche `L`.
 - **Pages** : boutons précédent et suivant, touches `A` (précédent) et `D` (suivant).
 
 ### Vérification de plaque (tiroir `plate`, sur la page d'ajout)
@@ -253,7 +250,7 @@ La barre suit l'ordre d'usage : **Check a plate** (vérifier ce qu'on va envoyer
 - `src/core` : point d'entrée, stockage (`store`), détection de la page (`here`), registre des fonctions, raccourcis clavier.
 - `src/ui` : icônes, styles, barre et tiroirs.
 - `src/lib` : format des plaques (`plate/` : `00-helpers.js` puis un fichier par pays, `PLATE_RULES.<cc>`), file de requêtes vers le site (`http.js`), pays (`countries.js`), véhicule (`vehicle.js`), pont entre sites (`bridge.js`), sites de recherche (`lookups.js`), registres ouverts (`registries.js`), texte des nouveautés (`whatsnew.js`).
-- `src/features` : une fonction par fichier (pair, details, description, likes, pages, plate, shortcuts, lens, flags, preview, tags, extra, members, bouton flottant, liens, profil, vos photos, régions, séries, registre, à propos), et `upload/` pour les envois par lots.
+- `src/features` : une fonction par fichier (pair, details, description, pages, plate, shortcuts, lens, flags, preview, tags, extra, members, bouton flottant, liens, profil, vos photos, régions, séries, registre, à propos), et `upload/` pour les envois par lots.
 - `src/boot` : démarrage.
 - `src/dev` : outils de développement (seulement dans le build dev).
 - `scripts/build.mjs` assemble les fichiers dans l'ordre et vérifie qu'aucun fichier n'est oublié.

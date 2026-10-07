@@ -9,7 +9,7 @@
     { id: 'search', icon: 'search', title: 'Check a plate', keys: [] },       // the plate check, Google Lens and the lookups
     { id: 'upload', icon: 'upload', title: 'Send photos', keys: ['open', 'start'] },     // a photo in a country, the batch upload
     { id: 'pair', icon: 'photos', title: 'Describe a pair', keys: ['select', 'fill'] },   // front and rear photo, details, description, automation
-    { id: 'gallery', icon: 'gallery', title: 'Browse', keys: ['like', 'prev', 'next', 'worldmap'] },      // likes, pages, members, the world map
+    { id: 'gallery', icon: 'gallery', title: 'Browse', keys: ['prev', 'next', 'worldmap'] },      // pages, members, the world map
     { id: 'keys', icon: 'keyboard', title: 'Shortcuts', keys: ['Esc'] },
     { id: 'settings', icon: 'settings', title: 'Settings', keys: [] },
     { id: 'dev', icon: 'wrench', title: 'Developer', keys: [] }        // shown only when the dev tools are built in

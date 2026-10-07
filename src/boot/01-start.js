@@ -10,5 +10,5 @@
 mountApp();
   const describing = featureOn('description');
   if (here.edit) { if (describing && $('autoFill').checked && state.front && state.rear) fillDescription(); }   // by itself only for a chosen pair
-  else if (!(describing && backToGallery())) { if (describing) autoEdit(); if (featureOn('likes')) resumeLikeRun(); }
+  else if (!(describing && backToGallery())) { if (describing) autoEdit(); }
   if (featureOn('upload')) batchOnLoad().catch(() => {});

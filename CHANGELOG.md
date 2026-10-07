@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.11.1
+
+- The Likes box is no longer part of the script.
+
 ## 5.11
 
 **World map** (new feature, switch in Settings; key `G` for globe, or Browse > World map, or the button of a profile)
