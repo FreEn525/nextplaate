@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.11.10
+
+- Test version for the update notice: nothing changed in the script, only its number.
+
 ## 5.11.9
 
 - **Update notice** (new feature, switch in Settings > Features > The panel): when you join the site, a notice tells you if the script has a newer version, with the link to install it. At most once every 3 hours (the tabs share the time; Tampermonkey updates by itself only every few hours, so a version published meanwhile is announced sooner; a failed look is tried again in half an hour); the cross or the link says "not again for this version"; never in the dev build. It reads only the version number of the published script, from Greasy Fork, the same file as a click on the logo; nothing about you is sent.
