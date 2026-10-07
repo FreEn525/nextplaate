@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         NextPlaate Auto-like (add-on)
 // @namespace    nextplaate
-// @version      1.0
+// @version      1.0.1
 // @author       NextEnzzo (https://platesmania.com/user121559)
 // @copyright    2026, NextEnzzo
 // @license      MIT
@@ -53,7 +53,7 @@
   const hearts = () => [...document.querySelectorAll(HEART)].filter(el => !clicked.has(el.id));
   const pages = () => Math.min(MAX_PAGES, Math.max(1, parseInt(ui ? ui.pages.value : get('pages', '1'), 10) || 1));
   const delay = () => Math.max(100, parseInt(ui ? ui.delay.value : get('delay', '200'), 10) || 200);
-  const say = text => { if (ui) ui.status.textContent = text; };
+  const say = text => { if (ui) { ui.status.textContent = text; ui.status.hidden = !text; } };          // no empty box when there is nothing to say
 
   // Address of the next page of the gallery (the active <li> of the pagination, then the one after it), or null on the last page
   function nextHref() {
@@ -154,7 +154,7 @@
       button: h('button', { type: 'button', class: 'btn ghost', disabled: true, text: 'Like this page', onclick: start }),
       pages: h('input', { type: 'number', id: 'alPages', min: 1, max: MAX_PAGES, step: 1, value: get('pages', '1') }),
       delay: h('input', { type: 'number', id: 'alDelay', min: 100, step: 50, value: get('delay', '200') }),
-      status: h('p', { class: 'presult', text: '' })
+      status: h('p', { class: 'presult', text: '', hidden: true })
     };
     ui.pages.addEventListener('input', () => { put('pages', ui.pages.value); button(); });
     ui.delay.addEventListener('input', () => put('delay', ui.delay.value));
