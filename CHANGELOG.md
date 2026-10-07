@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.11.11
+
+- **Update notice, more often**: about every 20 minutes (a time 15 to 25 minutes ahead is kept, so the tabs share it and the users do not all ask together) instead of 3 hours, and a page that stays open looks again by itself (a timer asks every 5 minutes if it is time). A version published meanwhile, or several in a row, is announced; the cross or the link says "not again for this version". A failed look is tried again in 10 minutes. The request is the 1.3 KB header of the published script.
+
 ## 5.11.10
 
 - Test version for the update notice: nothing changed in the script, only its number.

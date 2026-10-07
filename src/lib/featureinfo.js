@@ -22,7 +22,7 @@
     profilestyle: { about: 'A member’s profile page in the look of the script: the figures, the private messages, the notifications, the countries and the last photos in one style. The site’s own elements and buttons stay.', scope: 'every profile' },
     notify: { about: 'A notice in the corner for a new like, comment or private message, on any PlatesMania page, like a phone. It works while a PlatesMania tab is open; you choose the kinds and how often.', scope: 'everywhere you are logged in' },
     laststrip: { about: 'The line of the latest uploads that every page carries under its header, as a slim strip with a flag and a chip per plate.', scope: 'every page' },
-    updatenotice: { about: 'A notice when a newer version of the script exists, when you join the site: every 3 hours at most it asks Greasy Fork for the version number (nothing about you is sent). The notice links to the install page.', scope: 'every page' },
+    updatenotice: { about: 'A notice when a newer version of the script exists, when you join the site: about every 20 minutes it asks Greasy Fork for the version number (1 KB; nothing about you is sent). The notice links to the install page.', scope: 'every page' },
     mine: { about: 'Under the vehicle menus: how many photos of that brand, model and generation you already have.', scope: 'every country' },
     regions: { about: 'On a member’s profile: which regions of a country the member has a photo from, and which are missing.', scope: 'every country the site has regions for' },
     series: { about: 'How many of your photos are in the series of the plate you type (HF-137-QQ is in HF-*-QQ); on a series page, the numbers already on the site.', scope: '84 countries (checked on the real site)' },
