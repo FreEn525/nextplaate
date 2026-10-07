@@ -32,7 +32,7 @@ Elle est dans `src/meta/00-header.txt` (`@description`, et `@description:fr` pou
 (En anglais, Markdown : choisir « Markdown » comme format.)
 
 ```markdown
-**NextPlaate** adds a panel to PlatesMania that makes posting photos and browsing faster. Twenty-five features, each with a switch in Settings (except Settings itself). Made by [NextEnzzo](https://platesmania.com/user121559).
+**NextPlaate** adds a panel to PlatesMania that makes posting photos and browsing faster. Twenty-six features, each with a switch in Settings (except Settings itself). Made by [NextEnzzo](https://platesmania.com/user121559).
 
 A click on the logo of the panel checks for a newer version. The bar follows the order of use: Check a plate, Send photos, Describe a pair, Browse. Settings tells what each feature does and where it works: the plate check covers all 96 countries and 829 plate categories (795 checked exactly on real plates), the series counter 84 countries, the official register the Netherlands and Israel; the rest works everywhere.
 
@@ -67,14 +67,16 @@ A click on the logo of the panel checks for a newer version. The bar follows the
 21. **Profile page look** - a member's profile in the look of the script: figures as tiles, the private messages and notifications in two identical panels, the countries table and the last photos tidied. One switch gives the site's look back.
 22. **Notification pop-ups** - a notice in the corner, like a phone's, for a new like, comment or private message on any PlatesMania page while a tab is open. You choose the kinds and how often.
 23. **Latest plates strip**: the line of the latest uploads that every page carries becomes a slim strip with a flag and a chip per plate.
-24. **Shortcut editor** - every key can be changed (AZERTY-safe).
-25. **Settings** - one switch per feature.
+24. **Update notice** - a notice when you join the site if the script has a newer version, with the link to install it. At most once every 12 hours; switch off in Settings.
+25. **Shortcut editor** - every key can be changed (AZERTY-safe).
+26. **Settings** - one switch per feature.
 
 ## Permissions, in plain words
 - It works on platesmania.com. Everything it reads from the site goes through one queue: one request at a time, three seconds apart, a pause after a block.
 - For Google Lens only, it also runs on Google pages, where it acts only for a search the panel asked for. `GM_setValue` / `GM_getValue` pass the photo to that page and the results back. `GM_openInTab` opens the batch upload and Lens tabs.
 - For the maps of regions it downloads public shape files (geoBoundaries, through geoboundaries.org and media.githubusercontent.com) when you open a country: nothing about you is sent. The other open sources (the Dutch and Israeli registers) are asked only for the plate you typed.
 - The notification pop-ups and the plate pictures read PlatesMania's own pages through the same queue; nothing leaves your browser.
+- Update notice: once every 12 hours, when you join the site, it reads the version number of the published script from Greasy Fork (`update.greasyfork.org`) and tells you if a newer one exists. Nothing about you is sent. Switch it off in Settings.
 - Nothing is sent to any server of ours: there is none.
 - Licence: all rights reserved. You can install it and use it; the code is readable so that you can check it, not so that it can be copied, modified or redistributed.
 ```

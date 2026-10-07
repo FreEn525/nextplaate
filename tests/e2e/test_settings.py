@@ -7,7 +7,7 @@ GALLERY = "https://platesmania.com/fr/gallery.php"
 PHOTO = "https://platesmania.com/fr/nomer101"
 EDIT = "https://platesmania.com/fr/edit_dopol.php?id=101"
 ADD = "https://platesmania.com/fr/add"
-FEATURES = ["selection", "details", "description", "pages", "plate", "shortcuts", "lens", "flags", "preview", "tags", "extra", "members", "floatupload", "lookup", "profile", "mine", "regions", "series", "registry", "worldmap", "profilestyle", "notify", "laststrip", "upload"]
+FEATURES = ["selection", "details", "description", "pages", "plate", "shortcuts", "lens", "flags", "preview", "tags", "extra", "members", "floatupload", "lookup", "profile", "mine", "regions", "series", "registry", "worldmap", "profilestyle", "notify", "laststrip", "updatenotice", "upload"]
 SHADOW = "document.getElementById('pmg-host').shadowRoot"
 
 
@@ -86,7 +86,7 @@ def test_the_features_are_in_five_folded_families_with_their_count(browser):
     page.wait_for_selector("#pmg-host")
     got = page.evaluate(f"() => [...{SHADOW}.querySelectorAll('#setList details.sgroup')].map(d => [d.querySelector('summary span').textContent, d.querySelector('.scount').textContent, d.open])")
     assert got == [["Send and describe photos", "8 of 8 on", False], ["Check a plate", "7 of 7 on", False], ["Browse", "3 of 3 on", False],
-                   ["Profiles and the site", "5 of 5 on", False], ["The panel", "1 of 1 on", False]]
+                   ["Profiles and the site", "5 of 5 on", False], ["The panel", "2 of 2 on", False]]
     assert page.evaluate(f"() => {SHADOW}.getElementById('setList').textContent.includes('null')") is False
     c.close()
 

@@ -1,6 +1,6 @@
 # PlatesMania - NextPlaate
 
-Tampermonkey userscript (**NextPlaate**) that makes posting and browsing on [PlatesMania](https://platesmania.com) faster: a docked panel with twenty-five features; every one of them but Settings itself can be switched off in Settings.
+Tampermonkey userscript (**NextPlaate**) that makes posting and browsing on [PlatesMania](https://platesmania.com) faster: a docked panel with twenty-six features; every one of them but Settings itself can be switched off in Settings.
 
 Made by [NextEnzzo](https://platesmania.com/user121559). © 2026 NextEnzzo. All rights reserved: free to use, not to copy, modify or redistribute (see [LICENSE](LICENSE)).
 
@@ -51,8 +51,9 @@ Where a key is given, it can be changed in the Shortcuts drawer.
 21. **Profile page look**: a member's profile in the look of the script: the picture, badges and figures in one box, the uploads, likes and comments as tiles, the private messages and the notifications in two identical panels, the countries table and the last photos tidied. Only the style of the site's own elements changes (sort, filter and delete of the messages keep working); one switch gives the site's look back.
 22. **Notification pop-ups**: a notice in the corner, like a phone's, for a new like, comment or private message, on any PlatesMania page while a tab is open: you choose the kinds and how often (2 to 30 minutes), and can ask for a system notification when the tab is in the background. The first look marks what is there as seen.
 23. **Latest plates strip**: the line of the latest uploads that every page carries becomes a slim strip with a flag and a chip per plate.
-24. **Shortcut editor**: every key is yours to change (AZERTY-safe).
-25. **Settings**: one switch per feature; a switched-off feature adds no control and no key.
+24. **Update notice**: a notice when you join the site if the script has a newer version, with the link to install it; at most once every 12 hours, switch off in Settings.
+25. **Shortcut editor**: every key is yours to change (AZERTY-safe).
+26. **Settings**: one switch per feature; a switched-off feature adds no control and no key.
 
 ## Installation
 
@@ -64,7 +65,7 @@ Where a key is given, it can be changed in the Shortcuts drawer.
 - It works on `platesmania.com`. Everything it reads from the site goes through one queue (one request at a time, three seconds apart, a pause after a block).
 - **Google Lens only**: the script also runs on `www.google.*` and `lens.google.com`, but there it does something only for a search that the panel asked for, and it stops at once on any other Google page. It needs `GM_setValue` and `GM_getValue` to pass the photo to that page and the results back.
 - **Official register** (Netherlands, Israel): the plate you typed is sent to that country's open register (`opendata.rdw.nl`, `data.gov.il`), whose data is public and free, as soon as the plate check has read it; Settings has a switch to ask only when you click a button, and one to not fill the menus.
-- **Update check**: only when you click the logo of the panel, the script reads the header of the published script on Greasy Fork (`update.greasyfork.org`) to compare versions.
+- **Update check**: when you click the logo of the panel, and once every 12 hours when you join the site (the *Update notice* feature, with a switch in Settings), the script reads the header of the published script on Greasy Fork (`update.greasyfork.org`) to compare versions. Only the version number is read; nothing about you is sent.
 - **Lookup links** are plain links: they open a public lookup site in a new tab only when you click one, and the script reads nothing from those sites.
 - `GM_openInTab` opens the tabs of the batch upload and of the Lens search. Nothing is sent to any server of ours: there is none.
 

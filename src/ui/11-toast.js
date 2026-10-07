@@ -1,14 +1,15 @@
   /* =====================================================================
    *  TOAST  (a small notice that comes up in a corner and goes by itself, like a phone's)
-   *      toast({ title, body, href, kind })      kind: 'like' | 'comment' | 'message' | 'other' (the colour and the word on it)
+   *      toast({ title, body, href, kind, ms, onClose })   kind: 'like' | 'comment' | 'message' | 'update' | 'other' (the colour and the word on it)
+   *                                          onClose: runs when the cross or the link is used (not when the notice goes by itself)
    *    They stack above the panel's rail, bottom right. Pointing at one keeps it; the cross or a click on the title closes it; a click on
    *    the line opens its link in a new tab. Under reduced motion they appear without sliding. It is in a shadow root, in the panel's tokens.
    * ===================================================================== */
-  const TOAST_WORDS = { like: 'Like', comment: 'Comment', message: 'Message', other: 'News' };
+  const TOAST_WORDS = { like: 'Like', comment: 'Comment', message: 'Message', update: 'Update', other: 'News' };
   const TOAST_CSS = `
     .stack{position:fixed;right:72px;bottom:16px;display:flex;flex-direction:column;gap:8px;width:min(340px,calc(100vw - 88px));pointer-events:none}
     .t{position:relative;display:flex;flex-direction:column;gap:2px;padding:10px 36px 10px 14px;border:1px solid var(--line2);border-left:3px solid var(--primary);background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.2);pointer-events:auto;animation:in .2s ease-out}
-    .t.like{border-left-color:var(--danger)}.t.comment{border-left-color:var(--ok-ink)}.t.message{border-left-color:var(--primary)}
+    .t.like{border-left-color:var(--danger)}.t.comment{border-left-color:var(--ok-ink)}.t.message{border-left-color:var(--primary)}.t.update{border-left-color:var(--primary-h)}
     .t .k{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
     .t a.ti{font-size:14px;font-weight:600;color:var(--ink);text-decoration:none;overflow-wrap:anywhere}
     .t a.ti:hover{color:var(--primary-h);text-decoration:underline}
@@ -20,7 +21,7 @@
   `;
   let toastStack = null;
 
-  function toast({ title, body = '', href = '', kind = 'other', ms = 9000 }) {
+  function toast({ title, body = '', href = '', kind = 'other', ms = 9000, onClose = null }) {
     if (!toastStack || !toastStack.isConnected) {
       const host = h('div', { id: 'pmg-toasts' });
       host.style.cssText = 'position:fixed;inset:0;z-index:2147483646;pointer-events:none';
@@ -31,9 +32,9 @@
     }
     const el = h('div', { class: 't ' + kind },
       h('span', { class: 'k', text: TOAST_WORDS[kind] || TOAST_WORDS.other }),
-      href ? h('a', { class: 'ti', href, target: '_blank', rel: 'noopener noreferrer', text: title }) : h('span', { class: 'ti', text: title }),
+      href ? h('a', { class: 'ti', href, target: '_blank', rel: 'noopener noreferrer', text: title, onclick: () => { if (onClose) onClose(); } }) : h('span', { class: 'ti', text: title }),
       body ? h('span', { class: 'b', text: body }) : null,
-      h('button', { type: 'button', class: 'x', title: 'Close', 'aria-label': 'Close', text: '\u00d7', onclick: () => el.remove() }));
+      h('button', { type: 'button', class: 'x', title: 'Close', 'aria-label': 'Close', text: '\u00d7', onclick: () => { el.remove(); if (onClose) onClose(); } }));
     let timer = 0;
     const arm = () => { clearTimeout(timer); timer = setTimeout(() => el.remove(), ms); };
     el.addEventListener('mouseenter', () => clearTimeout(timer));

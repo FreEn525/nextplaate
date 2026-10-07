@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.11.9
+
+- **Update notice** (new feature, switch in Settings > Features > The panel): when you join the site, a notice tells you if the script has a newer version, with the link to install it. At most once every 12 hours (the tabs share the time; a failed look is tried again in an hour); the cross or the link says "not again for this version"; never in the dev build. It reads only the version number of the published script, from Greasy Fork, the same file as a click on the logo; nothing about you is sent.
+
 ## 5.11.8
 
 - **Licence**: from this version NextPlaate is *all rights reserved* instead of MIT: you can install it and use it; you may not copy, modify or redistribute it (see LICENSE). Versions published before 2026-10-07 were under the MIT licence, which stays with the copies already made. Third-party material keeps its own licences (THIRD_PARTY.md).

@@ -20,6 +20,7 @@ def meta(version):
 def ctx(browser):
     c = browser.new_context()
     route_site(c)
+    c.add_init_script("localStorage.setItem('pmg_set_feature_updatenotice', '0')")            # the automatic notice (test_update_notice.py) is not what these tests are about: the logo is
     ASKED.clear()
     yield c
     c.close()
@@ -50,7 +51,7 @@ def text(page):
 
 
 @public_only
-def test_nothing_is_asked_until_the_logo_is_clicked(ctx):
+def test_with_the_notice_off_nothing_is_asked_until_the_logo_is_clicked(ctx):
     serve(ctx, "99.0")
     page = click_logo(ctx)
     page.wait_for_timeout(500)
