@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.11.14
+
+- Test version for the update notice, the reminder and the reload: nothing changed in the script, only its number.
+
 ## 5.11.13
 
 - **Reminder**: a person who opened the Update window, saw a newer version and did not use "Update now" is reminded by the notice: for that version the cross silences it for 6 hours only, not for good. The Update window and the notice now share the result of the look (no second request right after). Without the window, the cross still silences the version for good.
