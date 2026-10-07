@@ -75,7 +75,7 @@ def test_the_same_vehicle_again_asks_nothing(ctx):
     choose(page, brand="7")
     page.wait_for_function(f"() => document.getElementById('pmg-mine-card') && {CARD}.querySelector('.mine-item a') && {CARD}.querySelector('.mine-item a').textContent === '5'", timeout=10000)
     choose(page, brand="8")
-    page.wait_for_function(f"() => {CARD}.querySelector('.mine-item b').textContent.includes('Audi')", timeout=10000)
+    page.wait_for_function(f"() => {CARD}.querySelector('.mine-item b').textContent.includes('Audi') && {CARD}.querySelector('.mine-item a').textContent !== '…'", timeout=10000)      # the count is in, so its request has been made
     asked = len(fake_site.GALLERY_USR)
     choose(page, brand="7")
     page.wait_for_function(f"() => {CARD}.querySelector('.mine-item b').textContent.includes('Volkswagen') && {CARD}.querySelector('.mine-item a').textContent === '5'", timeout=10000)

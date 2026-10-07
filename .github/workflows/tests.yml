@@ -31,7 +31,7 @@ jobs:
 
       - name: Install the test tools
         run: |
-          pip install playwright pytest pytest-xdist
+          pip install playwright pytest pytest-xdist pytest-rerunfailures
           playwright install --with-deps chromium
 
       # the public script, then the dev script (the dev tests are skipped without it)
