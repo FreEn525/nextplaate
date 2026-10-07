@@ -5,7 +5,7 @@ import pytest
 
 from fake_site import inject, route_site
 
-REAL = Path(__file__).resolve().parents[2] / "reference" / "real"
+FIXTURES = Path(__file__).resolve().parents[1] / "fixtures"          # the awards tables of two real members (the pages of the site, reduced to their tables)
 BADGES = ('<ul class="badge-lists"><li><a href="/userbestphoto.php?user=1"><i class="fa fa-camera-retro"></i></a><span class="badge">1</span></li>'
           '<li><a href="/userawards.php?user=1" data-original-title="Awards"><i class="fa fa-trophy"></i></a>{badge}</li></ul>')
 PAGE = '<html><body><div class="container content profile"><div class="row"><div class="col-md-3">' + BADGES + '</div><div class="col-md-9"><h1>x</h1></div></div></div></body></html>'
@@ -32,14 +32,14 @@ def badge(page):
 
 
 def test_a_member_with_awards_gets_a_figure_where_the_site_shows_none(browser):
-    c, page, asked = serve(browser, 121546, "", (REAL / "platesmania-userawards_php_user_121546.html").read_text(encoding="utf-8"))
+    c, page, asked = serve(browser, 121546, "", (FIXTURES / "userawards_121546.html").read_text(encoding="utf-8"))
     page.wait_for_function("() => document.querySelector('a[href*=\"userawards\"]').parentElement.querySelector('.badge')", timeout=30000)
     assert badge(page) == "1"
     c.close()
 
 
 def test_the_figure_is_the_number_of_awards_all_the_tables_together_and_the_hover_gives_the_detail(browser):
-    c, page, asked = serve(browser, 101605, "", (REAL / "platesmania-userawards_php_user_101605.html").read_text(encoding="utf-8"))
+    c, page, asked = serve(browser, 101605, "", (FIXTURES / "userawards_101605.html").read_text(encoding="utf-8"))
     page.wait_for_function("() => document.querySelector('a[href*=\"userawards\"]').parentElement.querySelector('.badge')", timeout=30000)
     assert badge(page) == "46"                                                             # 1 State + 35 regions + 2 formats + 1 brand + 7 models
     detail = page.evaluate("() => document.querySelector('a[href*=\"userawards\"]').getAttribute('data-original-title')")
