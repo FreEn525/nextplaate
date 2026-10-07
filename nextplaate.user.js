@@ -2426,7 +2426,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     .profile ul.mCustomScrollbar li .fa-hand-o-right{color:var(--pm-mute)}
     .profile ul.mCustomScrollbar li .pull-right{margin:0 0 0 auto;font-size:12px;white-space:nowrap;color:var(--pm-mute)}
     .profile ul.mCustomScrollbar li .pull-right small{font-size:12px}
-    .profile .pm-plate{display:block;height:26px;width:auto;border:1px solid var(--pm-line2)}
+    .profile .pm-plate{display:block;width:auto;height:auto;max-width:100%;max-height:26px;object-fit:contain;border:1px solid var(--pm-line2)}
     .profile .pm-end{padding:10px 12px;font-size:12px;text-align:center;color:var(--pm-mute)}
     /* the countries: a band, then a table that lines up (flag and name left, the three figures right, in columns of one width) */
     .profile .panel-blue{margin:0 0 16px}
@@ -2467,7 +2467,7 @@ const WORLD_MAP = {"w":1000,"h":442,"views":{"europe":[418.6,16.6,240.4,106.3]},
     .pm-badge .pm-flag{margin:0;vertical-align:top}
     .pm-plate-well{display:flex;align-items:center;justify-content:center;min-height:48px;padding:6px 8px;border-top:1px solid var(--pm-line);background:var(--pm-paper)}
     .pm-plate-text{font-size:16px;font-weight:700;line-height:1.2;letter-spacing:.04em;text-align:center;overflow-wrap:anywhere;color:var(--pm-ink)}
-    .pm-plate-well img{display:block;width:auto;max-width:100%;height:34px}
+    .pm-plate-well img{display:block;width:auto;height:auto;max-width:100%;max-height:34px;object-fit:contain}   /* both limits give way together: the picture keeps its proportions */
     .pm-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-top:1px solid var(--pm-line);font-size:13px;color:var(--pm-ink)}
     .pm-meta b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .pm-meta span{flex:none;font-size:12px;color:color-mix(in srgb,var(--pm-ink) 80%,#fff)}

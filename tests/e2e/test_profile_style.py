@@ -1,7 +1,7 @@
 """The profile page in the look of the script: the site's own elements restyled, and a switch to get the site's look back."""
 import pytest
 
-from fake_site import inject, route_site
+from fake_site import PNG, inject, route_site
 
 URL = "https://platesmania.com/user121559"
 
@@ -71,6 +71,7 @@ def prof(browser):
         r.fulfill(status=200, content_type="text/html", body=body)
 
     flags(c)
+    c.route("https://img03.platesmania.com/**", lambda r: r.fulfill(status=200, content_type="image/png", body=PNG))             # a real (1 x 1) picture
     c.route("https://platesmania.com/user121559", lambda r: r.fulfill(status=200, content_type="text/html", body=inject(PROFILE)))
     c.route("https://platesmania.com/action2.php**", action)
     c.route("https://platesmania.com/*/nomer*", lambda r: r.fulfill(status=200, content_type="text/html", body=f'<html><body><img src="{INF}"></body></html>'))
@@ -149,3 +150,13 @@ def test_the_strip_keeps_every_plate_on_one_line_without_a_scrollbar(browser):
     assert got == [10, True, "visible", False]                                  # all ten, on ONE line (the chips shrink, a long plate is cut), nothing to scroll
     assert p.evaluate("() => getComputedStyle(document.querySelector('.pm-flag')).objectFit") == "contain"
     c.close()
+
+
+def test_a_plate_picture_keeps_its_proportions_however_narrow_its_card(prof):
+    """A fixed height with a capped width stretched the plates: both limits must give way together (the test picture is square)."""
+    prof.wait_for_selector(".pm-card")
+    prof.evaluate("() => document.querySelector('.pm-card').scrollIntoView()")
+    prof.wait_for_function("() => document.querySelector('.pm-plate-well img') && document.querySelector('.pm-plate-well img').naturalWidth > 0", timeout=30000)
+    prof.evaluate("() => { const w = document.querySelector('.pm-plate-well'); w.style.width = '24px'; w.style.padding = '0'; w.style.boxSizing = 'border-box'; }")
+    w, h = prof.evaluate("() => { const r = document.querySelector('.pm-plate-well img').getBoundingClientRect(); return [r.width, r.height]; }")
+    assert 0 < w <= 24.5 and abs(w - h) < 1                                            # narrower than the card allows: smaller, not squeezed
