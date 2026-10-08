@@ -29,7 +29,7 @@ def open_page(ctx, seen=None):
 def test_a_first_install_shows_nothing_and_remembers_the_version(ctx):
     page = open_page(ctx)
     assert page.evaluate(f"() => !{MODAL}")
-    assert page.evaluate("() => localStorage.getItem('pmg_seen_version')") == "5.11.14"
+    assert page.evaluate("() => localStorage.getItem('pmg_seen_version')") == "5.11.15"
 
 
 def test_after_an_update_the_window_opens_once(ctx):
@@ -39,7 +39,7 @@ def test_after_an_update_the_window_opens_once(ctx):
     assert title == "What’s new in 5.11"
     sections = page.evaluate(f"() => [...{MODAL}.shadowRoot.querySelectorAll('.wn-section .cat')].map(e => e.textContent)")
     assert sections == ["New", "The panel", "Clearer pages", "On the upload page", "On profiles and series", "Good to know"]          # 5.11, 5.10, then 5.9 (seen 5.8)
-    assert page.evaluate("() => localStorage.getItem('pmg_seen_version')") == "5.11.14"
+    assert page.evaluate("() => localStorage.getItem('pmg_seen_version')") == "5.11.15"
     page.reload()
     page.wait_for_selector("#pmg-host")
     page.wait_for_timeout(300)
@@ -90,4 +90,20 @@ def test_only_what_is_newer_than_the_version_seen_is_shown(ctx):
 def test_a_fix_version_does_not_open_the_window(ctx):
     page = open_page(ctx, seen="5.11.1")                                                       # same minor version: a fix
     assert page.evaluate(f"() => !{MODAL}")
-    assert page.evaluate("() => localStorage.getItem('pmg_seen_version')") == "5.11.14"
+    assert page.evaluate("() => localStorage.getItem('pmg_seen_version')") == "5.11.15"
+
+
+def test_the_credits_button_lists_the_authors_and_their_scripts_with_their_pages(ctx):
+    page = open_page(ctx)
+    page.evaluate(f"() => {PANEL}.querySelector('.rbtn[data-drawer=\"settings\"]').click()")
+    page.evaluate(f"() => {PANEL}.getElementById('aboutCredits').click()")
+    page.wait_for_function("() => document.getElementById('pmg-credits')")
+    root = "document.getElementById('pmg-credits').shadowRoot"
+    assert page.evaluate(f"() => {root}.querySelector('h2').textContent") == "Credits"
+    assert page.evaluate(f"() => [...{root}.querySelectorAll('.wn-author a')].map(a => [a.textContent, a.href])") == [
+        ["Armand", "https://platesmania.com/user101389"], ["Jacon22 (Jacon_Twentytwo)", "https://platesmania.com/user104448"]]
+    scripts = page.evaluate(f"() => [...{root}.querySelectorAll('.wn-item a')].map(a => a.getAttribute('href'))")
+    assert len(scripts) == 5 and scripts[0] == "https://greasyfork.org/scripts/591680" and scripts[-1] == "https://greasyfork.org/scripts/586634"
+    assert page.evaluate(f"() => [...{root}.querySelectorAll('a')].every(a => a.target === '_blank' && a.rel === 'noopener noreferrer')")
+    page.keyboard.press("Escape")
+    page.wait_for_function("() => !document.getElementById('pmg-credits')")

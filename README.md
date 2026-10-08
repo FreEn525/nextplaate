@@ -75,6 +75,8 @@ Updates are delivered through Greasy Fork. Tampermonkey checks for a new version
 
 ## Credits
 
+Several features were first built by other members in their own scripts, and their ideas are here, rebuilt in NextPlaate's own code: [Armand](https://platesmania.com/user101389) (the plate card that fills the menus from the photos already on the site, the series counter, the real total of the gallery on the profile, your photos of a vehicle) and Jacon22 ([Jacon_Twentytwo](https://platesmania.com/user104448)) (the plate check and its count of the photos of a plate). The scripts are listed with their pages in the Credits button of Settings > About. Thank you to both.
+
 The world map is [Natural Earth](https://www.naturalearthdata.com/) data (public domain), through the [world-atlas](https://github.com/topojson/world-atlas) package. The maps of regions use the shapes of [geoBoundaries](https://www.geoboundaries.org/) (CC-BY 4.0 and the licence of each country's source, shown under the map), loaded when you choose a country. Plate codes, towns and coordinates that place a region on its shape come from [Wikidata](https://www.wikidata.org/) (CC0).
 
 ## License

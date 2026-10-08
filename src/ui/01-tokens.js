@@ -69,6 +69,7 @@
     .cardbox textarea{width:100%;min-height:180px;padding:10px;resize:vertical;line-height:1.5}
     .wn-section{margin:0 0 14px}
     .wn-item{margin:4px 0;font-size:13px;line-height:1.45}
+    .wn-section a{color:var(--primary-h)}.wn-author{margin:0 0 4px;font-size:14px;font-weight:700}
     .secs{gap:0}
     .sec{display:flex;flex-direction:column;gap:6px;padding:10px 0;border-top:1px solid var(--line)}
     .secs > .sec:first-child{border-top:0;padding-top:0}

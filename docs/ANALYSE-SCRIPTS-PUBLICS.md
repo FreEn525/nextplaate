@@ -71,5 +71,5 @@ Pas repris : Notifications Enhancer (108 Ko de retouche d'une zone du site que n
 
 ## 5. Crédits et licences
 
-- Notre lecture de la plaque vient de « Notification Doubles Plaques » (MIT) ; la méthode du Lens, de « Platesmania → Google Lens » (MIT, même auteur que Lookup Toolbox, Greasy Fork 976031) : voir `THIRD_PARTY.md`.
+- Notre lecture de la plaque vient de « Notification Doubles Plaques » (MIT) ; la méthode du Lens, de « Platesmania → Google Lens » (MIT) : voir `THIRD_PARTY.md`.
 - Reprendre une idée (point 1 à 10) ne demande rien. Reprendre du **code** d'un script sans licence indiquée demande l'accord de son auteur ; reprendre du code MIT demande de garder sa mention. Nos reprises sont des réécritures dans nos briques (`bridge`, `vehicle`, `inlineCard`).

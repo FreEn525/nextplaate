@@ -81,6 +81,10 @@ A click on the logo of the panel checks for a newer version. The bar follows the
 - Licence: all rights reserved. You can install it and use it; the code is readable so that you can check it, not so that it can be copied, modified or redistributed.
 ```
 
+## Credits
+
+Several features were first built by other members in their own scripts, and their ideas are here, rebuilt in NextPlaate's own code: [Armand](https://platesmania.com/user101389) (the plate card that fills the menus from the photos already on the site, the series counter, the real total of the gallery on the profile, your photos of a vehicle) and Jacon22 ([Jacon_Twentytwo](https://platesmania.com/user104448)) (the plate check and its count of the photos of a plate). The scripts are listed with their pages in the Credits button of Settings > About. Thank you to both.
+
 ## Le dépôt n'est pas cité
 
 Ni le script, ni son en-tête, ni le texte à coller ci-dessus ne mentionnent le dépôt (aucun lien, aucun nom de compte GitHub) ; `tests/e2e/test_public_text.py` le vérifie. Le `README.md` reste dans le dépôt, mais n'envoie pas non plus vers lui : l'installation passe par Greasy Fork.

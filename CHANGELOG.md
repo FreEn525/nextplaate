@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.11.15
+
+- **Credits**: a *Credits* button in Settings > About opens a window that lists, by author (Armand, Jacon22), the scripts of other members whose ideas became features here, each with its Greasy Fork page. The README, the sources file and the Greasy Fork text say the same.
+
 ## 5.11.14
 
 - Test version for the update notice, the reminder and the reload: nothing changed in the script, only its number.

@@ -31,6 +31,16 @@
     modal.message(`NextPlaate by ${AUTHOR.name}`);
   }
 
+  // The scripts of other members whose ideas are here (src/lib/credits.js), each with its Greasy Fork page
+  function creditsOpen() {
+    const link = (href, text) => h('a', { href, target: '_blank', rel: 'noopener noreferrer', text });
+    const body = h('div', { class: 'cardbox' },
+      h('p', { class: 'hint', text: 'Several features were first built by other members in their own scripts. NextPlaate took their ideas and rebuilt them in its own code.' }),
+      CREDITS.map(c => h('div', { class: 'wn-section' }, h('p', { class: 'wn-author' }, link(c.link, c.author)),
+        c.scripts.map(s => h('p', { class: 'wn-item' }, link('https://greasyfork.org/scripts/' + s.id, s.name), h('span', { text: ': ' + s.what }))))));
+    modalOpen({ id: 'pmg-credits', title: 'Credits', body }).message(`NextPlaate by ${AUTHOR.name}`);
+  }
+
   // After an update: show it once, then remember the version. A first install only remembers it.
   function whatsNewOnUpdate() {
     if (window.top !== window) return;                                       // not inside a frame of the site
@@ -47,12 +57,14 @@
       build: () => [
         h('p', { class: 'presult' }, `NextPlaate ${SCRIPT_VERSION} © 2026 `, h('a', { href: AUTHOR.profile, target: '_blank', rel: 'noopener noreferrer', text: AUTHOR.name })),
         h('button', { id: 'aboutNew', type: 'button', class: 'btn ghost', text: 'What’s new' }),
+        h('button', { id: 'aboutCredits', type: 'button', class: 'btn ghost', text: 'Credits' }),
         h('button', { id: 'siteCheck', type: 'button', class: 'btn ghost', text: 'Check the site now' }),
         h('p', { id: 'siteSaid', class: 'presult', hidden: true })
       ]
     }],
     init: () => {
       $('aboutNew').onclick = () => whatsNewOpen('');
+      $('aboutCredits').onclick = creditsOpen;
       // one small request, on demand only (a robots.txt: a few bytes), through the shared queue; the dot on the logo follows
       $('siteCheck').onclick = async () => {
         const said = $('siteSaid'), began = performance.now();
